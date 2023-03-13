@@ -1,0 +1,28 @@
+.showreel {
+    &__title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        line-height: 2.6rem;
+
+        span {
+            margin-left: 0.5rem;
+            opacity: 0.4;
+        }
+
+        &::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            margin-right: 0.8rem;
+            border-radius: 50%;
+            background: #FF4D01;
+            transform: translateY(-.3rem);
+        }
+    }
+
+    &__s {
+        cursor: none;
+    }
+}

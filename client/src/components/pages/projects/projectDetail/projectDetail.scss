@@ -1,0 +1,183 @@
+.project {
+    &-main {
+        padding: 6.9rem 0rem 10rem;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .52fr .24fr;
+            grid-gap: 4rem;
+            justify-content: space-between;
+        }
+
+        &__subtitle {
+            margin-bottom: 2rem;
+            font-weight: 500;
+            font-size: 3.6rem;
+            line-height: 4.3rem;
+        }
+
+        &__descr {
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+    }
+
+    &-goals {
+        padding: 10rem 0;
+        background: #F3F4F4;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            grid-gap: 4rem;
+        }
+
+        &__text {
+            margin-bottom: 4rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+
+        &__tasks {
+            &-item {
+                display: flex;
+                align-items: center;
+                font-size: 2.4rem;
+                line-height: 3.4rem;
+
+                .icon {
+                    flex: 0 0 3.2rem;
+                    width: 3.2rem;
+                    height: 3.2rem;
+                    margin-right: 1.6rem;
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+
+    &-steps {
+        padding: 10rem 0;
+
+        .heading-secondary {
+            margin-bottom: 6rem;
+        }
+
+        &__s {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            grid-gap: 4rem;
+
+            &:not(:last-child) {
+                padding-bottom: 4rem;
+                margin-bottom: 4rem;
+                border-bottom: 1px solid rgba(25, 27, 29, 0.3);
+            }
+        }
+
+        &__subtitle {
+            max-width: 29rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &__text {
+            margin-bottom: 2rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+
+        &__adv {
+            &-item {
+                display: flex;
+                align-items: flex-start;
+                font-size: 2.4rem;
+                line-height: 3.4rem;
+
+                .icon {
+                    width: 3.2rem;
+                    height: 3.2rem;
+                    flex: 0 0 3.2rem;
+                    margin-right: 1.6rem;
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+
+    &-results {
+        padding: 10rem 0;
+        background: #191B1D;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            grid-gap: 4rem;
+
+            .heading-secondary {
+                color: #fff;
+            }
+        }
+    }
+
+    &-analytics {
+        padding: 10rem 0 5rem;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            grid-gap: 4rem;
+
+            .heading-secondary {
+                margin-bottom: 3rem;
+            }
+        }
+
+        &__img {
+            width: 100%;
+        }
+    }
+}
+
+.quote {
+    margin-bottom: 4rem;
+    position: relative;
+
+    &__img {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        position: absolute;
+        left: -8rem;
+        bottom: 0;
+    }
+
+    &__box {
+        padding: 4rem;
+        background: #FFFFFF;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px 20px 20px 0px;
+    }
+
+    &__person {
+        margin-bottom: 1rem;
+        line-height: 1.8rem;
+
+        span {
+            opacity: 0.6;
+        }
+    }
+
+    &__q {
+        font-weight: 500;
+        font-size: 2.8rem;
+        line-height: 3.4rem;
+    }
+}

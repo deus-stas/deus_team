@@ -1,0 +1,45 @@
+.section-social {
+    &__wrap {
+        padding: 9.5rem 0 7.1rem;
+        display: grid;
+        grid-template-columns: auto 74.5%;
+        grid-gap: 5rem;
+        justify-content: space-between;
+        border-top: 1px solid rgba(25, 27, 29, 0.3);
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(3, .33334fr);
+        grid-gap: 4rem;
+    }
+
+    &__item {
+        padding: 4rem;
+
+        color: rgba(256, 256, 256, .5);
+
+        &:nth-child(1) {
+            background: #0077FF;
+        }
+
+        &:nth-child(2) {
+            background: linear-gradient(180deg, #2AABEE 0%, #229ED9 9925.83%), #29A9EB;
+        }
+
+        &:nth-child(3) {
+            background: #0057FF;
+        }
+
+        img {
+            display: inline-block;
+            height: 4rem;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__descr {
+        font-size: 2.4rem;
+        line-height: 3.4rem;
+    }
+}

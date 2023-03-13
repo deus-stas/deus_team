@@ -1,0 +1,27 @@
+@import './_mixins.scss';
+
+body {
+    font-family: 'TT Commons', Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #191B1D;
+}
+
+.heading-primary {
+    font-weight: 500;
+    font-size: 6.4rem;
+    line-height: 7rem;
+}
+
+.heading-secondary {
+    font-weight: 500;
+    font-size: 3.6rem;
+    line-height: 4.3rem;
+}
+
+.heading-tertiary {
+    font-weight: 500;
+    font-size: 2.8rem;
+    line-height: 3.4rem;
+}

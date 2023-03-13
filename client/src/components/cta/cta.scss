@@ -1,0 +1,24 @@
+.cta {
+    padding: 10rem 0 6.5rem;
+
+    &__wrap {
+        display: grid;
+        grid-template-columns: .25fr .25fr .5fr;
+        grid-gap: 4rem;
+    }
+
+    &__person {
+        &-img {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            margin-bottom: 4rem;
+        }
+
+        &-descr {
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+    }
+}

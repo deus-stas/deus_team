@@ -1,0 +1,71 @@
+.header {
+    padding: 1.9rem 0;
+    width: 100%;
+
+    background: #F3F4F4;
+
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+
+    &__wrap {
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(4, .25fr);
+        grid-gap: 4rem;
+    }
+
+    &__logo {
+        img {
+            width: 7.8rem;
+        }
+    }
+
+    &__nav {
+        &-list {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            line-height: 2.6rem;
+        }
+
+        &-item {
+            &:not(:last-child) {
+                margin-right: 5.4rem;
+            }
+        }
+    }
+
+    &__contacts {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+
+        &-link {
+            font-size: 2rem;
+            line-height: 2.6rem;
+            transition: color .3s;
+
+            &:not(:last-child) {
+                margin-right: 5.1rem;
+            }
+        }
+    }
+
+    &__discuss {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
+        line-height: 2.6rem;
+
+        &-img {
+            flex: 0 0 4.5rem;
+            width: 4.5rem;
+            height: 4.5rem;
+            margin-right: 2rem;
+            border-radius: 50%;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.project-next {
+    padding-top: 5rem;
+
+    &__item {
+        display: grid;
+        grid-template-columns: .5fr .5fr;
+        grid-gap: 4rem;
+        justify-content: space-between;
+        color: #fff;
+    }
+
+    &__text {
+        padding: 7rem;
+    }
+
+    &__subtitle {
+        margin-bottom: 2rem;
+        line-height: 1.8rem;
+    }
+
+    &__name {
+        max-width: 43rem;
+        margin-bottom: 4rem;
+        font-weight: 500;
+        font-size: 3.6rem;
+        line-height: 4.3rem;
+    }
+}

@@ -1,0 +1,55 @@
+.btn {
+    padding: 1.5rem 3rem 1.3rem;
+    display: inline-block;
+
+    background: #3B3D3F;
+    border-radius: 45px;
+    border: none;
+    cursor: pointer;
+
+    font-size: 2rem;
+    line-height: 2.6rem;
+    color: #FFFFFF;
+
+    transition: all .3s;
+
+    &.--b-orange {
+        border: 1px solid #FF4D01;
+        background: transparent;
+        color: #FF4D01;
+    }
+
+    &.--b-white {
+        border: 1px solid #FFFFFF;
+        color: #fff;
+        background: transparent;
+    }
+
+    &.--orange {
+        background: #FF4D01;
+    }
+
+    &.--white {
+        background: #FFFFFF;
+        color: #191B1D;
+    }
+
+    &.--circle {
+        width: 15rem;
+        height: 15rem;
+        padding: 5.2rem 1.3rem;
+        border-radius: 50%;
+        text-align: center;
+    }
+
+    &.--grey {
+        background: #F3F4F4;
+        color: #191B1D;
+
+        &:hover,
+        &.active {
+            background: #FF4D01;
+            color: #FFFFFF;
+        }
+    }
+}

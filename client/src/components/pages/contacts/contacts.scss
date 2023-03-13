@@ -1,0 +1,30 @@
+.contacts {
+    &-main {
+        padding-top: 9.4rem;
+
+        .heading-primary {
+            margin-bottom: 10rem;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .75fr;
+            grid-gap: 4rem;
+        }
+
+        .heading-secondary {
+            margin-bottom: 2rem;
+        }
+
+        &__address {
+            margin-bottom: 4rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+
+        &__map {
+            width: 100%;
+            height: 50rem;
+        }
+    }
+}

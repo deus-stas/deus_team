@@ -1,0 +1,53 @@
+.news {
+    &__item {
+        &:nth-child(10n + 10), &:first-child {
+            grid-column: span 2;
+            position: relative;
+
+            &::after {
+                content: '';
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(122.07deg, #000000 0.33%, rgba(0, 0, 0, 0) 69.26%);
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 2;
+            }
+
+            .news__img {
+                margin: 0;
+            }
+
+            .news__text {
+                max-width: 36rem;
+
+                color: #fff;
+
+                position: absolute;
+                top: 5rem;
+                left: 5rem;
+                z-index: 3;
+            }
+        }
+    }
+
+    &__img {
+        width: 100%;
+        display: block;
+        margin-bottom: 3rem;
+    }
+
+    &__tag {
+        margin-bottom: 0.7rem;
+        font-size: 2rem;
+        line-height: 2.6rem;
+        color: #FF4D01;
+    }
+
+    &__name {
+        font-weight: 500;
+        font-size: 2.8rem;
+        line-height: 3.4rem;
+    }
+}

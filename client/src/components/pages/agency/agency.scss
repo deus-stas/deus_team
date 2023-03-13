@@ -1,0 +1,307 @@
+.agency {
+    &-start {
+        padding-top: 9.4rem;
+
+        .heading-primary {
+            max-width: 117.4rem;
+            margin-bottom: 10rem;
+        }
+
+        &__video {
+            video {
+                width: 100%;
+            }
+        }
+    }
+
+    &-about {
+        padding-top: 10rem;
+
+        .heading-secondary {
+            margin-bottom: 3rem;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .5fr .25fr .25fr;
+            grid-gap: 4rem;
+            margin-bottom: 11.6rem;
+
+            .btn {
+                justify-self: end;
+            }
+        }
+
+        &__descr {
+            max-width: 69.5rem;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+            font-weight: 500;
+        }
+
+        &__adv {
+            &-item {
+                max-width: 33rem;
+                display: flex;
+                align-items: center;
+                font-size: 2.4rem;
+                line-height: 3.4rem;
+
+                &:not(:last-child) {
+                    margin-bottom: 3rem;
+                }
+
+                .icon {
+                    width: 5rem;
+                    flex: 0 0 5rem;
+                    height: 5rem;
+                    margin-right: 2rem;
+                }
+            }
+        }
+
+        &__showreels {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            grid-gap: 4rem;
+        }
+    }
+
+    &-benefits {
+        padding: 10rem 0 0;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .75fr;
+            grid-gap: 4rem;
+            padding-bottom: 10rem;
+            border-bottom: 1px solid rgba(25, 27, 29, 0.3);
+        }
+
+        &__info {
+            .heading-secondary {
+                margin-bottom: 6rem;
+            }
+
+            &-btn {
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                font-size: 2.8rem;
+                line-height: 3.4rem;
+                transition: color .3s;
+                cursor: pointer;
+
+                &:hover,
+                &.active {
+                    color: #FF4D01;
+                }
+
+                .icon {
+                    width: 4rem;
+                    height: 4rem;
+                    flex: 0 0 4rem;
+                    margin-right: 1.5rem;
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+
+        &__content {
+            &-wrap {
+                display: grid;
+                grid-template-columns: repeat(3, 33334fr);
+                grid-gap: 3rem 4rem;
+            }
+        }
+
+        &__item {
+            padding: 4rem;
+            background: #F3F4F4;
+        }
+
+        &__name {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &__descr {
+            margin-bottom: 2rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+
+        &__year {
+            font-size: 2rem;
+            line-height: 2.6rem;
+            opacity: 0.5;
+        }
+    }
+
+    &-clients {
+        padding: 10rem 0;
+        background: #191B1D;
+        color: #fff;
+
+        .heading-secondary {
+            margin-bottom: 6rem;
+        }
+
+        &__img {
+            height: 8rem;
+            margin-right: 12.8rem;
+        }
+
+        .marquee-container {
+            &:not(:last-child) {
+                margin-bottom: 6rem;
+            }
+        }
+
+        .overlay {
+
+            &::before,
+            &::after {
+                content: none;
+            }
+        }
+    }
+
+    &-team {
+        padding: 10rem 0;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            grid-gap: 4rem;
+        }
+
+        .heading-secondary {
+            margin-bottom: 6rem;
+        }
+
+        &__subtitle {
+            margin-bottom: 6rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &__t {
+            &-item {
+                display: grid;
+                grid-template-columns: repeat(2, .5fr);
+                grid-gap: 4rem;
+                align-items: center;
+                padding-bottom: 2rem;
+                border-bottom: 1px solid rgba(25, 27, 29, 0.3);
+                position: relative;
+
+                &:hover {
+
+                    .agency-team__t-post,
+                    .agency-team__t-name {
+                        transform: translateX(4rem);
+                    }
+
+                    .agency-team__t-img {
+                        opacity: 1;
+                        transform: translate(-50%, -50%) scale(1);
+                        transition: all .6s cubic-bezier(.25, 1.75, .75, .9);
+                    }
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 2rem;
+                }
+            }
+
+            &-name {
+                font-weight: 500;
+                font-size: 2.8rem;
+                line-height: 3.4rem;
+                transition: transform .6s cubic-bezier(.25, 1.75, .75, .9);
+            }
+
+            &-post {
+                font-size: 2rem;
+                line-height: 2.6rem;
+                opacity: 0.6;
+                transition: transform .6s cubic-bezier(.25, 1.75, .75, .9);
+            }
+
+            &-img {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+                left: 42%;
+                transition: all .4s cubic-bezier(.25, 1, .75, .9);
+            }
+        }
+
+        &__talent {
+            &-wrap {
+                display: grid;
+                grid-template-columns: repeat(2, .5fr);
+                grid-gap: 2rem;
+                margin-bottom: 6.2rem;
+            }
+
+            &-item {
+                padding: 4rem;
+                background: #F3F4F4;
+                transition: all .5s;
+                position: relative;
+
+                &:hover {
+                    background: #FF4D01;
+                    color: #fff;
+
+                    .agency-team__talent-icon {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+            }
+
+            &-name {
+                padding-right: 4rem;
+                margin-bottom: .9rem;
+                font-weight: 500;
+                font-size: 2.8rem;
+                line-height: 3.4rem;
+            }
+
+            &-descr {
+                line-height: 1.8rem;
+            }
+
+            &-icon {
+                width: 5rem;
+                height: 5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background: #FFFFFF;
+                position: absolute;
+                right: 2rem;
+                top: 2rem;
+                opacity: 0;
+                transform: scale(0);
+                transition: transform 0.5s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+            }
+
+            .btn {
+                margin: 0 auto;
+                display: block;
+            }
+        }
+    }
+}

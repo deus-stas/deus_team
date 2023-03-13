@@ -1,0 +1,22 @@
+.breadcrumbs {
+    padding: 1.1rem 0;
+
+    &__wrap {
+        display: flex;
+        align-items: center;
+    }
+
+    &__item {
+        opacity: 0.6;
+        line-height: 1.8rem;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+
+            &::after {
+                content: '/';
+                margin-left: 1rem;
+            }
+        }
+    }
+}

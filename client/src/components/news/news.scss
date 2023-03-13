@@ -1,0 +1,22 @@
+.news {
+    &-main {
+        padding: 9.4rem 0 6rem;
+
+        .heading-primary {
+            margin-bottom: 4rem;
+        }
+    }
+
+    &__filters {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 4rem;
+    }
+
+    &__wrap {
+        display: grid;
+        grid-template-columns: repeat(4, .25fr);
+        grid-gap: 6rem 4rem;
+    }
+}

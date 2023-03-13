@@ -1,0 +1,286 @@
+.main {
+    &-banner {
+        padding: 9.6rem 0 3.3rem;
+        color: #fff;
+        position: relative;
+
+        &__line {
+            width: 124.4rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        &>.container {
+            position: relative;
+            z-index: 2;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            align-items: start;
+            grid-gap: 4rem;
+        }
+
+        &__content {
+            padding-right: 6.4rem;
+
+            .heading-primary {
+                margin-bottom: 20rem;
+            }
+
+            .btn {
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        &__project {
+            position: relative;
+
+            &-name {
+                max-width: 32rem;
+                font-weight: 500;
+                font-size: 3.6rem;
+                line-height: 4.3rem;
+                position: absolute;
+                top: 3rem;
+                left: 0;
+                z-index: 3;
+            }
+
+            &-img {
+                width: 100%;
+            }
+
+            &-link {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                z-index: 3;
+            }
+        }
+    }
+
+    &-projects {
+        padding-top: 10rem;
+
+        &__head {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3.8rem;
+
+            .heading-secondary {
+                margin-right: 28.3rem;
+            }
+        }
+
+        &__filters {
+            margin-right: auto;
+            display: flex;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .5fr .25fr .25fr;
+            align-items: start;
+            grid-gap: 4rem;
+            border-bottom: 1px solid rgba(25, 27, 29, 0.3);
+            padding-bottom: 5.5rem;
+        }
+
+        &__video,
+        &__img {
+            width: 100%;
+            display: block;
+            margin-bottom: 2.5rem;
+        }
+
+        &__name {
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+    }
+
+    &-working {
+        padding: 6rem 0 9.2rem;
+
+        .heading-tertiary {
+            margin-bottom: 4rem;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: repeat(8, 0.125fr);
+            grid-gap: 3rem;
+        }
+
+        &__img-wrap {
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid #FF4D01;
+            border-radius: 50%;
+        }
+
+        &__img {
+            width: 100%;
+            display: block;
+            border-radius: 50%;
+        }
+
+        &__name {
+            line-height: 1.8rem;
+            text-align: center;
+            font-weight: 500;
+        }
+    }
+
+    &-services {
+        padding: 10rem 0;
+        background: #191B1D;
+        color: #fff;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: 43.2% 49%;
+            justify-content: space-between;
+        }
+
+        &__info {
+            .heading-secondary {
+                margin-bottom: 10.5rem;
+            }
+        }
+
+        &__item {
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #3B3D3F;
+
+            &:not(:last-child) {
+                margin-bottom: 3rem;
+            }
+
+            &.active {
+                .main-services__btn {
+                    transform: rotate(180deg);
+                    background: #fff;
+                }
+
+                .main-services__acc {
+                    opacity: 1;
+                    margin-top: 2rem;
+                    max-height: 100rem;
+                    visibility: visible;
+                }
+            }
+        }
+
+        &__head {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        &__num {
+            margin-right: 2rem;
+            line-height: 1.8rem;
+            opacity: 0.4;
+        }
+
+        &__name {
+            margin-right: auto;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &__btn {
+            width: 5rem;
+            height: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #3B3D3F;
+            border-radius: 38px;
+            color: #191B1D;
+            transition: all .5s;
+
+            .icon {
+                width: 1.6rem;
+                height: 1.6rem;
+            }
+        }
+
+        &__acc {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            visibility: hidden;
+            transition: all .5s;
+        }
+
+        &__descr {
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            line-height: 2.6rem;
+            opacity: 0.6;
+        }
+
+        &__bot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            row-gap: 2rem;
+        }
+
+        &__gallery {
+            display: flex;
+            align-items: center;
+        }
+
+        &__img {
+            height: 4.8rem;
+
+            &:not(:last-child) {
+                margin-right: 6rem;
+            }
+        }
+
+    }
+
+    &-news {
+        padding: 10rem 0;
+
+        .heading-secondary {
+            margin-bottom: 6rem;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: 17% 74.5%;
+            justify-content: space-between;
+        }
+
+        &__info {
+            &-item {
+                display: block;
+                font-size: 2rem;
+                line-height: 2.6rem;
+                color: #FF4D01;
+
+                &:not(:last-child) {
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+
+        &__content {
+            display: grid;
+            grid-template-columns: repeat(3, .33334fr);
+            grid-gap: 4rem;
+        }
+    }
+}

@@ -1,0 +1,70 @@
+.footer {
+    padding: 10rem 0 2.8rem;
+    background: #191B1D;
+    color: #FFFFFF;
+
+    &__wrap {
+        display: grid;
+        grid-template-columns: repeat(4, .25fr);
+        grid-gap: 3rem;
+        margin-bottom: 7.8rem;
+    }
+
+    &__subtitle {
+        margin-bottom: 2rem;
+        line-height: 1.8rem;
+        opacity: 0.5;
+    }
+
+    &__item {
+        .btn {
+            margin-top: 1.9rem;
+        }
+    }
+
+    &__contacts {
+        &-item {
+            display: block;
+            font-weight: 500;
+            font-size: 3.6rem;
+            line-height: 4.3rem;
+            transition: color .3s;
+
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    &__social {
+        margin-top: 4.2rem;
+        display: flex;
+
+        .icon {
+            width: 6rem;
+            height: 6rem;
+        }
+
+        &-item {
+            &:not(:last-child) {
+                margin-right: 2rem;
+            }
+        }
+    }
+
+    &__list {
+        &-item {
+            font-size: 2rem;
+            line-height: 3.2rem;
+
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    &__copyright {
+        line-height: 1.8rem;
+        opacity: 0.5;
+    }
+}
