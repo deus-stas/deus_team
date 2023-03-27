@@ -4,7 +4,7 @@ import InputMask from "react-input-mask";
 
 import './cta.scss'
 
-import person from '../../img/person.png';
+import manager from '../../img/manager.png';
 
 function Checkbox(props) {
     return (
@@ -43,16 +43,17 @@ const Cta = () => {
         <section className="cta">
             <div className="container">
                 <div className="cta__wrap">
-                    <h2 className="heading-secondary">Позвать в тендер</h2>
+                    <h2 className="heading-secondary">Хотите обсудить проект?</h2>
                     <div className="cta__person">
-                        <img src={person} alt="Алена Фролова" className="cta__person-img" />
-                        <div className="cta__person-descr">Алена Фролова — тендерный специалист, ответит на ваши вопросы и организует встречу</div>
+                        <img src={manager} alt="Алена Фролова" className="cta__person-img" />
+                        <div className="cta__person-descr">Павел Докторов — Менеджер проектов, ответит на ваши вопросы и организует встречу</div>
                     </div>
                     <div className="cta__f">
                         <Formik
-                            initialValues={{ name: '', company: '', phone: '', email: '', about: '', file: '', ctaServices: [], budget: [] }}
+                            initialValues={{ name: '', company: '', phone: '', email: '', about: '', file: '', ctaServices: [], budget: '' }}
                             validate={values => {
                                 const errors = {};
+                                console.log(values);
                                 if (!values.name || values.name.length < 2) {
                                     errors.name = 'Обязательное поле';
                                 }
@@ -68,7 +69,7 @@ const Cta = () => {
                                 if (!values.about || values.about.length < 2) {
                                     errors.about = 'Обязательное поле';
                                 }
-                                if (!values.ctaServices.length) {
+                                if (values.ctaServices.length === 0) {
                                     errors.ctaServices = 'Обязательное поле';
                                 }
                                 if (!values.budget.length) {
@@ -134,10 +135,24 @@ const Cta = () => {
                                             <div className="form__error">{errors.about && touched.about && errors.about}</div>
                                         </div>
                                     </div>
+
                                     <div className="form__file">
-                                        <input id="file" name="file" type="file" onChange={(event) => {
-                                            setFieldValue("file", event.currentTarget.files[0]);
-                                        }} />
+                                        <label className="form__file-label">
+                                            <div className="form__file-btn">Прикрепить файл</div>
+                                            <input id="file" name="file" type="file" onChange={(event) => {
+                                                setFieldValue("file", event.currentTarget.files[0]);
+                                            }} />
+                                        </label>
+                                        {
+                                            values.file ?
+                                                <div className="form__file-f">
+                                                    {values.file.name}
+                                                    <div className="form__file-delete" onClick={(event) => {
+                                                        setFieldValue("file", null);
+                                                    }}>&times;</div>
+                                                </div>
+                                                : null
+                                        }
                                     </div>
 
                                     <div className="form__checks">

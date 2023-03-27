@@ -13,6 +13,7 @@
     &__filters {
         display: flex;
         align-items: center;
+        gap: 2rem;
     }
 
     &__wrap {
@@ -25,6 +26,13 @@
 
     &__item {
         position: relative;
+        overflow: hidden;
+
+        &:hover {
+            .projects__item-img {
+                transform: scale(1.1);
+            }
+        }
 
         &:nth-child(1),
         &:nth-child(4),
@@ -35,7 +43,7 @@
             grid-gap: 4rem;
             grid-template-columns: repeat(4, .25fr);
 
-            .projects__item-img {
+            .projects__item-img-wrap {
                 grid-column: 3/5;
             }
 
@@ -59,8 +67,14 @@
             grid-column: span 2;
         }
 
-        &-img {
+        &-img-wrap {
+            overflow: hidden;
             margin-bottom: 2rem;
+        }
+
+        &-img {
+            display: block;
+            transition: transform .4s;
         }
 
         &-name {

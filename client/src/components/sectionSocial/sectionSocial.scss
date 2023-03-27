@@ -18,17 +18,30 @@
         padding: 4rem;
 
         color: rgba(256, 256, 256, .5);
+        transition: background .5s;
 
         &:nth-child(1) {
             background: #0077FF;
+
+            &:hover {
+                background: rgba(0, 119, 255, .8);
+            }
         }
 
         &:nth-child(2) {
             background: linear-gradient(180deg, #2AABEE 0%, #229ED9 9925.83%), #29A9EB;
+
+            &:hover {
+                background: linear-gradient(180deg, rgba(42, 171, 238, .8) 0%, rgba(34, 158, 217, .8) 9925.83%), rgba(41, 170, 235, .8);
+            }
         }
 
         &:nth-child(3) {
             background: #0057FF;
+
+            &:hover {
+                background: rgba(0, 87, 255, .8);
+            }
         }
 
         img {

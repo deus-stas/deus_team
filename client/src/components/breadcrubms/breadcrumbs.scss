@@ -9,6 +9,11 @@
     &__item {
         opacity: 0.6;
         line-height: 1.8rem;
+        transition: color .4s;
+
+        &:hover {
+            color: #FF4D01;
+        }
 
         &:not(:last-child) {
             margin-right: 1rem;

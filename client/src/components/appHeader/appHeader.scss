@@ -31,6 +31,16 @@
         }
 
         &-item {
+            transition: opacity .5s;
+
+            &:hover {
+                opacity: 0.5;
+            }
+
+            a {
+                display: block;
+            }
+
             &:not(:last-child) {
                 margin-right: 5.4rem;
             }
@@ -45,7 +55,11 @@
         &-link {
             font-size: 2rem;
             line-height: 2.6rem;
-            transition: color .3s;
+            transition: opacity .5s;
+
+            &:hover {
+                opacity: 0.5;
+            }
 
             &:not(:last-child) {
                 margin-right: 5.1rem;
@@ -60,12 +74,22 @@
         font-size: 2rem;
         line-height: 2.6rem;
 
+        &:hover {
+            .header__discuss-text {
+                opacity: 0.5;
+            }
+        }
+
         &-img {
             flex: 0 0 4.5rem;
             width: 4.5rem;
             height: 4.5rem;
             margin-right: 2rem;
             border-radius: 50%;
+        }
+
+        &-text {
+            transition: opacity .5s;
         }
     }
 }

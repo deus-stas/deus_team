@@ -33,19 +33,26 @@ const colourStyles = {
     control: (styles) => ({}),
     valueContainer: (styles) => ({}),
     placeholder: (styles) => ({}),
-    input: (styles) => ({ display: 'none' }),
     indicatorSeparator: (styles) => ({ display: 'none' }),
     indicatorsContainer: (styles) => ({}),
+    menu: (styles) => ({}),
+    menuList: (styles) => ({}),
+    option: (styles, state) => ({
+        color: state.isSelected ? '#FF4D01' : 'inherit'
+    }),
 };
 
 const classes = {
-    control: () => 'select',
+    control: (state) => state.menuIsOpen ? 'select active' : 'select',
     valueContainer: () => 'select__value',
-    indicatorsContainer: () => 'select__icon'
+    indicatorsContainer: () => 'select__icon',
+    menu: () => 'select__dropdown',
+    option: () => 'select__item',
+    input: () => 'select__search'
 }
 
 const onAcc = (e) => {
-    let accItem = e.target.closest('.main-services__item');
+    let accItem = e.target.closest('.tab-parent');
     if (accItem.classList.contains('active')) {
         accItem.classList.remove('active');
     } else {
@@ -93,11 +100,15 @@ const MainPage = () => {
                             <div className="main-projects__name">Газораспределительной организации Чеченской Республики</div>
                         </Link>
                         <Link to="/" className="main-projects__item">
-                            <img src={newsImg} alt="Дизайн и разработка сайта ассоциации детских стоматологов" className="main-projects__img" />
+                            <div className="main-projects__img-wrap">
+                                <img src={newsImg} alt="Дизайн и разработка сайта ассоциации детских стоматологов" className="main-projects__img" />
+                            </div>
                             <div className="main-projects__name">Дизайн и разработка сайта ассоциации детских стоматологов</div>
                         </Link>
                         <Link to="/" className="main-projects__item">
-                            <img src={newsImg} alt="Клиника репродукции ЭМБРИО" className="main-projects__img" />
+                            <div className="main-projects__img-wrap">
+                                <img src={newsImg} alt="Клиника репродукции ЭМБРИО" className="main-projects__img" />
+                            </div>
                             <div className="main-projects__name">Клиника репродукции ЭМБРИО</div>
                         </Link>
                     </div>
@@ -168,7 +179,7 @@ const MainPage = () => {
                             <Showreel />
                         </div>
                         <div className="main-services__content">
-                            <div className="main-services__item">
+                            <div className="main-services__item tab-parent">
                                 <div className="main-services__head" onClick={onAcc}>
                                     <div className="main-services__num">01</div>
                                     <div className="main-services__name">Фирменный стиль</div>
@@ -184,11 +195,11 @@ const MainPage = () => {
                                             <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
                                             <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
                                         </div>
-                                        <Link to="/serviceDetail" className="btn --b-orange">Подробнее</Link>
+                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
                                     </div>
                                 </div>
                             </div>
-                            <div className="main-services__item">
+                            <div className="main-services__item tab-parent">
                                 <div className="main-services__head" onClick={onAcc}>
                                     <div className="main-services__num">02</div>
                                     <div className="main-services__name">Сайты и сервисы</div>
@@ -204,11 +215,11 @@ const MainPage = () => {
                                             <img src={serviceImg} alt="Сайты и сервисы" className="main-services__img" />
                                             <img src={serviceImg} alt="Сайты и сервисы" className="main-services__img" />
                                         </div>
-                                        <Link to="/serviceDetail" className="btn --b-orange">Подробнее</Link>
+                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
                                     </div>
                                 </div>
                             </div>
-                            <div className="main-services__item">
+                            <div className="main-services__item tab-parent">
                                 <div className="main-services__head" onClick={onAcc}>
                                     <div className="main-services__num">03</div>
                                     <div className="main-services__name">Контент-маркетинг</div>
@@ -224,11 +235,11 @@ const MainPage = () => {
                                             <img src={serviceImg} alt="Контент-маркетинг" className="main-services__img" />
                                             <img src={serviceImg} alt="Контент-маркетинг" className="main-services__img" />
                                         </div>
-                                        <Link to="/serviceDetail" className="btn --b-orange">Подробнее</Link>
+                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
                                     </div>
                                 </div>
                             </div>
-                            <div className="main-services__item">
+                            <div className="main-services__item tab-parent">
                                 <div className="main-services__head" onClick={onAcc}>
                                     <div className="main-services__num">04</div>
                                     <div className="main-services__name">SEO-продвижение</div>
@@ -244,11 +255,11 @@ const MainPage = () => {
                                             <img src={serviceImg} alt="SEO-продвижение" className="main-services__img" />
                                             <img src={serviceImg} alt="SEO-продвижение" className="main-services__img" />
                                         </div>
-                                        <Link to="/serviceDetail" className="btn --b-orange">Подробнее</Link>
+                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
                                     </div>
                                 </div>
                             </div>
-                            <div className="main-services__item">
+                            <div className="main-services__item tab-parent">
                                 <div className="main-services__head" onClick={onAcc}>
                                     <div className="main-services__num">05</div>
                                     <div className="main-services__name">Лидогенерация</div>
@@ -264,11 +275,11 @@ const MainPage = () => {
                                             <img src={serviceImg} alt="Лидогенерация" className="main-services__img" />
                                             <img src={serviceImg} alt="Лидогенерация" className="main-services__img" />
                                         </div>
-                                        <Link to="/serviceDetail" className="btn --b-orange">Подробнее</Link>
+                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
                                     </div>
                                 </div>
                             </div>
-                            <div className="main-services__item">
+                            <div className="main-services__item tab-parent">
                                 <div className="main-services__head" onClick={onAcc}>
                                     <div className="main-services__num">06</div>
                                     <div className="main-services__name">Поддержка и развитие</div>
@@ -284,7 +295,7 @@ const MainPage = () => {
                                             <img src={serviceImg} alt="Поддержка и развитие" className="main-services__img" />
                                             <img src={serviceImg} alt="Поддержка и развитие" className="main-services__img" />
                                         </div>
-                                        <Link to="/serviceDetail" className="btn --b-orange">Подробнее</Link>
+                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
                                     </div>
                                 </div>
                             </div>

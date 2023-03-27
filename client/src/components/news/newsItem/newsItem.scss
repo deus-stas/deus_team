@@ -1,6 +1,8 @@
 .news {
     &__item {
-        &:nth-child(10n + 10), &:first-child {
+
+        &:nth-child(10n + 10),
+        &:first-child {
             grid-column: span 2;
             position: relative;
 
@@ -15,7 +17,7 @@
                 z-index: 2;
             }
 
-            .news__img {
+            .news__img-wrap {
                 margin: 0;
             }
 
@@ -30,12 +32,24 @@
                 z-index: 3;
             }
         }
+
+        &:hover {
+            .news__img {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    &__img-wrap {
+        overflow: hidden;
+        margin-bottom: 3rem;
     }
 
     &__img {
         width: 100%;
         display: block;
-        margin-bottom: 3rem;
+        transition: transform 0.5s;
+        will-change: transform;
     }
 
     &__tag {

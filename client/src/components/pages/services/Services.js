@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ProjectNext from '../projects/projectNext/ProjectNext';
 import Cta from '../../cta/Cta';
 import Social from '../../sectionSocial/SectionSocial';
+import {Icon} from '../../icon/Icon'
 
 import './services.scss'
 
@@ -31,26 +32,44 @@ const Services = () => {
                             <Link to="/services/detail" className="services-s__item">
                                 <div className="services-s__name">Фирменный стиль</div>
                                 <div className="services-s__descr">Гайдбуки • Айдентика • Видео-ролики • Иллюстрации</div>
+                                <div className="services-s__icon">
+                                    <Icon icon="corner-arr"/>
+                                </div>
                             </Link>
                             <Link to="/services/detail" className="services-s__item">
                                 <div className="services-s__name">Сайты и сервисы</div>
                                 <div className="services-s__descr">Корпоративные • Лендинги • Интернет-магазины • Сервисы</div>
+                                <div className="services-s__icon">
+                                    <Icon icon="corner-arr"/>
+                                </div>
                             </Link>
                             <Link to="/services/detail" className="services-s__item">
                                 <div className="services-s__name">SEO-продвижение</div>
                                 <div className="services-s__descr">Вырастим органический трафик на сайт</div>
+                                <div className="services-s__icon">
+                                    <Icon icon="corner-arr"/>
+                                </div>
                             </Link>
                             <Link to="/services/detail" className="services-s__item">
                                 <div className="services-s__name">Лидогенерация</div>
                                 <div className="services-s__descr">Таргетированная реклама • Контекстная реклама</div>
+                                <div className="services-s__icon">
+                                    <Icon icon="corner-arr"/>
+                                </div>
                             </Link>
                             <Link to="/services/detail" className="services-s__item">
                                 <div className="services-s__name">Контент-маркетинг</div>
                                 <div className="services-s__descr">Создание разного вида контента</div>
+                                <div className="services-s__icon">
+                                    <Icon icon="corner-arr"/>
+                                </div>
                             </Link>
                             <Link to="/services/detail" className="services-s__item">
                                 <div className="services-s__name">Поддержка и развитие</div>
                                 <div className="services-s__descr">От мелки до крупных задач</div>
+                                <div className="services-s__icon">
+                                    <Icon icon="corner-arr"/>
+                                </div>
                             </Link>
                         </div>
                     </div>

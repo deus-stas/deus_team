@@ -53,6 +53,46 @@
     &__file {
         margin-top: 4rem;
         margin-bottom: 6rem;
+
+        &-label {
+            display: block;
+        }
+
+        &-btn {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: #F3F4F4;
+            cursor: pointer;
+            border-radius: 38px;
+            font-size: 2rem;
+            line-height: 2.6rem;
+            transition: all .3s;
+
+            &:hover {
+                background: #FF4D01;
+                color: #fff;
+            }
+        }
+
+        &-f {
+            max-width: 90%;
+            margin-top: 1rem;
+            display: inline-flex;
+            position: relative;
+        }
+
+        &-delete {
+            font-size: 4rem;
+            line-height: 2rem;
+            cursor: pointer;
+            position: absolute;
+            top: -1rem;
+            right: -2rem;
+        }
+
+        input {
+            display: none;
+        }
     }
 
     .btn {
@@ -104,6 +144,10 @@
             line-height: 2.6rem;
             cursor: pointer;
             transition: all .3s;
+
+            &:hover {
+                background: #D0D0D0;
+            }
         }
     }
 }

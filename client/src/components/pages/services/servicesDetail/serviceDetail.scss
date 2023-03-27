@@ -1,0 +1,397 @@
+.service {
+    &-main {
+        padding: 6.9rem 0 10rem;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .5fr .5fr;
+            grid-gap: 4rem;
+            justify-content: space-between;
+        }
+
+        &__descr {
+            max-width: 68.8rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+    }
+
+    &-adv {
+        padding: 10rem 0;
+        background: #F3F4F4;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            justify-content: space-between;
+        }
+
+        &__item {
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(25, 27, 29, 0.3);
+
+            &:not(:last-child) {
+                margin-bottom: 3rem;
+            }
+
+            &.active {
+                .service-adv__tab {
+                    opacity: 1;
+                    margin-top: 2rem;
+                    max-height: 100rem;
+                    visibility: visible;
+                }
+
+                .service-adv__icon {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        &__head {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            grid-gap: 4rem;
+            align-items: center;
+            cursor: pointer;
+
+            &-elem {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &__num {
+            margin-right: 2rem;
+            line-height: 1.8rem;
+            opacity: 0.4;
+        }
+
+        &__name {
+            max-width: 28rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &__person {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+
+            &-img {
+                margin-right: 1.5rem;
+                width: 6rem;
+                height: 6rem;
+                flex: 0 0 6rem;
+            }
+
+            &-name {
+                line-height: 1.8rem;
+                opacity: 0.5;
+            }
+        }
+
+        &__icon {
+            width: 5rem;
+            height: 5rem;
+            flex: 0 0 5rem;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            border-radius: 38px;
+            transition: transform .5s;
+
+            .icon {
+                width: 1.6rem;
+                height: 1.6rem;
+            }
+        }
+
+        &__tab {
+            max-width: 45rem;
+            padding-left: 3.7rem;
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            visibility: hidden;
+            font-size: 2rem;
+            line-height: 2.6rem;
+            transition: all 0.5s;
+        }
+    }
+
+    &-s {
+        padding: 10rem 0;
+        background: #191B1D;
+        color: #fff;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .75fr;
+            grid-gap: 4rem;
+        }
+
+        &__content {
+            display: grid;
+            grid-template-columns: repeat(3, .33334fr);
+            grid-gap: 4rem;
+        }
+
+        &__item {
+            padding: 5rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        &__img {
+            display: block;
+            width: 10rem;
+            margin-bottom: 4rem;
+        }
+
+        &__name {
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &__descr {
+            font-size: 2rem;
+            line-height: 2.6rem;
+            opacity: 0.5;
+        }
+    }
+
+    &-work {
+        padding: 10rem 0 5rem;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            grid-gap: 4rem;
+            justify-content: space-between;
+        }
+
+        &__item {
+            display: flex;
+            align-items: flex-start;
+
+            &:not(:last-child) {
+                margin-bottom: 6rem;
+            }
+        }
+
+        &__num {
+            width: 5rem;
+            height: 5rem;
+            flex: 0 0 5rem;
+            margin-right: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 0.4rem;
+            background: #FF4D01;
+            border-radius: 50%;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+            color: #FFFFFF;
+        }
+
+        &__name {
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &__descr {
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+    }
+
+    &-portfolio {
+        padding: 5rem 0 10rem;
+
+        .projects__wrap {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .heading-secondary {
+            margin-bottom: 6rem;
+        }
+    }
+
+    &-price {
+        padding: 10rem 0;
+        background: #191B1D;
+        color: #fff;
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .75fr;
+            grid-gap: 4rem;
+        }
+
+        &__info {
+            .heading-secondary {
+                margin-bottom: 6rem;
+            }
+
+            &-btn {
+                display: table;
+                font-weight: 500;
+                font-size: 2.8rem;
+                line-height: 3.4rem;
+                cursor: pointer;
+                transition: color .5s;
+
+                &:not(:last-child) {
+                    margin-bottom: 2.6rem;
+                }
+
+                &.active,
+                &:hover {
+                    color: #FF4D01;
+                }
+            }
+        }
+
+        &__content {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            grid-gap: 4rem;
+        }
+
+        &__item {
+            padding: 4rem;
+            background: rgba(85, 85, 85, .1);
+
+            .heading-secondary {
+                margin-bottom: 1.9rem;
+            }
+        }
+
+        &__subtitle {
+            margin-bottom: 1rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+
+        &__elem {
+            display: grid;
+            grid-template-columns: .65fr .35fr;
+            grid-gap: 4rem;
+        }
+
+        &__type {
+            &-item {
+                display: flex;
+                align-items: center;
+                font-size: 2rem;
+                line-height: 2.6rem;
+
+                .icon {
+                    width: 3.2rem;
+                    height: 3.2rem;
+                    flex: 0 0 3.2rem;
+                    margin-right: 1rem;
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 0.7rem;
+                }
+            }
+        }
+
+        &__p {
+            &-item {
+                &:not(:last-child) {
+                    margin-bottom: 1.9rem;
+                }
+            }
+
+            &-title {
+                margin-bottom: 0.5rem;
+                font-size: 2rem;
+                line-height: 2.6rem;
+                opacity: 0.5;
+            }
+
+            &-descr {
+                font-weight: 500;
+                font-size: 2.8rem;
+                line-height: 3.4rem;
+            }
+        }
+    }
+
+    &-review {
+        padding-top: 10rem;
+
+        .heading-secondary {
+            margin-bottom: 6rem;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            grid-gap: 4rem;
+        }
+
+        &__item {
+            padding: 5rem;
+            min-height: 70rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        &__content {
+            position: relative;
+            z-index: 2;
+        }
+
+        &__person {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+
+            &-img {
+                width: 4rem;
+                height: 4rem;
+                margin-right: 1.5rem;
+                border-radius: 50%;
+            }
+
+            &-p {
+                font-size: 2rem;
+                line-height: 2.6rem;
+
+                span {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        &__descr {
+            margin-bottom: 4rem;
+            max-width: 43rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+
+        &__bg {
+            width: 90rem;
+            position: absolute;
+            bottom: -3rem;
+            right: -20rem;
+            z-index: 0;
+        }
+    }
+}

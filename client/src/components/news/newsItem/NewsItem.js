@@ -8,7 +8,9 @@ const NewsItem = () => {
 
     return (
         <Link to="/news/detail" className="news__item">
-            <img src={newsImg} alt="Дизайн" className="news__img" />
+            <div className="news__img-wrap">
+                <img src={newsImg} alt="Дизайн" className="news__img" />
+            </div>
             <div className="news__text">
                 <div className="news__tag">#Дизайн</div>
                 <div className="news__name">Как создавать интерфейсы, которые нравятся пользователям</div>
