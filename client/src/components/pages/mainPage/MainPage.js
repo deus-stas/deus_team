@@ -86,11 +86,11 @@ const MainPage = () => {
                 <div className="container">
                     <div className="main-projects__head">
                         <h2 className="heading-secondary">Проекты</h2>
-                        <div className="main-projects__filters">
+                        <div className="main-projects__filters hidden-mobile">
                             <Select classNames={classes} options={projectOptionsType} styles={colourStyles} placeholder="Тип проекта" />
                             <Select classNames={classes} options={projectOptionsTheme} styles={colourStyles} placeholder="Тематика проекта" />
                         </div>
-                        <Link to="/projects" className="btn --orange">Все проекты</Link>
+                        <Link to="/projects" className="btn --orange hidden-mobile">Все проекты</Link>
                     </div>
                     <div className="main-projects__wrap">
                         <Link to="/" className="main-projects__item">
@@ -309,10 +309,12 @@ const MainPage = () => {
                     <div className="main-news__wrap">
                         <div className="main-news__info">
                             <h2 className="heading-secondary">Журнал</h2>
-                            <Link to="/news" className="main-news__info-item">#Разработка</Link>
-                            <Link to="/news" className="main-news__info-item">#Дизайн</Link>
-                            <Link to="/news" className="main-news__info-item">#Реклама</Link>
-                            <Link to="/news" className="main-news__info-item">#Аналитика</Link>
+                            <div className="main-news__info-wrap">
+                                <Link to="/news" className="main-news__info-item">#Разработка</Link>
+                                <Link to="/news" className="main-news__info-item">#Дизайн</Link>
+                                <Link to="/news" className="main-news__info-item">#Реклама</Link>
+                                <Link to="/news" className="main-news__info-item">#Аналитика</Link>
+                            </div>
                         </div>
                         <div className="main-news__content">
                             <NewsItem />

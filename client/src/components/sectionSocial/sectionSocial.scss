@@ -1,3 +1,5 @@
+@import '../../style/_mixins.scss';
+
 .section-social {
     &__wrap {
         padding: 9.5rem 0 7.1rem;
@@ -6,12 +8,21 @@
         grid-gap: 5rem;
         justify-content: space-between;
         border-top: 1px solid rgba(25, 27, 29, 0.3);
+
+        @include respond(md) {
+            grid-template-columns: auto 78%;
+            grid-gap: 2rem;
+        }
     }
 
     &__content {
         display: grid;
         grid-template-columns: repeat(3, .33334fr);
         grid-gap: 4rem;
+
+        @include respond(md) {
+            grid-gap: 1rem;
+        }
     }
 
     &__item {
@@ -19,6 +30,10 @@
 
         color: rgba(256, 256, 256, .5);
         transition: background .5s;
+
+        @include respond(md) {
+            padding: 3rem 2rem;
+        }
 
         &:nth-child(1) {
             background: #0077FF;

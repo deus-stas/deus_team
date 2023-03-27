@@ -23,7 +23,6 @@ function Checkbox(props) {
                                 set.add(props.value);
                             }
                             form.setFieldValue(field.name, (Array.from(set)));
-                            form.setFieldTouched(field.name, true);
                         }}
                     />
                     <div className="form__checks-c">
@@ -45,7 +44,7 @@ const Cta = () => {
                 <div className="cta__wrap">
                     <h2 className="heading-secondary">Хотите обсудить проект?</h2>
                     <div className="cta__person">
-                        <img src={manager} alt="Алена Фролова" className="cta__person-img" />
+                        <img src={manager} alt="Павел Докторов" className="cta__person-img" />
                         <div className="cta__person-descr">Павел Докторов — Менеджер проектов, ответит на ваши вопросы и организует встречу</div>
                     </div>
                     <div className="cta__f">
@@ -53,7 +52,6 @@ const Cta = () => {
                             initialValues={{ name: '', company: '', phone: '', email: '', about: '', file: '', ctaServices: [], budget: '' }}
                             validate={values => {
                                 const errors = {};
-                                console.log(values);
                                 if (!values.name || values.name.length < 2) {
                                     errors.name = 'Обязательное поле';
                                 }

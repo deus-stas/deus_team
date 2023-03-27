@@ -1,3 +1,5 @@
+@import '../../../style/_mixins.scss';
+
 .main {
     &-banner {
         padding: 9.6rem 0 3.3rem;
@@ -29,6 +31,10 @@
 
             .heading-primary {
                 margin-bottom: 20rem;
+
+                @include respond(md) {
+                    margin-bottom: 15rem;
+                }
             }
 
             .btn {
@@ -126,8 +132,16 @@
     &-working {
         padding: 6rem 0 9.2rem;
 
+        @include respond(sm) {
+            padding: 6rem 0;
+        }
+
         .heading-tertiary {
             margin-bottom: 4rem;
+
+            @include respond(sm) {
+                margin-bottom: 3rem;
+            }
         }
 
         &__item {
@@ -148,8 +162,37 @@
 
         &__wrap {
             display: grid;
-            grid-template-columns: repeat(8, 0.125fr);
+            grid-template-columns: repeat(8, 1fr);
             grid-gap: 3rem;
+
+            @include respond(md) {
+                grid-gap: 1rem;
+            }
+
+            @include respond(sm) {
+                width: 100vw;
+                margin-left: -2rem;
+                padding: 2rem 0;
+                grid-gap: 0;
+                display: flex;
+                overflow-x: auto;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        &__item {
+            @include respond(sm) {
+                flex: 0 0 16.3rem;
+
+                &:not(:last-child) {
+                    margin-right: 1rem;
+                }
+            }
         }
 
         &__img-wrap {
@@ -200,6 +243,10 @@
             display: grid;
             grid-template-columns: 43.2% 49%;
             justify-content: space-between;
+
+            @include respond(md) {
+                grid-template-columns: 40% 56%;
+            }
         }
 
         &__info {
@@ -308,17 +355,51 @@
     &-news {
         padding: 10rem 0;
 
+        @include respond(sm) {
+            padding: 6rem 0;
+        }
+
         .heading-secondary {
             margin-bottom: 6rem;
+
+            @include respond(sm) {
+                margin-bottom: 1rem;
+            }
         }
 
         &__wrap {
             display: grid;
             grid-template-columns: 17% 74.5%;
             justify-content: space-between;
+
+            @include respond(md) {
+                grid-template-columns: 14% 82%;
+            }
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 3rem;
+            }
         }
 
         &__info {
+
+            &-wrap {
+                @include respond(sm) {
+                    display: flex;
+                    width: 100vw;
+                    padding: 0 2rem;
+                    margin-left: -2rem;
+                    overflow-x: auto;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+            }
+
             &-item {
                 display: block;
                 font-size: 2rem;
@@ -332,6 +413,11 @@
 
                 &:not(:last-child) {
                     margin-bottom: 2rem;
+
+                    @include respond(sm) {
+                        margin-bottom: 0;
+                        margin-right: 1.5rem;
+                    }
                 }
             }
         }
@@ -340,6 +426,11 @@
             display: grid;
             grid-template-columns: repeat(3, .33334fr);
             grid-gap: 4rem;
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 3rem;
+            }
         }
     }
 }
