@@ -1,60 +1,88 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 import Breadcrumbs from "../../breadcrubms/Breadcrumbs";
-import { Icon } from '../../icon/Icon';
 import SectionSocial from '../../sectionSocial/SectionSocial';
-import NewsItem from '../newsItem/NewsItem';
 import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 
 import './newsDetail.scss'
 
-import newsImg from '../../../img/news-img.png';
-
 const NewsDetail = () => {
+
+    const [news, setNews] = useState([]);
+    const [detail, setDetail] = useState([]);
+    const { id } = useParams();
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/news/${id}`)
+            .then((response) => {
+
+                const dataDetail = response.data;
+                axios.get(`http://localhost:5000/api/tags/${response.data.tags}`)
+                    .then((response) => {
+                        dataDetail.tags = response.data.name;
+                        setDetail(dataDetail);
+                        console.log(dataDetail);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [id]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/news')
+            .then((response) => {
+                const newsWithTags = response.data.map((news) => {
+                    return axios.get(`http://localhost:5000/api/tags/${news.tags}`)
+                        .then((tagResponse) => {
+                            news.tags = tagResponse.data.name;
+                            return news;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return news;
+                        });
+                });
+
+                Promise.all(newsWithTags)
+                    .then((news) => {
+                        setNews(news);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+
+
     return (
         <main className="news-detail">
-
             <section className="news-detail__main">
                 <Breadcrumbs />
                 <div className="container">
                     <div className="news-detail__main-content">
-                        <div className="news-detail__main-tag">#Реклама</div>
-                        <h1 className="heading-primary">Как работать с рекламой Google Ads из РФ в 2023 году</h1>
+                        <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.tags }}></div>
+                        <h1 className="heading-primary" dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
                     </div>
+                    <img className="news-detail__main-img" src={detail.image ? `http://localhost:5000/uploads/${detail.image.filename}` : null} alt={detail.name} />
                 </div>
-                <img src={newsImg} alt="#Реклама" className="news-detail__main-img" />
             </section>
 
             <section className="news-detail__article">
                 <div className="container">
                     <div className="news-detail__article-content">
-                        <h2>Клиент обратился к нам с задачей продвижения своих продуктов, расширения поисковой выдачи, увеличения охвата поисковых запросов. </h2>
-                        <p>Клиент обратился к нам с задачей продвижения своих продуктов, расширения поисковой выдачи, увеличения охвата поисковых запросов. Сложность работы заключалась в том, что мы не имели доступа к технической части сайта и все работы осуществлялись силами клиента после предварительного согласования.</p>
-                        <p>Клиент обратился к нам с задачей продвижения своих продуктов, расширения поисковой выдачи, увеличения охвата поисковых запросов. Сложность работы заключалась в том, что мы не имели доступа к технической части сайта и все работы осуществлялись силами клиента после предварительного согласования.</p>
-                        <div className="news-detail__adv">
-                            <div className="news-detail__adv-item">
-                                <Icon icon="task" />
-                                Максимально охватить поисковую выдачу в области кибербезопасности.
-                            </div>
-                            <div className="news-detail__adv-item">
-                                <Icon icon="task" />
-                                Увеличить узнаваемость продуктов и решений компании.
-                            </div>
-                            <div className="news-detail__adv-item">
-                                <Icon icon="task" />
-                                Увеличить узнаваемость бренда на российском рынке.
-                            </div>
-                        </div>
-                        <img src={newsImg} alt="Как работать с рекламой Google Ads из РФ в 2023 году" />
-                        <h3>Клиент обратился к нам с задачей продвижения своих продуктов, расширения поисковой выдачи</h3>
-                        <p>Клиент обратился к нам с задачей продвижения своих продуктов, расширения поисковой выдачи, увеличения охвата поисковых запросов. Сложность работы заключалась в том, что мы не имели доступа к технической части сайта и все работы осуществлялись силами клиента после предварительного согласования.</p>
-                        <h4>Lorem ipsum dolor sit amet.</h4>
-                        <ul>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem ipsum dolor sit amet.</li>
-                        </ul>
-                        <ol>
-                            <li>Lorem ipsum dolor sit.</li>
-                            <li>Lorem, ipsum dolor.</li>
-                        </ol>
+                        <div dangerouslySetInnerHTML={{ __html: detail.body }}></div>
                     </div>
                 </div>
             </section>
@@ -64,9 +92,21 @@ const NewsDetail = () => {
                     <div className="news-detail__more-content">
                         <h2 className="heading-secondary">Ещё статьи</h2>
                         <div className="news-detail__more-wrap">
-                            <NewsItem />
-                            <NewsItem />
-                            <NewsItem />
+
+                            {news.map((item) => {
+                                if (item.id === detail.id) return null;
+                                return (
+                                    <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
+                                        <div className="news__img-wrap">
+                                            <img src={`http://localhost:5000/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                        </div>
+                                        <div className="news__text">
+                                            <div className="news__tag">{item.tags}</div>
+                                            <div className="news__name">{item.name}</div>
+                                        </div>
+                                    </Link>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

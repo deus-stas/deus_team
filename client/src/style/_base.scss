@@ -180,7 +180,7 @@ main {
     padding-top: 8.3rem;
 
     @include respond(sm) {
-        padding-top: 6.9rem;
+        padding-top: 6rem;
     }
 }
 
@@ -194,6 +194,10 @@ main {
     opacity: 0;
     background: url('../img/play.svg') no-repeat 50% 50%/.5rem .5rem #FF4D01;
     border-radius: 50%;
+
+    @include respond(sm) {
+        display: none;
+    }
 }
 
 .js-cursor-play {
@@ -216,6 +220,10 @@ main {
     color: #191B1D;
 
     transition: border-color .3s;
+
+    @include respond(sm) {
+        justify-content: space-between;
+    }
 
     &.active {
         .select__icon {
@@ -290,6 +298,13 @@ main {
         top: 6rem;
         right: 6rem;
         z-index: 5;
+
+        @include respond(sm) {
+            top: 4rem;
+            right: 4rem;
+            font-size: 8rem;
+            line-height: 4rem;
+        }
     }
 
     &__content {

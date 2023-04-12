@@ -13,6 +13,11 @@
 
     transition: all .3s;
 
+    @include respond(sm) {
+        font-size: 1.6rem;
+        line-height: 1.8rem;
+    }
+
     &:hover {
         background: #FF4D01;
     }
@@ -44,6 +49,7 @@
     &.--white {
         background: #FFFFFF;
         color: #191B1D;
+
         &:hover {
             background: #FF4D01;
             color: #fff;
@@ -60,6 +66,12 @@
         text-align: center;
         will-change: transform;
         position: relative;
+
+        @include respond(sm) {
+            width: 13rem;
+            height: 13rem;
+            padding: 4.9rem .5rem 4.5rem;
+        }
 
         &::after {
             content: '';

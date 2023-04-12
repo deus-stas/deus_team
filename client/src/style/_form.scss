@@ -4,13 +4,27 @@
         font-weight: 500;
         font-size: 2.8rem;
         line-height: 3.4rem;
+
+        @include respond(sm) {
+            margin-bottom: 2rem;
+            font-size: 2.6rem;
+            line-height: 3.1rem;
+        }
     }
 
     &__wrap {
         display: flex;
 
+        @include respond(sm) {
+            display: block;
+        }
+
         &:not(:first-child) {
             margin-top: 6rem;
+
+            @include respond(sm) {
+                margin-top: 3rem;
+            }
         }
     }
 
@@ -20,6 +34,11 @@
 
         &:not(:last-child) {
             margin-right: 4rem;
+
+            @include respond(sm) {
+                margin-right: 0;
+                margin-bottom: 3rem;
+            }
         }
     }
 
@@ -38,6 +57,12 @@
         font-size: 2.4rem;
         color: inherit;
 
+        @include respond(sm) {
+            height: 3.1rem;
+            padding: 0 0 .5rem 0;
+            font-size: 2rem;
+        }
+
         &::placeholder {
             color: inherit;
         }
@@ -48,11 +73,19 @@
         position: absolute;
         bottom: -3rem;
         left: 0;
+
+        @include respond(sm) {
+            bottom: -2.5rem;
+        }
     }
 
     &__file {
         margin-top: 4rem;
         margin-bottom: 6rem;
+
+        @include respond(sm) {
+            margin: 3rem 0;
+        }
 
         &-label {
             display: block;
@@ -68,9 +101,20 @@
             line-height: 2.6rem;
             transition: all .3s;
 
+            @include respond(sm) {
+                padding: 1rem 2rem;
+                font-size: 1.6rem;
+                line-height: 1.8rem;
+            }
+
             &:hover {
                 background: #FF4D01;
                 color: #fff;
+
+                @include respond(sm) {
+                    background: #F3F4F4;
+                    color: inherit;
+                }
             }
         }
 
@@ -79,6 +123,10 @@
             margin-top: 1rem;
             display: inline-flex;
             position: relative;
+
+            @include respond(sm) {
+                margin-top: 2rem;
+            }
         }
 
         &-delete {
@@ -98,6 +146,10 @@
     .btn {
         margin: 6rem auto 3rem;
         display: block;
+
+        @include respond(sm) {
+            margin: 3rem auto;
+        }
     }
 
     &__check {
@@ -105,6 +157,10 @@
         margin: 0 auto;
         text-align: center;
         line-height: 1.8rem;
+
+        @include respond(sm) {
+            max-width: 33.5rem;
+        }
 
         a {
             color: rgba(255, 77, 1, 1);
@@ -115,16 +171,30 @@
         margin-bottom: 6rem;
         position: relative;
 
+        @include respond(sm) {
+            margin-bottom: 3rem;
+        }
+
         &-title {
             margin-bottom: 1.5rem;
             font-size: 2.4rem;
             line-height: 3.4rem;
+
+            @include respond(sm) {
+                margin-bottom: 1rem;
+                font-size: 2rem;
+                line-height: 2.6rem;
+            }
         }
 
         &-wrap {
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem 2rem;
+
+            @include respond(sm) {
+                gap: .5rem;
+            }
         }
 
         input {
@@ -145,8 +215,18 @@
             cursor: pointer;
             transition: all .3s;
 
+            @include respond(sm) {
+                padding: 1rem 2rem;
+                font-size: 1.6rem;
+                line-height: 1.8rem;
+            }
+
             &:hover {
                 background: #D0D0D0;
+
+                @include respond(sm) {
+                    background: #F3F4F4;
+                }
             }
         }
     }

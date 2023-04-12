@@ -1,24 +1,52 @@
+@import '../../style/mixins';
+
 .cta {
     padding: 10rem 0 6.5rem;
+
+    @include respond(sm) {
+        padding: 6rem 0;
+    }
 
     &__wrap {
         display: grid;
         grid-template-columns: .25fr .25fr .5fr;
         grid-gap: 4rem;
+
+        @include respond(sm) {
+            grid-template-columns: 100%;
+        }
     }
 
     &__person {
+        @include respond(sm) {
+            display: flex;
+            align-items: flex-start;
+        }
+
         &-img {
             width: 10rem;
             height: 10rem;
             border-radius: 50%;
             margin-bottom: 4rem;
+
+            @include respond(sm) {
+                width: 6rem;
+                height: 6rem;
+                flex: 0 0 6rem;
+                margin-right: 2rem;
+                margin-bottom: 0;
+            }
         }
 
         &-descr {
             font-weight: 500;
             font-size: 2.8rem;
             line-height: 3.4rem;
+
+            @include respond(sm) {
+                font-size: 2.2rem;
+                line-height: 2.6rem;
+            }
         }
     }
 }

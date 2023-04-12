@@ -6,12 +6,21 @@
         color: #fff;
         position: relative;
 
+        @include respond(sm) {
+            padding: 4.5rem 0 6rem;
+        }
+
         &__line {
             width: 124.4rem;
             position: absolute;
             bottom: 0;
             left: 0;
             z-index: 1;
+
+            @include respond(sm) {
+                width: 100%;
+                bottom: 6rem;
+            }
         }
 
         &>.container {
@@ -24,22 +33,35 @@
             grid-template-columns: repeat(2, .5fr);
             align-items: start;
             grid-gap: 4rem;
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 0;
+            }
         }
 
         &__content {
             padding-right: 6.4rem;
 
+            @include respond(sm) {
+                padding-right: 0;
+            }
+
             .heading-primary {
                 margin-bottom: 20rem;
 
                 @include respond(md) {
-                    margin-bottom: 15rem;
+                    margin-bottom: 6.6rem;
                 }
             }
 
             .btn {
                 margin: 0 auto;
                 display: block;
+
+                @include respond(sm) {
+                    margin: 0 0 0 1.8rem;
+                }
             }
         }
 
@@ -73,13 +95,25 @@
     &-projects {
         padding-top: 10rem;
 
+        @include respond(sm) {
+            padding-top: 6rem;
+        }
+
         &__head {
             display: flex;
             align-items: center;
             margin-bottom: 3.8rem;
 
+            @include respond(sm) {
+                margin-bottom: 3rem;
+            }
+
             .heading-secondary {
                 margin-right: 28.3rem;
+
+                @include respond(sm) {
+                    margin-right: 0;
+                }
             }
         }
 
@@ -96,6 +130,12 @@
             grid-gap: 4rem;
             border-bottom: 1px solid rgba(25, 27, 29, 0.3);
             padding-bottom: 5.5rem;
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 3rem;
+                padding-bottom: 6rem;
+            }
         }
 
         &__item {
@@ -109,6 +149,10 @@
         &__img-wrap {
             margin-bottom: 2.5rem;
             overflow: hidden;
+
+            @include respond(sm) {
+                margin-bottom: 2rem;
+            }
         }
 
         &__video,
@@ -121,11 +165,20 @@
 
         &__video {
             margin-bottom: 2.5rem;
+
+            @include respond(sm) {
+                margin-bottom: 2rem;
+            }
         }
 
         &__name {
             font-size: 2.4rem;
             line-height: 3.4rem;
+
+            @include respond(sm) {
+                font-size: 2rem;
+                line-height: 2.6rem;
+            }
         }
     }
 
@@ -239,6 +292,10 @@
         background: #191B1D;
         color: #fff;
 
+        @include respond(sm) {
+            padding: 6rem 0;
+        }
+
         &__wrap {
             display: grid;
             grid-template-columns: 43.2% 49%;
@@ -247,11 +304,20 @@
             @include respond(md) {
                 grid-template-columns: 40% 56%;
             }
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 4rem;
+            }
         }
 
         &__info {
             .heading-secondary {
                 margin-bottom: 10.5rem;
+
+                @include respond(sm) {
+                    margin-bottom: 3rem;
+                }
             }
         }
 
@@ -259,8 +325,16 @@
             padding-bottom: 3rem;
             border-bottom: 1px solid #3B3D3F;
 
+            @include respond(sm) {
+                padding-bottom: 1.5rem;
+            }
+
             &:not(:last-child) {
                 margin-bottom: 3rem;
+
+                @include respond(sm) {
+                    margin-bottom: 1.5rem;
+                }
             }
 
             &.active {
@@ -295,10 +369,17 @@
             font-weight: 500;
             font-size: 2.8rem;
             line-height: 3.4rem;
+
+            @include respond(sm) {
+                font-size: 2.6rem;
+                line-height: 3.1rem;
+            }
         }
 
         &__btn {
             width: 5rem;
+            flex: 0 0 5rem;
+            margin-left: 1rem;
             height: 5rem;
             display: flex;
             align-items: center;
@@ -307,6 +388,12 @@
             border-radius: 38px;
             color: #191B1D;
             transition: all .5s;
+
+            @include respond(sm) {
+                width: 4rem;
+                height: 4rem;
+                flex: 0 0 4rem;
+            }
 
             .icon {
                 width: 1.6rem;
@@ -340,13 +427,32 @@
         &__gallery {
             display: flex;
             align-items: center;
+
+            @include respond(sm) {
+                display: flex;
+                width: 100vw;
+                margin-left: -2rem;
+                padding: 0 2rem;
+                overflow-x: auto;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
         }
 
         &__img {
+            display: block;
             height: 4.8rem;
 
             &:not(:last-child) {
                 margin-right: 6rem;
+
+                @include respond(sm) {
+                    margin-right: 3rem;
+                }
             }
         }
 

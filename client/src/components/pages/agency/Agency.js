@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Marquee from "react-fast-marquee";
 import { Formik } from 'formik';
 import InputMask from "react-input-mask";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Grid } from "swiper";
 
 import { Icon } from '../../icon/Icon';
 import SectionProducts from '../../sectionProducts/SectionProducts';
@@ -10,6 +13,8 @@ import SectionSocial from '../../sectionSocial/SectionSocial';
 import Showreel from '../../showreel/Showreel';
 import Cta from '../../cta/Cta';
 
+import "swiper/css";
+import "swiper/css/grid";
 import './agency.scss';
 
 import productVideo from '../../../img/webhands.mp4';
@@ -17,6 +22,17 @@ import logoChoice from '../../../img/logo-choice.svg';
 import teamImg from '../../../img/team-img.png';
 
 const Agency = () => {
+
+    const [current, setCurrent] = useState(4);
+    const [total, setTotal] = useState(0);
+
+    const slideChange = (slider) => {
+        if (slider.touches.diff > 0) {
+            setCurrent(current - 2);
+        } else {
+            setCurrent(current + 2);
+        }
+    }
 
     return (
         <main className="agency">
@@ -40,15 +56,15 @@ const Agency = () => {
                         <div className="agency-about__adv">
                             <div className="agency-about__adv-item">
                                 <Icon icon="star"></Icon>
-                                Работаем с 2016 года
+                                Работаем<br /> с 2016 года
                             </div>
                             <div className="agency-about__adv-item">
                                 <Icon icon="star"></Icon>
-                                Входим в ТОП-40 креативности студий
+                                Входим в ТОП-40<br /> креативности студий
                             </div>
                             <div className="agency-about__adv-item">
                                 <Icon icon="star"></Icon>
-                                Комплексные решения для различных индустрий
+                                Комплексные решения<br /> для различных индустрий
                             </div>
                         </div>
                         <Link className="btn --circle --orange">Презентация агентства</Link>
@@ -65,14 +81,16 @@ const Agency = () => {
                     <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
                         <TabList className="agency-benefits__info">
                             <h2 className="heading-secondary">Награды</h2>
-                            <Tab className="agency-benefits__info-btn">
-                                <Icon icon="w" />
-                                awwwards <sup>2</sup>
-                            </Tab>
-                            <Tab className="agency-benefits__info-btn">
-                                <Icon icon="cssda" />
-                                css design awards <sup>5</sup>
-                            </Tab>
+                            <div className="agency-benefits__info-wrap">
+                                <Tab className="agency-benefits__info-btn">
+                                    <Icon icon="w" />
+                                    awwwards <sup>2</sup>
+                                </Tab>
+                                <Tab className="agency-benefits__info-btn">
+                                    <Icon icon="cssda" />
+                                    css design awards <sup>5</sup>
+                                </Tab>
+                            </div>
                         </TabList>
                         <div className="agency-benefits__tabs">
                             <TabPanel className="agency-benefits__content">
@@ -143,10 +161,12 @@ const Agency = () => {
                     <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
                         <TabList className="agency-benefits__info">
                             <h2 className="heading-secondary">Награды</h2>
-                            <Tab className="agency-benefits__info-btn">
-                                <Icon icon="rating" />
-                                ratingruneta<sup>6</sup>
-                            </Tab>
+                            <div className="agency-benefits__info-wrap">
+                                <Tab className="agency-benefits__info-btn">
+                                    <Icon icon="rating" />
+                                    ratingruneta<sup>6</sup>
+                                </Tab>
+                            </div>
                         </TabList>
                         <div className="agency-benefits__tabs">
                             <TabPanel className="agency-benefits__content">
@@ -190,32 +210,74 @@ const Agency = () => {
 
             <section className="agency-clients" id="clients">
                 <div className="container">
-                    <h2 className="heading-secondary">Наши клиенты</h2>
+                    <div className="agency-clients__head">
+                        <h2 className="heading-secondary">Наши клиенты</h2>
+                        <div className="agency-clients__pag hidden-desktop">
+                            <div className="agency-clients__pag-current">{current}</div>
+                            <div className="agency-clients__pag-sep">/</div>
+                            <div className="agency-clients__pag-total">{total}</div>
+                        </div>
+                    </div>
                 </div>
-                <Marquee speed="50">
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                </Marquee>
-                <Marquee direction='right' speed="50">
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                </Marquee>
-                <Marquee speed="20">
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                </Marquee>
+                <div className="agency-clients__marquee hidden-mobile">
+                    <Marquee speed="40">
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                    </Marquee>
+                    <Marquee direction='right' speed="40">
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                    </Marquee>
+                    <Marquee speed="20">
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
+                    </Marquee>
+                </div>
+                <Swiper
+                    slidesPerView={2}
+                    grid={{
+                        rows: 2,
+                    }}
+                    spaceBetween={10}
+                    modules={[Grid]}
+                    onSlideChange={(e) => slideChange(e)}
+                    onInit={(e) => setTotal(e.slides.length)}
+                    className="agency-clients__slider hidden-desktop">
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
+                </Swiper>
             </section>
 
             <section className="agency-team" id="team">

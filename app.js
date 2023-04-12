@@ -3,12 +3,21 @@ const config = require('config')
 const path = require('path')
 const mongoose = require('mongoose')
 const cors = require('cors');
+const newsRoutes = require('./routes/api/news');
+const tagsRoutes = require('./routes/api/tags');
 
 const app = express();
 
+app.use('/uploads', express.static('uploads'));
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
-app.use('/api/test', require('./routes/api/test'));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
+    next();
+});
+app.use('/api', newsRoutes);
+app.use('/api', tagsRoutes);
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, 'client', 'build')))

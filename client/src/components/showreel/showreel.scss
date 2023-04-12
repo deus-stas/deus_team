@@ -1,3 +1,5 @@
+@import '../../style/mixins';
+
 .showreel {
     &__title {
         display: flex;
@@ -5,6 +7,10 @@
         margin-bottom: 1rem;
         font-size: 2rem;
         line-height: 2.6rem;
+
+        @include respond(sm) {
+            margin-bottom: 0.8rem;
+        }
 
         span {
             margin-left: 0.5rem;
@@ -24,5 +30,19 @@
 
     &__s {
         cursor: none;
+        position: relative;
+
+        @include respond(sm) {
+            &::before {
+                content: '';
+                width: 6rem;
+                height: 6rem;
+                background: url('../../img/play-video.svg')no-repeat center/cover;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
     }
 }

@@ -13,6 +13,12 @@
             grid-template-columns: auto 78%;
             grid-gap: 2rem;
         }
+
+        @include respond(sm) {
+            padding: 6rem 0;
+            grid-template-columns: 100%;
+            grid-gap: 3rem;
+        }
     }
 
     &__content {
@@ -21,6 +27,11 @@
         grid-gap: 4rem;
 
         @include respond(md) {
+            grid-gap: 1rem;
+        }
+
+        @include respond(sm) {
+            grid-template-columns: 100%;
             grid-gap: 1rem;
         }
     }
@@ -33,6 +44,10 @@
 
         @include respond(md) {
             padding: 3rem 2rem;
+        }
+
+        @include respond(sm) {
+            padding: 3rem;
         }
 
         &:nth-child(1) {
@@ -69,5 +84,10 @@
     &__descr {
         font-size: 2.4rem;
         line-height: 3.4rem;
+
+        @include respond(sm) {
+            font-size: 2rem;
+            line-height: 2.6rem;
+        }
     }
 }

@@ -25,12 +25,12 @@ const AppFooter = () => {
                             <Link className="footer__social-item" to="/"><Icon icon="be" /></Link>
                         </div>
                     </div>
-                    <div className="footer__item">
+                    <div className="footer__item hidden-mobile">
                         <div className="footer__subtitle">Офис</div>
                         <div className="footer__list-item">г. Одинцово, ул. Молодежная, д.46, <br /> строение 1 офис 24, 25</div>
                         <Link className='btn' to="/">Скачать презентацию</Link>
                     </div>
-                    <div className="footer__item">
+                    <div className="footer__item --about">
                         <div className="footer__subtitle">О компании</div>
                         <nav className="footer__nav">
                             <ul className='footer__list'>

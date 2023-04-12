@@ -16,31 +16,36 @@ import Contacts from './components/pages/contacts/Contacts';
 import News from './components/news/News';
 import NewsDetail from './components/news/newsDetail/NewsDetail';
 
+import AdminPage from './Admin';
+
 function App() {
 
   return (
     <Router>
-      <ScrollToTop />
-      <CustomCursor
-        targets={['.js-cursor-play']}
-        customClass='custom-cursor'
-        dimensions={20}
-        fill='none'
-        opacity={0}
-      />
-      <AppHeader />
-      <Routes>
-        <Route exact path='/' element={<MainPage />} />
-        <Route exact path='/projects' element={<Projects />} />
-        <Route exact path='/projects/detail' element={<ProjectDetail />} />
-        <Route exact path='/services' element={<Services />} />
-        <Route exact path='/services/detail' element={<ServicesDetail />} />
-        <Route exact path='/agency' element={<Agency />} />
-        <Route exact path='/contacts' element={<Contacts />} />
-        <Route exact path='/news' element={<News />} />
-        <Route exact path='/news/detail' element={<NewsDetail />} />
-      </Routes>
-      <AppFooter />
+      <>
+        <ScrollToTop />
+        <CustomCursor
+          targets={['.js-cursor-play']}
+          customClass='custom-cursor'
+          dimensions={20}
+          fill='none'
+          opacity={0}
+        />
+        <AppHeader />
+        <Routes>
+          <Route exact path='/' element={<MainPage />} />
+          <Route exact path='/projects' element={<Projects />} />
+          <Route exact path='/projects/detail' element={<ProjectDetail />} />
+          <Route exact path='/services' element={<Services />} />
+          <Route exact path='/services/detail' element={<ServicesDetail />} />
+          <Route exact path='/agency' element={<Agency />} />
+          <Route exact path='/contacts' element={<Contacts />} />
+          <Route exact path='/news' element={<News />} />
+          <Route exact path='/news/:id' element={<NewsDetail />} />
+          <Route path='/admin/*' element={<AdminPage />} />
+        </Routes>
+        <AppFooter />
+      </>
     </Router>
   );
 }

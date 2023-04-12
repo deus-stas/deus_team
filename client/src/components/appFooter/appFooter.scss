@@ -1,13 +1,25 @@
+@import '../../style/_mixins.scss';
+
 .footer {
     padding: 10rem 0 2.8rem;
     background: #191B1D;
     color: #FFFFFF;
+
+    @include respond(sm) {
+        padding: 6rem 0;
+    }
 
     &__wrap {
         display: grid;
         grid-template-columns: repeat(4, .25fr);
         grid-gap: 3rem;
         margin-bottom: 7.8rem;
+
+        @include respond(sm) {
+            grid-template-columns: 100%;
+            grid-gap: 4rem;
+            margin-bottom: 4rem;
+        }
     }
 
     &__subtitle {
@@ -20,6 +32,16 @@
         .btn {
             margin-top: 1.9rem;
         }
+
+        &.--about {
+            .footer__list {
+                @include respond(sm) {
+                    display: grid;
+                    grid-template-columns: .5fr .5fr;
+                    grid-column-gap: 2rem;
+                }
+            }
+        }
     }
 
     &__contacts {
@@ -30,8 +52,17 @@
             line-height: 4.3rem;
             transition: color .3s;
 
+            @include respond(sm) {
+                font-size: 3.2rem;
+                line-height: 3.8rem;
+            }
+
             &:not(:last-child) {
                 margin-bottom: 1rem;
+
+                @include respond(sm) {
+                    margin-bottom: 0.5rem;
+                }
             }
         }
     }
@@ -39,6 +70,10 @@
     &__social {
         margin-top: 4.2rem;
         display: flex;
+
+        @include respond(sm) {
+            margin-top: 2rem;
+        }
 
         &-item {
             width: 6rem;

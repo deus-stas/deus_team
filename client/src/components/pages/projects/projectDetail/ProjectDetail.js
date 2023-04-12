@@ -34,9 +34,13 @@ const ProjectDetail = () => {
                         <div className="project-goals__content">
                             <div className="project-goals__text">Клиент обратился к нам с задачей продвижения своих продуктов, расширения поисковой выдачи, увеличения охвата поисковых запросов. Сложность работы заключалась в том, что мы не имели доступа к технической части сайта и все работы осуществлялись силами клиента после предварительного согласования.</div>
                             <div className="quote">
-                                <img src={person} alt="Брижань Вячеслав" className="quote__img" />
                                 <div className="quote__box">
-                                    <div className="quote__person">Брижань Вячеслав, <span>Директор по развитию @ DEUS</span></div>
+                                    <div className="quote__person">
+                                        <img src={person} alt="Брижань Вячеслав" className="quote__img" />
+                                        <div className="quote__person-text">
+                                            Брижань Вячеслав, <span>Директор по развитию @ DEUS</span>
+                                        </div>
+                                    </div>
                                     <div className="quote__q">Главная цель проекта — получить максимальный охват поисковых запросов, так или иначе связанных с информационной безопасностью.</div>
                                 </div>
                             </div>
@@ -126,9 +130,13 @@ const ProjectDetail = () => {
                     <div className="project-results__wrap">
                         <h2 className="heading-secondary">Результаты</h2>
                         <div className="quote">
-                            <img src={person} alt="Максим Салимов" className="quote__img" />
                             <div className="quote__box">
-                                <div className="quote__person">Максим Салимов, <span>SEO специалист @ DEUS</span></div>
+                                <div className="quote__person">
+                                    <img src={person} alt="Максим Салимов" className="quote__img" />
+                                    <div className="quote__person-text">
+                                        Максим Салимов, <span>SEO специалист @ DEUS</span>
+                                    </div>
+                                </div>
                                 <div className="quote__q">В результате проделанной работы более 70% всех поисковых запросов попали в ТОП-10. При этом мы не вмешивались ни в пользовательский интерфейс, ни в структуру сайта (тогда бы результаты были еще лучше). В данный момент клиент самостоятельно готовит темы и контент для будущих статей, придерживаясь при этом нашей первоначальной стратегии и получая места в выдаче ТОП-10.</div>
                             </div>
                         </div>
@@ -151,7 +159,7 @@ const ProjectDetail = () => {
                 </div>
             </section>
 
-            <ProjectNext/>
+            <ProjectNext />
 
             <Cta />
 

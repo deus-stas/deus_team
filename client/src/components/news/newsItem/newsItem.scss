@@ -3,7 +3,6 @@
 .news {
     &__item {
 
-
         &:nth-child(10n + 10),
         &:first-child {
             grid-column: span 2;

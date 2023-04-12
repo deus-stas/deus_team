@@ -17,6 +17,7 @@ const Contacts = () => {
                         <div className="contacts-main__content">
                             <h2 className="heading-secondary">Офис</h2>
                             <div className="contacts-main__address">г. Одинцово, ул. Молодежная, д.46, строение 1 офис 24, 25</div>
+                            <Link to="tel:+74951034351" className="contacts-main__phone">+7 (495) 103—4351</Link>
                             <Link to="https://yandex.ru/maps/?rtext=~55.677636, 37.272125" className="btn --orange" target="_blank">Как проехать</Link>
                         </div>
                         <div className="contacts-main__map" id="contacts-map">

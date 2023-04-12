@@ -1,4 +1,6 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
@@ -16,6 +18,7 @@ import newsImg from '../../../img/news-img.png';
 import productVideo from '../../../img/webhands.mp4';
 import projectImg from '../../../img/project-img.png';
 import mainBannerLine from '../../../img/main-banner-line.svg';
+import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
 
 const projectOptionsType = [
     { value: 'sites-services', label: 'Сайты и сервисы' },
@@ -62,6 +65,40 @@ const onAcc = (e) => {
 
 const MainPage = () => {
 
+
+    const [news, setNews] = useState([]);
+    const [allTags, setAllTags] = useState(new Set());
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/news')
+            .then((response) => {
+                const newsWithTags = response.data.map((news) => {
+                    return axios.get(`http://localhost:5000/api/tags/${news.tags}`)
+                        .then((tagResponse) => {
+                            news.tags = tagResponse.data.name;
+                            return news;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return news;
+                        });
+                });
+
+                Promise.all(newsWithTags)
+                    .then((news) => {
+                        setNews(news);
+                        const tags = new Set(news.flatMap((news) => news.tags));
+                        setAllTags(tags);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <main className="main">
 
@@ -69,17 +106,18 @@ const MainPage = () => {
                 <div className="container">
                     <div className="main-banner__wrap">
                         <div className="main-banner__content">
-                            <h1 className="heading-primary">Создавайте вместе с нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1>
+                            <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1>
                             <Link to="#" className="btn --circle --orange">Презентация агентства</Link>
                         </div>
-                        <div className="main-banner__project">
+                        <div className="main-banner__project hidden-mobile">
                             <div className="main-banner__project-name">Touch Money</div>
                             <img src={projectImg} alt="Touch Money" className="main-banner__project-img" />
                             <Link to="/projects/detail" className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
                         </div>
                     </div>
                 </div>
-                <img src={mainBannerLine} alt="Touch Money" className="main-banner__line" />
+                <img src={mainBannerLine} alt="Touch Money" className="main-banner__line hidden-mobile" />
+                <img src={mainBannerLineMob} alt="Touch Money" className="main-banner__line hidden-desktop" />
             </section>
 
             <section className="main-projects">
@@ -310,18 +348,25 @@ const MainPage = () => {
                         <div className="main-news__info">
                             <h2 className="heading-secondary">Журнал</h2>
                             <div className="main-news__info-wrap">
-                                <Link to="/news" className="main-news__info-item">#Разработка</Link>
-                                <Link to="/news" className="main-news__info-item">#Дизайн</Link>
-                                <Link to="/news" className="main-news__info-item">#Реклама</Link>
-                                <Link to="/news" className="main-news__info-item">#Аналитика</Link>
+                                {[...allTags].map((tag, i) => (
+                                    <Link to={`/news?tag=${tag}`} className="main-news__info-item" key={i}>#{tag}</Link>
+                                ))}
                             </div>
                         </div>
                         <div className="main-news__content">
-                            <NewsItem />
-                            <NewsItem />
-                            <NewsItem />
-                            <NewsItem />
-                            <NewsItem />
+                            {news.map((item) => {
+                                return (
+                                    <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
+                                        <div className="news__img-wrap">
+                                            <img src={`http://localhost:5000/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                        </div>
+                                        <div className="news__text">
+                                            <div className="news__tag">{item.tags}</div>
+                                            <div className="news__name">{item.name}</div>
+                                        </div>
+                                    </Link>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

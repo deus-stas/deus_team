@@ -216,9 +216,11 @@ const ServicesDetail = () => {
                     <Tabs className="service-price__wrap" selectedTabClassName="active">
                         <TabList className="service-price__info">
                             <h2 className="heading-secondary">Услуги</h2>
-                            <Tab className="service-price__info-btn">Сайты</Tab>
-                            <Tab className="service-price__info-btn">Nocode</Tab>
-                            <Tab className="service-price__info-btn">Лендинг</Tab>
+                            <div className="service-price__info-wrap">
+                                <Tab className="service-price__info-btn">Сайты</Tab>
+                                <Tab className="service-price__info-btn">Nocode</Tab>
+                                <Tab className="service-price__info-btn">Лендинг</Tab>
+                            </div>
                         </TabList>
                         <div className="service-price__tariffs">
                             <TabPanel className="service-price__tab">
