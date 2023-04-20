@@ -8,29 +8,12 @@ import { Icon } from '../../icon/Icon';
 import SectionProducts from '../../sectionProducts/SectionProducts';
 import SectionSocial from '../../sectionSocial/SectionSocial';
 import Showreel from '../../showreel/Showreel';
-import NewsItem from '../../news/newsItem/NewsItem';
 
 import './mainPage.scss';
 
-import workingImg from '../../../img/working-img.png';
 import serviceImg from '../../../img/service-img.svg';
-import newsImg from '../../../img/news-img.png';
-import productVideo from '../../../img/webhands.mp4';
-import projectImg from '../../../img/project-img.png';
 import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
-
-const projectOptionsType = [
-    { value: 'sites-services', label: 'Сайты и сервисы' },
-    { value: 'sites-services', label: 'Сайты и сервисы' },
-    { value: 'sites-services', label: 'Сайты и сервисы' },
-]
-
-const projectOptionsTheme = [
-    { value: 'estate', label: 'Недвижимость' },
-    { value: 'finance', label: 'Финансы и банки' },
-    { value: 'medicine', label: 'Медицина' },
-]
 
 const colourStyles = {
     control: (styles) => ({}),
@@ -65,9 +48,18 @@ const onAcc = (e) => {
 
 const MainPage = () => {
 
-
     const [news, setNews] = useState([]);
     const [allTags, setAllTags] = useState(new Set());
+
+    const [working, setWorking] = useState([]);
+
+    const [projects, setProjects] = useState([]);
+    const [mainProjects, setMainProjects] = useState([]);
+    const [optionsTheme, setOptionsTheme] = useState([]);
+    const [optionsType, setOptionsType] = useState([]);
+
+    const [selectedTheme, setSelectedTheme] = useState(null);
+    const [selectedType, setSelectedType] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/news')
@@ -99,115 +91,150 @@ const MainPage = () => {
             });
     }, []);
 
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/working/`)
+            .then((response) => {
+                setWorking(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/projects/`)
+            .then((response) => {
+                let mainProject = [];
+                setProjects(response.data);
+                response.data.forEach(project => {
+                    if (project.main) mainProject[0] = project;
+                });
+                setMainProjects(mainProject);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/themes/`)
+            .then((response) => {
+                console.log(response.data);
+                let projectOptionsTheme = [];
+                response.data.forEach((item, i) => {
+                    const { id, name } = item;
+                    projectOptionsTheme[i] = { value: id, label: name }
+                })
+                setOptionsTheme(projectOptionsTheme)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/types/`)
+            .then((response) => {
+                console.log(response.data);
+                let projectOptionsType = [];
+                response.data.forEach((item, i) => {
+                    const { id, name } = item;
+                    projectOptionsType[i] = { value: id, label: name }
+                })
+                setOptionsType(projectOptionsType)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    const handleThemeChange = (selectedOption) => {
+        setSelectedTheme(selectedOption);
+    };
+
+    const handleTypeChange = (selectedOption) => {
+        setSelectedType(selectedOption);
+    };
+
+    const filteredProjects = projects.filter(project => {
+        return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
+            (selectedType ? project.projectType === selectedType.value : true);
+    });
+
     return (
         <main className="main">
 
-            <section className="main-banner" style={{ background: 'linear-gradient(252.85deg, #5740F3 0%, #5A42F5 100%)' }}>
-                <div className="container">
-                    <div className="main-banner__wrap">
-                        <div className="main-banner__content">
-                            <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1>
-                            <Link to="#" className="btn --circle --orange">Презентация агентства</Link>
+            {mainProjects ? mainProjects.map(project => {
+                return (
+                    <section className="main-banner" key={project.id} style={{ background: project.color }}>
+                        <div className="container">
+                            <div className="main-banner__wrap">
+                                <div className="main-banner__content">
+                                    <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1>
+                                    <Link to="#" className="btn --circle --orange">Презентация агентства</Link>
+                                </div>
+                                <div className="main-banner__project hidden-mobile">
+                                    <div className="main-banner__project-name">{project.name}</div>
+                                    <img src={project.image ? `http://localhost:5000/uploads/${project.image.filename}` : null} alt={project.name} className="main-banner__project-img" />
+                                    <Link to={`/projects/${project.id}`} className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
+                                </div>
+                            </div>
                         </div>
-                        <div className="main-banner__project hidden-mobile">
-                            <div className="main-banner__project-name">Touch Money</div>
-                            <img src={projectImg} alt="Touch Money" className="main-banner__project-img" />
-                            <Link to="/projects/detail" className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
-                        </div>
-                    </div>
-                </div>
-                <img src={mainBannerLine} alt="Touch Money" className="main-banner__line hidden-mobile" />
-                <img src={mainBannerLineMob} alt="Touch Money" className="main-banner__line hidden-desktop" />
-            </section>
+                        <img src={mainBannerLine} alt="Touch Money" className="main-banner__line hidden-mobile" />
+                        <img src={mainBannerLineMob} alt="Touch Money" className="main-banner__line hidden-desktop" />
+                    </section>
+                )
+            }) : null}
 
             <section className="main-projects">
                 <div className="container">
                     <div className="main-projects__head">
                         <h2 className="heading-secondary">Проекты</h2>
                         <div className="main-projects__filters hidden-mobile">
-                            <Select classNames={classes} options={projectOptionsType} styles={colourStyles} placeholder="Тип проекта" />
-                            <Select classNames={classes} options={projectOptionsTheme} styles={colourStyles} placeholder="Тематика проекта" />
+                            <Select classNames={classes} options={optionsType} styles={colourStyles} onChange={handleTypeChange} placeholder="Тип проекта" />
+                            <Select classNames={classes} options={optionsTheme} styles={colourStyles} onChange={handleThemeChange} placeholder="Тематика проекта" />
                         </div>
                         <Link to="/projects" className="btn --orange hidden-mobile">Все проекты</Link>
                     </div>
                     <div className="main-projects__wrap">
-                        <Link to="/" className="main-projects__item">
-                            <video autoPlay loop muted playsInline className="main-projects__video">
-                                <source src={productVideo} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                            </video>
-                            <div className="main-projects__name">Газораспределительной организации Чеченской Республики</div>
-                        </Link>
-                        <Link to="/" className="main-projects__item">
-                            <div className="main-projects__img-wrap">
-                                <img src={newsImg} alt="Дизайн и разработка сайта ассоциации детских стоматологов" className="main-projects__img" />
-                            </div>
-                            <div className="main-projects__name">Дизайн и разработка сайта ассоциации детских стоматологов</div>
-                        </Link>
-                        <Link to="/" className="main-projects__item">
-                            <div className="main-projects__img-wrap">
-                                <img src={newsImg} alt="Клиника репродукции ЭМБРИО" className="main-projects__img" />
-                            </div>
-                            <div className="main-projects__name">Клиника репродукции ЭМБРИО</div>
-                        </Link>
+                        {filteredProjects ? filteredProjects.map(project => {
+                            return (
+                                <Link to={`/projects/${project.id}`} className="main-projects__item" key={project.id}>
+                                    <div className="main-projects__img-wrap">
+                                        <img src={project.image ? `http://localhost:5000/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                    </div>
+                                    <div className="main-projects__name">{project.name}</div>
+                                </Link>
+                            )
+                        })
+                            : null}
                     </div>
                 </div>
             </section>
 
-            <section className="main-working">
-                <div className="container">
-                    <h3 className="heading-tertiary">Работаем сейчас над</h3>
-                    <div className="main-working__wrap">
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="Промо сайт для Nike" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">Промо сайт для Nike</div>
-                        </div>
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="SEO продвижение трактора Беларус" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">SEO продвижение трактора Беларус</div>
-                        </div>
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="SMM продвижение магазины вкусных вин" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">SMM продвижение магазины вкусных вин</div>
-                        </div>
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="Разработка фирменного стиля для 3В кинотетра" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">Разработка фирменного стиля для 3В кинотетра</div>
-                        </div>
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="Фотосессия для гастрономического ресторана" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">Фотосессия для гастрономического ресторана</div>
-                        </div>
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="Разработка сайта для студии интерьера" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">Разработка сайта для студии интерьера</div>
-                        </div>
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="Рисуем дизайн концепт для застройщика квартирного комплекса" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">Рисуем дизайн концепт для застройщика квартирного комплекса</div>
-                        </div>
-                        <div className="main-working__item">
-                            <div className="main-working__img-wrap">
-                                <img src={workingImg} alt="Сайт для планеты земля" className="main-working__img" />
-                            </div>
-                            <div className="main-working__name">Сайт для планеты земля</div>
+            {working ?
+                <section className="main-working">
+                    <div className="container">
+                        <h3 className="heading-tertiary">Работаем сейчас над</h3>
+                        <div className="main-working__wrap">
+                            {
+                                working.map(item => {
+                                    return (
+                                        <div className="main-working__item" key={item.id}>
+                                            <div className="main-working__img-wrap">
+                                                <img src={item.image ? `http://localhost:5000/uploads/${item.image.filename}` : null} alt={item.name} className="main-working__img" />
+                                            </div>
+                                            <div className="main-working__name">{item.name}</div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                : null}
 
             <section className="main-services">
                 <div className="container">

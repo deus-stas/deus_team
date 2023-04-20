@@ -1,4 +1,6 @@
-import { Icon } from '../../../icon/Icon';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+import { useParams } from "react-router-dom";
 
 import Cta from '../../../cta/Cta';
 import Breadcrumbs from '../../../breadcrubms/Breadcrumbs';
@@ -6,28 +8,180 @@ import ProjectNext from '../projectNext/ProjectNext';
 
 import './projectDetail.scss'
 
-import person from '../../../../img/discuss-btn.png';
-import projectAnalytic from '../../../../img/project-analytic.png';
-
 const ProjectDetail = () => {
+    const [detail, setDetail] = useState([]);
+    const { id } = useParams();
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/projects/${id}`)
+            .then((response) => {
+
+                const dataDetail = response.data;
+                setDetail(response.data);
+                console.log(response.data);
+                if (response.data.taskPersons !== 'undefined') {
+                    axios.get(`http://localhost:5000/api/persons/${response.data.taskPersons}`)
+                        .then((response) => {
+                            dataDetail.taskPersons = response.data;
+                            setDetail(dataDetail);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+                if (response.data.approachPersons !== 'undefined') {
+                    axios.get(`http://localhost:5000/api/persons/${response.data.approachPersons}`)
+                        .then((response) => {
+                            dataDetail.approachPersons = response.data;
+                            setDetail(dataDetail);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+                if (response.data.resultPersons !== 'undefined') {
+                    axios.get(`http://localhost:5000/api/persons/${response.data.resultPersons}`)
+                        .then((response) => {
+                            dataDetail.resultPersons = response.data;
+                            setDetail(dataDetail);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [id]);
+
     return (
         <main className="project">
-
+            {console.log(detail)}
             <Breadcrumbs />
 
             <section className="project-main">
                 <div className="container">
                     <div className="project-main__wrap">
-                        <h1 className="heading-primary">Разработали стратегию продвижения для крупной телеком-компании и за 6 месяцев с 0 вывели 70% блога в ТОП-10.</h1>
-                        <div className="project-main__text">
-                            <div className="project-main__subtitle">О клиенте</div>
-                            <div className="project-main__descr">Крупный Российский разработчик решений в области кибербезопасности и защиты информации. В кейсе мы делимся стратегией и результатами продвижения продуктов компании.</div>
-                        </div>
+                        <h1 className="heading-primary" dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
+                        {detail.about !== 'undefined' ?
+                            <div className="project-main__text">
+                                <div className="project-main__subtitle">О клиенте</div>
+                                <div className="project-main__descr" dangerouslySetInnerHTML={{ __html: detail.about }}></div>
+                            </div>
+                            : null}
                     </div>
                 </div>
             </section>
 
-            <section className="project-goals">
+            {detail.bannerFirst ?
+                <section className="project-banner">
+                    <img src={`http://localhost:5000/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
+                </section>
+                : null}
+
+            {detail.task !== 'undefined' && detail.taskPersons ?
+                <section className="project-results">
+                    <div className="container">
+                        <div className="project-results__wrap">
+                            <h2 className="heading-secondary">Задача</h2>
+                            <div className="quote">
+                                <div className="quote__box">
+                                    <div className="quote__person">
+                                        {detail.taskPersons.image ? <img src={`http://localhost:5000/uploads/${detail.taskPersons.image.filename}`} alt={detail.taskPersons.name} className="quote__img" /> : null}
+
+                                        <div className="quote__person-text">
+                                            {detail.taskPersons.name}, <span>{detail.taskPersons.post} @ DEUS</span>
+                                        </div>
+                                    </div>
+                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerSecond ?
+                <section className="project-banner">
+                    <img src={`http://localhost:5000/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
+                </section>
+                : null}
+
+            {detail.approach !== 'undefined' && detail.approachPersons ?
+                <section className="project-results">
+                    <div className="container">
+                        <div className="project-results__wrap">
+                            <h2 className="heading-secondary">Подход</h2>
+                            <div className="quote">
+                                <div className="quote__box">
+                                    <div className="quote__person">
+                                        {detail.approachPersons.image ? <img src={`http://localhost:5000/uploads/${detail.approachPersons.image.filename}`} alt={detail.approachPersons.name} className="quote__img" /> : null}
+
+                                        <div className="quote__person-text">
+                                            {detail.approachPersons.name}, <span>{detail.approachPersons.post} @ DEUS</span>
+                                        </div>
+                                    </div>
+                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerThird ?
+                <section className="project-banner">
+                    <img src={`http://localhost:5000/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
+                </section>
+                : null}
+
+            {detail.body ?
+                <section className="project-results">
+                    <div className="container">
+                        <div className="project-results__wrap">
+                            <div className="project-results__text" dangerouslySetInnerHTML={{ __html: detail.body }}></div>
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerFourth ?
+                <section className="project-banner">
+                    <img src={`http://localhost:5000/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
+                </section>
+                : null}
+
+            {detail.result !== 'undefined' && detail.resultPersons ?
+                <section className="project-results">
+                    <div className="container">
+                        <div className="project-results__wrap">
+                            <h2 className="heading-secondary">Результаты</h2>
+                            <div className="quote">
+                                <div className="quote__box">
+                                    <div className="quote__person">
+                                        {detail.resultPersons.image ? <img src={`http://localhost:5000/uploads/${detail.resultPersons.image.filename}`} alt={detail.resultPersons.name} className="quote__img" /> : null}
+
+                                        <div className="quote__person-text">
+                                            {detail.resultPersons.name}, <span>{detail.resultPersons.post} @ DEUS</span>
+                                        </div>
+                                    </div>
+                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerFifth ?
+                <section className="project-banner">
+                    <img src={`http://localhost:5000/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
+                </section>
+                : null}
+
+            {/* <section className="project-goals">
                 <div className="container">
                     <div className="project-goals__wrap">
                         <h2 className="heading-secondary">Цели и задачи</h2>
@@ -61,9 +215,9 @@ const ProjectDetail = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
-            <section className="project-steps">
+            {/* <section className="project-steps">
                 <div className="container">
                     <h2 className="heading-secondary">Этапы работ</h2>
                     <div className="project-steps__s">
@@ -125,25 +279,6 @@ const ProjectDetail = () => {
                 </div>
             </section>
 
-            <section className="project-results">
-                <div className="container">
-                    <div className="project-results__wrap">
-                        <h2 className="heading-secondary">Результаты</h2>
-                        <div className="quote">
-                            <div className="quote__box">
-                                <div className="quote__person">
-                                    <img src={person} alt="Максим Салимов" className="quote__img" />
-                                    <div className="quote__person-text">
-                                        Максим Салимов, <span>SEO специалист @ DEUS</span>
-                                    </div>
-                                </div>
-                                <div className="quote__q">В результате проделанной работы более 70% всех поисковых запросов попали в ТОП-10. При этом мы не вмешивались ни в пользовательский интерфейс, ни в структуру сайта (тогда бы результаты были еще лучше). В данный момент клиент самостоятельно готовит темы и контент для будущих статей, придерживаясь при этом нашей первоначальной стратегии и получая места в выдаче ТОП-10.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section className="project-analytics">
                 <div className="container">
                     <div className="project-analytics__wrap">
@@ -157,7 +292,7 @@ const ProjectDetail = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>*/}
 
             <ProjectNext />
 

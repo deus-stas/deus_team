@@ -5,6 +5,13 @@ const mongoose = require('mongoose')
 const cors = require('cors');
 const newsRoutes = require('./routes/api/news');
 const tagsRoutes = require('./routes/api/tags');
+const workingRoutes = require('./routes/api/working');
+const projectsRoutes = require('./routes/api/projects');
+const personsRoutes = require('./routes/api/persons');
+const themesRoutes = require('./routes/api/themes');
+const typesRoutes = require('./routes/api/types');
+const socialRoutes = require('./routes/api/social');
+const productsRoutes = require('./routes/api/products');
 
 const app = express();
 
@@ -17,6 +24,13 @@ app.use((req, res, next) => {
 });
 app.use('/api', newsRoutes);
 app.use('/api', tagsRoutes);
+app.use('/api', workingRoutes);
+app.use('/api', projectsRoutes);
+app.use('/api', personsRoutes);
+app.use('/api', themesRoutes);
+app.use('/api', typesRoutes);
+app.use('/api', socialRoutes);
+app.use('/api', productsRoutes);
 
 
 if (process.env.NODE_ENV === 'production') {

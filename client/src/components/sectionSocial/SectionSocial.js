@@ -1,36 +1,47 @@
 import { Link } from 'react-router-dom';
-
-import vkLogo from '../../img/vk-logo.svg';
-import tgLogo from '../../img/tg-logo.svg';
-import beLogo from '../../img/be-logo.svg';
+import { useState, useEffect } from 'react';
+import axios from 'axios'
 
 import './sectionSocial.scss'
 
 const SectionSocial = () => {
 
-    return (
+    const [social, setSocial] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/social/`)
+            .then((response) => {
+                setSocial(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    return social ? (
+
         <section className="section-social">
             <div className="container">
                 <div className="section-social__wrap">
                     <h2 className="heading-secondary">Узнать нас ближе</h2>
                     <div className="section-social__content">
-                        <Link to="/" className="section-social__item">
-                            <img src={vkLogo} alt="ВКОНТАКТЕ" />
-                            <div className="section-social__descr">В разных соц сетях публикуем разное чтобы было интересно</div>
-                        </Link>
-                        <Link to="/" className="section-social__item">
-                            <img src={tgLogo} alt="Telegram" />
-                            <div className="section-social__descr">В телеге можно инсайды какие-то и полезности</div>
-                        </Link>
-                        <Link to="/" className="section-social__item">
-                            <img src={beLogo} alt="Behance" />
-                            <div className="section-social__descr">С этим пациентом всё понятно, только кейсы</div>
-                        </Link>
+                        {
+                            social.map(item => {
+                                return (
+                                    <Link to={item.link} className="section-social__item" target="_blank" key={item.id} style={{ background: item.color }}>
+                                        <img src={item.image ? `http://localhost:5000/uploads/${item.image.filename}` : null} alt={item.name} />
+                                        <div className="section-social__descr">{item.descr}</div>
+                                    </Link>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>
-        </section>
-    )
+        </section >
+
+    ) : null
 
 }
 

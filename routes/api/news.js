@@ -1,14 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const { v4: uuidv4 } = require('uuid');
+const path = require('path');
+const fs = require('fs');
 const News = require("../../models/News");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+    cb(null, 'uploads');
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    const ext = path.extname(file.originalname);
+    const newFilename = `${uuidv4()}${ext}`;
+    cb(null, newFilename);
   },
 });
 
@@ -61,15 +66,48 @@ router.get('/news/:id', async (req, res) => {
   res.json(news);
 });
 
-router.put("/news/:id", async (req, res) => {
+router.put("/news/:id", upload.single('image'), async (req, res) => {
   const { id } = req.params;
-  const post = await News.findByIdAndUpdate(id, req.body);
-  res.json(post);
+
+  // Проверяем, есть ли такой документ в базе данных
+  const news = await News.findById(id);
+  if (!news) {
+    return res.status(404).json({ error: 'News not found' });
+  }
+
+  const { name, tags, body } = req.body;
+  const image = req.file;
+
+  // Если есть новое изображение в запросе, обновляем ссылку на него
+  if (image) {
+    fs.unlinkSync(`uploads/${news.image.filename}`);
+    news.image = image;
+  }
+
+  // Обновляем остальные поля документа
+  news.name = name;
+  news.tags = tags;
+  news.body = body;
+
+  // Сохраняем изменения
+  await news.save();
+
+  res.json(news);
 });
 
 router.delete("/news/:id", async (req, res) => {
   const { id } = req.params;
-  await News.findByIdAndDelete(id);
+  const news = await News.findByIdAndDelete(id);
+  if (!news) {
+    return res.status(404).json({ success: false, message: "News not found" });
+  }
+
+  const { image } = news;
+
+  if (image) {
+    fs.unlinkSync(`uploads/${image.filename}`);
+  }
+
   res.json({ success: true });
 });
 

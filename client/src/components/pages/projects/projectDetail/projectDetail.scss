@@ -202,7 +202,6 @@
 
     &-results {
         padding: 10rem 0;
-        background: #191B1D;
 
         @include respond(sm) {
             padding: 6rem 0;
@@ -228,9 +227,17 @@
                     }
                 }
             }
+        }
 
-            .heading-secondary {
-                color: #fff;
+        &__text {
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+            grid-column: 2/3;
+
+            @include respond(sm) {
+                font-size: 2rem;
+                line-height: 2.6rem;
+                grid-column: 1/2;
             }
         }
     }
@@ -264,14 +271,24 @@
             width: 100%;
         }
     }
+
+    &-banner {
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
 }
 
 .quote {
-    margin-bottom: 4rem;
     position: relative;
 
-    @include respond(sm) {
-        margin-bottom: 3rem;
+    &:not(:last-child) {
+        margin-bottom: 4rem;
+
+        @include respond(sm) {
+            margin-bottom: 3rem;
+        }
     }
 
     &__img {
@@ -293,7 +310,7 @@
 
     &__box {
         padding: 4rem;
-        background: #FFFFFF;
+        background: #F3F4F4;
         border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 20px 20px 20px 0px;
 

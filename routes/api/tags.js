@@ -6,29 +6,30 @@ const Tags = require("../../models/Tags");
 router.get('/tags', async (req, res) => {
     const limit = parseInt(req.query._limit);
     const skip = parseInt(req.query._start);
-  
+
     const [tags, count] = await Promise.all([
-      Tags.find().limit(limit).skip(skip),
-      Tags.countDocuments()
+        Tags.find().limit(limit).skip(skip),
+        Tags.countDocuments()
     ]);
-  
+
     const rangeStart = skip;
     const rangeEnd = Math.min(skip + limit - 1, count - 1);
     const contentRange = `tags ${rangeStart}-${rangeEnd}/${count}`;
-  
+
     res.set('Content-Range', contentRange);
     res.json(tags);
-  });
+});
 
 router.post('/tags', async (req, res) => {
+    console.log(req.body.name);
     const { name } = req.body;
-    try {
-        const tag = await Tags.create({ name });
-        res.status(201).json(tag);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Failed to create tag' });
-    }
+    const tags = new Tags({
+        name
+    });
+
+    await tags.save();
+
+    res.json(tags);
 });
 
 

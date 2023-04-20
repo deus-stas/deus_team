@@ -9,12 +9,14 @@ const dataProvider = {
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
+    const { q, ...filters } = params.filter; // оставляем только фильтры, не связанные с полем q (поисковый запрос)
     const query = {
-      ...params.filter,
+      ...filters,
       _sort: field,
       _order: order,
       _start: (page - 1) * perPage,
       _limit: perPage,
+      _fields: params.fields // добавляем параметр fields
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
@@ -61,21 +63,45 @@ const dataProvider = {
 
   create: (resource, params) => {
     const formData = new FormData();
-    formData.append("image", params.data.image.rawFile);
-    formData.append("name", params.data.name);
-    formData.append("tags", params.data.tags);
-    formData.append("body", params.data.body);
+    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video'];
+    let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
+    for (const [key, value] of Object.entries(params.data)) {
+      if (images.includes(key) && value) {
+        hasImage = true;
+        formData.append(key, value.rawFile);
+      } else {
+        formData.append(key, value);
+      }
+    }
     return httpClient(`${apiUrl}/${resource}`, {
       method: "POST",
-      body: formData,
+      body: hasImage ? formData : JSON.stringify(params.data),
     }).then(({ json }) => ({ data: { ...params.data, id: json.id } }));
   },
 
-  update: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  update: (resource, params) => {
+    const formData = new FormData();
+    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video'];
+    let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
+
+    for (const [key, value] of Object.entries(params.data)) {
+      if (images.includes(key) && value) {
+        hasImage = true;
+        formData.append(key, value.rawFile);
+      } else {
+        formData.append(key, value);
+      }
+    }
+
+    const url = `${apiUrl}/${resource}/${params.id}`;
+
+    const options = {
       method: "PUT",
-      body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+      body: hasImage ? formData : JSON.stringify(params.data),
+    };
+
+    return httpClient(url, options).then(({ json }) => ({ data: json }));
+  },
 
   updateMany: (resource, params) => {
     const query = {
