@@ -3,13 +3,18 @@ import { List, Datagrid, TextField, EditButton } from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, ReferenceArrayInput, SelectInput, required, FunctionField } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
+
 const FilenameField = props => {
     return (
         <FunctionField
             {...props}
             render={record => {
                 if (record.filename) {
-                    return <img src={`http://localhost:5000/uploads/${record.filename}`} alt={record.filename} title="image" />;
+                    return <img src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
                 } else {
                     return <img src={`${record.src}`} alt={record.src} title="image" />;
                 }

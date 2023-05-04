@@ -4,6 +4,11 @@ import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, 
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+  ? 'http://188.120.232.38'
+  : 'http://localhost:5000';
+
+
 const FilenameField = props => {
     return (
         <FunctionField
@@ -16,7 +21,7 @@ const FilenameField = props => {
                             <video autoPlay loop playsInline><source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
                         )
                     } else {
-                        return <img src={`http://localhost:5000/uploads/${record.filename}`} alt={record.filename} title="image" />;
+                        return <img src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
                     }
                 } else {
                     return <img src={`${record.src}`} alt={record.src} title="image" />;

@@ -29,6 +29,10 @@ const classes = {
     input: () => 'select__search'
 }
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const Projects = () => {
 
     const [projects, setProjects] = useState([]);
@@ -40,7 +44,7 @@ const Projects = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/projects/`)
+        axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
                 setProjects(response.data);
                 console.log(response.data);
@@ -51,7 +55,7 @@ const Projects = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/themes/`)
+        axios.get(`${apiUrl}/api/themes/`)
             .then((response) => {
                 console.log(response.data);
                 let projectOptionsTheme = [];
@@ -67,7 +71,7 @@ const Projects = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/types/`)
+        axios.get(`${apiUrl}/api/types/`)
             .then((response) => {
                 console.log(response.data);
                 let projectOptionsType = [];
@@ -104,8 +108,8 @@ const Projects = () => {
                         {optionsTheme && optionsType ?
                             <div className="projects__filters">
                                 {console.log(optionsTheme, optionsType)}
-                                <Select classNames={classes} options={optionsType} styles={colourStyles} onChange={handleTypeChange}  placeholder="Тип проекта" />
-                                <Select classNames={classes} options={optionsTheme} styles={colourStyles} onChange={handleThemeChange}  placeholder="Тематика проекта" />
+                                <Select classNames={classes} options={optionsType} styles={colourStyles} onChange={handleTypeChange} placeholder="Тип проекта" />
+                                <Select classNames={classes} options={optionsTheme} styles={colourStyles} onChange={handleThemeChange} placeholder="Тематика проекта" />
                             </div>
                             : null}
                     </div>
@@ -114,7 +118,7 @@ const Projects = () => {
                             return (
                                 <Link to={`/projects/${project.id}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                     <div className="projects__item-img-wrap">
-                                        <img src={project.image ? `http://localhost:5000/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
                                     </div>
                                     <div className="projects__item-name">{project.name}</div>
                                 </Link>

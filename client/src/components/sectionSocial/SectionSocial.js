@@ -4,12 +4,16 @@ import axios from 'axios'
 
 import './sectionSocial.scss'
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const SectionSocial = () => {
 
     const [social, setSocial] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/social/`)
+        axios.get(`${apiUrl}/api/social/`)
             .then((response) => {
                 setSocial(response.data);
                 console.log(response.data);
@@ -30,7 +34,7 @@ const SectionSocial = () => {
                             social.map(item => {
                                 return (
                                     <Link to={item.link} className="section-social__item" target="_blank" key={item.id} style={{ background: item.color }}>
-                                        <img src={item.image ? `http://localhost:5000/uploads/${item.image.filename}` : null} alt={item.name} />
+                                        <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null} alt={item.name} />
                                         <div className="section-social__descr">{item.descr}</div>
                                     </Link>
                                 )

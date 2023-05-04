@@ -4,6 +4,10 @@ import { Link, useLocation } from 'react-router-dom';
 
 import './news.scss';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+  ? 'http://188.120.232.38'
+  : 'http://localhost:5000';
+
 const News = () => {
     const location = useLocation()
     const params = new URLSearchParams(location.search)
@@ -14,10 +18,10 @@ const News = () => {
     const [selectedTag, setSelectedTag] = useState(tagInit);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/news')
+        axios.get(`${apiUrl}/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`http://localhost:5000/api/tags/${news.tags}`)
+                    return axios.get(`${apiUrl}/api/tags/${news.tags}`)
                         .then((tagResponse) => {
                             news.tags = tagResponse.data.name;
                             return news;
@@ -67,7 +71,7 @@ const News = () => {
                             return (
                                 <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
                                     <div className="news__img-wrap">
-                                        <img src={`http://localhost:5000/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                        <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
                                     </div>
                                     <div className="news__text">
                                         <div className="news__tag">{item.tags}</div>

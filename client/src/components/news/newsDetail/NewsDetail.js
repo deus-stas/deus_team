@@ -9,6 +9,10 @@ import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 
 import './newsDetail.scss'
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const NewsDetail = () => {
 
     const [news, setNews] = useState([]);
@@ -16,11 +20,11 @@ const NewsDetail = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/news/${id}`)
+        axios.get(`${apiUrl}/api/news/${id}`)
             .then((response) => {
 
                 const dataDetail = response.data;
-                axios.get(`http://localhost:5000/api/tags/${response.data.tags}`)
+                axios.get(`${apiUrl}/api/tags/${response.data.tags}`)
                     .then((response) => {
                         dataDetail.tags = response.data.name;
                         setDetail(dataDetail);
@@ -37,10 +41,10 @@ const NewsDetail = () => {
     }, [id]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/news')
+        axios.get('${apiUrl}/api/news')
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`http://localhost:5000/api/tags/${news.tags}`)
+                    return axios.get(`${apiUrl}/api/tags/${news.tags}`)
                         .then((tagResponse) => {
                             news.tags = tagResponse.data.name;
                             return news;
@@ -75,7 +79,7 @@ const NewsDetail = () => {
                         <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.tags }}></div>
                         <h1 className="heading-primary" dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
                     </div>
-                    <img className="news-detail__main-img" src={detail.image ? `http://localhost:5000/uploads/${detail.image.filename}` : null} alt={detail.name} />
+                    <img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />
                 </div>
             </section>
 
@@ -98,7 +102,7 @@ const NewsDetail = () => {
                                 return (
                                     <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
                                         <div className="news__img-wrap">
-                                            <img src={`http://localhost:5000/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                            <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
                                         </div>
                                         <div className="news__text">
                                             <div className="news__tag">{item.tags}</div>

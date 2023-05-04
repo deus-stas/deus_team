@@ -5,6 +5,10 @@ import { useParams } from "react-router-dom";
 
 import './projectNext.scss'
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const ProjectNext = () => {
 
     const { id } = useParams();
@@ -12,7 +16,7 @@ const ProjectNext = () => {
     const [project, setProject] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/projects/`)
+        axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
                 const pr = id !== response.data[0].id ? response.data[0] : response.data[1]
                 setProject(pr);
@@ -33,7 +37,7 @@ const ProjectNext = () => {
                         <div className="project-next__name" dangerouslySetInnerHTML={{ __html: project.name }}></div>
                         <Link to={`/projects/${project.id}`} className="btn --white">Перейти к проекту</Link>
                     </div>
-                    <img src={project.image ? `http://localhost:5000/uploads/${project.image.filename}` : null} alt="Academy профессионального образовательного ресурса" className="project-next__img" />
+                    <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt="Academy профессионального образовательного ресурса" className="project-next__img" />
                 </div>
             </div>
         </section>

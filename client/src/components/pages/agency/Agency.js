@@ -20,6 +20,10 @@ import './agency.scss';
 
 import productVideo from '../../../img/webhands.mp4';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const Agency = () => {
 
     const [awards, setAwards] = useState([]);
@@ -34,7 +38,7 @@ const Agency = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/awards/`)
+        axios.get(`${apiUrl}/api/awards/`)
             .then((response) => {
                 setAwards(response.data);
                 console.log(response.data);
@@ -45,7 +49,7 @@ const Agency = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/raitings/`)
+        axios.get(`${apiUrl}/api/raitings/`)
             .then((response) => {
                 setRaitings(response.data);
                 console.log(response.data);
@@ -56,7 +60,7 @@ const Agency = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/clients/`)
+        axios.get(`${apiUrl}/api/clients/`)
             .then((response) => {
                 setClients(response.data);
                 setTotal(response.data.length)
@@ -67,7 +71,7 @@ const Agency = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/team/`)
+        axios.get(`${apiUrl}/api/team/`)
             .then((response) => {
                 setTeam(response.data);
             })
@@ -77,7 +81,7 @@ const Agency = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/vacancies/`)
+        axios.get(`${apiUrl}/api/vacancies/`)
             .then((response) => {
                 setVacancies(response.data);
             })
@@ -159,7 +163,7 @@ const Agency = () => {
                                         awards.map(award => {
                                             return (
                                                 <Tab className="agency-benefits__info-btn" key={award.id}>
-                                                    <img src={award.image ? `http://localhost:5000/uploads/${award.image.filename}` : null} alt={award.name} />
+                                                    <img src={award.image ? `${apiUrl}/uploads/${award.image.filename}` : null} alt={award.name} />
                                                     {award.name} <sup>{award.awardProject.length}</sup>
                                                 </Tab>
                                             )
@@ -207,7 +211,7 @@ const Agency = () => {
                                         raitings.map(raiting => {
                                             return (
                                                 <Tab className="agency-benefits__info-btn" key={raiting.id}>
-                                                    <img src={raiting.image ? `http://localhost:5000/uploads/${raiting.image.filename}` : null} alt={raiting.name} />
+                                                    <img src={raiting.image ? `${apiUrl}/uploads/${raiting.image.filename}` : null} alt={raiting.name} />
                                                     {raiting.name} <sup>{raiting.raitingProject.length}</sup>
                                                 </Tab>
                                             )
@@ -263,7 +267,7 @@ const Agency = () => {
                                 clients.map((client, i) => {
                                     if (i < amountSlides) {
                                         return (
-                                            <img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                            <img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
                                         )
                                     } else return null
                                 })
@@ -274,7 +278,7 @@ const Agency = () => {
                                 clients.map((client, i) => {
                                     if (i > amountSlides - 1 && i < amountSlides * 2) {
                                         return (
-                                            <img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                            <img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
                                         )
                                     } else return null
                                 })
@@ -285,7 +289,7 @@ const Agency = () => {
                                 clients.map((client, i) => {
                                     if (i > amountSlides * 2 - 1) {
                                         return (
-                                            <img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                            <img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
                                         )
                                     } else return null
                                 })
@@ -304,7 +308,7 @@ const Agency = () => {
                         {
                             clients.map(client => {
                                 return (
-                                    <SwiperSlide className="agency-clients__item" key={client.id}><img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} /></SwiperSlide>
+                                    <SwiperSlide className="agency-clients__item" key={client.id}><img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} /></SwiperSlide>
                                 )
                             })
                         }
@@ -323,7 +327,7 @@ const Agency = () => {
                                         return (
                                             <div className="agency-team__t-item" key={item.id}>
                                                 <div className="agency-team__t-name">{item.name}</div>
-                                                <img src={item.image ? `http://localhost:5000/uploads/${item.image.filename}` : null} alt={item.name} className="agency-team__t-img" />
+                                                <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null} alt={item.name} className="agency-team__t-img" />
                                                 <div className="agency-team__t-post">{item.post}</div>
                                             </div>
                                         )

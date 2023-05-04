@@ -1,7 +1,9 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = "http://localhost:5000/api"; // URL вашего Express сервера
+const apiUrl = process.env.NODE_ENV === 'production'
+  ? 'http://188.120.232.38/api'
+  : 'http://localhost:5000/api';
 
 const httpClient = fetchUtils.fetchJson;
 

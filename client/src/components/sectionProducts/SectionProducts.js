@@ -6,12 +6,16 @@ import productVideo from '../../img/webhands.mp4';
 
 import './sectionProducts.scss'
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const SectionProducts = () => {
 
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/products/`)
+        axios.get(`${apiUrl}/api/products/`)
             .then((response) => {
                 setProducts(response.data);
                 console.log(response.data);
@@ -32,7 +36,7 @@ const SectionProducts = () => {
                                 return (
                                     <Link to={product.link} className="section-products__item" key={product.id} target="_blank">
                                         <video className="section-products__video" autoPlay loop muted playsInline>
-                                            <source src={product.video ? `http://localhost:5000/uploads/${product.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                            <source src={product.video ? `${apiUrl}/uploads/${product.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                                         </video>
                                         <div className="section-products__text">
                                             <div className="section-products__name">{product.name}</div>

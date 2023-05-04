@@ -8,19 +8,23 @@ import ProjectNext from '../projectNext/ProjectNext';
 
 import './projectDetail.scss'
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const ProjectDetail = () => {
     const [detail, setDetail] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/projects/${id}`)
+        axios.get(`${apiUrl}/api/projects/${id}`)
             .then((response) => {
 
                 const dataDetail = response.data;
                 setDetail(response.data);
                 console.log(response.data);
                 if (response.data.taskPersons !== 'undefined') {
-                    axios.get(`http://localhost:5000/api/persons/${response.data.taskPersons}`)
+                    axios.get(`${apiUrl}/api/persons/${response.data.taskPersons}`)
                         .then((response) => {
                             dataDetail.taskPersons = response.data;
                             setDetail(dataDetail);
@@ -30,7 +34,7 @@ const ProjectDetail = () => {
                         });
                 }
                 if (response.data.approachPersons !== 'undefined') {
-                    axios.get(`http://localhost:5000/api/persons/${response.data.approachPersons}`)
+                    axios.get(`${apiUrl}/api/persons/${response.data.approachPersons}`)
                         .then((response) => {
                             dataDetail.approachPersons = response.data;
                             setDetail(dataDetail);
@@ -40,7 +44,7 @@ const ProjectDetail = () => {
                         });
                 }
                 if (response.data.resultPersons !== 'undefined') {
-                    axios.get(`http://localhost:5000/api/persons/${response.data.resultPersons}`)
+                    axios.get(`${apiUrl}/api/persons/${response.data.resultPersons}`)
                         .then((response) => {
                             dataDetail.resultPersons = response.data;
                             setDetail(dataDetail);
@@ -77,7 +81,7 @@ const ProjectDetail = () => {
 
             {detail.bannerFirst ?
                 <section className="project-banner">
-                    <img src={`http://localhost:5000/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
+                    <img src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
                 </section>
                 : null}
 
@@ -89,7 +93,7 @@ const ProjectDetail = () => {
                             <div className="quote">
                                 <div className="quote__box">
                                     <div className="quote__person">
-                                        {detail.taskPersons.image ? <img src={`http://localhost:5000/uploads/${detail.taskPersons.image.filename}`} alt={detail.taskPersons.name} className="quote__img" /> : null}
+                                        {detail.taskPersons.image ? <img src={`${apiUrl}/uploads/${detail.taskPersons.image.filename}`} alt={detail.taskPersons.name} className="quote__img" /> : null}
 
                                         <div className="quote__person-text">
                                             {detail.taskPersons.name}, <span>{detail.taskPersons.post} @ DEUS</span>
@@ -105,7 +109,7 @@ const ProjectDetail = () => {
 
             {detail.bannerSecond ?
                 <section className="project-banner">
-                    <img src={`http://localhost:5000/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
+                    <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
                 </section>
                 : null}
 
@@ -117,7 +121,7 @@ const ProjectDetail = () => {
                             <div className="quote">
                                 <div className="quote__box">
                                     <div className="quote__person">
-                                        {detail.approachPersons.image ? <img src={`http://localhost:5000/uploads/${detail.approachPersons.image.filename}`} alt={detail.approachPersons.name} className="quote__img" /> : null}
+                                        {detail.approachPersons.image ? <img src={`${apiUrl}/uploads/${detail.approachPersons.image.filename}`} alt={detail.approachPersons.name} className="quote__img" /> : null}
 
                                         <div className="quote__person-text">
                                             {detail.approachPersons.name}, <span>{detail.approachPersons.post} @ DEUS</span>
@@ -133,7 +137,7 @@ const ProjectDetail = () => {
 
             {detail.bannerThird ?
                 <section className="project-banner">
-                    <img src={`http://localhost:5000/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
+                    <img src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
                 </section>
                 : null}
 
@@ -149,7 +153,7 @@ const ProjectDetail = () => {
 
             {detail.bannerFourth ?
                 <section className="project-banner">
-                    <img src={`http://localhost:5000/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
+                    <img src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
                 </section>
                 : null}
 
@@ -161,7 +165,7 @@ const ProjectDetail = () => {
                             <div className="quote">
                                 <div className="quote__box">
                                     <div className="quote__person">
-                                        {detail.resultPersons.image ? <img src={`http://localhost:5000/uploads/${detail.resultPersons.image.filename}`} alt={detail.resultPersons.name} className="quote__img" /> : null}
+                                        {detail.resultPersons.image ? <img src={`${apiUrl}/uploads/${detail.resultPersons.image.filename}`} alt={detail.resultPersons.name} className="quote__img" /> : null}
 
                                         <div className="quote__person-text">
                                             {detail.resultPersons.name}, <span>{detail.resultPersons.post} @ DEUS</span>
@@ -177,7 +181,7 @@ const ProjectDetail = () => {
 
             {detail.bannerFifth ?
                 <section className="project-banner">
-                    <img src={`http://localhost:5000/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
+                    <img src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
                 </section>
                 : null}
 

@@ -15,6 +15,11 @@ import serviceImg from '../../../img/service-img.svg';
 import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+  ? 'http://188.120.232.38'
+  : 'http://localhost:5000';
+
+
 const colourStyles = {
     control: (styles) => ({}),
     valueContainer: (styles) => ({}),
@@ -60,12 +65,11 @@ const MainPage = () => {
 
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
-
     useEffect(() => {
-        axios.get('http://localhost:5000/api/news')
+        axios.get(`${apiUrl}/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`http://localhost:5000/api/tags/${news.tags}`)
+                    return axios.get(`${apiUrl}/api/tags/${news.tags}`)
                         .then((tagResponse) => {
                             news.tags = tagResponse.data.name;
                             return news;
@@ -92,7 +96,7 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/working/`)
+        axios.get(`${apiUrl}/api/working/`)
             .then((response) => {
                 setWorking(response.data);
                 console.log(response.data);
@@ -103,7 +107,7 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/projects/`)
+        axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
                 let mainProject = [];
                 setProjects(response.data);
@@ -119,7 +123,7 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/themes/`)
+        axios.get(`${apiUrl}/api/themes/`)
             .then((response) => {
                 console.log(response.data);
                 let projectOptionsTheme = [];
@@ -135,7 +139,7 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/types/`)
+        axios.get(`${apiUrl}/api/types/`)
             .then((response) => {
                 console.log(response.data);
                 let projectOptionsType = [];
@@ -177,7 +181,7 @@ const MainPage = () => {
                                 </div>
                                 <div className="main-banner__project hidden-mobile">
                                     <div className="main-banner__project-name">{project.name}</div>
-                                    <img src={project.image ? `http://localhost:5000/uploads/${project.image.filename}` : null} alt={project.name} className="main-banner__project-img" />
+                                    <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-banner__project-img" />
                                     <Link to={`/projects/${project.id}`} className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
                                 </div>
                             </div>
@@ -203,7 +207,7 @@ const MainPage = () => {
                             return (
                                 <Link to={`/projects/${project.id}`} className="main-projects__item" key={project.id}>
                                     <div className="main-projects__img-wrap">
-                                        <img src={project.image ? `http://localhost:5000/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
                                     </div>
                                     <div className="main-projects__name">{project.name}</div>
                                 </Link>
@@ -224,7 +228,7 @@ const MainPage = () => {
                                     return (
                                         <div className="main-working__item" key={item.id}>
                                             <div className="main-working__img-wrap">
-                                                <img src={item.image ? `http://localhost:5000/uploads/${item.image.filename}` : null} alt={item.name} className="main-working__img" />
+                                                <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null} alt={item.name} className="main-working__img" />
                                             </div>
                                             <div className="main-working__name">{item.name}</div>
                                         </div>
@@ -385,7 +389,7 @@ const MainPage = () => {
                                 return (
                                     <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
                                         <div className="news__img-wrap">
-                                            <img src={`http://localhost:5000/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                            <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
                                         </div>
                                         <div className="news__text">
                                             <div className="news__tag">{item.tags}</div>
