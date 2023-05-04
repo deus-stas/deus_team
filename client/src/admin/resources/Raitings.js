@@ -17,7 +17,7 @@ const FilenameField = props => {
     )
 }
 
-export const AwardsList = (props) => (
+export const RaitingsList = (props) => (
     <List {...props}>
         <Datagrid rowClick="edit">
             <TextField source="name" />
@@ -26,7 +26,7 @@ export const AwardsList = (props) => (
     </List>
 );
 
-export const AwardsCreate = (props) => (
+export const RaitingsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="name" label="Название" validate={[required()]} />
@@ -34,21 +34,21 @@ export const AwardsCreate = (props) => (
                 <ImageField source="src" title="title" />
             </ImageInput>
             <ArrayInput
-                source="awardProject"
+                source="raitingProject"
                 label="Номинант"
                 validate={[required()]}
             >
                 <SimpleFormIterator>
-                    <TextInput source="awardName" label="Название проекта" />
-                    <TextInput source="awardPlace" label="Какое место и какая номинация" />
-                    <TextInput source="awardYear" label="Год" />
+                    <TextInput source="raitingPlace" label="Какое место " />
+                    <TextInput source="raitingName" label="Номинация" />
+                    <TextInput source="raitingYear" label="Год" />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>
     </Create>
 );
 
-export const AwardsEdit = (props) => (
+export const RaitingsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput source="name" label="Название" validate={[required()]} />
@@ -56,14 +56,14 @@ export const AwardsEdit = (props) => (
                 <FilenameField source="image" title="title" />
             </ImageInput>
             <ArrayInput
-                source="awardProject"
+                source="raitingProject"
                 label="Номинант"
                 validate={[required()]}
             >
                 <SimpleFormIterator>
-                    <TextInput source="awardName" label="Название проекта" />
-                    <TextInput source="awardPlace" label="Какое место и какая номинация" />
-                    <TextInput source="awardYear" label="Год" />
+                    <TextInput source="raitingPlace" label="Какое место " />
+                    <TextInput source="raitingName" label="Номинация" />
+                    <TextInput source="raitingYear" label="Год" />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Marquee from "react-fast-marquee";
@@ -18,21 +19,92 @@ import "swiper/css/grid";
 import './agency.scss';
 
 import productVideo from '../../../img/webhands.mp4';
-import logoChoice from '../../../img/logo-choice.svg';
-import teamImg from '../../../img/team-img.png';
 
 const Agency = () => {
 
+    const [awards, setAwards] = useState([]);
+    const [raitings, setRaitings] = useState([]);
+    const [clients, setClients] = useState([]);
+    const [team, setTeam] = useState([]);
+    const [vacancies, setVacancies] = useState([]);
+
     const [current, setCurrent] = useState(4);
     const [total, setTotal] = useState(0);
+    const [endSlider, setEndSlider] = useState(false);
+
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/awards/`)
+            .then((response) => {
+                setAwards(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/raitings/`)
+            .then((response) => {
+                setRaitings(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/clients/`)
+            .then((response) => {
+                setClients(response.data);
+                setTotal(response.data.length)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/team/`)
+            .then((response) => {
+                setTeam(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/vacancies/`)
+            .then((response) => {
+                setVacancies(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const slideChange = (slider) => {
         if (slider.touches.diff > 0) {
-            setCurrent(current - 2);
+            if (endSlider) {
+                setCurrent(current - 1);
+                setEndSlider(false);
+            } else {
+                setCurrent(current - 2);
+            }
         } else {
-            setCurrent(current + 2);
+            if (current + 1 === total) {
+                setCurrent(total);
+                setEndSlider(true);
+            } else {
+                setCurrent(current + 2);
+            }
         }
     }
+
+    const amountSlides = Math.round(clients.length / 3);
 
     return (
         <main className="agency">
@@ -76,209 +148,169 @@ const Agency = () => {
                 </div>
             </section>
 
-            <section className="agency-benefits" id="awards">
-                <div className="container">
-                    <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
-                        <TabList className="agency-benefits__info">
-                            <h2 className="heading-secondary">Награды</h2>
-                            <div className="agency-benefits__info-wrap">
-                                <Tab className="agency-benefits__info-btn">
-                                    <Icon icon="w" />
-                                    awwwards <sup>2</sup>
-                                </Tab>
-                                <Tab className="agency-benefits__info-btn">
-                                    <Icon icon="cssda" />
-                                    css design awards <sup>5</sup>
-                                </Tab>
+            {
+                awards ? <section className="agency-benefits" id="awards">
+                    <div className="container">
+                        <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
+                            <TabList className="agency-benefits__info">
+                                <h2 className="heading-secondary">Награды</h2>
+                                <div className="agency-benefits__info-wrap">
+                                    {
+                                        awards.map(award => {
+                                            return (
+                                                <Tab className="agency-benefits__info-btn" key={award.id}>
+                                                    <img src={award.image ? `http://localhost:5000/uploads/${award.image.filename}` : null} alt={award.name} />
+                                                    {award.name} <sup>{award.awardProject.length}</sup>
+                                                </Tab>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </TabList>
+                            <div className="agency-benefits__tabs">
+                                {
+                                    awards.map(award => {
+                                        return (
+                                            <TabPanel className="agency-benefits__content" key={award.id}>
+                                                <div className="agency-benefits__content-wrap">
+                                                    {
+                                                        award.awardProject.map((project, i) => {
+                                                            return (
+                                                                <div className="agency-benefits__item" key={i}>
+                                                                    <div className="agency-benefits__name">{project.awardName}</div>
+                                                                    <div className="agency-benefits__descr">{project.awardPlace}</div>
+                                                                    <div className="agency-benefits__year">{project.awardYear}</div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                            </TabPanel>
+                                        )
+                                    })
+                                }
                             </div>
-                        </TabList>
-                        <div className="agency-benefits__tabs">
-                            <TabPanel className="agency-benefits__content">
-                                <div className="agency-benefits__content-wrap">
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Valvoline Russia</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Choice Construction</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Lucky</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Dentline</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Digital Finance</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                </div>
-                            </TabPanel>
-                            <TabPanel className="agency-benefits-content">
-                                <div className="agency-benefits__content-wrap">
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Valvoline Russia</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Digital Finance</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Choice Construction</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Lucky</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">Dentline</div>
-                                        <div className="agency-benefits__descr">3 место — Special Kudos</div>
-                                        <div className="agency-benefits__year">2020</div>
-                                    </div>
-                                </div>
-                            </TabPanel>
-                        </div>
-                    </Tabs>
-                </div>
-            </section>
+                        </Tabs>
+                    </div>
+                </section>
+                    : null}
 
-            <section className="agency-benefits">
-                <div className="container">
-                    <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
-                        <TabList className="agency-benefits__info">
-                            <h2 className="heading-secondary">Награды</h2>
-                            <div className="agency-benefits__info-wrap">
-                                <Tab className="agency-benefits__info-btn">
-                                    <Icon icon="rating" />
-                                    ratingruneta<sup>6</sup>
-                                </Tab>
+
+            {
+                raitings ? <section className="agency-benefits">
+                    <div className="container">
+                        <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
+                            <TabList className="agency-benefits__info">
+                                <h2 className="heading-secondary">Награды</h2>
+                                <div className="agency-benefits__info-wrap">
+                                    {
+                                        raitings.map(raiting => {
+                                            return (
+                                                <Tab className="agency-benefits__info-btn" key={raiting.id}>
+                                                    <img src={raiting.image ? `http://localhost:5000/uploads/${raiting.image.filename}` : null} alt={raiting.name} />
+                                                    {raiting.name} <sup>{raiting.raitingProject.length}</sup>
+                                                </Tab>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </TabList>
+                            <div className="agency-benefits__tabs">
+                                {
+                                    raitings.map(raiting => {
+                                        return (
+                                            <TabPanel className="agency-benefits__content" key={raiting.id}>
+                                                <div className="agency-benefits__content-wrap">
+                                                    {
+                                                        raiting.raitingProject.map((project, i) => {
+                                                            return (
+                                                                <div className="agency-benefits__item" key={i}>
+                                                                    <div className="agency-benefits__name">{project.raitingName}</div>
+                                                                    <div className="agency-benefits__descr">{project.raitingPlace}</div>
+                                                                    <div className="agency-benefits__year">{project.raitingYear}</div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                            </TabPanel>
+                                        )
+                                    })
+                                }
                             </div>
-                        </TabList>
-                        <div className="agency-benefits__tabs">
-                            <TabPanel className="agency-benefits__content">
-                                <div className="agency-benefits__content-wrap">
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">14 место</div>
-                                        <div className="agency-benefits__descr">Россия: рейтинг креативности веб-студий</div>
-                                        <div className="agency-benefits__year">2022</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">14 место</div>
-                                        <div className="agency-benefits__descr">Россия: рейтинг креативности веб-студий</div>
-                                        <div className="agency-benefits__year">2022</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">14 место</div>
-                                        <div className="agency-benefits__descr">Россия: рейтинг креативности веб-студий</div>
-                                        <div className="agency-benefits__year">2022</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">14 место</div>
-                                        <div className="agency-benefits__descr">Россия: рейтинг креативности веб-студий</div>
-                                        <div className="agency-benefits__year">2022</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">14 место</div>
-                                        <div className="agency-benefits__descr">Россия: рейтинг креативности веб-студий</div>
-                                        <div className="agency-benefits__year">2022</div>
-                                    </div>
-                                    <div className="agency-benefits__item">
-                                        <div className="agency-benefits__name">14 место</div>
-                                        <div className="agency-benefits__descr">Россия: рейтинг креативности веб-студий</div>
-                                        <div className="agency-benefits__year">2022</div>
-                                    </div>
-                                </div>
-                            </TabPanel>
-                        </div>
-                    </Tabs>
-                </div>
-            </section>
+                        </Tabs>
+                    </div>
+                </section> : null
+            }
 
-            <section className="agency-clients" id="clients">
-                <div className="container">
-                    <div className="agency-clients__head">
-                        <h2 className="heading-secondary">Наши клиенты</h2>
-                        <div className="agency-clients__pag hidden-desktop">
-                            <div className="agency-clients__pag-current">{current}</div>
-                            <div className="agency-clients__pag-sep">/</div>
-                            <div className="agency-clients__pag-total">{total}</div>
+
+            {
+                clients ? <section className="agency-clients" id="clients">
+                    <div className="container">
+                        <div className="agency-clients__head">
+                            <h2 className="heading-secondary">Наши клиенты</h2>
+                            <div className="agency-clients__pag hidden-desktop">
+                                <div className="agency-clients__pag-current">{current}</div>
+                                <div className="agency-clients__pag-sep">/</div>
+                                <div className="agency-clients__pag-total">{total}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="agency-clients__marquee hidden-mobile">
-                    <Marquee speed="40">
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    </Marquee>
-                    <Marquee direction='right' speed="40">
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    </Marquee>
-                    <Marquee speed="20">
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                        <img className='agency-clients__img' src={logoChoice} alt="Choice Estate" />
-                    </Marquee>
-                </div>
-                <Swiper
-                    slidesPerView={2}
-                    grid={{
-                        rows: 2,
-                    }}
-                    spaceBetween={10}
-                    modules={[Grid]}
-                    onSlideChange={(e) => slideChange(e)}
-                    onInit={(e) => setTotal(e.slides.length)}
-                    className="agency-clients__slider hidden-desktop">
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                    <SwiperSlide className="agency-clients__item"><img className='agency-clients__img' src={logoChoice} alt="Choice Estate" /></SwiperSlide>
-                </Swiper>
-            </section>
+                    <div className="agency-clients__marquee hidden-mobile">
+
+                        <Marquee speed="40">
+                            {
+                                clients.map((client, i) => {
+                                    if (i < amountSlides) {
+                                        return (
+                                            <img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                        )
+                                    } else return null
+                                })
+                            }
+                        </Marquee>
+                        <Marquee direction='right' speed="40">
+                            {
+                                clients.map((client, i) => {
+                                    if (i > amountSlides - 1 && i < amountSlides * 2) {
+                                        return (
+                                            <img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                        )
+                                    } else return null
+                                })
+                            }
+                        </Marquee>
+                        <Marquee speed="20">
+                            {
+                                clients.map((client, i) => {
+                                    if (i > amountSlides * 2 - 1) {
+                                        return (
+                                            <img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                        )
+                                    } else return null
+                                })
+                            }
+                        </Marquee>
+                    </div>
+                    <Swiper
+                        slidesPerView={2}
+                        grid={{
+                            rows: 2,
+                        }}
+                        spaceBetween={10}
+                        modules={[Grid]}
+                        onSlideChange={(e) => slideChange(e)}
+                        className="agency-clients__slider hidden-desktop">
+                        {
+                            clients.map(client => {
+                                return (
+                                    <SwiperSlide className="agency-clients__item" key={client.id}><img className='agency-clients__img' src={client.image ? `http://localhost:5000/uploads/${client.image.filename}` : null} alt={client.name} /></SwiperSlide>
+                                )
+                            })
+                        }
+                    </Swiper>
+                </section> : null
+            }
 
             <section className="agency-team" id="team">
                 <div className="container">
@@ -286,181 +318,128 @@ const Agency = () => {
                         <div className="agency-team__t">
                             <h2 className="heading-secondary">Команда мечты</h2>
                             <div className="agency-team__t-content">
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
-                                <div className="agency-team__t-item">
-                                    <div className="agency-team__t-name">Сергей Разинкин</div>
-                                    <img src={teamImg} alt="Сергей Разинкин" className="agency-team__t-img" />
-                                    <div className="agency-team__t-post">Frontend разработчик</div>
-                                </div>
+                                {
+                                    team ? team.map(item => {
+                                        return (
+                                            <div className="agency-team__t-item" key={item.id}>
+                                                <div className="agency-team__t-name">{item.name}</div>
+                                                <img src={item.image ? `http://localhost:5000/uploads/${item.image.filename}` : null} alt={item.name} className="agency-team__t-img" />
+                                                <div className="agency-team__t-post">{item.post}</div>
+                                            </div>
+                                        )
+                                    }) : null
+                                }
                             </div>
                         </div>
                         <div className="agency-team__content">
                             <h2 className="heading-secondary">Ищем таланты</h2>
-                            <div className="agency-team__talent">
-                                <div className="agency-team__talent-wrap">
-                                    <Link to="#" className="agency-team__talent-item">
-                                        <div className="agency-team__talent-name">Бизнес-аналитик</div>
-                                        <div className="agency-team__talent-descr">Middle/Middle+. Фултайм. Офис или удаленно</div>
-                                        <div className="agency-team__talent-icon">
-                                            <Icon icon="corner-arr" />
-                                        </div>
-                                    </Link>
-                                    <Link to="#" className="agency-team__talent-item">
-                                        <div className="agency-team__talent-name">Ведущий дизайнер</div>
-                                        <div className="agency-team__talent-descr">Фултайм. Офис или удаленно</div>
-                                        <div className="agency-team__talent-icon">
-                                            <Icon icon="corner-arr" />
-                                        </div>
-                                    </Link>
-                                    <Link to="#" className="agency-team__talent-item">
-                                        <div className="agency-team__talent-name">3D-дизайнер</div>
-                                        <div className="agency-team__talent-descr">Middle/Middle+. Фултайм. Офис или удаленно</div>
-                                        <div className="agency-team__talent-icon">
-                                            <Icon icon="corner-arr" />
-                                        </div>
-                                    </Link>
-                                    <Link to="#" className="agency-team__talent-item">
-                                        <div className="agency-team__talent-name">Продюсер проектов</div>
-                                        <div className="agency-team__talent-descr">Фултайм. Офис или удаленно</div>
-                                        <div className="agency-team__talent-icon">
-                                            <Icon icon="corner-arr" />
-                                        </div>
-                                    </Link>
-                                </div>
-                                <Link to="#" className="btn --orange --circle">
-                                    Отправить резюме
-                                </Link>
-                            </div>
-                            <div className="agency-team__feedback">
-                                <Formik
-                                    initialValues={{ name: '', link: '', phone: '', email: '', about: '', file: '' }}
-                                    validate={values => {
-                                        const errors = {};
-                                        if (!values.name || values.name.length < 2) {
-                                            errors.name = 'Обязательное поле';
-                                        }
-                                        if (!values.link || values.link.length < 2) {
-                                            errors.link = 'Обязательное поле';
-                                        }
-                                        if (!values.phone || values.phone.indexOf("_") !== -1) {
-                                            errors.phone = 'Обязательное поле';
-                                        }
-                                        if (!values.email || !(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email))) {
-                                            errors.email = 'Обязательное поле';
-                                        }
-                                        if (!values.about || values.about.length < 2) {
-                                            errors.about = 'Обязательное поле';
-                                        }
-                                        return errors;
-                                    }}
-                                    onSubmit={(values, { setSubmitting, resetForm }) => {
-                                        setTimeout(() => {
-                                            console.log(values);
-                                            alert(JSON.stringify(values, null, 2));
-                                            setSubmitting(false);
-                                            resetForm();
-                                        }, 400);
-                                    }}
-                                >
-                                    {({
-                                        values,
-                                        errors,
-                                        touched,
-                                        handleChange,
-                                        handleBlur,
-                                        handleSubmit,
-                                        isSubmitting,
-                                        setFieldValue,
-                                    }) => (
+                            {
+                                vacancies ?
+                                    <div className="agency-team__talent">
+                                        <div className="agency-team__talent-wrap">
 
-                                        <form className="form" onSubmit={handleSubmit}>
-                                            <div className="form__title">Заполните форму</div>
-                                            <div className="form__wrap">
-                                                <div className="form__group">
-                                                    <input type="text" name="name" className="form__input" onChange={handleChange} value={values.name} placeholder="Ваше имя" />
-                                                    <div className="form__error">{errors.name && touched.name && errors.name}</div>
-                                                </div>
-                                                <div className="form__group">
-                                                    <input type="text" name="link" className="form__input" onChange={handleChange} value={values.link} placeholder="Ссылка на портфолио" />
-                                                    <div className="form__error">{errors.link && touched.link && errors.link}</div>
-                                                </div>
-                                            </div>
-                                            <div className="form__wrap">
-                                                <div className="form__group">
-                                                    <InputMask type="text" name="phone" className="form__input" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
-                                                    <div className="form__error">{errors.phone && touched.phone && errors.phone}</div>
-                                                </div>
-                                                <div className="form__group">
-                                                    <input type="text" name="email" className="form__input" onChange={handleChange} value={values.email} placeholder="E-mail" />
-                                                    <div className="form__error">{errors.email && touched.email && errors.email}</div>
-                                                </div>
-                                            </div>
-                                            <div className="form__wrap">
-                                                <div className="form__group">
-                                                    <textarea type="text" name="about" className="form__textarea" onChange={handleChange} value={values.about} placeholder="Расскажите кратко о себе" />
-                                                    <div className="form__error">{errors.about && touched.about && errors.about}</div>
-                                                </div>
-                                            </div>
-                                            <div className="form__file">
-                                                <input id="file" name="file" type="file" onChange={(event) => {
-                                                    setFieldValue("file", event.currentTarget.files[0]);
-                                                }} />
-                                            </div>
+                                            {vacancies.map(item => {
+                                                return (
+                                                    <Link to={item.link} className="agency-team__talent-item" key={item.id}>
+                                                        <div className="agency-team__talent-name">{item.name}</div>
+                                                        <div className="agency-team__talent-descr">{item.lvl}. {item.place}. {item.time}</div>
+                                                        <div className="agency-team__talent-icon">
+                                                            <Icon icon="corner-arr" />
+                                                        </div>
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                    : <div className="agency-team__feedback">
+                                        <Formik
+                                            initialValues={{ name: '', link: '', phone: '', email: '', about: '', file: '' }}
+                                            validate={values => {
+                                                const errors = {};
+                                                if (!values.name || values.name.length < 2) {
+                                                    errors.name = 'Обязательное поле';
+                                                }
+                                                if (!values.link || values.link.length < 2) {
+                                                    errors.link = 'Обязательное поле';
+                                                }
+                                                if (!values.phone || values.phone.indexOf("_") !== -1) {
+                                                    errors.phone = 'Обязательное поле';
+                                                }
+                                                if (!values.email || !(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email))) {
+                                                    errors.email = 'Обязательное поле';
+                                                }
+                                                if (!values.about || values.about.length < 2) {
+                                                    errors.about = 'Обязательное поле';
+                                                }
+                                                return errors;
+                                            }}
+                                            onSubmit={(values, { setSubmitting, resetForm }) => {
+                                                setTimeout(() => {
+                                                    console.log(values);
+                                                    alert(JSON.stringify(values, null, 2));
+                                                    setSubmitting(false);
+                                                    resetForm();
+                                                }, 400);
+                                            }}
+                                        >
+                                            {({
+                                                values,
+                                                errors,
+                                                touched,
+                                                handleChange,
+                                                handleBlur,
+                                                handleSubmit,
+                                                isSubmitting,
+                                                setFieldValue,
+                                            }) => (
 
-                                            <button type="submit" className='btn --orange --circle'>
-                                                Отправить
-                                            </button>
-                                            <div className="form__check">
-                                                Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <Link to="#">персональных данных</Link>
-                                            </div>
-                                        </form>
-                                    )}
-                                </Formik>
-                            </div>
+                                                <form className="form" onSubmit={handleSubmit}>
+                                                    <div className="form__title">Заполните форму</div>
+                                                    <div className="form__wrap">
+                                                        <div className="form__group">
+                                                            <input type="text" name="name" className="form__input" onChange={handleChange} value={values.name} placeholder="Ваше имя" />
+                                                            <div className="form__error">{errors.name && touched.name && errors.name}</div>
+                                                        </div>
+                                                        <div className="form__group">
+                                                            <input type="text" name="link" className="form__input" onChange={handleChange} value={values.link} placeholder="Ссылка на портфолио" />
+                                                            <div className="form__error">{errors.link && touched.link && errors.link}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form__wrap">
+                                                        <div className="form__group">
+                                                            <InputMask type="text" name="phone" className="form__input" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
+                                                            <div className="form__error">{errors.phone && touched.phone && errors.phone}</div>
+                                                        </div>
+                                                        <div className="form__group">
+                                                            <input type="text" name="email" className="form__input" onChange={handleChange} value={values.email} placeholder="E-mail" />
+                                                            <div className="form__error">{errors.email && touched.email && errors.email}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form__wrap">
+                                                        <div className="form__group">
+                                                            <textarea type="text" name="about" className="form__textarea" onChange={handleChange} value={values.about} placeholder="Расскажите кратко о себе" />
+                                                            <div className="form__error">{errors.about && touched.about && errors.about}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form__file">
+                                                        <input id="file" name="file" type="file" onChange={(event) => {
+                                                            setFieldValue("file", event.currentTarget.files[0]);
+                                                        }} />
+                                                    </div>
+
+                                                    <button type="submit" className='btn --orange --circle'>
+                                                        Отправить
+                                                    </button>
+                                                    <div className="form__check">
+                                                        Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <Link to="#">персональных данных</Link>
+                                                    </div>
+                                                </form>
+                                            )}
+                                        </Formik>
+                                    </div>
+                            }
+
+
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 
@@ -9,8 +9,15 @@ const FilenameField = props => {
         <FunctionField
             {...props}
             render={record => {
+                console.log(record);
                 if (record.filename) {
-                    return <img src={`http://localhost:5000/uploads/${record.filename}`} alt={record.filename} title="image" />;
+                    if (record.mimetype.indexOf('mp4') !== -1) {
+                        return (
+                            <video autoPlay loop playsInline><source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
+                        )
+                    } else {
+                        return <img src={`http://localhost:5000/uploads/${record.filename}`} alt={record.filename} title="image" />;
+                    }
                 } else {
                     return <img src={`${record.src}`} alt={record.src} title="image" />;
                 }
@@ -44,34 +51,34 @@ export const ProjectsCreate = (props) => (
                 <SelectInput optionText="name" label="Тип проекта" />
             </ReferenceArrayInput>
             <TextInput source="about" label="О клиенте" fullWidth />
-            <ImageInput source="bannerFirst" label="Баннер">
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <FileInput source="bannerFirst" label="Баннер">
+                <FileField source="src" title="title" />
+            </FileInput>
             <TextInput source="task" label="Задача" fullWidth />
             <ReferenceArrayInput source="taskPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для задачи" />
             </ReferenceArrayInput>
-            <ImageInput source="bannerSecond" label="Баннер">
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <FileInput source="bannerSecond" label="Баннер">
+                <FileField source="src" title="title" />
+            </FileInput>
             <TextInput source="approach" label="Подход" fullWidth />
             <ReferenceArrayInput source="approachPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для подхода" />
             </ReferenceArrayInput>
-            <ImageInput source="bannerThird" label="Баннер">
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <FileInput source="bannerThird" label="Баннер">
+                <FileField source="src" title="title" />
+            </FileInput>
             <RichTextInput source="body" fullWidth />
-            <ImageInput source="bannerFourth" label="Баннер">
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <FileInput source="bannerFourth" label="Баннер">
+                <FileField source="src" title="title" />
+            </FileInput>
             <TextInput source="result" label="Результаты" fullWidth />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
             </ReferenceArrayInput>
-            <ImageInput source="bannerFifth" label="Баннер">
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <FileInput source="bannerFifth" label="Баннер">
+                <FileField source="src" title="title" />
+            </FileInput>
         </SimpleForm>
     </Create>
 );
@@ -83,37 +90,43 @@ export const ProjectsEdit = (props) => (
             <ImageInput source="image" label="Главное изображение" validate={[required()]} accept="image/*">
                 <FilenameField source="src" title="title" />
             </ImageInput>
-            <BooleanInput source="main" label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
             <ColorInput source="color" label="Цвет проекта" validate={[required()]} />
+            <BooleanInput source="main" label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
+            <ReferenceArrayInput source="projectTheme" reference="themes">
+                <SelectInput optionText="name" label="Тема проекта" />
+            </ReferenceArrayInput>
+            <ReferenceArrayInput source="projectType" reference="types">
+                <SelectInput optionText="name" label="Тип проекта" />
+            </ReferenceArrayInput>
             <TextInput source="about" label="О клиенте" fullWidth />
-            <ImageInput source="bannerFirst" label="Баннер">
+            <FileInput source="bannerFirst" label="Баннер">
                 <FilenameField source="src" title="title" />
-            </ImageInput>
+            </FileInput>
             <TextInput source="task" label="Задача" fullWidth />
             <ReferenceArrayInput source="taskPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для задачи" />
             </ReferenceArrayInput>
-            <ImageInput source="bannerSecond" label="Баннер">
+            <FileInput source="bannerSecond" label="Баннер">
                 <FilenameField source="src" title="title" />
-            </ImageInput>
+            </FileInput>
             <TextInput source="approach" label="Подход" fullWidth />
             <ReferenceArrayInput source="approachPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для подхода" />
             </ReferenceArrayInput>
-            <ImageInput source="bannerThird" label="Баннер">
+            <FileInput source="bannerThird" label="Баннер">
                 <FilenameField source="src" title="title" />
-            </ImageInput>
+            </FileInput>
             <RichTextInput source="body" fullWidth />
-            <ImageInput source="bannerFourth" label="Баннер">
+            <FileInput source="bannerFourth" label="Баннер">
                 <FilenameField source="src" title="title" />
-            </ImageInput>
+            </FileInput>
             <TextInput source="result" label="Результаты" fullWidth />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
             </ReferenceArrayInput>
-            <ImageInput source="bannerFifth" label="Баннер">
+            <FileInput source="bannerFifth" label="Баннер">
                 <FilenameField source="src" title="title" />
-            </ImageInput>
+            </FileInput>
         </SimpleForm>
     </Edit>
 );

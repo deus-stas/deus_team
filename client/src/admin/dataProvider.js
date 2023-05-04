@@ -70,7 +70,21 @@ const dataProvider = {
         hasImage = true;
         formData.append(key, value.rawFile);
       } else {
-        formData.append(key, value);
+        if (key === "awardProject") {
+          value.forEach((item, index) => {
+            Object.keys(item).forEach((itemKey) => {
+              formData.append(`awardProject[${index}][${itemKey}]`, item[itemKey]);
+            });
+          });
+        } else if (key === "raitingProject") {
+          value.forEach((item, index) => {
+            Object.keys(item).forEach((itemKey) => {
+              formData.append(`raitingProject[${index}][${itemKey}]`, item[itemKey]);
+            });
+          });
+        } else {
+          formData.append(key, value);
+        }
       }
     }
     return httpClient(`${apiUrl}/${resource}`, {
@@ -89,7 +103,21 @@ const dataProvider = {
         hasImage = true;
         formData.append(key, value.rawFile);
       } else {
-        formData.append(key, value);
+        if (key === "awardProject") {
+          value.forEach((item, index) => {
+            Object.keys(item).forEach((itemKey) => {
+              formData.append(`awardProject[${index}][${itemKey}]`, item[itemKey]);
+            });
+          });
+        } else if (key === "raitingProject") {
+          value.forEach((item, index) => {
+            Object.keys(item).forEach((itemKey) => {
+              formData.append(`raitingProject[${index}][${itemKey}]`, item[itemKey]);
+            });
+          });
+        } else {
+          formData.append(key, value);
+        }
       }
     }
 
@@ -105,12 +133,11 @@ const dataProvider = {
 
   updateMany: (resource, params) => {
     const query = {
-      id: params.ids.map(id => id).join(','),
+      id: params.ids.join(','),
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
     return httpClient(url, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({ data: json }));
   },

@@ -10,6 +10,11 @@ import { PersonsList, PersonsEdit, PersonsCreate } from './admin/resources/Perso
 import { SocialList, SocialEdit, SocialCreate } from './admin/resources/Social';
 import { ProductsList, ProductsEdit, ProductsCreate } from './admin/resources/Products';
 import { AwardsList, AwardsEdit, AwardsCreate } from './admin/resources/Awards';
+import { RaitingsList, RaitingsEdit, RaitingsCreate } from './admin/resources/Raitings';
+import { ClientsList, ClientsEdit, ClientsCreate } from './admin/resources/Clients';
+import { TeamList, TeamEdit, TeamCreate } from './admin/resources/Team';
+import { VacanciesList, VacanciesEdit, VacanciesCreate } from './admin/resources/Vacancies';
+import { ShowreelsList, ShowreelsEdit, ShowreelsCreate } from './admin/resources/Showreels';
 import dataProvider from './admin/dataProvider';
 import { theme } from "./admin/theme";
 
@@ -25,6 +30,11 @@ const AdminPage = () => (
     <Resource name="social" list={SocialList} create={SocialCreate} edit={SocialEdit} options={{ label: 'Соц сети' }} />
     <Resource name="products" list={ProductsList} create={ProductsCreate} edit={ProductsEdit} options={{ label: 'Продукты' }} />
     <Resource name="awards" list={AwardsList} create={AwardsCreate} edit={AwardsEdit} options={{ label: 'Награды' }} />
+    <Resource name="raitings" list={RaitingsList} create={RaitingsCreate} edit={RaitingsEdit} options={{ label: 'Рейтинги' }} />
+    <Resource name="clients" list={ClientsList} create={ClientsCreate} edit={ClientsEdit} options={{ label: 'Клиенты' }} />
+    <Resource name="team" list={TeamList} create={TeamCreate} edit={TeamEdit} options={{ label: 'Команда' }} />
+    <Resource name="vacancies" list={VacanciesList} create={VacanciesCreate} edit={VacanciesEdit} options={{ label: 'Вакансии' }} />
+    <Resource name="showreels" list={ShowreelsList} create={ShowreelsCreate} edit={ShowreelsEdit} options={{ label: 'Шоурилы' }} />
   </Admin >
 );
 
