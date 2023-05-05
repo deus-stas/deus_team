@@ -65,28 +65,30 @@ const dataProvider = {
 
   create: (resource, params) => {
     const formData = new FormData();
-    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video'];
-    let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
+    const images = [
+      "image",
+      "bannerFirst",
+      "bannerSecond",
+      "bannerThird",
+      "bannerFourth",
+      "bannerFifth",
+      "video",
+    ];
+    let hasImage = false;
+    const extraImages = params.data.imagesExtra
+      ? params.data.imagesExtra.map((image) => image.imageI.rawFile)
+      : [];
     for (const [key, value] of Object.entries(params.data)) {
       if (images.includes(key) && value) {
         hasImage = true;
         formData.append(key, value.rawFile);
+      } else if (key === "imagesExtra") {
+        // добавляем картинки из imagesExtra в formData
+        extraImages.forEach((image, index) => {
+          formData.append(`imagesExtra`, image);
+        });
       } else {
-        if (key === "awardProject") {
-          value.forEach((item, index) => {
-            Object.keys(item).forEach((itemKey) => {
-              formData.append(`awardProject[${index}][${itemKey}]`, item[itemKey]);
-            });
-          });
-        } else if (key === "raitingProject") {
-          value.forEach((item, index) => {
-            Object.keys(item).forEach((itemKey) => {
-              formData.append(`raitingProject[${index}][${itemKey}]`, item[itemKey]);
-            });
-          });
-        } else {
-          formData.append(key, value);
-        }
+        formData.append(key, value);
       }
     }
     return httpClient(`${apiUrl}/${resource}`, {

@@ -15,45 +15,46 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const ProjectDetail = () => {
     const [detail, setDetail] = useState([]);
     const { id } = useParams();
-
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/${id}`)
             .then((response) => {
+                let dataDetail = { ...response.data };
+                let requests = [];
 
-                const dataDetail = response.data;
-                setDetail(response.data);
-                console.log(response.data);
                 if (response.data.taskPersons !== 'undefined') {
-                    axios.get(`${apiUrl}/api/persons/${response.data.taskPersons}`)
-                        .then((response) => {
-                            dataDetail.taskPersons = response.data;
-                            setDetail(dataDetail);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                }
-                if (response.data.approachPersons !== 'undefined') {
-                    axios.get(`${apiUrl}/api/persons/${response.data.approachPersons}`)
-                        .then((response) => {
-                            dataDetail.approachPersons = response.data;
-                            setDetail(dataDetail);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                }
-                if (response.data.resultPersons !== 'undefined') {
-                    axios.get(`${apiUrl}/api/persons/${response.data.resultPersons}`)
-                        .then((response) => {
-                            dataDetail.resultPersons = response.data;
-                            setDetail(dataDetail);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
+                    requests.push(
+                        axios.get(`${apiUrl}/api/persons/${response.data.taskPersons}`)
+                            .then((response) => {
+                                dataDetail = { ...dataDetail, taskPersons: response.data };
+                            })
+                    );
                 }
 
+                if (response.data.approachPersons !== 'undefined') {
+                    requests.push(
+                        axios.get(`${apiUrl}/api/persons/${response.data.approachPersons}`)
+                            .then((response) => {
+                                dataDetail = { ...dataDetail, approachPersons: response.data };
+                            })
+                    );
+                }
+
+                if (response.data.resultPersons !== 'undefined') {
+                    requests.push(
+                        axios.get(`${apiUrl}/api/persons/${response.data.resultPersons}`)
+                            .then((response) => {
+                                dataDetail = { ...dataDetail, resultPersons: response.data };
+                            })
+                    );
+                }
+
+                Promise.all(requests)
+                    .then(() => {
+                        setDetail(dataDetail);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             })
             .catch((error) => {
                 console.log(error);
@@ -81,7 +82,14 @@ const ProjectDetail = () => {
 
             {detail.bannerFirst ?
                 <section className="project-banner">
-                    <img src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
+                    {detail.bannerFirst.mimetype !== 'video/mp4'
+                        ?
+                        <img src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
+                        :
+                        <video autoPlay loop muted playsInline>
+                            <source src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                        </video>
+                    }
                 </section>
                 : null}
 
@@ -109,7 +117,14 @@ const ProjectDetail = () => {
 
             {detail.bannerSecond ?
                 <section className="project-banner">
-                    <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
+                    {detail.bannerSecond.mimetype !== 'video/mp4'
+                        ?
+                        <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
+                        :
+                        <video autoPlay loop muted playsInline>
+                            <source src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                        </video>
+                    }
                 </section>
                 : null}
 
@@ -120,6 +135,7 @@ const ProjectDetail = () => {
                             <h2 className="heading-secondary">Подход</h2>
                             <div className="quote">
                                 <div className="quote__box">
+                                    {console.log(detail.approachPersons)}
                                     <div className="quote__person">
                                         {detail.approachPersons.image ? <img src={`${apiUrl}/uploads/${detail.approachPersons.image.filename}`} alt={detail.approachPersons.name} className="quote__img" /> : null}
 
@@ -127,7 +143,7 @@ const ProjectDetail = () => {
                                             {detail.approachPersons.name}, <span>{detail.approachPersons.post} @ DEUS</span>
                                         </div>
                                     </div>
-                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
+                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.approach }}></div>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +153,14 @@ const ProjectDetail = () => {
 
             {detail.bannerThird ?
                 <section className="project-banner">
-                    <img src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
+                    {detail.bannerThird.mimetype !== 'video/mp4'
+                        ?
+                        <img src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
+                        :
+                        <video autoPlay loop muted playsInline>
+                            <source src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                        </video>
+                    }
                 </section>
                 : null}
 
@@ -153,7 +176,14 @@ const ProjectDetail = () => {
 
             {detail.bannerFourth ?
                 <section className="project-banner">
-                    <img src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
+                    {detail.bannerFourth.mimetype !== 'video/mp4'
+                        ?
+                        <img src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
+                        :
+                        <video autoPlay loop muted playsInline>
+                            <source src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                        </video>
+                    }
                 </section>
                 : null}
 
@@ -171,7 +201,7 @@ const ProjectDetail = () => {
                                             {detail.resultPersons.name}, <span>{detail.resultPersons.post} @ DEUS</span>
                                         </div>
                                     </div>
-                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
+                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.result }}></div>
                                 </div>
                             </div>
                         </div>
@@ -181,8 +211,26 @@ const ProjectDetail = () => {
 
             {detail.bannerFifth ?
                 <section className="project-banner">
-                    <img src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
+                    {detail.bannerFifth.mimetype !== 'video/mp4'
+                        ?
+                        <img src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
+                        :
+                        <video autoPlay loop muted playsInline>
+                            <source src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                        </video>
+                    }
+
                 </section>
+                : null}
+
+            {detail.imagesExtra ?
+                detail.imagesExtra.map((image, index) => {
+                    return (
+                        <section className="project-banner --extra" key={index}>
+                            <img src={`${apiUrl}/uploads/${image.filename}`} alt={image.fieldname} />
+                        </section>
+                    )
+                })
                 : null}
 
             {/* <section className="project-goals">

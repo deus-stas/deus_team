@@ -20,7 +20,8 @@ const projectsSchema = new Schema({
   result: { type: String },
   resultPersons: { type: String },
   bannerFifth: { type: Object },
-  main: {type: Boolean}
+  main: {type: Boolean},
+  imagesExtra: {type: Array}
 });
 
 projectsSchema.set('toJSON', { virtuals: true });

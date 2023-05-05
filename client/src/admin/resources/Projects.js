@@ -1,12 +1,12 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField, ArrayInput, SimpleFormIterator } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 
 const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'http://188.120.232.38'
-  : 'http://localhost:5000';
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
 
 
 const FilenameField = props => {
@@ -47,8 +47,17 @@ export const ProjectsCreate = (props) => (
             <ImageInput source="image" label="Главное изображение" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <ColorInput source="color" label="Цвет проекта" validate={[required()]} />
+            <ColorInput source="color" label="Цвет проекта"/>
             <BooleanInput source="main" label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
+
+            <ArrayInput source="imagesExtra" label="Дополнительные изображения">
+                <SimpleFormIterator>
+                    <ImageInput source="imageI" label="Изображение" accept="image/*">
+                        <ImageField source="src" title="title" />
+                    </ImageInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <ReferenceArrayInput source="projectTheme" reference="themes">
                 <SelectInput optionText="name" label="Тема проекта" />
             </ReferenceArrayInput>
@@ -96,6 +105,13 @@ export const ProjectsEdit = (props) => (
                 <FilenameField source="src" title="title" />
             </ImageInput>
             <ColorInput source="color" label="Цвет проекта" validate={[required()]} />
+            <ArrayInput source="imagesExtra" label="Дополнительные изображения">
+                <SimpleFormIterator>
+                    <ImageInput source="imageI" label="Изображение" accept="image/*">
+                        <FilenameField source="src" title="title" />
+                    </ImageInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <BooleanInput source="main" label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
             <ReferenceArrayInput source="projectTheme" reference="themes">
                 <SelectInput optionText="name" label="Тема проекта" />

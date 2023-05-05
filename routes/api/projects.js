@@ -36,11 +36,12 @@ router.get('/projects', async (req, res) => {
     res.json(projects);
 });
 
-router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }]), async (req, res) => {
+router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }, { name: 'imagesExtra' }]), async (req, res) => {
     const { name, color, about, task, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType } = req.body;
 
+    console.log(req.files);
     console.log(req.body);
-    let bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth;
+    let bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -60,6 +61,10 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
 
     if (req.files.bannerFifth) {
         bannerFifth = req.files.bannerFifth[0];
+    }
+
+    if (req.files.imagesExtra) {
+        imagesExtra = req.files.imagesExtra;
     }
 
     const image = req.files.image[0];
@@ -83,7 +88,8 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
         resultPersons,
         main,
         projectTheme, 
-        projectType
+        projectType,
+        imagesExtra
     });
 
     await projects.save();
