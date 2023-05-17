@@ -18,12 +18,14 @@ const clientsRoutes = require('./routes/api/clients');
 const teamRoutes = require('./routes/api/team');
 const vacanciesRoutes = require('./routes/api/vacancies');
 const showreelsRoutes = require('./routes/api/showreels');
+const subServicesRoutes = require('./routes/api/subServices');
+const servicesRoutes = require('./routes/api/services');
 
 const app = express();
 
 app.use('/uploads', express.static('uploads'));
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json({ extended: false }));
+app.use(express.json({ extended: false, limit: '10mb' }));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
     next();
@@ -43,6 +45,8 @@ app.use('/api', clientsRoutes);
 app.use('/api', teamRoutes);
 app.use('/api', vacanciesRoutes);
 app.use('/api', showreelsRoutes);
+app.use('/api', subServicesRoutes);
+app.use('/api', servicesRoutes);
 
 
 if (process.env.NODE_ENV === 'production') {

@@ -15,6 +15,8 @@ import { ClientsList, ClientsEdit, ClientsCreate } from './admin/resources/Clien
 import { TeamList, TeamEdit, TeamCreate } from './admin/resources/Team';
 import { VacanciesList, VacanciesEdit, VacanciesCreate } from './admin/resources/Vacancies';
 import { ShowreelsList, ShowreelsEdit, ShowreelsCreate } from './admin/resources/Showreels';
+import { ServicesList, ServicesEdit, ServicesCreate } from './admin/resources/Services';
+import { SubServicesList, SubServicesEdit, SubServicesCreate } from './admin/resources/SubServices';
 import dataProvider from './admin/dataProvider';
 import { theme } from "./admin/theme";
 
@@ -35,6 +37,8 @@ const AdminPage = () => (
     <Resource name="team" list={TeamList} create={TeamCreate} edit={TeamEdit} options={{ label: 'Команда' }} />
     <Resource name="vacancies" list={VacanciesList} create={VacanciesCreate} edit={VacanciesEdit} options={{ label: 'Вакансии' }} />
     <Resource name="showreels" list={ShowreelsList} create={ShowreelsCreate} edit={ShowreelsEdit} options={{ label: 'Шоурилы' }} />
+    <Resource name="services" list={ServicesList} create={ServicesCreate} edit={ServicesEdit} options={{ label: 'Услуги' }} />
+    <Resource name="subServices" list={SubServicesList} create={SubServicesCreate} edit={SubServicesEdit} options={{ label: 'Услуги(для деталки)' }} />
   </Admin >
 );
 

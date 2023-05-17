@@ -87,7 +87,11 @@ const dataProvider = {
         extraImages.forEach((image, index) => {
           formData.append(`imagesExtra`, image);
         });
+        //свойства в которых объект нужно отдельно переводить в JSON
+      } else if (key === "tasksList") {
+        formData.append(key, JSON.stringify(value));
       } else {
+        console.log(key, value);
         formData.append(key, value);
       }
     }
@@ -101,6 +105,10 @@ const dataProvider = {
     const formData = new FormData();
     const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video'];
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
+    console.log(params.data);
+    const extraImages = params.data.imagesExtra
+      ? params.data.imagesExtra.map((image) => image.imageI?.rawFile)
+      : [];
 
     for (const [key, value] of Object.entries(params.data)) {
       if (images.includes(key) && value) {
@@ -119,6 +127,16 @@ const dataProvider = {
               formData.append(`raitingProject[${index}][${itemKey}]`, item[itemKey]);
             });
           });
+        } else if (key === "imagesExtra") {
+          // добавляем картинки из imagesExtra в formData
+          extraImages.forEach((image, index) => {
+            if (image !== undefined) {
+              formData.append(`imagesExtra`, image);
+            }
+          });
+          //свойства в которых объект нужно отдельно переводить в JSON
+        } else if (key === "tasksList") {
+          formData.append(key, JSON.stringify(value));
         } else {
           formData.append(key, value);
         }

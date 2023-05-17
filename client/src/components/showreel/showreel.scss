@@ -2,7 +2,8 @@
 
 .showreel {
     &__title {
-        display: flex;
+        // display: flex;
+        display: none;
         align-items: center;
         margin-bottom: 1rem;
         font-size: 2rem;

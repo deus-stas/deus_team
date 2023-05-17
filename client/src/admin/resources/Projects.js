@@ -59,10 +59,20 @@ export const ProjectsCreate = (props) => (
             <FileInput source="bannerFirst" label="Баннер">
                 <FileField source="src" title="title" />
             </FileInput>
-            <TextInput source="task" label="Задача" fullWidth />
+            <TextInput source="taskDescr" label="Описание для блока Цели и задачи" fullWidth />
+            <TextInput source="task" label="Цитата задачи" fullWidth />
             <ReferenceArrayInput source="taskPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для задачи" />
             </ReferenceArrayInput>
+            <ArrayInput
+                source="tasksList"
+                label="Список задач"
+            >
+                <SimpleFormIterator>
+                    <TextInput source="tasksItem" label="Задача" />
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <FileInput source="bannerSecond" label="Баннер">
                 <FileField source="src" title="title" />
             </FileInput>
@@ -114,10 +124,19 @@ export const ProjectsEdit = (props) => (
             <FileInput source="bannerFirst" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
+            <TextInput source="taskDescr" label="Описание для блока Цели и задачи" fullWidth />
             <TextInput source="task" label="Задача" fullWidth />
             <ReferenceArrayInput source="taskPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для задачи" />
             </ReferenceArrayInput>
+            <ArrayInput
+                source="tasksList"
+                label="Список задач"
+            >
+                <SimpleFormIterator>
+                    <TextInput source="tasksItem" label="Задача" />
+                </SimpleFormIterator>
+            </ArrayInput>
             <FileInput source="bannerSecond" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
@@ -139,7 +158,7 @@ export const ProjectsEdit = (props) => (
             <FileInput source="bannerFifth" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
-            <ArrayInput source="imagesExtra" label="Дополнительные изображения">
+            <ArrayInput source="imagesExtra" label="Дополнительные изображения(если редактируется одна картинка, то нужно обновить/заменить и другую)">
                 <SimpleFormIterator>
                     <ImageInput source="imageI" label="Изображение" accept="image/*">
                         <FilenameField source="src" title="title" />

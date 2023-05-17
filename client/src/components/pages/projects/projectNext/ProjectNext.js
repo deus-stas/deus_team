@@ -9,10 +9,10 @@ const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
     : 'http://localhost:5000';
 
-const ProjectNext = () => {
-
+const ProjectNext = (props) => {
+    console.log(props);
     const { id } = useParams();
-    
+
     const [project, setProject] = useState([]);
 
     useEffect(() => {
@@ -33,7 +33,9 @@ const ProjectNext = () => {
             <div className="container">
                 <div className="project-next__item" style={{ background: project.color }}>
                     <div className="project-next__text">
-                        <div className="project-next__subtitle">Следующий проект</div>
+                        <div className="project-next__subtitle">
+                            {props.last ? 'Последний созданный проект' : 'Следующий проект'}
+                        </div>
                         <div className="project-next__name" dangerouslySetInnerHTML={{ __html: project.name }}></div>
                         <Link to={`/projects/${project.id}`} className="btn --white">Перейти к проекту</Link>
                     </div>

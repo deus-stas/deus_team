@@ -205,6 +205,14 @@
             grid-template-columns: repeat(3, .33334fr);
             grid-gap: 4rem;
 
+            &.even {
+                grid-template-columns: repeat(2, .5fr);
+
+                @include respond(sm) {
+                    grid-template-columns: 100%;
+                }
+            }
+
             @include respond(sm) {
                 grid-template-columns: 100%;
                 grid-gap: 1rem;
@@ -276,16 +284,18 @@
         }
 
         &__content {
-            display: flex;
-            width: 100vw;
-            margin-left: -2rem;
-            padding: 0 2rem;
-            overflow-x: auto;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            @include respond(sm) {
+                display: flex;
+                width: 100vw;
+                margin-left: -2rem;
+                padding: 0 2rem;
+                overflow-x: auto;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
 
-            &::-webkit-scrollbar {
-                display: none;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
             }
         }
 
@@ -455,16 +465,18 @@
             }
 
             &-wrap {
-                width: 100vw;
-                margin-left: -2rem;
-                padding: 0 2rem;
-                display: flex;
-                overflow-x: auto;
-                -ms-overflow-style: none;
-                scrollbar-width: none;
+                @include respond(sm) {
+                    width: 100vw;
+                    margin-left: -2rem;
+                    padding: 0 2rem;
+                    display: flex;
+                    overflow-x: auto;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
 
-                &::-webkit-scrollbar {
-                    display: none;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
                 }
             }
 

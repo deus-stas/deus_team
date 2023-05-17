@@ -37,8 +37,10 @@ router.get('/projects', async (req, res) => {
 });
 
 router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }, { name: 'imagesExtra' }]), async (req, res) => {
-    const { name, color, about, task, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType } = req.body;
+    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType } = req.body;
+    const tasksList = JSON.parse(req.body.tasksList);
 
+    console.log(tasksList);
     console.log(req.files);
     console.log(req.body);
     let bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra;
@@ -80,6 +82,8 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
         bannerFourth,
         bannerFifth,
         task,
+        taskDescr,
+        tasksList,
         approach,
         body,
         result,
@@ -87,7 +91,7 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
         approachPersons,
         resultPersons,
         main,
-        projectTheme, 
+        projectTheme,
         projectType,
         imagesExtra
     });
@@ -109,7 +113,7 @@ router.get('/projects/:id', async (req, res) => {
     res.json(projects);
 });
 
-router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }]), async (req, res) => {
+router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }, { name: 'imagesExtra' }]), async (req, res) => {
     const { id } = req.params;
     const project = await Projects.findById(id);
 
@@ -118,7 +122,9 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
     }
     console.log(req.body);
 
-    const { name, color, about, task, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType } = req.body;
+    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType } = req.body;
+
+    const tasksList = JSON.parse(req.body.tasksList);
 
     if (req.files.image) {
         project.image = req.files.image[0];
@@ -224,10 +230,36 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         }
     }
 
+    if (req.files.imagesExtra) {
+        if (project.imagesExtra && project.imagesExtra.length > 0) {
+            project.imagesExtra.forEach((image) => {
+                fs.unlink(image.path, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            });
+        }
+        project.imagesExtra = req.files.imagesExtra;
+    } else {
+        if (project.imagesExtra && project.imagesExtra.length > 0) {
+            project.imagesExtra.forEach((image) => {
+                fs.unlink(image.path, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            });
+            project.imagesExtra = null;
+        }
+    }
+
     project.name = name;
     project.color = color;
     project.about = about;
     project.task = task;
+    project.taskDescr = taskDescr;
+    project.tasksList = tasksList;
     project.approach = approach;
     project.body = body;
     project.result = result;
@@ -250,7 +282,7 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth } = project;
+    const { image, bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     if (image) {
@@ -270,6 +302,12 @@ router.delete("/projects/:id", async (req, res) => {
     }
     if (bannerFifth) {
         fs.unlinkSync(`uploads/${bannerFifth.filename}`);
+    }
+
+    if (imagesExtra) {
+        imagesExtra.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
     }
 
     res.json({ success: true });

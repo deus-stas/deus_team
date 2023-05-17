@@ -1,16 +1,35 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 
 import ProjectNext from '../projects/projectNext/ProjectNext';
 import Cta from '../../cta/Cta';
 import Social from '../../sectionSocial/SectionSocial';
-import {Icon} from '../../icon/Icon'
+import { Icon } from '../../icon/Icon'
 
 import './services.scss'
 
 import person from '../../../img/discuss-btn.png';
 import review from '../../../img/review.png';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const Services = () => {
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/services/`)
+            .then((response) => {
+                setServices(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <main className="services">
 
@@ -29,54 +48,25 @@ const Services = () => {
                             </div>
                         </div>
                         <div className="services-s__list">
-                            <Link to="/services/detail" className="services-s__item">
-                                <div className="services-s__name">Фирменный стиль</div>
-                                <div className="services-s__descr">Гайдбуки • Айдентика • Видео-ролики • Иллюстрации</div>
-                                <div className="services-s__icon">
-                                    <Icon icon="corner-arr"/>
-                                </div>
-                            </Link>
-                            <Link to="/services/detail" className="services-s__item">
-                                <div className="services-s__name">Сайты и сервисы</div>
-                                <div className="services-s__descr">Корпоративные • Лендинги • Интернет-магазины • Сервисы</div>
-                                <div className="services-s__icon">
-                                    <Icon icon="corner-arr"/>
-                                </div>
-                            </Link>
-                            <Link to="/services/detail" className="services-s__item">
-                                <div className="services-s__name">SEO-продвижение</div>
-                                <div className="services-s__descr">Вырастим органический трафик на сайт</div>
-                                <div className="services-s__icon">
-                                    <Icon icon="corner-arr"/>
-                                </div>
-                            </Link>
-                            <Link to="/services/detail" className="services-s__item">
-                                <div className="services-s__name">Лидогенерация</div>
-                                <div className="services-s__descr">Таргетированная реклама • Контекстная реклама</div>
-                                <div className="services-s__icon">
-                                    <Icon icon="corner-arr"/>
-                                </div>
-                            </Link>
-                            <Link to="/services/detail" className="services-s__item">
-                                <div className="services-s__name">Контент-маркетинг</div>
-                                <div className="services-s__descr">Создание разного вида контента</div>
-                                <div className="services-s__icon">
-                                    <Icon icon="corner-arr"/>
-                                </div>
-                            </Link>
-                            <Link to="/services/detail" className="services-s__item">
-                                <div className="services-s__name">Поддержка и развитие</div>
-                                <div className="services-s__descr">От мелки до крупных задач</div>
-                                <div className="services-s__icon">
-                                    <Icon icon="corner-arr"/>
-                                </div>
-                            </Link>
+                            {
+                                services ? services.map(service => {
+                                    return (
+                                        <Link to={`/services/${service.id}`} className="services-s__item" key={service.id}>
+                                            <div className="services-s__name">{service.name}</div>
+                                            <div className="services-s__descr">{service.descrTotal}</div>
+                                            <div className="services-s__icon">
+                                                <Icon icon="corner-arr" />
+                                            </div>
+                                        </Link>
+                                    )
+                                }) : null
+                            }
                         </div>
                     </div>
                 </div>
             </section>
 
-            <ProjectNext />
+            <ProjectNext last={true} />
 
             <section className="services-reviews">
                 <div className="container">
@@ -135,9 +125,9 @@ const Services = () => {
                 </div>
             </section>
 
-            <Cta/>
+            <Cta />
 
-            <Social/>
+            <Social />
 
         </main>
     )

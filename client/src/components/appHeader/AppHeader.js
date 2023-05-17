@@ -20,11 +20,17 @@ const AppHeader = () => {
                         </Link>
                         <nav className="header__nav">
                             <ul className="header__nav-list">
-                                <li className="header__nav-item">
+                                <li className="header__nav-item ">
                                     <NavLink to="/projects">Проекты</NavLink>
                                 </li>
                                 <li className="header__nav-item hidden-mobile">
+                                    <NavLink to="/services">Услуги</NavLink>
+                                </li>
+                                <li className="header__nav-item hidden-mobile">
                                     <NavLink to="/agency">Агентство</NavLink>
+                                </li>
+                                <li className="header__nav-item hidden-mobile">
+                                    <NavLink to="/news">Новости</NavLink>
                                 </li>
                                 <li className="header__nav-item hidden-mobile">
                                     <NavLink to="/contacts">Контакты</NavLink>
