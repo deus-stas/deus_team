@@ -20,6 +20,7 @@ const vacanciesRoutes = require('./routes/api/vacancies');
 const showreelsRoutes = require('./routes/api/showreels');
 const subServicesRoutes = require('./routes/api/subServices');
 const servicesRoutes = require('./routes/api/services');
+const reviewsRoutes = require('./routes/api/reviews');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api', vacanciesRoutes);
 app.use('/api', showreelsRoutes);
 app.use('/api', subServicesRoutes);
 app.use('/api', servicesRoutes);
+app.use('/api', reviewsRoutes);
 
 
 if (process.env.NODE_ENV === 'production') {

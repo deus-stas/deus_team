@@ -31,6 +31,7 @@ const ServicesDetail = () => {
     const { id } = useParams();
     const [service, setService] = useState([]);
     const [projects, setProjects] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/services/${id}`)
@@ -88,6 +89,51 @@ const ServicesDetail = () => {
             .then((response) => {
                 setProjects(response.data);
                 console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/reviews/`)
+            .then((response) => {
+                const reviewPromises = response.data.map((review) => {
+                    const projectPromise = axios.get(`${apiUrl}/api/projects/${review.reviewProject}`)
+                        .then((projectResponse) => {
+                            review.reviewProject = projectResponse.data;
+                            return review;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return review;
+                        });
+
+                    const servicePromise = axios.get(`${apiUrl}/api/services/${review.reviewService}`)
+                        .then((serviceResponse) => {
+                            review.reviewService = serviceResponse.data;
+                            return review;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return review;
+                        });
+
+                    return Promise.all([projectPromise, servicePromise])
+                        .then((results) => {
+                            const updatedReview = results[0];
+                            return updatedReview;
+                        });
+                });
+
+                Promise.all(reviewPromises)
+                    .then((reviewsAll) => {
+                        setReviews(reviewsAll);
+                        console.log(reviewsAll);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             })
             .catch((error) => {
                 console.log(error);
@@ -338,39 +384,38 @@ const ServicesDetail = () => {
                     : null
             }
 
-            <section className="service-review">
-                <div className="container">
-                    <h2 className="heading-secondary">Отзывы</h2>
-                    <div className="service-review__wrap">
-                        <div className="service-review__item" style={{ background: 'linear-gradient(252.85deg, #5740F3 0%, #5A42F5 100%)' }}>
-                            <div className="service-review__content">
-                                <div className="service-review__person">
-                                    <img src={choiceReview} alt="Игорь Кулик" className="service-review__person-img" />
-                                    <div className="service-review__person-p">
-                                        Игорь Кулик, <span>Генеральный директор Choice Estate</span>
-                                    </div>
-                                </div>
-                                <div className="service-review__descr">Агентство элитной недвижимости Choice Estate оказывает услуги по подбору, оценке и продаже домов с 2017 года. Специалисты компании помогают продать не только... </div>
-                                <Link className="btn --white">Смотреть проект</Link>
+            {
+                reviews ?
+                    <section className="service-review">
+                        <div className="container">
+                            <h2 className="heading-secondary">Отзывы</h2>
+                            <div className="service-review__wrap">
+                                {
+                                    reviews.map(review => {
+                                        if (review.reviewService.id === service.id) {
+                                            return (
+                                                <div className="service-review__item" style={{ background: review.reviewProject.color }} key={review.id}>
+                                                    <div className="service-review__content">
+                                                        <div className="service-review__person">
+                                                            <img src={`${apiUrl}/uploads/${review.reviewImage.filename}`} alt={review.reviewName} className="service-review__person-img" />
+                                                            <div className="service-review__person-p">
+                                                                {review.reviewName}, <span>{review.reviewPost}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="service-review__descr">{review.review} </div>
+                                                        <Link to={`/projects/${review.reviewProject.id}`} className="btn --white">Смотреть проект</Link>
+                                                    </div>
+                                                    <img src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" />
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                }
                             </div>
-                            <img src={projectImg} alt="Touch Money" className="service-review__bg" />
                         </div>
-                        <div className="service-review__item" style={{ background: 'linear-gradient(252.85deg, #5740F3 0%, #5A42F5 100%)' }}>
-                            <div className="service-review__content">
-                                <div className="service-review__person">
-                                    <img src={choiceReview} alt="Игорь Кулик" className="service-review__person-img" />
-                                    <div className="service-review__person-p">
-                                        Игорь Кулик, <span>Генеральный директор Choice Estate</span>
-                                    </div>
-                                </div>
-                                <div className="service-review__descr">Агентство элитной недвижимости Choice Estate оказывает услуги по подбору, оценке и продаже домов с 2017 года. Специалисты компании помогают продать не только... </div>
-                                <Link className="btn --white">Смотреть проект</Link>
-                            </div>
-                            <img src={projectImg} alt="Touch Money" className="service-review__bg" />
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
+                    : null
+            }
 
             <Cta />
 

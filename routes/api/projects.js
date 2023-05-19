@@ -37,7 +37,7 @@ router.get('/projects', async (req, res) => {
 });
 
 router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }, { name: 'imagesExtra' }]), async (req, res) => {
-    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType } = req.body;
+    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
 
     console.log(tasksList);
@@ -76,6 +76,11 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
         image,
         color,
         about,
+        bannerFirstVideo,
+        bannerSecondVideo,
+        bannerThirdVideo,
+        bannerFourthVideo,
+        bannerFifthVideo,
         bannerFirst,
         bannerSecond,
         bannerThird,
@@ -121,8 +126,9 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         return res.status(404).json({ success: false, message: "Project not found" });
     }
     console.log(req.body);
+    console.log(req.files);
 
-    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType } = req.body;
+    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
 
     const tasksList = JSON.parse(req.body.tasksList);
 
@@ -140,7 +146,7 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         }
         project.bannerFirst = req.files.bannerFirst[0];
     } else {
-        if (project.bannerFirst && project.bannerFirst.path) {
+        if (project.bannerFirst && project.bannerFirst.path && req.body.bannerFirst !== 'true') {
             fs.unlink(project.bannerFirst.path, (err) => {
                 if (err) {
                     console.error(err);
@@ -160,7 +166,7 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         }
         project.bannerSecond = req.files.bannerSecond[0];
     } else {
-        if (project.bannerSecond && project.bannerSecond.path) {
+        if (project.bannerSecond && project.bannerSecond.path && req.body.bannerSecond !== 'true') {
             fs.unlink(project.bannerSecond.path, (err) => {
                 if (err) {
                     console.error(err);
@@ -180,7 +186,7 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         }
         project.bannerThird = req.files.bannerThird[0];
     } else {
-        if (project.bannerThird && project.bannerThird.path) {
+        if (project.bannerThird && project.bannerThird.path && req.body.bannerThird !== 'true') {
             fs.unlink(project.bannerThird.path, (err) => {
                 if (err) {
                     console.error(err);
@@ -200,7 +206,7 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         }
         project.bannerFourth = req.files.bannerFourth[0];
     } else {
-        if (project.bannerFourth && project.bannerFourth.path) {
+        if (project.bannerFourth && project.bannerFourth.path && req.body.bannerFourth !== 'true') {
             fs.unlink(project.bannerFourth.path, (err) => {
                 if (err) {
                     console.error(err);
@@ -220,7 +226,7 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         }
         project.bannerFifth = req.files.bannerFifth[0];
     } else {
-        if (project.bannerFifth && project.bannerFifth.path) {
+        if (project.bannerFifth && project.bannerFifth.path && req.body.bannerFifth !== 'true') {
             fs.unlink(project.bannerFifth.path, (err) => {
                 if (err) {
                     console.error(err);
@@ -258,6 +264,11 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
     project.color = color;
     project.about = about;
     project.task = task;
+    project.bannerFirstVideo = bannerFirstVideo;
+    project.bannerSecondVideo = bannerSecondVideo;
+    project.bannerThirdVideo = bannerThirdVideo;
+    project.bannerFourthVideo = bannerFourthVideo;
+    project.bannerFifthVideo = bannerFifthVideo;
     project.taskDescr = taskDescr;
     project.tasksList = tasksList;
     project.approach = approach;

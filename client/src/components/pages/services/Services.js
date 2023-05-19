@@ -10,7 +10,6 @@ import { Icon } from '../../icon/Icon'
 import './services.scss'
 
 import person from '../../../img/discuss-btn.png';
-import review from '../../../img/review.png';
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -18,6 +17,9 @@ const apiUrl = process.env.NODE_ENV === 'production'
 
 const Services = () => {
     const [services, setServices] = useState([]);
+    const [reviews, setReviews] = useState([]);
+
+    const [openImage, setOpenImage] = useState(null);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/services/`)
@@ -29,6 +31,60 @@ const Services = () => {
                 console.log(error);
             });
     }, []);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/reviews/`)
+            .then((response) => {
+                const reviewPromises = response.data.map((review) => {
+                    const projectPromise = axios.get(`${apiUrl}/api/projects/${review.reviewProject}`)
+                        .then((projectResponse) => {
+                            review.reviewProject = projectResponse.data;
+                            return review;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return review;
+                        });
+
+                    const servicePromise = axios.get(`${apiUrl}/api/services/${review.reviewService}`)
+                        .then((serviceResponse) => {
+                            review.reviewService = serviceResponse.data;
+                            return review;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return review;
+                        });
+
+                    return Promise.all([projectPromise, servicePromise])
+                        .then((results) => {
+                            const updatedReview = results[0];
+                            return updatedReview;
+                        });
+                });
+
+                Promise.all(reviewPromises)
+                    .then((reviewsAll) => {
+                        setReviews(reviewsAll);
+                        console.log(reviewsAll);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+
+    const handleImageClick = (filename) => {
+        setOpenImage(filename);
+    };
+
+    const handleCloseImage = () => {
+        setOpenImage(null);
+    };
 
     return (
         <main className="services">
@@ -72,55 +128,28 @@ const Services = () => {
                 <div className="container">
                     <h2 className="heading-secondary">Отзывы</h2>
                     <div className="services-reviews__wrap">
-                        <Link to="/" className="services-reviews__item">
-                            <div className="services-reviews__name">Ростелеком</div>
-                            <div className="services-reviews__s">Разработка сайта</div>
-                            <div className="services-reviews__type">Корпоративный сайт</div>
-                            <div className="services-reviews__file">pdf</div>
-                            <img src={review} alt="Ростелеком" className="services-reviews__r" />
-                        </Link>
-                        <Link to="/" className="services-reviews__item">
-                            <div className="services-reviews__name">Ростелеком</div>
-                            <div className="services-reviews__s">Разработка сайта</div>
-                            <div className="services-reviews__type">Корпоративный сайт</div>
-                            <div className="services-reviews__file">pdf</div>
-                            <img src={review} alt="Ростелеком" className="services-reviews__r" />
-                        </Link>
-                        <Link to="/" className="services-reviews__item">
-                            <div className="services-reviews__name">Ростелеком</div>
-                            <div className="services-reviews__s">Разработка сайта</div>
-                            <div className="services-reviews__type">Корпоративный сайт</div>
-                            <div className="services-reviews__file">pdf</div>
-                            <img src={review} alt="Ростелеком" className="services-reviews__r" />
-                        </Link>
-                        <Link to="/" className="services-reviews__item">
-                            <div className="services-reviews__name">Ростелеком</div>
-                            <div className="services-reviews__s">Разработка сайта</div>
-                            <div className="services-reviews__type">Корпоративный сайт</div>
-                            <div className="services-reviews__file">pdf</div>
-                            <img src={review} alt="Ростелеком" className="services-reviews__r" />
-                        </Link>
-                        <Link to="/" className="services-reviews__item">
-                            <div className="services-reviews__name">Ростелеком</div>
-                            <div className="services-reviews__s">Разработка сайта</div>
-                            <div className="services-reviews__type">Корпоративный сайт</div>
-                            <div className="services-reviews__file">pdf</div>
-                            <img src={review} alt="Ростелеком" className="services-reviews__r" />
-                        </Link>
-                        <Link to="/" className="services-reviews__item">
-                            <div className="services-reviews__name">Ростелеком</div>
-                            <div className="services-reviews__s">Разработка сайта</div>
-                            <div className="services-reviews__type">Корпоративный сайт</div>
-                            <div className="services-reviews__file">pdf</div>
-                            <img src={review} alt="Ростелеком" className="services-reviews__r" />
-                        </Link>
-                        <Link to="/" className="services-reviews__item">
-                            <div className="services-reviews__name">Ростелеком</div>
-                            <div className="services-reviews__s">Разработка сайта</div>
-                            <div className="services-reviews__type">Корпоративный сайт</div>
-                            <div className="services-reviews__file">pdf</div>
-                            <img src={review} alt="Ростелеком" className="services-reviews__r" />
-                        </Link>
+                        {reviews ? reviews.map(review => {
+                            return (
+                                <div to="/" className="services-reviews__item" onClick={() => handleImageClick(review.reviewFile.filename)} key={review.id}>
+                                    <div className="services-reviews__name">{review.name}</div>
+                                    <div className="services-reviews__s">{review.service}</div>
+                                    <div className="services-reviews__type">{review.type}</div>
+                                    <div className="services-reviews__file">{review.reviewFile.mimetype}</div>
+                                    <img src={`${apiUrl}/uploads/${review.reviewFile.filename}`} alt={review.name} className="services-reviews__r" />
+                                </div>
+                            )
+                        }) : null}
+
+                        {openImage && (
+                            <div className="modal">
+                                <div className="modal-content">
+                                    <img src={`${apiUrl}/uploads/${openImage}`} alt="Отзыв" />
+                                    <button onClick={handleCloseImage}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 24 24"><path d="M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

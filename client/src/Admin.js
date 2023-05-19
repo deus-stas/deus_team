@@ -17,6 +17,7 @@ import { VacanciesList, VacanciesEdit, VacanciesCreate } from './admin/resources
 import { ShowreelsList, ShowreelsEdit, ShowreelsCreate } from './admin/resources/Showreels';
 import { ServicesList, ServicesEdit, ServicesCreate } from './admin/resources/Services';
 import { SubServicesList, SubServicesEdit, SubServicesCreate } from './admin/resources/SubServices';
+import { ReviewsList, ReviewsEdit, ReviewsCreate } from './admin/resources/Reviews';
 import dataProvider from './admin/dataProvider';
 import { theme } from "./admin/theme";
 
@@ -39,6 +40,7 @@ const AdminPage = () => (
     <Resource name="showreels" list={ShowreelsList} create={ShowreelsCreate} edit={ShowreelsEdit} options={{ label: 'Шоурилы' }} />
     <Resource name="services" list={ServicesList} create={ServicesCreate} edit={ServicesEdit} options={{ label: 'Услуги' }} />
     <Resource name="subServices" list={SubServicesList} create={SubServicesCreate} edit={SubServicesEdit} options={{ label: 'Услуги(для деталки)' }} />
+    <Resource name="reviews" list={ReviewsList} create={ReviewsCreate} edit={ReviewsEdit} options={{ label: 'Отзывы' }} />
   </Admin >
 );
 

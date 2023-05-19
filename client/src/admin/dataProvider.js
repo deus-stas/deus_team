@@ -73,6 +73,8 @@ const dataProvider = {
       "bannerFourth",
       "bannerFifth",
       "video",
+      "reviewFile",
+      "reviewImage"
     ];
     let hasImage = false;
     const extraImages = params.data.imagesExtra
@@ -103,7 +105,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     const formData = new FormData();
-    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video'];
+    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage'];
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
     const extraImages = params.data.imagesExtra
@@ -112,8 +114,13 @@ const dataProvider = {
 
     for (const [key, value] of Object.entries(params.data)) {
       if (images.includes(key) && value) {
+        console.log(key, value);
         hasImage = true;
-        formData.append(key, value.rawFile);
+        if(value.rawFile) {
+          formData.append(key, value.rawFile);
+        } else {
+          formData.append(key, true);
+        }
       } else {
         if (key === "awardProject") {
           value.forEach((item, index) => {

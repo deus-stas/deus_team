@@ -323,9 +323,17 @@
         &.--extra {
             margin: 5rem 0;
         }
-        img, video {
+
+        img,
+        video {
             display: block;
             width: 100%;
+        }
+
+        iframe {
+            height: auto;
+            width: 100%;
+            aspect-ratio: 1/0.5;
         }
     }
 }

@@ -10,7 +10,6 @@ const apiUrl = process.env.NODE_ENV === 'production'
     : 'http://localhost:5000';
 
 const ProjectNext = (props) => {
-    console.log(props);
     const { id } = useParams();
 
     const [project, setProject] = useState([]);

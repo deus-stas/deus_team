@@ -80,18 +80,24 @@ const ProjectDetail = () => {
                 </div>
             </section>
 
-            {detail.bannerFirst ?
-                <section className="project-banner">
-                    {detail.bannerFirst.mimetype !== 'video/mp4'
-                        ?
-                        <img src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
-                        :
-                        <video autoPlay loop muted playsInline>
-                            <source src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                        </video>
-                    }
-                </section>
-                : null}
+            {
+                detail.bannerFirstVideo && detail.bannerFirstVideo !== 'undefined' && detail.bannerFirstVideo !== 'null' ?
+                    <section className="project-banner">
+                        <div dangerouslySetInnerHTML={{ __html: detail.bannerFirstVideo }}></div>
+                    </section>
+                    : detail.bannerFirst ?
+                        <section className="project-banner">
+                            {detail.bannerFirst.mimetype !== 'video/mp4'
+                                ?
+                                <img src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
+                                :
+                                <video autoPlay loop muted playsInline>
+                                    <source src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                </video>
+                            }
+                        </section>
+                        : null
+            }
 
             {detail.task !== 'undefined' && detail.taskPersons ?
                 <section className="project-results">
@@ -115,18 +121,24 @@ const ProjectDetail = () => {
                 </section>
                 : null}
 
-            {detail.bannerSecond ?
-                <section className="project-banner">
-                    {detail.bannerSecond.mimetype !== 'video/mp4'
-                        ?
-                        <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
-                        :
-                        <video autoPlay loop muted playsInline>
-                            <source src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                        </video>
-                    }
-                </section>
-                : null}
+            {
+                detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
+                    <section className="project-banner">
+                        <div dangerouslySetInnerHTML={{ __html: detail.bannerSecondVideo }}></div>
+                    </section>
+                    : detail.bannerSecond ?
+                        <section className="project-banner">
+                            {detail.bannerSecond.mimetype !== 'video/mp4'
+                                ?
+                                <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
+                                :
+                                <video autoPlay loop muted playsInline>
+                                    <source src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                </video>
+                            }
+                        </section>
+                        : null
+            }
 
             {detail.approach !== 'undefined' && detail.approachPersons ?
                 <section className="project-results">
@@ -151,18 +163,24 @@ const ProjectDetail = () => {
                 </section>
                 : null}
 
-            {detail.bannerThird ?
-                <section className="project-banner">
-                    {detail.bannerThird.mimetype !== 'video/mp4'
-                        ?
-                        <img src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
-                        :
-                        <video autoPlay loop muted playsInline>
-                            <source src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                        </video>
-                    }
-                </section>
-                : null}
+            {
+                detail.bannerThirdVideo && detail.bannerThirdVideo !== 'undefined' && detail.bannerThirdVideo !== 'null' ?
+                    <section className="project-banner">
+                        <div dangerouslySetInnerHTML={{ __html: detail.bannerThirdVideo }}></div>
+                    </section>
+                    : detail.bannerThird ?
+                        <section className="project-banner">
+                            {detail.bannerThird.mimetype !== 'video/mp4'
+                                ?
+                                <img src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
+                                :
+                                <video autoPlay loop muted playsInline>
+                                    <source src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                </video>
+                            }
+                        </section>
+                        : null
+            }
 
             {detail.body ?
                 <section className="project-results">
@@ -174,18 +192,24 @@ const ProjectDetail = () => {
                 </section>
                 : null}
 
-            {detail.bannerFourth ?
-                <section className="project-banner">
-                    {detail.bannerFourth.mimetype !== 'video/mp4'
-                        ?
-                        <img src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
-                        :
-                        <video autoPlay loop muted playsInline>
-                            <source src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                        </video>
-                    }
-                </section>
-                : null}
+            {
+                detail.bannerFourthVideo && detail.bannerFourthVideo !== 'undefined' && detail.bannerFourthVideo !== 'null' ?
+                    <section className="project-banner">
+                        <div dangerouslySetInnerHTML={{ __html: detail.bannerFourthVideo }}></div>
+                    </section>
+                    : detail.bannerFourth ?
+                        <section className="project-banner">
+                            {detail.bannerFourth.mimetype !== 'video/mp4'
+                                ?
+                                <img src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
+                                :
+                                <video autoPlay loop muted playsInline>
+                                    <source src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                </video>
+                            }
+                        </section>
+                        : null
+            }
 
             {detail.result !== 'undefined' && detail.resultPersons ?
                 <section className="project-results">
@@ -209,19 +233,24 @@ const ProjectDetail = () => {
                 </section>
                 : null}
 
-            {detail.bannerFifth ?
-                <section className="project-banner">
-                    {detail.bannerFifth.mimetype !== 'video/mp4'
-                        ?
-                        <img src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
-                        :
-                        <video autoPlay loop muted playsInline>
-                            <source src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                        </video>
-                    }
-
-                </section>
-                : null}
+            {
+                detail.bannerFifthVideo && detail.bannerFifthVideo !== 'undefined' && detail.bannerFifthVideo !== 'null' ?
+                    <section className="project-banner">
+                        <div dangerouslySetInnerHTML={{ __html: detail.bannerFifthVideo }}></div>
+                    </section>
+                    : detail.bannerFifth ?
+                        <section className="project-banner">
+                            {detail.bannerFifth.mimetype !== 'video/mp4'
+                                ?
+                                <img src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
+                                :
+                                <video autoPlay loop muted playsInline>
+                                    <source src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                </video>
+                            }
+                        </section>
+                        : null
+            }
 
             {detail.imagesExtra ?
                 detail.imagesExtra.map((image, index) => {
@@ -233,41 +262,6 @@ const ProjectDetail = () => {
                 })
                 : null}
 
-            {/* <section className="project-goals">
-                <div className="container">
-                    <div className="project-goals__wrap">
-                        <h2 className="heading-secondary">Цели и задачи</h2>
-                        <div className="project-goals__content">
-                            <div className="project-goals__text">Клиент обратился к нам с задачей продвижения своих продуктов, расширения поисковой выдачи, увеличения охвата поисковых запросов. Сложность работы заключалась в том, что мы не имели доступа к технической части сайта и все работы осуществлялись силами клиента после предварительного согласования.</div>
-                            <div className="quote">
-                                <div className="quote__box">
-                                    <div className="quote__person">
-                                        <img src={person} alt="Брижань Вячеслав" className="quote__img" />
-                                        <div className="quote__person-text">
-                                            Брижань Вячеслав, <span>Директор по развитию @ DEUS</span>
-                                        </div>
-                                    </div>
-                                    <div className="quote__q">Главная цель проекта — получить максимальный охват поисковых запросов, так или иначе связанных с информационной безопасностью.</div>
-                                </div>
-                            </div>
-                            <div className="project-goals__tasks">
-                                <div className="project-goals__tasks-item">
-                                    <Icon icon="task" />
-                                    Максимально охватить поисковую выдачу в области кибербезопасности.
-                                </div>
-                                <div className="project-goals__tasks-item">
-                                    <Icon icon="task" />
-                                    Увеличить узнаваемость продуктов и решений компании.
-                                </div>
-                                <div className="project-goals__tasks-item">
-                                    <Icon icon="task" />
-                                    Увеличить узнаваемость бренда на российском рынке.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
 
             {/* <section className="project-steps">
                 <div className="container">

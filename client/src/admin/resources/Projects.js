@@ -59,6 +59,7 @@ export const ProjectsCreate = (props) => (
             <FileInput source="bannerFirst" label="Баннер">
                 <FileField source="src" title="title" />
             </FileInput>
+            <TextInput source="bannerFirstVideo" label="Видео для баннера(url)" fullWidth />
             <TextInput source="taskDescr" label="Описание для блока Цели и задачи" fullWidth />
             <TextInput source="task" label="Цитата задачи" fullWidth />
             <ReferenceArrayInput source="taskPersons" reference="persons">
@@ -76,6 +77,7 @@ export const ProjectsCreate = (props) => (
             <FileInput source="bannerSecond" label="Баннер">
                 <FileField source="src" title="title" />
             </FileInput>
+                <TextInput source="bannerSecondVideo" label="Видео для баннера(url)" fullWidth />
             <TextInput source="approach" label="Подход" fullWidth />
             <ReferenceArrayInput source="approachPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для подхода" />
@@ -83,10 +85,12 @@ export const ProjectsCreate = (props) => (
             <FileInput source="bannerThird" label="Баннер">
                 <FileField source="src" title="title" />
             </FileInput>
+                <TextInput source="bannerThirdVideo" label="Видео для баннера(url)" fullWidth />
             <RichTextInput source="body" fullWidth />
             <FileInput source="bannerFourth" label="Баннер">
                 <FileField source="src" title="title" />
             </FileInput>
+                <TextInput source="bannerFourthVideo" label="Видео для баннера(url)" fullWidth />
             <TextInput source="result" label="Результаты" fullWidth />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
@@ -94,6 +98,7 @@ export const ProjectsCreate = (props) => (
             <FileInput source="bannerFifth" label="Баннер">
                 <FileField source="src" title="title" />
             </FileInput>
+                <TextInput source="bannerFifthVideo" label="Видео для баннера(url)" fullWidth />
             <ArrayInput source="imagesExtra" label="Дополнительные изображения">
                 <SimpleFormIterator>
                     <ImageInput source="imageI" label="Изображение" accept="image/*">
@@ -124,6 +129,7 @@ export const ProjectsEdit = (props) => (
             <FileInput source="bannerFirst" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
+            <TextInput source="bannerFirstVideo" label="Видео для баннера(url)" fullWidth />
             <TextInput source="taskDescr" label="Описание для блока Цели и задачи" fullWidth />
             <TextInput source="task" label="Задача" fullWidth />
             <ReferenceArrayInput source="taskPersons" reference="persons">
@@ -140,6 +146,7 @@ export const ProjectsEdit = (props) => (
             <FileInput source="bannerSecond" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
+            <TextInput source="bannerSecondVideo" label="Видео для баннера(url)" fullWidth />
             <TextInput source="approach" label="Подход" fullWidth />
             <ReferenceArrayInput source="approachPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для подхода" />
@@ -147,10 +154,12 @@ export const ProjectsEdit = (props) => (
             <FileInput source="bannerThird" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
+            <TextInput source="bannerThirdVideo" label="Видео для баннера(url)" fullWidth />
             <RichTextInput source="body" fullWidth />
             <FileInput source="bannerFourth" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
+            <TextInput source="bannerFourthVideo" label="Видео для баннера(url)" fullWidth />
             <TextInput source="result" label="Результаты" fullWidth />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
@@ -158,6 +167,7 @@ export const ProjectsEdit = (props) => (
             <FileInput source="bannerFifth" label="Баннер">
                 <FilenameField source="src" title="title" />
             </FileInput>
+            <TextInput source="bannerFifthVideo" label="Видео для баннера(url)" fullWidth />
             <ArrayInput source="imagesExtra" label="Дополнительные изображения(если редактируется одна картинка, то нужно обновить/заменить и другую)">
                 <SimpleFormIterator>
                     <ImageInput source="imageI" label="Изображение" accept="image/*">
