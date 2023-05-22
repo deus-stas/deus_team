@@ -37,7 +37,7 @@ router.get('/projects', async (req, res) => {
 });
 
 router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }, { name: 'imagesExtra' }]), async (req, res) => {
-    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
 
     console.log(tasksList);
@@ -74,6 +74,7 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
     const projects = new Projects({
         name,
         image,
+        mainVideo,
         color,
         about,
         bannerFirstVideo,
@@ -128,7 +129,7 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
     console.log(req.body);
     console.log(req.files);
 
-    const { name, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
 
     const tasksList = JSON.parse(req.body.tasksList);
 
@@ -261,6 +262,7 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
     }
 
     project.name = name;
+    project.mainVideo = mainVideo;
     project.color = color;
     project.about = about;
     project.task = task;

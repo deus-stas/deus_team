@@ -107,7 +107,6 @@ const Projects = () => {
                         <h1 className="heading-primary">Наши проекты</h1>
                         {optionsTheme && optionsType ?
                             <div className="projects__filters">
-                                {console.log(optionsTheme, optionsType)}
                                 <Select classNames={classes} options={optionsType} styles={colourStyles} onChange={handleTypeChange} placeholder="Тип проекта" />
                                 <Select classNames={classes} options={optionsTheme} styles={colourStyles} onChange={handleThemeChange} placeholder="Тематика проекта" />
                             </div>
@@ -118,7 +117,14 @@ const Projects = () => {
                             return (
                                 <Link to={`/projects/${project.id}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                     <div className="projects__item-img-wrap">
-                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                        {
+                                            project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                ?
+                                                <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
+                                                :
+                                                <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                        }
+
                                     </div>
                                     <div className="projects__item-name">{project.name}</div>
                                 </Link>

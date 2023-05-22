@@ -303,7 +303,14 @@ const ServicesDetail = () => {
                                     return (
                                         <Link to={`/projects/${project.id}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                             <div className="projects__item-img-wrap">
-                                                <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                                {
+                                                    project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                        ?
+                                                        <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
+                                                        :
+                                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                                }
+
                                             </div>
                                             <div className="projects__item-name">{project.name}</div>
                                         </Link>
@@ -397,7 +404,10 @@ const ServicesDetail = () => {
                                                 <div className="service-review__item" style={{ background: review.reviewProject.color }} key={review.id}>
                                                     <div className="service-review__content">
                                                         <div className="service-review__person">
-                                                            <img src={`${apiUrl}/uploads/${review.reviewImage.filename}`} alt={review.reviewName} className="service-review__person-img" />
+                                                            {
+                                                                review.reviewImage ? <img src={`${apiUrl}/uploads/${review.reviewImage.filename}`} alt={review.reviewName} className="service-review__person-img" /> : null
+                                                            }
+                                                            
                                                             <div className="service-review__person-p">
                                                                 {review.reviewName}, <span>{review.reviewPost}</span>
                                                             </div>
@@ -405,7 +415,7 @@ const ServicesDetail = () => {
                                                         <div className="service-review__descr">{review.review} </div>
                                                         <Link to={`/projects/${review.reviewProject.id}`} className="btn --white">Смотреть проект</Link>
                                                     </div>
-                                                    <img src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" />
+                                                   {review.reviewProject.image ? <img src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" /> : null} 
                                                 </div>
                                             )
                                         }

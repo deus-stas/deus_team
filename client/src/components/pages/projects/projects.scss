@@ -132,6 +132,14 @@
         &-img-wrap {
             overflow: hidden;
             margin-bottom: 2rem;
+
+            iframe,
+            img {
+                width: 100%;
+                display: block;
+                aspect-ratio: 1/0.55;
+                height: auto;
+            }
         }
 
         &-img {

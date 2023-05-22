@@ -126,7 +126,7 @@ const Agency = () => {
 
             <section className="agency-about">
                 <div className="container">
-                    <h2 className="heading-secondary">Об агенстве</h2>
+                    <h2 className="heading-secondary">Об агентстве</h2>
                     <div className="agency-about__wrap">
                         <div className="agency-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса</div>
                         <div className="agency-about__adv">
@@ -205,7 +205,7 @@ const Agency = () => {
                     <div className="container">
                         <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
                             <TabList className="agency-benefits__info">
-                                <h2 className="heading-secondary">Награды</h2>
+                                <h2 className="heading-secondary">Рейтинги</h2>
                                 <div className="agency-benefits__info-wrap">
                                     {
                                         raitings.map(raiting => {
@@ -229,8 +229,8 @@ const Agency = () => {
                                                         raiting.raitingProject.map((project, i) => {
                                                             return (
                                                                 <div className="agency-benefits__item" key={i}>
-                                                                    <div className="agency-benefits__name">{project.raitingName}</div>
-                                                                    <div className="agency-benefits__descr">{project.raitingPlace}</div>
+                                                                    <div className="agency-benefits__name">{project.raitingPlace}</div>
+                                                                    <div className="agency-benefits__descr">{project.raitingName}</div>
                                                                     <div className="agency-benefits__year">{project.raitingYear}</div>
                                                                 </div>
                                                             )

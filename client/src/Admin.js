@@ -19,10 +19,11 @@ import { ServicesList, ServicesEdit, ServicesCreate } from './admin/resources/Se
 import { SubServicesList, SubServicesEdit, SubServicesCreate } from './admin/resources/SubServices';
 import { ReviewsList, ReviewsEdit, ReviewsCreate } from './admin/resources/Reviews';
 import dataProvider from './admin/dataProvider';
+import authProvider from './admin/authProvider';
 import { theme } from "./admin/theme";
 
 const AdminPage = () => (
-  <Admin dataProvider={dataProvider} basename="/admin" theme={theme}>
+  <Admin dataProvider={dataProvider} authProvider={authProvider} basename="/admin" theme={theme}>
     <Resource name="projects" list={ProjectsList} create={ProjectsCreate} edit={ProjectsEdit} options={{ label: 'Проекты' }} />
     <Resource name="news" list={NewsList} create={NewsCreate} edit={NewsEdit} options={{ label: 'Новости' }} />
     <Resource name="working" list={WorkingList} create={WorkingCreate} edit={WorkingEdit} options={{ label: 'В работе' }} />

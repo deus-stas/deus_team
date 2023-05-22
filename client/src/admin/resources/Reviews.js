@@ -72,6 +72,12 @@ export const ReviewsEdit = (props) => (
                 <FilenameField source="src" title="title" />
             </ImageInput>
             <TextInput source="review" label="Отзыв" />
+            <ReferenceArrayInput source="reviewProject" reference="projects">
+                <SelectInput optionText="name" label="Проект" />
+            </ReferenceArrayInput>
+            <ReferenceArrayInput source="reviewService" reference="services">
+                <SelectInput optionText="name" label="Услуга" />
+            </ReferenceArrayInput>
         </SimpleForm>
     </Edit>
 );

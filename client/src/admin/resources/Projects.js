@@ -47,6 +47,7 @@ export const ProjectsCreate = (props) => (
             <ImageInput source="image" label="Главное изображение" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
+            <TextInput source="mainVideo" label="Видео для баннера(url)" fullWidth />
             <ColorInput source="color" label="Цвет проекта" />
             <BooleanInput source="main" label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
             <ReferenceArrayInput source="projectTheme" reference="themes">
@@ -117,6 +118,7 @@ export const ProjectsEdit = (props) => (
             <ImageInput source="image" label="Главное изображение" validate={[required()]} accept="image/*">
                 <FilenameField source="src" title="title" />
             </ImageInput>
+            <TextInput source="mainVideo" label="Видео для баннера(url)" fullWidth />
             <ColorInput source="color" label="Цвет проекта" validate={[required()]} />
             <BooleanInput source="main" label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
             <ReferenceArrayInput source="projectTheme" reference="themes">

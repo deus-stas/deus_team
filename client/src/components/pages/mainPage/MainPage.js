@@ -16,8 +16,8 @@ import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
 
 const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'http://188.120.232.38'
-  : 'http://localhost:5000';
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
 
 
 const colourStyles = {
@@ -207,7 +207,13 @@ const MainPage = () => {
                             return (
                                 <Link to={`/projects/${project.id}`} className="main-projects__item" key={project.id}>
                                     <div className="main-projects__img-wrap">
-                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                        {
+                                            project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                ?
+                                                <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
+                                                :
+                                                <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                        }
                                     </div>
                                     <div className="main-projects__name">{project.name}</div>
                                 </Link>
