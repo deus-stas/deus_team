@@ -150,6 +150,17 @@
             margin-bottom: 2.5rem;
             overflow: hidden;
 
+            p {
+                display: none;
+            }
+
+            iframe {
+                aspect-ratio: 1/.55;
+                display: block;
+                height: auto;
+                width: 100%;
+            }
+
             @include respond(sm) {
                 margin-bottom: 2rem;
             }

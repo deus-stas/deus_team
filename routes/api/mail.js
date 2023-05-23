@@ -23,7 +23,7 @@ router.post('/mail', (req, res) => {
     // настройки электронного письма
     const mailOptions = {
         from: 'Deus<noreply@de-us.ru>',
-        to: 'razinkin.s.v@gmail.com',
+        to: 'stnslvmukhin@gmail.com',
         subject: 'Заполнена форма с сайта Deus',
         text: `Заполнена форма с сайта Deus\nФорма: ${formName}\nИмя: ${name}\nТелефон: ${phone}\nПочта: ${email}\nКомпания: ${company}\nБюджет: ${budget}\nТекст: ${about}\nПортфолио: ${link}
         `,
