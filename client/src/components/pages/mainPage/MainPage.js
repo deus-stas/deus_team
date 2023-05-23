@@ -11,7 +11,6 @@ import Showreel from '../../showreel/Showreel';
 
 import './mainPage.scss';
 
-import serviceImg from '../../../img/service-img.svg';
 import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
 
@@ -57,11 +56,13 @@ const MainPage = () => {
     const [allTags, setAllTags] = useState(new Set());
 
     const [working, setWorking] = useState([]);
+    const [showreels, setShowreels] = useState([]);
 
     const [projects, setProjects] = useState([]);
     const [mainProjects, setMainProjects] = useState([]);
     const [optionsTheme, setOptionsTheme] = useState([]);
     const [optionsType, setOptionsType] = useState([]);
+    const [services, setServices] = useState([]);
 
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
@@ -99,6 +100,28 @@ const MainPage = () => {
         axios.get(`${apiUrl}/api/working/`)
             .then((response) => {
                 setWorking(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/showreels/`)
+            .then((response) => {
+                setShowreels(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/services/`)
+            .then((response) => {
+                setServices(response.data);
                 console.log(response.data);
             })
             .catch((error) => {
@@ -166,6 +189,8 @@ const MainPage = () => {
         return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
             (selectedType ? project.projectType === selectedType.value : true);
     });
+
+    const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
     return (
         <main className="main">
@@ -251,129 +276,36 @@ const MainPage = () => {
                     <div className="main-services__wrap">
                         <div className="main-services__info">
                             <h2 className="heading-secondary">Услуги</h2>
-                            <Showreel />
+                            {
+                                foundShowreel ? <Showreel data={foundShowreel} key={foundShowreel.id} /> : null
+                            }
+
                         </div>
                         <div className="main-services__content">
-                            <div className="main-services__item tab-parent">
-                                <div className="main-services__head" onClick={onAcc}>
-                                    <div className="main-services__num">01</div>
-                                    <div className="main-services__name">Фирменный стиль</div>
-                                    <div className="main-services__btn">
-                                        <Icon icon="arr-acc" />
-                                    </div>
-                                </div>
-                                <div className="main-services__acc">
-                                    <div className="main-services__descr">Наши специалисты предоставят помощь на всех этапах проекта, от совместного формулирования техзадания, до старта проекта.</div>
-                                    <div className="main-services__bot">
-                                        <div className="main-services__gallery">
-                                            <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
-                                            <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
-                                            <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
+                            {services ? services.map((service, index) => {
+                                return (
+                                    <div className="main-services__item tab-parent" key={service.id}>
+                                        <div className="main-services__head" onClick={onAcc}>
+                                            <div className="main-services__num">0{index + 1}</div>
+                                            <div className="main-services__name">{service.name}</div>
+                                            <div className="main-services__btn">
+                                                <Icon icon="arr-acc" />
+                                            </div>
                                         </div>
-                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="main-services__item tab-parent">
-                                <div className="main-services__head" onClick={onAcc}>
-                                    <div className="main-services__num">02</div>
-                                    <div className="main-services__name">Сайты и сервисы</div>
-                                    <div className="main-services__btn">
-                                        <Icon icon="arr-acc" />
-                                    </div>
-                                </div>
-                                <div className="main-services__acc">
-                                    <div className="main-services__descr">Наши специалисты предоставят помощь на всех этапах проекта, от совместного формулирования техзадания, до старта проекта.</div>
-                                    <div className="main-services__bot">
-                                        <div className="main-services__gallery">
-                                            <img src={serviceImg} alt="Сайты и сервисы" className="main-services__img" />
-                                            <img src={serviceImg} alt="Сайты и сервисы" className="main-services__img" />
-                                            <img src={serviceImg} alt="Сайты и сервисы" className="main-services__img" />
+                                        <div className="main-services__acc">
+                                            <div className="main-services__descr">{service.descr}</div>
+                                            <div className="main-services__bot">
+                                                {/* <div className="main-services__gallery">
+                                                <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
+                                                <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
+                                                <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
+                                            </div> */}
+                                                <Link to={`/services/${service.id}`} className="btn --b-orange">Подробнее</Link>
+                                            </div>
                                         </div>
-                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="main-services__item tab-parent">
-                                <div className="main-services__head" onClick={onAcc}>
-                                    <div className="main-services__num">03</div>
-                                    <div className="main-services__name">Контент-маркетинг</div>
-                                    <div className="main-services__btn">
-                                        <Icon icon="arr-acc" />
-                                    </div>
-                                </div>
-                                <div className="main-services__acc">
-                                    <div className="main-services__descr">Наши специалисты предоставят помощь на всех этапах проекта, от совместного формулирования техзадания, до старта проекта.</div>
-                                    <div className="main-services__bot">
-                                        <div className="main-services__gallery">
-                                            <img src={serviceImg} alt="Контент-маркетинг" className="main-services__img" />
-                                            <img src={serviceImg} alt="Контент-маркетинг" className="main-services__img" />
-                                            <img src={serviceImg} alt="Контент-маркетинг" className="main-services__img" />
-                                        </div>
-                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="main-services__item tab-parent">
-                                <div className="main-services__head" onClick={onAcc}>
-                                    <div className="main-services__num">04</div>
-                                    <div className="main-services__name">SEO-продвижение</div>
-                                    <div className="main-services__btn">
-                                        <Icon icon="arr-acc" />
-                                    </div>
-                                </div>
-                                <div className="main-services__acc">
-                                    <div className="main-services__descr">Наши специалисты предоставят помощь на всех этапах проекта, от совместного формулирования техзадания, до старта проекта.</div>
-                                    <div className="main-services__bot">
-                                        <div className="main-services__gallery">
-                                            <img src={serviceImg} alt="SEO-продвижение" className="main-services__img" />
-                                            <img src={serviceImg} alt="SEO-продвижение" className="main-services__img" />
-                                            <img src={serviceImg} alt="SEO-продвижение" className="main-services__img" />
-                                        </div>
-                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="main-services__item tab-parent">
-                                <div className="main-services__head" onClick={onAcc}>
-                                    <div className="main-services__num">05</div>
-                                    <div className="main-services__name">Лидогенерация</div>
-                                    <div className="main-services__btn">
-                                        <Icon icon="arr-acc" />
-                                    </div>
-                                </div>
-                                <div className="main-services__acc">
-                                    <div className="main-services__descr">Наши специалисты предоставят помощь на всех этапах проекта, от совместного формулирования техзадания, до старта проекта.</div>
-                                    <div className="main-services__bot">
-                                        <div className="main-services__gallery">
-                                            <img src={serviceImg} alt="Лидогенерация" className="main-services__img" />
-                                            <img src={serviceImg} alt="Лидогенерация" className="main-services__img" />
-                                            <img src={serviceImg} alt="Лидогенерация" className="main-services__img" />
-                                        </div>
-                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="main-services__item tab-parent">
-                                <div className="main-services__head" onClick={onAcc}>
-                                    <div className="main-services__num">06</div>
-                                    <div className="main-services__name">Поддержка и развитие</div>
-                                    <div className="main-services__btn">
-                                        <Icon icon="arr-acc" />
-                                    </div>
-                                </div>
-                                <div className="main-services__acc">
-                                    <div className="main-services__descr">Наши специалисты предоставят помощь на всех этапах проекта, от совместного формулирования техзадания, до старта проекта.</div>
-                                    <div className="main-services__bot">
-                                        <div className="main-services__gallery">
-                                            <img src={serviceImg} alt="Поддержка и развитие" className="main-services__img" />
-                                            <img src={serviceImg} alt="Поддержка и развитие" className="main-services__img" />
-                                            <img src={serviceImg} alt="Поддержка и развитие" className="main-services__img" />
-                                        </div>
-                                        <Link to="/services/detail" className="btn --b-orange">Подробнее</Link>
-                                    </div>
-                                </div>
-                            </div>
+                                )
+                            }) : null}
                         </div>
                     </div>
                 </div>

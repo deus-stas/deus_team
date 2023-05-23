@@ -21,6 +21,8 @@ const showreelsRoutes = require('./routes/api/showreels');
 const subServicesRoutes = require('./routes/api/subServices');
 const servicesRoutes = require('./routes/api/services');
 const reviewsRoutes = require('./routes/api/reviews');
+const formRoutes = require('./routes/api/form');
+const mailRoutes = require('./routes/api/mail');
 
 const app = express();
 
@@ -49,6 +51,8 @@ app.use('/api', showreelsRoutes);
 app.use('/api', subServicesRoutes);
 app.use('/api', servicesRoutes);
 app.use('/api', reviewsRoutes);
+app.use('/api', formRoutes);
+app.use('/api', mailRoutes);
 
 
 if (process.env.NODE_ENV === 'production') {

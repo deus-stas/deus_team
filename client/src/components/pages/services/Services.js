@@ -154,7 +154,7 @@ const Services = () => {
                 </div>
             </section>
 
-            <Cta />
+            <Cta formName={'project'} />
 
             <Social />
 

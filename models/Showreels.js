@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const showreelsSchema = new Schema({
   name: { type: String, required: true },
   year: { type: String },
+  mainShowreel: { type: Boolean },
   video: { type: Object },
+  videoUrl: { type: String },
 });
 
 showreelsSchema.set('toJSON', { virtuals: true });

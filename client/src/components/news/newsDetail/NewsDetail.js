@@ -41,7 +41,7 @@ const NewsDetail = () => {
     }, [id]);
 
     useEffect(() => {
-        axios.get('${apiUrl}/api/news')
+        axios.get(`${apiUrl}/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
                     return axios.get(`${apiUrl}/api/tags/${news.tags}`)
@@ -116,7 +116,7 @@ const NewsDetail = () => {
                 </div>
             </section>
 
-            <ProjectNext />
+            <ProjectNext last={true} />
 
             <SectionSocial />
 

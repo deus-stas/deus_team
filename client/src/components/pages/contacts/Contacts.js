@@ -36,7 +36,7 @@ const Contacts = () => {
                 </div>
             </section>
 
-            <Cta />
+            <Cta formName={'project'} />
 
             <SectionSocial />
 

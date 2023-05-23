@@ -18,8 +18,6 @@ import "swiper/css";
 import "swiper/css/grid";
 import './agency.scss';
 
-import productVideo from '../../../img/webhands.mp4';
-
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
     : 'http://localhost:5000';
@@ -31,6 +29,8 @@ const Agency = () => {
     const [clients, setClients] = useState([]);
     const [team, setTeam] = useState([]);
     const [vacancies, setVacancies] = useState([]);
+    const [showreels, setShowreels] = useState([]);
+    const [success, setSuccess] = useState(false);
 
     const [current, setCurrent] = useState(4);
     const [total, setTotal] = useState(0);
@@ -83,7 +83,19 @@ const Agency = () => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/vacancies/`)
             .then((response) => {
+                console.log(response.data);
                 setVacancies(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/showreels/`)
+            .then((response) => {
+                setShowreels(response.data);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -110,6 +122,17 @@ const Agency = () => {
 
     const amountSlides = Math.round(clients.length / 3);
 
+    const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
+
+    const sendEmail = async (values) => {
+        try {
+            const response = await axios.post(`${apiUrl}/api/mail`, values);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <main className="agency">
 
@@ -117,11 +140,9 @@ const Agency = () => {
                 <div className="container">
                     <h1 className="heading-primary">Оказываем услуги, которые помогают нашим клиентам расти, открывать новые предприятия и масштабировать свой бизнес в цифровом пространстве.</h1>
                 </div>
-                <Link to="#" className="agency-start__video js-cursor-play">
-                    <video autoPlay loop muted playsInline>
-                        <source src={productVideo} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                    </video>
-                </Link>
+                {
+                    foundShowreel ? <Showreel data={foundShowreel} key={foundShowreel.id} /> : null
+                }
             </section>
 
             <section className="agency-about">
@@ -146,8 +167,11 @@ const Agency = () => {
                         <Link className="btn --circle --orange">Презентация агентства</Link>
                     </div>
                     <div className="agency-about__showreels">
-                        <Showreel />
-                        <Showreel />
+                        {
+                            showreels ? showreels.map(showreel => {
+                                return <Showreel data={showreel} key={showreel.id} />
+                            }) : null
+                        }
                     </div>
                 </div>
             </section>
@@ -338,7 +362,7 @@ const Agency = () => {
                         <div className="agency-team__content">
                             <h2 className="heading-secondary">Ищем таланты</h2>
                             {
-                                vacancies ?
+                                vacancies.length ?
                                     <div className="agency-team__talent">
                                         <div className="agency-team__talent-wrap">
 
@@ -357,7 +381,7 @@ const Agency = () => {
                                     </div>
                                     : <div className="agency-team__feedback">
                                         <Formik
-                                            initialValues={{ name: '', link: '', phone: '', email: '', about: '', file: '' }}
+                                            initialValues={{ name: '', link: '', phone: '', email: '', about: '', file: '', formName: 'Ищем таланты' }}
                                             validate={values => {
                                                 const errors = {};
                                                 if (!values.name || values.name.length < 2) {
@@ -380,10 +404,26 @@ const Agency = () => {
                                             onSubmit={(values, { setSubmitting, resetForm }) => {
                                                 setTimeout(() => {
                                                     console.log(values);
-                                                    alert(JSON.stringify(values, null, 2));
+                                                    sendEmail(values);
+                                                    setSuccess(true);
+                                                    const formData = new FormData();
+                                                    for (const [key, value] of Object.entries(values)) {
+                                                        formData.append(key, value);
+                                                    }
+
+                                                    axios.post(`${apiUrl}/api/form/`, formData)
+                                                        .then((response) => {
+                                                            console.log(response.data);
+                                                        })
+                                                        .catch((error) => {
+                                                            console.log(error);
+                                                        });
                                                     setSubmitting(false);
                                                     resetForm();
                                                 }, 400);
+                                                setTimeout(() => {
+                                                    setSuccess(false);
+                                                }, 5000);
                                             }}
                                         >
                                             {({
@@ -398,46 +438,54 @@ const Agency = () => {
                                             }) => (
 
                                                 <form className="form" onSubmit={handleSubmit}>
-                                                    <div className="form__title">Заполните форму</div>
-                                                    <div className="form__wrap">
-                                                        <div className="form__group">
-                                                            <input type="text" name="name" className="form__input" onChange={handleChange} value={values.name} placeholder="Ваше имя" />
-                                                            <div className="form__error">{errors.name && touched.name && errors.name}</div>
+                                                    <div className="form__inner" style={{ display: success ? 'none' : 'block' }}>
+                                                        <div className="form__title">Заполните форму</div>
+                                                        <input type="hidden" name="formName" value="Ищем таланты" />
+                                                        <div className="form__wrap">
+                                                            <div className="form__group">
+                                                                <input type="text" name="name" className="form__input" onChange={handleChange} value={values.name} placeholder="Ваше имя" />
+                                                                <div className="form__error">{errors.name && touched.name && errors.name}</div>
+                                                            </div>
+                                                            <div className="form__group">
+                                                                <input type="text" name="link" className="form__input" onChange={handleChange} value={values.link} placeholder="Ссылка на портфолио" />
+                                                                <div className="form__error">{errors.link && touched.link && errors.link}</div>
+                                                            </div>
                                                         </div>
-                                                        <div className="form__group">
-                                                            <input type="text" name="link" className="form__input" onChange={handleChange} value={values.link} placeholder="Ссылка на портфолио" />
-                                                            <div className="form__error">{errors.link && touched.link && errors.link}</div>
+                                                        <div className="form__wrap">
+                                                            <div className="form__group">
+                                                                <InputMask type="text" name="phone" className="form__input" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
+                                                                <div className="form__error">{errors.phone && touched.phone && errors.phone}</div>
+                                                            </div>
+                                                            <div className="form__group">
+                                                                <input type="text" name="email" className="form__input" onChange={handleChange} value={values.email} placeholder="E-mail" />
+                                                                <div className="form__error">{errors.email && touched.email && errors.email}</div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="form__wrap">
-                                                        <div className="form__group">
-                                                            <InputMask type="text" name="phone" className="form__input" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
-                                                            <div className="form__error">{errors.phone && touched.phone && errors.phone}</div>
+                                                        <div className="form__wrap">
+                                                            <div className="form__group">
+                                                                <textarea type="text" name="about" className="form__textarea" onChange={handleChange} value={values.about} placeholder="Расскажите кратко о себе" />
+                                                                <div className="form__error">{errors.about && touched.about && errors.about}</div>
+                                                            </div>
                                                         </div>
-                                                        <div className="form__group">
-                                                            <input type="text" name="email" className="form__input" onChange={handleChange} value={values.email} placeholder="E-mail" />
-                                                            <div className="form__error">{errors.email && touched.email && errors.email}</div>
+                                                        <div className="form__file">
+                                                            <input id="file" name="file" type="file" onChange={(event) => {
+                                                                setFieldValue("file", event.currentTarget.files[0]);
+                                                            }} />
                                                         </div>
-                                                    </div>
-                                                    <div className="form__wrap">
-                                                        <div className="form__group">
-                                                            <textarea type="text" name="about" className="form__textarea" onChange={handleChange} value={values.about} placeholder="Расскажите кратко о себе" />
-                                                            <div className="form__error">{errors.about && touched.about && errors.about}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="form__file">
-                                                        <input id="file" name="file" type="file" onChange={(event) => {
-                                                            setFieldValue("file", event.currentTarget.files[0]);
-                                                        }} />
-                                                    </div>
 
-                                                    <button type="submit" className='btn --orange --circle'>
-                                                        Отправить
-                                                    </button>
-                                                    <div className="form__check">
-                                                        Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <Link to="#">персональных данных</Link>
+                                                        <button type="submit" className='btn --orange --circle'>
+                                                            Отправить
+                                                        </button>
+                                                        <div className="form__check">
+                                                            Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <Link to="#">персональных данных</Link>
+                                                        </div>
+                                                    </div>
+                                                    <div className="form__success" style={{ display: success ? 'block' : 'none' }}>
+                                                        <div className="form__success-title">Заявка отправлена!</div>
+                                                        <div className="form__success-descr">Ожидайте, скоро мы с вами свяжемся</div>
                                                     </div>
                                                 </form>
+
                                             )}
                                         </Formik>
                                     </div>
@@ -451,7 +499,7 @@ const Agency = () => {
 
             <SectionProducts />
 
-            <Cta />
+            <Cta formName={'tender'} />
 
             <SectionSocial />
 

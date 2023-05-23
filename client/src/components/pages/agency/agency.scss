@@ -120,6 +120,10 @@
             grid-template-columns: repeat(2, .5fr);
             grid-gap: 4rem;
 
+            iframe {
+                aspect-ratio: 1/0.562;
+            }
+
             @include respond(sm) {
                 grid-template-columns: 100%;
                 grid-gap: 3rem;

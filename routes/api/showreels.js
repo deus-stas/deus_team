@@ -37,7 +37,7 @@ router.get('/showreels', async (req, res) => {
 });
 
 router.post('/showreels', upload.single('video'), async (req, res) => {
-    const { name, year } = req.body;
+    const { name, year, mainShowreel, videoUrl } = req.body;
     console.log(req.file);
 
     const video = req.file;
@@ -45,7 +45,9 @@ router.post('/showreels', upload.single('video'), async (req, res) => {
     const showreels = new Showreels({
         name,
         year,
+        mainShowreel,
         video,
+        videoUrl
     });
 
     await showreels.save();
@@ -74,7 +76,7 @@ router.put("/showreels/:id", upload.single('video'), async (req, res) => {
         return res.status(404).json({ error: 'Showreels not found' });
     }
 
-    const { name, year } = req.body;
+    const { name, year, mainShowreel, videoUrl } = req.body;
     const video = req.file;
 
     // Если есть новое изображение в запросе, обновляем ссылку на него
@@ -86,6 +88,8 @@ router.put("/showreels/:id", upload.single('video'), async (req, res) => {
     // Обновляем остальные поля документа
     showreels.name = name;
     showreels.year = year;
+    showreels.mainShowreel = mainShowreel;
+    showreels.videoUrl = videoUrl;
 
     // Сохраняем изменения
     await showreels.save();

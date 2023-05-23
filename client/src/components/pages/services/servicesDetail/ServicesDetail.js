@@ -10,9 +10,6 @@ import { Link } from 'react-router-dom';
 
 import './serviceDetail.scss'
 
-import projectImg from '../../../../img/project-img.png';
-import choiceReview from '../../../../img/choice-review.png';
-
 const onAcc = (e) => {
     let accItem = e.target.closest('.tab-parent');
     if (accItem.classList.contains('active')) {
@@ -407,7 +404,7 @@ const ServicesDetail = () => {
                                                             {
                                                                 review.reviewImage ? <img src={`${apiUrl}/uploads/${review.reviewImage.filename}`} alt={review.reviewName} className="service-review__person-img" /> : null
                                                             }
-                                                            
+
                                                             <div className="service-review__person-p">
                                                                 {review.reviewName}, <span>{review.reviewPost}</span>
                                                             </div>
@@ -415,7 +412,7 @@ const ServicesDetail = () => {
                                                         <div className="service-review__descr">{review.review} </div>
                                                         <Link to={`/projects/${review.reviewProject.id}`} className="btn --white">Смотреть проект</Link>
                                                     </div>
-                                                   {review.reviewProject.image ? <img src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" /> : null} 
+                                                    {review.reviewProject.image ? <img src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" /> : null}
                                                 </div>
                                             )
                                         }
@@ -427,7 +424,7 @@ const ServicesDetail = () => {
                     : null
             }
 
-            <Cta />
+            <Cta formName={'project'} />
 
         </main>
     )

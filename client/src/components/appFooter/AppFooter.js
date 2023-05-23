@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 import './appFooter.scss';
 import { Icon } from '../icon/Icon';
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : 'http://localhost:5000';
+
 const AppFooter = () => {
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/services/`)
+            .then((response) => {
+                setServices(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const gotoAnchor = (e) => {
         setTimeout(() => {
@@ -47,12 +64,11 @@ const AppFooter = () => {
                         <div className="footer__subtitle">Услуги</div>
                         <nav className="footer__nav">
                             <ul className='footer__list'>
-                                <li className="footer__list-item"><Link to="/">Фирменный стиль</Link></li>
-                                <li className="footer__list-item"><Link to="/">Сайты и сервисы</Link></li>
-                                <li className="footer__list-item"><Link to="/">Контент-маркетинг</Link></li>
-                                <li className="footer__list-item"><Link to="/">SEO-продвижение</Link></li>
-                                <li className="footer__list-item"><Link to="/">Лидогенерация</Link></li>
-                                <li className="footer__list-item"><Link to="/">Поддержка и развитие</Link></li>
+                                {services ? services.map(service => {
+                                    return (
+                                        <li className="footer__list-item" key={service.id}><Link to={`/services/${service.id}`}>{service.name}</Link></li>
+                                    )
+                                }) : null}
                             </ul>
                         </nav>
                     </div>

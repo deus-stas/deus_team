@@ -33,6 +33,16 @@
         cursor: none;
         position: relative;
 
+        video {
+            width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/0.4;
+        }
+
         @include respond(sm) {
             &::before {
                 content: '';

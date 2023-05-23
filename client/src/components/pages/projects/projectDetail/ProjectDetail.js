@@ -342,7 +342,7 @@ const ProjectDetail = () => {
 
             <ProjectNext />
 
-            <Cta />
+            <Cta formName={'project'} />
 
         </main>
     )
