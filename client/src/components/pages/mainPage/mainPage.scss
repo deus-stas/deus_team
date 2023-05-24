@@ -236,7 +236,7 @@
             @include respond(sm) {
                 width: 100vw;
                 margin-left: -2rem;
-                padding: 2rem 0;
+                padding: 2rem;
                 grid-gap: 0;
                 display: flex;
                 overflow-x: auto;
@@ -290,6 +290,12 @@
             position: relative;
             z-index: 2;
             will-change: transform;
+
+            @include respond(sm) {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+            }
         }
 
         &__name {

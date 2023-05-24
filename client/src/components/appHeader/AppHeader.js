@@ -59,7 +59,13 @@ const AppHeader = () => {
                                 <NavLink to="/projects" onClick={() => setMenu(!menu)}>Проекты</NavLink>
                             </li>
                             <li className="header__menu-item">
+                                <NavLink to="/services" onClick={() => setMenu(!menu)}>Услуги</NavLink>
+                            </li>
+                            <li className="header__menu-item">
                                 <NavLink to="/agency" onClick={() => setMenu(!menu)}>Агентство</NavLink>
+                            </li>
+                            <li className="header__menu-item">
+                                <NavLink to="/news" onClick={() => setMenu(!menu)}>Новости</NavLink>
                             </li>
                             <li className="header__menu-item">
                                 <NavLink to="/contacts" onClick={() => setMenu(!menu)}>Контакты</NavLink>
