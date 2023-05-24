@@ -55,6 +55,7 @@
         position: relative;
         overflow: hidden;
 
+
         &:hover {
             .projects__item-img {
                 transform: scale(1.1);
@@ -132,6 +133,10 @@
         &-img-wrap {
             overflow: hidden;
             margin-bottom: 2rem;
+
+            p {
+                display: none;
+            }
 
             iframe,
             img {

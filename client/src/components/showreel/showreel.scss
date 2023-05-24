@@ -43,6 +43,10 @@
             aspect-ratio: 1/0.4;
         }
 
+        p {
+            display: none;
+        }
+
         @include respond(sm) {
             &::before {
                 content: '';
