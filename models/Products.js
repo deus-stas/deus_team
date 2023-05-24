@@ -5,6 +5,7 @@ const productsSchema = new Schema({
   name: { type: String, required: true },
   descr: { type: String },
   link: { type: String },
+  videoUrl: { type: String },
   video: { type: Object },
 });
 

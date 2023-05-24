@@ -37,7 +37,7 @@ router.get('/products', async (req, res) => {
 });
 
 router.post('/products', upload.single('video'), async (req, res) => {
-    const { name, descr, link } = req.body;
+    const { name, descr, link, videoUrl } = req.body;
     console.log(req.file);
 
     const video = req.file;
@@ -47,6 +47,7 @@ router.post('/products', upload.single('video'), async (req, res) => {
         descr,
         link,
         video,
+        videoUrl
     });
 
     await products.save();
@@ -75,7 +76,7 @@ router.put("/products/:id", upload.single('video'), async (req, res) => {
         return res.status(404).json({ error: 'Products not found' });
     }
 
-    const { name, descr, link } = req.body;
+    const { name, descr, link, videoUrl } = req.body;
     const video = req.file;
 
     // Если есть новое изображение в запросе, обновляем ссылку на него
@@ -87,6 +88,7 @@ router.put("/products/:id", upload.single('video'), async (req, res) => {
     // Обновляем остальные поля документа
     products.name = name;
     products.descr = descr;
+    products.videoUrl = videoUrl;
     products.link = link;
 
     // Сохраняем изменения

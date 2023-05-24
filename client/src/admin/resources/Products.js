@@ -10,6 +10,7 @@ export const ProductsCreate = (props) => (
             <FileInput source="video">
                 <FileField source="src" title="title" />
             </FileInput>
+            <TextInput source="videoUrl" label="URL"/>
         </SimpleForm>
     </Create>
 )
@@ -23,6 +24,7 @@ export const ProductsEdit = (props) => (
             <FileInput source="video">
                 <FileField source="src" title="title" />
             </FileInput>
+            <TextInput source="videoUrl" label="URL"/>
         </SimpleForm>
     </Edit>
 );

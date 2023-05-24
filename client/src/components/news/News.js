@@ -57,7 +57,7 @@ const News = () => {
         <main className="news">
             <section className="news-main">
                 <div className="container">
-                    <h1 className="heading-primary">Блог</h1>
+                    <h1 className="heading-primary">Журнал</h1>
                     <div className="news__filters">
                         <div className={`news__filters-btn btn --grey ${selectedTag === 'Все' ? 'active' : ''}`} onClick={() => handleTagClick('Все')}>Все</div>
                         {[...allTags].map((tag) => (

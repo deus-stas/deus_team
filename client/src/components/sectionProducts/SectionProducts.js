@@ -35,9 +35,14 @@ const SectionProducts = () => {
                             products.map(product => {
                                 return (
                                     <Link to={product.link} className="section-products__item" key={product.id} target="_blank">
-                                        <video className="section-products__video" autoPlay loop muted playsInline>
-                                            <source src={product.video ? `${apiUrl}/uploads/${product.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                        </video>
+                                        {
+                                            product.videoUrl && product.videoUrl !== 'undefined' && product.videoUrl !== 'null' ?
+                                                <div className="section-products__frame" dangerouslySetInnerHTML={{ __html: product.videoUrl }}></div>
+                                                : <video className="section-products__video" autoPlay loop muted playsInline>
+                                                    <source src={product.video ? `${apiUrl}/uploads/${product.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                                </video>
+                                        }
+
                                         <div className="section-products__text">
                                             <div className="section-products__name">{product.name}</div>
                                             <div className="section-products__descr">{product.descr}</div>
