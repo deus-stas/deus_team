@@ -30,7 +30,7 @@ const AppHeader = () => {
                                     <NavLink to="/agency">Агентство</NavLink>
                                 </li>
                                 <li className="header__nav-item hidden-mobile">
-                                    <NavLink to="/news">Новости</NavLink>
+                                    <NavLink to="/news">Журнал</NavLink>
                                 </li>
                                 <li className="header__nav-item hidden-mobile">
                                     <NavLink to="/contacts">Контакты</NavLink>
@@ -65,7 +65,7 @@ const AppHeader = () => {
                                 <NavLink to="/agency" onClick={() => setMenu(!menu)}>Агентство</NavLink>
                             </li>
                             <li className="header__menu-item">
-                                <NavLink to="/news" onClick={() => setMenu(!menu)}>Новости</NavLink>
+                                <NavLink to="/news" onClick={() => setMenu(!menu)}>Журнал</NavLink>
                             </li>
                             <li className="header__menu-item">
                                 <NavLink to="/contacts" onClick={() => setMenu(!menu)}>Контакты</NavLink>
