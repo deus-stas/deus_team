@@ -3,6 +3,8 @@ const config = require('config')
 const path = require('path')
 const mongoose = require('mongoose')
 const cors = require('cors');
+const bodyParser = require("body-parser");
+const passport = require("passport");
 const newsRoutes = require('./routes/api/news');
 const tagsRoutes = require('./routes/api/tags');
 const workingRoutes = require('./routes/api/working');
@@ -23,8 +25,25 @@ const servicesRoutes = require('./routes/api/services');
 const reviewsRoutes = require('./routes/api/reviews');
 const formRoutes = require('./routes/api/form');
 const mailRoutes = require('./routes/api/mail');
+const users = require("./routes/api/users");
 
 const app = express();
+
+// Bodyparser middleware
+app.use(
+    bodyParser.urlencoded({
+      extended: false
+    })
+);
+app.use(bodyParser.json());
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+// Routes
+// app.use('/api', users);
+
 
 app.use('/uploads', express.static('uploads'));
 app.use(cors({ origin: true, credentials: true }));
@@ -53,6 +72,7 @@ app.use('/api', servicesRoutes);
 app.use('/api', reviewsRoutes);
 app.use('/api', formRoutes);
 app.use('/api', mailRoutes);
+app.use('/api', users);
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -63,7 +83,16 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
+// mongoose.connect(config.get('mongoURI'), {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// })
+// .then(() => console.log("MongoDB successfully connected"))
+// .catch(err => console.log(err));
+
 const PORT = config.get('port') || 5000
+
+// app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`));
 
 async function start() {
     try {

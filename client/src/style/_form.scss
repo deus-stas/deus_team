@@ -247,3 +247,20 @@
         }
     }
 }
+.underline {
+    text-decoration: underline;
+}
+.pointer {
+    cursor: pointer;
+}
+.authContainer {
+    width: 30%;
+    
+    @include respond(lg) {
+        width: 60%;
+    }
+
+    @include respond(sm) {
+        width: 100%;
+    }
+}
