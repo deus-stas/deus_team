@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { logoutuser } from "../../actions/authActions";
 class Logout extends Component {
   onLogoutClick = e => {
     e.preventDefault();
-    this.props.logoutUser();
+    this.props.logoutuser();
   };
 render() {
     const { user } = this.props.auth;
@@ -32,7 +32,7 @@ return (
   }
 }
 Logout.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
+  logoutuser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
@@ -40,5 +40,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutuser }
 )(Logout);

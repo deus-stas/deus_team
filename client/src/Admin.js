@@ -1,5 +1,5 @@
 import React from 'react';
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, UserMenu, AppBar, Layout } from 'react-admin';
 import { NewsList, NewsCreate, NewsEdit } from './admin/resources/News';
 import { WorkingList, WorkingCreate, WorkingEdit } from './admin/resources/Working';
 import { TagsList, TagsEdit, TagsCreate } from './admin/resources/Tags';
@@ -23,9 +23,16 @@ import { FormList} from './admin/resources/Form';
 import dataProvider from './admin/dataProvider';
 import authProvider from './admin/authProvider';
 import { theme } from "./admin/theme";
+import MyLogoutButton from '../src/components/appHeader/MyLogoutButton';
+
+const MyUserMenu = () => <UserMenu><MyLogoutButton /></UserMenu>;
+
+const MyAppBar = () => <AppBar userMenu={<MyUserMenu />} />;
+
+const MyLayout = (props) => <Layout {...props} appBar={MyAppBar} />;
 
 const AdminPage = () => (
-  <Admin dataProvider={dataProvider} authProvider={authProvider} basename="/admin" theme={theme}>
+  <Admin layout={MyLayout} dataProvider={dataProvider} authProvider={authProvider} basename="/admin" theme={theme}>
     <Resource name="projects" list={ProjectsList} create={ProjectsCreate} edit={ProjectsEdit} options={{ label: 'Проекты' }} />
     <Resource name="news" list={NewsList} create={NewsCreate} edit={NewsEdit} options={{ label: 'Новости' }} />
     <Resource name="working" list={WorkingList} create={WorkingCreate} edit={WorkingEdit} options={{ label: 'В работе' }} />
