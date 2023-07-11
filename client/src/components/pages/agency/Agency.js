@@ -20,7 +20,7 @@ import './agency.scss';
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
-    : 'http://localhost:5000';
+    : 'http://localhost:4554';
 
 const Agency = () => {
 
@@ -35,6 +35,20 @@ const Agency = () => {
     const [current, setCurrent] = useState(4);
     const [total, setTotal] = useState(0);
     const [endSlider, setEndSlider] = useState(false);
+    const [headerData, setHeaderData] = useState([]);
+
+
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/headerData/`)
+            .then((response) => {
+                setHeaderData(response.data[0]);
+                console.log('header data',response.data[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
 
     useEffect(() => {
@@ -164,12 +178,20 @@ const Agency = () => {
                                 Комплексные решения<br /> для различных индустрий
                             </div>
                         </div>
-                        <Link className="btn --circle --orange">Презентация агентства</Link>
+                        {/* <Link className="btn --circle --orange">Презентация агентства</Link> */}
+                        {
+                            headerData && headerData.presentation ? 
+                            <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`} target='_blank' rel="noopener noreferrer"  className="btn --circle --orange">Презентация агентства</a> :
+                            <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"  className="btn --circle --orange">Презентация агентства</a>
+                        }
                     </div>
                     <div className="agency-about__showreels">
                         {
                             showreels ? showreels.map(showreel => {
-                                return <Showreel data={showreel} key={showreel.id} />
+                                return(
+                                    showreel.mainShowreel === false || showreel.mainShowreel === "false" ? 
+                                     <Showreel data={showreel} key={showreel.id}/> : null
+                                )
                             }) : null
                         }
                     </div>
@@ -423,7 +445,7 @@ const Agency = () => {
                                                 }, 400);
                                                 setTimeout(() => {
                                                     setSuccess(false);
-                                                }, 5000);
+                                                }, 4554);
                                             }}
                                         >
                                             {({

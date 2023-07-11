@@ -80,13 +80,13 @@
             }
 
             &-img {
-                width: 100%;
+                width: 92%;
             }
 
             &-link {
                 position: absolute !important;
-                right: 0;
-                bottom: 0;
+                right: -9rem;
+                bottom: -4rem;
                 z-index: 3;
             }
         }
@@ -94,6 +94,7 @@
 
     &-projects {
         padding-top: 10rem;
+        padding-bottom: 10rem;
 
         @include respond(sm) {
             padding-top: 6rem;

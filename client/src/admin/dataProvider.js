@@ -3,7 +3,7 @@ import { stringify } from "query-string";
 
 const apiUrl = process.env.NODE_ENV === 'production'
   ? 'http://188.120.232.38/api'
-  : 'http://localhost:5000/api';
+  : 'http://localhost:4554/api';
 
 const httpClient = fetchUtils.fetchJson;
 
@@ -74,7 +74,12 @@ const dataProvider = {
       "bannerFifth",
       "video",
       "reviewFile",
-      "reviewImage"
+      "reviewImage",
+      "mainVideoFile",
+      "presentation",
+      'img',
+      'visibilityImg1',
+      'visibilityImg2'
     ];
     let hasImage = false;
     const extraImages = params.data.imagesExtra
@@ -92,6 +97,8 @@ const dataProvider = {
         //свойства в которых объект нужно отдельно переводить в JSON
       } else if (key === "tasksList") {
         formData.append(key, JSON.stringify(value));
+      } else if (key === "workSteps") {
+        formData.append(key, JSON.stringify(value));
       } else {
         console.log(key, value);
         formData.append(key, value);
@@ -105,7 +112,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     const formData = new FormData();
-    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage'];
+    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2'];
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
     const extraImages = params.data.imagesExtra
@@ -143,6 +150,8 @@ const dataProvider = {
           });
           //свойства в которых объект нужно отдельно переводить в JSON
         } else if (key === "tasksList") {
+          formData.append(key, JSON.stringify(value));
+        }  else if (key === "workSteps") {
           formData.append(key, JSON.stringify(value));
         } else {
           formData.append(key, value);

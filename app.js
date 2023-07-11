@@ -26,6 +26,7 @@ const reviewsRoutes = require('./routes/api/reviews');
 const formRoutes = require('./routes/api/form');
 const mailRoutes = require('./routes/api/mail');
 const users = require("./routes/api/users");
+const headerData = require("./routes/api/headerData");
 
 const app = express();
 
@@ -73,6 +74,7 @@ app.use('/api', reviewsRoutes);
 app.use('/api', formRoutes);
 app.use('/api', mailRoutes);
 app.use('/api', users);
+app.use('/api', headerData);
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -90,7 +92,7 @@ if (process.env.NODE_ENV === 'production') {
 // .then(() => console.log("MongoDB successfully connected"))
 // .catch(err => console.log(err));
 
-const PORT = config.get('port') || 5000
+const PORT = config.get('port') || 4554
 
 // app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`));
 

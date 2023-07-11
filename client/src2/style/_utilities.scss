@@ -1,0 +1,31 @@
+@import './_mixins.scss';
+
+
+
+.hidden-mobile {
+    @include respond(sm) {
+        display: none !important;
+    }
+}
+
+.hidden-desktop {
+    display: none !important;
+
+    @include respond(sm) {
+        display: block !important;
+    }
+}
+
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.tabs__content {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}

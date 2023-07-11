@@ -7,6 +7,7 @@ const productsSchema = new Schema({
   link: { type: String },
   videoUrl: { type: String },
   video: { type: Object },
+  img: {type: Object}
 });
 
 productsSchema.set('toJSON', { virtuals: true });

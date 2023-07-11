@@ -42,6 +42,12 @@ router.post('/showreels', upload.single('video'), async (req, res) => {
 
     const video = req.file;
 
+    // Check if mainShowreel is being set to true
+    if (mainShowreel === true || mainShowreel === 'true') {
+        // Find any existing showreel with mainShowreel set to true and set it to false
+        await Showreels.updateMany({ mainShowreel: true }, { $set: { mainShowreel: false } });
+    }
+
     const showreels = new Showreels({
         name,
         year,
@@ -67,35 +73,71 @@ router.get('/showreels/:id', async (req, res) => {
     res.json(showreels);
 });
 
+// router.put("/showreels/:id", upload.single('video'), async (req, res) => {
+//     const { id } = req.params;
+
+//     // Проверяем, есть ли такой документ в базе данных
+//     const showreels = await Showreels.findById(id);
+//     if (!showreels) {
+//         return res.status(404).json({ error: 'Showreels not found' });
+//     }
+
+//     const { name, year, mainShowreel, videoUrl } = req.body;
+//     const video = req.file;
+
+//     // Если есть новое изображение в запросе, обновляем ссылку на него
+//     if (video) {
+//         fs.unlinkSync(`uploads/${showreels.video.filename}`);
+//         showreels.video = video;
+//     }
+
+//     // Обновляем остальные поля документа
+//     showreels.name = name;
+//     showreels.year = year;
+//     showreels.mainShowreel = mainShowreel;
+//     showreels.videoUrl = videoUrl;
+
+//     // Сохраняем изменения
+//     await showreels.save();
+
+//     res.json(showreels);
+// });
 router.put("/showreels/:id", upload.single('video'), async (req, res) => {
     const { id } = req.params;
-
-    // Проверяем, есть ли такой документ в базе данных
+  
+    // Check if the showreel exists in the database
     const showreels = await Showreels.findById(id);
     if (!showreels) {
-        return res.status(404).json({ error: 'Showreels not found' });
+      return res.status(404).json({ error: 'Showreels not found' });
     }
-
+  
     const { name, year, mainShowreel, videoUrl } = req.body;
     const video = req.file;
-
-    // Если есть новое изображение в запросе, обновляем ссылку на него
+  
+    // If there is a new video file in the request, update the video property and delete the previous video file
     if (video) {
         fs.unlinkSync(`uploads/${showreels.video.filename}`);
         showreels.video = video;
     }
-
-    // Обновляем остальные поля документа
+  
+    // Update the other fields of the document
     showreels.name = name;
     showreels.year = year;
-    showreels.mainShowreel = mainShowreel;
     showreels.videoUrl = videoUrl;
-
-    // Сохраняем изменения
+  
+    //Check if mainShowreel is being modified and update it accordingly
+    if (mainShowreel === "true" || mainShowreel === true) {
+       // Find any existing showreel with mainShowreel set to true and set it to false
+        await Showreels.updateMany({ mainShowreel: true, _id: { $ne: id } }, { $set: { mainShowreel: false } });
+    } 
+    
+    showreels.mainShowreel = mainShowreel;
+  
+    // Save the changes
     await showreels.save();
-
     res.json(showreels);
-});
+  });
+  
 
 router.delete("/showreels/:id", async (req, res) => {
     const { id } = req.params;

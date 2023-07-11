@@ -1,0 +1,73 @@
+@import '../../style/_mixins.scss';
+
+.section-social {
+    &__wrap {
+        padding: 9.5rem 0 7.1rem;
+        display: grid;
+        grid-template-columns: auto 74.5%;
+        grid-gap: 5rem;
+        justify-content: space-between;
+        border-top: 1px solid rgba(25, 27, 29, 0.3);
+
+        @include respond(md) {
+            grid-template-columns: auto 78%;
+            grid-gap: 2rem;
+        }
+
+        @include respond(sm) {
+            padding: 6rem 0;
+            grid-template-columns: 100%;
+            grid-gap: 3rem;
+        }
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(3, .33334fr);
+        grid-gap: 4rem;
+
+        @include respond(md) {
+            grid-gap: 1rem;
+        }
+
+        @include respond(sm) {
+            grid-template-columns: 100%;
+            grid-gap: 1rem;
+        }
+    }
+
+    &__item {
+        padding: 4rem;
+
+        color: rgba(256, 256, 256, .5);
+        transition: opacity .5s;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        @include respond(md) {
+            padding: 3rem 2rem;
+        }
+
+        @include respond(sm) {
+            padding: 3rem;
+        }
+
+        img {
+            display: inline-block;
+            height: 4rem;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__descr {
+        font-size: 2.4rem;
+        line-height: 3.4rem;
+
+        @include respond(sm) {
+            font-size: 2rem;
+            line-height: 2.6rem;
+        }
+    }
+}

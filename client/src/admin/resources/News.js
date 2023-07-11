@@ -5,7 +5,7 @@ import { RichTextInput } from 'ra-input-rich-text';
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
-    : 'http://localhost:5000';
+    : 'http://localhost:4554';
 
 
 const FilenameField = props => {

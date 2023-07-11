@@ -295,8 +295,8 @@ main {
         color: #fff;
         line-height: 5rem;
         position: absolute;
-        top: 6rem;
-        right: 6rem;
+        top: -4rem;
+        right: -4rem;
         z-index: 5;
 
         @include respond(sm) {
@@ -355,4 +355,8 @@ main {
             }
         }
     }
+}
+
+.MuiCardContent-root {
+    margin-bottom: 100px !important;
 }

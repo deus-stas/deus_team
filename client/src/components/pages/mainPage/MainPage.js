@@ -1,22 +1,31 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Grid, Autoplay } from "swiper";
 
 import { Icon } from '../../icon/Icon';
 import SectionProducts from '../../sectionProducts/SectionProducts';
 import SectionSocial from '../../sectionSocial/SectionSocial';
 import Showreel from '../../showreel/Showreel';
 
+import "swiper/css";
+import "swiper/css/grid";
 import './mainPage.scss';
+
+
 
 import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
 
+
+SwiperCore.use([Autoplay]);
+
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
-    : 'http://localhost:5000';
+    : 'http://localhost:4554';
 
 
 const colourStyles = {
@@ -63,7 +72,8 @@ const MainPage = () => {
     const [optionsTheme, setOptionsTheme] = useState([]);
     const [optionsType, setOptionsType] = useState([]);
     const [services, setServices] = useState([]);
-
+    const [current, setCurrent] = useState(4);
+    const [endSlider, setEndSlider] = useState(false);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
     useEffect(() => {
@@ -121,8 +131,9 @@ const MainPage = () => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/services/`)
             .then((response) => {
-                setServices(response.data);
-                console.log(response.data);
+                const sortedData = response.data.sort((a, b) => a.position - b.position);
+                setServices(sortedData);
+                console.log(sortedData);
             })
             .catch((error) => {
                 console.log(error);
@@ -177,6 +188,24 @@ const MainPage = () => {
             });
     }, []);
 
+    const slideChange = (slider) => {
+        if (slider.touches.diff > 0) {
+            if (endSlider) {
+                setCurrent(current - 1);
+                setEndSlider(false);
+            } else {
+                setCurrent(current - 2);
+            }
+        } else {
+            if (current + 1 === 2) {
+                setCurrent(2);
+                setEndSlider(true);
+            } else {
+                setCurrent(current + 2);
+            }
+        }
+    }
+
     const handleThemeChange = (selectedOption) => {
         setSelectedTheme(selectedOption);
     };
@@ -192,21 +221,48 @@ const MainPage = () => {
 
     const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
+
+
+    const videoRefs = useRef([]);
+
+    const handleMouseEnter = (index) => {
+        videoRefs.current[index].play();
+        console.log("hovered", index)
+    };
+
+    const handleMouseLeave = (index) => {
+        const video = videoRefs.current[index];
+        video.pause();
+        video.currentTime = 0; // Rewind the video to the beginning
+    };
+
+    const addVideoRef = (ref) => {
+        videoRefs.current.push(ref);
+    };
+
     return (
         <main className="main">
-
             {mainProjects ? mainProjects.map(project => {
                 return (
                     <section className="main-banner" key={project.id} style={{ background: project.color }}>
                         <div className="container">
                             <div className="main-banner__wrap">
                                 <div className="main-banner__content">
-                                    <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1>
-                                    <Link to="#" className="btn --circle --orange">Презентация агентства</Link>
+                                    <h1 className="heading-primary">{project.bannerText}</h1>
+                                    {/* <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1> */}
+                                    <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' className="btn --circle --orange">Презентация агентства</a>
                                 </div>
                                 <div className="main-banner__project hidden-mobile">
-                                    <div className="main-banner__project-name">{project.name}</div>
-                                    <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-banner__project-img" />
+                                    {/* <div className="main-banner__project-name">{project.name}</div> */}
+                                    {
+                                        project.mainVideoFile ? (
+                                            <video width={800} className="main-banner__project-img" autoPlay muted loop>
+                                                <source src={project.mainVideoFile ? `${apiUrl}/uploads/${project.mainVideoFile.filename}` : null} />
+                                            </video>
+                                        ) : (
+                                            <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-banner__project-img" />
+                                        )
+                                    }
                                     <Link to={`/projects/${project.id}`} className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
                                 </div>
                             </div>
@@ -216,6 +272,61 @@ const MainPage = () => {
                     </section>
                 )
             }) : null}
+
+            {/* {mainProjects ? mainProjects.map(project => { */}
+                {/* return ( */}
+                    {/* <section className="main-banner" key={project.id} style={{ background: project.color }}> */}
+                        {/* <div className="container"> */}
+                            {/* <div className="main-banner__wrap"> */}
+                                {/* <div className="main-banner__content"> */}
+                                    {/* <h1 className="heading-primary">{project.bannerText}</h1> */}
+                                    {/* <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1> */}
+                                    {/* <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' className="btn --circle --orange">Презентация агентства</a> */}
+                                {/* </div> */}
+                                {/* <div className="main-banner__project hidden-mobile"> */}
+                                    {/* <div className="main-banner__project-name">{project.name}</div> */}
+                                    {/* <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-banner__project-img" />
+                                    <Link to={`/projects/${project.id}`} className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
+                                </div> */}
+                                {/* <Swiper
+                                    autoplay={{ delay: 3000 }}
+                                    slidesPerView={1}
+                                    grid={{
+                                        rows: 1,
+                                    }}
+                                    spaceBetween={10}
+                                    modules={[Grid]}
+                                    onSlideChange={(e) => slideChange(e)}
+                                    className="main-banner__project hidden-mobile" 
+                                    style={{width:'910px'}}
+                                    loop={true}
+                                    >
+                                   {
+                                        projects.map((project) => (
+                                            <SwiperSlide key={project.id}>
+                                                {project.mainVideoFile ? (
+                                                    <video className="main-banner__project-img" muted controls>
+                                                        <source src={project.mainVideoFile ? `${apiUrl}/uploads/${project.mainVideoFile.filename}` : null}/>
+                                                    </video>
+                                                ) : (
+                                                    <img
+                                                        className="main-banner__project-img"
+                                                        src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                                        alt={project.name}
+                                                    />
+                                                )}
+                                                <Link to={`/projects/${project.id}`} className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
+                                            </SwiperSlide>
+                                        ))
+                                    }
+                                </Swiper> */}
+                            {/* </div> */}
+                        {/* </div> */}
+                        {/* <img src={mainBannerLine} alt="Touch Money" className="main-banner__line hidden-mobile" />
+                        <img src={mainBannerLineMob} alt="Touch Money" className="main-banner__line hidden-desktop" />
+                    </section> */}
+                {/* )
+            }) : null} */}
 
             <section className="main-projects">
                 <div className="container">
@@ -228,20 +339,44 @@ const MainPage = () => {
                         <Link to="/projects" className="btn --orange hidden-mobile">Все проекты</Link>
                     </div>
                     <div className="main-projects__wrap">
-                        {filteredProjects ? filteredProjects.map(project => {
+                        {filteredProjects ? filteredProjects.map((project,index) => {
                             return (
-                                <Link to={`/projects/${project.id}`} className="main-projects__item" key={project.id}>
+                                project.controlURL ?
+                                <a href={`${project.projectURL}`} className="main-projects__item" key={project.id}>
                                     <div className="main-projects__img-wrap">
                                         {
+                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 
+                                                ?
+                                            <video ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline>
+                                                <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                            </video> : 
                                             project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
                                                 ?
-                                                <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
+                                                <div ref={(ref) => addVideoRef(ref)} dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
                                                 :
-                                                <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                                <img ref={(ref) => addVideoRef(ref)} src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
                                         }
                                     </div>
                                     <div className="main-projects__name">{project.name}</div>
-                                </Link>
+                                </a> :
+                                <Link to={`/projects/${project.id}`} className="main-projects__item" key={project.id}>
+                                <div className="main-projects__img-wrap">
+                                        {
+                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 
+                                                ?
+                                            <video ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline>
+                                                <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                            </video> : 
+                                            project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                ?
+                                                <div ref={(ref) => addVideoRef(ref)} dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
+                                                :
+                                                <img ref={(ref) => addVideoRef(ref)} src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                        }
+                                </div>
+                                <div className="main-projects__name">{project.name}</div>
+                            </Link> 
+
                             )
                         })
                             : null}
@@ -286,8 +421,8 @@ const MainPage = () => {
                                 return (
                                     <div className="main-services__item tab-parent" key={service.id}>
                                         <div className="main-services__head" onClick={onAcc}>
-                                            <div className="main-services__num">0{index + 1}</div>
-                                            <div className="main-services__name">{service.name}</div>
+                                            <div className="main-services__num">{index < 9 ? 0 : ''}{index + 1}</div>
+                                            <div className="main-services__name">{service.name} - {service.position}</div>
                                             <div className="main-services__btn">
                                                 <Icon icon="arr-acc" />
                                             </div>

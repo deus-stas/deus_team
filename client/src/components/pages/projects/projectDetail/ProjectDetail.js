@@ -5,12 +5,13 @@ import { useParams } from "react-router-dom";
 import Cta from '../../../cta/Cta';
 import Breadcrumbs from '../../../breadcrubms/Breadcrumbs';
 import ProjectNext from '../projectNext/ProjectNext';
+import { Icon } from '../../../icon/Icon';
 
 import './projectDetail.scss'
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
-    : 'http://localhost:5000';
+    : 'http://localhost:4554';
 
 const ProjectDetail = () => {
     const [detail, setDetail] = useState([]);
@@ -21,7 +22,7 @@ const ProjectDetail = () => {
                 let dataDetail = { ...response.data };
                 let requests = [];
 
-                if (response.data.taskPersons !== 'undefined') {
+                if (response.data.taskPersons !== 'undefined' && response.data.taskPersons !== 'null') {
                     requests.push(
                         axios.get(`${apiUrl}/api/persons/${response.data.taskPersons}`)
                             .then((response) => {
@@ -74,6 +75,14 @@ const ProjectDetail = () => {
                             <div className="project-main__text">
                                 <div className="project-main__subtitle">О клиенте</div>
                                 <div className="project-main__descr" dangerouslySetInnerHTML={{ __html: detail.about }}></div>
+                                {
+                                    detail.projectSite ? (
+                                        <div>
+                                            <a href={detail.projectURL} target='_blank' className="project-main__link">{detail.projectSite}</a>
+                                            <Icon icon="arr" />
+                                        </div>
+                                    ) : null
+                                }
                             </div>
                             : null}
                     </div>
@@ -81,6 +90,14 @@ const ProjectDetail = () => {
             </section>
 
             {
+                detail.mainVideoFile && detail.mainVideoFile !== 'undefined' && detail.mainVideoFile !== 'null'
+                ?
+                <section className="project-banner">
+                    <video autoPlay loop muted playsInline controls>
+                        <source src={`${apiUrl}/uploads/${detail.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                    </video>
+                </section>
+                 :
                 detail.bannerFirstVideo && detail.bannerFirstVideo !== 'undefined' && detail.bannerFirstVideo !== 'null' ?
                     <section className="project-banner">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFirstVideo }}></div>
@@ -98,8 +115,7 @@ const ProjectDetail = () => {
                         </section>
                         : null
             }
-
-            {detail.task !== 'undefined' && detail.taskPersons ?
+            {/* {detail.task !== 'undefined' && detail.taskPersons ?
                 <section className="project-results">
                     <div className="container">
                         <div className="project-results__wrap">
@@ -119,7 +135,8 @@ const ProjectDetail = () => {
                         </div>
                     </div>
                 </section>
-                : null}
+                : null
+            } */}
 
             {
                 detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
@@ -140,7 +157,127 @@ const ProjectDetail = () => {
                         : null
             }
 
-            {detail.approach !== 'undefined' && detail.approachPersons ?
+
+            {/* <div style={{ background: detail.aimColor }}>
+                {detail.taskDescr !== 'undefined' && detail.taskDescr ?
+                    <section className="project-results">
+                        <div className="container">
+                            <div className="project-results__wrap">
+                                <h2 className="heading-secondary">Цели и задачи</h2>
+                                <div className="quote">
+                                    <div>
+                                        { detail.taskDescr }
+                                    </div>
+                                    <div className="quote__box">
+                                        <div className="quote__person">
+                                            {detail.taskPersons.image ? <img src={`${apiUrl}/uploads/${detail.taskPersons.image.filename}`} alt={detail.taskPersons.name} className="quote__img" /> : null}
+
+                                            <div className="quote__person-text">
+                                                {detail.taskPersons.name}, <span>{detail.taskPersons.post} @ DEUS</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
+                                    </div>
+                                    {
+                                        detail.tasksList !== 'undefined' && detail.tasksList ?
+                                        <div>
+                                            {
+                                                detail.tasksList.map((item, index) => (
+                                                    <div key={index}>{item.tasksItem}</div>
+                                                ))
+                                            }
+                                        </div> : null
+                                    }
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </section>
+                    : null
+                }
+            </div> */}
+
+
+
+            {/* <div style={{ background: detail.aimColor }}>
+                {
+                    detail.taskDescr && detail.taskDescr !== 'undefined' ?
+                    <div>{
+                        detail.taskDescr
+                    }</div> : null
+                }
+                {
+                    detail.tasksList !== 'undefined' && detail.tasksList ?
+                    <div>
+                        {
+                            detail.tasksList.map((item, index) => (
+                                <div key={index}>{item.tasksItem}</div>
+                            ))
+                        }
+                    </div> : null
+                }
+            </div> */}
+
+
+
+
+            {/* {
+                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" ?
+                <div>{
+                    detail.taskDescr
+                }</div> : null
+            } */}
+            {/* {
+                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
+                    <div style={{ background: detail.workStepsColor }}>
+                        {
+                            <section className="project-results">
+                                <div className="container">
+                                    <div className="project-results__wrap">
+                                        <h2 className="heading-secondary">Этапы работ</h2>
+                                    </div>
+
+                                    {
+                                        detail.workSteps.map((item, index) => (
+                                            <div  key={index} style={{borderBottom:'1px solid #000'}} className="container">
+                                                <div className="project-results__wrap">
+                                                    <h2 className="heading-secondary">{item.workStepsTitle}</h2>
+                                                    <div>
+                                                        <div className='project-results__text'>{item.workStepsIntroText}</div>
+                                                        <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </section>
+
+                        }
+                    </div> : null
+            } */}
+            {/* {
+                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" ?
+                <div >
+                    {
+                        detail.workSteps.map((item, index) => (
+                            <div key={index} style={{display:'flex', borderBottom:'1px solid #000'}}>
+                                <div>{item.workStepsTitle}</div>
+                                <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
+                            </div>
+
+                        ))
+                    }
+                </div> : null
+            }
+             */}
+
+
+
+            {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
                 <section className="project-results">
                     <div className="container">
                         <div className="project-results__wrap">
@@ -211,7 +348,7 @@ const ProjectDetail = () => {
                         : null
             }
 
-            {detail.result !== 'undefined' && detail.resultPersons ?
+            {/* {detail.result !== 'undefined' && detail.resultPersons ?
                 <section className="project-results">
                     <div className="container">
                         <div className="project-results__wrap">
@@ -231,7 +368,7 @@ const ProjectDetail = () => {
                         </div>
                     </div>
                 </section>
-                : null}
+                : null} */}
 
             {
                 detail.bannerFifthVideo && detail.bannerFifthVideo !== 'undefined' && detail.bannerFifthVideo !== 'null' ?
@@ -263,82 +400,149 @@ const ProjectDetail = () => {
                 : null}
 
 
-            {/* <section className="project-steps">
-                <div className="container">
-                    <h2 className="heading-secondary">Этапы работ</h2>
-                    <div className="project-steps__s">
-                        <div className="project-steps__subtitle">Этап 1. Подготовка семантического ядра</div>
-                        <div className="project-steps__content">
-                            <div className="project-steps__text">Одной из задач стал брендинг агентства. Мы разработали фирменный стиль и презентацию, что способствовало росту и развитию агентства.</div>
-                            <div className="project-steps__adv">
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Проанализировали поисковую выдачу ТОП-10 и сайты прямых конкурентов.
+
+        <div style={{ background: detail.aimColor }}>
+            {
+                detail.taskDescr !== 'undefined' && detail.taskDescr ?
+                <section style={{ background: detail.aimColor }} className="project-goals">
+                    <div className="container">
+                        <div className="project-goals__wrap">
+                            <h2 className="heading-secondary">Цели и задачи</h2>
+                            <div className="project-goals__content">
+                                <div className="project-goals__text">{detail.taskDescr}</div>
+                                <div className="project-goals__person">
+                                    <div className="project-goals__person-info">
+                                        <div className="project-goals__person-name">{detail.taskPersons.name},</div>
+                                        <div className="project-goals__person-position">{detail.taskPersons.post} @ DEUS</div>
+                                    </div>
+                                    <div className="project-goals__person-text">
+                                        <div dangerouslySetInnerHTML={{ __html: detail.task }}></div>
+                                    </div>
+                                    {detail.taskPersons.image ? <img src={`${apiUrl}/uploads/${detail.taskPersons.image.filename}`} alt={detail.taskPersons.name} className="project-goals__person-photo" /> : null}
                                 </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Выстроили структуру блога и подготовили шаблон публикаций.
-                                </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Собрали всевозможные запросы по теме информационной безопасности.
-                                </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Кластеризировали полученные запросы.
-                                </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Согласовали полученный список с клиентом.
-                                </div>
+                                {
+                                        detail.tasksList !== 'undefined' && detail.tasksList ?
+                                        <div>
+                                            {
+                                                detail.tasksList.map((item, index) => (
+                                                    // <div key={index}>{item.tasksItem}</div>
+                                                    <div>
+                                                        <div className="project-goals__tasks-item">
+                                                            {/* <Icon icon="task" /> */}
+                                                                 <div key={index}>{item.tasksItem}</div>
+                                                            </div>
+                                                        </div>
+                                                ))
+                                            }
+                                        </div> : null
+                                    }
+                                {/* <div className="project-goals__tasks-item"> */}
+                                    {/* <Icon icon="task" /> */}
+                                    {/* Проанализировали поисковую выдачу ТОП-10 и сайты прямых конкурентов. */}
+                                {/* </div> */}
+                                {/* <div className="project-goals__tasks-item"> */}
+                                    {/* <Icon icon="task" /> */}
+                                    {/* Выстроили структуру блога и подготовили шаблон публикаций. */}
+                                {/* </div> */}
+                                {/* <div className="project-goals__tasks-item"> */}
+                                    {/* <Icon icon="task" /> */}
+                                    {/* Собрали всевозможные запросы по теме информационной безопасности. */}
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>
-                    <div className="project-steps__s">
-                        <div className="project-steps__subtitle">Этап 2. Разработка плана публикаций </div>
-                        <div className="project-steps__content">
-                            <div className="project-steps__text">На каждый полученный кластер мы подготовили отдельное ТЗ с учетом связанной семантики и написали профессиональных контент.</div>
-                            <div className="project-steps__adv">
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Сбор связанной семантики для каждого кластера.
+                </section> : null
+            }
+        </div>
+
+        {
+            detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
+            <section style={{ background: detail.workStepsColor }} className="project-steps">
+                <div className="container">
+                    <h2 className="heading-secondary">Этапы работ</h2>
+                    {
+                        detail.workSteps.map((item, index) => (
+                            <div key={index} className="project-steps__s">
+                                <div className="project-steps__subtitle">{item.workStepsTitle}</div>
+                                <div className="project-steps__content">
+                                    <div className="project-steps__text">{item.workStepsIntroText}</div>
+                                    <div className="project-steps__adv">
+                                        <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
+
+                                        {/* <div className="project-steps__adv-item">
+                                            <Icon icon="task" />
+                                            Проанализировали поисковую выдачу ТОП-10 и сайты прямых конкурентов.
+                                        </div>
+                                        <div className="project-steps__adv-item">
+                                            <Icon icon="task" />
+                                            Выстроили структуру блога и подготовили шаблон публикаций.
+                                        </div>
+                                        <div className="project-steps__adv-item">
+                                            <Icon icon="task" />
+                                            Собрали всевозможные запросы по теме информационной безопасности.
+                                        </div>
+                                        <div className="project-steps__adv-item">
+                                            <Icon icon="task" />
+                                            Кластеризировали полученные запросы.
+                                        </div>
+                                        <div className="project-steps__adv-item">
+                                            <Icon icon="task" />
+                                            Согласовали полученный список с клиентом.
+                                        </div> */}
+                                    </div>
                                 </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Создание подробного ТЗ для каждого кластера запросов
+                            </div>
+                        ))
+                    }
+                </div>
+            </section> : null
+        }
+
+{detail.result !== 'undefined' && detail.resultPersons ?
+            <section style={{ background: detail.resultsColor }} className="project-results results_bg">
+                <div className="container">
+                    <div className="project-results__wrap">
+                        <h2 style={{ color: detail.resultsColor === '#000000' ? '#ffffff' : '#000000' }} className="heading-secondary">Результаты</h2>
+                        <div className="project-results__content">
+                            <div className="project-results__person">
+                                <div className="project-results__person-info">
+                                    <div className="project-results__person-name">{detail.resultPersons.name},</div>
+                                    <div className="project-results__person-position">{detail.resultPersons.post} @ DEUS</div>
                                 </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Подготовка плана будущих публикаций.
-                                </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Написание и публикация профессиональных статей на тему кибербезопасности и защиты информации.
-                                </div>
-                                <div className="project-steps__adv-item">
-                                    <Icon icon="task" />
-                                    Минимальное ссылочное продвижение на авторитетных ресурсах (для более быстрой индексации и вхождения статей в индекс).
-                                </div>
+                                <div className="project-results__person-text"><div dangerouslySetInnerHTML={{ __html: detail.result }}></div></div>
+                                {/* <img src="/img/maks.png" alt="person" className="project-results__person-photo"/> */}
+                                {detail.resultPersons.image ? <img src={`${apiUrl}/uploads/${detail.resultPersons.image.filename}`} alt={detail.resultPersons.name} className="project-results__person-photo" /> : null}
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> : null }
 
+
+        {detail.visibilityImg1 && detail.visibilityTitle1 && detail.visibilityImg1 !== 'undefined' && detail.visibilityTitle1 !== 'undefined' ?
             <section className="project-analytics">
                 <div className="container">
                     <div className="project-analytics__wrap">
                         <div className="project-analytics__item">
-                            <h2 className="heading-secondary">Видимость в Яндекс</h2>
-                            <img src={projectAnalytic} alt="Видимость в Яндекс" className="project-analytics__img" />
+                            <h2 className="heading-secondary">{detail.visibilityTitle1}</h2>
+                            <div className="project-analytics__picture">
+                                {/* <img src="/img/yan.png" alt="Видимость в Яндекс" className="project-analytics__img" /> */}
+                                {detail.visibilityImg1 ? <img src={`${apiUrl}/uploads/${detail.visibilityImg1.filename}`} alt={detail.visibilityImg1.name} className="project-analytics__img" /> : null}
+
+                            </div>
                         </div>
                         <div className="project-analytics__item">
-                            <h2 className="heading-secondary">Видимость в Google</h2>
-                            <img src={projectAnalytic} alt="Видимость в Google" className="project-analytics__img" />
+                            <h2 className="heading-secondary">{detail.visibilityTitle2}</h2>
+                            <div className="project-analytics__picture">
+                                {/* <img src="/img/google.png" alt="Видимость в Google" className="project-analytics__img" /> */}
+                                {detail.visibilityImg2 ? <img src={`${apiUrl}/uploads/${detail.visibilityImg2.filename}`} alt={detail.visibilityImg2.name} className="project-analytics__img" /> : null}
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>*/}
+            </section> : null
+        }
 
             <ProjectNext />
 

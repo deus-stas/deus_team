@@ -45,6 +45,16 @@
                 line-height: 2.6rem;
             }
         }
+
+        &__link{
+            color: var(--text-and-bg, #191B1D);
+            font-size: 2.8rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%;
+            text-decoration-line: underline;
+            cursor: pointer;
+        }
     }
 
     &-goals {
@@ -79,6 +89,46 @@
                 margin-bottom: 3rem;
                 font-size: 2rem;
                 line-height: 2.6rem;
+            }
+        }
+
+        &__person{
+            background-color: #FFFFFF;
+            border-radius: 2rem 2rem 2rem 0;
+            padding: 4rem;
+            position: relative;
+            margin-bottom: 4rem;
+            &-info{
+                display: flex;
+                column-gap: .5rem;
+                @include respond(sm){
+                    flex-direction: column;
+                }
+            }
+            &-name{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+            }
+            &-position{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+                opacity: .6;
+            }
+            &-text{
+                font-size: 2.8rem;
+                font-weight: 500;
+                color: #191B1D;
+                line-height: 120%;
+            }
+            &-photo{
+                position: absolute;
+                left: -8rem;
+                bottom: 0;
+                width: 6rem;
+                height: 6rem;
+                border-radius: 50%;
             }
         }
 
@@ -202,9 +252,14 @@
 
     &-results {
         padding: 10rem 0;
+        // background-color: #191B1D;
 
         @include respond(sm) {
             padding: 6rem 0;
+        }
+
+        .heading-secondary{
+            color: #FFFFFF;
         }
 
         &__wrap {
@@ -230,6 +285,7 @@
         }
 
         &__text {
+            margin-bottom: 4rem;
             font-size: 2.4rem;
             line-height: 3.4rem;
             grid-column: 2/3;
@@ -282,9 +338,46 @@
             }
 
             @include respond(sm) {
+                margin-bottom: 3rem;
                 font-size: 2rem;
                 line-height: 2.6rem;
-                grid-column: 1/2;
+            }
+        }
+
+        &__person{
+            background-color: #FFFFFF;
+            border-radius: 2rem 2rem 2rem 0;
+            padding: 4rem;
+            position: relative;
+            margin-bottom: 4rem;
+            &-info{
+                display: flex;
+                column-gap: .5rem;
+            }
+            &-name{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+            }
+            &-position{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+                opacity: .6;
+            }
+            &-text{
+                font-size: 2.8rem;
+                font-weight: 500;
+                color: #191B1D;
+                line-height: 140%;
+            }
+            &-photo{
+                position: absolute;
+                left: -8rem;
+                bottom: 0;
+                width: 6rem;
+                height: 6rem;
+                border-radius: 50%;
             }
         }
     }
@@ -312,6 +405,11 @@
                     margin-bottom: 2rem;
                 }
             }
+        }
+
+        &__picture{
+            background-color: #F3F4F4;
+            padding: 70px 50px;
         }
 
         &__img {
@@ -414,4 +512,7 @@
             line-height: 3.1rem;
         }
     }
+}
+.results_bg {
+    padding: 10rem 0;
 }

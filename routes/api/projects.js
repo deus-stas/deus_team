@@ -17,6 +17,44 @@ const storage = multer.diskStorage({
     },
 });
 
+const addCustomId = async (req, res, next) => {
+    try {
+        const CustomIdProjects = await Projects.find();
+        let maxCustomId = -1;
+        for (let index = 0; index < CustomIdProjects.length; index++) {
+            if( parseInt(CustomIdProjects[index].customId) > maxCustomId)
+            maxCustomId = parseInt(CustomIdProjects[index].customId);
+        }
+        const newCustomId = maxCustomId ? `${parseInt(maxCustomId) + 1}` : `1`;
+        req.body = {
+            ...req.body,
+            customId: newCustomId,
+        };
+  
+        next();
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+const convertToLatin = async (req, res, next) => {
+    try {
+        const name = req.body.name
+        var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+
+
+        const editedName = name.split('').map(function (char) { 
+            return a[char] || char; 
+        }).join("");
+        console.log('edited name: ',editedName)
+        return editedName
+
+    } catch (error) {
+
+    }
+}
+
 const upload = multer({ storage: storage });
 
 router.get('/projects', async (req, res) => {
@@ -36,14 +74,39 @@ router.get('/projects', async (req, res) => {
     res.json(projects);
 });
 
-router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }, { name: 'imagesExtra' }]), async (req, res) => {
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
+router.post(
+    '/projects', 
+    upload.fields([
+        { name: 'image' }, 
+        { name: 'bannerFirst' }, 
+        { name: 'bannerSecond' }, 
+        { name: 'bannerThird' }, 
+        { name: 'bannerFourth' }, 
+        { name: 'bannerFifth' }, 
+        { name: 'imagesExtra' }, 
+        { name: 'mainVideoFile' }]), 
+    addCustomId,
+    async (req, res) => {
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
+    const workSteps = JSON.parse(req.body.workSteps);
 
-    console.log(tasksList);
-    console.log(req.files);
-    console.log(req.body);
-    let bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra;
+    var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+
+    const editedName = name.split('').map(function (char) { 
+        return a[char] || char; 
+    }).join("");
+    var editedWithLine = editedName.split(' ').join('-');
+    console.log('edited name: ',editedWithLine)
+    const nameInEng = editedWithLine
+
+
+    // console.log(tasksList);
+    // console.log('workSteps', workSteps);
+    // console.log(req.files);
+    // console.log(req.body);
+    console.log('inside', req.body.customId);
+    let bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -67,6 +130,18 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
 
     if (req.files.imagesExtra) {
         imagesExtra = req.files.imagesExtra;
+    }
+
+    if (req.files.mainVideoFile) {
+        mainVideoFile = req.files.mainVideoFile[0];
+    }
+
+    if (req.files.visibilityImg1) {
+        visibilityImg1 = req.files.visibilityImg1[0];
+    }
+
+    if (req.files.visibilityImg2) {
+        visibilityImg2 = req.files.visibilityImg2[0];
     }
 
     const image = req.files.image[0];
@@ -99,7 +174,22 @@ router.post('/projects', upload.fields([{ name: 'image' }, { name: 'bannerFirst'
         main,
         projectTheme,
         projectType,
-        imagesExtra
+        imagesExtra,
+        bannerText,
+        controlURL,
+        projectURL,
+        projectSite,
+        mainVideoFile,
+        workSteps,
+        aimColor,
+        workStepsColor,
+        visibilityTitle1, 
+        visibilityTitle2,
+        visibilityImg1, 
+        visibilityImg2,
+        resultsColor,
+        customId,
+        nameInEng
     });
 
     await projects.save();
@@ -119,7 +209,19 @@ router.get('/projects/:id', async (req, res) => {
     res.json(projects);
 });
 
-router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFirst' }, { name: 'bannerSecond' }, { name: 'bannerThird' }, { name: 'bannerFourth' }, { name: 'bannerFifth' }, { name: 'imagesExtra' }]), async (req, res) => {
+router.put("/projects/:id", 
+    upload.fields([
+        { name: 'image' }, 
+        { name: 'bannerFirst' }, 
+        { name: 'bannerSecond' }, 
+        { name: 'bannerThird' }, 
+        { name: 'bannerFourth' }, 
+        { name: 'bannerFifth' }, 
+        { name: 'imagesExtra' }, 
+        { name: 'mainVideoFile' }, 
+        { name: 'visibilityImg1'}, 
+        { name: 'visibilityImg2'}
+    ]), async (req, res) => {
     const { id } = req.params;
     const project = await Projects.findById(id);
 
@@ -129,9 +231,10 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
     console.log(req.body);
     console.log(req.files);
 
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng } = req.body;
 
     const tasksList = JSON.parse(req.body.tasksList);
+    const workSteps = JSON.parse(req.body.workSteps);
 
     if (req.files.image) {
         project.image = req.files.image[0];
@@ -261,7 +364,75 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
         }
     }
 
+    if (req.files.mainVideoFile) {
+        if (project.mainVideoFile) {
+            fs.unlink(project.mainVideoFile.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        project.mainVideoFile = req.files.mainVideoFile[0];
+    } else {
+        if (project.mainVideoFile && project.mainVideoFile.path && req.body.mainVideoFile !== 'true') {
+            fs.unlink(project.mainVideoFile.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            project.mainVideoFile = null;
+        }
+    }
+
+    if (req.files.visibilityImg1) {
+        if (project.visibilityImg1) {
+            fs.unlink(project.visibilityImg1.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        project.visibilityImg1 = req.files.visibilityImg1[0];
+    } else {
+        if (project.visibilityImg1 && project.visibilityImg1.path && req.body.visibilityImg1 !== 'true') {
+            fs.unlink(project.visibilityImg1.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            project.visibilityImg1 = null;
+        }
+    }
+
+    if (req.files.visibilityImg2) {
+        if (project.visibilityImg2) {
+            fs.unlink(project.visibilityImg2.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        project.visibilityImg2 = req.files.visibilityImg2[0];
+    } else {
+        if (project.visibilityImg2 && project.visibilityImg2.path && req.body.visibilityImg2 !== 'true') {
+            fs.unlink(project.visibilityImg2.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            project.visibilityImg2 = null;
+        }
+    }
+
     project.name = name;
+    var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+
+    const editedName = name.split('').map(function (char) { 
+        return a[char] || char; 
+    }).join("");
+    var editedWithLine = editedName.split(' ').join('-');
+    console.log('edited name: ',editedWithLine)
+    project.nameInEng = editedWithLine;
     project.mainVideo = mainVideo;
     project.color = color;
     project.about = about;
@@ -282,6 +453,17 @@ router.put("/projects/:id", upload.fields([{ name: 'image' }, { name: 'bannerFir
     project.approachPersons = approachPersons;
     project.resultPersons = resultPersons;
     project.main = main;
+    project.bannerText = bannerText,
+    project.controlURL = controlURL,
+    project.projectURL = projectURL,
+    project.projectSite = projectSite,
+    project.workSteps = workSteps
+    project.aimColor = aimColor
+    project.workStepsColor = workStepsColor,
+    project.visibilityTitle1 = visibilityTitle1,
+    project.visibilityTitle2 = visibilityTitle2,
+    project.resultsColor = resultsColor
+    project.customId = customId
 
     await project.save();
 
@@ -295,7 +477,7 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra } = project;
+    const { image, bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     if (image) {
@@ -321,6 +503,18 @@ router.delete("/projects/:id", async (req, res) => {
         imagesExtra.forEach((image) => {
             fs.unlinkSync(`uploads/${image.filename}`);
         });
+    }
+
+    if (mainVideoFile) {
+        fs.unlinkSync(`uploads/${mainVideoFile.filename}`);
+    }
+
+    if (visibilityImg1) {
+        fs.unlinkSync(`uploads/${visibilityImg1.filename}`);
+    }
+
+    if (visibilityImg2) {
+        fs.unlinkSync(`uploads/${visibilityImg2.filename}`);
     }
 
     res.json({ success: true });

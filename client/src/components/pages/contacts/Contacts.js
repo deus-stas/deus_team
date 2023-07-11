@@ -1,12 +1,20 @@
 import { Link } from 'react-router-dom';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-
+import {  useEffect } from 'react';
 import Cta from '../../cta/Cta';
 import SectionSocial from '../../sectionSocial/SectionSocial';
 
-import './contacts.scss'
+import './contacts.scss';
+
 
 const Contacts = () => {
+
+    useEffect(() => {
+        const element = document.getElementById('contactUs');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+        }, []);
 
     return (
         <main className="contacts">
@@ -35,8 +43,10 @@ const Contacts = () => {
                     </div>
                 </div>
             </section>
+            <section id="contactUs">
+                <Cta   formName={'project'} />
+            </section>
 
-            <Cta formName={'project'} />
 
             <SectionSocial />
 

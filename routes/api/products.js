@@ -36,24 +36,36 @@ router.get('/products', async (req, res) => {
     res.json(products);
 });
 
-router.post('/products', upload.single('video'), async (req, res) => {
+router.post('/products', upload.fields([{ name: 'img' }, { name: 'video' }]), async (req, res) => {
     const { name, descr, link, videoUrl } = req.body;
-    console.log(req.file);
+    
+    console.log(req.files);
 
-    const video = req.file;
+    let video, img;
+
+    if (req.files.video) {
+        video = req.files.video[0];
+    }
+
+    if (req.files.img) {
+        img = req.files.img[0];
+    }
+
 
     const products = new Products({
         name,
         descr,
         link,
         video,
-        videoUrl
+        videoUrl,
+        img
     });
 
     await products.save();
 
     res.json(products);
 });
+
 
 
 router.get('/products/:id', async (req, res) => {
@@ -63,55 +75,99 @@ router.get('/products/:id', async (req, res) => {
     if (!products) {
         return res.status(404).json({ error: 'Products not found' });
     }
-
     res.json(products);
 });
 
-router.put("/products/:id", upload.single('video'), async (req, res) => {
+router.put("/products/:id", upload.fields([{ name: 'video' }, { name: 'img' }]), async (req, res) => {
     const { id } = req.params;
 
-    // Проверяем, есть ли такой документ в базе данных
-    const products = await Products.findById(id);
-    if (!products) {
-        return res.status(404).json({ error: 'Products not found' });
+    // Check if the product exists in the database
+    const product = await Products.findById(id);
+    if (!product) {
+        return res.status(404).json({ error: 'Product not found' });
     }
 
     const { name, descr, link, videoUrl } = req.body;
-    const video = req.file;
 
-    // Если есть новое изображение в запросе, обновляем ссылку на него
-    if (video) {
-        fs.unlinkSync(`uploads/${products.video.filename}`);
-        products.video = video;
+    if (req.files && req.files.video) {
+        if (product.video) {
+            fs.unlink(product.video.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        product.video = req.files.video[0];
+    } else {
+        if (product.video && product.video.path && req.body.video !== 'true') {
+            fs.unlink(product.video.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            product.video = null;
+        }
     }
 
-    // Обновляем остальные поля документа
-    products.name = name;
-    products.descr = descr;
-    products.videoUrl = videoUrl;
-    products.link = link;
+    if (req.files && req.files.img) {
+        if (product.img) {
+            fs.unlink(product.img.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        product.img = req.files.img[0];
+    } else {
+        if (product.img && product.img.path && req.body.img !== 'true') {
+            fs.unlink(product.img.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            product.img = null;
+        }
+    }
 
-    // Сохраняем изменения
-    await products.save();
+    // Update the other fields of the document
+    product.name = name;
+    product.descr = descr;
+    product.videoUrl = videoUrl;
+    product.link = link;
 
-    res.json(products);
+    // Save the changes
+    await product.save();
+
+    res.json(product);
 });
+
+
 
 router.delete("/products/:id", async (req, res) => {
     const { id } = req.params;
-    const products = await Products.findByIdAndDelete(id);
-    if (!products) {
-        return res.status(404).json({ success: false, message: "Products not found" });
+
+    // Check if the product exists in the database
+    const product = await Products.findByIdAndDelete(id);
+    if (!product) {
+        return res.status(404).json({ success: false, message: "Product not found" });
     }
 
-    const { video } = products;
+    const { video, img } = product;
 
+    // If there is a video file associated with the product, delete it
     if (video) {
         fs.unlinkSync(`uploads/${video.filename}`);
+        console.log('delete')
+    }
+
+    // If there is an image file associated with the product, delete it
+    if (img) {
+        fs.unlinkSync(`uploads/${img.filename}`);
     }
 
     res.json({ success: true });
 });
+
 
 
 module.exports = router;
