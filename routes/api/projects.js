@@ -38,22 +38,6 @@ const addCustomId = async (req, res, next) => {
     }
 };
 
-const convertToLatin = async (req, res, next) => {
-    try {
-        const name = req.body.name
-        var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
-
-
-        const editedName = name.split('').map(function (char) { 
-            return a[char] || char; 
-        }).join("");
-        console.log('edited name: ',editedName)
-        return editedName
-
-    } catch (error) {
-
-    }
-}
 
 const upload = multer({ storage: storage });
 
@@ -96,8 +80,9 @@ router.post(
     const editedName = name.split('').map(function (char) { 
         return a[char] || char; 
     }).join("");
-    var editedWithLine = editedName.split(' ').join('-');
-    console.log('edited name: ',editedWithLine)
+    var rmPercent = editedName.replace("%",'');
+    var editedWithLine = rmPercent.split(' ').join('-');
+    
     const nameInEng = editedWithLine
 
 
@@ -197,10 +182,33 @@ router.post(
     res.json(projects);
 });
 
+router.get('/projects/:id', async (req, res) => {
+    const { id } = req.params;
+    if (id.includes("-")) {
+        const projects = await Projects.findOne({ nameInEng: id });
+        console.log("pr", projects)
 
+        if (!projects) {
+            return res.status(404).json({ error: 'projects not found' });
+        }
+
+        res.json(projects);
+    } else {
+        const projects = await Projects.findById(id);
+
+        if (!projects) {
+            return res.status(404).json({ error: 'projects not found' });
+        }
+
+        res.json(projects);
+    }
+    // const projects = await Projects.findById(nameInEng);
+    
+});
 router.get('/projects/:id', async (req, res) => {
     const { id } = req.params;
     const projects = await Projects.findById(id);
+
 
     if (!projects) {
         return res.status(404).json({ error: 'projects not found' });
@@ -425,14 +433,14 @@ router.put("/projects/:id",
     }
 
     project.name = name;
-    var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+    // var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
-    const editedName = name.split('').map(function (char) { 
-        return a[char] || char; 
-    }).join("");
-    var editedWithLine = editedName.split(' ').join('-');
-    console.log('edited name: ',editedWithLine)
-    project.nameInEng = editedWithLine;
+    // const editedName = name.split('').map(function (char) { 
+    //     return a[char] || char; 
+    // }).join("");
+    // var rmPercent = editedName.replace("%",'');
+    // var editedWithLine = rmPercent.split(' ').join('-');
+    project.nameInEng = nameInEng;
     project.mainVideo = mainVideo;
     project.color = color;
     project.about = about;

@@ -79,7 +79,7 @@
 
             .projects__item-img-wrap {
                 grid-column: 3/5;
-                margin-bottom: 0;
+                margin-bottom: -10px;
 
                 @include respond(sm) {
                     grid-column: 1/2;

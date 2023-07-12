@@ -263,7 +263,7 @@ const MainPage = () => {
                                             <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-banner__project-img" />
                                         )
                                     }
-                                    <Link to={`/projects/${project.id}`} className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
+                                    <Link to={`/projects/${project.nameInEng}`} className="main-banner__project-link btn --circle --b-white">Перейти <br /> к проекту</Link>
                                 </div>
                             </div>
                         </div>
@@ -359,7 +359,7 @@ const MainPage = () => {
                                     </div>
                                     <div className="main-projects__name">{project.name}</div>
                                 </a> :
-                                <Link to={`/projects/${project.id}`} className="main-projects__item" key={project.id}>
+                                <Link to={`/projects/${project.nameInEng}`} className="main-projects__item" key={project.id}>
                                 <div className="main-projects__img-wrap">
                                         {
                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 

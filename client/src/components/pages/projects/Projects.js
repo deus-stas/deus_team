@@ -152,7 +152,7 @@ const Projects = () => {
                                     </div>
                                     <div className="projects__item-name">{project.name}</div>
                                 </a> :
-                                <Link to={`/projects/${project.id}`} className="projects__item" key={project.id} style={{ background: project.color }}>
+                                <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                     <div className="projects__item-img-wrap">
                                         {
                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 

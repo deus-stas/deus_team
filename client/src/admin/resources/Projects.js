@@ -53,7 +53,8 @@ export const ProjectsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="name" label="Заголовок"  validate={[required()]} />
-            <TextInput source="customId" title="URL ID"  />
+            {/* <TextInput source="customId" title="URL ID"  /> */}
+            <TextInput source="nameInEng" label="URL" fullWidth  />
             <ImageInput source="image" label="Главное изображение" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
@@ -157,7 +158,8 @@ export const ProjectsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm toolbar={<MyToolbar />}>
             <TextInput source="name" label="Заголовок"  validate={[required()]} />
-            <TextInput source="customId" title="URL ID"  />
+            {/* <TextInput source="customId" title="URL ID"  /> */}
+            <TextInput source="nameInEng" label="URL" fullWidth  />
             <ImageInput source="image" label="Главное изображение" validate={[required()]} accept="image/*">
                 <FilenameField source="src" title="title" />
             </ImageInput>

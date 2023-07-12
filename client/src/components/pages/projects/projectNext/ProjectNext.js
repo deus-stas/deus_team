@@ -36,7 +36,7 @@ const ProjectNext = (props) => {
                             {props.last ? 'Последний созданный проект' : 'Следующий проект'}
                         </div>
                         <div className="project-next__name" dangerouslySetInnerHTML={{ __html: project.name }}></div>
-                        <Link to={`/projects/${project.id}`} className="btn --white">Перейти к проекту</Link>
+                        <Link to={`/projects/${project.nameInEng}`} className="btn --white">Перейти к проекту</Link>
                     </div>
                     <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt="Academy профессионального образовательного ресурса" className="project-next__img" />
                 </div>

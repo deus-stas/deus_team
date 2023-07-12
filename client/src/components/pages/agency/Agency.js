@@ -155,7 +155,7 @@ const Agency = () => {
                     <h1 className="heading-primary">Оказываем услуги, которые помогают нашим клиентам расти, открывать новые предприятия и масштабировать свой бизнес в цифровом пространстве.</h1>
                 </div>
                 {
-                    foundShowreel ? <Showreel data={foundShowreel} key={foundShowreel.id} /> : null
+                    foundShowreel ? <Showreel data={foundShowreel} key={foundShowreel.id} isMain={true} /> : null
                 }
             </section>
 
@@ -190,7 +190,7 @@ const Agency = () => {
                             showreels ? showreels.map(showreel => {
                                 return(
                                     showreel.mainShowreel === false || showreel.mainShowreel === "false" ? 
-                                     <Showreel data={showreel} key={showreel.id}/> : null
+                                     <Showreel data={showreel} key={showreel.id} isMain={false}/> : null
                                 )
                             }) : null
                         }

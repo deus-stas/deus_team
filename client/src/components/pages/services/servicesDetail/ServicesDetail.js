@@ -298,7 +298,7 @@ const ServicesDetail = () => {
                             {
                                 projects.map(project => {
                                     return (
-                                        <Link to={`/projects/${project.id}`} className="projects__item" key={project.id} style={{ background: project.color }}>
+                                        <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                             <div className="projects__item-img-wrap">
                                                 {
                                                     project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
