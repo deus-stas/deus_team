@@ -197,9 +197,9 @@ const Agency = () => {
                     </div>
                 </div>
             </section>
-
             {
-                awards ? <section className="agency-benefits" id="awards">
+                
+                awards && (awards[0] ? awards[0].controlVisibility : null) ? <section className="agency-benefits" id="awards">
                     <div className="container">
                         <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
                             <TabList className="agency-benefits__info">
@@ -247,7 +247,7 @@ const Agency = () => {
 
 
             {
-                raitings ? <section className="agency-benefits">
+                raitings && (raitings[0] ? raitings[0].controlVisibility : null) ? <section className="agency-benefits">
                     <div className="container">
                         <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
                             <TabList className="agency-benefits__info">

@@ -134,8 +134,15 @@ const Services = () => {
                                     <div className="services-reviews__name">{review.name}</div>
                                     <div className="services-reviews__s">{review.service}</div>
                                     <div className="services-reviews__type">{review.type}</div>
-                                    <div className="services-reviews__file">{review.reviewFile.mimetype}</div>
-                                    <img src={`${apiUrl}/uploads/${review.reviewFile.filename}`} alt={review.name} className="services-reviews__r" />
+                                    {
+                                        review.reviewFile ?  (
+                                            <>
+                                                <div className="services-reviews__file">{review.reviewFile.mimetype}</div>
+                                                <img src={`${apiUrl}/uploads/${review.reviewFile.filename}`} alt={review.name} className="services-reviews__r" />
+                                            </>
+                                        ) : null
+                                    }
+                                    
                                 </div>
                             )
                         }) : null}

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const awardsSchema = new Schema({
     name: { type: String, required: true },
+    controlVisibility: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v},
     image: { type: Object },
     awardProject: { type: Array }
 });

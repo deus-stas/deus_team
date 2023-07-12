@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, SimpleFormIterator, ArrayInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, SimpleFormIterator, ArrayInput, BooleanInput } from 'react-admin';
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -35,6 +35,7 @@ export const RaitingsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="name" label="Название" validate={[required()]} />
+            <BooleanInput source="controlVisibility" label="Скрыть/Показать"/>
             <ImageInput source="image" label="Иконка" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
@@ -57,6 +58,7 @@ export const RaitingsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput source="name" label="Название" validate={[required()]} />
+            <BooleanInput source="controlVisibility" label="Скрыть/Показать"/>
             <ImageInput source="image" label="Картинка" validate={[required()]} accept="image/*">
                 <FilenameField source="image" title="title" />
             </ImageInput>

@@ -37,7 +37,7 @@ router.get('/awards', async (req, res) => {
 });
 
 router.post('/awards', upload.single('image'), async (req, res) => {
-  const { name, awardProject } = req.body;
+  const { name, awardProject,controlVisibility } = req.body;
   console.log(req.file);
 
   const image = req.file;
@@ -45,7 +45,8 @@ router.post('/awards', upload.single('image'), async (req, res) => {
   const awards = new Awards({
     name,
     image,
-    awardProject
+    awardProject,
+    controlVisibility
   });
 
   await awards.save();
@@ -74,7 +75,7 @@ router.put("/awards/:id", upload.single('image'), async (req, res) => {
     return res.status(404).json({ error: 'Awards not found' });
   }
 
-  const { name, awardProject } = req.body;
+  const { name, awardProject, controlVisibility } = req.body;
   const image = req.file;
 
   // Если есть новое изображение в запросе, обновляем ссылку на него
@@ -86,6 +87,7 @@ router.put("/awards/:id", upload.single('image'), async (req, res) => {
   // Обновляем остальные поля документа
   awards.name = name;
   awards.awardProject = awardProject;
+  awards.controlVisibility = controlVisibility;
 
   // Сохраняем изменения
   await awards.save();

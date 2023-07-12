@@ -37,7 +37,7 @@ router.get('/raitings', async (req, res) => {
 });
 
 router.post('/raitings', upload.single('image'), async (req, res) => {
-    const { name, raitingProject } = req.body;
+    const { name, raitingProject, controlVisibility } = req.body;
     console.log(req.file);
 
     const image = req.file;
@@ -45,7 +45,8 @@ router.post('/raitings', upload.single('image'), async (req, res) => {
     const raitings = new Raitings({
         name,
         image,
-        raitingProject
+        raitingProject,
+        controlVisibility
     });
 
     await raitings.save();
@@ -74,7 +75,7 @@ router.put("/raitings/:id", upload.single('image'), async (req, res) => {
         return res.status(404).json({ error: 'Raitings not found' });
     }
 
-    const { name, raitingProject } = req.body;
+    const { name, raitingProject, controlVisibility } = req.body;
     const image = req.file;
 
     // Если есть новое изображение в запросе, обновляем ссылку на него
@@ -86,6 +87,7 @@ router.put("/raitings/:id", upload.single('image'), async (req, res) => {
     // Обновляем остальные поля документа
     raitings.name = name;
     raitings.raitingProject = raitingProject;
+    raitings.controlVisibility = controlVisibility
 
     // Сохраняем изменения
     await raitings.save();
