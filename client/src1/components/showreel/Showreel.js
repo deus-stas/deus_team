@@ -11,7 +11,7 @@ class MutedVideo extends HTMLVideoElement {
       this.autoplay = true;
     }
   }
-
+  
 customElements.define("x-muted", MutedVideo, { extends: "video" });
 
 const apiUrl = process.env.NODE_ENV === 'production'
@@ -22,7 +22,7 @@ const Showreel = (props) => {
     const [open, setOpen] = useState(false);
 
     const videoRef = useRef(null);
-
+    
     const closeModal = () => setOpen(false);
     const openModal = () => {
         console.log('Modal opened',  videoRef);
@@ -31,7 +31,7 @@ const Showreel = (props) => {
     };
 
     const { data, isMain } = props;
-
+    
 
     return (
         <div className="showreel">
@@ -41,7 +41,7 @@ const Showreel = (props) => {
                     <div className="showreel__s">
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' ?
-                            <video ref={videoRef} autoPlay muted controls loop  playsInline>
+                            <video ref={videoRef} muted controls loop  playsInline>
                                 <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                             </video> :
                             data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
@@ -67,7 +67,7 @@ const Showreel = (props) => {
                     </div>
                 )
             }
-
+            
             <Popup open={open} closeOnDocumentClick onClose={closeModal}>
                 <div>
                     <div className="popup__close" onClick={closeModal}>

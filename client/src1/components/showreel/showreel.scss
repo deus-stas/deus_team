@@ -1,0 +1,82 @@
+@import '../../style/mixins';
+
+.showreel {
+    &__title {
+        // display: flex;
+        display: none;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        line-height: 2.6rem;
+
+        @include respond(sm) {
+            margin-bottom: 0.8rem;
+        }
+
+        span {
+            margin-left: 0.5rem;
+            opacity: 0.4;
+        }
+
+        &::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            margin-right: 0.8rem;
+            border-radius: 50%;
+            background: #FF4D01;
+            transform: translateY(-.3rem);
+        }
+    }
+
+    &__s {
+        // cursor: none;
+        cursor: pointer;
+        position: relative;
+
+        video {
+            width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/0.5625;
+        }
+
+        p {
+            display: none;
+        }
+
+        @include respond(sm) {
+            &::before {
+                content: '';
+                width: 6rem;
+                height: 6rem;
+                background: url('../../img/play-video.svg')no-repeat center/cover;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+}
+.popup-content {
+    margin: auto;
+    padding: 5px;
+  }
+  .popup-arrow {
+    color: rgb(255, 255, 255);
+  }
+  [role='tooltip'].popup-content {
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+  }
+  
+  .popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  [data-popup='tooltip'].popup-overlay {
+    background: transparent;
+  }

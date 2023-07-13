@@ -1,0 +1,518 @@
+@import '../../../../style/mixins';
+
+.project {
+    &-main {
+        padding: 6.9rem 0rem 10rem;
+
+        @include respond(sm) {
+            padding: 6rem 0;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .52fr .24fr;
+            grid-gap: 4rem;
+            justify-content: space-between;
+
+            @include respond(md) {
+                grid-template-columns: .5fr .4fr;
+            }
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 4rem;
+            }
+        }
+
+        &__subtitle {
+            margin-bottom: 2rem;
+            font-weight: 500;
+            font-size: 3.6rem;
+            line-height: 4.3rem;
+
+            @include respond(sm) {
+                font-size: 3.2rem;
+                line-height: 3.8rem;
+            }
+        }
+
+        &__descr {
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+
+            @include respond(sm) {
+                font-size: 2rem;
+                line-height: 2.6rem;
+            }
+        }
+
+        &__link{
+            color: var(--text-and-bg, #191B1D);
+            font-size: 2.8rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%;
+            text-decoration-line: underline;
+            cursor: pointer;
+        }
+    }
+
+    &-goals {
+        padding: 10rem 0;
+        background: #F3F4F4;
+
+        @include respond(sm) {
+            padding: 6rem 0;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            grid-gap: 4rem;
+
+            @include respond(md) {
+                grid-template-columns: .3fr .6fr;
+            }
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 3rem;
+            }
+        }
+
+        &__text {
+            margin-bottom: 4rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+
+            @include respond(sm) {
+                margin-bottom: 3rem;
+                font-size: 2rem;
+                line-height: 2.6rem;
+            }
+        }
+
+        &__person{
+            background-color: #FFFFFF;
+            border-radius: 2rem 2rem 2rem 0;
+            padding: 4rem;
+            position: relative;
+            margin-bottom: 4rem;
+            &-info{
+                display: flex;
+                column-gap: .5rem;
+                @include respond(sm){
+                    flex-direction: column;
+                }
+            }
+            &-name{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+            }
+            &-position{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+                opacity: .6;
+            }
+            &-text{
+                font-size: 2.8rem;
+                font-weight: 500;
+                color: #191B1D;
+                line-height: 120%;
+            }
+            &-photo{
+                position: absolute;
+                left: -8rem;
+                bottom: 0;
+                width: 6rem;
+                height: 6rem;
+                border-radius: 50%;
+            }
+        }
+
+        &__tasks {
+            &-item {
+                display: flex;
+                align-items: flex-start;
+                font-size: 2.4rem;
+                line-height: 3.4rem;
+
+                @include respond(sm) {
+                    font-size: 2rem;
+                    line-height: 2.6rem;
+                }
+
+                .icon {
+                    flex: 0 0 3.2rem;
+                    width: 3.2rem;
+                    height: 3.2rem;
+                    margin-right: 1.6rem;
+                    transform: translateY(-.3rem);
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+
+    &-steps {
+        padding: 10rem 0;
+
+        @include respond(sm) {
+            padding: 6rem 0;
+        }
+
+        .heading-secondary {
+            margin-bottom: 6rem;
+
+            @include respond(sm) {
+                margin-bottom: 3rem;
+            }
+        }
+
+        &__s {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            grid-gap: 4rem;
+
+            @include respond(md) {
+                grid-template-columns: .3fr .6fr;
+            }
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 2rem;
+            }
+
+            &:not(:last-child) {
+                padding-bottom: 4rem;
+                margin-bottom: 4rem;
+                border-bottom: 1px solid rgba(25, 27, 29, 0.3);
+
+                @include respond(sm) {
+                    padding-bottom: 3rem;
+                    margin-bottom: 3rem;
+                }
+            }
+        }
+
+        &__subtitle {
+            max-width: 29rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+
+            @include respond(sm) {
+                font-size: 2.6rem;
+                line-height: 3.1rem;
+            }
+        }
+
+        &__text {
+            margin-bottom: 2rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+
+            @include respond(sm) {
+                font-size: 2rem;
+                line-height: 2.6rem;
+            }
+        }
+
+        &__adv {
+            &-item {
+                display: flex;
+                align-items: flex-start;
+                font-size: 2.4rem;
+                line-height: 3.4rem;
+
+                @include respond(sm) {
+                    font-size: 2rem;
+                    line-height: 2.6rem;
+                }
+
+                .icon {
+                    width: 3.2rem;
+                    height: 3.2rem;
+                    flex: 0 0 3.2rem;
+                    margin-right: 1.6rem;
+                    transform: translateY(-.3rem);
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+
+    &-results {
+        padding: 10rem 0;
+        // background-color: #191B1D;
+
+        @include respond(sm) {
+            padding: 6rem 0;
+        }
+
+        .heading-secondary{
+            color: #FFFFFF;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: .25fr .5fr;
+            grid-gap: 4rem;
+
+            @include respond(md) {
+                grid-template-columns: .3fr .6fr;
+            }
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 3rem;
+
+                .quote {
+                    &__q {
+                        font-size: 2rem;
+                        line-height: 2.6rem;
+                    }
+                }
+            }
+        }
+
+        &__text {
+            margin-bottom: 4rem;
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+            grid-column: 2/3;
+
+            p {
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            ul {
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+
+                li {
+                    display: flex;
+                    align-items: center;
+
+                    &:not(:last-child) {
+                        margin-bottom: 0.5rem;
+                    }
+
+                    &::before {
+                        content: '';
+                        flex: 0 0 3.2rem;
+                        width: 3.2rem;
+                        height: 3.2rem;
+                        margin-right: 1.6rem;
+                        transform: translateY(-.3rem);
+                        background: url('../../../../img/icon-task.svg')no-repeat center/contain;
+                    }
+                }
+            }
+
+            ol {
+                padding-left: 2rem;
+
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+
+                li {
+                    list-style-type: auto;
+
+                    &:not(:last-child) {
+                        margin-bottom: 0.5rem;
+                    }
+                }
+            }
+
+            @include respond(sm) {
+                margin-bottom: 3rem;
+                font-size: 2rem;
+                line-height: 2.6rem;
+            }
+        }
+
+        &__person{
+            background-color: #FFFFFF;
+            border-radius: 2rem 2rem 2rem 0;
+            padding: 4rem;
+            position: relative;
+            margin-bottom: 4rem;
+            &-info{
+                display: flex;
+                column-gap: .5rem;
+            }
+            &-name{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+            }
+            &-position{
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: #191B1D;
+                opacity: .6;
+            }
+            &-text{
+                font-size: 2.8rem;
+                font-weight: 500;
+                color: #191B1D;
+                line-height: 140%;
+            }
+            &-photo{
+                position: absolute;
+                left: -8rem;
+                bottom: 0;
+                width: 6rem;
+                height: 6rem;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    &-analytics {
+        padding: 10rem 0 5rem;
+
+        @include respond(sm) {
+            padding: 6rem 0 3rem;
+        }
+
+        &__wrap {
+            display: grid;
+            grid-template-columns: repeat(2, .5fr);
+            grid-gap: 4rem;
+
+            @include respond(sm) {
+                grid-template-columns: 100%;
+            }
+
+            .heading-secondary {
+                margin-bottom: 3rem;
+
+                @include respond(sm) {
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+
+        &__picture{
+            background-color: #F3F4F4;
+            padding: 70px 50px;
+        }
+
+        &__img {
+            width: 100%;
+        }
+    }
+
+    &-banner {
+        &.--extra {
+            margin: 5rem 0;
+        }
+
+        img,
+        video {
+            display: block;
+            width: 100%;
+        }
+
+        iframe {
+            height: auto;
+            width: 100%;
+            aspect-ratio: 1/0.5;
+        }
+
+        p {
+            display: none;
+        }
+    }
+}
+
+.quote {
+    position: relative;
+
+    &:not(:last-child) {
+        margin-bottom: 4rem;
+
+        @include respond(sm) {
+            margin-bottom: 3rem;
+        }
+    }
+
+    &__img {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        position: absolute;
+        left: -8rem;
+        bottom: 0;
+
+        @include respond(sm) {
+            width: 4rem;
+            height: 4rem;
+            flex: 0 0 4rem;
+            margin-right: 1rem;
+            position: static;
+        }
+    }
+
+    &__box {
+        padding: 4rem;
+        background: #F3F4F4;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px 20px 20px 0px;
+
+        @include respond(sm) {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column-reverse;
+            border-radius: 20px;
+        }
+    }
+
+    &__person {
+        margin-bottom: 1rem;
+        line-height: 1.8rem;
+
+        @include respond(sm) {
+            display: flex;
+            align-items: center;
+        }
+
+        span {
+            opacity: 0.6;
+
+            @include respond(sm) {
+                display: block;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+
+    &__q {
+        font-weight: 500;
+        font-size: 2.8rem;
+        line-height: 3.4rem;
+
+        @include respond(sm) {
+            margin-bottom: 2rem;
+            font-size: 2.6rem;
+            line-height: 3.1rem;
+        }
+    }
+}
+.results_bg {
+    padding: 10rem 0;
+}

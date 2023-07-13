@@ -25,7 +25,6 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const Agency = () => {
 
     const [awards, setAwards] = useState([]);
-    const [diplomas, setDiplomas] = useState([]);
     const [raitings, setRaitings] = useState([]);
     const [clients, setClients] = useState([]);
     const [team, setTeam] = useState([]);
@@ -57,16 +56,6 @@ const Agency = () => {
             .then((response) => {
                 setAwards(response.data);
                 console.log(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/diplomas/`)
-            .then((response) => {
-                setDiplomas(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -209,53 +198,7 @@ const Agency = () => {
                 </div>
             </section>
             {
-                diplomas && (diplomas[0] ? diplomas[0].controlVisibility : null) ? <section className="agency-benefits" id="diplomas">
-                    <div className="container">
-                        <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
-                            <TabList className="agency-benefits__info">
-                                <h2 className="heading-secondary">Дипломы и бейжи</h2>
-                                <div className="agency-benefits__info-wrap">
-                                    {
-                                        diplomas.map(diploma => {
-                                            return (
-                                                <Tab className="agency-benefits__info-btn" key={diploma.id}>
-                                                    <img src={diploma.image ? `${apiUrl}/uploads/${diploma.image.filename}` : null} alt={diploma.name} />
-                                                    {diploma.name} <sup>{diploma.diplomaProject.length}</sup>
-                                                </Tab>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </TabList>
-                            <div className="agency-benefits__tabs">
-                                {
-                                    diplomas.map(diploma => {
-                                        return (
-                                            <TabPanel className="agency-benefits__content" key={diploma.id}>
-                                                <div className="agency-benefits__content-wrap">
-                                                    {
-                                                        diploma.diplomaProject.map((project, i) => {
-                                                            return (
-                                                                <div className="agency-benefits__item" key={i}>
-                                                                    <div className="agency-benefits__name">{project.diplomaName}</div>
-                                                                    <div className="agency-benefits__descr">{project.diplomaPlace}</div>
-                                                                    <div className="agency-benefits__year">{project.diplomaYear}</div>
-                                                                </div>
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
-                                            </TabPanel>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </Tabs>
-                    </div>
-                </section>
-                    : null
-            }
-            {
+                
                 awards && (awards[0] ? awards[0].controlVisibility : null) ? <section className="agency-benefits" id="awards">
                     <div className="container">
                         <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
@@ -300,8 +243,7 @@ const Agency = () => {
                         </Tabs>
                     </div>
                 </section>
-                    : null
-            }
+                    : null}
 
 
             {

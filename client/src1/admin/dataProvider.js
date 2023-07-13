@@ -135,12 +135,6 @@ const dataProvider = {
               formData.append(`awardProject[${index}][${itemKey}]`, item[itemKey]);
             });
           });
-        } else if (key === 'diplomaProject') {
-          value.forEach((item, index) => {
-            Object.keys(item).forEach((itemKey) => {
-              formData.append(`diplomaProject[${index}][${itemKey}]`, item[itemKey]);
-            });
-          });
         } else if (key === "raitingProject") {
           value.forEach((item, index) => {
             Object.keys(item).forEach((itemKey) => {
