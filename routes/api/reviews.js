@@ -36,11 +36,11 @@ router.get('/reviews', async (req, res) => {
     res.json(reviews);
 });
 
-router.post('/reviews', upload.fields([{ name: 'reviewFile' }, { name: 'reviewImage' }]), async (req, res) => {
+router.post('/reviews', upload.fields([{ name: 'reviewFile' }, { name: 'reviewImage' }, { name: 'reviewBg'}]), async (req, res) => {
     const { name, service, type, reviewName, reviewPost, review, reviewProject, reviewService } = req.body;
     console.log(req.file);
 
-    let reviewFile, reviewImage;
+    let reviewFile, reviewImage, reviewBg;
 
     if (req.files.reviewFile) {
         reviewFile = req.files.reviewFile[0];
@@ -48,6 +48,10 @@ router.post('/reviews', upload.fields([{ name: 'reviewFile' }, { name: 'reviewIm
 
     if (req.files.reviewImage) {
         reviewImage = req.files.reviewImage[0];
+    }
+
+    if (req.files.reviewBg) {
+        reviewBg = req.files.reviewBg[0];
     }
 
     const reviews = new Reviews({
@@ -60,7 +64,8 @@ router.post('/reviews', upload.fields([{ name: 'reviewFile' }, { name: 'reviewIm
         reviewProject,
         reviewService,
         reviewFile,
-        reviewImage
+        reviewImage,
+        reviewBg
     });
 
     await reviews.save();
@@ -80,7 +85,7 @@ router.get('/reviews/:id', async (req, res) => {
     res.json(reviews);
 });
 
-router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'reviewImage' }]), async (req, res) => {
+router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'reviewImage' }, { name: 'reviewBg' }]), async (req, res) => {
     const { id } = req.params;
     const reviews = await Reviews.findById(id);
 
@@ -132,6 +137,26 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
         }
     }
 
+    if (req.files.reviewBg) {
+        if (reviews.reviewBg) {
+            fs.unlink(reviews.reviewBg.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        reviews.reviewBg = req.files.reviewBg[0];
+    } else {
+        if (reviews.reviewBg && reviews.reviewBg.path) {
+            fs.unlink(reviews.reviewBg.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            reviews.reviewBg = null;
+        }
+    }
+
     reviews.name = name;
     reviews.service = service;
     reviews.type = type;
@@ -153,7 +178,7 @@ router.delete("/reviews/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "reviews not found" });
     }
 
-    const { reviewFile, reviewImage } = reviews;
+    const { reviewFile, reviewImage, reviewBg } = reviews;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     if (reviewFile) {
@@ -161,6 +186,10 @@ router.delete("/reviews/:id", async (req, res) => {
     }
     if (reviewImage) {
         fs.unlinkSync(`uploads/${reviewImage.filename}`);
+    }
+
+    if (reviewBg) {
+        fs.unlinkSync(`uploads/${reviewBg.filename}`);
     }
 
     res.json({ success: true });

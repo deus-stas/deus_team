@@ -12,6 +12,7 @@ const servicesSchema = new Schema({
     review: { type: String },
     reviewProject: { type: String },
     reviewService: { type: String },
+    reviewBg: { type: Object },
 });
 
 servicesSchema.set('toJSON', { virtuals: true });

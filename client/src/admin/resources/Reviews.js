@@ -53,6 +53,9 @@ export const ReviewsCreate = (props) => (
             <ReferenceArrayInput source="reviewService" reference="services">
                 <SelectInput optionText="name" label="Услуга" />
             </ReferenceArrayInput>
+            <ImageInput source="reviewBg" label="Фото отзывa" accept="image/*">
+                <ImageField source="src" title="title" />
+            </ImageInput>
         </SimpleForm>
     </Create>
 );
@@ -78,6 +81,9 @@ export const ReviewsEdit = (props) => (
             <ReferenceArrayInput source="reviewService" reference="services">
                 <SelectInput optionText="name" label="Услуга" />
             </ReferenceArrayInput>
+            <ImageInput source="reviewBg" label="Фото отзывa" accept="image/*">
+                <ImageField source="src" title="title" />
+            </ImageInput>
         </SimpleForm>
     </Edit>
 );
