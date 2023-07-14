@@ -50,7 +50,8 @@ router.post('/services', addPosition, async (req, res) => {
         servicesServices,
         work,
         tariffs,
-        position } = req.body;
+        position,
+        blockTitle } = req.body;
     const services = new Services({
         name,
         descrTotal,
@@ -60,7 +61,8 @@ router.post('/services', addPosition, async (req, res) => {
         servicesServices,
         work,
         tariffs,
-        position
+        position,
+        blockTitle
     });
 
     await services.save();
@@ -89,7 +91,7 @@ router.get('/services/:id', async (req, res) => {
 router.put("/services/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const { position, name, descrTotal, descr, benefitsTitle, benefits, servicesServices, work, tariffs } = req.body;
+      const { position, name, descrTotal, descr, benefitsTitle, benefits, servicesServices, work, tariffs, blockTitle } = req.body;
   
       const service = await Services.findById(id);
   
@@ -114,6 +116,7 @@ router.put("/services/:id", async (req, res) => {
       service.servicesServices = servicesServices;
       service.work = work;
       service.tariffs = tariffs;
+      service.blockTitle = blockTitle
 
       console.log("new", servicesServices)
   

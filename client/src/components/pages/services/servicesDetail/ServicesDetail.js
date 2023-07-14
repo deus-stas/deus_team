@@ -243,7 +243,9 @@ const ServicesDetail = () => {
                     <section className="service-s">
                         <div className="container">
                             <div className="service-s__wrap">
-                                <h2 className="heading-secondary">Услуги</h2>
+                                <h2 className="heading-secondary">
+                                    {service.blockTitle}
+                                </h2>
                                 <div className={`service-s__content ${service.servicesServices.length % 2 === 0 ? 'even' : 'odd'}`}>
                                     {
                                         service.servicesServices.map(item => {

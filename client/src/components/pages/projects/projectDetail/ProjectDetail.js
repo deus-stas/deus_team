@@ -115,29 +115,7 @@ const ProjectDetail = () => {
                         </section>
                         : null
             }
-            {/* {detail.task !== 'undefined' && detail.taskPersons ?
-                <section className="project-results">
-                    <div className="container">
-                        <div className="project-results__wrap">
-                            <h2 className="heading-secondary">Задача</h2>
-                            <div className="quote">
-                                <div className="quote__box">
-                                    <div className="quote__person">
-                                        {detail.taskPersons.image ? <img src={`${apiUrl}/uploads/${detail.taskPersons.image.filename}`} alt={detail.taskPersons.name} className="quote__img" /> : null}
-
-                                        <div className="quote__person-text">
-                                            {detail.taskPersons.name}, <span>{detail.taskPersons.post} @ DEUS</span>
-                                        </div>
-                                    </div>
-                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                : null
-            } */}
-
+            
             {
                 detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
                     <section className="project-banner">
@@ -156,125 +134,6 @@ const ProjectDetail = () => {
                         </section>
                         : null
             }
-
-
-            {/* <div style={{ background: detail.aimColor }}>
-                {detail.taskDescr !== 'undefined' && detail.taskDescr ?
-                    <section className="project-results">
-                        <div className="container">
-                            <div className="project-results__wrap">
-                                <h2 className="heading-secondary">Цели и задачи</h2>
-                                <div className="quote">
-                                    <div>
-                                        { detail.taskDescr }
-                                    </div>
-                                    <div className="quote__box">
-                                        <div className="quote__person">
-                                            {detail.taskPersons.image ? <img src={`${apiUrl}/uploads/${detail.taskPersons.image.filename}`} alt={detail.taskPersons.name} className="quote__img" /> : null}
-
-                                            <div className="quote__person-text">
-                                                {detail.taskPersons.name}, <span>{detail.taskPersons.post} @ DEUS</span>
-                                            </div>
-                                        </div>
-
-                                        <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.task }}></div>
-                                    </div>
-                                    {
-                                        detail.tasksList !== 'undefined' && detail.tasksList ?
-                                        <div>
-                                            {
-                                                detail.tasksList.map((item, index) => (
-                                                    <div key={index}>{item.tasksItem}</div>
-                                                ))
-                                            }
-                                        </div> : null
-                                    }
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </section>
-                    : null
-                }
-            </div> */}
-
-
-
-            {/* <div style={{ background: detail.aimColor }}>
-                {
-                    detail.taskDescr && detail.taskDescr !== 'undefined' ?
-                    <div>{
-                        detail.taskDescr
-                    }</div> : null
-                }
-                {
-                    detail.tasksList !== 'undefined' && detail.tasksList ?
-                    <div>
-                        {
-                            detail.tasksList.map((item, index) => (
-                                <div key={index}>{item.tasksItem}</div>
-                            ))
-                        }
-                    </div> : null
-                }
-            </div> */}
-
-
-
-
-            {/* {
-                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" ?
-                <div>{
-                    detail.taskDescr
-                }</div> : null
-            } */}
-            {/* {
-                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
-                    <div style={{ background: detail.workStepsColor }}>
-                        {
-                            <section className="project-results">
-                                <div className="container">
-                                    <div className="project-results__wrap">
-                                        <h2 className="heading-secondary">Этапы работ</h2>
-                                    </div>
-
-                                    {
-                                        detail.workSteps.map((item, index) => (
-                                            <div  key={index} style={{borderBottom:'1px solid #000'}} className="container">
-                                                <div className="project-results__wrap">
-                                                    <h2 className="heading-secondary">{item.workStepsTitle}</h2>
-                                                    <div>
-                                                        <div className='project-results__text'>{item.workStepsIntroText}</div>
-                                                        <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </section>
-
-                        }
-                    </div> : null
-            } */}
-            {/* {
-                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" ?
-                <div >
-                    {
-                        detail.workSteps.map((item, index) => (
-                            <div key={index} style={{display:'flex', borderBottom:'1px solid #000'}}>
-                                <div>{item.workStepsTitle}</div>
-                                <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
-                            </div>
-
-                        ))
-                    }
-                </div> : null
-            }
-             */}
-
 
 
             {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
@@ -348,28 +207,6 @@ const ProjectDetail = () => {
                         : null
             }
 
-            {/* {detail.result !== 'undefined' && detail.resultPersons ?
-                <section className="project-results">
-                    <div className="container">
-                        <div className="project-results__wrap">
-                            <h2 className="heading-secondary">Результаты</h2>
-                            <div className="quote">
-                                <div className="quote__box">
-                                    <div className="quote__person">
-                                        {detail.resultPersons.image ? <img src={`${apiUrl}/uploads/${detail.resultPersons.image.filename}`} alt={detail.resultPersons.name} className="quote__img" /> : null}
-
-                                        <div className="quote__person-text">
-                                            {detail.resultPersons.name}, <span>{detail.resultPersons.post} @ DEUS</span>
-                                        </div>
-                                    </div>
-                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.result }}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                : null} */}
-
             {
                 detail.bannerFifthVideo && detail.bannerFifthVideo !== 'undefined' && detail.bannerFifthVideo !== 'null' ?
                     <section className="project-banner">
@@ -436,18 +273,6 @@ const ProjectDetail = () => {
                                             }
                                         </div> : null
                                     }
-                                {/* <div className="project-goals__tasks-item"> */}
-                                    {/* <Icon icon="task" /> */}
-                                    {/* Проанализировали поисковую выдачу ТОП-10 и сайты прямых конкурентов. */}
-                                {/* </div> */}
-                                {/* <div className="project-goals__tasks-item"> */}
-                                    {/* <Icon icon="task" /> */}
-                                    {/* Выстроили структуру блога и подготовили шаблон публикаций. */}
-                                {/* </div> */}
-                                {/* <div className="project-goals__tasks-item"> */}
-                                    {/* <Icon icon="task" /> */}
-                                    {/* Собрали всевозможные запросы по теме информационной безопасности. */}
-                                {/* </div> */}
                             </div>
                         </div>
                     </div>
@@ -468,27 +293,6 @@ const ProjectDetail = () => {
                                     <div className="project-steps__text">{item.workStepsIntroText}</div>
                                     <div className="project-steps__adv">
                                         <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
-
-                                        {/* <div className="project-steps__adv-item">
-                                            <Icon icon="task" />
-                                            Проанализировали поисковую выдачу ТОП-10 и сайты прямых конкурентов.
-                                        </div>
-                                        <div className="project-steps__adv-item">
-                                            <Icon icon="task" />
-                                            Выстроили структуру блога и подготовили шаблон публикаций.
-                                        </div>
-                                        <div className="project-steps__adv-item">
-                                            <Icon icon="task" />
-                                            Собрали всевозможные запросы по теме информационной безопасности.
-                                        </div>
-                                        <div className="project-steps__adv-item">
-                                            <Icon icon="task" />
-                                            Кластеризировали полученные запросы.
-                                        </div>
-                                        <div className="project-steps__adv-item">
-                                            <Icon icon="task" />
-                                            Согласовали полученный список с клиентом.
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>

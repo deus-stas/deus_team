@@ -63,7 +63,7 @@ export const ServicesCreate = (props) => (
                     </ReferenceArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-
+            <TextInput source="blockTitle" label="Заголовок для блока" />
             <ReferenceArrayInput source="servicesServices" reference="subServices" allowEmpty={true}>
                 <SelectArrayInput optionText="name" label="Услуги" />
             </ReferenceArrayInput>
@@ -131,9 +131,9 @@ export const ServicesEdit = (props) => (
                     </ReferenceArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-
+            <TextInput source="blockTitle" label="Заголовок для блока" />
             <ReferenceArrayInput source="servicesServices" reference="subServices" allowEmpty={true}>
-                <SelectArrayInput optionText="name" label="Услуги" />
+                <SelectArrayInput optionText="name" label="Элементы блока" />
             </ReferenceArrayInput>
 
             <ArrayInput
