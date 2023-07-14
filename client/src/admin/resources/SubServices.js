@@ -25,7 +25,7 @@ export const SubServicesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание" validate={[required()]} />
+            <TextInput source="descr" label="Описание" />
             <ImageInput source="image" label="Иконка" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
@@ -37,7 +37,7 @@ export const SubServicesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание" validate={[required()]} />
+            <TextInput source="descr" label="Описание"  />
             <ImageInput source="image" label="Иконка" validate={[required()]} accept="image/*">
                 <FilenameField source="image" title="title" />
             </ImageInput>

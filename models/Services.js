@@ -11,7 +11,8 @@ const servicesSchema = new Schema({
   work: { type: Array },
   tariffs: { type: Array },
   position: {type: Number},
-  blockTitle: {type:String}
+  blockTitle: {type:String},
+  subProjects: {type: Array}
 });
 
 servicesSchema.set('toJSON', { virtuals: true });

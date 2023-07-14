@@ -59,17 +59,28 @@ const ServicesDetail = () => {
                         });
                 });
 
-                Promise.all([...benefitsPersonsPromises, ...subServicesPromises])
+                const subProjectsPromises = response.data.subProjects.map((subProjectId) => {
+                    return axios.get(`${apiUrl}/api/projects/${subProjectId}`)
+                        .then((subProjectResponse) => {
+                            return subProjectResponse.data;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            return null;
+                        });
+                });
+
+                Promise.all([...benefitsPersonsPromises, ...subServicesPromises, ...subProjectsPromises])
                     .then((results) => {
                         const persons = results.slice(0, response.data.benefits.length);
-                        const subServices = results.slice(response.data.benefits.length);
-
+                        const subServices = results.slice(response.data.benefits.length, response.data.servicesServices.length+response.data.benefits.length);
+                        const subProjects = results.slice(response.data.benefits.length + response.data.servicesServices.length)
                         const updatedData = {
                             ...response.data,
                             benefits: persons,
                             servicesServices: subServices,
+                            subProjects: subProjects
                         };
-
                         setService(updatedData);
                     })
                     .catch((error) => {
@@ -298,6 +309,24 @@ const ServicesDetail = () => {
                         <h2 className="heading-secondary">Портфолио</h2>
                         <div className="projects__wrap">
                             {
+                                service.subProjects && service.subProjects.length > 0 ?
+                                service.subProjects.map(project => {
+                                    return (
+                                        <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
+                                            <div className="projects__item-img-wrap">
+                                                {
+                                                    project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                        ?
+                                                        <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
+                                                        :
+                                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                                }
+
+                                            </div>
+                                            <div className="projects__item-name">{project.name}</div>
+                                        </Link>
+                                    )
+                                }) :
                                 projects.map(project => {
                                     return (
                                         <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>

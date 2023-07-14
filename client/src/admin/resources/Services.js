@@ -48,7 +48,9 @@ export const ServicesCreate = (props) => (
             <TextInput source="position" label="Позиция"/>
             <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
             <TextInput source="descr" label="Описание для деталки" fullWidth />
-
+            <ReferenceArrayInput source="subProjects" reference="projects" allowEmpty={true}>
+                <SelectArrayInput optionText="name" label="Проекты" />
+            </ReferenceArrayInput>
             <TextInput source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
 
             <ArrayInput
@@ -116,6 +118,9 @@ export const ServicesEdit = (props) => (
             <TextInput source="position" label="Позиция"/>
             <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
             <TextInput source="descr" label="Описание для деталки" fullWidth />
+            <ReferenceArrayInput source="subProjects" reference="projects" allowEmpty={true}>
+                <SelectArrayInput optionText="name" label="Проекты" />
+            </ReferenceArrayInput>
 
             <TextInput source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
 
