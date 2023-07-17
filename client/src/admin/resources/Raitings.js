@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, SimpleFormIterator, ArrayInput, BooleanInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, SimpleFormIterator, ArrayInput, BooleanInput, SelectInput } from 'react-admin';
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -44,10 +44,14 @@ export const RaitingsCreate = (props) => (
                 label="Номинант"
                 validate={[required()]}
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="raitingPlace" label="Какое место " />
                     <TextInput source="raitingName" label="Номинация" />
                     <TextInput source="raitingYear" label="Год" />
+                    <SelectInput source="raitingControlVisibility" label="Скрыть/Показать" choices={[
+                        { id: true, name: 'Показать' },
+                        { id: false, name: 'Скрыть' },
+                    ]} />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>
@@ -67,10 +71,14 @@ export const RaitingsEdit = (props) => (
                 label="Номинант"
                 validate={[required()]}
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="raitingPlace" label="Какое место " />
                     <TextInput source="raitingName" label="Номинация" />
                     <TextInput source="raitingYear" label="Год" />
+                    <SelectInput source="raitingControlVisibility" label="Скрыть/Показать" choices={[
+                        { id: true, name: 'Показать' },
+                        { id: false, name: 'Скрыть' },
+                    ]} />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>

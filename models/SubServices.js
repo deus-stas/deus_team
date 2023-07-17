@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const SubServicesSchema = new Schema({
     name: { type: String, required: true },
     image: { type: Object },
-    descr: { type: String },
+    descr: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v  },
 });
 
 SubServicesSchema.set('toJSON', { virtuals: true });

@@ -217,7 +217,7 @@ const MainPage = () => {
     const filteredProjects = projects.filter(project => {
         return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
             (selectedType ? project.projectType === selectedType.value : true);
-    });
+    }).slice(0, 3);
 
     const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 

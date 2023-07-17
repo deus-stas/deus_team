@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, SimpleFormIterator, ArrayInput, BooleanInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, SimpleFormIterator, ArrayInput, BooleanInput, SelectInput } from 'react-admin';
 
 const apiUrl = process.env.NODE_ENV === 'production'
   ? 'http://188.120.232.38'
@@ -44,10 +44,15 @@ export const AwardsCreate = (props) => (
                 label="Номинант"
                 validate={[required()]}
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="awardName" label="Название проекта" />
                     <TextInput source="awardPlace" label="Какое место и какая номинация" />
                     <TextInput source="awardYear" label="Год" />
+                    {/* <BooleanInput source="awardControlVisibility" label="Скрыть/Показать"/> */}
+                    <SelectInput source="awardControlVisibility" label="Скрыть/Показать" choices={[
+                        { id: true, name: 'Показать' },
+                        { id: false, name: 'Скрыть' },
+                    ]} />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>
@@ -67,10 +72,15 @@ export const AwardsEdit = (props) => (
                 label="Номинант"
                 validate={[required()]}
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="awardName" label="Название проекта" />
                     <TextInput source="awardPlace" label="Какое место и какая номинация" />
                     <TextInput source="awardYear" label="Год" />
+                    {/* <BooleanInput source="awardControlVisibility" label="Скрыть/Показать"/> */}
+                    <SelectInput source="awardControlVisibility" label="Скрыть/Показать" choices={[
+                        { id: true, name: 'Показать' },
+                        { id: false, name: 'Скрыть' },
+                    ]} />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>

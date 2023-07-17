@@ -264,12 +264,19 @@ const Agency = () => {
                                 <div className="agency-benefits__info-wrap">
                                     {
                                         awards.map(award => {
+                                            const awardProjectCount = award.awardProject.reduce((count, element) => {
+                                                if (element.awardControlVisibility === 'true') {
+                                                    return count + 1;
+                                                }
+                                                return count;
+                                            }, 0);
+                                        
                                             return (
                                                 <Tab className="agency-benefits__info-btn" key={award.id}>
                                                     <img src={award.image ? `${apiUrl}/uploads/${award.image.filename}` : null} alt={award.name} />
-                                                    {award.name} <sup>{award.awardProject.length}</sup>
+                                                    {award.name} <sup>{awardProjectCount}</sup>
                                                 </Tab>
-                                            )
+                                            );
                                         })
                                     }
                                 </div>
@@ -283,11 +290,12 @@ const Agency = () => {
                                                     {
                                                         award.awardProject.map((project, i) => {
                                                             return (
+                                                                project.awardControlVisibility === 'true' ?
                                                                 <div className="agency-benefits__item" key={i}>
                                                                     <div className="agency-benefits__name">{project.awardName}</div>
                                                                     <div className="agency-benefits__descr">{project.awardPlace}</div>
                                                                     <div className="agency-benefits__year">{project.awardYear}</div>
-                                                                </div>
+                                                                </div> : null
                                                             )
                                                         })
                                                     }
@@ -313,10 +321,16 @@ const Agency = () => {
                                 <div className="agency-benefits__info-wrap">
                                     {
                                         raitings.map(raiting => {
+                                            const raitingProjectCount = raiting.raitingProject.reduce((count, element) => {
+                                                if (element.raitingControlVisibility === 'true') {
+                                                    return count + 1;
+                                                }
+                                                return count;
+                                            }, 0);
                                             return (
                                                 <Tab className="agency-benefits__info-btn" key={raiting.id}>
                                                     <img src={raiting.image ? `${apiUrl}/uploads/${raiting.image.filename}` : null} alt={raiting.name} />
-                                                    {raiting.name} <sup>{raiting.raitingProject.length}</sup>
+                                                    {raiting.name} <sup>{raitingProjectCount}</sup>
                                                 </Tab>
                                             )
                                         })
@@ -332,11 +346,12 @@ const Agency = () => {
                                                     {
                                                         raiting.raitingProject.map((project, i) => {
                                                             return (
+                                                                project.raitingControlVisibility === 'true' ?
                                                                 <div className="agency-benefits__item" key={i}>
                                                                     <div className="agency-benefits__name">{project.raitingPlace}</div>
                                                                     <div className="agency-benefits__descr">{project.raitingName}</div>
                                                                     <div className="agency-benefits__year">{project.raitingYear}</div>
-                                                                </div>
+                                                                </div> : null
                                                             )
                                                         })
                                                     }
