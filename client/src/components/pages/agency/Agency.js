@@ -44,7 +44,6 @@ const Agency = () => {
         axios.get(`${apiUrl}/api/headerData/`)
             .then((response) => {
                 setHeaderData(response.data[0]);
-                console.log('header data',response.data[0]);
             })
             .catch((error) => {
                 console.log(error);
@@ -196,7 +195,7 @@ const Agency = () => {
                             <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"  className="btn --circle --orange">Презентация агентства</a>
                         }
                     </div>
-                    <div className="agency-about__showreels">
+                    <div className="agency-about__showreels hidden-desktop hidden-mobile">
                         {
                             showreels ? showreels.map(showreel => {
                                 return(

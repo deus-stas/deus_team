@@ -94,7 +94,7 @@ const AppFooter = () => {
                             <ul className='footer__list'>
                                 {services ? services.map(service => {
                                     return (
-                                        <li className="footer__list-item" key={service.id}><Link to={`/services/${service.id}`}>{service.name}</Link></li>
+                                        <li className="footer__list-item" key={service.id}><Link to={`/services/${service.path}`}>{service.name}</Link></li>
                                     )
                                 }) : null}
                             </ul>

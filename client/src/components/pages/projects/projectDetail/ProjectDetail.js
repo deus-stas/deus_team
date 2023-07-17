@@ -135,30 +135,6 @@ const ProjectDetail = () => {
                         : null
             }
 
-
-            {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
-                <section className="project-results">
-                    <div className="container">
-                        <div className="project-results__wrap">
-                            <h2 className="heading-secondary">Подход</h2>
-                            <div className="quote">
-                                <div className="quote__box">
-                                    {console.log(detail.approachPersons)}
-                                    <div className="quote__person">
-                                        {detail.approachPersons.image ? <img src={`${apiUrl}/uploads/${detail.approachPersons.image.filename}`} alt={detail.approachPersons.name} className="quote__img" /> : null}
-
-                                        <div className="quote__person-text">
-                                            {detail.approachPersons.name}, <span>{detail.approachPersons.post} @ DEUS</span>
-                                        </div>
-                                    </div>
-                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.approach }}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                : null}
-
             {
                 detail.bannerThirdVideo && detail.bannerThirdVideo !== 'undefined' && detail.bannerThirdVideo !== 'null' ?
                     <section className="project-banner">
@@ -240,7 +216,7 @@ const ProjectDetail = () => {
 
         <div style={{ background: detail.aimColor }}>
             {
-                detail.taskDescr !== 'undefined' && detail.taskDescr ?
+                detail.task !== 'undefined' && detail.task ?
                 <section style={{ background: detail.aimColor }} className="project-goals">
                     <div className="container">
                         <div className="project-goals__wrap">
@@ -280,11 +256,34 @@ const ProjectDetail = () => {
             }
         </div>
 
+        {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
+                <section className="project-results">
+                    <div className="container">
+                        <div className="project-results__wrap">
+                            <h2 className="heading-secondary text-black">Подход</h2>
+                            <div className="quote">
+                                <div className="quote__box">
+                                    {console.log(detail.approachPersons)}
+                                    <div className="quote__person">
+                                        {detail.approachPersons.image ? <img src={`${apiUrl}/uploads/${detail.approachPersons.image.filename}`} alt={detail.approachPersons.name} className="quote__img" /> : null}
+
+                                        <div className="quote__person-text">
+                                            {detail.approachPersons.name}, <span>{detail.approachPersons.post} @ DEUS</span>
+                                        </div>
+                                    </div>
+                                    <div className="quote__q" dangerouslySetInnerHTML={{ __html: detail.approach }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                : null}
+
         {
             detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
             <section style={{ background: detail.workStepsColor }} className="project-steps">
                 <div className="container">
-                    <h2 className="heading-secondary">Этапы работ</h2>
+                    <h2 className="heading-secondary">{detail.workStepsHeader}</h2>
                     {
                         detail.workSteps.map((item, index) => (
                             <div key={index} className="project-steps__s">

@@ -45,6 +45,7 @@ export const ServicesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="name" label="Заголовок" fullWidth validate={[required()]} />
+            {/* <TextInput source="path" label="URL" /> */}
             <TextInput source="position" label="Позиция"/>
             <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
             <TextInput source="descr" label="Описание для деталки" fullWidth />
@@ -57,7 +58,7 @@ export const ServicesCreate = (props) => (
                 source="benefits"
                 label="Преимущества"
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="benefitsName" label="Название преимущества" />
                     <TextInput source="benefitsDescr" label="Описание" />
                     <ReferenceArrayInput source="benefitsPersons" reference="persons">
@@ -74,7 +75,7 @@ export const ServicesCreate = (props) => (
                 source="work"
                 label="Как проходит работа"
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="workName" label="Название" />
                     <TextInput source="workDescr" label="Описание" />
                 </SimpleFormIterator>
@@ -84,13 +85,13 @@ export const ServicesCreate = (props) => (
                 source="tariffs"
                 label="Тарифы"
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="tariffsCategory" label="Категория тарифа" />
                     <ArrayInput
                         source="tariffsItems"
                         label="Тариф"
                     >
-                        <SimpleFormIterator>
+                        <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                             <TextInput source="tariffName" label="Название" />
                             <TextInput source="tariffDeadline" label="Срок работы" />
                             <TextInput source="tariffPrice" label="Стоимость" />
@@ -98,7 +99,7 @@ export const ServicesCreate = (props) => (
                                 source="tariffList"
                                 label="Что входит в тариф"
                             >
-                                <SimpleFormIterator>
+                                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                                     <TextInput source="tariffWork" label="Услуга тарифа" />
                                 </SimpleFormIterator>
                             </ArrayInput>
@@ -115,6 +116,7 @@ export const ServicesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput source="name" label="Заголовок" fullWidth validate={[required()]} />
+            <TextInput source="path" label="URL" />
             <TextInput source="position" label="Позиция"/>
             <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
             <TextInput source="descr" label="Описание для деталки" fullWidth />
@@ -128,7 +130,7 @@ export const ServicesEdit = (props) => (
                 source="benefits"
                 label="Преимущества"
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="benefitsName" label="Название преимущества" />
                     <TextInput source="benefitsDescr" label="Описание" />
                     <ReferenceArrayInput source="benefitsPersons" reference="persons">
@@ -145,7 +147,7 @@ export const ServicesEdit = (props) => (
                 source="work"
                 label="Как проходит работа"
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="workName" label="Название" />
                     <TextInput source="workDescr" label="Описание" />
                 </SimpleFormIterator>
@@ -155,13 +157,13 @@ export const ServicesEdit = (props) => (
                 source="tariffs"
                 label="Тарифы"
             >
-                <SimpleFormIterator>
+                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput source="tariffsCategory" label="Категория тарифа" />
                     <ArrayInput
                         source="tariffsItems"
                         label="Тариф"
                     >
-                        <SimpleFormIterator>
+                        <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                             <TextInput source="tariffName" label="Название" />
                             <TextInput source="tariffDeadline" label="Срок работы" />
                             <TextInput source="tariffPrice" label="Стоимость" />
@@ -169,7 +171,7 @@ export const ServicesEdit = (props) => (
                                 source="tariffList"
                                 label="Что входит в тариф"
                             >
-                                <SimpleFormIterator>
+                                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                                     <TextInput source="tariffWork" label="Услуга тарифа" />
                                 </SimpleFormIterator>
                             </ArrayInput>

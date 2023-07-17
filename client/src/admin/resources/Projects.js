@@ -109,6 +109,7 @@ export const ProjectsCreate = (props) => (
                 <TextInput source="bannerThirdVideo" label="Видео для баннера(url)"  />
             <RichTextInput source="body"  />
             {/* <RichTextInput source="workSteps" label="Этапы работ"  /> */}
+            <TextInput source="workStepsHeader" label="Подзаголовок Этапы работ"  />
             <ArrayInput
                 source="workSteps"
                 label="Этапы работ"
@@ -124,7 +125,7 @@ export const ProjectsCreate = (props) => (
                 <FileField source="src" title="title" />
             </FileInput>
             <TextInput source="bannerFourthVideo" label="Видео для баннера(url)"  />
-            <TextInput source="result" label="Результаты"  />
+            <RichTextInput source="result" label="Результаты"  />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
             </ReferenceArrayInput>
@@ -211,6 +212,7 @@ export const ProjectsEdit = (props) => (
             </FileInput>
             <TextInput source="bannerThirdVideo" label="Видео для баннера(url)"  />
             <RichTextInput source="body"  />
+            <TextInput source="workStepsHeader" label="Подзаголовок Этапы работ"  />
             {/* <RichTextInput source="workSteps" label="Этапы работ"  /> */}
             <ArrayInput
                 source="workSteps"
@@ -227,7 +229,7 @@ export const ProjectsEdit = (props) => (
                 <FilenameField source="src" title="title" />
             </FileInput>
             <TextInput source="bannerFourthVideo" label="Видео для баннера(url)"  />
-            <TextInput source="result" label="Результаты"  />
+            <RichTextInput source="result" label="Результаты"  />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
             </ReferenceArrayInput>

@@ -71,7 +71,7 @@ router.post(
         { name: 'mainVideoFile' }]), 
     addCustomId,
     async (req, res) => {
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
 
@@ -174,7 +174,8 @@ router.post(
         visibilityImg2,
         resultsColor,
         customId,
-        nameInEng
+        nameInEng,
+        workStepsHeader
     });
 
     await projects.save();
@@ -239,7 +240,7 @@ router.put("/projects/:id",
     console.log(req.body);
     console.log(req.files);
 
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader } = req.body;
 
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
@@ -471,7 +472,8 @@ router.put("/projects/:id",
     project.visibilityTitle1 = visibilityTitle1,
     project.visibilityTitle2 = visibilityTitle2,
     project.resultsColor = resultsColor
-    project.customId = customId
+    project.customId = customId,
+    project.workStepsHeader = workStepsHeader
 
     await project.save();
 

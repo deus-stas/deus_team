@@ -435,7 +435,7 @@ const MainPage = () => {
                                                 <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
                                                 <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
                                             </div> */}
-                                                <Link to={`/services/${service.id}`} className="btn --b-orange">Подробнее</Link>
+                                                <Link to={`/services/${service.path}`} className="btn --b-orange">Подробнее</Link>
                                             </div>
                                         </div>
                                     </div>

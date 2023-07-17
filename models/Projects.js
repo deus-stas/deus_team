@@ -37,6 +37,7 @@ const projectsSchema = new Schema({
   controlURL: {type: Boolean},
   projectSite: {type:String, default: '',set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   projectURL: {type:String, default: '',set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
+  workStepsHeader: {type: String, default: 'Этапы работ', set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? 'Этапы работ' : v},
   workSteps: { type: Array },
   aimColor: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   workStepsColor: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},

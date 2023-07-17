@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const servicesSchema = new Schema({
   name: { type: String, required: true },
+  path: {type: String},
   descrTotal: { type: String },
   descr: { type: String },
   benefitsTitle: { type: String },

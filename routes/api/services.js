@@ -53,6 +53,17 @@ router.post('/services', addPosition, async (req, res) => {
         position,
         blockTitle,
         subProjects } = req.body;
+
+    var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+
+    const editedName = name.split('').map(function (char) { 
+        return a[char] || char; 
+    }).join("");
+    var rmPercent = editedName.replace("%",'');
+    var editedWithLine = rmPercent.split(' ').join('-');
+
+    const path = editedWithLine
+
     const services = new Services({
         name,
         descrTotal,
@@ -64,7 +75,8 @@ router.post('/services', addPosition, async (req, res) => {
         tariffs,
         position,
         blockTitle,
-        subProjects
+        subProjects,
+        path
     });
 
     await services.save();
@@ -75,25 +87,30 @@ router.post('/services', addPosition, async (req, res) => {
 
 router.get('/services/:id', async (req, res) => {
     const { id } = req.params;
-    const services = await Services.findById(id);
+    if (id.includes("-")) {
+        const services = await Services.findOne({ path: id });
+        console.log("srvcs", services)
+        
+        if (!services) {
+            return res.status(404).json({ error: 'Services not found' });
+        }
 
-    if (!services) {
-        return res.status(404).json({ error: 'Services not found' });
+        res.json(services);
+    } else {
+        const services = await Services.findById(id);
+
+        if (!services) {
+            return res.status(404).json({ error: 'Services not found' });
+        }
+
+        res.json(services);
     }
-
-    res.json(services);
 });
-
-// router.put("/services/:id", async (req, res) => {
-//     const { id } = req.params;
-//     const post = await Services.findByIdAndUpdate(id, req.body);
-//     res.json(post);
-// });
 
 router.put("/services/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const { position, name, descrTotal, descr, benefitsTitle, benefits, servicesServices, work, tariffs, blockTitle, subProjects } = req.body;
+      const { position, name, descrTotal, descr, benefitsTitle, benefits, servicesServices, work, tariffs, blockTitle, subProjects, path } = req.body;
   
       const service = await Services.findById(id);
   
@@ -107,6 +124,14 @@ router.put("/services/:id", async (req, res) => {
       service.servicesServices = []; // Clearing the field
   
       const oldPosition = service.position;
+      // var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+
+      // const editedName = name.split('').map(function (char) { 
+      //     return a[char] || char; 
+      // }).join("");
+      // var rmPercent = editedName.replace("%",'');
+      // var editedWithLine = rmPercent.split(' ').join('-');
+      // service.path = editedWithLine
   
       // Update the fields of the service
       service.position = position;
@@ -118,8 +143,11 @@ router.put("/services/:id", async (req, res) => {
       service.servicesServices = servicesServices;
       service.work = work;
       service.tariffs = tariffs;
-      service.blockTitle = blockTitle
-      service.subProjects = subProjects
+      service.blockTitle = blockTitle;
+      service.subProjects = subProjects;
+      service.path = path;
+
+      
 
       console.log("new", servicesServices)
   
