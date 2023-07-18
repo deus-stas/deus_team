@@ -441,7 +441,7 @@ const ServicesDetail = () => {
                                                             </div>
                                                         </div>
                                                         <div className="service-review__descr">{review.review} </div>
-                                                        <Link to={`/projects/${review.reviewProject.id}`} className="btn --white">Смотреть проект</Link>
+                                                        <Link to={`/projects/${review.reviewProject.nameInEng}`} className="btn --white">Смотреть проект</Link>
                                                     </div>
                                                     { review.reviewBg ?  <img src={`${apiUrl}/uploads/${review.reviewBg.filename}`} alt={review.name} className="service-review__bg" /> :
                                                     review.reviewProject.image ? <img src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" /> : null}
