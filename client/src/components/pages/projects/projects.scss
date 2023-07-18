@@ -113,7 +113,8 @@
         &:nth-child(11),
         &:nth-child(13),
         &:nth-child(14),
-        &:nth-child(15) {
+        &:nth-child(15),
+        &:nth-child(n+14) {
             background: none !important;
         }
 

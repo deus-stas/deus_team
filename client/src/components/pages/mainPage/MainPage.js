@@ -446,7 +446,7 @@ const MainPage = () => {
                 </div>
             </section>
 
-            <section className="main-news">
+            {/* <section className="main-news">
                 <div className="container">
                     <div className="main-news__wrap">
                         <div className="main-news__info">
@@ -474,7 +474,7 @@ const MainPage = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <SectionSocial />
 

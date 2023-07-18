@@ -16,21 +16,36 @@ const ProjectNext = (props) => {
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/`)
-            .then((response) => {
-                const pr = id !== response.data[0].id ? response.data[0] : response.data[1]
-                setProject(pr);
-                console.log(pr);
-            })
-            .catch((error) => {
-                console.log(error);
+        .then((response) => {
+            let pr = null;
+        
+            response.data.some((item, index) => {
+                if (id === item.nameInEng) {
+                    pr = response.data[index + 1];
+                    return true; // Break the loop
+                } else {
+                    pr = response.data[index];
+                }
+                return false;
             });
+            if (pr && pr !== undefined) {
+                setProject(pr);
+            } else {
+                setProject(response.data[0]);
+            }
+           
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        
     }, [id]);
 
 
     return project ? (
         <section className="project-next">
             <div className="container">
-                <div className="project-next__item" style={{ background: project.color }}>
+                <div className="project-next__item" style={{ background: project.color && project.color !== undefined && project.color !== 'undefined' ? project.color : '#000'}}>
                     <div className="project-next__text">
                         <div className="project-next__subtitle">
                             {props.last ? 'Последний созданный проект' : 'Следующий проект'}

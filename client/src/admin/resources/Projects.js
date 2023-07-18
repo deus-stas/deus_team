@@ -126,6 +126,8 @@ export const ProjectsCreate = (props) => (
             </FileInput>
             <TextInput source="bannerFourthVideo" label="Видео для баннера(url)"  />
             <RichTextInput source="result" label="Результаты"  />
+            <ColorInput source="resultTextColor" label="Цвет текста резултаты" />
+            <TextInput source="resultPersonsText" label="Результаты прямая речь"  />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
             </ReferenceArrayInput>
@@ -230,6 +232,8 @@ export const ProjectsEdit = (props) => (
             </FileInput>
             <TextInput source="bannerFourthVideo" label="Видео для баннера(url)"  />
             <RichTextInput source="result" label="Результаты"  />
+            <ColorInput source="resultTextColor" label="Цвет текста резултаты" />
+            <TextInput source="resultPersonsText" label="Результаты прямая речь"  />
             <ReferenceArrayInput source="resultPersons" reference="persons">
                 <SelectInput optionText="name" label="Чья цитата для результата" />
             </ReferenceArrayInput>
