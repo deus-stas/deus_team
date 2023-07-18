@@ -49,7 +49,7 @@ export const ServicesCreate = (props) => (
             <TextInput source="position" label="Позиция"/>
             <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
             <TextInput source="descr" label="Описание для деталки" fullWidth />
-            <ReferenceArrayInput source="subProjects" reference="projects" allowEmpty={true}>
+            <ReferenceArrayInput perPage={100} source="subProjects" reference="projects" allowEmpty={true}>
                 <SelectArrayInput optionText="name" label="Проекты" />
             </ReferenceArrayInput>
             <TextInput source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
@@ -67,7 +67,7 @@ export const ServicesCreate = (props) => (
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput source="blockTitle" label="Заголовок для блока" />
-            <ReferenceArrayInput source="servicesServices" reference="subServices" allowEmpty={true}>
+            <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
                 <SelectArrayInput optionText="name" label="Услуги" />
             </ReferenceArrayInput>
 
@@ -120,7 +120,7 @@ export const ServicesEdit = (props) => (
             <TextInput source="position" label="Позиция"/>
             <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
             <TextInput source="descr" label="Описание для деталки" fullWidth />
-            <ReferenceArrayInput source="subProjects" reference="projects" allowEmpty={true}>
+            <ReferenceArrayInput perPage={100}  source="subProjects" reference="projects" allowEmpty={true}>
                 <SelectArrayInput optionText="name" label="Проекты" />
             </ReferenceArrayInput>
 
@@ -139,7 +139,7 @@ export const ServicesEdit = (props) => (
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput source="blockTitle" label="Заголовок для блока" />
-            <ReferenceArrayInput source="servicesServices" reference="subServices" allowEmpty={true}>
+            <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
                 <SelectArrayInput optionText="name" label="Элементы блока" />
             </ReferenceArrayInput>
 

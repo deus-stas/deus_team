@@ -270,7 +270,7 @@ const ProjectDetail = () => {
                     </div>
                 </section> : null
             }
-            {detail.result !== 'undefined' && detail.result ?
+            {detail.result !== 'undefined' && detail.resultPersons ? 
 
                 <section style={{ background: detail.resultsColor }} className="project-results results_bg">
                     <div className="container">

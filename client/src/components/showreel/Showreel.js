@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Popup from 'reactjs-popup';
 
 import './showreel.scss';
@@ -8,7 +8,7 @@ class MutedVideo extends HTMLVideoElement {
     constructor() {
       super();
       this.muted = true;
-      this.autoplay = true;
+      this.autoPlay = true;
     }
   }
 
@@ -22,15 +22,41 @@ const Showreel = (props) => {
     const [open, setOpen] = useState(false);
 
     const videoRef = useRef(null);
+    const showReelRef = useRef(null)
 
     const closeModal = () => setOpen(false);
     const openModal = () => {
-        console.log('Modal opened',  videoRef);
         setOpen(true);
         videoRef.current.pause();
     };
 
     const { data, isMain } = props;
+
+    useEffect(() => {
+        const videoElement = videoRef.current;
+        const showreelElement = showReelRef.current;
+        if (videoElement && showreelElement) {
+            videoElement.addEventListener("play", () => {
+              showreelElement.classList.remove("showreel__s");
+            });
+        
+            videoElement.addEventListener("pause", () => {
+              showreelElement.classList.add("showreel__s");
+            });
+        }
+        
+          return () => {
+            if (videoElement && showreelElement) {
+              videoElement.removeEventListener("play", () => {
+                showreelElement.classList.remove("showreel__s");
+              });
+        
+              videoElement.removeEventListener("pause", () => {
+                showreelElement.classList.add("showreel__s");
+              });
+            }
+          };
+    }, []);
 
 
     return (
@@ -38,7 +64,7 @@ const Showreel = (props) => {
             <div className="showreel__title">{data.name} <span> — {data.year}</span></div>
             {
                 isMain ? (
-                    <div className="showreel__s">
+                    <div ref={showReelRef} className="showreel__s playIcon">
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' ?
                             <video ref={videoRef} autoPlay muted controls loop  playsInline>

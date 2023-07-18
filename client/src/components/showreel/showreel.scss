@@ -80,3 +80,16 @@
   [data-popup='tooltip'].popup-overlay {
     background: transparent;
   }
+.playIcon {
+    cursor: pointer;
+    position: relative;
+}
+.playIcon  video {
+    width: 100%;
+}
+
+.playIcon iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/0.5625;
+}
