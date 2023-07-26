@@ -34,20 +34,43 @@ export const DiplomasList = (props) => (
 export const DiplomasCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <BooleanInput source="controlVisibility" label="Скрыть/Показать"/>
-            <ImageInput source="image" label="Иконка" validate={[required()]} accept="image/*">
-                <ImageField source="src" title="title" />
+            <TextInput
+                className="customWidth" 
+                source="name" 
+                label="Название" 
+                validate={[required()]} />
+            <BooleanInput 
+                source="controlVisibility" 
+                label="Скрыть/Показать"/>
+            <ImageInput
+                className="fileInput" 
+                placeholder="+" 
+                source="image" 
+                label="Иконка" 
+                validate={[required()]} 
+                accept="image/*">
+                <ImageField 
+                    source="src" 
+                    title="title" />
             </ImageInput>
             <ArrayInput
                 source="diplomaProject"
                 label="Номинант"
                 validate={[required()]}
             >
-                <SimpleFormIterator>
-                    <TextInput source="diplomaName" label="Название проекта" />
-                    <TextInput source="diplomaPlace" label="Какое место и какая номинация" />
-                    <TextInput source="diplomaYear" label="Год" />
+                <SimpleFormIterator inline>
+                    <TextInput
+                        className="customWidth" 
+                        source="diplomaName" 
+                        label="Название проекта" />
+                    <TextInput
+                        className="customWidth" 
+                        source="diplomaPlace" 
+                        label="Какое место и какая номинация" />
+                    <TextInput
+                        className="customWidth" 
+                        source="diplomaYear" 
+                        label="Год" />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>
@@ -57,20 +80,43 @@ export const DiplomasCreate = (props) => (
 export const DiplomasEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <BooleanInput source="controlVisibility" label="Скрыть/Показать"/>
-            <ImageInput source="image" label="Картинка" validate={[required()]} accept="image/*">
-                <FilenameField source="image" title="title" />
+            <TextInput
+                className="customWidth" 
+                source="name" 
+                label="Название" 
+                validate={[required()]} />
+            <BooleanInput 
+                source="controlVisibility" 
+                label="Скрыть/Показать"/>
+            <ImageInput
+                className="fileInput" 
+                placeholder="+" 
+                source="image" 
+                label="Картинка" 
+                validate={[required()]} 
+                accept="image/*">
+                <FilenameField 
+                    source="image" 
+                    title="title" />
             </ImageInput>
             <ArrayInput
                 source="diplomaProject"
                 label="Номинант"
                 validate={[required()]}
             >
-                <SimpleFormIterator>
-                    <TextInput source="diplomaName" label="Название проекта" />
-                    <TextInput source="diplomaPlace" label="Какое место и какая номинация" />
-                    <TextInput source="diplomaYear" label="Год" />
+                <SimpleFormIterator inline>
+                    <TextInput
+                        className="customWidth" 
+                        source="diplomaName" 
+                        label="Название проекта" />
+                    <TextInput
+                        className="customWidth" 
+                        source="diplomaPlace" 
+                        label="Какое место и какая номинация" />
+                    <TextInput
+                        className="customWidth" 
+                        source="diplomaYear" 
+                        label="Год" />
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>

@@ -24,9 +24,9 @@ const FilenameField = props => {
 export const SubServicesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание" />
-            <ImageInput source="image" label="Иконка" validate={[required()]} accept="image/*">
+            <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <TextInput className="customWidth" source="descr" label="Описание" />
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Иконка" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
         </SimpleForm>
@@ -36,9 +36,9 @@ export const SubServicesCreate = (props) => (
 export const SubServicesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание"  />
-            <ImageInput source="image" label="Иконка" validate={[required()]} accept="image/*">
+            <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <TextInput className="customWidth" source="descr" label="Описание"  />
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Иконка" validate={[required()]} accept="image/*">
                 <FilenameField source="image" title="title" />
             </ImageInput>
         </SimpleForm>

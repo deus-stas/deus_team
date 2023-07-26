@@ -12,7 +12,7 @@ const FilenameField = props => {
             {...props}
             render={record => {
                 if (record.filename) {
-                    return <img src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
+                    return <img  src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
                 } else {
                     return <img src={`${record.src}`} alt={record.src} title="image" />;
                 }
@@ -24,9 +24,9 @@ const FilenameField = props => {
 export const PersonsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Имя" validate={[required()]} />
-            <TextInput source="post" label="Должность" validate={[required()]} />
-            <ImageInput source="image" label="Фото" validate={[required()]} accept="image/*">
+            <TextInput className="customWidth" source="name" label="Имя" validate={[required()]} />
+            <TextInput className="customWidth" source="post" label="Должность" validate={[required()]} />
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Фото" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
         </SimpleForm>
@@ -36,9 +36,9 @@ export const PersonsCreate = (props) => (
 export const PersonsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Имя" validate={[required()]} />
-            <TextInput source="post" label="Должность" validate={[required()]} />
-            <ImageInput source="image" label="Фото" validate={[required()]} accept="image/*">
+            <TextInput className="customWidth" source="name" label="Имя" validate={[required()]} />
+            <TextInput className="customWidth" source="post" label="Должность" validate={[required()]} />
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Фото" validate={[required()]} accept="image/*">
                 <FilenameField source="image" title="title" />
             </ImageInput>
         </SimpleForm>

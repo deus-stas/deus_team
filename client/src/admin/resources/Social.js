@@ -25,11 +25,11 @@ const FilenameField = props => {
 export const SocialCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание" validate={[required()]} />
-            <TextInput source="link" label="Ссылка" validate={[required()]} />
+            <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <TextInput className="customWidth" source="descr" label="Описание" validate={[required()]} />
+            <TextInput className="customWidth" source="link" label="Ссылка" validate={[required()]} />
             <ColorInput source="color" label="Цвет фона" validate={[required()]} />
-            <ImageInput source="image" label="Логотип" validate={[required()]} accept="image/*">
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Логотип" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
         </SimpleForm>
@@ -39,11 +39,11 @@ export const SocialCreate = (props) => (
 export const SocialEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание" validate={[required()]} />
-            <TextInput source="link" label="Ссылка" validate={[required()]} />
+            <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <TextInput className="customWidth" source="descr" label="Описание" validate={[required()]} />
+            <TextInput className="customWidth" source="link" label="Ссылка" validate={[required()]} />
             <ColorInput source="color" label="Цвет фона" validate={[required()]} />
-            <ImageInput source="image" label="Логотип" validate={[required()]} accept="image/*">
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Логотип" validate={[required()]} accept="image/*">
                 <FilenameField source="image" title="title" />
             </ImageInput>
         </SimpleForm>

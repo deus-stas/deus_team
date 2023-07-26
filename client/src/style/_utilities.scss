@@ -29,3 +29,32 @@
 .show {
     display: block !important;
 }
+.customWidth {
+    width: 450px !important;
+    margin: 40px 0 !important;
+}
+.customWidth #body {
+    height: 200px !important;
+}
+.RaFileInput-dropZone {
+    height: 200px;
+    width: 200px;
+}
+.editForm label span, .editForm .RaLabeled-label span, .editForm .RaArrayInput-label span {
+    font-size: 20px !important;
+}
+.fileInput .RaFileInput-dropZone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+.editForm .RaSimpleFormIterator-buttons .MuiSvgIcon-root {
+    font-size: 4rem !important;
+}
+.MuiTypography-root {
+    font-size: 2rem !important;
+}
+.edit-page img {
+    width: 300px !important;
+}

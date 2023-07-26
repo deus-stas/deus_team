@@ -4,7 +4,7 @@ import { List, Datagrid, TextField, Edit, Create, TextInput, SimpleForm, require
 export const ThemesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название темы" validate={[required()]} />
+            <TextInput className="customWidth" source="name" label="Название темы" validate={[required()]} />
         </SimpleForm>
     </Create>
 )
@@ -12,7 +12,7 @@ export const ThemesCreate = (props) => (
 export const ThemesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название темы" validate={[required()]} />
+            <TextInput className="customWidth" source="name" label="Название темы" validate={[required()]} />
         </SimpleForm>
     </Edit>
 );

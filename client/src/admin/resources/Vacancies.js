@@ -4,11 +4,11 @@ import { List, Datagrid, TextField, Edit, Create, TextInput, SimpleForm, require
 export const VacanciesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название вакансии" validate={[required()]} />
-            <TextInput source="lvl" label="Уровень" />
-            <TextInput source="time" label="График" />
-            <TextInput source="place" label="Место работы" />
-            <TextInput source="link" label="Ссылка на вакансию" />
+            <TextInput className="customWidth" source="name" label="Название вакансии" validate={[required()]} />
+            <TextInput className="customWidth" source="lvl" label="Уровень" />
+            <TextInput className="customWidth" source="time" label="График" />
+            <TextInput className="customWidth" source="place" label="Место работы" />
+            <TextInput className="customWidth" source="link" label="Ссылка на вакансию" />
         </SimpleForm>
     </Create>
 )
@@ -16,11 +16,11 @@ export const VacanciesCreate = (props) => (
 export const VacanciesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название вакансии" validate={[required()]} />
-            <TextInput source="lvl" label="Уровень" />
-            <TextInput source="time" label="График" />
-            <TextInput source="place" label="Место работы" />
-            <TextInput source="link" label="Ссылка на вакансию" />
+            <TextInput className="customWidth" source="name" label="Название вакансии" validate={[required()]} />
+            <TextInput className="customWidth" source="lvl" label="Уровень" />
+            <TextInput className="customWidth" source="time" label="График" />
+            <TextInput className="customWidth" source="place" label="Место работы" />
+            <TextInput className="customWidth" source="link" label="Ссылка на вакансию" />
         </SimpleForm>
     </Edit>
 );

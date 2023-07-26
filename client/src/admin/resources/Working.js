@@ -34,8 +34,8 @@ export const WorkingList = (props) => (
 export const WorkingCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Заголовок" validate={[required()]} />
-            <ImageInput source="image" label="Картинка" validate={[required()]} accept="image/*">
+            <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Картинка" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
         </SimpleForm>
@@ -45,8 +45,8 @@ export const WorkingCreate = (props) => (
 export const WorkingEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Заголовок" validate={[required()]} />
-            <ImageInput source="image" label="Картинка" validate={[required()]} accept="image/*">
+            <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
+            <ImageInput className="fileInput" placeholder="+" source="image" label="Картинка" validate={[required()]} accept="image/*">
                 <FilenameField source="image" title="title" />
             </ImageInput>
         </SimpleForm>

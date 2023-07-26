@@ -35,25 +35,25 @@ export const ReviewsList = (props) => (
 export const ReviewsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Компания" />
-            <TextInput source="service" label="Услуга" />
-            <TextInput source="type" label="Тип услуги" />
+            <TextInput className="customWidth" source="name" label="Компания" />
+            <TextInput className="customWidth" source="service" label="Услуга" />
+            <TextInput className="customWidth" source="type" label="Тип услуги" />
             <FileInput source="reviewFile" label="Файл отзыва">
                 <FileField source="src" title="title" />
             </FileInput>
-            <TextInput source="reviewName" label="Имя человека оставившего отзыв" />
-            <TextInput source="reviewPost" label="Пост человека оставившего отзыв" />
-            <ImageInput source="reviewImage" label="Фото человека оставившего отзыв" accept="image/*">
+            <TextInput className="customWidth" source="reviewName" label="Имя человека оставившего отзыв" />
+            <TextInput className="customWidth" source="reviewPost" label="Пост человека оставившего отзыв" />
+            <ImageInput className="fileInput" placeholder="+" source="reviewImage" label="Фото человека оставившего отзыв" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <TextInput source="review" label="Отзыв" fullWidth/>
+            <TextInput className="customWidth" source="review" label="Отзыв" fullWidth/>
             <ReferenceArrayInput source="reviewProject" reference="projects">
-                <SelectInput optionText="name" label="Проект" />
+                <SelectInput className="customWidth" optionText="name" label="Проект" />
             </ReferenceArrayInput>
             <ReferenceArrayInput source="reviewService" reference="services">
-                <SelectInput optionText="name" label="Услуга" />
+                <SelectInput className="customWidth" optionText="name" label="Услуга" />
             </ReferenceArrayInput>
-            <ImageInput source="reviewBg" label="Фото отзывa" accept="image/*">
+            <ImageInput className="fileInput" placeholder="+"  source="reviewBg" label="Фото отзывa" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
         </SimpleForm>
@@ -63,25 +63,25 @@ export const ReviewsCreate = (props) => (
 export const ReviewsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Компания" />
-            <TextInput source="service" label="Услуга" />
-            <TextInput source="type" label="Тип услуги" />
+            <TextInput className="customWidth" source="name" label="Компания" />
+            <TextInput className="customWidth" source="service" label="Услуга" />
+            <TextInput className="customWidth" source="type" label="Тип услуги" />
             <FileInput source="reviewFile" label="Файл отзыва">
                 <FilenameField source="src" title="title" />
             </FileInput>
-            <TextInput source="reviewName" label="Имя человека оставившего отзыв" />
-            <TextInput source="reviewName" label="Пост человека оставившего отзыв" />
-            <ImageInput source="reviewImage" label="Фото человека оставившего отзыв" accept="image/*">
+            <TextInput className="customWidth" source="reviewName" label="Имя человека оставившего отзыв" />
+            <TextInput className="customWidth" source="reviewPost" label="Пост человека оставившего отзыв" />
+            <ImageInput className="fileInput" placeholder="+" source="reviewImage" label="Фото человека оставившего отзыв" accept="image/*">
                 <FilenameField source="src" title="title" />
             </ImageInput>
-            <TextInput source="review" label="Отзыв" />
+            <TextInput className="customWidth" source="review" label="Отзыв" />
             <ReferenceArrayInput source="reviewProject" reference="projects">
-                <SelectInput optionText="name" label="Проект" />
+                <SelectInput className="customWidth" optionText="name" label="Проект" />
             </ReferenceArrayInput>
             <ReferenceArrayInput source="reviewService" reference="services">
-                <SelectInput optionText="name" label="Услуга" />
+                <SelectInput className="customWidth" optionText="name" label="Услуга" />
             </ReferenceArrayInput>
-            <ImageInput source="reviewBg" label="Фото отзывa" accept="image/*">
+            <ImageInput className="fileInput" placeholder="+" source="reviewBg" label="Фото отзывa" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
         </SimpleForm>

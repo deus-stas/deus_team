@@ -6,14 +6,14 @@ import { List, Datagrid, TextField, PasswordInput, Edit, SelectInput, Create, Te
 export const UsersCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Имя" validate={[required()]} />
-            <TextInput source="email" label="E-mail" validate={[required()]} />
-            <SelectInput source="type" validate={required()} choices={[
+            <TextInput className="customWidth" source="name" label="Имя" validate={[required()]} />
+            <TextInput className="customWidth" source="email" label="E-mail" validate={[required()]} />
+            <SelectInput className="customWidth" source="type" validate={required()} choices={[
                 { id: 'admin', name: 'Admin' },
                 { id: 'manager', name: 'Manager' },
             ]} />
-            <PasswordInput source="password" initiallyVisible  label="Пароль" validate={[required()]} />
-            <PasswordInput source="password2" initiallyVisible label="Повтор пароль" validate={[required()]} />
+            <PasswordInput className="customWidth" source="password" initiallyVisible  label="Пароль" validate={[required()]} />
+            <PasswordInput className="customWidth" source="password2" initiallyVisible label="Повтор пароль" validate={[required()]} />
         </SimpleForm>
     </Create>
 )
@@ -21,7 +21,7 @@ export const UsersCreate = (props) => (
 // export const UsersEdit = (props) => (
 //     <Edit {...props}>
 //         <SimpleForm>
-//             <TextInput source="name" label="Тип проекта" validate={[required()]} />
+//             <TextInput className="customWidth" source="name" label="Тип проекта" validate={[required()]} />
 //         </SimpleForm>
 //     </Edit>
 // );

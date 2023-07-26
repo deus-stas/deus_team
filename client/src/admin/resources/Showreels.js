@@ -15,13 +15,13 @@ export const ShowreelsList = (props) => (
 export const ShowreelsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Заголовок" validate={[required()]} />
-            <TextInput source="year" label="Год" />
+            <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
+            <TextInput className="customWidth" source="year" label="Год" />
             <BooleanInput source="mainShowreel" label="Установить как главный шоурил?(нужно снять с других шоурилов)" />
-            <FileInput source="video" label="Шоурил">
+            <FileInput className="fileInput" placeholder="+" source="video" label="Шоурил">
                 <FileField source="src" title="title" />
             </FileInput>
-            <TextInput source="videoUrl" label="URL" />
+            <TextInput className="customWidth" source="videoUrl" label="URL" />
         </SimpleForm>
     </Create>
 );
@@ -29,13 +29,13 @@ export const ShowreelsCreate = (props) => (
 export const ShowreelsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Заголовок" validate={[required()]} />
-            <TextInput source="year" label="Год" />
+            <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
+            <TextInput className="customWidth" source="year" label="Год" />
             <BooleanInput source="mainShowreel" label="Установить как главный шоурил?(нужно снять с других шоурилов)" />
-            <FileInput source="video" label="Шоурил">
+            <FileInput className="fileInput" placeholder="+" source="video" label="Шоурил">
                 <FileField source="src" title="title" />
             </FileInput>
-            <TextInput source="videoUrl" label="URL" />
+            <TextInput className="customWidth" source="videoUrl" label="URL" />
         </SimpleForm>
     </Edit>
 );

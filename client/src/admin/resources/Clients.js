@@ -34,9 +34,20 @@ export const ClientsList = (props) => (
 export const ClientsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название клиента" />
-            <ImageInput source="image" label="Логотип" validate={[required()]} accept="image/*">
-                <ImageField source="src" title="title" />
+            <TextInput
+                className="customWidth" 
+                source="name" 
+                label="Название клиента" />
+            <ImageInput
+                className="fileInput" 
+                placeholder="+" 
+                source="image" 
+                label="Логотип" 
+                validate={[required()]} 
+                accept="image/*">
+                    <ImageField 
+                        source="src" 
+                        title="title" />
             </ImageInput>
         </SimpleForm>
     </Create>
@@ -45,9 +56,20 @@ export const ClientsCreate = (props) => (
 export const ClientsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название клиента" />
-            <ImageInput source="image" label="Логотип" validate={[required()]} accept="image/*">
-                <FilenameField source="image" title="title" />
+            <TextInput
+                className="customWidth" 
+                source="name" 
+                label="Название клиента" />
+            <ImageInput
+                className="fileInput" 
+                placeholder="+" 
+                source="image" 
+                label="Логотип" 
+                validate={[required()]} 
+                accept="image/*">
+                <FilenameField 
+                    source="image" 
+                    title="title" />
             </ImageInput>
         </SimpleForm>
     </Edit>

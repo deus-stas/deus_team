@@ -44,31 +44,31 @@ export const ServicesList = (props) => (
 export const ServicesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Заголовок" fullWidth validate={[required()]} />
-            {/* <TextInput source="path" label="URL" /> */}
-            <TextInput source="position" label="Позиция"/>
-            <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
-            <TextInput source="descr" label="Описание для деталки" fullWidth />
+            <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
+            {/* <TextInput className="customWidth" source="path" label="URL" /> */}
+            <TextInput className="customWidth" source="position" label="Позиция"/>
+            <TextInput className="customWidth" source="descrTotal" label="Описание для разводящей" fullWidth />
+            <TextInput className="customWidth" source="descr" label="Описание для деталки" fullWidth />
             <ReferenceArrayInput perPage={100} source="subProjects" reference="projects" allowEmpty={true}>
-                <SelectArrayInput optionText="name" label="Проекты" />
+                <SelectArrayInput className="customWidth" optionText="name" label="Проекты" />
             </ReferenceArrayInput>
-            <TextInput source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
+            <TextInput className="customWidth" source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
 
             <ArrayInput
                 source="benefits"
                 label="Преимущества"
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput source="benefitsName" label="Название преимущества" />
-                    <TextInput source="benefitsDescr" label="Описание" />
+                    <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
+                    <TextInput className="customWidth" source="benefitsDescr" label="Описание" />
                     <ReferenceArrayInput source="benefitsPersons" reference="persons">
-                        <SelectInput optionText="name" label="Сотрудник" />
+                        <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
                     </ReferenceArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-            <TextInput source="blockTitle" label="Заголовок для блока" />
+            <TextInput className="customWidth" source="blockTitle" label="Заголовок для блока" />
             <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
-                <SelectArrayInput optionText="name" label="Услуги" />
+                <SelectArrayInput className="customWidth" optionText="name" label="Услуги" />
             </ReferenceArrayInput>
 
             <ArrayInput
@@ -76,8 +76,8 @@ export const ServicesCreate = (props) => (
                 label="Как проходит работа"
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput source="workName" label="Название" />
-                    <TextInput source="workDescr" label="Описание" />
+                    <TextInput className="customWidth" source="workName" label="Название" />
+                    <TextInput className="customWidth" source="workDescr" label="Описание" />
                 </SimpleFormIterator>
             </ArrayInput>
 
@@ -86,21 +86,21 @@ export const ServicesCreate = (props) => (
                 label="Тарифы"
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput source="tariffsCategory" label="Категория тарифа" />
+                    <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
                     <ArrayInput
                         source="tariffsItems"
                         label="Тариф"
                     >
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <TextInput source="tariffName" label="Название" />
-                            <TextInput source="tariffDeadline" label="Срок работы" />
-                            <TextInput source="tariffPrice" label="Стоимость" />
+                            <TextInput className="customWidth" source="tariffName" label="Название" />
+                            <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
+                            <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
                             <ArrayInput
                                 source="tariffList"
                                 label="Что входит в тариф"
                             >
                                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                                    <TextInput source="tariffWork" label="Услуга тарифа" />
+                                    <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />
                                 </SimpleFormIterator>
                             </ArrayInput>
                         </SimpleFormIterator>
@@ -115,32 +115,32 @@ export const ServicesCreate = (props) => (
 export const ServicesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Заголовок" fullWidth validate={[required()]} />
-            <TextInput source="path" label="URL" />
-            <TextInput source="position" label="Позиция"/>
-            <TextInput source="descrTotal" label="Описание для разводящей" fullWidth />
-            <TextInput source="descr" label="Описание для деталки" fullWidth />
+            <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
+            <TextInput className="customWidth" source="path" label="URL" />
+            <TextInput className="customWidth" source="position" label="Позиция"/>
+            <TextInput className="customWidth" source="descrTotal" label="Описание для разводящей" fullWidth />
+            <TextInput className="customWidth" source="descr" label="Описание для деталки" fullWidth />
             <ReferenceArrayInput perPage={100}  source="subProjects" reference="projects" allowEmpty={true}>
-                <SelectArrayInput optionText="name" label="Проекты" />
+                <SelectArrayInput className="customWidth" optionText="name" label="Проекты" />
             </ReferenceArrayInput>
 
-            <TextInput source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
+            <TextInput className="customWidth" source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
 
             <ArrayInput
                 source="benefits"
                 label="Преимущества"
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput source="benefitsName" label="Название преимущества" />
-                    <TextInput source="benefitsDescr" label="Описание" />
+                    <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
+                    <TextInput className="customWidth" source="benefitsDescr" label="Описание" />
                     <ReferenceArrayInput source="benefitsPersons" reference="persons">
-                        <SelectInput optionText="name" label="Сотрудник" />
+                        <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
                     </ReferenceArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-            <TextInput source="blockTitle" label="Заголовок для блока" />
+            <TextInput className="customWidth" source="blockTitle" label="Заголовок для блока" />
             <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
-                <SelectArrayInput optionText="name" label="Элементы блока" />
+                <SelectArrayInput className="customWidth" optionText="name" label="Элементы блока" />
             </ReferenceArrayInput>
 
             <ArrayInput
@@ -148,8 +148,8 @@ export const ServicesEdit = (props) => (
                 label="Как проходит работа"
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput source="workName" label="Название" />
-                    <TextInput source="workDescr" label="Описание" />
+                    <TextInput className="customWidth" source="workName" label="Название" />
+                    <TextInput className="customWidth" source="workDescr" label="Описание" />
                 </SimpleFormIterator>
             </ArrayInput>
 
@@ -158,21 +158,21 @@ export const ServicesEdit = (props) => (
                 label="Тарифы"
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput source="tariffsCategory" label="Категория тарифа" />
+                    <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
                     <ArrayInput
                         source="tariffsItems"
                         label="Тариф"
                     >
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <TextInput source="tariffName" label="Название" />
-                            <TextInput source="tariffDeadline" label="Срок работы" />
-                            <TextInput source="tariffPrice" label="Стоимость" />
+                            <TextInput className="customWidth" source="tariffName" label="Название" />
+                            <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
+                            <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
                             <ArrayInput
                                 source="tariffList"
                                 label="Что входит в тариф"
                             >
                                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                                    <TextInput source="tariffWork" label="Услуга тарифа" />
+                                    <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />
                                 </SimpleFormIterator>
                             </ArrayInput>
                         </SimpleFormIterator>

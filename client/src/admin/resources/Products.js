@@ -4,16 +4,16 @@ import { List, Datagrid, TextField, Edit, Create, TextInput, SimpleForm, require
 export const ProductsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание" validate={[required()]} />
-            <TextInput source="link" label="Ссылка на продукт" validate={[required()]} />
-            <FileInput source="img" label="Картинка">
+            <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <TextInput className="customWidth" source="descr" label="Описание" validate={[required()]} />
+            <TextInput className="customWidth" source="link" label="Ссылка на продукт" validate={[required()]} />
+            <FileInput className="fileInput" placeholder="+" source="img" label="Картинка">
                 <FileField source="src" title="title" />
             </FileInput>
-            <FileInput source="video">
+            <FileInput className="fileInput" placeholder="+" source="video">
                 <FileField source="src" title="title" />
             </FileInput>
-            <TextInput source="videoUrl" label="URL"/>
+            <TextInput className="customWidth" source="videoUrl" label="URL"/>
         </SimpleForm>
     </Create>
 )
@@ -21,16 +21,16 @@ export const ProductsCreate = (props) => (
 export const ProductsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput source="name" label="Название" validate={[required()]} />
-            <TextInput source="descr" label="Описание" validate={[required()]} />
-            <TextInput source="link" label="Ссылка на продукт" validate={[required()]} />
-            <FileInput source="img"label="Картинка" >
+            <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <TextInput className="customWidth" source="descr" label="Описание" validate={[required()]} />
+            <TextInput className="customWidth" source="link" label="Ссылка на продукт" validate={[required()]} />
+            <FileInput className="fileInput" placeholder="+" source="img"label="Картинка" >
                 <FileField source="src" title="title" />
             </FileInput>
-            <FileInput source="video">
+            <FileInput className="fileInput" placeholder="+" source="video">
                 <FileField source="src" title="title" />
             </FileInput>
-            <TextInput source="videoUrl" label="URL"/>
+            <TextInput className="customWidth" source="videoUrl" label="URL"/>
         </SimpleForm>
     </Edit>
 );

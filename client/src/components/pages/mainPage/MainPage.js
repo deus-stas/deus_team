@@ -422,7 +422,7 @@ const MainPage = () => {
                                     <div className="main-services__item tab-parent" key={service.id}>
                                         <div className="main-services__head" onClick={onAcc}>
                                             <div className="main-services__num">{index < 9 ? 0 : ''}{index + 1}</div>
-                                            <div className="main-services__name">{service.name} - {service.position}</div>
+                                            <div className="main-services__name">{service.name}</div>
                                             <div className="main-services__btn">
                                                 <Icon icon="arr-acc" />
                                             </div>

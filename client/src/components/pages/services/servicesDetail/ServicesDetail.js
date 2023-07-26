@@ -194,56 +194,6 @@ const ServicesDetail = () => {
                                     )
                                 }) : null
                             }
-                            {/* <div className="service-adv__item tab-parent">
-                                <div className="service-adv__head" onClick={onAcc}>
-                                    <div className="service-adv__head-elem">
-                                        <div className="service-adv__num">01</div>
-                                        <div className="service-adv__name">Используем продуктовый подход</div>
-                                    </div>
-                                    <div className="service-adv__head-elem">
-                                        <div className="service-adv__person">
-                                            <img src={frontend} alt="Сергей Разинкин" className="service-adv__person-img" />
-                                            <div className="service-adv__person-name">Сергей Разинкин, <br />Front End разработчик</div>
-                                        </div>
-                                        <div className="service-adv__icon">
-                                            <Icon icon="arr-acc" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="service-adv__tab">Комплексно подходим к созданию продукта для вашего бренда, анализируем рынок и аудиторию</div>
-                            </div>
-                            <div className="service-adv__item tab-parent">
-                                <div className="service-adv__head" onClick={onAcc}>
-                                    <div className="service-adv__head-elem">
-                                        <div className="service-adv__num">02</div>
-                                        <div className="service-adv__name">Работаем с задачами разной сложности</div>
-                                    </div>
-                                    <div className="service-adv__head-elem">
-                                        <div className="service-adv__person">
-                                            <img src={frontend} alt="Сергей Разинкин" className="service-adv__person-img" />
-                                            <div className="service-adv__person-name">Сергей Разинкин, <br />Front End разработчик</div>
-                                        </div>
-                                        <div className="service-adv__icon"><Icon icon="arr-acc" /></div>
-                                    </div>
-                                </div>
-                                <div className="service-adv__tab">Комплексно подходим к созданию продукта для вашего бренда, анализируем рынок и аудиторию</div>
-                            </div>
-                            <div className="service-adv__item tab-parent">
-                                <div className="service-adv__head" onClick={onAcc}>
-                                    <div className="service-adv__head-elem">
-                                        <div className="service-adv__num">03</div>
-                                        <div className="service-adv__name">Выделенная команда</div>
-                                    </div>
-                                    <div className="service-adv__head-elem">
-                                        <div className="service-adv__person">
-                                            <img src={frontend} alt="Сергей Разинкин" className="service-adv__person-img" />
-                                            <div className="service-adv__person-name">Сергей Разинкин, <br />Front End разработчик</div>
-                                        </div>
-                                        <div className="service-adv__icon"><Icon icon="arr-acc" /></div>
-                                    </div>
-                                </div>
-                                <div className="service-adv__tab">Комплексно подходим к созданию продукта для вашего бренда, анализируем рынок и аудиторию</div>
-                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -315,6 +265,11 @@ const ServicesDetail = () => {
                                         <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                             <div className="projects__item-img-wrap">
                                                 {
+                                                    project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 
+                                                        ?
+                                                    <video autoPlay loop muted playsInline controls>
+                                                        <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                                    </video> : 
                                                     project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
                                                         ?
                                                         <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>

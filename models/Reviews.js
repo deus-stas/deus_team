@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 
 const servicesSchema = new Schema({
     name: { type: String, required: true },
-    service: { type: String },
-    type: { type: String },
+    service: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
+    type: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
     reviewFile: { type: Object },
-    reviewName: { type: String },
-    reviewPost: { type: String },
+    reviewName: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
+    reviewPost: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
     reviewImage: { type: Object },
-    review: { type: String },
-    reviewProject: { type: String },
-    reviewService: { type: String },
+    review: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
+    reviewProject: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
+    reviewService: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
     reviewBg: { type: Object },
 });
 
