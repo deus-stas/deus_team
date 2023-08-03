@@ -72,7 +72,7 @@ const Showreel = (props) => {
                             </video> :
                             data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
                                 <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
-                                <video is="x-muted" loop  playsInline>
+                                <video autoPlay muted controls loop  playsInline>
                                     <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                                 </video>
                         }
@@ -86,7 +86,7 @@ const Showreel = (props) => {
                             </video> :
                             data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
                                 <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
-                                <video is="x-muted" loop  playsInline>
+                                <video muted controls loop  playsInline>
                                     <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                                 </video>
                         }
@@ -102,7 +102,9 @@ const Showreel = (props) => {
                     {
                         data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
                             <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
-                            <video src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} playsInline loop is="x-muted" className="popup__video"></video>
+                            <video muted controls playsInline loop autoPlay className="popup__video">
+                                <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} />
+                            </video>
                     }
                 </div>
             </Popup>

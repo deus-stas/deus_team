@@ -292,6 +292,28 @@ const ProjectDetail = () => {
                     </div>
                 </section> : null }
 
+                {detail.technologies && detail.technologies !== 'undefined' && detail.technologies !== '' ? 
+
+                    <section className="project-results">
+                        <div className="container">
+                            <div className="project-results__wrap">
+                                <h2  style={{ color: '#000000' }} className="heading-secondary">Технологии</h2>
+                                <div className="project-results__content">
+                                    {/* <div className="project-results__person">
+                                        <div className="project-results__person-info">
+                                            <div className="project-results__person-name">{detail.resultPersons.name},</div>
+                                            <div className="project-results__person-position">{detail.resultPersons.post} @ DEUS</div>
+                                        </div>
+                                        <div className="project-results__person-text"><div dangerouslySetInnerHTML={{ __html: detail.resultPersonsText }}></div></div>
+                                        <img src="/img/maks.png" alt="person" className="project-results__person-photo"/>
+                                        {detail.resultPersons.image ? <img src={`${apiUrl}/uploads/${detail.resultPersons.image.filename}`} alt={detail.resultPersons.name} className="project-results__person-photo" /> : null}
+                                    </div> */}
+                                    <div className='blackText'  dangerouslySetInnerHTML={{ __html: detail.technologies }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section> : null }
+
             {
                 detail.bannerFifthVideo && detail.bannerFifthVideo !== 'undefined' && detail.bannerFifthVideo !== 'null' ?
                     <section className="project-banner">

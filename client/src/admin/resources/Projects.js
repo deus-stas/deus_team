@@ -362,6 +362,10 @@ export const ProjectsCreate = (props) => (
             <ColorInput 
                 source="resultsColor" 
                 label="Цвет результаты" />
+            <RichTextInput  
+                className="customWidth"
+                source="technologies" 
+                label="Технологии"  />
             <FileInput 
                 source="bannerFifth" 
                 label="Баннер">
@@ -623,6 +627,10 @@ export const ProjectsEdit = (props) => (
             <ColorInput 
                 source="resultsColor" 
                 label="Цвет результаты" />
+            <RichTextInput  
+                className="customWidth"
+                source="technologies" 
+                label="Технологии"  />
             <FileInput 
                 source="bannerFifth" 
                 label="Баннер">

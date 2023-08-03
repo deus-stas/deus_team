@@ -171,7 +171,7 @@ const Agency = () => {
                 }
             </section>
 
-            <section className="agency-about">
+            <section id='agency' className="agency-about">
                 <div className="container">
                     <h2 className="heading-secondary">Об агентстве</h2>
                     <div className="agency-about__wrap">

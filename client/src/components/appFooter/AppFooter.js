@@ -79,7 +79,7 @@ const AppFooter = () => {
                         <div className="footer__subtitle">О компании</div>
                         <nav className="footer__nav">
                             <ul className='footer__list'>
-                                <li className="footer__list-item"><Link to="/agency">О компании</Link></li>
+                                <li className="footer__list-item"><Link to="/agency" datahash="agency" onClick={(e) => gotoAnchor(e)}>О компании</Link></li>
                                 <li className="footer__list-item"><Link to="/agency" datahash="clients" onClick={(e) => gotoAnchor(e)}>Клиенты</Link></li>
                                 <li className="footer__list-item"><Link to="/agency" datahash="team" onClick={(e) => gotoAnchor(e)}>Команда</Link></li>
                                 <li className="footer__list-item"><Link to="/agency" datahash="awards" onClick={(e) => gotoAnchor(e)}>Награды</Link></li>

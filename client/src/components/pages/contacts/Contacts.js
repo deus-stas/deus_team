@@ -9,12 +9,12 @@ import './contacts.scss';
 
 const Contacts = () => {
 
-    useEffect(() => {
-        const element = document.getElementById('contactUs');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-        }, []);
+    // useEffect(() => {
+    //     const element = document.getElementById('contactUs');
+    //     if (element) {
+    //         element.scrollIntoView({ behavior: 'smooth' });
+    //     }
+    //     }, []);
 
     return (
         <main className="contacts">

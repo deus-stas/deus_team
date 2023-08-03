@@ -35,6 +35,12 @@ const AppHeader = (props) => {
         navigate('/contacts#contactUs');
     };
     
+    const gotoAnchor = (e) => {
+        setTimeout(() => {
+            let element = document.getElementById(e.target.getAttribute('datahash'));
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 750)
+    }
     
     
     const [menu, setMenu] = useState(false);    
@@ -83,10 +89,14 @@ const AppHeader = (props) => {
                         }
 
                         
-                        <div onClick={handleClick} className="header__discuss hidden-mobile">
+                        {/* <div onClick={handleClick} className="header__discuss hidden-mobile">
                             <img src={btn} alt="Обсудить проект" className="header__discuss-img" />
                             <div className="header__discuss-text">Обсудить проект</div>
-                        </div>
+                        </div> */}
+                        <Link to="/contacts"  className="header__discuss hidden-mobile" datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
+                            <img datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={btn} alt="Обсудить проект" className="header__discuss-img" />
+                            <div datahash="contactUs" onClick={(e) => gotoAnchor(e)} className="header__discuss-text">Обсудить проект</div>
+                        </Link>
                         
                         <div className={`header__burger hidden-desktop ${menu ? 'active' : ''}`} onClick={() => setMenu(!menu)}>
                             <span></span>
@@ -133,10 +143,13 @@ const AppHeader = (props) => {
                     }
                     
                     <div className="header__bot">
-                        <a href='contacts#contactWithUsPart' className="header__cta">
-                            <img src={btn} alt="Обсудить проект" />
+                        <Link to="/contacts"  className="header__cta" datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
+                            <img datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={btn} alt="Обсудить проект" />
                             Обсудить проект
-                        </a>
+                        </Link>
+                        {/* <a href='contacts#contactWithUsPart'>
+                           
+                        </a> */}
                         {/* <Link to="/" className="header__presa">Презентация агентства</Link> */}
                         {
                             headerData && headerData.presentation ? 

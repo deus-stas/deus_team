@@ -71,7 +71,7 @@ router.post(
         { name: 'mainVideoFile' }]), 
     addCustomId,
     async (req, res) => {
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
 
@@ -177,7 +177,8 @@ router.post(
         nameInEng,
         workStepsHeader,
         resultPersonsText,
-        resultTextColor
+        resultTextColor,
+        technologies
     });
 
     await projects.save();
@@ -242,7 +243,7 @@ router.put("/projects/:id",
     console.log(req.body);
     console.log(req.files);
 
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader, resultPersonsText,resultTextColor } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader, resultPersonsText,resultTextColor, technologies } = req.body;
 
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
@@ -477,7 +478,8 @@ router.put("/projects/:id",
     project.customId = customId,
     project.workStepsHeader = workStepsHeader,
     project.resultPersonsText = resultPersonsText,
-    project.resultTextColor = resultTextColor
+    project.resultTextColor = resultTextColor,
+    project.technologies = technologies
 
     await project.save();
 

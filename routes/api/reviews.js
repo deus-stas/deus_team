@@ -97,7 +97,7 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
 
     const { name, service, type, reviewName, reviewPost, review, reviewProject, reviewService } = req.body;
 
-    if (req.files.reviewFile) {
+    if (req.files && req.files.reviewFile) {
         if (reviews.reviewFile) {
             fs.unlink(reviews.reviewFile.path, (err) => {
                 if (err) {
@@ -117,7 +117,7 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
         }
     }
 
-    if (req.files.reviewImage) {
+    if (req.files && req.files.reviewImage) {
         if (reviews.reviewImage) {
             fs.unlink(reviews.reviewImage.path, (err) => {
                 if (err) {
@@ -137,7 +137,7 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
         }
     }
 
-    if (req.files.reviewBg) {
+    if (req.files && req.files.reviewBg) {
         if (reviews.reviewBg) {
             fs.unlink(reviews.reviewBg.path, (err) => {
                 if (err) {

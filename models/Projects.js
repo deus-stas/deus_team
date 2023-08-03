@@ -32,6 +32,7 @@ const projectsSchema = new Schema({
   resultTextColor: {type: String, default: '#ffffff' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '#ffffff' : v },
   resultPersons: { type: String, default: '#ffffff' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '#ffffff' : v},
   resultPersonsText: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
+  technologies: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   bannerFifth: { type: Object },
   main: {type: Boolean},
   imagesExtra: {type: Array},

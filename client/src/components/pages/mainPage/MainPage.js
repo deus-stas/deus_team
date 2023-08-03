@@ -385,7 +385,7 @@ const MainPage = () => {
             </section>
 
             {working ?
-                <section className="main-working">
+                <section style={{display: 'none'}} className="main-working">
                     <div className="container">
                         <h3 className="heading-tertiary">Работаем сейчас над</h3>
                         <div className="main-working__wrap">
