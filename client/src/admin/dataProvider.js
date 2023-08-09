@@ -80,7 +80,9 @@ const dataProvider = {
       "presentation",
       'img',
       'visibilityImg1',
-      'visibilityImg2'
+      'visibilityImg2',
+      'headerPhoto',
+      'contactPhoto'
     ];
     let hasImage = false;
     const extraImages = params.data.imagesExtra
@@ -113,7 +115,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     const formData = new FormData();
-    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2'];
+    const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
     const extraImages = params.data.imagesExtra

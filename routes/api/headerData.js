@@ -36,11 +36,28 @@ router.get('/headerData', async (req, res) => {
     res.json(headerData);
 });
 
-router.post('/headerData', upload.single('presentation'), async (req, res) => {
+router.post('/headerData', upload.fields([
+    { name: 'presentation' }, 
+    { name: 'headerPhoto' }, 
+    { name: 'contactPhoto' }]), async (req, res) => {
     const { phone, email, vk, telegram, behance } = req.body;
     console.log(req.file);
 
-    const presentation = req.file;
+    // const presentation = req.file;
+    let presentation, headerPhoto, contactPhoto;
+
+    if (req.files.presentation) {
+        presentation = req.files.presentation[0];
+    }
+
+    if (req.files.headerPhoto) {
+        headerPhoto = req.files.headerPhoto[0];
+    }
+
+    if (req.files.contactPhoto) {
+        contactPhoto = req.files.contactPhoto[0];
+    }
+    
 
     
     const headerData = new HeaderData({
@@ -49,7 +66,9 @@ router.post('/headerData', upload.single('presentation'), async (req, res) => {
         presentation,
         vk,
         telegram,
-        behance
+        behance,
+        headerPhoto,
+        contactPhoto
     });
 
     await headerData.save();
@@ -68,7 +87,11 @@ router.get('/headerData/:id', async (req, res) => {
     res.json(headerData);
 });
 
-router.put("/headerData/:id", upload.single('presentation'), async (req, res) => {
+router.put("/headerData/:id", upload.fields([
+    {name: 'presentation'},
+    {name: 'headerPhoto'},
+    {name: 'contactPhoto'}
+]), async (req, res) => {
     const { id } = req.params;
   
     try {
@@ -79,12 +102,72 @@ router.put("/headerData/:id", upload.single('presentation'), async (req, res) =>
       }
   
       const { email, phone, vk, telegram, behance } = req.body;
-      const presentation = req.file;
+    //   const presentation = req.file;
   
-      if (presentation) {
-        fs.unlinkSync(`uploads/${headerData.presentation.filename}`);
-        headerData.presentation = presentation;
-        console.log("pres", presentation)
+    //   if (presentation) {
+    //     fs.unlinkSync(`uploads/${headerData.presentation.filename}`);
+    //     headerData.presentation = presentation;
+    //     console.log("pres", presentation)
+    // }
+
+    if (req.files.presentation) {
+        if (headerData.presentation) {
+            fs.unlink(headerData.presentation.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        headerData.presentation = req.files.presentation[0];
+    } else {
+        if (headerData.presentation && headerData.presentation.path && req.body.presentation !== 'true') {
+            fs.unlink(headerData.presentation.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            headerData.presentation = null;
+        }
+    }
+
+    if (req.files.headerPhoto) {
+        if (headerData.headerPhoto) {
+            fs.unlink(headerData.headerPhoto.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        headerData.headerPhoto = req.files.headerPhoto[0];
+    } else {
+        if (headerData.headerPhoto && headerData.headerPhoto.path && req.body.headerPhoto !== 'true') {
+            fs.unlink(headerData.headerPhoto.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            headerData.headerPhoto = null;
+        }
+    }
+
+    if (req.files.contactPhoto) {
+        if (headerData.contactPhoto) {
+            fs.unlink(headerData.contactPhoto.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        headerData.contactPhoto = req.files.contactPhoto[0];
+    } else {
+        if (headerData.contactPhoto && headerData.contactPhoto.path && req.body.contactPhoto !== 'true') {
+            fs.unlink(headerData.contactPhoto.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            headerData.contactPhoto = null;
+        }
     }
   
       // Update the other fields of the document
@@ -113,11 +196,20 @@ router.put("/headerData/:id", upload.single('presentation'), async (req, res) =>
         return res.status(404).json({ success: false, message: "HeaderData not found" });
     }
 
-    const { presentation } = headerData;
+    const { presentation, headerPhoto, contactPhoto } = headerData;
 
     if (presentation) {
         fs.unlinkSync(`uploads/${presentation.filename}`);
     }
+
+    if (headerPhoto) {
+        fs.unlinkSync(`uploads/${headerPhoto.filename}`);
+    }
+
+    if (contactPhoto) {
+        fs.unlinkSync(`uploads/${contactPhoto.filename}`);
+    }
+    
 
     res.json({ success: true });
 });

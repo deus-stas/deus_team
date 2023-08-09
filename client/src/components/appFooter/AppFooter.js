@@ -83,7 +83,7 @@ const AppFooter = () => {
                                 <li className="footer__list-item"><Link to="/agency" datahash="clients" onClick={(e) => gotoAnchor(e)}>Клиенты</Link></li>
                                 <li className="footer__list-item"><Link to="/agency" datahash="team" onClick={(e) => gotoAnchor(e)}>Команда</Link></li>
                                 <li className="footer__list-item"><Link to="/agency" datahash="awards" onClick={(e) => gotoAnchor(e)}>Награды</Link></li>
-                                <li className="footer__list-item"><Link to="/agency" datahash="team" onClick={(e) => gotoAnchor(e)}>Вакансии</Link></li>
+                                <li className="footer__list-item"><Link to="/agency" datahash="vacancies" onClick={(e) => gotoAnchor(e)}>Вакансии</Link></li>
                                 <li className="footer__list-item"><Link to="/contacts">Контакты </Link></li>
                             </ul>
                         </nav>

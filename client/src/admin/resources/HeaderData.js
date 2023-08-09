@@ -24,6 +24,12 @@ export const HeaderDataCreate = (props) => (
             <FileInput className="fileInput" placeholder="+" source="presentation" label="Презентация">
                 <FileField source="src" title="title" />
             </FileInput>
+            <FileInput className="fileInput" placeholder="+" source="headerPhoto" label="Фото на шапке">
+                <FileField source="src" title="title" />
+            </FileInput>
+            <FileInput className="fileInput" placeholder="+" source="contactPhoto" label="Фотo  в странице контакты">
+                <FileField source="src" title="title" />
+            </FileInput>
         </SimpleForm>
     </Create>
 );
@@ -37,6 +43,12 @@ export const HeaderDataEdit = (props) => (
             <TextInput className="customWidth" source="telegram" label="Telegram" />
             <TextInput className="customWidth" source="behance" label="Behance" />
             <FileInput className="fileInput" placeholder="+" source="presentation" label="Презентация">
+                <FileField source="src" title="title" />
+            </FileInput>
+            <FileInput className="fileInput" placeholder="+" source="headerPhoto" label="Фото на шапке">
+                <FileField source="src" title="title" />
+            </FileInput>
+            <FileInput className="fileInput" placeholder="+" source="contactPhoto" label="Фотo  в странице контакты">
                 <FileField source="src" title="title" />
             </FileInput>
         </SimpleForm>

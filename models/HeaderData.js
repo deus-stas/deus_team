@@ -12,7 +12,9 @@ const HeaderSchema = new Schema({
   presentation: { type: Object },
   vk: {type: String},
   telegram: {type: String},
-  behance: {type: String}
+  behance: {type: String},
+  headerPhoto: { type: Object },
+  contactPhoto: { type: Object },
 
   
 });

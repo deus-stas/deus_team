@@ -455,7 +455,7 @@ const Agency = () => {
                                 }
                             </div>
                         </div>
-                        <div className="agency-team__content">
+                        <div className="agency-team__content" id='vacancies'>
                             <h2 className="heading-secondary">Ищем таланты</h2>
                             {
                                 vacancies.length ?
