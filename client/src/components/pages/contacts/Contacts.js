@@ -44,7 +44,7 @@ const Contacts = () => {
                 </div>
             </section>
             <section id="contactUs">
-                <Cta   formName={'project'} />
+                <Cta   formName={'contacts'} />
             </section>
 
 

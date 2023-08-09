@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 import InputMask from "react-input-mask";
 import axios from 'axios'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
@@ -47,6 +47,25 @@ function Checkbox(props) {
 
 const Cta = (props) => {
 
+    const [worker, setWorker] = useState([]);
+
+
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/contacts/`)
+            .then((response) => {
+                console.log("data contc", response.data)
+                console.log("props", props)
+                response.data.map((item, index) => (
+                    item.pageName === props.formName ? setWorker(item) : null
+                ))
+                
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [props]);
+
     const { formName } = props;
     const [success, setSuccess] = useState(false);
 
@@ -63,13 +82,24 @@ const Cta = (props) => {
         <section className="cta">
             <div className="container">
                 <div className="cta__wrap">
-                    <h2 className="heading-secondary">{formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'}</h2>
+                    <h2 className="heading-secondary">{worker ? worker.title : null}</h2>
                     <div className="cta__person">
-                        <img src={formName === 'tender' ? tender : manager} alt={formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'} className="cta__person-img" />
+                        {/* <img src={formName === 'tender' ? tender : manager} alt={formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'} className="cta__person-img" /> */}
+                        {
+                                worker && worker.image ? 
+                                (
+                                    <img   src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title} className="cta__person-img" />
+                                ) : (
+                                    <img   src={manager} alt="Хотите обсудить проект?" className="cta__person-img" />
+                                )
+                        }
                         <div className="cta__person-descr">
-                            {
+                            {/* {
                                 formName === 'tender' ? 'Алена Фролова — тендерный специалист, ответит на ваши вопросы и организует встречу'
                                     : 'Павел Докторов — Менеджер проектов, ответит на ваши вопросы и организует встречу'
+                            } */}
+                            {
+                                worker && worker.description ? worker.description : null
                             }
                         </div>
                     </div>

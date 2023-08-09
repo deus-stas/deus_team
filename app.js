@@ -28,6 +28,7 @@ const mailRoutes = require('./routes/api/mail');
 const users = require("./routes/api/users");
 const headerData = require("./routes/api/headerData");
 const diplomasRoutes = require("./routes/api/diplomas");
+const contactsRoutes = require("./routes/api/contacts");
 
 const app = express();
 
@@ -77,6 +78,7 @@ app.use('/api', mailRoutes);
 app.use('/api', users);
 app.use('/api', headerData);
 app.use('/api', diplomasRoutes);
+app.use('/api', contactsRoutes);
 
 
 if (process.env.NODE_ENV === 'production') {

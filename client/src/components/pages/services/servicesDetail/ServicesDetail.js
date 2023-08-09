@@ -411,7 +411,7 @@ const ServicesDetail = () => {
                     : null
             }
 
-            <Cta formName={'project'} />
+            <Cta formName={'services'} />
 
         </main>
     )

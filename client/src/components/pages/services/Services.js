@@ -21,6 +21,19 @@ const Services = () => {
 
     const [openImage, setOpenImage] = useState(null);
 
+    const [headerData, setHeaderData] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/headerData/`)
+            .then((response) => {
+                setHeaderData(response.data[0]);
+                console.log('header data',response.data[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     useEffect(() => {
         axios.get(`${apiUrl}/api/services/`)
             .then((response) => {
@@ -96,7 +109,15 @@ const Services = () => {
                         <div className="services-s__content">
                             <div className="services-s__subtitle">Отвечаем за качество своих услуг. Гордимся каждым проектом.</div>
                             <div className="services-s__dir">
-                                <img src={person} alt="Брижань Вячеслав" className="services-s__dir-img" />
+                                {
+                                    headerData && headerData.headerPhoto ? 
+                                    (
+                                        <img src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`} alt="Брижань Вячеслав" className="services-s__dir-img" />
+                                    ) :
+                                    (
+                                        <img src={person} alt="Брижань Вячеслав" className="services-s__dir-img" />
+                                    )
+                                }
                                 <div className="services-s__dir-name">
                                     Брижань Вячеслав <br />
                                     генеральный директор
@@ -161,7 +182,7 @@ const Services = () => {
                 </div>
             </section>
 
-            <Cta formName={'project'} />
+            <Cta formName={'services'} />
 
             <Social />
 

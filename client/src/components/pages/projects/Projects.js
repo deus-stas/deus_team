@@ -179,7 +179,7 @@ const Projects = () => {
                 </div>
             </section>
 
-            <Cta formName={'project'} />
+            <Cta formName={'projects'} />
         </main>
     )
 

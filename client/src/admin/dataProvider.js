@@ -82,7 +82,7 @@ const dataProvider = {
       'visibilityImg1',
       'visibilityImg2',
       'headerPhoto',
-      'contactPhoto'
+      'contactPhoto',
     ];
     let hasImage = false;
     const extraImages = params.data.imagesExtra

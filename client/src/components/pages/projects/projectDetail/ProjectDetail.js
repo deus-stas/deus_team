@@ -381,7 +381,7 @@ const ProjectDetail = () => {
 
             <ProjectNext />
 
-            <Cta formName={'project'} />
+            <Cta formName={'projects'} />
 
         </main>
     )

@@ -26,6 +26,7 @@ import authProvider from './admin/authProvider';
 import { theme } from "./admin/theme";
 import MyLogoutButton from '../src/components/appHeader/MyLogoutButton';
 import { DiplomasList, DiplomasEdit, DiplomasCreate } from './admin/resources/Diplomas';
+import { ContactsList, ContactsEdit, ContactsCreate } from './admin/resources/Contacts';
 
 const MyUserMenu = () => <UserMenu><MyLogoutButton /></UserMenu>;
 
@@ -63,6 +64,7 @@ const AdminPage = () => (
     }
     <Resource name="headerData" list={HeaderDataList} create={HeaderDataCreate} edit={HeaderDataEdit} options={{ label: 'Шапка сайта' }} />
     <Resource name="diplomas" list={DiplomasList} create={DiplomasCreate} edit={DiplomasEdit} options={{ label: 'Дипломы и бейжи' }} />
+    <Resource name="contacts" list={ContactsList} create={ContactsCreate} edit={ContactsEdit} options={{ label: 'Контакты' }} />
 
   </Admin >
 );
