@@ -262,7 +262,7 @@ const ProjectDetail = () => {
                                         <div className="project-steps__text">{item.workStepsIntroText}</div>
                                         {/*{!!item.workStepsItemList && item.workStepsItemList.length > 0 ?*/}
                                             <>
-                                                {item.workStepsItemTaskList.map(val=>
+                                                {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val=>
                                                     <div className="project-steps__adv">
                                                         <div className="project-results__text" dangerouslySetInnerHTML={{ __html: val.workStepsItemTask }}></div>
                                                     </div>
