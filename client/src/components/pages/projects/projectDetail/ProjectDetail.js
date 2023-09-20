@@ -260,9 +260,19 @@ const ProjectDetail = () => {
                                     <div className="project-steps__subtitle">{item.workStepsTitle}</div>
                                     <div className="project-steps__content">
                                         <div className="project-steps__text">{item.workStepsIntroText}</div>
-                                        <div className="project-steps__adv">
-                                            <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
-                                        </div>
+                                        {/*{!!item.workStepsItemList && item.workStepsItemList.length > 0 ?*/}
+                                            <>
+                                                {item.workStepsItemTaskList.map(val=>
+                                                    <div className="project-steps__adv">
+                                                        <div className="project-results__text" dangerouslySetInnerHTML={{ __html: val.workStepsItemTask }}></div>
+                                                    </div>
+                                                )}
+                                            </>
+                                             {/*:*/}
+                                            <div className="project-steps__adv">
+                                                <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
+                                            </div>
+                                         {/*}*/}
                                     </div>
                                 </div>
                             ))

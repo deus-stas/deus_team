@@ -589,6 +589,17 @@ export const ProjectsEdit = (props) => (
                     <RichTextInput  
                         className="customWidth"
                         source="workStepsItem"  />
+                    <ArrayInput
+                        source="workStepsItemTaskList"
+                        label="Список выполненных задач"
+                    >
+                        <SimpleFormIterator>
+                            <RichTextInput
+                                className="customWidth"
+                                source="workStepsItemTask"
+                                label="Описание задачи" />
+                        </SimpleFormIterator>
+                    </ArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
             <ColorInput 
