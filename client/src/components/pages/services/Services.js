@@ -150,6 +150,9 @@ const Services = () => {
                     <h2 className="heading-secondary">Отзывы</h2>
                     <div className="services-reviews__wrap">
                         {reviews ? reviews.map(review => {
+                            const fileName = !!review.reviewFile ? review.reviewFile.mimetype : "";
+                            const extension = fileName.split('/').pop().toLowerCase();
+
                             return (
                                 <div to="/" className="services-reviews__item" onClick={() => handleImageClick(review.reviewFile.filename)} key={review.id}>
                                     <div className="services-reviews__name">{review.name}</div>
@@ -158,7 +161,7 @@ const Services = () => {
                                     {
                                         review.reviewFile ?  (
                                             <>
-                                                <div className="services-reviews__file">{review.reviewFile.mimetype}</div>
+                                                <div className="services-reviews__file"> {extension} </div>
                                                 <img src={`${apiUrl}/uploads/${review.reviewFile.filename}`} alt={review.name} className="services-reviews__r" />
                                             </>
                                         ) : null
