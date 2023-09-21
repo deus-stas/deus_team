@@ -167,6 +167,9 @@ export const ProjectsCreate = (props) => (
                 className="customWidth" 
                 source="nameInEng" 
                 label="URL" fullWidth  />
+            <BooleanInput 
+                source="visibility" 
+                label="Скрыть/Показать проекта проекта"/>
             <ImageInput 
                 className="fileInput"
                 placeholder="+"
@@ -432,6 +435,9 @@ export const ProjectsEdit = (props) => (
                 className="customWidth" 
                 source="nameInEng" 
                 label="URL" fullWidth  />
+             <BooleanInput 
+                source="visibility" 
+                label="Скрыть/Показать проекта"/>
             <ImageInput 
                 className='fileInput'
                 placeholder="+"

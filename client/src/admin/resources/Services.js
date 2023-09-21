@@ -46,6 +46,9 @@ export const ServicesCreate = (props) => (
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
             {/* <TextInput className="customWidth" source="path" label="URL" /> */}
+            <BooleanInput 
+                source="isInvisible" 
+                label="Показать/Скрыть"/>
             <TextInput className="customWidth" source="position" label="Позиция"/>
             <TextInput className="customWidth" source="descrTotal" label="Описание для разводящей" fullWidth />
             <TextInput className="customWidth" source="descr" label="Описание для деталки" fullWidth />
@@ -116,6 +119,9 @@ export const ServicesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
+            <BooleanInput 
+                source="isInvisible" 
+                label="Показать/Скрыть"/>
             <TextInput className="customWidth" source="path" label="URL" />
             <TextInput className="customWidth" source="position" label="Позиция"/>
             <TextInput className="customWidth" source="descrTotal" label="Описание для разводящей" fullWidth />

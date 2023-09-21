@@ -172,6 +172,10 @@
                         display: none;
                     }
                 }
+                @include respond(xsx){
+                    flex-direction: column;
+                    row-gap: 1rem;
+                }
             }
 
             .heading-secondary {
@@ -351,7 +355,8 @@
             margin-right: 12.8rem;
 
             @include respond(sm) {
-                height: 6.5em;
+                max-height: 6.5rem;
+                height: 100%;
                 margin-right: 0;
             }
         }

@@ -48,7 +48,8 @@ const projectsSchema = new Schema({
   visibilityImg1: {type: Object},
   visibilityTitle2: {type: String, default: '',set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   visibilityImg2: {type: Object},
-  resultsColor: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v}
+  resultsColor: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
+  visibility: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v }
 });
 
 projectsSchema.set('toJSON', { virtuals: true });
