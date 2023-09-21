@@ -192,7 +192,24 @@ const ProjectDetail = () => {
                     </section>
                 )
             }
-
+            {
+                detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
+                    <section className="project-banner">
+                        <div dangerouslySetInnerHTML={{ __html: detail.bannerSecondVideo }}></div>
+                    </section>
+                    : detail.bannerSecond ?
+                        <section className="project-banner">
+                            {detail.bannerSecond.mimetype !== 'video/mp4'
+                                ?
+                                <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
+                                :
+                                <video autoPlay loop muted playsInline>
+                                    <source src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                                </video>
+                            }
+                        </section>
+                        : null
+            }
             {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
                 <section className="project-results">
                     <div className="container">
