@@ -556,8 +556,32 @@ export const ProjectsEdit = (props) => (
                 className="customWidth" 
                 source="approach" 
                 label="Подход"  />
-            <ReferenceArrayInput  
-                source="approachPersons" 
+
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachList'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
+            <ReferenceArrayInput
+                source="approachPersons"
                 reference="persons">
                 <SelectInput
                     className="customWidth"   

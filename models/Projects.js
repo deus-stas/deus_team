@@ -23,6 +23,7 @@ const projectsSchema = new Schema({
   taskPersons: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   tasksList: { type: Array },
   bannerSecond: { type: Object },
+  bannerSeconds: { type: Array },
   approach: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   approachPersons: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   bannerThird: { type: Object },
@@ -49,7 +50,8 @@ const projectsSchema = new Schema({
   visibilityTitle2: {type: String, default: '',set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   visibilityImg2: {type: Object},
   resultsColor: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
-  visibility: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v }
+  visibility: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v },
+  approachList: {type: Array}
 });
 
 projectsSchema.set('toJSON', { virtuals: true });

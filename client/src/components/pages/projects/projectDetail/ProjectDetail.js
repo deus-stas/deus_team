@@ -30,7 +30,18 @@ const ProjectDetail = () => {
                             })
                     );
                 }
-
+                if (!!response.data.approachList) {
+                    response.data.approachList.forEach((val, i) => {
+                        if (!!val.approachPersons) {
+                            requests.push(
+                                axios.get(`${apiUrl}/api/persons/${val.approachPersons}`)
+                                    .then((response) => {
+                                        val.approachPersons = response.data
+                                    })
+                            );
+                        }
+                    })
+                }
                 if (response.data.approachPersons !== 'undefined') {
                     requests.push(
                         axios.get(`${apiUrl}/api/persons/${response.data.approachPersons}`)
@@ -158,24 +169,28 @@ const ProjectDetail = () => {
                     </section> : null
                 }
             </div>
-            
-            {
-                detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
-                    <section className="project-banner">
-                        <div dangerouslySetInnerHTML={{ __html: detail.bannerSecondVideo }}></div>
+            {!!detail.approachList && detail.approachList.filter(val=>!!val.approachPersons && val.text !=='').map((val)=>
+                    <section className="project-results">
+                        <div className="container">
+                            <div className="project-results__wrap">
+                                <h2 className="heading-secondary text-black">{val.title}</h2>
+                                <div className="quote">
+                                    <div className="quote__box">
+                                        {console.log(val.approachPersons)}
+                                        <div className="quote__person">
+                                            {val.approachPersons.image ? <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`} alt={val.approachPersons.name} className="quote__img" /> : null}
+
+                                            <div className="quote__person-text">
+                                                {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
+                                            </div>
+                                        </div>
+                                        <div className="quote__q" dangerouslySetInnerHTML={{ __html: val.text }}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
-                    : detail.bannerSecond ?
-                        <section className="project-banner">
-                            {detail.bannerSecond.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
-                        : null
+                )
             }
 
             {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
@@ -260,19 +275,16 @@ const ProjectDetail = () => {
                                     <div className="project-steps__subtitle">{item.workStepsTitle}</div>
                                     <div className="project-steps__content">
                                         <div className="project-steps__text">{item.workStepsIntroText}</div>
-                                        {/*{!!item.workStepsItemList && item.workStepsItemList.length > 0 ?*/}
                                             <>
-                                                {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val=>
+                                                {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val =>
                                                     <div className="project-steps__adv">
                                                         <div className="project-results__text" dangerouslySetInnerHTML={{ __html: val.workStepsItemTask }}></div>
                                                     </div>
                                                 )}
                                             </>
-                                             {/*:*/}
                                             <div className="project-steps__adv">
                                                 <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
                                             </div>
-                                         {/*}*/}
                                     </div>
                                 </div>
                             ))

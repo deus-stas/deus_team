@@ -102,6 +102,8 @@ const dataProvider = {
         formData.append(key, JSON.stringify(value));
       } else if (key === "workSteps") {
         formData.append(key, JSON.stringify(value));
+      }else if (key === "approachList") {
+        formData.append(key, JSON.stringify(value));
       } else {
         console.log(key, value);
         formData.append(key, value);
@@ -161,6 +163,8 @@ const dataProvider = {
         } else if (key === "tasksList") {
           formData.append(key, JSON.stringify(value));
         }  else if (key === "workSteps") {
+          formData.append(key, JSON.stringify(value));
+        }  else if (key === "approachList") {
           formData.append(key, JSON.stringify(value));
         } else {
           formData.append(key, value);
