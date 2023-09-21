@@ -13,7 +13,7 @@ import tender from '../../img/tender.png';
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
-    : 'http://localhost:4554';
+    : process.env.REACT_APP_LOCALHOST_URI;
 
 function Checkbox(props) {
     return (
