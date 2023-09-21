@@ -84,18 +84,20 @@ const dataProvider = {
       'headerPhoto',
       'contactPhoto',
     ];
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths']
     let hasImage = false;
-    const extraImages = params.data.imagesExtra
-      ? params.data.imagesExtra.map((image) => image.imageI.rawFile)
-      : [];
+
     for (const [key, value] of Object.entries(params.data)) {
       if (images.includes(key) && value) {
         hasImage = true;
         formData.append(key, value.rawFile);
-      } else if (key === "imagesExtra") {
+      } else if (arrayImages.includes(key) && value) {
+        const imagesFile = !!value
+          ? value.map((image) => image.imageI.rawFile)
+          : [];
         // добавляем картинки из imagesExtra в formData
-        extraImages.forEach((image, index) => {
-          formData.append(`imagesExtra`, image);
+        imagesFile.forEach((image, index) => {
+          formData.append(key, image);
         });
         //свойства в которых объект нужно отдельно переводить в JSON
       } else if (key === "tasksList") {
@@ -118,15 +120,14 @@ const dataProvider = {
   update: (resource, params) => {
     const formData = new FormData();
     const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
-    const extraImages = params.data.imagesExtra
-      ? params.data.imagesExtra.map((image) => image.imageI?.rawFile)
-      : [];
 
     for (const [key, value] of Object.entries(params.data)) {
+      console.log('put',key, value);
       if (images.includes(key) && value) {
-        console.log(key, value);
+
         hasImage = true;
         if(value.rawFile) {
           formData.append(key, value.rawFile);
@@ -152,11 +153,15 @@ const dataProvider = {
               formData.append(`raitingProject[${index}][${itemKey}]`, item[itemKey]);
             });
           });
-        } else if (key === "imagesExtra") {
+        } else if (arrayImages.includes(key) && value) {
+          const images = !!value
+            ? value.map((image) => image.imageI?.rawFile)
+            : [];
+
           // добавляем картинки из imagesExtra в formData
-          extraImages.forEach((image, index) => {
+          images.forEach((image, index) => {
             if (image !== undefined) {
-              formData.append(`imagesExtra`, image);
+              formData.append(key, image);
             }
           });
           //свойства в которых объект нужно отдельно переводить в JSON

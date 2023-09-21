@@ -66,8 +66,11 @@ router.post(
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
         { name: 'bannerThird' },
+        { name: 'bannerThirds' },
         { name: 'bannerFourth' },
+        { name: 'bannerFourths' },
         { name: 'bannerFifth' },
+        { name: 'bannerFifths' },
         { name: 'imagesExtra' },
         { name: 'mainVideoFile' }]),
     addCustomId,
@@ -93,7 +96,7 @@ router.post(
     // console.log(req.files);
     // console.log(req.body);
     console.log('inside', req.body.customId);
-    let bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
+    let bannerFirst, bannerSecond, bannerSeconds, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -117,6 +120,22 @@ router.post(
 
     if (req.files.imagesExtra) {
         imagesExtra = req.files.imagesExtra;
+    }
+
+    if (req.files.bannerSeconds) {
+        bannerSeconds = req.files.bannerSeconds;
+    }
+
+    if (req.files.bannerThirds) {
+        bannerThirds = req.files.bannerThirds;
+    }
+
+    if (req.files.bannerFourths) {
+        bannerThirds = req.files.bannerThirds;
+    }
+
+    if (req.files.bannerFifths) {
+        bannerThirds = req.files.bannerThirds;
     }
 
     if (req.files.mainVideoFile) {
@@ -146,10 +165,13 @@ router.post(
         bannerFifthVideo,
         bannerFirst,
         bannerSecond,
-        // bannerSeconds,
+        bannerSeconds,
         bannerThird,
+        bannerThirds,
         bannerFourth,
+        bannerFourths,
         bannerFifth,
+        bannerFifths,
         task,
         taskDescr,
         tasksList,
@@ -233,8 +255,11 @@ router.put("/projects/:id",
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
         { name: 'bannerThird' },
+        { name: 'bannerThirds' },
         { name: 'bannerFourth' },
+        { name: 'bannerFourths' },
         { name: 'bannerFifth' },
+        { name: 'bannerFifths' },
         { name: 'imagesExtra' },
         { name: 'mainVideoFile' },
         { name: 'visibilityImg1'},
@@ -383,6 +408,102 @@ router.put("/projects/:id",
         }
     }
 
+        if (req.files.bannerSeconds) {
+            if (project.bannerSeconds && project.bannerSeconds.length > 0) {
+                project.bannerSeconds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerSeconds = req.files.bannerSeconds;
+        } else {
+            if (project.bannerSeconds && project.bannerSeconds.length > 0) {
+                project.bannerSeconds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerSeconds = null;
+            }
+        }
+
+        if (req.files.bannerThirds) {
+            if (project.bannerThirds && project.bannerThirds.length > 0) {
+                project.bannerThirds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerThirds = req.files.bannerThirds;
+        } else {
+            if (project.bannerThirds && project.bannerThirds.length > 0) {
+                project.bannerThirds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerThirds = null;
+            }
+        }
+
+        if (req.files.bannerFourths) {
+            if (project.bannerFourths && project.bannerFourths.length > 0) {
+                project.bannerFourths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerFourths = req.files.bannerFourths;
+        } else {
+            if (project.bannerFourths && project.bannerFourths.length > 0) {
+                project.bannerFourths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerFourths = null;
+            }
+        }
+
+        if (req.files.bannerFifths) {
+            if (project.bannerFifths && project.bannerFifths.length > 0) {
+                project.bannerFifths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerFifths = req.files.bannerFifths;
+        } else {
+            if (project.bannerFifths && project.bannerFifths.length > 0) {
+                project.bannerFifths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerFifths = null;
+            }
+        }
+
     if (req.files.mainVideoFile) {
         if (project.mainVideoFile) {
             fs.unlink(project.mainVideoFile.path, (err) => {
@@ -502,7 +623,7 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
+    const { image, bannerFirst, bannerSecond, bannerSeconds, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     if (image) {
@@ -526,6 +647,29 @@ router.delete("/projects/:id", async (req, res) => {
 
     if (imagesExtra) {
         imagesExtra.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+
+    if (bannerSeconds) {
+        bannerSeconds.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+    if (bannerThirds) {
+        bannerThirds.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+
+    if (bannerFourths) {
+        bannerFourths.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+
+    if (bannerFifths) {
+        bannerFifths.forEach((image) => {
             fs.unlinkSync(`uploads/${image.filename}`);
         });
     }

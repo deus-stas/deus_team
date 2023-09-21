@@ -114,16 +114,7 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFirstVideo }}></div>
                     </section>
                     : detail.bannerFirst ?
-                        <section className="project-banner">
-                            {detail.bannerFirst.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerFirst} detail={detail}/>
                         : null
             }
 
@@ -176,18 +167,17 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerSecondVideo }}></div>
                     </section>
                     : detail.bannerSecond ?
-                        <section className="project-banner">
-                            {detail.bannerSecond.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerSecond} detail={detail}/>
                         : null
             }
+
+            {detail.bannerSeconds ?
+                detail.bannerSeconds.filter(val => !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
+            }
+
             {!!detail.approachList && detail.approachList.filter(val => !!val.approachPersons && val.text !== '').map((val) =>
                 <section className="project-results">
                     <div className="container">
@@ -242,18 +232,17 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerThirdVideo }}></div>
                     </section>
                     : detail.bannerThird ?
-                        <section className="project-banner">
-                            {detail.bannerThird.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerThird} detail={detail}/>
                         : null
             }
+
+            {detail.bannerThirds ?
+                detail.bannerThirds.filter(val=> !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
+            }
+
 
             {detail.body ?
                 <section className="project-results">
@@ -271,18 +260,17 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFourthVideo }}></div>
                     </section>
                     : detail.bannerFourth ?
-                        <section className="project-banner">
-                            {detail.bannerFourth.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerFourth} detail={detail}/>
                         : null
             }
+
+            {detail.bannerFourths ?
+                detail.bannerFourths.filter(val=> !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
+            }
+
             {
                 detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
                 <section style={{ background: detail.workStepsColor }} className="project-steps">
@@ -364,17 +352,15 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFifthVideo }}></div>
                     </section>
                     : detail.bannerFifth ?
-                        <section className="project-banner">
-                            {detail.bannerFifth.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerFifth} detail={detail}/>
                         : null
+            }
+
+            {detail.bannerFifths ?
+                detail.bannerFifths.filter(val=> !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
             }
 
             {detail.imagesExtra ?
@@ -433,3 +419,19 @@ const ProjectDetail = () => {
 }
 
 export default ProjectDetail;
+
+const BannerComponent = ({banner,detail}) => {
+    return (
+        <section className="project-banner">
+            {banner.mimetype !== 'video/mp4'
+                ?
+                <img src={`${apiUrl}/uploads/${banner.filename}`} alt={detail.name}/>
+                :
+                <video autoPlay loop muted playsInline>
+                    <source src={`${apiUrl}/uploads/${banner.filename}`}
+                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                </video>
+            }
+        </section>
+    )
+}

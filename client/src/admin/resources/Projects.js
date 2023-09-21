@@ -280,6 +280,20 @@ export const ProjectsCreate = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerSeconds"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerSecondVideo" 
@@ -325,6 +339,20 @@ export const ProjectsCreate = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerThirds"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerThirdVideo" 
@@ -361,6 +389,20 @@ export const ProjectsCreate = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerFourths"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerFourthVideo" 
@@ -398,6 +440,20 @@ export const ProjectsCreate = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerFifths"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerFifthVideo" 
@@ -570,6 +626,20 @@ export const ProjectsEdit = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerSeconds"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerSecondVideo" 
@@ -619,6 +689,20 @@ export const ProjectsEdit = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerThirds"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerThirdVideo" 
@@ -666,6 +750,20 @@ export const ProjectsEdit = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerFourths"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerFourthVideo" 
@@ -703,6 +801,20 @@ export const ProjectsEdit = (props) => (
                     source="src" 
                     title="title" />
             </FileInput>
+            <ArrayInput
+                label={"Список баннеров"}
+                source={"bannerFifths"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <TextInput
                 className="customWidth" 
                 source="bannerFifthVideo" 
