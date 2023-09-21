@@ -96,7 +96,7 @@ const Projects = () => {
 
     const filteredProjects = projects.filter(project => {
         return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
-            (selectedType ? project.projectType === selectedType.value : true);
+            (selectedType ? project.projectType === selectedType.value : true) && project.visibility;
     });
 
     const videoRefs = useRef([]);

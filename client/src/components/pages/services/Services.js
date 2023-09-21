@@ -128,13 +128,14 @@ const Services = () => {
                             {
                                 services ? services.map(service => {
                                     return (
-                                        <Link to={`/services/${service.path}`} className="services-s__item" key={service.id}>
-                                            <div className="services-s__name">{service.name}</div>
-                                            <div className="services-s__descr">{service.descrTotal}</div>
-                                            <div className="services-s__icon">
-                                                <Icon icon="corner-arr" />
-                                            </div>
-                                        </Link>
+                                        service.isInvisible ?
+                                            <Link to={`/services/${service.path}`} className="services-s__item" key={service.id}>
+                                                <div className="services-s__name">{service.name}</div>
+                                                <div className="services-s__descr">{service.descrTotal}</div>
+                                                <div className="services-s__icon">
+                                                    <Icon icon="corner-arr" />
+                                                </div>
+                                            </Link> : null
                                     )
                                 }) : null
                             }

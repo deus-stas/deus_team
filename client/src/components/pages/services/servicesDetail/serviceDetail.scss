@@ -524,6 +524,12 @@
         &__item {
             padding: 4rem;
             background: rgba(85, 85, 85, .1);
+            height: 250px;
+            transition: height 0.3s ease;
+            overflow: hidden;
+            &.expanded {
+                height: auto; /* Let the content determine the height */
+            }
 
             @include respond(sm) {
                 padding: 3rem;
@@ -587,6 +593,32 @@
         }
 
         &__p {
+            position: relative;
+            .show__more {
+                position: absolute;
+                top: -90px;
+                right: 0;
+                .top, .bottom {
+                    width: 5rem;
+                    height: 5rem;
+                    flex: 0 0 5rem;
+                    margin-left: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #FFFFFF;
+                    border-radius: 38px;
+                    transition: transform .5s;
+                    cursor: pointer;
+                    svg {
+                        color: #000;
+                    }
+                }
+                .bottom {
+                    transform: rotate(180deg);
+
+                }
+            }
             &-item {
                 &:not(:last-child) {
                     margin-bottom: 1.9rem;

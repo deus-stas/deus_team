@@ -148,6 +148,16 @@ const ServicesDetail = () => {
             });
     }, []);
 
+    const [expandedItems, setExpandedItems] = useState([]);
+
+    const toggleExpand = (index) => {
+        setExpandedItems(prevExpandedItems => {
+            const newExpandedItems = [...prevExpandedItems];
+            newExpandedItems[index] = !newExpandedItems[index];
+            return newExpandedItems;
+        });
+    };
+
     return (
         <main className="service">
 
@@ -332,7 +342,7 @@ const ServicesDetail = () => {
                                                     {
                                                         tariff.tariffsItems.map((item, index) => {
                                                             return (
-                                                                <div className="service-price__item" key={index}>
+                                                                <div className={`service-price__item ${expandedItems[index] ? 'expanded' : ''}`} key={index}>
                                                                     <h2 className="heading-secondary">{item.tariffName}</h2>
                                                                     <div className="service-price__subtitle">Что входит в тариф:</div>
                                                                     <div className="service-price__elem">
@@ -357,6 +367,15 @@ const ServicesDetail = () => {
                                                                                 <div className="service-price__p-title">Стоимость</div>
                                                                                 <div className="service-price__p-descr">{item.tariffPrice}</div>
                                                                             </div>
+                                                                            <p className='show__more' onClick={() => toggleExpand(index)}>
+                                                                                {expandedItems[index] ? 
+                                                                                    <div className="bottom">
+                                                                                        <Icon icon="arr-acc" />
+                                                                                    </div> : 
+                                                                                    <div className="top">
+                                                                                        <Icon icon="arr-acc" />
+                                                                                    </div>}
+                                                                            </p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
