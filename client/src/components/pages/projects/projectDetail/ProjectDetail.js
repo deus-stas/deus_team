@@ -169,29 +169,7 @@ const ProjectDetail = () => {
                     </section> : null
                 }
             </div>
-            {!!detail.approachList && detail.approachList.filter(val=>!!val.approachPersons && val.text !=='').map((val)=>
-                    <section className="project-results">
-                        <div className="container">
-                            <div className="project-results__wrap">
-                                <h2 className="heading-secondary text-black">{val.title}</h2>
-                                <div className="quote">
-                                    <div className="quote__box">
-                                        {console.log(val.approachPersons)}
-                                        <div className="quote__person">
-                                            {val.approachPersons.image ? <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`} alt={val.approachPersons.name} className="quote__img" /> : null}
 
-                                            <div className="quote__person-text">
-                                                {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
-                                            </div>
-                                        </div>
-                                        <div className="quote__q" dangerouslySetInnerHTML={{ __html: val.text }}></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                )
-            }
             {
                 detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
                     <section className="project-banner">
@@ -209,6 +187,30 @@ const ProjectDetail = () => {
                             }
                         </section>
                         : null
+            }
+            {!!detail.approachList && detail.approachList.filter(val => !!val.approachPersons && val.text !== '').map((val) =>
+                <section className="project-results">
+                    <div className="container">
+                        <div className="project-results__wrap">
+                            <h2 className="heading-secondary text-black">{val.title}</h2>
+                            <div className="quote">
+                                <div className="quote__box">
+                                    <div className="quote__person">
+                                        {val.approachPersons.image ?
+                                            <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
+                                                 alt={val.approachPersons.name} className="quote__img"/> : null}
+
+                                        <div className="quote__person-text">
+                                            {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
+                                        </div>
+                                    </div>
+                                    <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )
             }
             {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
                 <section className="project-results">
@@ -286,25 +288,28 @@ const ProjectDetail = () => {
                 <section style={{ background: detail.workStepsColor }} className="project-steps">
                     <div className="container">
                         <h2 className="heading-secondary">{detail.workStepsHeader}</h2>
-                        {
-                            detail.workSteps.map((item, index) => (
+                        {detail.workSteps.map((item, index) => (
+                            <>
+                                <div className="project-steps__text">{item.workStepsIntroText}</div>
                                 <div key={index} className="project-steps__s">
                                     <div className="project-steps__subtitle">{item.workStepsTitle}</div>
                                     <div className="project-steps__content">
-                                        <div className="project-steps__text">{item.workStepsIntroText}</div>
-                                            <>
-                                                {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val =>
-                                                    <div className="project-steps__adv">
-                                                        <div className="project-results__text" dangerouslySetInnerHTML={{ __html: val.workStepsItemTask }}></div>
-                                                    </div>
-                                                )}
-                                            </>
-                                            <div className="project-steps__adv">
-                                                <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
-                                            </div>
+                                        <>
+                                            {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val =>
+                                                <div className="project-steps__adv">
+                                                    <div className="project-results__text"
+                                                         dangerouslySetInnerHTML={{__html: val.workStepsItemTask}}></div>
+                                                </div>
+                                            )}
+                                        </>
+                                        <div className="project-steps__adv">
+                                            <div className="project-results__text"
+                                                 dangerouslySetInnerHTML={{__html: item.workStepsItem}}></div>
+                                        </div>
                                     </div>
                                 </div>
-                            ))
+                            </>
+                        ))
                         }
                     </div>
                 </section> : null

@@ -296,6 +296,28 @@ export const ProjectsCreate = (props) => (
                     optionText="name" 
                     label="Чья цитата для подхода" />
             </ReferenceArrayInput>
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachList'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                </SimpleFormIterator>
+            </ArrayInput>
             <FileInput 
                 source="bannerThird" 
                 label="Баннер">
@@ -557,6 +579,15 @@ export const ProjectsEdit = (props) => (
                 source="approach" 
                 label="Подход"  />
 
+            <ReferenceArrayInput
+                source="approachPersons"
+                reference="persons">
+                <SelectInput
+                    className="customWidth"
+                    optionText="name"
+                    label="Чья цитата для подхода" />
+            </ReferenceArrayInput>
+
             <ArrayInput
                 label={'Список цитат'}
                 source={'approachList'}>
@@ -580,14 +611,7 @@ export const ProjectsEdit = (props) => (
                 </SimpleFormIterator>
             </ArrayInput>
 
-            <ReferenceArrayInput
-                source="approachPersons"
-                reference="persons">
-                <SelectInput
-                    className="customWidth"   
-                    optionText="name" 
-                    label="Чья цитата для подхода" />
-            </ReferenceArrayInput>
+
             <FileInput 
                 source="bannerThird" 
                 label="Баннер">

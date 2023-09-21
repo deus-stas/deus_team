@@ -30,7 +30,7 @@ const addCustomId = async (req, res, next) => {
             ...req.body,
             customId: newCustomId,
         };
-  
+
         next();
     } catch (error) {
       console.log(error);
@@ -59,32 +59,32 @@ router.get('/projects', async (req, res) => {
 });
 
 router.post(
-    '/projects', 
+    '/projects',
     upload.fields([
-        { name: 'image' }, 
-        { name: 'bannerFirst' }, 
-        { name: 'bannerSecond' }, 
+        { name: 'image' },
+        { name: 'bannerFirst' },
+        { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
         { name: 'bannerThird' },
-        { name: 'bannerFourth' }, 
-        { name: 'bannerFifth' }, 
-        { name: 'imagesExtra' }, 
-        { name: 'mainVideoFile' }]), 
+        { name: 'bannerFourth' },
+        { name: 'bannerFifth' },
+        { name: 'imagesExtra' },
+        { name: 'mainVideoFile' }]),
     addCustomId,
     async (req, res) => {
     const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
-    const approachList = JSON.parse(req.body.approachList);
+    const approachList = !!req.body.approachList ? JSON.parse(req.body.approachList) : [];
 
     var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
-    const editedName = name.split('').map(function (char) { 
-        return a[char] || char; 
+    const editedName = name.split('').map(function (char) {
+        return a[char] || char;
     }).join("");
     var rmPercent = editedName.replace("%",'');
     var editedWithLine = rmPercent.split(' ').join('-');
-    
+
     const nameInEng = editedWithLine
 
 
@@ -146,7 +146,7 @@ router.post(
         bannerFifthVideo,
         bannerFirst,
         bannerSecond,
-        bannerSeconds,
+        // bannerSeconds,
         bannerThird,
         bannerFourth,
         bannerFifth,
@@ -171,9 +171,9 @@ router.post(
         workSteps,
         aimColor,
         workStepsColor,
-        visibilityTitle1, 
+        visibilityTitle1,
         visibilityTitle2,
-        visibilityImg1, 
+        visibilityImg1,
         visibilityImg2,
         resultsColor,
         customId,
@@ -212,7 +212,7 @@ router.get('/projects/:id', async (req, res) => {
         res.json(projects);
     }
     // const projects = await Projects.findById(nameInEng);
-    
+
 });
 router.get('/projects/:id', async (req, res) => {
     const { id } = req.params;
@@ -226,18 +226,18 @@ router.get('/projects/:id', async (req, res) => {
     res.json(projects);
 });
 
-router.put("/projects/:id", 
+router.put("/projects/:id",
     upload.fields([
-        { name: 'image' }, 
-        { name: 'bannerFirst' }, 
-        { name: 'bannerSecond' }, 
+        { name: 'image' },
+        { name: 'bannerFirst' },
+        { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
         { name: 'bannerThird' },
-        { name: 'bannerFourth' }, 
-        { name: 'bannerFifth' }, 
-        { name: 'imagesExtra' }, 
-        { name: 'mainVideoFile' }, 
-        { name: 'visibilityImg1'}, 
+        { name: 'bannerFourth' },
+        { name: 'bannerFifth' },
+        { name: 'imagesExtra' },
+        { name: 'mainVideoFile' },
+        { name: 'visibilityImg1'},
         { name: 'visibilityImg2'}
     ]), async (req, res) => {
     const { id } = req.params;
@@ -446,8 +446,8 @@ router.put("/projects/:id",
     project.name = name;
     // var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
-    // const editedName = name.split('').map(function (char) { 
-    //     return a[char] || char; 
+    // const editedName = name.split('').map(function (char) {
+    //     return a[char] || char;
     // }).join("");
     // var rmPercent = editedName.replace("%",'');
     // var editedWithLine = rmPercent.split(' ').join('-');
