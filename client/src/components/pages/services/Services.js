@@ -163,7 +163,10 @@ const Services = () => {
                                         review.reviewFile ?  (
                                             <>
                                                 <div className="services-reviews__file"> {extension} </div>
-                                                <iframe src={`${apiUrl}/uploads/${review.reviewFile.filename}`} alt={review.name} className="services-reviews__r"/>
+                                                <iframe src={`${apiUrl}/uploads/${review.reviewFile.filename}`}
+                                                        style={{overflow: 'hidden'}}
+                                                        scrolling="no" alt={review.name}
+                                                        className="services-reviews__r"/>
                                             </>
                                         ) : null
                                     }
@@ -175,7 +178,7 @@ const Services = () => {
                         {openImage && (
                             <div className="modal">
                                 <div className="modal-content">
-                                    <iframe src={`${apiUrl}/uploads/${openImage}`} alt="Отзыв" width="1000px" height="600px" />
+                                    <iframe src={`${apiUrl}/uploads/${openImage}`} style={{overflow: 'hidden'}} scrolling="no" alt="Отзыв" width="1000px" height="600px" />
                                     <button onClick={handleCloseImage}>
                                         <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 24 24"><path d="M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z"></path></svg>
                                     </button>
