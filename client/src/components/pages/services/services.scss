@@ -286,5 +286,31 @@
                 position: static;
             }
         }
+        .iframe-height {
+            height: 27vh;
+            overflow: hidden;
+
+            @include respond(lg) {
+                height: 23vh;
+            }
+
+            @include respond(sm) {
+                height: 14vh;
+            }
+
+        }
+
+        .iframe-modal-size {
+            height: 27vh;
+            overflow: hidden;
+
+            @include respond(lg) {
+                height: 63vh;
+            }
+
+            @include respond(sm) {
+                height: 63vh;
+            }
+        }
     }
 }
