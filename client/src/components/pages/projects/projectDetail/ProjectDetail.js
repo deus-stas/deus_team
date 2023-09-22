@@ -11,7 +11,7 @@ import './projectDetail.scss'
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
-    : 'http://localhost:4554';
+    : process.env.REACT_APP_LOCALHOST_URI;
 
 const ProjectDetail = () => {
     const [detail, setDetail] = useState([]);
@@ -30,7 +30,18 @@ const ProjectDetail = () => {
                             })
                     );
                 }
-
+                if (!!response.data.approachList) {
+                    response.data.approachList.forEach((val, i) => {
+                        if (!!val.approachPersons) {
+                            requests.push(
+                                axios.get(`${apiUrl}/api/persons/${val.approachPersons}`)
+                                    .then((response) => {
+                                        val.approachPersons = response.data
+                                    })
+                            );
+                        }
+                    })
+                }
                 if (response.data.approachPersons !== 'undefined') {
                     requests.push(
                         axios.get(`${apiUrl}/api/persons/${response.data.approachPersons}`)
@@ -103,16 +114,7 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFirstVideo }}></div>
                     </section>
                     : detail.bannerFirst ?
-                        <section className="project-banner">
-                            {detail.bannerFirst.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerFirst.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerFirst} detail={detail}/>
                         : null
             }
 
@@ -158,26 +160,53 @@ const ProjectDetail = () => {
                     </section> : null
                 }
             </div>
-            
+
             {
                 detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
                     <section className="project-banner">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerSecondVideo }}></div>
                     </section>
                     : detail.bannerSecond ?
-                        <section className="project-banner">
-                            {detail.bannerSecond.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerSecond.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerSecond} detail={detail}/>
                         : null
             }
 
+            {detail.bannerSeconds ?
+                detail.bannerSeconds.filter(val => !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
+            }
+
+            {!!detail.approachList && detail.approachList.filter(val => !!val.approachPersons && val.text !== '').map((val, index) =>
+                <>
+                    <section className="project-results">
+                        <div className="container">
+                            <div className="project-results__wrap">
+                                <h2 className="heading-secondary text-black">{val.title}</h2>
+                                <div className="quote">
+                                    <div className="quote__box">
+                                        <div className="quote__person">
+                                            {val.approachPersons.image ?
+                                                <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
+                                                     alt={val.approachPersons.name} className="quote__img"/> : null}
+
+                                            <div className="quote__person-text">
+                                                {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
+                                            </div>
+                                        </div>
+                                        <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {!!val.imageI && !!detail.approachListFiles.find(file=>file.originalname === val.imageI.title) &&
+                        <BannerComponent banner={detail.approachListFiles.find(file=>file.originalname === val.imageI.title)} detail={detail}/>
+                    }
+                </>
+            )
+            }
             {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
                 <section className="project-results">
                     <div className="container">
@@ -208,18 +237,17 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerThirdVideo }}></div>
                     </section>
                     : detail.bannerThird ?
-                        <section className="project-banner">
-                            {detail.bannerThird.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerThird.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerThird} detail={detail}/>
                         : null
             }
+
+            {detail.bannerThirds ?
+                detail.bannerThirds.filter(val=> !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
+            }
+
 
             {detail.body ?
                 <section className="project-results">
@@ -237,40 +265,49 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFourthVideo }}></div>
                     </section>
                     : detail.bannerFourth ?
-                        <section className="project-banner">
-                            {detail.bannerFourth.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerFourth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerFourth} detail={detail}/>
                         : null
             }
+
+            {detail.bannerFourths ?
+                detail.bannerFourths.filter(val=> !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
+            }
+
             {
                 detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
                 <section style={{ background: detail.workStepsColor }} className="project-steps">
                     <div className="container">
                         <h2 className="heading-secondary">{detail.workStepsHeader}</h2>
-                        {
-                            detail.workSteps.map((item, index) => (
+                        {detail.workSteps.map((item, index) => (
+                            <>
+                                <div className="project-steps__text">{item.workStepsIntroText}</div>
                                 <div key={index} className="project-steps__s">
                                     <div className="project-steps__subtitle">{item.workStepsTitle}</div>
                                     <div className="project-steps__content">
-                                        <div className="project-steps__text">{item.workStepsIntroText}</div>
+                                        <>
+                                            {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val =>
+                                                <div className="project-steps__adv">
+                                                    <div className="project-results__text"
+                                                         dangerouslySetInnerHTML={{__html: val.workStepsItemTask}}></div>
+                                                </div>
+                                            )}
+                                        </>
                                         <div className="project-steps__adv">
-                                            <div className="project-results__text" dangerouslySetInnerHTML={{ __html: item.workStepsItem }}></div>
+                                            <div className="project-results__text"
+                                                 dangerouslySetInnerHTML={{__html: item.workStepsItem}}></div>
                                         </div>
                                     </div>
                                 </div>
-                            ))
+                            </>
+                        ))
                         }
                     </div>
                 </section> : null
             }
-            {detail.result !== 'undefined' && detail.resultPersons && detail.resultPersonsText ? 
+            {detail.result !== 'undefined' && detail.resultPersons && detail.resultPersonsText ?
 
                 <section style={{ background: detail.resultsColor }} className="project-results results_bg">
                     <div className="container">
@@ -292,7 +329,7 @@ const ProjectDetail = () => {
                     </div>
                 </section> : null }
 
-                {detail.technologies && detail.technologies !== 'undefined' && detail.technologies !== '' ? 
+                {detail.technologies && detail.technologies !== 'undefined' && detail.technologies !== '' ?
 
                     <section className="project-results">
                         <div className="container">
@@ -320,17 +357,15 @@ const ProjectDetail = () => {
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFifthVideo }}></div>
                     </section>
                     : detail.bannerFifth ?
-                        <section className="project-banner">
-                            {detail.bannerFifth.mimetype !== 'video/mp4'
-                                ?
-                                <img src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} alt={detail.name} />
-                                :
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.bannerFifth.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
-                            }
-                        </section>
+                        <BannerComponent banner={detail.bannerFifth} detail={detail}/>
                         : null
+            }
+
+            {detail.bannerFifths ?
+                detail.bannerFifths.filter(val=> !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
             }
 
             {detail.imagesExtra ?
@@ -345,13 +380,13 @@ const ProjectDetail = () => {
 
 
 
-        
 
-        
 
-        
 
-        
+
+
+
+
 
 
         {detail.visibilityImg1 && detail.visibilityTitle1 && detail.visibilityImg1 !== 'undefined' && detail.visibilityTitle1 !== 'undefined' ?
@@ -389,3 +424,19 @@ const ProjectDetail = () => {
 }
 
 export default ProjectDetail;
+
+const BannerComponent = ({banner,detail}) => {
+    return (
+        <section className="project-banner">
+            {banner.mimetype !== 'video/mp4'
+                ?
+                <img src={`${apiUrl}/uploads/${banner.filename}`} alt={detail.name}/>
+                :
+                <video autoPlay loop muted playsInline>
+                    <source src={`${apiUrl}/uploads/${banner.filename}`}
+                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                </video>
+            }
+        </section>
+    )
+}

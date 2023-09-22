@@ -30,7 +30,7 @@ const addCustomId = async (req, res, next) => {
             ...req.body,
             customId: newCustomId,
         };
-  
+
         next();
     } catch (error) {
       console.log(error);
@@ -59,30 +59,36 @@ router.get('/projects', async (req, res) => {
 });
 
 router.post(
-    '/projects', 
+    '/projects',
     upload.fields([
-        { name: 'image' }, 
-        { name: 'bannerFirst' }, 
-        { name: 'bannerSecond' }, 
-        { name: 'bannerThird' }, 
-        { name: 'bannerFourth' }, 
-        { name: 'bannerFifth' }, 
-        { name: 'imagesExtra' }, 
-        { name: 'mainVideoFile' }]), 
+        { name: 'image' },
+        { name: 'bannerFirst' },
+        { name: 'bannerSecond' },
+        { name: 'bannerSeconds' },
+        { name: 'approachListFiles' },
+        { name: 'bannerThird' },
+        { name: 'bannerThirds' },
+        { name: 'bannerFourth' },
+        { name: 'bannerFourths' },
+        { name: 'bannerFifth' },
+        { name: 'bannerFifths' },
+        { name: 'imagesExtra' },
+        { name: 'mainVideoFile' }]),
     addCustomId,
     async (req, res) => {
     const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
+    const approachList = !!req.body.approachList ? JSON.parse(req.body.approachList) : [];
 
     var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
-    const editedName = name.split('').map(function (char) { 
-        return a[char] || char; 
+    const editedName = name.split('').map(function (char) {
+        return a[char] || char;
     }).join("");
     var rmPercent = editedName.replace("%",'');
     var editedWithLine = rmPercent.split(' ').join('-');
-    
+
     const nameInEng = editedWithLine
 
 
@@ -91,7 +97,7 @@ router.post(
     // console.log(req.files);
     // console.log(req.body);
     console.log('inside', req.body.customId);
-    let bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
+    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -115,6 +121,25 @@ router.post(
 
     if (req.files.imagesExtra) {
         imagesExtra = req.files.imagesExtra;
+    }
+
+    if (req.files.bannerSeconds) {
+        bannerSeconds = req.files.bannerSeconds;
+    }
+    if (req.files.approachListFiles) {
+        approachListFiles = req.files.approachListFiles;
+    }
+
+    if (req.files.bannerThirds) {
+        bannerThirds = req.files.bannerThirds;
+    }
+
+    if (req.files.bannerFourths) {
+        bannerFourths = req.files.bannerThirds;
+    }
+
+    if (req.files.bannerFifths) {
+        bannerFifths = req.files.bannerThirds;
     }
 
     if (req.files.mainVideoFile) {
@@ -144,9 +169,14 @@ router.post(
         bannerFifthVideo,
         bannerFirst,
         bannerSecond,
+        bannerSeconds,
+        approachListFiles,
         bannerThird,
+        bannerThirds,
         bannerFourth,
+        bannerFourths,
         bannerFifth,
+        bannerFifths,
         task,
         taskDescr,
         tasksList,
@@ -168,9 +198,9 @@ router.post(
         workSteps,
         aimColor,
         workStepsColor,
-        visibilityTitle1, 
+        visibilityTitle1,
         visibilityTitle2,
-        visibilityImg1, 
+        visibilityImg1,
         visibilityImg2,
         resultsColor,
         customId,
@@ -179,7 +209,8 @@ router.post(
         resultPersonsText,
         resultTextColor,
         technologies,
-        visibility
+        visibility,
+        approachList
     });
 
     await projects.save();
@@ -208,7 +239,7 @@ router.get('/projects/:id', async (req, res) => {
         res.json(projects);
     }
     // const projects = await Projects.findById(nameInEng);
-    
+
 });
 router.get('/projects/:id', async (req, res) => {
     const { id } = req.params;
@@ -222,17 +253,22 @@ router.get('/projects/:id', async (req, res) => {
     res.json(projects);
 });
 
-router.put("/projects/:id", 
+router.put("/projects/:id",
     upload.fields([
-        { name: 'image' }, 
-        { name: 'bannerFirst' }, 
-        { name: 'bannerSecond' }, 
-        { name: 'bannerThird' }, 
-        { name: 'bannerFourth' }, 
-        { name: 'bannerFifth' }, 
-        { name: 'imagesExtra' }, 
-        { name: 'mainVideoFile' }, 
-        { name: 'visibilityImg1'}, 
+        { name: 'image' },
+        { name: 'bannerFirst' },
+        { name: 'bannerSecond' },
+        { name: 'bannerSeconds' },
+        { name: 'approachListFiles' },
+        { name: 'bannerThird' },
+        { name: 'bannerThirds' },
+        { name: 'bannerFourth' },
+        { name: 'bannerFourths' },
+        { name: 'bannerFifth' },
+        { name: 'bannerFifths' },
+        { name: 'imagesExtra' },
+        { name: 'mainVideoFile' },
+        { name: 'visibilityImg1'},
         { name: 'visibilityImg2'}
     ]), async (req, res) => {
     const { id } = req.params;
@@ -248,6 +284,7 @@ router.put("/projects/:id",
 
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
+    const approachList = JSON.parse(req.body.approachList);
 
     if (req.files.image) {
         project.image = req.files.image[0];
@@ -377,6 +414,125 @@ router.put("/projects/:id",
         }
     }
 
+        if (req.files.bannerSeconds) {
+            if (project.bannerSeconds && project.bannerSeconds.length > 0) {
+                project.bannerSeconds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerSeconds = req.files.bannerSeconds;
+        } else {
+            if (project.bannerSeconds && project.bannerSeconds.length > 0) {
+                project.bannerSeconds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerSeconds = null;
+            }
+        }
+        if (req.files.approachListFiles) {
+            if (project.approachListFiles && project.approachListFiles.length > 0) {
+                project.approachListFiles.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.approachListFiles = req.files.approachListFiles;
+        } else {
+            if (project.approachListFiles && project.approachListFiles.length > 0) {
+                project.approachListFiles.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.approachListFiles = null;
+            }
+        }
+
+        if (req.files.bannerThirds) {
+            if (project.bannerThirds && project.bannerThirds.length > 0) {
+                project.bannerThirds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerThirds = req.files.bannerThirds;
+        } else {
+            if (project.bannerThirds && project.bannerThirds.length > 0) {
+                project.bannerThirds.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerThirds = null;
+            }
+        }
+
+        if (req.files.bannerFourths) {
+            if (project.bannerFourths && project.bannerFourths.length > 0) {
+                project.bannerFourths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerFourths = req.files.bannerFourths;
+        } else {
+            if (project.bannerFourths && project.bannerFourths.length > 0) {
+                project.bannerFourths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerFourths = null;
+            }
+        }
+
+        if (req.files.bannerFifths) {
+            if (project.bannerFifths && project.bannerFifths.length > 0) {
+                project.bannerFifths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerFifths = req.files.bannerFifths;
+        } else {
+            if (project.bannerFifths && project.bannerFifths.length > 0) {
+                project.bannerFifths.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerFifths = null;
+            }
+        }
+
     if (req.files.mainVideoFile) {
         if (project.mainVideoFile) {
             fs.unlink(project.mainVideoFile.path, (err) => {
@@ -440,8 +596,8 @@ router.put("/projects/:id",
     project.name = name;
     // var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
-    // const editedName = name.split('').map(function (char) { 
-    //     return a[char] || char; 
+    // const editedName = name.split('').map(function (char) {
+    //     return a[char] || char;
     // }).join("");
     // var rmPercent = editedName.replace("%",'');
     // var editedWithLine = rmPercent.split(' ').join('-');
@@ -481,7 +637,8 @@ router.put("/projects/:id",
     project.resultPersonsText = resultPersonsText,
     project.resultTextColor = resultTextColor,
     project.technologies = technologies,
-    project.visibility = visibility
+    project.visibility = visibility,
+    project.approachList = approachList
 
     await project.save();
 
@@ -495,7 +652,7 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerThird, bannerFourth, bannerFifth, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
+    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     if (image) {
@@ -519,6 +676,34 @@ router.delete("/projects/:id", async (req, res) => {
 
     if (imagesExtra) {
         imagesExtra.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+
+    if (bannerSeconds) {
+        bannerSeconds.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+    if (approachListFiles) {
+        approachListFiles.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+    if (bannerThirds) {
+        bannerThirds.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+
+    if (bannerFourths) {
+        bannerFourths.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+
+    if (bannerFifths) {
+        bannerFifths.forEach((image) => {
             fs.unlinkSync(`uploads/${image.filename}`);
         });
     }

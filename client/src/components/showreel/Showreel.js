@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import Popup from 'reactjs-popup';
 
 import './showreel.scss';
+import {usePrevious} from "react-admin";
 
 
 class MutedVideo extends HTMLVideoElement {
@@ -16,10 +17,12 @@ customElements.define("x-muted", MutedVideo, { extends: "video" });
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
-    : 'http://localhost:4554';
+    : process.env.REACT_APP_LOCALHOST_URI;
 
 const Showreel = (props) => {
     const [open, setOpen] = useState(false);
+    const [isInViewport, setIsInViewport] = useState(false);
+    const prevIsInViewport = usePrevious({isInViewport, setIsInViewport});
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null)
@@ -58,6 +61,35 @@ const Showreel = (props) => {
           };
     }, []);
 
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (prevIsInViewport !== isInViewport) {
+            if (!isInViewport) {
+                videoRef.current.pause()
+            } else {
+                videoRef.current.play();
+            }
+
+        }
+    }, [isInViewport])
+
+    const handleScroll = () => {
+        const videoElement = videoRef.current;
+        if (videoElement) {
+            const videoRect = videoElement.getBoundingClientRect();
+            const isInViewport = (
+                videoRect.top >= 0 &&
+                videoRect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+            );
+            setIsInViewport(isInViewport)
+        }
+    };
 
     return (
         <div className="showreel">
