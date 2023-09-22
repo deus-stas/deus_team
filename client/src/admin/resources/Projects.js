@@ -465,6 +465,37 @@ export const ProjectsCreate = (props) => (
                 className="customWidth" 
                 source="bannerFifthVideo" 
                 label="Видео для баннера(url)"  />
+
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachListSecond'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <ArrayInput 
                 source="imagesExtra" 
                 label="Дополнительные изображения(если редактируется одна картинка, то нужно обновить/заменить и другую)">
@@ -833,6 +864,37 @@ export const ProjectsEdit = (props) => (
                 className="customWidth" 
                 source="bannerFifthVideo" 
                 label="Видео для баннера(url)"  />
+
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachListSecond'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <ArrayInput 
                 source="imagesExtra" 
                 label="Дополнительные изображения(если редактируется одна картинка, то нужно обновить/заменить и другую)">

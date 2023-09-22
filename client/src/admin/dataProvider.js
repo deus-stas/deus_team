@@ -84,7 +84,8 @@ const dataProvider = {
       'headerPhoto',
       'contactPhoto',
     ];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths']
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths' ]
+    const arrayApproachKeys = ['approachList', 'approachListSecond']
     let hasImage = false;
 
     for (const [key, value] of Object.entries(params.data)) {
@@ -104,10 +105,11 @@ const dataProvider = {
         formData.append(key, JSON.stringify(value));
       } else if (key === "workSteps") {
         formData.append(key, JSON.stringify(value));
-      } else if (key === "approachList") {
+      } else if (arrayApproachKeys.includes(key) && value) {
         const imagesFile = !!value
             ? value.map((image) => !!image.imageI ? image.imageI.rawFile : null)
             : [];
+
         // добавляем картинки из arrayImages в formData
         imagesFile.forEach((image, index) => {
           formData.append(key+'Files', image);
@@ -128,6 +130,7 @@ const dataProvider = {
     const formData = new FormData();
     const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
     const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths']
+    const arrayApproachKeys = ['approachList', 'approachListSecond']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
 
@@ -176,7 +179,7 @@ const dataProvider = {
           formData.append(key, JSON.stringify(value));
         }  else if (key === "workSteps") {
           formData.append(key, JSON.stringify(value));
-        }  else if (key === "approachList") {
+        }  else if (arrayApproachKeys.includes(key) && value) {
             const imagesFile = !!value
                 ? value.map((image) => !!image.imageI ? image.imageI.rawFile : null)
                 : [];
