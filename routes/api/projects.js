@@ -65,6 +65,7 @@ router.post(
         { name: 'bannerFirst' },
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
+        { name: 'approachListFiles' },
         { name: 'bannerThird' },
         { name: 'bannerThirds' },
         { name: 'bannerFourth' },
@@ -96,7 +97,7 @@ router.post(
     // console.log(req.files);
     // console.log(req.body);
     console.log('inside', req.body.customId);
-    let bannerFirst, bannerSecond, bannerSeconds, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
+    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -125,17 +126,20 @@ router.post(
     if (req.files.bannerSeconds) {
         bannerSeconds = req.files.bannerSeconds;
     }
+    if (req.files.approachListFiles) {
+        approachListFiles = req.files.approachListFiles;
+    }
 
     if (req.files.bannerThirds) {
         bannerThirds = req.files.bannerThirds;
     }
 
     if (req.files.bannerFourths) {
-        bannerThirds = req.files.bannerThirds;
+        bannerFourths = req.files.bannerThirds;
     }
 
     if (req.files.bannerFifths) {
-        bannerThirds = req.files.bannerThirds;
+        bannerFifths = req.files.bannerThirds;
     }
 
     if (req.files.mainVideoFile) {
@@ -166,6 +170,7 @@ router.post(
         bannerFirst,
         bannerSecond,
         bannerSeconds,
+        approachListFiles,
         bannerThird,
         bannerThirds,
         bannerFourth,
@@ -254,6 +259,7 @@ router.put("/projects/:id",
         { name: 'bannerFirst' },
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
+        { name: 'approachListFiles' },
         { name: 'bannerThird' },
         { name: 'bannerThirds' },
         { name: 'bannerFourth' },
@@ -429,6 +435,29 @@ router.put("/projects/:id",
                     });
                 });
                 project.bannerSeconds = null;
+            }
+        }
+        if (req.files.approachListFiles) {
+            if (project.approachListFiles && project.approachListFiles.length > 0) {
+                project.approachListFiles.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.approachListFiles = req.files.approachListFiles;
+        } else {
+            if (project.approachListFiles && project.approachListFiles.length > 0) {
+                project.approachListFiles.forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.approachListFiles = null;
             }
         }
 
@@ -623,7 +652,7 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerSeconds, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
+    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     if (image) {
@@ -653,6 +682,11 @@ router.delete("/projects/:id", async (req, res) => {
 
     if (bannerSeconds) {
         bannerSeconds.forEach((image) => {
+            fs.unlinkSync(`uploads/${image.filename}`);
+        });
+    }
+    if (approachListFiles) {
+        approachListFiles.forEach((image) => {
             fs.unlinkSync(`uploads/${image.filename}`);
         });
     }

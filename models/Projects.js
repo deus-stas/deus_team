@@ -25,6 +25,7 @@ const projectsSchema = new Schema({
   bannerSecond: { type: Object },
   bannerSeconds: { type: Array },
   bannerThirds: { type: Array },
+  approachListFiles: { type: Array },
   bannerFourths: { type: Array },
   bannerFifths: { type: Array },
   approach: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},

@@ -330,6 +330,13 @@ export const ProjectsCreate = (props) => (
                             optionText="name"
                             label="Чья цитата " />
                     </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
             <FileInput 
@@ -678,6 +685,13 @@ export const ProjectsEdit = (props) => (
                             optionText="name"
                             label="Чья цитата " />
                     </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
 

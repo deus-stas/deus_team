@@ -178,28 +178,33 @@ const ProjectDetail = () => {
                 : null
             }
 
-            {!!detail.approachList && detail.approachList.filter(val => !!val.approachPersons && val.text !== '').map((val) =>
-                <section className="project-results">
-                    <div className="container">
-                        <div className="project-results__wrap">
-                            <h2 className="heading-secondary text-black">{val.title}</h2>
-                            <div className="quote">
-                                <div className="quote__box">
-                                    <div className="quote__person">
-                                        {val.approachPersons.image ?
-                                            <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
-                                                 alt={val.approachPersons.name} className="quote__img"/> : null}
+            {!!detail.approachList && detail.approachList.filter(val => !!val.approachPersons && val.text !== '').map((val, index) =>
+                <>
+                    <section className="project-results">
+                        <div className="container">
+                            <div className="project-results__wrap">
+                                <h2 className="heading-secondary text-black">{val.title}</h2>
+                                <div className="quote">
+                                    <div className="quote__box">
+                                        <div className="quote__person">
+                                            {val.approachPersons.image ?
+                                                <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
+                                                     alt={val.approachPersons.name} className="quote__img"/> : null}
 
-                                        <div className="quote__person-text">
-                                            {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
+                                            <div className="quote__person-text">
+                                                {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
+                                            </div>
                                         </div>
+                                        <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
                                     </div>
-                                    <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                    {!!val.imageI && !!detail.approachListFiles.find(file=>file.originalname === val.imageI.title) &&
+                        <BannerComponent banner={detail.approachListFiles.find(file=>file.originalname === val.imageI.title)} detail={detail}/>
+                    }
+                </>
             )
             }
             {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
@@ -302,7 +307,7 @@ const ProjectDetail = () => {
                     </div>
                 </section> : null
             }
-            {detail.result !== 'undefined' && detail.resultPersons && detail.resultPersonsText ? 
+            {detail.result !== 'undefined' && detail.resultPersons && detail.resultPersonsText ?
 
                 <section style={{ background: detail.resultsColor }} className="project-results results_bg">
                     <div className="container">
@@ -324,7 +329,7 @@ const ProjectDetail = () => {
                     </div>
                 </section> : null }
 
-                {detail.technologies && detail.technologies !== 'undefined' && detail.technologies !== '' ? 
+                {detail.technologies && detail.technologies !== 'undefined' && detail.technologies !== '' ?
 
                     <section className="project-results">
                         <div className="container">
@@ -375,13 +380,13 @@ const ProjectDetail = () => {
 
 
 
-        
 
-        
 
-        
 
-        
+
+
+
+
 
 
         {detail.visibilityImg1 && detail.visibilityTitle1 && detail.visibilityImg1 !== 'undefined' && detail.visibilityTitle1 !== 'undefined' ?

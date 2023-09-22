@@ -95,7 +95,7 @@ const dataProvider = {
         const imagesFile = !!value
           ? value.map((image) => image.imageI.rawFile)
           : [];
-        // добавляем картинки из imagesExtra в formData
+        // добавляем картинки из arrayImages в formData
         imagesFile.forEach((image, index) => {
           formData.append(key, image);
         });
@@ -104,7 +104,14 @@ const dataProvider = {
         formData.append(key, JSON.stringify(value));
       } else if (key === "workSteps") {
         formData.append(key, JSON.stringify(value));
-      }else if (key === "approachList") {
+      } else if (key === "approachList") {
+        const imagesFile = !!value
+            ? value.map((image) => !!image.imageI ? image.imageI.rawFile : null)
+            : [];
+        // добавляем картинки из arrayImages в formData
+        imagesFile.forEach((image, index) => {
+          formData.append(key+'Files', image);
+        });
         formData.append(key, JSON.stringify(value));
       } else {
         console.log(key, value);
@@ -158,7 +165,7 @@ const dataProvider = {
             ? value.map((image) => image.imageI?.rawFile)
             : [];
 
-          // добавляем картинки из imagesExtra в formData
+          // добавляем картинки из arrayImages в formData
           images.forEach((image, index) => {
             if (image !== undefined) {
               formData.append(key, image);
@@ -170,7 +177,14 @@ const dataProvider = {
         }  else if (key === "workSteps") {
           formData.append(key, JSON.stringify(value));
         }  else if (key === "approachList") {
-          formData.append(key, JSON.stringify(value));
+            const imagesFile = !!value
+                ? value.map((image) => !!image.imageI ? image.imageI.rawFile : null)
+                : [];
+            // добавляем картинки из arrayImages в formData
+            imagesFile.forEach((image, index) => {
+                formData.append(key+'Files', image);
+            });
+            formData.append(key, JSON.stringify(value));
         } else {
           formData.append(key, value);
         }
