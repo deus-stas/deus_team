@@ -40,6 +40,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/sammy/deus
-            git pull origin master
+            git pull origin master --log
 #            npm run client:build
 #            pm2 restart npm -- start
