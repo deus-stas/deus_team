@@ -23,8 +23,8 @@ const upload = multer({ storage: storage });
 router.get('/team', async (req, res) => {
     const limit = parseInt(req.query._limit);
     const skip = parseInt(req.query._start);
-    const order = req.query._order
-    const sort = req.query._sort
+    const order = !!req && !!req.query && !!req.query._order ? req.query._order : ''
+    const sort = !!req && !!req.query && !!req.query._sort ? req.query._sort : ''
 
     let [team, count] = await Promise.all([
         Team.find().limit(limit).skip(skip),

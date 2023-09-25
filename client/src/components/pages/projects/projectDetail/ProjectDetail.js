@@ -307,6 +307,38 @@ const ProjectDetail = () => {
                     </div>
                 </section> : null
             }
+
+            {!!detail.approachListSecond && detail.approachListSecond.filter(val => !!val.approachPersons && val.text !== '')
+                .map((val, index) =>
+                    <>
+                        <section className="project-results">
+                            <div className="container">
+                                <div className="project-results__wrap">
+                                    <h2 className="heading-secondary text-black">{val.title}</h2>
+                                    <div className="quote">
+                                        <div className="quote__box">
+                                            <div className="quote__person">
+                                                {val.approachPersons.image ?
+                                                    <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
+                                                         alt={val.approachPersons.name} className="quote__img"/> : null}
+
+                                                <div className="quote__person-text">
+                                                    {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
+                                                </div>
+                                            </div>
+                                            <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        {!!val.imageI && !!detail.approachListSecondFiles && !!detail.approachListSecondFiles.find(file=>file.originalname === val.imageI.title) &&
+                            <BannerComponent banner={detail.approachListSecondFiles.find(file=>file.originalname === val.imageI.title)} detail={detail}/>
+                        }
+                    </>
+                )
+            }
+
             {detail.result !== 'undefined' && detail.resultPersons && detail.resultPersonsText ?
 
                 <section style={{ background: detail.resultsColor }} className="project-results results_bg">
@@ -377,48 +409,6 @@ const ProjectDetail = () => {
                     )
                 })
                 : null}
-
-            {!!detail.approachListSecond && detail.approachListSecond.filter(val => !!val.approachPersons && val.text !== '')
-                .map((val, index) =>
-                <>
-                    <section className="project-results">
-                        <div className="container">
-                            <div className="project-results__wrap">
-                                <h2 className="heading-secondary text-black">{val.title}</h2>
-                                <div className="quote">
-                                    <div className="quote__box">
-                                        <div className="quote__person">
-                                            {val.approachPersons.image ?
-                                                <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
-                                                     alt={val.approachPersons.name} className="quote__img"/> : null}
-
-                                            <div className="quote__person-text">
-                                                {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
-                                            </div>
-                                        </div>
-                                        <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    {!!val.imageI && !!detail.approachListSecondFiles && !!detail.approachListSecondFiles.find(file=>file.originalname === val.imageI.title) &&
-                        <BannerComponent banner={detail.approachListSecondFiles.find(file=>file.originalname === val.imageI.title)} detail={detail}/>
-                    }
-                </>
-            )
-            }
-
-
-
-
-
-
-
-
-
-
-
 
         {detail.visibilityImg1 && detail.visibilityTitle1 && detail.visibilityImg1 !== 'undefined' && detail.visibilityTitle1 !== 'undefined' ?
             <section className="project-analytics">
