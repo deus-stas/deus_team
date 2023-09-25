@@ -45,8 +45,8 @@ const upload = multer({ storage: storage });
 router.get('/projects', async (req, res) => {
     const limit = parseInt(req.query._limit);
     const skip = parseInt(req.query._start);
-    const order = req.query._order
-    const sort = req.query._sort
+    const order = !!req && !!req.query && !!req.query._order ? req.query._order : ''
+    const sort = !!req && !!req.query && !!req.query._sort ? req.query._sort : ''
 
     let [projects, count] = await Promise.all([
         Projects.find().limit(limit).skip(skip),
