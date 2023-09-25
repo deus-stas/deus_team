@@ -5,6 +5,7 @@ const Team = require("../../models/Team");
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const compareUtil = require("../../utils/compareUtil");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,8 +23,10 @@ const upload = multer({ storage: storage });
 router.get('/team', async (req, res) => {
     const limit = parseInt(req.query._limit);
     const skip = parseInt(req.query._start);
+    const order = req.query._order
+    const sort = req.query._sort
 
-    const [team, count] = await Promise.all([
+    let [team, count] = await Promise.all([
         Team.find().limit(limit).skip(skip),
         Team.countDocuments()
     ]);
@@ -33,6 +36,7 @@ router.get('/team', async (req, res) => {
     const contentRange = `team ${rangeStart}-${rangeEnd}/${count}`;
 
     res.set('Content-Range', contentRange);
+    team = compareUtil.sortByField(team, sort, order)
     res.json(team);
 });
 

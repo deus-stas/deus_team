@@ -5,6 +5,7 @@ const Projects = require("../../models/Projects");
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const compareUtil = require("../../utils/compareUtil");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -44,8 +45,10 @@ const upload = multer({ storage: storage });
 router.get('/projects', async (req, res) => {
     const limit = parseInt(req.query._limit);
     const skip = parseInt(req.query._start);
+    const order = req.query._order
+    const sort = req.query._sort
 
-    const [projects, count] = await Promise.all([
+    let [projects, count] = await Promise.all([
         Projects.find().limit(limit).skip(skip),
         Projects.countDocuments()
     ]);
@@ -55,6 +58,7 @@ router.get('/projects', async (req, res) => {
     const contentRange = `projects ${rangeStart}-${rangeEnd}/${count}`;
 
     res.set('Content-Range', contentRange);
+    projects = compareUtil.sortByField(projects, sort, order)
     res.json(projects);
 });
 
@@ -66,6 +70,7 @@ router.post(
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
         { name: 'approachListFiles' },
+        { name: 'approachListSecondFiles' },
         { name: 'bannerThird' },
         { name: 'bannerThirds' },
         { name: 'bannerFourth' },
@@ -80,6 +85,7 @@ router.post(
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
     const approachList = !!req.body.approachList ? JSON.parse(req.body.approachList) : [];
+    const approachListSecond = !!req.body.approachListSecond ? JSON.parse(req.body.approachListSecond) : [];
 
     var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
@@ -97,7 +103,7 @@ router.post(
     // console.log(req.files);
     // console.log(req.body);
     console.log('inside', req.body.customId);
-    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
+    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -128,6 +134,10 @@ router.post(
     }
     if (req.files.approachListFiles) {
         approachListFiles = req.files.approachListFiles;
+    }
+
+    if (req.files.approachListSecondFiles) {
+        approachListSecondFiles = req.files.approachListSecondFiles;
     }
 
     if (req.files.bannerThirds) {
@@ -171,6 +181,7 @@ router.post(
         bannerSecond,
         bannerSeconds,
         approachListFiles,
+        approachListSecondFiles,
         bannerThird,
         bannerThirds,
         bannerFourth,
@@ -210,7 +221,8 @@ router.post(
         resultTextColor,
         technologies,
         visibility,
-        approachList
+        approachList,
+        approachListSecond,
     });
 
     await projects.save();
@@ -260,6 +272,7 @@ router.put("/projects/:id",
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
         { name: 'approachListFiles' },
+        { name: 'approachListSecondFiles' },
         { name: 'bannerThird' },
         { name: 'bannerThirds' },
         { name: 'bannerFourth' },
@@ -285,6 +298,7 @@ router.put("/projects/:id",
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
     const approachList = JSON.parse(req.body.approachList);
+    const approachListSecond = JSON.parse(req.body.approachListSecond);
 
     if (req.files.image) {
         project.image = req.files.image[0];
@@ -438,27 +452,12 @@ router.put("/projects/:id",
             }
         }
         if (req.files.approachListFiles) {
-            if (project.approachListFiles && project.approachListFiles.length > 0) {
-                project.approachListFiles.forEach((image) => {
-                    fs.unlink(image.path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                });
-            }
+
             project.approachListFiles = req.files.approachListFiles;
-        } else {
-            if (project.approachListFiles && project.approachListFiles.length > 0) {
-                project.approachListFiles.forEach((image) => {
-                    fs.unlink(image.path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                });
-                project.approachListFiles = null;
-            }
+        }
+
+        if (req.files.approachListSecondFiles) {
+            project.approachListSecondFiles = req.files.approachListSecondFiles;
         }
 
         if (req.files.bannerThirds) {
@@ -638,7 +637,8 @@ router.put("/projects/:id",
     project.resultTextColor = resultTextColor,
     project.technologies = technologies,
     project.visibility = visibility,
-    project.approachList = approachList
+    project.approachList = approachList,
+    project.approachListSecond = approachListSecond,
 
     await project.save();
 
@@ -652,73 +652,32 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
+    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
-    if (image) {
-        fs.unlinkSync(`uploads/${image.filename}`);
-    }
-    if (bannerFirst) {
-        fs.unlinkSync(`uploads/${bannerFirst.filename}`);
-    }
-    if (bannerSecond) {
-        fs.unlinkSync(`uploads/${bannerSecond.filename}`);
-    }
-    if (bannerThird) {
-        fs.unlinkSync(`uploads/${bannerThird.filename}`);
-    }
-    if (bannerFourth) {
-        fs.unlinkSync(`uploads/${bannerFourth.filename}`);
-    }
-    if (bannerFifth) {
-        fs.unlinkSync(`uploads/${bannerFifth.filename}`);
-    }
+    const singleImage = [ image,bannerFirst,bannerSecond,bannerThird,bannerFourth,bannerFifth, mainVideoFile, visibilityImg1, visibilityImg2 ]
+    singleImage.forEach(file=>{
+        if (file) {
+            fs.unlinkSync(`uploads/${file.filename}`);
+        }
+    })
 
-    if (imagesExtra) {
-        imagesExtra.forEach((image) => {
-            fs.unlinkSync(`uploads/${image.filename}`);
-        });
-    }
-
-    if (bannerSeconds) {
-        bannerSeconds.forEach((image) => {
-            fs.unlinkSync(`uploads/${image.filename}`);
-        });
-    }
-    if (approachListFiles) {
-        approachListFiles.forEach((image) => {
-            fs.unlinkSync(`uploads/${image.filename}`);
-        });
-    }
-    if (bannerThirds) {
-        bannerThirds.forEach((image) => {
-            fs.unlinkSync(`uploads/${image.filename}`);
-        });
-    }
-
-    if (bannerFourths) {
-        bannerFourths.forEach((image) => {
-            fs.unlinkSync(`uploads/${image.filename}`);
-        });
-    }
-
-    if (bannerFifths) {
-        bannerFifths.forEach((image) => {
-            fs.unlinkSync(`uploads/${image.filename}`);
-        });
-    }
-
-    if (mainVideoFile) {
-        fs.unlinkSync(`uploads/${mainVideoFile.filename}`);
-    }
-
-    if (visibilityImg1) {
-        fs.unlinkSync(`uploads/${visibilityImg1.filename}`);
-    }
-
-    if (visibilityImg2) {
-        fs.unlinkSync(`uploads/${visibilityImg2.filename}`);
-    }
+    const multiImages = [
+        imagesExtra,
+        bannerSeconds,
+        approachListFiles,
+        approachListSecondFiles,
+        bannerThirds,
+        bannerFourths,
+        bannerFifths
+    ]
+    multiImages.forEach(files => {
+        if (files) {
+            files.forEach((file) => {
+                fs.unlinkSync(`uploads/${file.filename}`);
+            });
+        }
+    })
 
     res.json({ success: true });
 });
