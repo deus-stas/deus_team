@@ -265,6 +265,12 @@
         }
     }
 
+    &-accordion {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
     &-work {
         padding: 10rem 0 5rem;
 
@@ -527,8 +533,21 @@
             height: 250px;
             transition: height 0.3s ease;
             overflow: hidden;
-            &.expanded {
-                height: auto; /* Let the content determine the height */
+            &.active {
+                .service-price__tab {
+                    opacity: 1;
+                    margin-top: 2rem;
+                    max-height: 100rem;
+                    visibility: visible;
+
+                    @include respond(sm) {
+                        margin-top: 1rem;
+                    }
+                }
+
+                .service-adv__icon {
+                    transform: rotate(180deg);
+                }
             }
 
             @include respond(sm) {
@@ -595,9 +614,6 @@
         &__p {
             position: relative;
             .show__more {
-                position: absolute;
-                top: -90px;
-                right: 0;
                 .top, .bottom {
                     width: 5rem;
                     height: 5rem;
