@@ -69,7 +69,7 @@ const Showreel = (props) => {
     }, []);
 
     useEffect(() => {
-        if (prevIsInViewport !== isInViewport) {
+        if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
             if (!isInViewport) {
                 videoRef.current.pause()
             } else {

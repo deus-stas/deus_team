@@ -41,7 +41,7 @@ router.get('/team', async (req, res) => {
 });
 
 router.post('/team', upload.single('image'), async (req, res) => {
-    const { name, post } = req.body;
+    const { name, post, priority } = req.body;
     console.log(req.file);
 
     const image = req.file;
@@ -50,6 +50,7 @@ router.post('/team', upload.single('image'), async (req, res) => {
         name,
         post,
         image,
+        priority,
     });
 
     await team.save();
@@ -78,7 +79,7 @@ router.put("/team/:id", upload.single('image'), async (req, res) => {
         return res.status(404).json({ error: 'team not found' });
     }
 
-    const { name, post } = req.body;
+    const { name, post, priority } = req.body;
     const image = req.file;
 
     // Если есть новое изображение в запросе, обновляем ссылку на него
@@ -90,6 +91,7 @@ router.put("/team/:id", upload.single('image'), async (req, res) => {
     // Обновляем остальные поля документа
     team.name = name;
     team.post = post;
+    team.priority = priority;
 
     // Сохраняем изменения
     await team.save();

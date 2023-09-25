@@ -5,6 +5,7 @@ const TeamSchema = new Schema({
     name: { type: String, required: true },
     post: { type: String, required: true },
     image: { type: Object },
+    priority: { type: Number }
 });
 
 TeamSchema.set('toJSON', { virtuals: true });
