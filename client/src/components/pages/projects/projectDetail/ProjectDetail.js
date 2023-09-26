@@ -30,6 +30,7 @@ const ProjectDetail = () => {
                             })
                     );
                 }
+
                 if (!!response.data.approachList) {
                     response.data.approachList.forEach((val, i) => {
                         if (!!val.approachPersons) {
@@ -42,6 +43,33 @@ const ProjectDetail = () => {
                         }
                     })
                 }
+
+                if (!!response.data.approachListSecond) {
+                    response.data.approachListSecond.forEach((val, i) => {
+                        if (!!val.approachPersons) {
+                            requests.push(
+                                axios.get(`${apiUrl}/api/persons/${val.approachPersons}`)
+                                    .then((response) => {
+                                        val.approachPersons = response.data
+                                    })
+                            );
+                        }
+                    })
+                }
+
+                if (!!response.data.approachListThird) {
+                    response.data.approachListThird.forEach((val, i) => {
+                        if (!!val.approachPersons) {
+                            requests.push(
+                                axios.get(`${apiUrl}/api/persons/${val.approachPersons}`)
+                                    .then((response) => {
+                                        val.approachPersons = response.data
+                                    })
+                            );
+                        }
+                    })
+                }
+
                 if (response.data.approachPersons !== 'undefined') {
                     requests.push(
                         axios.get(`${apiUrl}/api/persons/${response.data.approachPersons}`)
@@ -246,6 +274,37 @@ const ProjectDetail = () => {
                     <BannerComponent banner={banner} detail={detail}/>
                 )
                 : null
+            }
+
+            {!!detail.approachListThird && detail.approachListThird.filter(val => !!val.approachPersons && val.text !== '')
+                .map((val, index) =>
+                    <>
+                        <section className="project-results">
+                            <div className="container">
+                                <div className="project-results__wrap">
+                                    <h2 className="heading-secondary text-black">{val.title}</h2>
+                                    <div className="quote">
+                                        <div className="quote__box">
+                                            <div className="quote__person">
+                                                {val.approachPersons.image ?
+                                                    <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
+                                                         alt={val.approachPersons.name} className="quote__img"/> : null}
+
+                                                <div className="quote__person-text">
+                                                    {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
+                                                </div>
+                                            </div>
+                                            <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        {!!val.imageI && !!detail.approachListThirdFiles && !!detail.approachListThirdFiles.find(file=>file.originalname === val.imageI.title) &&
+                            <BannerComponent banner={detail.approachListThirdFiles.find(file=>file.originalname === val.imageI.title)} detail={detail}/>
+                        }
+                    </>
+                )
             }
 
 

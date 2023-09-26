@@ -47,6 +47,8 @@ router.get('/projects', async (req, res) => {
     const skip = parseInt(req.query._start);
     const order = !!req && !!req.query && !!req.query._order ? req.query._order : ''
     const sort = !!req && !!req.query && !!req.query._sort ? req.query._sort : ''
+    const name = !!req && !!req.query && !!req.query.name ? req.query.name : ''
+
 
     let [projects, count] = await Promise.all([
         Projects.find().limit(limit).skip(skip),
@@ -58,7 +60,7 @@ router.get('/projects', async (req, res) => {
     const contentRange = `projects ${rangeStart}-${rangeEnd}/${count}`;
 
     res.set('Content-Range', contentRange);
-    projects = compareUtil.sortByField(projects, sort, order)
+    projects = compareUtil.sortByField(projects, sort, order).filter(val => val.name.includes(name))
     res.json(projects);
 });
 
@@ -71,6 +73,7 @@ router.post(
         { name: 'bannerSeconds' },
         { name: 'approachListFiles' },
         { name: 'approachListSecondFiles' },
+        { name: 'approachListThirdFiles' },
         { name: 'bannerThird' },
         { name: 'bannerThirds' },
         { name: 'bannerFourth' },
@@ -86,6 +89,7 @@ router.post(
     const workSteps = JSON.parse(req.body.workSteps);
     const approachList = !!req.body.approachList ? JSON.parse(req.body.approachList) : [];
     const approachListSecond = !!req.body.approachListSecond ? JSON.parse(req.body.approachListSecond) : [];
+    const approachListThird = !!req.body.approachListThird ? JSON.parse(req.body.approachListThird) : [];
 
     var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
@@ -103,7 +107,7 @@ router.post(
     // console.log(req.files);
     // console.log(req.body);
     console.log('inside', req.body.customId);
-    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
+    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -138,6 +142,9 @@ router.post(
 
     if (req.files.approachListSecondFiles) {
         approachListSecondFiles = req.files.approachListSecondFiles;
+    }
+    if (req.files.approachListThirdFiles) {
+        approachListThirdFiles = req.files.approachListThirdFiles;
     }
 
     if (req.files.bannerThirds) {
@@ -182,6 +189,7 @@ router.post(
         bannerSeconds,
         approachListFiles,
         approachListSecondFiles,
+        approachListThirdFiles,
         bannerThird,
         bannerThirds,
         bannerFourth,
@@ -223,6 +231,7 @@ router.post(
         visibility,
         approachList,
         approachListSecond,
+        approachListThird,
     });
 
     await projects.save();
@@ -273,6 +282,7 @@ router.put("/projects/:id",
         { name: 'bannerSeconds' },
         { name: 'approachListFiles' },
         { name: 'approachListSecondFiles' },
+        { name: 'approachListThirdFiles' },
         { name: 'bannerThird' },
         { name: 'bannerThirds' },
         { name: 'bannerFourth' },
@@ -299,6 +309,7 @@ router.put("/projects/:id",
     const workSteps = JSON.parse(req.body.workSteps);
     const approachList = JSON.parse(req.body.approachList);
     const approachListSecond = JSON.parse(req.body.approachListSecond);
+    const approachListThird = JSON.parse(req.body.approachListThird);
 
     if (req.files.image) {
         project.image = req.files.image[0];
@@ -458,6 +469,10 @@ router.put("/projects/:id",
 
         if (req.files.approachListSecondFiles) {
             project.approachListSecondFiles = req.files.approachListSecondFiles;
+        }
+
+        if (req.files.approachListThirdFiles) {
+            project.approachListThirdFiles = req.files.approachListThirdFiles;
         }
 
         if (req.files.bannerThirds) {
@@ -639,6 +654,7 @@ router.put("/projects/:id",
     project.visibility = visibility,
     project.approachList = approachList,
     project.approachListSecond = approachListSecond,
+    project.approachListThird = approachListThird,
 
     await project.save();
 
@@ -652,7 +668,7 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
+    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     const singleImage = [ image,bannerFirst,bannerSecond,bannerThird,bannerFourth,bannerFifth, mainVideoFile, visibilityImg1, visibilityImg2 ]
@@ -667,6 +683,7 @@ router.delete("/projects/:id", async (req, res) => {
         bannerSeconds,
         approachListFiles,
         approachListSecondFiles,
+        approachListThirdFiles,
         bannerThirds,
         bannerFourths,
         bannerFifths

@@ -27,6 +27,7 @@ const projectsSchema = new Schema({
   bannerThirds: { type: Array },
   approachListFiles: { type: Array },
   approachListSecondFiles: { type: Array },
+  approachListThirdFiles: { type: Array },
   bannerFourths: { type: Array },
   bannerFifths: { type: Array },
   approach: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
@@ -57,7 +58,8 @@ const projectsSchema = new Schema({
   resultsColor: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   visibility: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v },
   approachList: {type: Array},
-  approachListSecond: {type: Array}
+  approachListSecond: {type: Array},
+  approachListThird: {type: Array},
 });
 
 projectsSchema.set('toJSON', { virtuals: true });

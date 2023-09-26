@@ -85,7 +85,7 @@ const dataProvider = {
       'contactPhoto',
     ];
     const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths' ]
-    const arrayApproachKeys = ['approachList', 'approachListSecond']
+    const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     let hasImage = false;
 
     for (const [key, value] of Object.entries(params.data)) {
@@ -130,7 +130,7 @@ const dataProvider = {
     const formData = new FormData();
     const images = ['image', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
     const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths']
-    const arrayApproachKeys = ['approachList', 'approachListSecond']
+    const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
 

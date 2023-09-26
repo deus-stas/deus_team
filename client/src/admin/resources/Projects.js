@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField, ArrayInput, SimpleFormIterator } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, SearchInput, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField, ArrayInput, SimpleFormIterator } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 import { MyToolbar } from '../toolbar';
@@ -40,8 +40,13 @@ const FilenameField = props => {
 //     // ...
 //   };
 
+const postFilters = [
+    <SearchInput source="name" alwaysOn />
+];
+
+
 export const ProjectsList = (props) => (
-    <List {...props}>
+    <List {...props} filters={postFilters}>
         <Datagrid rowClick="edit">
             <TextField source="name" />
             <EditButton />
@@ -360,6 +365,37 @@ export const ProjectsCreate = (props) => (
                     </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
+
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachListThird'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <TextInput
                 className="customWidth" 
                 source="bannerThirdVideo" 
@@ -749,6 +785,37 @@ export const ProjectsEdit = (props) => (
                     </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
+
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachListThird'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <TextInput
                 className="customWidth" 
                 source="bannerThirdVideo" 
