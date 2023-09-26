@@ -83,8 +83,7 @@ export const TeamEdit = (props) => {
                 console.log(error);
             });
     }, []);
-    const disableNumber = teamLength.map((val)=> val.priority)
-
+    const disableNumber = teamLength.map((val)=> Number(val.priority))
 
     const choices = teamLength.map((val, index) => ({
         id: index+1,
