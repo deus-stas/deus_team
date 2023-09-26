@@ -360,6 +360,37 @@ export const ProjectsCreate = (props) => (
                     </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
+
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachListThird'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <TextInput
                 className="customWidth" 
                 source="bannerThirdVideo" 
@@ -749,6 +780,37 @@ export const ProjectsEdit = (props) => (
                     </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
+
+            <ArrayInput
+                label={'Список цитат'}
+                source={'approachListThird'}>
+                <SimpleFormIterator>
+                    <TextInput
+                        className="customWidth"
+                        source="title"
+                        label="Заголовок цитаты"  />
+                    <TextInput
+                        className="customWidth"
+                        source="text"
+                        label="Текст цитаты"  />
+                    <ReferenceArrayInput
+                        source="approachPersons"
+                        reference="persons">
+                        <SelectInput
+                            className="customWidth"
+                            optionText="name"
+                            label="Чья цитата " />
+                    </ReferenceArrayInput>
+                    <FileInput
+                        source="imageI"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                </SimpleFormIterator>
+            </ArrayInput>
+
             <TextInput
                 className="customWidth" 
                 source="bannerThirdVideo" 
