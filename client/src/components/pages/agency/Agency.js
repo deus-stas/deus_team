@@ -443,7 +443,7 @@ const Agency = () => {
                             <h2 className="heading-secondary">Команда мечты</h2>
                             <div className="agency-team__t-content">
                                 {
-                                    team ? team.map(item => {
+                                    team ? team.sort((a, b) => a.priority - b.priority).map(item => {
                                         return (
                                             <div className="agency-team__t-item" key={item.id}>
                                                 <div className="agency-team__t-name">{item.name}</div>
