@@ -47,6 +47,8 @@ router.get('/projects', async (req, res) => {
     const skip = parseInt(req.query._start);
     const order = !!req && !!req.query && !!req.query._order ? req.query._order : ''
     const sort = !!req && !!req.query && !!req.query._sort ? req.query._sort : ''
+    const name = !!req && !!req.query && !!req.query.name ? req.query.name : ''
+
 
     let [projects, count] = await Promise.all([
         Projects.find().limit(limit).skip(skip),
@@ -58,7 +60,7 @@ router.get('/projects', async (req, res) => {
     const contentRange = `projects ${rangeStart}-${rangeEnd}/${count}`;
 
     res.set('Content-Range', contentRange);
-    projects = compareUtil.sortByField(projects, sort, order)
+    projects = compareUtil.sortByField(projects, sort, order).filter(val => val.name.includes(name))
     res.json(projects);
 });
 

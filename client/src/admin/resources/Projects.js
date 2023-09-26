@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField, ArrayInput, SimpleFormIterator } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, SearchInput, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField, ArrayInput, SimpleFormIterator } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 import { MyToolbar } from '../toolbar';
@@ -40,8 +40,13 @@ const FilenameField = props => {
 //     // ...
 //   };
 
+const postFilters = [
+    <SearchInput source="name" alwaysOn />
+];
+
+
 export const ProjectsList = (props) => (
-    <List {...props}>
+    <List {...props} filters={postFilters}>
         <Datagrid rowClick="edit">
             <TextField source="name" />
             <EditButton />
