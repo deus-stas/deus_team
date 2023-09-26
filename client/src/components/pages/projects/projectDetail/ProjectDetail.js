@@ -30,6 +30,7 @@ const ProjectDetail = () => {
                             })
                     );
                 }
+
                 if (!!response.data.approachList) {
                     response.data.approachList.forEach((val, i) => {
                         if (!!val.approachPersons) {
@@ -42,6 +43,33 @@ const ProjectDetail = () => {
                         }
                     })
                 }
+
+                if (!!response.data.approachListSecond) {
+                    response.data.approachListSecond.forEach((val, i) => {
+                        if (!!val.approachPersons) {
+                            requests.push(
+                                axios.get(`${apiUrl}/api/persons/${val.approachPersons}`)
+                                    .then((response) => {
+                                        val.approachPersons = response.data
+                                    })
+                            );
+                        }
+                    })
+                }
+
+                if (!!response.data.approachListThird) {
+                    response.data.approachListThird.forEach((val, i) => {
+                        if (!!val.approachPersons) {
+                            requests.push(
+                                axios.get(`${apiUrl}/api/persons/${val.approachPersons}`)
+                                    .then((response) => {
+                                        val.approachPersons = response.data
+                                    })
+                            );
+                        }
+                    })
+                }
+
                 if (response.data.approachPersons !== 'undefined') {
                     requests.push(
                         axios.get(`${apiUrl}/api/persons/${response.data.approachPersons}`)
