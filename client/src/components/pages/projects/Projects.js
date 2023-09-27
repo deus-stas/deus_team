@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
-import axios from 'axios'
+import {Link} from 'react-router-dom';
+import {useEffect, useRef, useState} from 'react';
+import axios from '../../../axios'
 import Select from 'react-select';
 
 import Cta from '../../cta/Cta';
@@ -35,6 +35,7 @@ const apiUrl = process.env.NODE_ENV === 'production'
 
 const Projects = () => {
 
+    const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState([]);
     const [optionsTheme, setOptionsTheme] = useState([]);
     const [optionsType, setOptionsType] = useState([]);
@@ -43,48 +44,67 @@ const Projects = () => {
     const [selectedType, setSelectedType] = useState(null);
 
 
-    useEffect(() => {
+    const loadProject = (cb) => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
                 setProjects(response.data);
                 console.log(response.data);
+                if (!!cb) {
+                    cb()
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
-
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/themes/`)
+    }
+    const loadThemes = (cb) => {
+        axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
+                setProjects(response.data);
                 console.log(response.data);
-                let projectOptionsTheme = [];
-                response.data.forEach((item, i) => {
-                    const { id, name } = item;
-                    projectOptionsTheme[i] = { value: id, label: name }
-                })
-                setOptionsTheme(projectOptionsTheme)
+                if (!!cb) {
+                    cb()
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
-
-    useEffect(() => {
+    }
+    const loadTypes = (cb) => {
         axios.get(`${apiUrl}/api/types/`)
             .then((response) => {
                 console.log(response.data);
                 let projectOptionsType = [];
                 response.data.forEach((item, i) => {
-                    const { id, name } = item;
-                    projectOptionsType[i] = { value: id, label: name }
+                    const {id, name} = item;
+                    projectOptionsType[i] = {value: id, label: name}
                 })
                 setOptionsType(projectOptionsType)
+                if (!!cb) {
+                    cb()
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
+    }
+    useEffect(() => {
+        loadTypes(() => loadThemes(() => loadProject()))
     }, []);
+
+
+    useEffect(() => {
+        const handleLoad = () => {
+            console.log(isLoading, 'isLoading')
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
 
     const handleThemeChange = (selectedOption) => {
         setSelectedTheme(selectedOption);
@@ -118,69 +138,88 @@ const Projects = () => {
 
 
     return (
-        <main className="projects">
-            <section className="projects-content">
-                <div className="container">
-                    <div className="projects__head">
-                        <h1 className="heading-primary">Наши проекты</h1>
-                        {optionsTheme && optionsType ?
-                            <div className="projects__filters">
-                                <Select classNames={classes} options={optionsType} styles={colourStyles} onChange={handleTypeChange} placeholder="Тип проекта" />
-                                <Select classNames={classes} options={optionsTheme} styles={colourStyles} onChange={handleThemeChange} placeholder="Тематика проекта" />
+        <>
+            {!isLoading &&
+                <main className="projects">
+                    <section className="projects-content">
+                        <div className="container">
+                            <div className="projects__head">
+                                <h1 className="heading-primary">Наши проекты</h1>
+                                {optionsTheme && optionsType ?
+                                    <div className="projects__filters">
+                                        <Select classNames={classes} options={optionsType} styles={colourStyles}
+                                                onChange={handleTypeChange} placeholder="Тип проекта"/>
+                                        <Select classNames={classes} options={optionsTheme} styles={colourStyles}
+                                                onChange={handleThemeChange} placeholder="Тематика проекта"/>
+                                    </div>
+                                    : null}
                             </div>
-                            : null}
-                    </div>
-                    <div className="projects__wrap">
-                        {filteredProjects ? filteredProjects.map((project, index) => {
-                            return (
-                                project.controlURL ?
-                                <a href={`${project.projectURL}`} className="projects__item" key={project.id} style={{ background: project.color }}>
-                                    <div className="projects__item-img-wrap">
-                                        {
-                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 
-                                                ?
-                                            <video autoPlay loop muted playsInline controls>
-                                                <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                            </video> : 
-                                            project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
-                                                ?
-                                                <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
-                                                :
-                                                <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
-                                        }
+                            <div className="projects__wrap">
+                                {filteredProjects ? filteredProjects.map((project, index) => {
+                                        return (
+                                            project.controlURL ?
+                                                <a href={`${project.projectURL}`} className="projects__item"
+                                                   key={project.id} style={{background: project.color}}>
+                                                    <div className="projects__item-img-wrap">
+                                                        {
+                                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
+                                                                ?
+                                                                <video autoPlay loop muted playsInline controls>
+                                                                    <source
+                                                                        src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
+                                                                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                                                </video> :
+                                                                project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                                    ?
+                                                                    <div
+                                                                        dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>
+                                                                    :
+                                                                    <img
+                                                                        src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                                                        alt={project.name} className="main-projects__img"/>
+                                                        }
 
-                                    </div>
-                                    <div className="projects__item-name">{project.name}</div>
-                                </a> :
-                                <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
-                                    <div className="projects__item-img-wrap">
-                                        {
-                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 
-                                                ?
-                                            <video autoPlay ref={(ref) => addVideoRef(ref)}
-                                                    onMouseEnter={() => handleMouseEnter(index)}
-                                                    onMouseLeave={() => handleMouseLeave(index)} muted playsInline>
-                                                <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                            </video> : 
-                                            project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
-                                                ?
-                                                <div ref={(ref) => addVideoRef(ref)} dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
-                                                :
-                                                <img ref={(ref) => addVideoRef(ref)} src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
-                                        }
+                                                    </div>
+                                                    <div className="projects__item-name">{project.name}</div>
+                                                </a> :
+                                                <Link to={`/projects/${project.nameInEng}`} className="projects__item"
+                                                      key={project.id} style={{background: project.color}}>
+                                                    <div className="projects__item-img-wrap">
+                                                        {
+                                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
+                                                                ?
+                                                                <video autoPlay ref={(ref) => addVideoRef(ref)}
+                                                                       onMouseEnter={() => handleMouseEnter(index)}
+                                                                       onMouseLeave={() => handleMouseLeave(index)} muted
+                                                                       playsInline>
+                                                                    <source
+                                                                        src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
+                                                                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                                                </video> :
+                                                                project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                                    ?
+                                                                    <div ref={(ref) => addVideoRef(ref)}
+                                                                         dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>
+                                                                    :
+                                                                    <img ref={(ref) => addVideoRef(ref)}
+                                                                         src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                                                         alt={project.name} className="main-projects__img"/>
+                                                        }
 
-                                    </div>
-                                    <div className="projects__item-name">{project.name}</div>
-                                </Link>
-                            )
-                        })
-                            : null}
-                    </div>
-                </div>
-            </section>
+                                                    </div>
+                                                    <div className="projects__item-name">{project.name}</div>
+                                                </Link>
+                                        )
+                                    })
+                                    : null}
+                            </div>
+                        </div>
+                    </section>
 
-            <Cta formName={'projects'} />
-        </main>
+                    <Cta formName={'projects'}/>
+                </main>
+            }
+        </>
     )
 
 }

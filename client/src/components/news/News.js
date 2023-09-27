@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from '../../axios'
 import { Link, useLocation } from 'react-router-dom';
 
 import './news.scss';
@@ -16,6 +16,7 @@ const News = () => {
     const [news, setNews] = useState([]);
     const [allTags, setAllTags] = useState(new Set());
     const [selectedTag, setSelectedTag] = useState(tagInit);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/news`)
@@ -47,6 +48,19 @@ const News = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            console.log(isLoading, 'isLoading')
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
     const handleTagClick = (tag) => {
         setSelectedTag(tag);
     };
@@ -54,6 +68,9 @@ const News = () => {
     const filteredNews = selectedTag === 'Все' ? news : news.filter((newsItem) => newsItem.tags === selectedTag);
 
     return (
+        <>
+            {!isLoading &&
+
         <main className="news">
             <section className="news-main">
                 <div className="container">
@@ -84,6 +101,8 @@ const News = () => {
                 </div>
             </section>
         </main>
+            }
+        </>
     )
 
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from '../../../axios'
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
@@ -17,6 +17,7 @@ const NewsDetail = () => {
 
     const [news, setNews] = useState([]);
     const [detail, setDetail] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams();
 
     useEffect(() => {
@@ -68,9 +69,25 @@ const NewsDetail = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            console.log(isLoading, 'isLoading')
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
 
 
     return (
+        <>
+            {!isLoading &&
+
         <main className="news-detail">
             <section className="news-detail__main">
                 <Breadcrumbs />
@@ -121,6 +138,8 @@ const NewsDetail = () => {
             <SectionSocial />
 
         </main>
+            }
+        </>
     )
 }
 

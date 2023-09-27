@@ -1,7 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import axios from 'axios'
+import axios from '../../../../axios'
 
 import Breadcrumbs from '../../../breadcrubms/Breadcrumbs'
 import Cta from '../../../cta/Cta';
@@ -27,6 +27,7 @@ const ServicesDetail = () => {
 
     const { id } = useParams();
     const [service, setService] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState([]);
     const [reviews, setReviews] = useState([]);
 
@@ -148,6 +149,19 @@ const ServicesDetail = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            console.log(isLoading, 'isLoading')
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
     const [expandedItems, setExpandedItems] = useState([]);
 
     const toggleExpand = (index) => {
@@ -159,6 +173,8 @@ const ServicesDetail = () => {
     };
 
     return (
+        <>
+            {!isLoading &&
         <main className="service">
 
             <Breadcrumbs />
@@ -438,6 +454,8 @@ const ServicesDetail = () => {
             <Cta formName={'services'} />
 
         </main>
+            }
+        </>
     )
 }
 

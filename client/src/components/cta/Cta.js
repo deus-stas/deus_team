@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 import InputMask from "react-input-mask";
-import axios from 'axios'
-import { useState, useEffect } from 'react';
+import axios from '../../axios'
+import {useState, useEffect, useLayoutEffect} from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
@@ -48,7 +48,7 @@ function Checkbox(props) {
 const Cta = (props) => {
 
     const [worker, setWorker] = useState([]);
-
+    const [isLoading, setIsLoading] = useState(true);
 
 
     useEffect(() => {
@@ -59,7 +59,6 @@ const Cta = (props) => {
                 response.data.map((item, index) => (
                     item.pageName === props.formName ? setWorker(item) : null
                 ))
-                
             })
             .catch((error) => {
                 console.log(error);
@@ -68,6 +67,18 @@ const Cta = (props) => {
 
     const { formName } = props;
     const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        const handleLoad = () => {
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
 
     const sendEmail = async (values) => {
         try {
@@ -79,6 +90,8 @@ const Cta = (props) => {
     };
 
     return (
+        <>
+            {!isLoading &&
         <section className="cta">
             <div className="container">
                 <div className="cta__wrap">
@@ -423,6 +436,8 @@ const Cta = (props) => {
                 </div>
             </div>
         </section>
+            }
+        </>
     )
 
 }

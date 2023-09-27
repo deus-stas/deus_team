@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from '../../axios'
 
 import './sectionSocial.scss'
 
@@ -11,6 +11,7 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const SectionSocial = () => {
 
     const [social, setSocial] = useState([]);
+    const [isLoading, setIsLoading] = useState([]);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/social/`)
@@ -23,28 +24,44 @@ const SectionSocial = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
     return social ? (
-
-        <section className="section-social">
-            <div className="container">
-                <div className="section-social__wrap">
-                    <h2 className="heading-secondary">Узнать нас ближе</h2>
-                    <div className="section-social__content">
-                        {
-                            social.map(item => {
-                                return (
-                                    <Link to={item.link} className="section-social__item" target="_blank" key={item.id} style={{ background: item.color }}>
-                                        <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null} alt={item.name} />
-                                        <div className="section-social__descr">{item.descr}</div>
-                                    </Link>
-                                )
-                            })
-                        }
+        <>
+            {!isLoading &&
+                <section className="section-social">
+                    <div className="container">
+                        <div className="section-social__wrap">
+                            <h2 className="heading-secondary">Узнать нас ближе</h2>
+                            <div className="section-social__content">
+                                {
+                                    social.map(item => {
+                                        return (
+                                            <Link to={item.link} className="section-social__item" target="_blank" key={item.id}
+                                                  style={{background: item.color}}>
+                                                <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null}
+                                                     alt={item.name}/>
+                                                <div className="section-social__descr">{item.descr}</div>
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section >
-
+                </section>
+            }
+        </>
     ) : null
 
 }
