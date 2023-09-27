@@ -358,18 +358,14 @@ const ServicesDetail = () => {
                                                     {
                                                         tariff.tariffsItems.map((item, index) => {
                                                             return (
-                                                                <div className={`service-price__item ${expandedItems[index] ? 'expanded' : ''}`} key={index}>
-                                                                    <div className="service-accordion" >
+                                                                <div className="service-price__item tab-parent" key={index}>
+                                                                    <div className="service-price__acc" onClick={onAcc}>
                                                                         <h2 className="heading-secondary" >{item.tariffName}</h2>
                                                                         <div className="service-price__p" >
-                                                                            <p className='show__more'  onClick={() => toggleExpand(index)}>
-                                                                                {expandedItems[index] ?
-                                                                                    <div className="bottom">
-                                                                                        <Icon icon="arr-acc" />
-                                                                                    </div> :
+                                                                            <p className='show__more'>
                                                                                     <div className="top">
                                                                                         <Icon icon="arr-acc" />
-                                                                                    </div>}
+                                                                                    </div>
                                                                             </p>
                                                                         </div>
                                                                     </div>

@@ -265,11 +265,6 @@
         }
     }
 
-    &-accordion {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-    }
 
     &-work {
         padding: 10rem 0 5rem;
@@ -462,6 +457,12 @@
             }
         }
 
+        &__acc {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
         &__info {
             .heading-secondary {
                 margin-bottom: 6rem;
@@ -530,11 +531,11 @@
         &__item {
             padding: 4rem;
             background: rgba(85, 85, 85, .1);
-            height: 250px;
+            //height: 250px;
             transition: height 0.3s ease;
             overflow: hidden;
             &.active {
-                .service-price__tab {
+                .service-price__elem {
                     opacity: 1;
                     margin-top: 2rem;
                     max-height: 100rem;
@@ -545,7 +546,7 @@
                     }
                 }
 
-                .service-adv__icon {
+                .top {
                     transform: rotate(180deg);
                 }
             }
@@ -663,6 +664,18 @@
                     line-height: 3.1rem;
                 }
             }
+        }
+
+        &__elem {
+            max-width: 45rem;
+            padding-left: 3.6rem;
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            visibility: hidden;
+            font-size: 2rem;
+            line-height: 2.6rem;
+            transition: all 0.5s;
         }
     }
 
