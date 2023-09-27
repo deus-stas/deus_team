@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, AutocompleteInput, ImageField, FunctionField, FileInput, FileField, ReferenceArrayInput, SelectInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, AutocompleteArrayInput, ImageField, FunctionField, FileInput, FileField, ReferenceArrayInput, SelectInput } from 'react-admin';
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -48,7 +48,7 @@ export const ReviewsCreate = (props) => (
             </ImageInput>
             <TextInput className="customWidth" source="review" label="Отзыв" fullWidth/>
             <ReferenceArrayInput  source="reviewProject" reference="projects" perPage={100000000000}>
-                <AutocompleteInput className="customWidth" optionText="name" label="Проект"  filterToQuery={searchText => ({ name: searchText })}/>
+                <AutocompleteArrayInput className="customWidth" optionText="name" label="Проект"  filterToQuery={searchText => ({ name: searchText })}/>
             </ReferenceArrayInput>
             <ReferenceArrayInput source="reviewService" reference="services">
                 <SelectInput className="customWidth" optionText="name" label="Услуга" />
@@ -76,7 +76,7 @@ export const ReviewsEdit = (props) => (
             </ImageInput>
             <TextInput className="customWidth" source="review" label="Отзыв" />
             <ReferenceArrayInput  source="reviewProject" reference="projects" perPage={100000000000}>
-                <AutocompleteInput className="customWidth" optionText="name" label="Проект" filterToQuery={searchText => ({ name: searchText })}/>
+                <AutocompleteArrayInput className="customWidth" optionText="name" label="Проект" filterToQuery={searchText => ({ name: searchText })}/>
             </ReferenceArrayInput>
             <ReferenceArrayInput source="reviewService" reference="services">
                 <SelectInput className="customWidth" optionText="name" label="Услуга" />

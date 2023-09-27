@@ -815,7 +815,6 @@ export const ProjectsEdit = (props) => (
                     </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
-
             <TextInput
                 className="customWidth" 
                 source="bannerThirdVideo" 

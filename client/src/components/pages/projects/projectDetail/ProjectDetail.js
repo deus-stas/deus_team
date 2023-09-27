@@ -319,6 +319,38 @@ const ProjectDetail = () => {
                 : null}
 
             {
+                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
+                    <section style={{ background: detail.workStepsColor }} className="project-steps">
+                        <div className="container">
+                            <h2 className="heading-secondary">{detail.workStepsHeader}</h2>
+                            {detail.workSteps.map((item, index) => (
+                                <>
+                                    <div className="project-steps__text">{item.workStepsIntroText}</div>
+                                    <div key={index} className="project-steps__s">
+                                        <div className="project-steps__subtitle">{item.workStepsTitle}</div>
+                                        <div className="project-steps__content">
+                                            <>
+                                                {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val =>
+                                                    <div className="project-steps__adv">
+                                                        <div className="project-results__text"
+                                                             dangerouslySetInnerHTML={{__html: val.workStepsItemTask}}></div>
+                                                    </div>
+                                                )}
+                                            </>
+                                            <div className="project-steps__adv">
+                                                <div className="project-results__text"
+                                                     dangerouslySetInnerHTML={{__html: item.workStepsItem}}></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            ))
+                            }
+                        </div>
+                    </section> : null
+            }
+
+            {
                 detail.bannerFourthVideo && detail.bannerFourthVideo !== 'undefined' && detail.bannerFourthVideo !== 'null' ?
                     <section className="project-banner">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFourthVideo }}></div>
@@ -328,44 +360,17 @@ const ProjectDetail = () => {
                         : null
             }
 
-            {detail.bannerFourths ?
-                detail.bannerFourths.filter(val=> !!val).map((banner, index) =>
-                    <BannerComponent banner={banner} detail={detail}/>
-                )
-                : null
-            }
+            {detail.bannerFourths ? (
+                <>
+                    <section className="project-banner">
+                        <div dangerouslySetInnerHTML={{__html: detail.bannerFourths}}></div>
+                    </section>
 
-            {
-                detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
-                <section style={{ background: detail.workStepsColor }} className="project-steps">
-                    <div className="container">
-                        <h2 className="heading-secondary">{detail.workStepsHeader}</h2>
-                        {detail.workSteps.map((item, index) => (
-                            <>
-                                <div className="project-steps__text">{item.workStepsIntroText}</div>
-                                <div key={index} className="project-steps__s">
-                                    <div className="project-steps__subtitle">{item.workStepsTitle}</div>
-                                    <div className="project-steps__content">
-                                        <>
-                                            {!!item.workStepsItemTaskList && item.workStepsItemTaskList.map(val =>
-                                                <div className="project-steps__adv">
-                                                    <div className="project-results__text"
-                                                         dangerouslySetInnerHTML={{__html: val.workStepsItemTask}}></div>
-                                                </div>
-                                            )}
-                                        </>
-                                        <div className="project-steps__adv">
-                                            <div className="project-results__text"
-                                                 dangerouslySetInnerHTML={{__html: item.workStepsItem}}></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        ))
-                        }
-                    </div>
-                </section> : null
-            }
+                    {detail.bannerFourths.filter(val => !!val).map((banner, index) => (
+                        <BannerComponent key={index} banner={banner} detail={detail}/>
+                    ))}
+                </>
+            ) : null}
 
             {!!detail.approachListSecond && detail.approachListSecond.filter(val => !!val.approachPersons && val.text !== '')
                 .map((val, index) =>
