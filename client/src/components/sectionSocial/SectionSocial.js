@@ -49,9 +49,17 @@ const SectionSocial = () => {
                                         return (
                                             <Link to={item.link} className="section-social__item" target="_blank" key={item.id}
                                                   style={{background: item.color}}>
-                                                <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null}
-                                                     alt={item.name}/>
-                                                <div className="section-social__descr">{item.descr}</div>
+                                                <div className="hidden">
+                                                    <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null}
+                                                         alt={item.name}/>
+                                                    <div className="section-social__descr">{item.descr}</div>
+                                                </div>
+
+                                                    <div className="section-social__btn">
+                                                        <div className="arrow" style={{'--custom-color': item.color}}></div>
+                                                    </div>
+
+
                                             </Link>
                                         )
                                     })
