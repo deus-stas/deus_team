@@ -138,6 +138,7 @@
                 align-items: flex-start;
                 font-size: 2.4rem;
                 line-height: 3.4rem;
+                height: 4.5rem;
 
                 @include respond(sm) {
                     font-size: 2rem;
@@ -154,6 +155,17 @@
 
                 &:not(:last-child) {
                     margin-bottom: 1rem;
+                }
+
+                &::before {
+                    content: '';
+                    flex: 0 0 3.2rem;
+                    width: 3.2rem;
+                    height: 3.2rem;
+                    margin-bottom: auto;
+                    margin-right: 1.6rem;
+                    transform: translateY(-.3rem);
+                    background: url('../../../../img/icon-task.svg')no-repeat center/contain;
                 }
             }
         }
@@ -306,7 +318,7 @@
                     align-items: center;
 
                     &:not(:last-child) {
-                        margin-bottom: 0.5rem;
+                        margin-bottom: 1.5rem;
                     }
 
                     &::before {
@@ -314,6 +326,7 @@
                         flex: 0 0 3.2rem;
                         width: 3.2rem;
                         height: 3.2rem;
+                        margin-bottom: auto;
                         margin-right: 1.6rem;
                         transform: translateY(-.3rem);
                         background: url('../../../../img/icon-task.svg')no-repeat center/contain;
