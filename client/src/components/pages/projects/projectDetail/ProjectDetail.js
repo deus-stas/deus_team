@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from '../../../../axios'
 import { useParams } from "react-router-dom";
 
 import Cta from '../../../cta/Cta';
@@ -15,6 +15,7 @@ const apiUrl = process.env.NODE_ENV === 'production'
 
 const ProjectDetail = () => {
     const [detail, setDetail] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams();
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/${id}`)
@@ -101,7 +102,22 @@ const ProjectDetail = () => {
             });
     }, [id]);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
     return (
+        <>
+            {!isLoading &&
+
         <main className="project">
             {console.log(detail)}
             <Breadcrumbs />
@@ -504,7 +520,10 @@ const ProjectDetail = () => {
             <Cta formName={'projects'} />
 
         </main>
+            }
+        </>
     )
+
 
 }
 

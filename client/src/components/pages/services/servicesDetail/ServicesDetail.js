@@ -1,7 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import axios from 'axios'
+import axios from '../../../../axios'
 
 import Breadcrumbs from '../../../breadcrubms/Breadcrumbs'
 import Cta from '../../../cta/Cta';
@@ -27,6 +27,7 @@ const ServicesDetail = () => {
 
     const { id } = useParams();
     const [service, setService] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState([]);
     const [reviews, setReviews] = useState([]);
 
@@ -148,6 +149,19 @@ const ServicesDetail = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            console.log(isLoading, 'isLoading')
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
     const [expandedItems, setExpandedItems] = useState([]);
 
     const toggleExpand = (index) => {
@@ -159,6 +173,8 @@ const ServicesDetail = () => {
     };
 
     return (
+        <>
+            {!isLoading &&
         <main className="service">
 
             <Breadcrumbs />
@@ -342,18 +358,14 @@ const ServicesDetail = () => {
                                                     {
                                                         tariff.tariffsItems.map((item, index) => {
                                                             return (
-                                                                <div className={`service-price__item ${expandedItems[index] ? 'expanded' : ''}`} key={index}>
-                                                                    <div className="service-accordion" >
+                                                                <div className="service-price__item tab-parent" key={index}>
+                                                                    <div className="service-price__acc" onClick={onAcc}>
                                                                         <h2 className="heading-secondary" >{item.tariffName}</h2>
                                                                         <div className="service-price__p" >
-                                                                            <p className='show__more'  onClick={() => toggleExpand(index)}>
-                                                                                {expandedItems[index] ?
-                                                                                    <div className="bottom">
-                                                                                        <Icon icon="arr-acc" />
-                                                                                    </div> :
+                                                                            <p className='show__more'>
                                                                                     <div className="top">
                                                                                         <Icon icon="arr-acc" />
-                                                                                    </div>}
+                                                                                    </div>
                                                                             </p>
                                                                         </div>
                                                                     </div>
@@ -438,6 +450,8 @@ const ServicesDetail = () => {
             <Cta formName={'services'} />
 
         </main>
+            }
+        </>
     )
 }
 

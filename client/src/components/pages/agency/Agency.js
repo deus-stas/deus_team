@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from '../../../axios'
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Marquee from "react-fast-marquee";
@@ -34,7 +34,7 @@ const Agency = () => {
     const [vacancies, setVacancies] = useState([]);
     const [showreels, setShowreels] = useState([]);
     const [success, setSuccess] = useState(false);
-
+    const [isLoading, setIsLoading] = useState(true);
     const [current, setCurrent] = useState(4);
     const [total, setTotal] = useState(0);
     const [endSlider, setEndSlider] = useState(false);
@@ -128,6 +128,19 @@ const Agency = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            console.log(isLoading, 'isLoading')
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
     const slideChange = (slider) => {
         if (slider.touches.diff > 0) {
             if (endSlider) {
@@ -160,6 +173,8 @@ const Agency = () => {
     };
 
     return (
+        <>
+            {!isLoading &&
         <main className="agency">
 
             <section className="agency-start">
@@ -729,6 +744,8 @@ const Agency = () => {
             <SectionSocial />
 
         </main>
+            }
+        </>
     )
 
 }

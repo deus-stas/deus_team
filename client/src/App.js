@@ -23,6 +23,8 @@ import NewsDetail from './components/news/newsDetail/NewsDetail';
 // import Register from './components/pages/register/Register';
 import Login from './components/pages/login/Login';
 import PrivateRoute from "./components/privateRoutes/PrivateRoute";
+import {useEffect, useState} from "react";
+import {AxiosInterceptor} from "./axios";
 
 // import AdminPage from './Admin';
 
@@ -42,6 +44,22 @@ const AppWrapper = () => {
   const location = useLocation();
   const adminBasePath = "/admin/";
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect((event) => {
+        const handleLoad = (e) => {
+            console.log('event:',e)
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    },[]);
+
+
   // Check if the current route starts with the adminBasePath
   const isOnAdminRoute = location.pathname.startsWith(adminBasePath);
 
@@ -50,40 +68,42 @@ const AppWrapper = () => {
 
   // Check if the current route matches the hidden routes
   const shouldHideHeaderFooter = isOnAdminRoute && hiddenRoutes.some(route => location.pathname.startsWith(route));
-
   return (
-    
       <>
-        <ScrollToTop />
-        <CustomCursor
-          targets={['.js-cursor-play']}
-          customClass='custom-cursor'
-          dimensions={20}
-          fill='none'
-          opacity={0}
-        />
-        {/* <AppHeader /> */}
-        {!shouldHideHeaderFooter && <AppHeader />}
-        <Routes>
-          <Route exact path='/' element={<MainPage />} />
-          <Route exact path='/projects' element={<Projects />} />
-          <Route exact path='/projects/:id' element={<ProjectDetail />} />
-          <Route exact path='/services' element={<Services />} />
-          <Route exact path='/services/:id' element={<ServicesDetail />} />
-          <Route exact path='/agency' element={<Agency />} />
-          <Route exact path='/contacts' element={<Contacts />} />
-          <Route exact path='/news' element={<News />} />
-          <Route exact path='/news/:id' element={<NewsDetail />} />
-          <Route exact path='/admin/*' element={<PrivateRoute />} />
-          {/* <Route path='/admin/*' element={<AdminPage />} /> */}
-          {/* <Route exact path='/register' element={<Register/>} /> */}
-          <Route exact path='/login' element={<Login/>} />
-        </Routes>
-        {!shouldHideHeaderFooter && <AppFooter />}
+          {!!isLoading &&(<div className="loader"></div>) }
+                  <ScrollToTop/>
+                  <CustomCursor
+                      targets={['.js-cursor-play']}
+                      customClass='custom-cursor'
+                      dimensions={20}
+                      fill='none'
+                      opacity={0}
+                  />
+                  {/* <AppHeader /> */}
+                  {!shouldHideHeaderFooter && <AppHeader/>}
+          <AxiosInterceptor>
+                  <Routes>
+                      <Route exact path='/' element={<MainPage/>}/>
+                      <Route exact path='/projects' element={<Projects/>}/>
+                      <Route exact path='/projects/:id' element={<ProjectDetail/>}/>
+                      <Route exact path='/services' element={<Services/>}/>
+                      <Route exact path='/services/:id' element={<ServicesDetail/>}/>
+                      <Route exact path='/agency' element={<Agency/>}/>
+                      <Route exact path='/contacts' element={<Contacts/>}/>
+                      <Route exact path='/news' element={<News/>}/>
+                      <Route exact path='/news/:id' element={<NewsDetail/>}/>
+                      <Route exact path='/admin/*' element={<PrivateRoute/>}/>
+                      {/* <Route path='/admin/*' element={<AdminPage />} /> */}
+                      {/* <Route exact path='/register' element={<Register/>} /> */}
+                      <Route exact path='/login' element={<Login/>}/>
+                  </Routes>
+          </AxiosInterceptor>
+                  { !shouldHideHeaderFooter && <AppFooter/>}
+
       </>
   );
 
-} 
+}
 
 
 
@@ -96,8 +116,8 @@ function App() {
       </Router>
     </Provider>
   )
-  
- 
+
+
 }
 
 export default App;

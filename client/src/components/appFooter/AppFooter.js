@@ -12,6 +12,7 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const AppFooter = () => {
     const [services, setServices] = useState([]);
     const [headerData, setHeaderData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/headerData/`)
@@ -34,6 +35,18 @@ const AppFooter = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
     const gotoAnchor = (e) => {
         setTimeout(() => {
             let element = document.getElementById(e.target.getAttribute('datahash'));
@@ -42,6 +55,8 @@ const AppFooter = () => {
     }
 
     return (
+        <>
+            {!isLoading &&
         <footer className="footer">
             <div className="container">
                 <div className="footer__wrap">
@@ -106,6 +121,8 @@ const AppFooter = () => {
                 <div className="footer__copyright">© 2016–2023 DEUS agency</div>
             </div>
         </footer>
+            }
+        </>
     )
 
 }

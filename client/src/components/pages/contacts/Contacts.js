@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-import {  useEffect } from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
 import Cta from '../../cta/Cta';
 import SectionSocial from '../../sectionSocial/SectionSocial';
 
@@ -8,6 +8,17 @@ import './contacts.scss';
 
 
 const Contacts = () => {
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useLayoutEffect(() => {
+        const timeout = setTimeout(() => {
+            setIsLoading(false);
+        }, 100);
+
+        return () => clearTimeout(timeout);
+    }, []);
+
 
     // useEffect(() => {
     //     const element = document.getElementById('contactUs');
@@ -17,6 +28,9 @@ const Contacts = () => {
     //     }, []);
 
     return (
+        <>
+            {!!isLoading ? <div className='loading'/> :
+
         <main className="contacts">
             <section className="contacts-main">
                 <div className="container">
@@ -51,6 +65,8 @@ const Contacts = () => {
             <SectionSocial />
 
         </main>
+            }
+        </>
     )
 
 }

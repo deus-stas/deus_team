@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useLayoutEffect} from 'react';
 import axios from 'axios'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from "prop-types";
@@ -14,10 +14,10 @@ const apiUrl = process.env.NODE_ENV === 'production'
 
 const AppHeader = (props) => {
 
-
+    const [isLoading, setIsLoading] = useState(true);
     const [headerData, setHeaderData] = useState([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         axios.get(`${apiUrl}/api/headerData/`)
             .then((response) => {
                 setHeaderData(response.data[0]);
@@ -28,6 +28,17 @@ const AppHeader = (props) => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
 
     const navigate = useNavigate();
   
@@ -46,6 +57,9 @@ const AppHeader = (props) => {
     const [menu, setMenu] = useState(false);    
     return (
         <>
+            {!isLoading &&
+        <>
+
             <header className="header">
                 <div className="container">
                     <div className="header__wrap">
@@ -166,6 +180,8 @@ const AppHeader = (props) => {
                     </div>
                 </div>
             </div>
+        </>
+            }
         </>
 
     )

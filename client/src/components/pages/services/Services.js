@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from '../../../axios'
 
 import ProjectNext from '../projects/projectNext/ProjectNext';
 import Cta from '../../cta/Cta';
@@ -18,7 +18,7 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const Services = () => {
     const [services, setServices] = useState([]);
     const [reviews, setReviews] = useState([]);
-
+    const [isLoading, setIsLoading] = useState(true);
     const [openImage, setOpenImage] = useState(null);
 
     const [headerData, setHeaderData] = useState([]);
@@ -90,6 +90,19 @@ const Services = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const handleLoad = () => {
+            console.log(isLoading, 'isLoading')
+            setIsLoading(false);
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    });
+
 
     const handleImageClick = (filename) => {
         setOpenImage(filename);
@@ -100,7 +113,9 @@ const Services = () => {
     };
 
     return (
-        <main className="services">
+        <>
+            {!isLoading &&
+                <main className="services">
 
             <section className="services-s">
                 <div className="container">
@@ -110,7 +125,7 @@ const Services = () => {
                             <div className="services-s__subtitle">Отвечаем за качество своих услуг. Гордимся каждым проектом.</div>
                             <div className="services-s__dir">
                                 {
-                                    headerData && headerData.headerPhoto ? 
+                                    headerData && headerData.headerPhoto ?
                                     (
                                         <img src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`} alt="Брижань Вячеслав" className="services-s__dir-img" />
                                     ) :
@@ -171,7 +186,7 @@ const Services = () => {
                                             </>
                                         ) : null
                                     }
-                                    
+
                                 </div>
                             )
                         }) : null}
@@ -197,7 +212,9 @@ const Services = () => {
 
             <Social />
 
-        </main>
+                </main>
+            }
+        </>
     )
 }
 
