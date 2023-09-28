@@ -82,7 +82,7 @@ export const ReviewsEdit = (props) => (
                 <SelectInput className="customWidth" optionText="name" label="Услуга" />
             </ReferenceArrayInput>
             <ImageInput className="fileInput" placeholder="+" source="reviewBg" label="Фото отзывa" accept="image/*">
-                <ImageField source="src" title="title" />
+                <FilenameField source="src" title="title" />
             </ImageInput>
         </SimpleForm>
     </Edit>
