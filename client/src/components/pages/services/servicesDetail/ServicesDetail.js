@@ -361,13 +361,15 @@ const ServicesDetail = () => {
                                                                 <div className="service-price__item tab-parent" key={index}>
                                                                     <div className="service-price__acc" onClick={onAcc}>
                                                                         <h2 className="heading-secondary" >{item.tariffName}</h2>
-                                                                        <div className="service-price__p" >
-                                                                            <p className='show__more'>
+                                                                        {item.tariffList.length > 4 ? (
+                                                                            <div className="service-price__p">
+                                                                                <p className='show__more'>
                                                                                     <div className="top">
                                                                                         <Icon icon="arr-acc" />
                                                                                     </div>
-                                                                            </p>
-                                                                        </div>
+                                                                                </p>
+                                                                            </div>
+                                                                        ) : null}
                                                                     </div>
 
                                                                     <div className="service-price__subtitle">Что входит в тариф:</div>
