@@ -9,26 +9,50 @@ const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
     : process.env.REACT_APP_LOCALHOST_URI;
 
+const VideoOrImageField = ({ file }) => {
+
+    const isVideo = (funcFile) => {
+        return funcFile && funcFile.filename && funcFile.mimetype.indexOf('mp4') !== -1;
+    };
+
+    if (!!file) {
+        if (isVideo(file)) {
+            return (
+                <video style={{ width: '300px' }} autoPlay loop playsInline>
+                    <source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                </video>
+            );
+        } else {
+            return <img style={{ width: '300px' }} src={`${apiUrl}/uploads/${file.filename}`} alt={file.filename} title="image" />;
+        }
+    }
+    return null; // Return null if file is not available
+};
+
+const FunctionFieldForArrayItem = (props) => (
+    <FunctionField {...props} render={(record, source) => {
+        const splitter = source.split(".");
+        const field = splitter[0];
+        const index = splitter[1];
+        console.log(record, source)
+        if(!!record[field] && !!record[field][index]){
+            const file = record[field][index];
+            return (
+                <VideoOrImageField file={file}/>
+            )
+        }
+
+    }}/>
+);
+
 
 const FilenameField = props => {
     return (
         <FunctionField
             {...props}
             render={record => {
-                console.log('record:',record);
-                if (record.filename) {
-                    console.log("in if")
-                    if (record.mimetype.indexOf('mp4') !== -1) {
-                        return (
-                            <video style={{width:'300px'}} autoPlay loop playsInline><source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
-                        )
-                    } else {
-                        return <img style={{width:'300px'}} src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
-                    }
-                } else {
-                    console.log("in else")
-                    return <img style={{width:'300px'}} src={`${record.src}`} alt={record.src} title="image" />;
-                }
+                console.log('record:',record,props);
+                return (<VideoOrImageField file={record} />)
             }}
         />
     )
@@ -163,105 +187,105 @@ export const ProjectsCreate = (props) => (
         </SimpleForm> */}
         <SimpleForm>
             <TextInput
-                className="customWidth" 
-                source="name" 
-                label="Заголовок"  
-                validate={[required()]} 
+                className="customWidth"
+                source="name"
+                label="Заголовок"
+                validate={[required()]}
             />
             <TextInput
-                className="customWidth" 
-                source="nameInEng" 
+                className="customWidth"
+                source="nameInEng"
                 label="URL" fullWidth  />
-            <BooleanInput 
-                source="visibility" 
+            <BooleanInput
+                source="visibility"
                 label="Скрыть/Показать проекта проекта"/>
-            <ImageInput 
+            <ImageInput
                 className="fileInput"
                 placeholder="+"
-                source="image" 
-                label="Главное изображение" 
-                validate={[required()]} 
+                source="image"
+                label="Главное изображение"
+                validate={[required()]}
                 accept="image/*"
             >
                 <FilenameField source="src" title="title" />
             </ImageInput>
-            <BooleanInput 
-                source="controlURL" 
+            <BooleanInput
+                source="controlURL"
                 label="Переход на URL при клике"/>
             <TextInput
-                className="customWidth" 
-                source="projectURL" 
+                className="customWidth"
+                source="projectURL"
                 label="URL проекта"/>
             <TextInput
-                className="customWidth" 
-                source="projectSite" 
+                className="customWidth"
+                source="projectSite"
                 label="Сайт проекта"/>
-            <FileInput 
-                source="mainVideoFile" 
+            <FileInput
+                source="mainVideoFile"
                 label="Баннер видео">
                 <FileField source="src" title="title" />
             </FileInput>
             <TextInput
-                className="customWidth" 
-                source="mainVideo" 
+                className="customWidth"
+                source="mainVideo"
                 label="Видео для баннера(url)"  />
-            <ColorInput 
-                source="color" 
-                label="Цвет проекта" 
+            <ColorInput
+                source="color"
+                label="Цвет проекта"
                 validate={[required()]} />
-            <BooleanInput 
-                source="main" 
+            <BooleanInput
+                source="main"
                 label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
             <TextInput
-                className="customWidth" 
-                source="bannerText" 
+                className="customWidth"
+                source="bannerText"
                 title="Текст для баннера"  />
-            <ReferenceArrayInput 
-                source="projectTheme" 
+            <ReferenceArrayInput
+                source="projectTheme"
                 reference="themes">
                 <SelectInput
-                    className="customWidth" 
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Тема проекта" />
             </ReferenceArrayInput>
-            <ReferenceArrayInput 
-                source="projectType" 
+            <ReferenceArrayInput
+                source="projectType"
                 reference="types">
                 <SelectInput
-                    className="customWidth"  
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Тип проекта" />
             </ReferenceArrayInput>
             <TextInput
-                className="customWidth" 
-                source="about" 
+                className="customWidth"
+                source="about"
                 label="О клиенте"  />
             <FileInput
-                source="bannerFirst" 
+                source="bannerFirst"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <TextInput
-                className="customWidth" 
-                source="bannerFirstVideo" 
-                allowEmpty 
+                className="customWidth"
+                source="bannerFirstVideo"
+                allowEmpty
                 label="Видео для баннера(url)"  />
             <TextInput
-                className="customWidth" 
-                source="taskDescr" 
+                className="customWidth"
+                source="taskDescr"
                 label="Описание для блока Цели и задачи"  />
             <TextInput
-                className="customWidth" 
-                source="task" 
+                className="customWidth"
+                source="task"
                 label="Задача"  />
-            <ReferenceArrayInput  
-                source="taskPersons" 
+            <ReferenceArrayInput
+                source="taskPersons"
                 reference="persons">
                 <SelectInput
-                    className="customWidth"   
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Чья цитата для задачи" />
             </ReferenceArrayInput>
             <ArrayInput
@@ -270,19 +294,19 @@ export const ProjectsCreate = (props) => (
             >
                 <SimpleFormIterator>
                     <TextInput
-                        className="customWidth" 
-                        source="tasksItem" 
+                        className="customWidth"
+                        source="tasksItem"
                         label="Задача" />
                 </SimpleFormIterator>
             </ArrayInput>
-            <ColorInput 
-                source="aimColor" 
+            <ColorInput
+                source="aimColor"
                 label="Цвет задач" />
-            <FileInput 
-                source="bannerSecond" 
+            <FileInput
+                source="bannerSecond"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -297,22 +321,23 @@ export const ProjectsCreate = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="bannerSecondVideo" 
+                className="customWidth"
+                source="bannerSecondVideo"
                 label="Видео для баннера(url)"  />
             <TextInput
-                className="customWidth" 
-                source="approach" 
+                className="customWidth"
+                source="approach"
                 label="Подход"  />
-            <ReferenceArrayInput  
-                source="approachPersons" 
+            <ReferenceArrayInput
+                source="approachPersons"
                 reference="persons">
                 <SelectInput
-                    className="customWidth"   
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Чья цитата для подхода" />
             </ReferenceArrayInput>
             <ArrayInput
@@ -344,11 +369,11 @@ export const ProjectsCreate = (props) => (
                     </FileInput>
                 </SimpleFormIterator>
             </ArrayInput>
-            <FileInput 
-                source="bannerThird" 
+            <FileInput
+                source="bannerThird"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -363,6 +388,7 @@ export const ProjectsCreate = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
 
@@ -397,39 +423,39 @@ export const ProjectsCreate = (props) => (
             </ArrayInput>
 
             <TextInput
-                className="customWidth" 
-                source="bannerThirdVideo" 
+                className="customWidth"
+                source="bannerThirdVideo"
                 label="Видео для баннера(url)"  />
-            <RichTextInput  
-                className="customWidth" 
+            <RichTextInput
+                className="customWidth"
                  source="body"  />
             <TextInput
-                className="customWidth" 
-                source="workStepsHeader" 
+                className="customWidth"
+                source="workStepsHeader"
                 label="Подзаголовок Этапы работ"  />
             <ArrayInput
                 source="workSteps"
                 label="Этапы работ">
                 <SimpleFormIterator>
                     <TextInput
-                        className="customWidth" 
+                        className="customWidth"
                         source="workStepsTitle" />
                     <TextInput
-                        className="customWidth" 
+                        className="customWidth"
                         source="workStepsIntroText" />
-                    <RichTextInput  
+                    <RichTextInput
                         className="customWidth"
                         source="workStepsItem"  />
                 </SimpleFormIterator>
             </ArrayInput>
-            <ColorInput 
-                source="workStepsColor" 
+            <ColorInput
+                source="workStepsColor"
                 label="Цвет этапы работ" />
-            <FileInput 
-                source="bannerFourth" 
+            <FileInput
+                source="bannerFourth"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -444,11 +470,12 @@ export const ProjectsCreate = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="bannerFourthVideo" 
+                className="customWidth"
+                source="bannerFourthVideo"
                 label="Видео для баннера(url)"  />
 
             <ArrayInput
@@ -481,37 +508,37 @@ export const ProjectsCreate = (props) => (
                 </SimpleFormIterator>
             </ArrayInput>
 
-            <RichTextInput  
+            <RichTextInput
                 className="customWidth"
-                source="result" 
+                source="result"
                 label="Результаты"  />
-            <ColorInput 
-                source="resultTextColor" 
+            <ColorInput
+                source="resultTextColor"
                 label="Цвет текста резултаты" />
             <TextInput
-                className="customWidth" 
-                source="resultPersonsText" 
+                className="customWidth"
+                source="resultPersonsText"
                 label="Результаты прямая речь"  />
-            <ReferenceArrayInput  
-                source="resultPersons" 
+            <ReferenceArrayInput
+                source="resultPersons"
                 reference="persons">
                 <SelectInput
-                    className="customWidth"  
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Чья цитата для результата" />
             </ReferenceArrayInput>
-            <ColorInput 
-                source="resultsColor" 
+            <ColorInput
+                source="resultsColor"
                 label="Цвет результаты" />
-            <RichTextInput  
+            <RichTextInput
                 className="customWidth"
-                source="technologies" 
+                source="technologies"
                 label="Технологии"  />
-            <FileInput 
-                source="bannerFifth" 
+            <FileInput
+                source="bannerFifth"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -526,48 +553,49 @@ export const ProjectsCreate = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="bannerFifthVideo" 
+                className="customWidth"
+                source="bannerFifthVideo"
                 label="Видео для баннера(url)"  />
 
-            <ArrayInput 
-                source="imagesExtra" 
+            <ArrayInput
+                source="imagesExtra"
                 label="Дополнительные изображения(если редактируется одна картинка, то нужно обновить/заменить и другую)">
                 <SimpleFormIterator>
-                    <ImageInput 
+                    <ImageInput
                         className="fileInput"
                         placeholder="+"
-                        source="imageI" 
-                        label="Изображение" 
+                        source="imageI"
+                        label="Изображение"
                         accept="image/*">
-                        <FilenameField 
-                            source="src" 
+                        <FilenameField
+                            source="src"
                             title="title" />
                     </ImageInput>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="visibilityTitle1" 
+                className="customWidth"
+                source="visibilityTitle1"
                 label="Видимость 1"  />
-            <FileInput 
-                source="visibilityImg1" 
+            <FileInput
+                source="visibilityImg1"
                 label="Фото видимость 1">
-                <FileField 
-                    source="src" 
+                <FileField
+                    source="src"
                     title="title" />
             </FileInput>
             <TextInput
-                className="customWidth" 
-                source="visibilityTitle2" 
+                className="customWidth"
+                source="visibilityTitle2"
                 label="Видимость 2"  />
-            <FileInput 
-                source="visibilityImg2" 
+            <FileInput
+                source="visibilityImg2"
                 label="Фото видимость 2">
-                <FileField 
+                <FileField
                     source="src"
                     title="title" />
             </FileInput>
@@ -579,105 +607,105 @@ export const ProjectsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm className='editForm' toolbar={<MyToolbar />}>
             <TextInput
-                className="customWidth" 
-                source="name" 
-                label="Заголовок"  
-                validate={[required()]} 
+                className="customWidth"
+                source="name"
+                label="Заголовок"
+                validate={[required()]}
             />
             <TextInput
-                className="customWidth" 
-                source="nameInEng" 
+                className="customWidth"
+                source="nameInEng"
                 label="URL" fullWidth  />
-             <BooleanInput 
-                source="visibility" 
+             <BooleanInput
+                source="visibility"
                 label="Скрыть/Показать проекта"/>
-            <ImageInput 
+            <ImageInput
                 className='fileInput'
                 placeholder="+"
-                source="image" 
-                label="Главное изображение" 
-                validate={[required()]} 
+                source="image"
+                label="Главное изображение"
+                validate={[required()]}
                 accept="image/*"
             >
                 <FilenameField source="src" title="title" />
             </ImageInput>
-            <BooleanInput 
-                source="controlURL" 
+            <BooleanInput
+                source="controlURL"
                 label="Переход на URL при клике"/>
             <TextInput
-                className="customWidth" 
-                source="projectURL" 
+                className="customWidth"
+                source="projectURL"
                 label="URL проекта"/>
             <TextInput
-                className="customWidth" 
-                source="projectSite" 
+                className="customWidth"
+                source="projectSite"
                 label="Сайт проекта"/>
-            <FileInput 
-                source="mainVideoFile" 
+            <FileInput
+                source="mainVideoFile"
                 label="Баннер видео">
                 <FileField source="src" title="title" />
             </FileInput>
             <TextInput
-                className="customWidth" 
-                source="mainVideo" 
+                className="customWidth"
+                source="mainVideo"
                 label="Видео для баннера(url)"  />
-            <ColorInput 
-                source="color" 
-                label="Цвет проекта" 
+            <ColorInput
+                source="color"
+                label="Цвет проекта"
                 validate={[required()]} />
-            <BooleanInput 
-                source="main" 
+            <BooleanInput
+                source="main"
                 label="Установить на баннер главного экрана?(нужно снять с других проектов)" />
             <TextInput
-                className="customWidth" 
-                source="bannerText" 
+                className="customWidth"
+                source="bannerText"
                 title="Текст для баннера"  />
-            <ReferenceArrayInput 
-                source="projectTheme" 
+            <ReferenceArrayInput
+                source="projectTheme"
                 reference="themes">
                 <SelectInput
-                    className="customWidth" 
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Тема проекта" />
             </ReferenceArrayInput>
-            <ReferenceArrayInput 
-                source="projectType" 
+            <ReferenceArrayInput
+                source="projectType"
                 reference="types">
                 <SelectInput
-                    className="customWidth"  
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Тип проекта" />
             </ReferenceArrayInput>
             <TextInput
-                className="customWidth" 
-                source="about" 
+                className="customWidth"
+                source="about"
                 label="О клиенте"  />
-            <FileInput 
-                source="bannerFirst" 
+            <FileInput
+                source="bannerFirst"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <TextInput
-                className="customWidth" 
-                source="bannerFirstVideo" 
-                allowEmpty 
+                className="customWidth"
+                source="bannerFirstVideo"
+                allowEmpty
                 label="Видео для баннера(url)"  />
             <TextInput
-                className="customWidth" 
-                source="taskDescr" 
+                className="customWidth"
+                source="taskDescr"
                 label="Описание для блока Цели и задачи"  />
             <TextInput
-                className="customWidth" 
-                source="task" 
+                className="customWidth"
+                source="task"
                 label="Задача"  />
-            <ReferenceArrayInput  
-                source="taskPersons" 
+            <ReferenceArrayInput
+                source="taskPersons"
                 reference="persons">
                 <SelectInput
-                    className="customWidth"   
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Чья цитата для задачи" />
             </ReferenceArrayInput>
             <ArrayInput
@@ -686,19 +714,19 @@ export const ProjectsEdit = (props) => (
             >
                 <SimpleFormIterator>
                     <TextInput
-                        className="customWidth" 
-                        source="tasksItem" 
+                        className="customWidth"
+                        source="tasksItem"
                         label="Задача" />
                 </SimpleFormIterator>
             </ArrayInput>
-            <ColorInput 
-                source="aimColor" 
+            <ColorInput
+                source="aimColor"
                 label="Цвет задач" />
-            <FileInput 
-                source="bannerSecond" 
+            <FileInput
+                source="bannerSecond"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -713,15 +741,16 @@ export const ProjectsEdit = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="bannerSecondVideo" 
+                className="customWidth"
+                source="bannerSecondVideo"
                 label="Видео для баннера(url)"  />
             <TextInput
-                className="customWidth" 
-                source="approach" 
+                className="customWidth"
+                source="approach"
                 label="Подход"  />
 
             <ReferenceArrayInput
@@ -764,11 +793,11 @@ export const ProjectsEdit = (props) => (
             </ArrayInput>
 
 
-            <FileInput 
-                source="bannerThird" 
+            <FileInput
+                source="bannerThird"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -783,6 +812,7 @@ export const ProjectsEdit = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
 
@@ -816,27 +846,27 @@ export const ProjectsEdit = (props) => (
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="bannerThirdVideo" 
+                className="customWidth"
+                source="bannerThirdVideo"
                 label="Видео для баннера(url)"  />
-            <RichTextInput  
-                className="customWidth" 
+            <RichTextInput
+                className="customWidth"
                 source="body"  />
             <TextInput
-                className="customWidth" 
-                source="workStepsHeader" 
+                className="customWidth"
+                source="workStepsHeader"
                 label="Подзаголовок Этапы работ"  />
             <ArrayInput
                 source="workSteps"
                 label="Этапы работ">
                 <SimpleFormIterator>
                     <TextInput
-                        className="customWidth" 
+                        className="customWidth"
                         source="workStepsTitle" />
                     <TextInput
-                        className="customWidth" 
+                        className="customWidth"
                         source="workStepsIntroText" />
-                    <RichTextInput  
+                    <RichTextInput
                         className="customWidth"
                         source="workStepsItem"  />
                     <ArrayInput
@@ -852,14 +882,14 @@ export const ProjectsEdit = (props) => (
                     </ArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-            <ColorInput 
-                source="workStepsColor" 
+            <ColorInput
+                source="workStepsColor"
                 label="Цвет этапы работ" />
-            <FileInput 
-                source="bannerFourth" 
+            <FileInput
+                source="bannerFourth"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -874,11 +904,12 @@ export const ProjectsEdit = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="bannerFourthVideo" 
+                className="customWidth"
+                source="bannerFourthVideo"
                 label="Видео для баннера(url)"  />
 
             <ArrayInput
@@ -911,37 +942,37 @@ export const ProjectsEdit = (props) => (
                 </SimpleFormIterator>
             </ArrayInput>
 
-            <RichTextInput  
+            <RichTextInput
                 className="customWidth"
-                source="result" 
+                source="result"
                 label="Результаты"  />
-            <ColorInput 
-                source="resultTextColor" 
+            <ColorInput
+                source="resultTextColor"
                 label="Цвет текста резултаты" />
             <TextInput
-                className="customWidth" 
-                source="resultPersonsText" 
+                className="customWidth"
+                source="resultPersonsText"
                 label="Результаты прямая речь"  />
-            <ReferenceArrayInput  
-                source="resultPersons" 
+            <ReferenceArrayInput
+                source="resultPersons"
                 reference="persons">
                 <SelectInput
-                    className="customWidth"  
-                    optionText="name" 
+                    className="customWidth"
+                    optionText="name"
                     label="Чья цитата для результата" />
             </ReferenceArrayInput>
-            <ColorInput 
-                source="resultsColor" 
+            <ColorInput
+                source="resultsColor"
                 label="Цвет результаты" />
-            <RichTextInput  
+            <RichTextInput
                 className="customWidth"
-                source="technologies" 
+                source="technologies"
                 label="Технологии"  />
-            <FileInput 
-                source="bannerFifth" 
+            <FileInput
+                source="bannerFifth"
                 label="Баннер">
-                <FilenameField 
-                    source="src" 
+                <FilenameField
+                    source="src"
                     title="title" />
             </FileInput>
             <ArrayInput
@@ -956,48 +987,50 @@ export const ProjectsEdit = (props) => (
                             source="src"
                             title="title"/>
                     </FileInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="bannerFifthVideo" 
+                className="customWidth"
+                source="bannerFifthVideo"
                 label="Видео для баннера(url)"  />
 
-            <ArrayInput 
-                source="imagesExtra" 
+            <ArrayInput
+                source="imagesExtra"
                 label="Дополнительные изображения(если редактируется одна картинка, то нужно обновить/заменить и другую)">
                 <SimpleFormIterator>
-                    <ImageInput 
+                    <ImageInput
                         className='fileInput'
                         placeholder="+"
-                        source="imageI" 
-                        label="Изображение" 
+                        source="imageI"
+                        label="Изображение"
                         accept="image/*">
-                        <FilenameField 
-                            source="src" 
+                        <FilenameField
+                            source="src"
                             title="title" />
                     </ImageInput>
+                    <FunctionFieldForArrayItem/>
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput
-                className="customWidth" 
-                source="visibilityTitle1" 
+                className="customWidth"
+                source="visibilityTitle1"
                 label="Видимость 1"  />
-            <FileInput 
-                source="visibilityImg1" 
+            <FileInput
+                source="visibilityImg1"
                 label="Фото видимость 1">
-                <FileField 
-                    source="src" 
+                <FileField
+                    source="src"
                     title="title" />
             </FileInput>
             <TextInput
-                className="customWidth" 
-                source="visibilityTitle2" 
+                className="customWidth"
+                source="visibilityTitle2"
                 label="Видимость 2"  />
-            <FileInput 
-                source="visibilityImg2" 
+            <FileInput
+                source="visibilityImg2"
                 label="Фото видимость 2">
-                <FileField 
+                <FileField
                     source="src"
                     title="title" />
             </FileInput>
