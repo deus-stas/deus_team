@@ -93,7 +93,10 @@ const Showreel = (props) => {
 
     return (
         <div className="showreel">
-            <div className="showreel__title">{data.name} <span> — {data.year}</span></div>
+            <div className="showreel__title">
+                {data.name}
+                {data.year && data.year.length > 0 && <span> — {data.year}</span>}
+            </div>
             {
                 isMain ? (
                     <div ref={showReelRef} className="showreel__s playIcon">

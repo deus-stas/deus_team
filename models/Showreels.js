@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const showreelsSchema = new Schema({
   name: { type: String, required: true },
-  year: { type: String },
+  year: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   mainShowreel: { type: Boolean },
   video: { type: Object },
   videoUrl: { type: String },
