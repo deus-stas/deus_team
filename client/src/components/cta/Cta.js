@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 import InputMask from "react-input-mask";
-import axios from '../../axios'
 import {useState, useEffect, useLayoutEffect} from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -10,6 +9,7 @@ import './cta.scss'
 
 import manager from '../../img/manager.png';
 import tender from '../../img/tender.png';
+import axios from "axios";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -52,6 +52,7 @@ const Cta = (props) => {
 
 
     useEffect(() => {
+        setIsLoading(true);
         axios.get(`${apiUrl}/api/contacts/`)
             .then((response) => {
                 console.log("data contc", response.data)
@@ -59,6 +60,7 @@ const Cta = (props) => {
                 response.data.map((item, index) => (
                     item.pageName === props.formName ? setWorker(item) : null
                 ))
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -68,17 +70,6 @@ const Cta = (props) => {
     const { formName } = props;
     const [success, setSuccess] = useState(false);
 
-    useEffect(() => {
-        const handleLoad = () => {
-            setIsLoading(false);
-        };
-
-        window.addEventListener('isLoadingMainPage', handleLoad);
-
-        return () => {
-            window.removeEventListener('isLoadingMainPage', handleLoad);
-        };
-    });
 
     const sendEmail = async (values) => {
         try {

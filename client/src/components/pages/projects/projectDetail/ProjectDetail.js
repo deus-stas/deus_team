@@ -382,9 +382,6 @@ const ProjectDetail = () => {
 
             {detail.bannerFourths ? (
                 <>
-                    <section className="project-banner">
-                        <div dangerouslySetInnerHTML={{__html: detail.bannerFourths}}></div>
-                    </section>
 
                     {detail.bannerFourths.filter(val => !!val).map((banner, index) => (
                         <BannerComponent key={index} banner={banner} detail={detail}/>
