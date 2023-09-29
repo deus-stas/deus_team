@@ -49,17 +49,20 @@ const News = () => {
     }, []);
 
     useEffect(() => {
-        const handleLoad = () => {
-            console.log(isLoading, 'isLoading')
-            setIsLoading(false);
+        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
+        window.dispatchEvent(event)
+
+        const handleLoad = (e) => {
+            if (e.detail.isLoading !== isLoading) {
+                setIsLoading(e.detail.isLoading);
+            }
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
-
         return () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
-    });
+    },[]);
 
     const handleTagClick = (tag) => {
         setSelectedTag(tag);

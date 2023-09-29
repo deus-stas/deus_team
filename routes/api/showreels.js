@@ -41,6 +41,7 @@ router.post('/showreels', upload.single('video'), async (req, res) => {
     console.log(req.file);
 
     const video = req.file;
+    const yearWrapper = (year ? year : '')
 
     // Check if mainShowreel is being set to true
     if (mainShowreel === true || mainShowreel === 'true') {
@@ -50,11 +51,12 @@ router.post('/showreels', upload.single('video'), async (req, res) => {
 
     const showreels = new Showreels({
         name,
-        year,
+        yearWrapper,
         mainShowreel,
         video,
         videoUrl
     });
+
 
     await showreels.save();
 
@@ -104,40 +106,43 @@ router.get('/showreels/:id', async (req, res) => {
 // });
 router.put("/showreels/:id", upload.single('video'), async (req, res) => {
     const { id } = req.params;
-  
+
     // Check if the showreel exists in the database
     const showreels = await Showreels.findById(id);
     if (!showreels) {
       return res.status(404).json({ error: 'Showreels not found' });
     }
-  
+
     const { name, year, mainShowreel, videoUrl } = req.body;
     const video = req.file;
-  
+    console.log(req.body)
+
+    const yearWrapper = (year!=='null' ? year : '')
+
     // If there is a new video file in the request, update the video property and delete the previous video file
     if (video) {
         fs.unlinkSync(`uploads/${showreels.video.filename}`);
         showreels.video = video;
     }
-  
+
     // Update the other fields of the document
     showreels.name = name;
-    showreels.year = year;
+    showreels.year = yearWrapper;
     showreels.videoUrl = videoUrl;
-  
+
     //Check if mainShowreel is being modified and update it accordingly
     if (mainShowreel === "true" || mainShowreel === true) {
        // Find any existing showreel with mainShowreel set to true and set it to false
         await Showreels.updateMany({ mainShowreel: true, _id: { $ne: id } }, { $set: { mainShowreel: false } });
-    } 
-    
+    }
+
     showreels.mainShowreel = mainShowreel;
-  
+
     // Save the changes
     await showreels.save();
     res.json(showreels);
   });
-  
+
 
 router.delete("/showreels/:id", async (req, res) => {
     const { id } = req.params;
