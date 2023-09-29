@@ -189,16 +189,20 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        const handleLoad = () => {
-            setIsLoading(false);
+        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
+        window.dispatchEvent(event)
+
+        const handleLoad = (e) => {
+            if (e.detail.isLoading !== isLoading) {
+                setIsLoading(e.detail.isLoading);
+            }
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
-
         return () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
-    });
+    },[]);
 
     const slideChange = (slider) => {
         if (slider.touches.diff > 0) {
@@ -449,7 +453,7 @@ const MainPage = () => {
                                     service.isInvisible ?
                                         <div className="main-services__item tab-parent" key={service.id}>
                                             <div className="main-services__head" onClick={onAcc}>
-                                                {/* <div className="main-services__num">{index < 9 ? 0 : ''}{index + 1}</div> */}
+                                                 <div className="main-services__num">{index < 9 ? 0 : ''}{index + 1}</div>
                                                 <div className="main-services__name">{service.name}</div>
                                                 <div className="main-services__btn">
                                                     <Icon icon="arr-acc" />

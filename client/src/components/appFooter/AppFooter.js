@@ -36,8 +36,8 @@ const AppFooter = () => {
     }, []);
 
     useEffect(() => {
-        const handleLoad = () => {
-            setIsLoading(false);
+        const handleLoad = (e) => {
+            setIsLoading(e.detail.isLoading);
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
@@ -45,7 +45,7 @@ const AppFooter = () => {
         return () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
-    });
+    },[]);
 
     const gotoAnchor = (e) => {
         setTimeout(() => {
@@ -56,8 +56,7 @@ const AppFooter = () => {
 
     return (
         <>
-            {!isLoading &&
-        <footer className="footer">
+        <footer className={"footer " + (isLoading?"fade-in":'')} key={'footer_'+isLoading}>
             <div className="container">
                 <div className="footer__wrap">
                     <div className="footer__contacts">
@@ -121,7 +120,6 @@ const AppFooter = () => {
                 <div className="footer__copyright">© 2016–2023 DEUS agency</div>
             </div>
         </footer>
-            }
         </>
     )
 

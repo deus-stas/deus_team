@@ -537,18 +537,37 @@
             &.active {
                 .service-price__elem {
                     opacity: 1;
-                    margin-top: 2rem;
+                    //margin-top: 2rem;
                     max-height: 100rem;
                     visibility: visible;
-
+                    transition: all 0.5s;
                     @include respond(sm) {
                         margin-top: 1rem;
+                    }
+                }
+
+                .service-price__type-item{
+                    display: flex;
+                    align-items: flex-start;
+                    font-size: 2rem;
+                    line-height: 2.6rem;
+                    transition: all 0.5s;
+                    &:nth-child(n + 5){
+                        max-height: 100vh;
+                        opacity: 1;
+                        visibility: visible;
+                        font-size: 2rem;
+                        line-height: 2.6rem;
+                        transition: all 0.5s;
                     }
                 }
 
                 .top {
                     transform: rotate(180deg);
                 }
+
+
+
             }
 
             @include respond(sm) {
@@ -590,9 +609,10 @@
         &__type {
             &-item {
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 font-size: 2rem;
                 line-height: 2.6rem;
+                //width: 25rem;
 
                 @include respond(sm) {
                     font-size: 1.6rem;
@@ -609,6 +629,21 @@
                 &:not(:last-child) {
                     margin-bottom: 0.7rem;
                 }
+
+                    &:nth-child(n + 5){
+                        //display: none;
+                        max-height: 0;
+                        opacity: 0;
+                        margin-top: 0;
+                        visibility: hidden;
+                        font-size: 2rem;
+                        line-height: 2.6rem;
+                        transition: all 0.5s;
+
+                    }
+
+
+
             }
         }
 
@@ -640,6 +675,7 @@
                 &:not(:last-child) {
                     margin-bottom: 1.9rem;
                 }
+
             }
 
             &-title {
@@ -666,17 +702,18 @@
             }
         }
 
-        &__elem {
-            max-width: 45rem;
-            padding-left: 3.6rem;
-            max-height: 0;
-            opacity: 0;
-            margin-top: 0;
-            visibility: hidden;
-            font-size: 2rem;
-            line-height: 2.6rem;
-            transition: all 0.5s;
+        &__type {
+            //max-width: 45rem;
+            //padding-left: 3.6rem;
+            //max-height: 15rem;
+            //opacity: 0;
+            //margin-top: 0;
+            //visibility: hidden;
+            //font-size: 2rem;
+            //line-height: 2.6rem;
+            //transition: all 0.5s;
         }
+
     }
 
     &-review {

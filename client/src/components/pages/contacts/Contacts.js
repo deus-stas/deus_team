@@ -11,13 +11,40 @@ const Contacts = () => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
+        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
+        window.dispatchEvent(event)
         const timeout = setTimeout(() => {
             setIsLoading(false);
         }, 100);
 
         return () => clearTimeout(timeout);
     }, []);
+    useEffect(()=>{
+        if(!isLoading){
+            const timeout = setTimeout(() => {
+                const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: isLoading}});
+                window.dispatchEvent(event)
+            }, 100);
+            return () => clearTimeout(timeout);
+        }
+    },[isLoading])
+
+    // useEffect(() => {
+    //     const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
+    //     window.dispatchEvent(event)
+    //
+    //     const handleLoad = (e) => {
+    //         if (e.detail.isLoading !== isLoading) {
+    //             setIsLoading(e.detail.isLoading);
+    //         }
+    //     };
+    //
+    //     window.addEventListener('isLoadingMainPage', handleLoad);
+    //     return () => {
+    //         window.removeEventListener('isLoadingMainPage', handleLoad);
+    //     };
+    // },[]);
 
 
     // useEffect(() => {
@@ -29,8 +56,7 @@ const Contacts = () => {
 
     return (
         <>
-            {!!isLoading ? <div className='loading'/> :
-
+        {!isLoading &&
         <main className="contacts">
             <section className="contacts-main">
                 <div className="container">

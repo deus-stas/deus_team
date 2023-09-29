@@ -106,15 +106,6 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
             });
         }
         reviews.reviewFile = req.files.reviewFile[0];
-    } else {
-        if (reviews.reviewFile && reviews.reviewFile.path) {
-            fs.unlink(reviews.reviewFile.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            reviews.reviewFile = null;
-        }
     }
 
     if (req.files && req.files.reviewImage) {
@@ -126,17 +117,7 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
             });
         }
         reviews.reviewImage = req.files.reviewImage[0];
-    } else {
-        if (reviews.reviewImage && reviews.reviewImage.path) {
-            fs.unlink(reviews.reviewImage.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            reviews.reviewImage = null;
-        }
     }
-
     if (req.files && req.files.reviewBg) {
         if (reviews.reviewBg) {
             fs.unlink(reviews.reviewBg.path, (err) => {
@@ -146,15 +127,6 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
             });
         }
         reviews.reviewBg = req.files.reviewBg[0];
-    } else {
-        if (reviews.reviewBg && reviews.reviewBg.path) {
-            fs.unlink(reviews.reviewBg.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            reviews.reviewBg = null;
-        }
     }
 
     reviews.name = name;
