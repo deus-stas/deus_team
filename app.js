@@ -49,11 +49,9 @@ require("./config/passport")(passport);
 
 
 app.use('/uploads', express.static('uploads'));
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false, limit: '10mb' }));
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
     next();
 });
