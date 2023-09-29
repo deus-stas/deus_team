@@ -1,4 +1,13 @@
-import { BrowserRouter as Router, Route, Routes, useLocation  } from 'react-router-dom';
+import {
+    BrowserRouter,
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Switch,
+    useHistory,
+    useLocation,
+    useNavigate
+} from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutuser } from "./actions/authActions";
@@ -23,7 +32,7 @@ import NewsDetail from './components/news/newsDetail/NewsDetail';
 // import Register from './components/pages/register/Register';
 import Login from './components/pages/login/Login';
 import PrivateRoute from "./components/privateRoutes/PrivateRoute";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {AxiosInterceptor} from "./axios";
 
 // import AdminPage from './Admin';
@@ -48,8 +57,7 @@ const AppWrapper = () => {
 
     useEffect((event) => {
         const handleLoad = (e) => {
-            console.log('event:',e)
-            setIsLoading(false);
+            setIsLoading(e.detail.isLoading);
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
@@ -70,7 +78,7 @@ const AppWrapper = () => {
   const shouldHideHeaderFooter = isOnAdminRoute && hiddenRoutes.some(route => location.pathname.startsWith(route));
   return (
       <>
-          {!!isLoading &&(<div className="loader"></div>) }
+
                   <ScrollToTop/>
                   <CustomCursor
                       targets={['.js-cursor-play']}
@@ -81,21 +89,22 @@ const AppWrapper = () => {
                   />
                   {/* <AppHeader /> */}
                   {!shouldHideHeaderFooter && <AppHeader/>}
+          {!!isLoading &&(<div className="loader"></div>) }
           <AxiosInterceptor>
                   <Routes>
-                      <Route exact path='/' element={<MainPage/>}/>
-                      <Route exact path='/projects' element={<Projects/>}/>
-                      <Route exact path='/projects/:id' element={<ProjectDetail/>}/>
-                      <Route exact path='/services' element={<Services/>}/>
-                      <Route exact path='/services/:id' element={<ServicesDetail/>}/>
-                      <Route exact path='/agency' element={<Agency/>}/>
-                      <Route exact path='/contacts' element={<Contacts/>}/>
-                      <Route exact path='/news' element={<News/>}/>
-                      <Route exact path='/news/:id' element={<NewsDetail/>}/>
-                      <Route exact path='/admin/*' element={<PrivateRoute/>}/>
-                      {/* <Route path='/admin/*' element={<AdminPage />} /> */}
-                      {/* <Route exact path='/register' element={<Register/>} /> */}
-                      <Route exact path='/login' element={<Login/>}/>
+                          <Route path="/" element={<MainPage/>}/>
+                          <Route exact path='/projects' element={<Projects/>}/>
+                          <Route exact path='/projects/:id' element={<ProjectDetail/>}/>
+                          <Route exact path='/services' element={<Services/>}/>
+                          <Route exact path='/services/:id' element={<ServicesDetail/>}/>
+                          <Route exact path='/agency' element={<Agency/>}/>
+                          <Route exact path='/contacts' element={<Contacts/>}/>
+                          <Route exact path='/news' element={<News/>}/>
+                          <Route exact path='/news/:id' element={<NewsDetail/>}/>
+                          <Route exact path='/admin/*' element={<PrivateRoute/>}/>
+                          {/* <Route path='/admin/*' element={<AdminPage />} /> */}
+                          {/* <Route exact path='/register' element={<Register/>} /> */}
+                          <Route exact path='/login' element={<Login/>}/>
                   </Routes>
           </AxiosInterceptor>
                   { !shouldHideHeaderFooter && <AppFooter/>}
@@ -108,12 +117,13 @@ const AppWrapper = () => {
 
 
 
+
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <AppWrapper />
-      </Router>
+      <BrowserRouter>
+          <AppWrapper />
+      </BrowserRouter>
     </Provider>
   )
 
