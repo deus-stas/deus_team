@@ -29,19 +29,23 @@ const AppHeader = (props) => {
     }, []);
 
     useEffect(() => {
-        const handleLoad = () => {
-            setIsLoading(false);
+        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
+        window.dispatchEvent(event)
+
+        const handleLoad = (e) => {
+            if (e.detail.isLoading !== isLoading) {
+                setIsLoading(e.detail.isLoading);
+            }
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
-
         return () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
-    });
+    },[]);
 
     const navigate = useNavigate();
-  
+
     const handleClick = () => {
         navigate('/contacts#contactUs');
     };
