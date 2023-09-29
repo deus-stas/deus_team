@@ -1,10 +1,25 @@
 import * as React from 'react';
-import { List, Datagrid, TextField, Edit, Create, TextInput, SimpleForm, required, FileInput, FileField } from 'react-admin';
+import {
+    List,
+    Datagrid,
+    TextField,
+    Edit,
+    Create,
+    TextInput,
+    SimpleForm,
+    required,
+    FileInput,
+    FileField,
+    BooleanInput
+} from 'react-admin';
 
 export const ProductsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать проекта"/>
             <TextInput className="customWidth" source="descr" label="Описание" validate={[required()]} />
             <TextInput className="customWidth" source="link" label="Ссылка на продукт" validate={[required()]} />
             <FileInput className="fileInput" placeholder="+" source="img" label="Картинка">
@@ -22,6 +37,9 @@ export const ProductsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Название" validate={[required()]} />
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать проекта"/>
             <TextInput className="customWidth" source="descr" label="Описание" validate={[required()]} />
             <TextInput className="customWidth" source="link" label="Ссылка на продукт" validate={[required()]} />
             <FileInput className="fileInput" placeholder="+" source="img"label="Картинка" >

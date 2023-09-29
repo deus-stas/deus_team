@@ -7,7 +7,8 @@ const productsSchema = new Schema({
   link: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   videoUrl: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   video: { type: Object },
-  img: {type: Object}
+  img: {type: Object},
+  visibility: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v },
 });
 
 productsSchema.set('toJSON', { virtuals: true });

@@ -25,14 +25,18 @@ const SectionProducts = () => {
             });
     }, []);
 
-    return products ? (
+    const filteredProducts = products.filter(product => {
+        return product.visibility;
+    });
+
+    return filteredProducts ? (
         <section className="section-products">
             <div className="container">
                 <div className="section-products__wrap">
                     <h2 className="heading-secondary">Продукты студии</h2>
                     <div className="section-products__content">
                         {
-                            products.map(product => {
+                            filteredProducts.map(product => {
                                 return (
                                     <Link to={product.link} className="section-products__item" key={product.id} target="_blank">
                                         {
