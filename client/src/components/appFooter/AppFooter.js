@@ -44,6 +44,7 @@ const AppFooter = () => {
 
         return () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
+            setIsLoading(true)
         };
     },[]);
 
@@ -56,7 +57,7 @@ const AppFooter = () => {
 
     return (
         <>
-        <footer className={"footer " + (isLoading?"fade-in":'')} key={'footer_'+isLoading}>
+        <footer className={"footer " + (isLoading ? "fade-in" : '')} >
             <div className="container">
                 <div className="footer__wrap">
                     <div className="footer__contacts">

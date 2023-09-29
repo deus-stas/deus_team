@@ -92,7 +92,7 @@ const AppWrapper = () => {
           {!!isLoading &&(<div className="loader"></div>) }
           <AxiosInterceptor>
                   <Routes>
-                          <Route path="/" element={<MainPage/>}/>
+                          <Route exact path="/" element={<MainPage/>}/>
                           <Route exact path='/projects' element={<Projects/>}/>
                           <Route exact path='/projects/:id' element={<ProjectDetail/>}/>
                           <Route exact path='/services' element={<Services/>}/>
@@ -107,7 +107,7 @@ const AppWrapper = () => {
                           <Route exact path='/login' element={<Login/>}/>
                   </Routes>
           </AxiosInterceptor>
-                  { !shouldHideHeaderFooter && <AppFooter/>}
+                  { !shouldHideHeaderFooter && <AppFooter key={'footer_'+new Date().getTime()}/>}
 
       </>
   );

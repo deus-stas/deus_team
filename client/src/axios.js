@@ -8,7 +8,7 @@ const resInterceptor = response => {
     console.log('response:', response)
 
     const event = new CustomEvent("isLoadingMainPage", { detail: { isLoading: false } });
-    setTimeout(() => window.dispatchEvent(event), 1500)
+    setTimeout(() => window.dispatchEvent(event), 0)
     return response;
 }
 

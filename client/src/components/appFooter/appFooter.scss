@@ -2,7 +2,8 @@
 
 .fade-in {
     opacity: 0;
-    transition: opacity 2s;
+    //transition: opacity 0.1s;
+    display: none;
 }
 
 .footer {
