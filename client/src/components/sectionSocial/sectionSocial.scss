@@ -96,19 +96,13 @@
         height: 5rem;
         position: absolute;
         opacity: 1;
-        bottom: 9rem;
-        right: 18rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         border-radius: 50%;
         z-index: 3;
 
         transition: all .5s;
-
-        @include respond(sm) {
-            width: 4rem;
-            height: 4rem;
-            right: 1rem;
-            bottom: 1rem;
-        }
 
     }
     .arrow {
