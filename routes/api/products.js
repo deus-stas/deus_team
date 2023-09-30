@@ -36,8 +36,11 @@ router.get('/products', async (req, res) => {
     res.json(products);
 });
 
-router.post('/products', upload.fields([{ name: 'img' }, { name: 'video' }]), async (req, res) => {
-    const { name, descr, link, videoUrl } = req.body;
+router.post('/products', upload.fields([
+    { name: 'img' },
+    { name: 'video' },]),
+    async (req, res) => {
+    const { name, descr, link, videoUrl, visibility } = req.body;
     
     console.log(req.files);
 
@@ -58,7 +61,8 @@ router.post('/products', upload.fields([{ name: 'img' }, { name: 'video' }]), as
         link,
         video,
         videoUrl,
-        img
+        img,
+        visibility,
     });
 
     await products.save();
@@ -78,7 +82,11 @@ router.get('/products/:id', async (req, res) => {
     res.json(products);
 });
 
-router.put("/products/:id", upload.fields([{ name: 'video' }, { name: 'img' }]), async (req, res) => {
+router.put("/products/:id", upload.fields([
+        { name: 'video' },
+        { name: 'img' }
+    ]),
+    async (req, res) => {
     const { id } = req.params;
 
     // Check if the product exists in the database
@@ -87,7 +95,7 @@ router.put("/products/:id", upload.fields([{ name: 'video' }, { name: 'img' }]),
         return res.status(404).json({ error: 'Product not found' });
     }
 
-    const { name, descr, link, videoUrl } = req.body;
+    const { name, descr, link, videoUrl, visibility } = req.body;
 
     if (req.files && req.files.video) {
         if (product.video) {
@@ -134,6 +142,7 @@ router.put("/products/:id", upload.fields([{ name: 'video' }, { name: 'img' }]),
     product.descr = descr;
     product.videoUrl = videoUrl;
     product.link = link;
+    product.visibility= visibility;
 
     // Save the changes
     await product.save();
