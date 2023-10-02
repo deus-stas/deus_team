@@ -344,10 +344,16 @@ export const ProjectsCreate = (props) => (
                 label={'Список цитат'}
                 source={'approachList'}>
                 <SimpleFormIterator>
+                    <ColorInput
+                        source="resultsColor"
+                        label="Цвет фона" />
                     <TextInput
                         className="customWidth"
                         source="title"
                         label="Заголовок цитаты"  />
+                    <ColorInput
+                        source="resultTextColor"
+                        label="Цвет текста цитаты" />
                     <TextInput
                         className="customWidth"
                         source="text"
@@ -396,10 +402,16 @@ export const ProjectsCreate = (props) => (
                 label={'Список цитат'}
                 source={'approachListThird'}>
                 <SimpleFormIterator>
+                    <ColorInput
+                        source="resultsColor"
+                        label="Цвет фона" />
                     <TextInput
                         className="customWidth"
                         source="title"
                         label="Заголовок цитаты"  />
+                    <ColorInput
+                        source="resultTextColor"
+                        label="Цвет текста цитаты" />
                     <TextInput
                         className="customWidth"
                         source="text"
@@ -482,10 +494,16 @@ export const ProjectsCreate = (props) => (
                 label={'Список цитат'}
                 source={'approachListSecond'}>
                 <SimpleFormIterator>
+                    <ColorInput
+                        source="resultsColor"
+                        label="Цвет фона" />
                     <TextInput
                         className="customWidth"
                         source="title"
                         label="Заголовок цитаты"  />
+                    <ColorInput
+                        source="resultTextColor"
+                        label="Цвет текста цитаты" />
                     <TextInput
                         className="customWidth"
                         source="text"
@@ -766,10 +784,16 @@ export const ProjectsEdit = (props) => (
                 label={'Список цитат'}
                 source={'approachList'}>
                 <SimpleFormIterator>
+                    <ColorInput
+                        source="resultsColor"
+                        label="Цвет фона" />
                     <TextInput
                         className="customWidth"
                         source="title"
                         label="Заголовок цитаты"  />
+                    <ColorInput
+                        source="resultTextColor"
+                        label="Цвет текста цитаты" />
                     <TextInput
                         className="customWidth"
                         source="text"
@@ -820,10 +844,16 @@ export const ProjectsEdit = (props) => (
                 label={'Список цитат'}
                 source={'approachListThird'}>
                 <SimpleFormIterator>
+                    <ColorInput
+                        source="resultsColor"
+                        label="Цвет фона" />
                     <TextInput
                         className="customWidth"
                         source="title"
                         label="Заголовок цитаты"  />
+                    <ColorInput
+                        source="resultTextColor"
+                        label="Цвет текста цитаты" />
                     <TextInput
                         className="customWidth"
                         source="text"
@@ -916,10 +946,16 @@ export const ProjectsEdit = (props) => (
                 label={'Список цитат'}
                 source={'approachListSecond'}>
                 <SimpleFormIterator>
+                    <ColorInput
+                        source="resultsColor"
+                        label="Цвет результаты" />
                     <TextInput
                         className="customWidth"
                         source="title"
                         label="Заголовок цитаты"  />
+                    <ColorInput
+                        source="resultTextColor"
+                        label="Цвет текста резултаты" />
                     <TextInput
                         className="customWidth"
                         source="text"
