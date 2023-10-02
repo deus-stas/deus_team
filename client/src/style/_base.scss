@@ -398,11 +398,60 @@ main {
 
         button {
             position: absolute;
-            top: -4rem;
-            right: -4rem;
+            top: -1rem;
+            right: -32rem;
             background: none;
             border: none;
             cursor: pointer;
+
+            @include respond(lg) {
+                position: absolute;
+                top: -2rem;
+                right: -35rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+            }
+
+            @include respond(sm) {
+                position: absolute;
+                top: -4rem;
+                right: -8rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            @include respond(xs) {
+                position: absolute;
+                //top: -3rem;
+                //right: -2rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+            }
+
+            @include respond(xsx) {
+                position: absolute;
+                top: -3rem;
+                right: -1rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+            }
+
+            @include respond(xss) {
+                position: absolute;
+                top: -3rem;
+                right: 0rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
 
             svg {
                 width: 4rem;

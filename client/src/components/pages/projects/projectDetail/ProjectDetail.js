@@ -195,7 +195,7 @@ const ProjectDetail = () => {
                                                         <div>
                                                             <div className="project-goals__tasks-item">
                                                                 {/* <Icon icon="task" /> */}
-                                                                    <div key={index}>{item.tasksItem}</div>
+                                                                    <div key={index} style={{ color: detail.aimColor === '#000000' ? '#ffffff' : '#000000' }}>{item.tasksItem}</div>
                                                                 </div>
                                                             </div>
                                                     ))
@@ -228,12 +228,12 @@ const ProjectDetail = () => {
 
             {!!detail.approachList && detail.approachList.filter(val => !!val.approachPersons && val.text !== '').map((val, index) =>
                 <>
-                    <section className="project-results">
+                    <section style={{ background: val.resultsColor }} className="project-results">
                         <div className="container">
                             <div className="project-results__wrap">
-                                <h2 className="heading-secondary text-black">{val.title}</h2>
+                                <h2 className="heading-secondary " style={{ color: val.resultsColor === '#000000' ? '#ffffff' : '#000000' }}>{val.title}</h2>
                                 <div className="quote">
-                                    <div className="quote__box">
+                                    <div className="quote__box" style={{background: val.resultsColor === '#000000' ? '#ffffff' : '#F3F4F4'}}>
                                         <div className="quote__person">
                                             {val.approachPersons.image ?
                                                 <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
@@ -243,7 +243,7 @@ const ProjectDetail = () => {
                                                 {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
                                             </div>
                                         </div>
-                                        <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
+                                        <div className="quote__q" style={{color: val.resultTextColor}} dangerouslySetInnerHTML={{__html: val.text}}></div>
                                     </div>
                                 </div>
                             </div>
@@ -299,13 +299,13 @@ const ProjectDetail = () => {
             {!!detail.approachListThird && detail.approachListThird.filter(val => !!val.approachPersons && val.text !== '')
                 .map((val, index) =>
                     <>
-                        <section className="project-results">
+                        <section className="project-results" style={{ background: val.resultsColor}}>
                             <div className="container">
                                 <div className="project-results__wrap">
-                                    <h2 className="heading-secondary text-black">{val.title}</h2>
+                                    <h2 className="heading-secondary" style={{ color: val.resultsColor === '#000000' ? '#ffffff' : '#000000' }}>{val.title}</h2>
                                     <div className="quote">
-                                        <div className="quote__box">
-                                            <div className="quote__person">
+                                        <div className="quote__box" style={{background: val.resultsColor === '#000000' ? '#ffffff' : '#F3F4F4'}}>
+                                        <div className="quote__person">
                                                 {val.approachPersons.image ?
                                                     <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
                                                          alt={val.approachPersons.name} className="quote__img"/> : null}
@@ -314,7 +314,7 @@ const ProjectDetail = () => {
                                                     {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
                                                 </div>
                                             </div>
-                                            <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
+                                            <div className="quote__q" style={{color: val.resultTextColor}} dangerouslySetInnerHTML={{__html: val.text}}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -392,12 +392,12 @@ const ProjectDetail = () => {
             {!!detail.approachListSecond && detail.approachListSecond.filter(val => !!val.approachPersons && val.text !== '')
                 .map((val, index) =>
                     <>
-                        <section className="project-results">
+                        <section className="project-results" style={{ background: val.resultsColor}}>
                             <div className="container">
                                 <div className="project-results__wrap">
-                                    <h2 className="heading-secondary text-black">{val.title}</h2>
+                                    <h2 className="heading-secondary" style={{ color: detail.resultsColor === '#000000' ? '#ffffff' : '#000000' }} >{val.title}</h2>
                                     <div className="quote">
-                                        <div className="quote__box">
+                                        <div className="quote__box" style={{background: val.resultsColor === '#000000' ? '#ffffff' : '#F3F4F4'}}>
                                             <div className="quote__person">
                                                 {val.approachPersons.image ?
                                                     <img src={`${apiUrl}/uploads/${val.approachPersons.image.filename}`}
@@ -407,7 +407,7 @@ const ProjectDetail = () => {
                                                     {val.approachPersons.name}, <span>{val.approachPersons.post} @ DEUS</span>
                                                 </div>
                                             </div>
-                                            <div className="quote__q" dangerouslySetInnerHTML={{__html: val.text}}></div>
+                                            <div className="quote__q" style={{color: val.resultTextColor}} dangerouslySetInnerHTML={{__html: val.text}}></div>
                                         </div>
                                     </div>
                                 </div>
