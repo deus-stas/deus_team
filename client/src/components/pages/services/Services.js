@@ -181,7 +181,7 @@ const Services = () => {
                                         review.reviewFile ?  (
                                             <>
                                                 <div className="services-reviews__file"> {extension} </div>
-                                                <iframe src={`${apiUrl}/uploads/${review.reviewFile.filename}`}
+                                                <iframe src={`${apiUrl}/uploads/${review.reviewFile.filename}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}
                                                         scrolling="no"
                                                         alt={review.name}
                                                         className="iframe-height services-reviews__r "
@@ -197,7 +197,7 @@ const Services = () => {
                         {openImage && (
                             <div className="modal">
                                 <div className="modal-content">
-                                    <iframe src={`${apiUrl}/uploads/${openImage}`}
+                                    <iframe src={`${apiUrl}/uploads/${openImage}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}
                                             alt="Отзыв"
                                             scrolling="no"
                                             className="iframe-modal-size"/>

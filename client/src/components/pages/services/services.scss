@@ -295,21 +295,34 @@
             }
 
             @include respond(sm) {
-                height: 14vh;
+                height: 13.5vh;
             }
 
         }
 
         .iframe-modal-size {
-            height: 27vh;
             overflow: hidden;
+            height: 90vh;
+            width: 160%;
 
             @include respond(lg) {
-                height: 63vh;
+                //height: 70vh;
+                //width: 140%;
             }
 
             @include respond(sm) {
                 height: 63vh;
+                width: 110%;
+            }
+
+            @include respond(xsx) {
+                height: 380px;
+                width: 90%;
+            }
+
+            @include respond(xss) {
+                height: 350px;
+                width: 87%;
             }
         }
     }
