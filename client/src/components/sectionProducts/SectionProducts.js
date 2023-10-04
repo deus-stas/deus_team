@@ -29,7 +29,7 @@ const SectionProducts = () => {
         return product.visibility;
     });
 
-    return filteredProducts ? (
+    return filteredProducts && filteredProducts.length > 0 ? (
         <section className="section-products">
             <div className="container">
                 <div className="section-products__wrap">
