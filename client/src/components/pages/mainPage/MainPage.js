@@ -510,7 +510,7 @@ const MainPage = () => {
 
             <SectionSocial />
 
-            <SectionProducts />
+            {/*<SectionProducts />*/}
                 </main>
             }
         </>
