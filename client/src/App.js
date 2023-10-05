@@ -93,7 +93,8 @@ const AppWrapper = () => {
             .catch((error)=>{
                 console.log(error)
             })
-    },[])
+    },[location])
+
 
   return (
       <>
