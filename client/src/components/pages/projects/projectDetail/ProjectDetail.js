@@ -8,6 +8,7 @@ import ProjectNext from '../projectNext/ProjectNext';
 import { Icon } from '../../../icon/Icon';
 
 import './projectDetail.scss'
+import HelmetComponent from "../../../helmetComponent";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -120,6 +121,7 @@ const ProjectDetail = () => {
 
     return (
         <>
+            <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords} pageDescription={detail.seoDescription}/>
             {!isLoading &&
 
         <main className="project">

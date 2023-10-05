@@ -84,7 +84,7 @@ router.post(
         { name: 'mainVideoFile' }]),
     addCustomId,
     async (req, res) => {
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility, seoTitle, seoKeywords, seoDescription  } = req.body;
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
     const approachList = !!req.body.approachList ? JSON.parse(req.body.approachList) : [];
@@ -232,6 +232,9 @@ router.post(
         approachList,
         approachListSecond,
         approachListThird,
+        seoTitle,
+        seoKeywords,
+        seoDescription
     });
 
     await projects.save();
@@ -303,7 +306,7 @@ router.put("/projects/:id",
     console.log(req.body);
     console.log(req.files);
 
-    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader, resultPersonsText,resultTextColor, technologies, visibility } = req.body;
+    const { name, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader, resultPersonsText,resultTextColor, technologies, visibility,  seoTitle, seoKeywords, seoDescription} = req.body;
 
     const tasksList = JSON.parse(req.body.tasksList);
     const workSteps = JSON.parse(req.body.workSteps);
@@ -655,6 +658,9 @@ router.put("/projects/:id",
     project.approachList = approachList,
     project.approachListSecond = approachListSecond,
     project.approachListThird = approachListThird,
+    project.seoDescription = seoDescription,
+    project.seoKeywords = seoKeywords,
+    project.seoTitle = seoTitle,
 
     await project.save();
 

@@ -3,6 +3,7 @@ import { Admin, Resource, UserMenu, AppBar, Layout } from 'react-admin';
 import { NewsList, NewsCreate, NewsEdit } from './admin/resources/News';
 import { WorkingList, WorkingCreate, WorkingEdit } from './admin/resources/Working';
 import { TagsList, TagsEdit, TagsCreate } from './admin/resources/Tags';
+import { SeoList, SeoEdit, SeoCreate } from './admin/resources/SEO';
 import { ThemesList, ThemesEdit, ThemesCreate } from './admin/resources/Themes';
 import { ProjectsList, ProjectsEdit, ProjectsCreate } from './admin/resources/Projects';
 import { TypesList, TypesEdit, TypesCreate } from './admin/resources/Types';
@@ -40,6 +41,7 @@ const AdminPage = () => (
     <Resource name="news" list={NewsList} create={NewsCreate} edit={NewsEdit} options={{ label: 'Новости' }} />
     <Resource name="working" list={WorkingList} create={WorkingCreate} edit={WorkingEdit} options={{ label: 'В работе' }} />
     <Resource name="tags" list={TagsList} create={TagsCreate} edit={TagsEdit} options={{ label: 'Теги' }} />
+    <Resource name="seo" list={SeoList} create={SeoCreate} edit={SeoEdit} options={{ label: 'SEO' }} />
     <Resource name="themes" list={ThemesList} create={ThemesCreate} edit={ThemesEdit} options={{ label: 'Темы' }} />
     <Resource name="types" list={TypesList} create={TypesCreate} edit={TypesEdit} options={{ label: 'Тип проекта' }} />
     <Resource name="persons" list={PersonsList} create={PersonsCreate} edit={PersonsEdit} options={{ label: 'Сотрудники' }} />

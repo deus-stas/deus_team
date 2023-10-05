@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const newsRoutes = require('./routes/api/news');
 const tagsRoutes = require('./routes/api/tags');
+const seoRoutes = require('./routes/api/seo');
 const workingRoutes = require('./routes/api/working');
 const projectsRoutes = require('./routes/api/projects');
 const personsRoutes = require('./routes/api/persons');
@@ -57,6 +58,7 @@ app.use((req, res, next) => {
 });
 app.use('/api', newsRoutes);
 app.use('/api', tagsRoutes);
+app.use('/api', seoRoutes);
 app.use('/api', workingRoutes);
 app.use('/api', projectsRoutes);
 app.use('/api', personsRoutes);

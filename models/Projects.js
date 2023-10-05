@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 const projectsSchema = new Schema({
   name: { type: String, required: true },
+  seoTitle: { type: String, required: true },
+  seoKeywords: { type: String, required: true },
+  seoDescription: { type: String, required: true },
   nameInEng: {type: String},
   customId: {type: String},
   image: { type: Object },
