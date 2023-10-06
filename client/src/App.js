@@ -1,12 +1,8 @@
 import {
-    BrowserRouter,
     BrowserRouter as Router,
     Route,
     Routes,
-    Switch,
-    useHistory,
     useLocation,
-    useNavigate
 } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -33,7 +29,9 @@ import NewsDetail from './components/news/newsDetail/NewsDetail';
 import Login from './components/pages/login/Login';
 import PrivateRoute from "./components/privateRoutes/PrivateRoute";
 import {useEffect, useRef, useState} from "react";
-import {AxiosInterceptor} from "./axios";
+import axios, {AxiosInterceptor} from "./axios";
+import {HelmetProvider} from "react-helmet-async";
+import HelmetComponent from "./components/helmetComponent";
 
 // import AdminPage from './Admin';
 
@@ -49,9 +47,17 @@ if (localStorage.jwtToken) {
     window.location.href = "./login";
   }
 }
+
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : process.env.REACT_APP_LOCALHOST_URI;
+
 const AppWrapper = () => {
-  const location = useLocation();
-  const adminBasePath = "/admin/";
+    const location = useLocation();
+    const adminBasePath = "/admin/";
+    const [seoInfo, setSeoInfo] = useState(null)
+    const currentId = location.pathname;
+
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -76,9 +82,22 @@ const AppWrapper = () => {
 
   // Check if the current route matches the hidden routes
   const shouldHideHeaderFooter = isOnAdminRoute && hiddenRoutes.some(route => location.pathname.startsWith(route));
+
+    useEffect(()=> {
+        axios.get(`${apiUrl}/api/seo`)
+            .then((response)=>{
+                const currentSeoInfo = response.data.find((item) => item.seoPages === currentId);
+                setSeoInfo(currentSeoInfo);
+                console.log('что пришло:', response)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+    },[location])
+
+
   return (
       <>
-
                   <ScrollToTop/>
                   <CustomCursor
                       targets={['.js-cursor-play']}
@@ -87,10 +106,13 @@ const AppWrapper = () => {
                       fill='none'
                       opacity={0}
                   />
+
                   {/* <AppHeader /> */}
                   {!shouldHideHeaderFooter && <AppHeader/>}
           {!!isLoading &&(<div className="loader"></div>) }
           <AxiosInterceptor>
+              {!!seoInfo && <HelmetComponent pageDescription={seoInfo.seoDescription} pageTitle={seoInfo.seoTitle} pageKeywords={seoInfo.seoKeywords}/>}
+
                   <Routes>
                           <Route exact path="/" element={<MainPage/>}/>
                           <Route exact path='/projects' element={<Projects/>}/>
@@ -114,19 +136,16 @@ const AppWrapper = () => {
 
 }
 
-
-
-
-
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <Router>
+          <HelmetProvider>
           <AppWrapper />
-      </BrowserRouter>
+          </HelmetProvider>
+      </Router>
     </Provider>
   )
-
 
 }
 
