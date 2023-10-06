@@ -110,7 +110,9 @@ export const ServicesCreate = (props) => (
                     </ArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-
+            <TextInput className="customWidth" source="seoTitle" label="TITLE" />
+            <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
+            <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
         </SimpleForm>
     </Create>
 );
@@ -185,7 +187,9 @@ export const ServicesEdit = (props) => (
                     </ArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-
+            <TextInput className="customWidth" source="seoTitle" label="TITLE" />
+            <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
+            <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
         </SimpleForm>
     </Edit>
 );

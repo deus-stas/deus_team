@@ -53,6 +53,9 @@ router.post('/services', addPosition, async (req, res) => {
         position,
         blockTitle,
         subProjects,
+        seoTitle,
+        seoDescription,
+        seoKeywords,
         isInvisible } = req.body;
 
     var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
@@ -78,6 +81,9 @@ router.post('/services', addPosition, async (req, res) => {
         blockTitle,
         subProjects,
         path,
+        seoTitle,
+        seoDescription,
+        seoKeywords,
         isInvisible
     });
 
@@ -112,7 +118,7 @@ router.get('/services/:id', async (req, res) => {
 router.put("/services/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const { position, name, descrTotal, descr, benefitsTitle, benefits, servicesServices, work, tariffs, blockTitle, subProjects, path, isInvisible } = req.body;
+      const { position, name, descrTotal, descr, benefitsTitle, benefits, servicesServices, work, tariffs, blockTitle, subProjects, path, seoTitle, seoDescription, seoKeywords, isInvisible } = req.body;
   
       const service = await Services.findById(id);
   
@@ -149,7 +155,9 @@ router.put("/services/:id", async (req, res) => {
       service.subProjects = subProjects;
       service.path = path;
       service.isInvisible = isInvisible;
-
+      service.seoTitle = seoTitle;
+      service.seoDescription = seoDescription;
+      service.seoKeywords = seoKeywords;
       
 
       console.log("new", servicesServices)
