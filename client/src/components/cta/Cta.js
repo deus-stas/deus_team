@@ -86,25 +86,30 @@ const Cta = (props) => {
         <section className="cta">
             <div className="container">
                 <div className="cta__wrap">
-                    <h2 className="heading-secondary">{worker ? worker.title : null}</h2>
-                    <div className="cta__person">
-                        {/* <img src={formName === 'tender' ? tender : manager} alt={formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'} className="cta__person-img" /> */}
-                        {
-                                worker && worker.image ? 
-                                (
-                                    <img   src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title} className="cta__person-img" />
-                                ) : (
-                                    <img   src={manager} alt="Хотите обсудить проект?" className="cta__person-img" />
-                                )
-                        }
-                        <div className="cta__person-descr">
-                            {/* {
+                    <div>
+                        <h2 className="heading-secondary sticky-h2">{worker ? worker.title : null}</h2>
+                    </div>
+                    <div>
+                        <div className="cta__person sticky-person">
+                            {/* <img src={formName === 'tender' ? tender : manager} alt={formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'} className="cta__person-img" /> */}
+                            {
+                                worker && worker.image ?
+                                    (
+                                            <img src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title}
+                                                 className="cta__person-img"/>
+                                    ) : (
+                                            <img src={manager} alt="Хотите обсудить проект?" className="cta__person-img"/>
+                                    )
+                            }
+                            <div className="cta__person-descr">
+                                {/* {
                                 formName === 'tender' ? 'Алена Фролова — тендерный специалист, ответит на ваши вопросы и организует встречу'
                                     : 'Павел Докторов — Менеджер проектов, ответит на ваши вопросы и организует встречу'
                             } */}
-                            {
-                                worker && worker.description ? worker.description : null
-                            }
+                                {
+                                    worker && worker.description ? worker.description : null
+                                }
+                            </div>
                         </div>
                     </div>
                     <div className="cta__f">
