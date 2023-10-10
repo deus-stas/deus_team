@@ -5,6 +5,7 @@
         padding: 9.6rem 0 3.3rem;
         color: #fff;
         position: relative;
+        overflow:hidden;
 
         @include respond(sm) {
             padding: 4.5rem 0 6rem;
@@ -13,13 +14,14 @@
         &__line {
             width: 124.4rem;
             position: absolute;
-            bottom: 0;
-            left: 0;
-            z-index: 1;
+            bottom: -31px;
+            left: -46px;
+            z-index: -1;
 
             @include respond(sm) {
                 width: 100%;
-                bottom: 6rem;
+                bottom: 14rem;
+                left: 0.1em;
             }
         }
 
@@ -30,9 +32,10 @@
 
         &__wrap {
             display: grid;
-            grid-template-columns: repeat(2, .5fr);
+            grid-template-columns: 1fr 1fr;
             align-items: start;
             grid-gap: 4rem;
+            height: 39em;
 
             @include respond(sm) {
                 grid-template-columns: 100%;
@@ -69,8 +72,62 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            align-items: end;
             gap: 20px;
+
+            &-marquee {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                height: 38em;
+                position: relative;
+                box-sizing: border-box;
+                text-align: center;
+                z-index: 9;
+
+                &__column {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1em;
+                    width: 100%;
+                    padding-top: 3em;
+
+                    &:nth-last-child(1) {
+                        animation: marqueeUp 80s linear infinite;
+                    }
+                    &:nth-last-child(2) {
+                        animation: marqueeDown 95s linear infinite;
+                        padding-top: 0;
+                    }
+                    &:nth-last-child(3) {
+                        animation: marqueeUp 99s linear infinite;
+                    }
+                    &:hover {
+                        animation-play-state: paused;
+                        transform: scale(1.0);
+                    }
+                }
+            }
+
+
+            @keyframes marqueeUp {
+                from {
+                    transform: translateY(0);
+                }
+                to {
+                    transform: translateY(-530%);
+                }
+            }
+
+            @keyframes marqueeDown {
+                from {
+                    transform: translateY(-730%);
+                }
+                to {
+                    transform: translateY(-170%);
+                }
+            }
+
+
 
             &-name {
                 max-width: 32rem;
@@ -84,8 +141,16 @@
             }
 
             &-img {
-                width: 92%;
-                align-self: baseline;
+                transition: transform 0.3s ease-in-out;
+                width: 15em;
+                height: 9em;
+                border-radius: 5px;
+                gap: 0;
+                &:hover {
+                    transform: scale(1.2);
+                    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.46);
+                    gap: 1em;
+                }
             }
 
             &-link {

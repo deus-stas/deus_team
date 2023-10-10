@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from 'react';
 import axios from './../../../axios'
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Grid, Autoplay } from "swiper";
 
 import { Icon } from '../../icon/Icon';
@@ -68,7 +67,8 @@ const MainPage = () => {
     const [showreels, setShowreels] = useState([]);
 
     const [projects, setProjects] = useState([]);
-    const [mainProjects, setMainProjects] = useState([]);
+    const [allProjects, setAllProjects] = useState([]);
+    const [total, setTotal] = useState(0);
     const [optionsTheme, setOptionsTheme] = useState([]);
     const [optionsType, setOptionsType] = useState([]);
     const [services, setServices] = useState([]);
@@ -143,14 +143,9 @@ const MainPage = () => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
-                let mainProject = [];
-                setProjects(response.data);
-                response.data.forEach(project => {
-                    if (project.main) mainProject[0] = project;
-                });
-                setMainProjects(mainProject);
-                console.log(response.data);
-            })
+            setAllProjects(response.data);
+            setTotal(response.data.length)
+        })
             .catch((error) => {
                 console.log(error);
             });
@@ -230,7 +225,7 @@ const MainPage = () => {
         setSelectedType(selectedOption);
     };
 
-    const filteredProjects = projects.filter(project => {
+    const filteredProjects = allProjects.filter(project => {
         return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
             (selectedType ? project.projectType === selectedType.value : true) && project.visibility;
     }).slice(0, 3);
@@ -256,54 +251,60 @@ const MainPage = () => {
         videoRefs.current.push(ref);
     };
 
+    const sortColumns=(...elements)=> {
+        const columns = elements.reduce((acc, element, index) => {
+            const columnIndex = index % 3;
+            acc[columnIndex].push(element);
+            return acc;
+        }, [[], [], []]);
+
+        return columns;
+    }
     return (
         <>
             {!isLoading &&
                 <main className="main">
-                    {mainProjects ? mainProjects.map(project => {
-                        return (
-                            project.visibility ?
-                                (
-                                    <section className="main-banner" key={project.id}
-                                             style={{background: project.color}}>
+                                    <section className="main-banner" style={{background: "rgba(0,0,0,0.82)"}}>
                                         <div className="container">
                                             <div className="main-banner__wrap">
                                                 <div className="main-banner__content">
-                                                    <h1 className="heading-primary">{project.bannerText}</h1>
-                                                    {/* <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1> */}
+                                                     <h1 className="heading-primary">Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей</h1>
                                                     <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
                                                        className="btn --circle --orange">Презентация агентства</a>
+                                                    <img src={mainBannerLine} alt="Touch Money"
+                                                         className="main-banner__line hidden-mobile"/>
+                                                    <img src={mainBannerLineMob} alt="Touch Money"
+                                                         className="main-banner__line hidden-desktop"/>
                                                 </div>
                                                 <div className="main-banner__project hidden-mobile">
-                                                    {/* <div className="main-banner__project-name">{project.name}</div> */}
-                                                    {
-                                                        project.mainVideoFile ? (
-                                                            <video width={800} className="main-banner__project-img"
-                                                                   autoPlay muted loop>
-                                                                <source
-                                                                    src={project.mainVideoFile ? `${apiUrl}/uploads/${project.mainVideoFile.filename}` : null}/>
-                                                            </video>
-                                                        ) : (
-                                                            <img
-                                                                src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
-                                                                alt={project.name}
-                                                                className="main-banner__project-img"/>
-                                                        )
-                                                    }
-                                                    <Link to={`/projects/${project.nameInEng}`}
-                                                          className="main-banner__project-link btn --circle --b-white">Перейти <br/> к
-                                                        проекту</Link>
+                                                    <div className="main-banner__project-marquee">
+                                                        {!!allProjects && sortColumns(...allProjects.map((val) => (
+                                                            <Link to={`/projects/${val.id}`} target="_blank">
+                                                                <img className="main-banner__project-img"
+                                                                     src={val.image ? `${apiUrl}/uploads/${val.image.filename}` : null}
+                                                                />
+                                                            </Link>
+                                                        ))).map((column, index) => (
+                                                            <div className="main-banner__project-marquee__column">
+                                                                <div style={{gap: "0.5em",
+                                                                    display: "flex",
+                                                                    flexDirection: "column",}}
+                                                                     key={index}>
+                                                                    {column}
+                                                                </div>
+                                                                <div style={{gap: "0.5em",
+                                                                    display: "flex",
+                                                                    flexDirection: "column",}}
+                                                                     key={index}>
+                                                                    {column}
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src={mainBannerLine} alt="Touch Money"
-                                             className="main-banner__line hidden-mobile"/>
-                                        <img src={mainBannerLineMob} alt="Touch Money"
-                                             className="main-banner__line hidden-desktop"/>
                                     </section>
-                                ) : null
-                        )
-                    }) : null}
 
             {/* {mainProjects ? mainProjects.map(project => { */}
                 {/* return ( */}
@@ -329,7 +330,7 @@ const MainPage = () => {
                                     spaceBetween={10}
                                     modules={[Grid]}
                                     onSlideChange={(e) => slideChange(e)}
-                                    className="main-banner__project hidden-mobile" 
+                                    className="main-banner__project hidden-mobile"
                                     style={{width:'910px'}}
                                     loop={true}
                                     >
