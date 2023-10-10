@@ -63,19 +63,14 @@
         border-radius: 50%;
         background: none;
         border: none;
-        bottom: 0;
-        left: 16em;
         text-align: center;
         will-change: transform;
-        position: absolute;
+        position: relative;
 
         @include respond(sm) {
             width: 13rem;
             height: 13rem;
             padding: 4.9rem .5rem 4.5rem;
-            top: 23em;
-            left: 1em;
-            right: 3em;
         }
 
         &::after {
