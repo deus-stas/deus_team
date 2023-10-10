@@ -465,3 +465,8 @@ main {
 .MuiCardContent-root {
     margin-bottom: 100px !important;
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

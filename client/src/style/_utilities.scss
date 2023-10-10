@@ -61,3 +61,25 @@
 .edit-page img {
     width: 300px !important;
 }
+
+/* Стили для неактивного скролла */
+::-webkit-scrollbar-thumb {
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Добавляем плавный переход для эффекта исчезновения */
+}
+
+/* Остальные стили для полосы прокрутки */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: rgba(42, 42, 42, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 187, 130, 0.68), #ff9500);
+}
