@@ -21,7 +21,7 @@ const pages = [
     { id: '/news', name: 'Новости' },
     { id: '/', name: 'Главная' },
     { id: '/services', name: 'Услуги' },
-    { id: '/agency', name: 'Агентво' },
+    { id: '/agency', name: 'Агенство' },
     { id: '/contacts', name: 'Контакты' },
 ]
 

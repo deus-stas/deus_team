@@ -9,6 +9,7 @@ import { Icon } from '../../../icon/Icon'
 import { Link } from 'react-router-dom';
 
 import './serviceDetail.scss'
+import HelmetComponent from "../../../helmetComponent";
 
 const onAcc = (e) => {
     let accItem = e.target.closest('.tab-parent');
@@ -177,6 +178,7 @@ const ServicesDetail = () => {
 
     return (
         <>
+            <HelmetComponent pageKeywords={service.seoKeywords} pageTitle={service.seoTitle} pageDescription={service.seoDescription}/>
             {!isLoading &&
         <main className="service">
 
