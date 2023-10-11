@@ -99,12 +99,12 @@ const Showreel = (props) => {
                     <div ref={showReelRef} className="showreel__s playIcon">
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' ?
-                            <video ref={videoRef} autoPlay muted controls loop  playsInline>
+                            <video ref={videoRef} autoPlay muted loop  playsInline>
                                 <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                             </video> :
                             data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
                                 <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
-                                <video autoPlay muted controls loop  playsInline>
+                                <video autoPlay muted loop  playsInline>
                                     <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                                 </video>
                         }
@@ -115,18 +115,22 @@ const Showreel = (props) => {
                             {data.name}
                             {data.year && data.year.length > 0 && <span> — {data.year}</span>}
                         </div>
-                        <div className="showreel__s" onClick={openModal}>
-                            {
-                                data.video && data.video !== 'undefined' && data.video !== 'null' ?
-                                <video ref={videoRef} muted controls loop  playsInline>
-                                    <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video> :
-                                data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
-                                    <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
-                                    <video muted controls loop  playsInline>
-                                        <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                    </video>
-                            }
+                        <div className="showreel__s playIcon" onClick={openModal}>
+
+                                {
+                                    data.video && data.video !== 'undefined' && data.video !== 'null' ?
+                                        <video ref={videoRef} muted loop playsInline>
+                                            <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                        </video> :
+                                        data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
+                                            <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
+                                            <video muted loop playsInline>
+                                                <source
+                                                    src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                            </video>
+                                }
                         </div>
                     </>
                 )
