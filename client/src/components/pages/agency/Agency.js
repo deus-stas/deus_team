@@ -493,7 +493,7 @@ const Agency = () => {
                                             })}
                                         </div>
                                     </div>
-                                    : <div className="agency-team__feedback">
+                                    : <div className="agency-team__feedback sticky-person">
                                         <Formik
                                             initialValues={{ name: '', link: '', phone: '', email: '', about: '', file: '', formName: 'Ищем таланты' }}
                                             validate={values => {
