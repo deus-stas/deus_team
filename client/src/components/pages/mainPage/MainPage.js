@@ -62,20 +62,16 @@ const MainPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [news, setNews] = useState([]);
     const [allTags, setAllTags] = useState(new Set());
-
     const [working, setWorking] = useState([]);
     const [showreels, setShowreels] = useState([]);
-
-    const [projects, setProjects] = useState([]);
     const [allProjects, setAllProjects] = useState([]);
     const [total, setTotal] = useState(0);
     const [optionsTheme, setOptionsTheme] = useState([]);
     const [optionsType, setOptionsType] = useState([]);
     const [services, setServices] = useState([]);
-    const [current, setCurrent] = useState(4);
-    const [endSlider, setEndSlider] = useState(false);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
+
     useEffect(() => {
         axios.get(`${apiUrl}/api/news`)
             .then((response) => {
@@ -198,24 +194,6 @@ const MainPage = () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
     },[]);
-
-    const slideChange = (slider) => {
-        if (slider.touches.diff > 0) {
-            if (endSlider) {
-                setCurrent(current - 1);
-                setEndSlider(false);
-            } else {
-                setCurrent(current - 2);
-            }
-        } else {
-            if (current + 1 === 2) {
-                setCurrent(2);
-                setEndSlider(true);
-            } else {
-                setCurrent(current + 2);
-            }
-        }
-    }
 
     const handleThemeChange = (selectedOption) => {
         setSelectedTheme(selectedOption);

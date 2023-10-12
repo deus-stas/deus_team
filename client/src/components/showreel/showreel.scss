@@ -29,8 +29,8 @@
     }
 
     &__s {
-        // cursor: none;
-        cursor: pointer;
+        cursor: url('../../img/videoCursor.svg'), default !important;
+        opacity: 1;
         position: relative;
 
         video {
@@ -80,7 +80,6 @@
     background: transparent;
   }
 .playIcon {
-    cursor: pointer;
     position: relative;
 }
 .playIcon  video {
