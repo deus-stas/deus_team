@@ -10,6 +10,7 @@ import { Icon } from '../../icon/Icon'
 import './services.scss'
 
 import person from '../../../img/discuss-btn.png';
+import RetryImage from "../../../helpers/RetryImage";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? ''
@@ -130,7 +131,7 @@ const Services = () => {
                                 {
                                     headerData && headerData.headerPhoto ?
                                     (
-                                        <img src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`} alt="Брижань Вячеслав" className="services-s__dir-img" />
+                                        <RetryImage src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`} alt="Брижань Вячеслав" className="services-s__dir-img" />
                                     ) :
                                     (
                                         <img src={person} alt="Брижань Вячеслав" className="services-s__dir-img" />

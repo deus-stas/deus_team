@@ -7,6 +7,7 @@ import './appHeader.scss';
 
 import logo from '../../img/logo.svg';
 import btn from '../../img/discuss-btn.png';
+import RetryImage from "../../helpers/RetryImage";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -115,7 +116,7 @@ const AppHeader = (props) => {
                             {
                                 headerData.headerPhoto ? 
                                 (
-                                    <img  datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`} alt="Обсудить проект" className="header__discuss-img" />
+                                    <RetryImage  datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`} alt="Обсудить проект" className="header__discuss-img" />
                                 ) : (
                                     <img  datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={btn} alt="Обсудить проект" className="header__discuss-img" />
                                 )
