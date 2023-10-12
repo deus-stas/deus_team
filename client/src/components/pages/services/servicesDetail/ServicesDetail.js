@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 import './serviceDetail.scss'
 import HelmetComponent from "../../../helmetComponent";
+import RetryImage from "../../../../helpers/RetryImage";
 
 const onAcc = (e) => {
     let accItem = e.target.closest('.tab-parent');
@@ -21,7 +22,7 @@ const onAcc = (e) => {
 }
 
 const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
+    ? ''
     : process.env.REACT_APP_LOCALHOST_URI;
 
 const ServicesDetail = () => {
@@ -33,121 +34,141 @@ const ServicesDetail = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/services/${id}`)
-            .then((response) => {
-                console.log(response.data);
-                const benefitsPersonsPromises = response.data.benefits.map((item) => {
-                    return axios.get(`${apiUrl}/api/persons/${item.benefitsPersons}`)
-                        .then((benefitsResponse) => {
-                            item.benefitsPersons = benefitsResponse.data.name;
-                            item.benefitsPersonsImage = benefitsResponse.data.image;
-                            item.benefitsPersonsPost = benefitsResponse.data.post;
-                            return item;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return item;
-                        });
-                });
-
-                const subServicesPromises = response.data.servicesServices.map((subServiceId) => {
-                    return axios.get(`${apiUrl}/api/subServices/${subServiceId}`)
-                        .then((subServiceResponse) => {
-                            return subServiceResponse.data;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return null;
-                        });
-                });
-
-                const subProjectsPromises = response.data.subProjects.map((subProjectId) => {
-                    return axios.get(`${apiUrl}/api/projects/${subProjectId}`)
-                        .then((subProjectResponse) => {
-                            return subProjectResponse.data;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return null;
-                        });
-                });
-
-                Promise.all([...benefitsPersonsPromises, ...subServicesPromises, ...subProjectsPromises])
-                    .then((results) => {
-                        const persons = results.slice(0, response.data.benefits.length);
-                        const subServices = results.slice(response.data.benefits.length, response.data.servicesServices.length+response.data.benefits.length);
-                        const subProjects = results.slice(response.data.benefits.length + response.data.servicesServices.length)
-                        const updatedData = {
-                            ...response.data,
-                            benefits: persons,
-                            servicesServices: subServices,
-                            subProjects: subProjects
-                        };
-                        setService(updatedData);
-                    })
-                    .catch((error) => {
-                        console.log(error);
+        setTimeout(()=>{
+            axios.get(`${apiUrl}/api/services/${id}`)
+                .then((response) => {
+                    console.log(response.data);
+                    const benefitsPersonsPromises = response.data.benefits.map((item) => {
+                        return axios.get(`${apiUrl}/api/persons/${item.benefitsPersons}`)
+                            .then((benefitsResponse) => {
+                                item.benefitsPersons = benefitsResponse.data.name;
+                                item.benefitsPersonsImage = benefitsResponse.data.image;
+                                item.benefitsPersonsPost = benefitsResponse.data.post;
+                                return item;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                return item;
+                            });
                     });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
+                    const subServicesPromises = response.data.servicesServices.map((subServiceId) => {
+                        return axios.get(`${apiUrl}/api/subServices/${subServiceId}`)
+                            .then((subServiceResponse) => {
+                                return subServiceResponse.data;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                return null;
+                            });
+                    });
+
+                    const subProjectsPromises = response.data.subProjects.map((subProjectId) => {
+                        return axios.get(`${apiUrl}/api/projects/${subProjectId}`)
+                            .then((subProjectResponse) => {
+                                return subProjectResponse.data;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                return null;
+                            });
+                    });
+
+                    Promise.all([...benefitsPersonsPromises, ...subServicesPromises, ...subProjectsPromises])
+                        .then((results) => {
+                            const persons = results.slice(0, response.data.benefits.length);
+                            const subServices = results.slice(response.data.benefits.length, response.data.servicesServices.length+response.data.benefits.length);
+                            const subProjects = results.slice(response.data.benefits.length + response.data.servicesServices.length)
+                            const updatedData = {
+                                ...response.data,
+                                benefits: persons,
+                                servicesServices: subServices,
+                                subProjects: subProjects
+                            };
+                            setService(updatedData);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },500)
+
     }, [id]);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/projects/`)
-            .then((response) => {
-                setProjects(response.data);
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        setTimeout(()=>{
+            axios.get(`${apiUrl}/api/projects/`)
+                .then((response) => {
+                    setProjects(response.data);
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },100)
+
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/reviews/`)
-            .then((response) => {
-                const reviewPromises = response.data.map((review) => {
-                    const projectPromise = axios.get(`${apiUrl}/api/projects/${review.reviewProject}`)
-                        .then((projectResponse) => {
-                            review.reviewProject = projectResponse.data;
-                            return review;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return review;
-                        });
+        setTimeout(() => {
+            axios.get(`${apiUrl}/api/reviews/`)
+                .then((response) => {
+                    const reviewPromises = response.data.map((review) => {
+                        let reviewProjectUrl = review.reviewProject
+                        let arrReviews = []
 
-                    const servicePromise = axios.get(`${apiUrl}/api/services/${review.reviewService}`)
-                        .then((serviceResponse) => {
-                            review.reviewService = serviceResponse.data;
-                            return review;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return review;
-                        });
+                        if (review.reviewProject.includes(',')) {
+                            reviewProjectUrl = review.reviewProject.split(',');
+                            arrReviews.push(...reviewProjectUrl);
+                        } else {
+                            arrReviews.push(reviewProjectUrl);
+                        }
 
-                    return Promise.all([projectPromise, servicePromise])
-                        .then((results) => {
-                            const updatedReview = results[0];
-                            return updatedReview;
-                        });
-                });
+                        arrReviews = arrReviews.map(reviewUrl => axios.get(`${apiUrl}/api/projects/${reviewUrl}`)
+                            .then((projectResponse) => {
+                                review.reviewProject = projectResponse.data;
+                                return review;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                return review;
+                            }))
 
-                Promise.all(reviewPromises)
-                    .then((reviewsAll) => {
-                        setReviews(reviewsAll);
-                        console.log(reviewsAll);
-                    })
-                    .catch((error) => {
-                        console.log(error);
+                        const servicePromise = axios.get(`${apiUrl}/api/services/${review.reviewService}`)
+                            .then((serviceResponse) => {
+                                review.reviewService = serviceResponse.data;
+                                return review;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                return review;
+                            });
+
+                        return Promise.all([...arrReviews, servicePromise])
+                            .then((results) => {
+                                const updatedReview = results[0];
+                                console.log('result:',updatedReview)
+                                return updatedReview;
+                            });
                     });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
+                    Promise.all(reviewPromises)
+                        .then((reviewsAll) => {
+                            setReviews(reviewsAll);
+                            console.log('reviewsAll',reviewsAll);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },1000)
+
     }, []);
 
     useEffect(() => {
@@ -210,7 +231,7 @@ const ServicesDetail = () => {
                                                 <div className="service-adv__head-elem">
                                                     <div className="service-adv__person">
                                                         {item.benefitsPersonsImage ?
-                                                            <img src={`${apiUrl}/uploads/${item.benefitsPersonsImage.filename}`} alt={item.benefitsPersons} className="service-adv__person-img" />
+                                                            <RetryImage src={`${apiUrl}/uploads/${item.benefitsPersonsImage.filename}`} alt={item.benefitsPersons} className="service-adv__person-img" />
                                                             : null}
 
                                                         <div className="service-adv__person-name">{item.benefitsPersons}, <br />{item.benefitsPersonsPost}</div>
@@ -244,7 +265,7 @@ const ServicesDetail = () => {
                                             return (
                                                 <div className="service-s__item" key={item.id}>
                                                     {item.image ?
-                                                        <img src={`${apiUrl}/uploads/${item.image.filename}`} alt={item.name} className="service-s__img" />
+                                                        <RetryImage src={`${apiUrl}/uploads/${item.image.filename}`} alt={item.name} className="service-s__img" />
                                                         : null}
                                                     <div className="service-s__name">{item.name}</div>
                                                     <div className="service-s__descr">{item.descr}</div>
@@ -291,21 +312,21 @@ const ServicesDetail = () => {
                         <div className="projects__wrap">
                             {
                                 service.subProjects && service.subProjects.length > 0 ?
-                                service.subProjects.map(project => {
+                                service.subProjects.map((project,i) => {
                                     return (
                                         <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
-                                            <div className="projects__item-img-wrap">
+                                            <div className="projects__item-img-wrap" >
                                                 {
-                                                    project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' 
+                                                    project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                         ?
                                                     <video autoPlay loop muted playsInline controls>
                                                         <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                                    </video> : 
+                                                    </video> :
                                                     project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
                                                         ?
                                                         <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
                                                         :
-                                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                                        <RetryImage key={project.image.filename} src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
                                                 }
 
                                             </div>
@@ -313,7 +334,7 @@ const ServicesDetail = () => {
                                         </Link>
                                     )
                                 }) :
-                                projects.map(project => {
+                                projects.map((project,i) => {
                                     return (
                                         <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                             <div className="projects__item-img-wrap">
@@ -322,7 +343,8 @@ const ServicesDetail = () => {
                                                         ?
                                                         <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
                                                         :
-                                                        <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
+                                                        <RetryImage src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                                             alt={project.name} className="main-projects__img" />
                                                 }
 
                                             </div>
@@ -416,9 +438,9 @@ const ServicesDetail = () => {
                     </section>
                     : null
             }
-
+            {console.log('reviewsAll',reviews)}
             {
-                reviews ?
+                reviews  ?
                     <section className="service-review">
                         <div className="container">
                             <h2 className="heading-secondary">Отзывы</h2>
@@ -426,12 +448,13 @@ const ServicesDetail = () => {
                                 {
                                     reviews.map(review => {
                                         if (review.reviewService.id === service.id) {
+                                            console.log('review',review)
                                             return (
                                                 <div className="service-review__item" style={{ background: review.reviewProject.color }} key={review.id}>
                                                     <div className="service-review__content">
                                                         <div className="service-review__person">
                                                             {
-                                                                review.reviewImage ? <img src={`${apiUrl}/uploads/${review.reviewImage.filename}`} alt={review.reviewName} className="service-review__person-img" /> : null
+                                                                review.reviewImage ? <RetryImage src={`${apiUrl}/uploads/${review.reviewImage.filename}`} alt={review.reviewName} className="service-review__person-img" /> : null
                                                             }
 
                                                             <div className="service-review__person-p">
@@ -441,8 +464,8 @@ const ServicesDetail = () => {
                                                         <div className="service-review__descr">{review.review} </div>
                                                         <Link to={`/projects/${review.reviewProject.nameInEng}`} className="btn --white">Смотреть проект</Link>
                                                     </div>
-                                                    { review.reviewBg ?  <img src={`${apiUrl}/uploads/${review.reviewBg.filename}`} alt={review.name} className="service-review__bg" /> :
-                                                    review.reviewProject.image ? <img src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" /> : null}
+                                                    { review.reviewBg ?  <RetryImage src={`${apiUrl}/uploads/${review.reviewBg.filename}`} alt={review.name} className="service-review__bg" /> :
+                                                    review.reviewProject.image ? <RetryImage src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" /> : null}
                                                 </div>
                                             )
                                         }
