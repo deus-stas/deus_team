@@ -273,7 +273,7 @@ const MainPage = () => {
                                                                 <div style={{gap: "0.5em",
                                                                     display: "flex",
                                                                     flexDirection: "column",}}
-                                                                     key={index}>
+                                                                     key={index + "_2"}>
                                                                     {column}
                                                                 </div>
                                                             </div>

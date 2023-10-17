@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useParams } from "react-router-dom";
 
 import './projectNext.scss'
+import RetryImage from "../../../../helpers/RetryImage";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -53,7 +54,8 @@ const ProjectNext = (props) => {
                         <div className="project-next__name" dangerouslySetInnerHTML={{ __html: project.name }}></div>
                         <Link to={`/projects/${project.nameInEng}`} className="btn --white">Перейти к проекту</Link>
                     </div>
-                    <img src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt="Academy профессионального образовательного ресурса" className="project-next__img" />
+                    <RetryImage src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt="Academy профессионального образовательного ресурса" className="project-next__img" />
+
                 </div>
             </div>
         </section>

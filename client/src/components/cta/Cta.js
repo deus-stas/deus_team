@@ -10,6 +10,7 @@ import './cta.scss'
 import manager from '../../img/manager.png';
 import tender from '../../img/tender.png';
 import axios from "axios";
+import RetryImage from "../../helpers/RetryImage";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -95,7 +96,7 @@ const Cta = (props) => {
                             {
                                 worker && worker.image ?
                                     (
-                                            <img src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title}
+                                            <RetryImage src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title}
                                                  className="cta__person-img"/>
                                     ) : (
                                             <img src={manager} alt="Хотите обсудить проект?" className="cta__person-img"/>
