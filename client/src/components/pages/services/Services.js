@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 import axios from '../../../axios'
 
@@ -21,14 +21,13 @@ const Services = () => {
     const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [openImage, setOpenImage] = useState(null);
-
     const [headerData, setHeaderData] = useState([]);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/headerData/`)
             .then((response) => {
                 setHeaderData(response.data[0]);
-                console.log('header data',response.data[0]);
+                console.log('header data', response.data[0]);
             })
             .catch((error) => {
                 console.log(error);
@@ -49,38 +48,31 @@ const Services = () => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/reviews/`)
             .then((response) => {
-                const reviewPromises = response.data.map((review) => {
-                    const projectPromise = axios.get(`${apiUrl}/api/projects/${review.reviewProject}`)
-                        .then((projectResponse) => {
-                            review.reviewProject = projectResponse.data;
-                            return review;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return review;
+                const reviews = response.data;
+                const projectIds = reviews.map((review) => review.reviewProject);
+                const serviceIds = reviews.map((review) => review.reviewService);
+
+                Promise.all([
+                    axios.get(`${apiUrl}/api/projects/?ids=${projectIds.join(',')}`),
+                    axios.get(`${apiUrl}/api/services/?ids=${serviceIds.join(',')}`)
+                ])
+                    .then((results) => {
+                        const projects = results[0].data;
+                        const services = results[1].data;
+
+                        const updatedReviews = reviews.map((review) => {
+                            const project = projects.find((p) => p.id === review.reviewProject);
+                            const service = services.find((s) => s.id === review.reviewService);
+
+                            return {
+                                ...review,
+                                reviewProject: project,
+                                reviewService: service
+                            };
                         });
 
-                    const servicePromise = axios.get(`${apiUrl}/api/services/${review.reviewService}`)
-                        .then((serviceResponse) => {
-                            review.reviewService = serviceResponse.data;
-                            return review;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return review;
-                        });
-
-                    return Promise.all([projectPromise, servicePromise])
-                        .then((results) => {
-                            const updatedReview = results[0];
-                            return updatedReview;
-                        });
-                });
-
-                Promise.all(reviewPromises)
-                    .then((reviewsAll) => {
-                        setReviews(reviewsAll);
-                        console.log(reviewsAll);
+                        setReviews(updatedReviews);
+                        console.log(updatedReviews);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -90,6 +82,22 @@ const Services = () => {
                 console.log(error);
             });
     }, []);
+
+    useEffect(() => {
+        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
+        window.dispatchEvent(event)
+
+        const handleLoad = (e) => {
+            if (e.detail.isLoading !== isLoading) {
+                setIsLoading(e.detail.isLoading);
+            }
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    },[]);
 
     useEffect(() => {
         const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
