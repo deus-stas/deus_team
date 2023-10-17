@@ -282,6 +282,9 @@ main {
     }
 
     &.active {
+        &:nth-child(n+2) {
+            margin-bottom: 1rem;
+        }
         .select__icon {
             transform: rotate(180deg) translateX(-1.3rem);
         }
@@ -315,6 +318,10 @@ main {
         z-index: 5;
         overflow: hidden;
         cursor: pointer;
+        @include respond(sm) {
+            justify-content: space-between;
+            position: relative;
+        }
     }
 
     &__item {
