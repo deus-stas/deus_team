@@ -96,7 +96,9 @@ const Showreel = (props) => {
 
             {
                 isMain ? (
-                    <div ref={showReelRef} className="showreel__s playIcon">
+                    <div ref={showReelRef} className="showreel__s playIcon wow fadeInUpBig"
+                         data-wow-duration="2s"
+                         data-wow-delay="1.5s">
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' ?
                             <video ref={videoRef} autoPlay muted loop  playsInline>

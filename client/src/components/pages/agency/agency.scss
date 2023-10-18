@@ -133,6 +133,7 @@
 
     &-benefits {
         padding: 10rem 0 0;
+        overflow: hidden;
 
         @include respond(sm) {
             padding: 5rem 0 0;

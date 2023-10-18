@@ -228,6 +228,7 @@
             margin-bottom: 2rem;
             font-size: 2.4rem;
             line-height: 3.4rem;
+            width: 30%;
 
             @include respond(sm) {
                 font-size: 2rem;

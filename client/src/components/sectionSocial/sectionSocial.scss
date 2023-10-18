@@ -1,6 +1,7 @@
 @import '../../style/_mixins.scss';
 
 .section-social {
+    overflow: hidden;
     &__wrap {
         padding: 9.5rem 0 7.1rem;
         display: grid;

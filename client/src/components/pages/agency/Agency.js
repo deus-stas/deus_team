@@ -182,7 +182,9 @@ const Agency = () => {
 
             <section className="agency-start">
                 <div className="container">
-                    <h1 className="heading-primary">Оказываем услуги, которые помогают нашим клиентам расти, открывать новые предприятия и масштабировать свой бизнес в цифровом пространстве.</h1>
+                    <h1 className="heading-primary wow slideInLeft"
+                        data-wow-duration="1s"
+                        data-wow-delay="0.5s">Оказываем услуги, которые помогают нашим клиентам расти, открывать новые предприятия и масштабировать свой бизнес в цифровом пространстве.</h1>
                 </div>
                 {
                     foundShowreel ? <Showreel data={foundShowreel} key={foundShowreel.id} isMain={true} /> : null
@@ -190,7 +192,10 @@ const Agency = () => {
             </section>
 
             <section id='agency' className="agency-about">
-                <div className="container">
+                <div className="container wow fadeInUp"
+                     data-wow-offset="2"
+                     data-wow-duration="3s"
+                     data-wow-delay="1s">
                     <h2 className="heading-secondary">Об агентстве</h2>
                     <div className="agency-about__wrap">
                         <div className="agency-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса</div>
@@ -278,7 +283,9 @@ const Agency = () => {
                 awards && (awards[0] ? awards[0].controlVisibility : null) ? <section className="agency-benefits" id="awards">
                     <div className="container">
                         <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
-                            <TabList className="agency-benefits__info">
+                            <TabList className="agency-benefits__info wow slideInLeft"
+                                     data-wow-duration="3s"
+                                     data-wow-delay="0.5s">
                                 <h2 className="heading-secondary">Награды</h2>
                                 <div className="agency-benefits__info-wrap">
                                     {
@@ -310,7 +317,10 @@ const Agency = () => {
                                                         award.awardProject.map((project, i) => {
                                                             return (
                                                                 project.awardControlVisibility === 'true' ?
-                                                                <div className="agency-benefits__item" key={i}>
+                                                                <div className="agency-benefits__item wow slideInRight"
+                                                                     data-wow-duration="3s"
+                                                                     data-wow-delay="2.5s"
+                                                                     key={i}>
                                                                     <div className="agency-benefits__name">{project.awardName}</div>
                                                                     <div className="agency-benefits__descr">{project.awardPlace}</div>
                                                                     <div className="agency-benefits__year">{project.awardYear}</div>
@@ -334,7 +344,10 @@ const Agency = () => {
             {
                 raitings && (raitings[0] ? raitings[0].controlVisibility : null) ? <section className="agency-benefits">
                     <div className="container">
-                        <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
+                        <Tabs className="agency-benefits__wrap wow slideInLeft"
+                              data-wow-duration="3s"
+                              data-wow-delay="0.5s"
+                              selectedTabClassName="active">
                             <TabList className="agency-benefits__info">
                                 <h2 className="heading-secondary">Рейтинги</h2>
                                 <div className="agency-benefits__info-wrap">
@@ -366,7 +379,9 @@ const Agency = () => {
                                                         raiting.raitingProject.map((project, i) => {
                                                             return (
                                                                 project.raitingControlVisibility === 'true' ?
-                                                                <div className="agency-benefits__item" key={i}>
+                                                                <div className="agency-benefits__item wow slideInRight"
+                                                                     data-wow-duration="3s"
+                                                                     data-wow-delay="2.5s" key={i}>
                                                                     <div className="agency-benefits__name">{project.raitingPlace}</div>
                                                                     <div className="agency-benefits__descr">{project.raitingName}</div>
                                                                     <div className="agency-benefits__year">{project.raitingYear}</div>
@@ -387,7 +402,11 @@ const Agency = () => {
 
 
             {
-                clients ? <section className="agency-clients" id="clients">
+                clients ? <section className="agency-clients  wow fadeInUpBig"
+                                   data-wow-offset="2"
+                                   data-wow-duration="3s"
+                                   data-wow-delay="1s"
+                                   id="clients">
                     <div className="container">
                         <div className="agency-clients__head">
                             <h2 className="heading-secondary">Наши клиенты</h2>
@@ -457,7 +476,10 @@ const Agency = () => {
             <section className="agency-team" id="team">
                 <div className="container">
                     <div className="agency-team__wrap">
-                        <div className="agency-team__t">
+                        <div className="agency-team__t  wow slideInLeft"
+                             data-wow-offset="2"
+                             data-wow-duration="3s"
+                             data-wow-delay="1s">
                             <h2 className="heading-secondary">Команда мечты</h2>
                             <div className="agency-team__t-content">
                                 {
@@ -473,7 +495,11 @@ const Agency = () => {
                                 }
                             </div>
                         </div>
-                        <div className="agency-team__content" id='vacancies'>
+                        <div className="agency-team__content wow fadeInUpBig"
+                             data-wow-offset="2"
+                             data-wow-duration="3s"
+                             data-wow-delay="1s"
+                             id='vacancies'>
                             <h2 className="heading-secondary">Ищем таланты</h2>
                             {
                                 vacancies.length ?
@@ -741,9 +767,12 @@ const Agency = () => {
             </section>
 
             <SectionProducts />
-
+            <div className="wow fadeInUpBig"
+                 data-wow-offset="2"
+                 data-wow-duration="3s"
+                 data-wow-delay="1s">
             <Cta formName={'agency'} />
-
+        </div>
             <SectionSocial />
 
         </main>

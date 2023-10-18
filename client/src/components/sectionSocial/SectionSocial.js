@@ -42,12 +42,17 @@ const SectionSocial = () => {
                 <section className="section-social">
                     <div className="container">
                         <div className="section-social__wrap">
-                            <h2 className="heading-secondary">Узнать нас ближе</h2>
+                            <h2 className="heading-secondary wow slideInLeft"
+                                data-wow-duration="2s"
+                                data-wow-delay="0.5s">Узнать нас ближе</h2>
                             <div className="section-social__content">
                                 {
                                     social.map(item => {
                                         return (
-                                            <Link to={item.link} className="section-social__item" target="_blank" key={item.id}
+                                            <Link to={item.link} className="section-social__item wow slideInRight"
+                                                  data-wow-duration="2.5s"
+                                                  data-wow-delay="1.5s"
+                                                  target="_blank" key={item.id}
                                                   style={{background: item.color}}>
                                                 <div className="hidden">
                                                     <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null}

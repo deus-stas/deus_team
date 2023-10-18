@@ -2,6 +2,7 @@
 
 .contacts {
     &-main {
+        overflow: hidden;
         padding-top: 9.4rem;
 
         @include respond(sm) {

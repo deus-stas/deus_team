@@ -161,7 +161,9 @@ const Projects = () => {
                                 {filteredProjects ? filteredProjects.map((project, index) => {
                                         return (
                                             project.controlURL ?
-                                                <a href={`${project.projectURL}`} className="projects__item"
+                                                <a href={`${project.projectURL}`} className="projects__item wow fadeInUpBig"
+                                                   data-wow-duration="1s"
+                                                   data-wow-delay="1s"
                                                    key={project.id} style={{background: project.color}}>
                                                     <div className="projects__item-img-wrap">
                                                         {
@@ -185,7 +187,9 @@ const Projects = () => {
                                                     </div>
                                                     <div className="projects__item-name">{project.name}</div>
                                                 </a> :
-                                                <Link to={`/projects/${project.nameInEng}`} className="projects__item"
+                                                <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeInUpBig"
+                                                      data-wow-duration="1s"
+                                                      data-wow-delay="1.5s"
                                                       key={project.id} style={{background: project.color}}>
                                                     <div className="projects__item-img-wrap">
                                                         {
@@ -218,8 +222,13 @@ const Projects = () => {
                             </div>
                         </div>
                     </section>
+                    <div className="wow fadeInUpBig"
+                         data-wow-offset="2"
+                         data-wow-duration="3s"
+                         data-wow-delay="1s">
+                        <Cta formName={'projects'}/>
+                    </div>
 
-                    <Cta formName={'projects'}/>
                 </main>
             }
         </>
