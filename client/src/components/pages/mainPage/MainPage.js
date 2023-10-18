@@ -242,7 +242,10 @@ const MainPage = () => {
         <>
             {!isLoading &&
                 <main className="main">
-                                    <section className="main-banner" style={{background: "rgba(0,0,0,0.82)"}}>
+                                    <section className="main-banner wow fadeInDownBig"
+                                             data-wow-duration="3s"
+                                             data-wow-delay="0.5s"
+                                             style={{background: "rgba(0,0,0,0.82)"}}>
                                         <div className="container">
                                             <div className="main-banner__wrap">
                                                 <div className="main-banner__content">
@@ -341,7 +344,9 @@ const MainPage = () => {
 
             <section className="main-projects">
                 <div className="container">
-                    <div className="main-projects__head">
+                    <div className="main-projects__head wow fadeInUpBig"
+                         data-wow-duration="3s"
+                         data-wow-delay="0.5s">
                         <h2 className="heading-secondary">Проекты</h2>
                         <div className="main-projects__filters hidden-mobile">
                             <Select classNames={classes} options={optionsType} styles={colourStyles} onChange={handleTypeChange} placeholder="Тип проекта" />
@@ -370,7 +375,9 @@ const MainPage = () => {
                                     </div>
                                     <div className="main-projects__name">{project.name}</div>
                                 </a> :
-                                <Link to={`/projects/${project.nameInEng}`} className="main-projects__item" key={project.id}>
+                                <Link to={`/projects/${project.nameInEng}`} className="main-projects__item wow fadeInUpBig"
+                                      data-wow-duration="3s"
+                                      data-wow-delay="0.5s" key={project.id}>
                                     <div className="main-projects__img-wrap">
                                             {
                                                 project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
@@ -416,7 +423,9 @@ const MainPage = () => {
                 </section>
                 : null}
 
-            <section className="main-services">
+            <section className="main-services wow fadeInUpBig"
+                     data-wow-duration="3s"
+                     data-wow-delay="0.5s">
                 <div className="container">
                     <div className="main-services__wrap">
                         <div className="main-services__info">

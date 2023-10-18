@@ -208,8 +208,12 @@ const ServicesDetail = () => {
             <section className="service-main">
                 <div className="container">
                     <div className="service-main__wrap">
-                        <h1 className="heading-primary">{service.name}</h1>
-                        <div className="service-main__descr">{service.descr}</div>
+                        <h1 className="heading-primary wow slideInLeft"
+                            data-wow-duration="3s"
+                            data-wow-delay="0.5s">{service.name}</h1>
+                        <div className="service-main__descr wow slideInRight"
+                             data-wow-duration="3s"
+                             data-wow-delay="0.5s">{service.descr}</div>
                     </div>
                 </div>
             </section>
@@ -217,12 +221,17 @@ const ServicesDetail = () => {
             <section className="service-adv">
                 <div className="container">
                     <div className="service-adv__wrap">
-                        <h2 className="heading-secondary">{service.benefitsTitle}</h2>
+                        <h2 className="heading-secondary wow slideInLeft"
+                            data-wow-duration="3s"
+                            data-wow-delay="0.5s">{service.benefitsTitle}</h2>
                         <div className="service-adv__content">
                             {
                                 service.benefits ? service.benefits.map((item, index) => {
                                     return (
-                                        <div className="service-adv__item tab-parent" key={index}>
+                                        <div className="service-adv__item tab-parent wow fadeInUpBig"
+                                             data-wow-duration="3s"
+                                             data-wow-delay="0.5s"
+                                             key={index}>
                                             <div className="service-adv__head" onClick={onAcc}>
                                                 <div className="service-adv__head-elem">
                                                     <div className="service-adv__num">0{index + 1}</div>
@@ -256,14 +265,19 @@ const ServicesDetail = () => {
                     <section className="service-s">
                         <div className="container">
                             <div className="service-s__wrap">
-                                <h2 className="heading-secondary">
+                                <h2 className="heading-secondary wow slideInLeft"
+                                    data-wow-duration="3s"
+                                    data-wow-delay="0.5s">
                                     {service.blockTitle}
                                 </h2>
                                 <div className={`service-s__content ${service.servicesServices.length % 2 === 0 ? 'even' : 'odd'}`}>
                                     {
                                         service.servicesServices.map(item => {
                                             return (
-                                                <div className="service-s__item" key={item.id}>
+                                                <div className="service-s__item wow slideInRight"
+                                                     data-wow-duration="3s"
+                                                     data-wow-delay="1.5s"
+                                                     key={item.id}>
                                                     {item.image ?
                                                         <RetryImage src={`${apiUrl}/uploads/${item.image.filename}`} alt={item.name} className="service-s__img" />
                                                         : null}
@@ -285,11 +299,15 @@ const ServicesDetail = () => {
                     <section className="service-work">
                         <div className="container">
                             <div className="service-work__wrap">
-                                <h2 className="heading-secondary">Как проходит работа</h2>
+                                <h2 className="heading-secondary wow slideInLeft"
+                                    data-wow-duration="2s"
+                                    data-wow-delay="0.5s">Как проходит работа</h2>
                                 <div className="service-work__content">
                                     {service.work.map((item, index) => {
                                         return (
-                                            <div className="service-work__item" key={index}>
+                                            <div className="service-work__item wow fadeInUpBig"
+                                                 data-wow-duration="3s"
+                                                 data-wow-delay="0.5s" key={index}>
                                                 <div className="service-work__num">{index + 1}</div>
                                                 <div className="service-work__text">
                                                     <div className="service-work__name">{item.workName}</div>
@@ -308,13 +326,18 @@ const ServicesDetail = () => {
             {projects ?
                 <section className="service-portfolio">
                     <div className="container">
-                        <h2 className="heading-secondary">Портфолио</h2>
+                        <h2 className="heading-secondary wow slideInLeft"
+                            data-wow-duration="2s"
+                            data-wow-delay="1.5s">Портфолио</h2>
                         <div className="projects__wrap">
                             {
                                 service.subProjects && service.subProjects.length > 0 ?
                                 service.subProjects.map((project,i) => {
                                     return (
-                                        <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
+                                        <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeInUpBig"
+                                              data-wow-duration="3s"
+                                              data-wow-delay="0.5s"
+                                              key={project.id} style={{ background: project.color }}>
                                             <div className="projects__item-img-wrap" >
                                                 {
                                                     project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
@@ -365,7 +388,9 @@ const ServicesDetail = () => {
                     <section className="service-price">
                         <div className="container">
                             <Tabs className="service-price__wrap" selectedTabClassName="active">
-                                <TabList className="service-price__info">
+                                <TabList className="service-price__info wow slideInLeft"
+                                         data-wow-duration="3s"
+                                         data-wow-delay="0.5s">
                                     <h2 className="heading-secondary">Тарифы</h2>
                                     <div className="service-price__info-wrap">
                                         {
@@ -380,7 +405,10 @@ const ServicesDetail = () => {
                                 <div className="service-price__tariffs">
                                     {service.tariffs.map((tariff, index) => {
                                         return (
-                                            <TabPanel className="service-price__tab" key={index}>
+                                            <TabPanel className="service-price__tab wow fadeInUpBig"
+                                                      data-wow-duration="3s"
+                                                      data-wow-delay="0.5s"
+                                                      key={index}>
                                                 <div className="service-price__content">
                                                     {
                                                         tariff.tariffsItems.map((item, index) => {
@@ -443,14 +471,19 @@ const ServicesDetail = () => {
                 reviews  ?
                     <section className="service-review">
                         <div className="container">
-                            <h2 className="heading-secondary">Отзывы</h2>
+                            <h2 className="heading-secondary wow slideInLeft"
+                                data-wow-duration="3s"
+                                data-wow-delay="0.5s">Отзывы</h2>
                             <div className="service-review__wrap">
                                 {
                                     reviews.map(review => {
                                         if (review.reviewService.id === service.id) {
                                             console.log('review',review)
                                             return (
-                                                <div className="service-review__item" style={{ background: review.reviewProject.color }} key={review.id}>
+                                                <div className="service-review__item wow fadeInUpBig"
+                                                     data-wow-duration="3s"
+                                                     data-wow-delay="0.5s"
+                                                     style={{ background: review.reviewProject.color }} key={review.id}>
                                                     <div className="service-review__content">
                                                         <div className="service-review__person">
                                                             {
@@ -476,8 +509,11 @@ const ServicesDetail = () => {
                     </section>
                     : null
             }
-
-            <Cta formName={'services'} />
+            <div className="wow fadeInUpBig"
+                 data-wow-duration="3s"
+                 data-wow-delay="0.5s">
+                <Cta formName={'services'} />
+            </div>
 
         </main>
             }

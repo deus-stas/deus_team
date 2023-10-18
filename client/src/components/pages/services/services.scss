@@ -74,6 +74,7 @@
             display: grid;
             grid-template-columns: repeat(2, .5fr);
             grid-gap: 2rem;
+            overflow: hidden;
 
             @include respond(sm) {
                 grid-template-columns: 100%;

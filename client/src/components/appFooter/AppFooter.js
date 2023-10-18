@@ -57,7 +57,10 @@ const AppFooter = () => {
 
     return (
         <>
-        <footer className={"footer " + (isLoading ? "fade-in" : '')} >
+        <footer className={"footer " + (isLoading ? "fade-in" : "wow backInUp")}
+                data-wow-offset="2"
+                data-wow-duration="3s"
+                data-wow-delay="1s">
             <div className="container">
                 <div className="footer__wrap">
                     <div className="footer__contacts">

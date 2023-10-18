@@ -1,6 +1,8 @@
 import {Link} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 import axios from '../../../axios'
+import WOW from 'wowjs';
+import 'wowjs/css/libs/animate.css';
 
 import ProjectNext from '../projects/projectNext/ProjectNext';
 import Cta from '../../cta/Cta';
@@ -86,7 +88,6 @@ const Services = () => {
     useEffect(() => {
         const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
         window.dispatchEvent(event)
-
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {
                 setIsLoading(e.detail.isLoading);
@@ -98,23 +99,6 @@ const Services = () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
     },[]);
-
-    useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
-
-        const handleLoad = (e) => {
-            if (e.detail.isLoading !== isLoading) {
-                setIsLoading(e.detail.isLoading);
-            }
-        };
-
-        window.addEventListener('isLoadingMainPage', handleLoad);
-        return () => {
-            window.removeEventListener('isLoadingMainPage', handleLoad);
-        };
-    },[]);
-
 
     const handleImageClick = (filename) => {
         setOpenImage(filename);
@@ -129,101 +113,130 @@ const Services = () => {
             {!isLoading &&
                 <main className="services">
 
-            <section className="services-s">
-                <div className="container">
-                    <h1 className="heading-primary">Услуги</h1>
-                    <div className="services-s__wrap">
-                        <div className="services-s__content">
-                            <div className="services-s__subtitle">Отвечаем за качество своих услуг. Гордимся каждым проектом.</div>
-                            <div className="services-s__dir">
-                                {
-                                    headerData && headerData.headerPhoto ?
-                                    (
-                                        <RetryImage src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`} alt="Брижань Вячеслав" className="services-s__dir-img" />
-                                    ) :
-                                    (
-                                        <img src={person} alt="Брижань Вячеслав" className="services-s__dir-img" />
-                                    )
-                                }
-                                <div className="services-s__dir-name">
-                                    Брижань Вячеслав <br />
-                                    генеральный директор
+                    <section className="services-s wow backInUp"
+                             data-wow-duration="3s"
+                             data-wow-delay="1s">
+                        <div className="container">
+                            <h1 className="heading-primary wow slideInLeft"
+                                data-wow-duration="1s"
+                                data-wow-delay="0.5s">Услуги</h1>
+                            <div className="services-s__wrap wow slideInLeft"
+                                 data-wow-duration="2s"
+                                 data-wow-delay="0.5s">
+                                <div className="services-s__content">
+                                    <div className="services-s__subtitle">Отвечаем за качество своих услуг. Гордимся
+                                        каждым проектом.
+                                    </div>
+                                    <div className="services-s__dir">
+                                        {
+                                            headerData && headerData.headerPhoto ?
+                                                (
+                                                    <RetryImage
+                                                        src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
+                                                        alt="Брижань Вячеслав" className="services-s__dir-img"/>
+                                                ) :
+                                                (
+                                                    <img src={person} alt="Брижань Вячеслав"
+                                                         className="services-s__dir-img"/>
+                                                )
+                                        }
+                                        <div className="services-s__dir-name">
+                                            Брижань Вячеслав <br/>
+                                            генеральный директор
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="services-s__list">
-                            {
-                                services ? services.map(service => {
-                                    return (
-                                        service.isInvisible ?
-                                            <Link to={`/services/${service.path}`} className="services-s__item" key={service.id}>
-                                                <div className="services-s__name">{service.name}</div>
-                                                <div className="services-s__descr">{service.descrTotal}</div>
-                                                <div className="services-s__icon">
-                                                    <Icon icon="corner-arr" />
-                                                </div>
-                                            </Link> : null
-                                    )
-                                }) : null
-                            }
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <ProjectNext last={true} />
-
-            <section className="services-reviews">
-                <div className="container">
-                    <h2 className="heading-secondary">Отзывы</h2>
-                    <div className="services-reviews__wrap">
-                        {reviews ? reviews.map(review => {
-                            const fileName = !!review.reviewFile ? review.reviewFile.mimetype : "";
-                            const extension = fileName.split('/').pop().toLowerCase();
-
-                            return (
-                                <div to="/" className="services-reviews__item" onClick={() => handleImageClick(review.reviewFile.filename)} key={review.id}>
-                                    <div className="services-reviews__name">{review.name}</div>
-                                    <div className="services-reviews__s">{review.service}</div>
-                                    <div className="services-reviews__type">{review.type}</div>
+                                <div className="services-s__list">
                                     {
-                                        review.reviewFile ?  (
-                                            <>
-                                                <div className="services-reviews__file"> {extension} </div>
-                                                <iframe src={`${apiUrl}/uploads/${review.reviewFile.filename}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}
-                                                        scrolling="no"
-                                                        alt={review.name}
-                                                        className="iframe-height services-reviews__r "
-                                                />
-                                            </>
-                                        ) : null
+                                        services ? services.map(service => {
+                                            return (
+                                                service.isInvisible ?
+                                                    <Link to={`/services/${service.path}`} className="services-s__item wow slideInRight"
+                                                          data-wow-duration="2.5s"
+                                                          data-wow-delay="0.5s"
+                                                          key={service.id}>
+                                                        <div className="services-s__name">{service.name}</div>
+                                                        <div className="services-s__descr">{service.descrTotal}</div>
+                                                        <div className="services-s__icon">
+                                                            <Icon icon="corner-arr"/>
+                                                        </div>
+                                                    </Link> : null
+                                            )
+                                        }) : null
                                     }
-
-                                </div>
-                            )
-                        }) : null}
-
-                        {openImage && (
-                            <div className="modal">
-                                <div className="modal-content">
-                                    <iframe src={`${apiUrl}/uploads/${openImage}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}
-                                            alt="Отзыв"
-                                            scrolling="no"
-                                            className="iframe-modal-size"/>
-                                    <button onClick={handleCloseImage}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 24 24"><path d="M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z"></path></svg>
-                                    </button>
                                 </div>
                             </div>
-                        )}
-                    </div>
+                        </div>
+                    </section>
+                    <div className="wow fadeInUpBig"
+                         data-wow-offset="2"
+                         data-wow-duration="3s"
+                         data-wow-delay="1s">
+                    <ProjectNext last={true}/>
                 </div>
-            </section>
+                    <section className="services-reviews wow fadeInUpBig"
+                             data-wow-offset="2"
+                             data-wow-duration="3s"
+                             data-wow-delay="1s">
+                        <div className="container">
+                            <h2 className="heading-secondary">Отзывы</h2>
+                            <div className="services-reviews__wrap">
+                                {reviews ? reviews.map(review => {
+                                    const fileName = !!review.reviewFile ? review.reviewFile.mimetype : "";
+                                    const extension = fileName.split('/').pop().toLowerCase();
 
-            <Cta formName={'services'} />
+                                    return (
+                                        <div to="/" className="services-reviews__item"
+                                             onClick={() => handleImageClick(review.reviewFile.filename)}
+                                             key={review.id}>
+                                            <div className="services-reviews__name">{review.name}</div>
+                                            <div className="services-reviews__s">{review.service}</div>
+                                            <div className="services-reviews__type">{review.type}</div>
+                                            {
+                                                review.reviewFile ? (
+                                                    <>
+                                                        <div className="services-reviews__file"> {extension} </div>
+                                                        <iframe
+                                                            src={`${apiUrl}/uploads/${review.reviewFile.filename}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}
+                                                            scrolling="no"
+                                                            alt={review.name}
+                                                            className="iframe-height services-reviews__r "
+                                                        />
+                                                    </>
+                                                ) : null
+                                            }
 
-            <Social />
+                                        </div>
+                                    )
+                                }) : null}
 
+                                {openImage && (
+                                    <div className="modal">
+                                        <div className="modal-content">
+                                            <iframe
+                                                src={`${apiUrl}/uploads/${openImage}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}
+                                                alt="Отзыв"
+                                                scrolling="no"
+                                                className="iframe-modal-size"/>
+                                            <button onClick={handleCloseImage}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                    <div className="wow fadeInUpBig"
+                         data-wow-offset="2"
+                         data-wow-duration="3s"
+                         data-wow-delay="1s">
+                        <Cta  formName={'services'}/>
+                    </div>
+                        <Social/>
                 </main>
             }
         </>

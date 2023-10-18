@@ -2,6 +2,7 @@
 
 .service {
     &-main {
+        overflow: hidden;
         padding: 6.9rem 0 10rem;
 
         @include respond(sm) {
@@ -180,6 +181,7 @@
         padding: 10rem 0;
         background: #191B1D;
         color: #fff;
+        overflow: hidden;
 
         @include respond(sm) {
             padding: 6rem 0;

@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutuser } from "./actions/authActions";
-import { Provider } from "react-redux";
+import {setCurrentUser, logoutuser} from "./actions/authActions";
+import {Provider} from "react-redux";
 import store from "./store";
 import CustomCursor from 'custom-cursor-react';
 import 'custom-cursor-react/dist/index.css';
@@ -32,20 +32,21 @@ import {useEffect, useRef, useState} from "react";
 import axios, {AxiosInterceptor} from "./axios";
 import {HelmetProvider} from "react-helmet-async";
 import HelmetComponent from "./components/helmetComponent";
+import WOW from "wowjs";
 
 // import AdminPage from './Admin';
 
 
 if (localStorage.jwtToken) {
-  const token = localStorage.jwtToken;
-  setAuthToken(token);
-  const decoded = jwt_decode(token);
-  store.dispatch(setCurrentUser(decoded));
-  const currentTime = Date.now() / 1000; // to get in milliseconds
-  if (decoded.exp < currentTime) {
-    store.dispatch(logoutuser());
-    window.location.href = "./login";
-  }
+    const token = localStorage.jwtToken;
+    setAuthToken(token);
+    const decoded = jwt_decode(token);
+    store.dispatch(setCurrentUser(decoded));
+    const currentTime = Date.now() / 1000; // to get in milliseconds
+    if (decoded.exp < currentTime) {
+        store.dispatch(logoutuser());
+        window.location.href = "./login";
+    }
 }
 
 const apiUrl = process.env.NODE_ENV === 'production'
@@ -64,6 +65,9 @@ const AppWrapper = () => {
     useEffect((event) => {
         const handleLoad = (e) => {
             setIsLoading(e.detail.isLoading);
+            const wow = new WOW.WOW();
+            wow.init();
+            console.log(wow.init)
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
@@ -71,81 +75,87 @@ const AppWrapper = () => {
         return () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
-    },[]);
+    }, []);
 
 
-  // Check if the current route starts with the adminBasePath
-  const isOnAdminRoute = location.pathname.startsWith(adminBasePath);
+    // Check if the current route starts with the adminBasePath
+    const isOnAdminRoute = location.pathname.startsWith(adminBasePath);
 
-  // Define an array of paths where the header and footer should be hidden
-  const hiddenRoutes = [adminBasePath];
+    // Define an array of paths where the header and footer should be hidden
+    const hiddenRoutes = [adminBasePath];
 
-  // Check if the current route matches the hidden routes
-  const shouldHideHeaderFooter = isOnAdminRoute && hiddenRoutes.some(route => location.pathname.startsWith(route));
+    // Check if the current route matches the hidden routes
+    const shouldHideHeaderFooter = isOnAdminRoute && hiddenRoutes.some(route => location.pathname.startsWith(route));
 
-    useEffect(()=> {
+    useEffect(() => {
         axios.get(`${apiUrl}/api/seo`)
-            .then((response)=>{
+            .then((response) => {
                 const currentSeoInfo = response.data.find((item) => item.seoPages === currentId);
                 setSeoInfo(currentSeoInfo);
                 console.log('что пришло:', response)
             })
-            .catch((error)=>{
+            .catch((error) => {
                 console.log(error)
             })
-    },[location])
+    }, [location])
 
 
-  return (
-      <>
-                  <ScrollToTop/>
-                  <CustomCursor
-                      targets={['.js-cursor-play']}
-                      customClass='custom-cursor'
-                      dimensions={20}
-                      fill='none'
-                      opacity={0}
-                  />
+    return (
+        <>
+            <ScrollToTop/>
+            <CustomCursor
+                targets={['.js-cursor-play']}
+                customClass='custom-cursor'
+                dimensions={20}
+                fill='none'
+                opacity={0}
+            />
 
-                  {/* <AppHeader /> */}
-                  {!shouldHideHeaderFooter && <AppHeader/>}
-          {!!isLoading &&(<div className="loader"></div>) }
-          <AxiosInterceptor>
-              {!!seoInfo && <HelmetComponent pageDescription={seoInfo.seoDescription} pageTitle={seoInfo.seoTitle} pageKeywords={seoInfo.seoKeywords}/>}
+            {/* <AppHeader /> */}
+            {!shouldHideHeaderFooter && <AppHeader/>}
+            {!!isLoading && (
+                <div className="loader"/>)}
+            <AxiosInterceptor>
+                {!!seoInfo &&
+                    <HelmetComponent
+                    pageDescription={seoInfo.seoDescription}
+                    pageTitle={seoInfo.seoTitle}
+                    pageKeywords={seoInfo.seoKeywords}
+                    />}
 
-                  <Routes>
-                          <Route exact path="/" element={<MainPage/>}/>
-                          <Route exact path='/projects' element={<Projects/>}/>
-                          <Route exact path='/projects/:id' element={<ProjectDetail/>}/>
-                          <Route exact path='/services' element={<Services/>}/>
-                          <Route exact path='/services/:id' element={<ServicesDetail/>}/>
-                          <Route exact path='/agency' element={<Agency/>}/>
-                          <Route exact path='/contacts' element={<Contacts/>}/>
-                          <Route exact path='/news' element={<News/>}/>
-                          <Route exact path='/news/:id' element={<NewsDetail/>}/>
-                          <Route exact path='/admin/*' element={<PrivateRoute/>}/>
-                          {/* <Route path='/admin/*' element={<AdminPage />} /> */}
-                          {/* <Route exact path='/register' element={<Register/>} /> */}
-                          <Route exact path='/login' element={<Login/>}/>
-                  </Routes>
-          </AxiosInterceptor>
-                  { !shouldHideHeaderFooter && <AppFooter key={'footer_'+new Date().getTime()}/>}
+                <Routes>
+                    <Route exact path="/" element={<MainPage/>}/>
+                    <Route exact path='/projects' element={<Projects/>}/>
+                    <Route exact path='/projects/:id' element={<ProjectDetail/>}/>
+                    <Route exact path='/services' element={<Services/>}/>
+                    <Route exact path='/services/:id' element={<ServicesDetail/>}/>
+                    <Route exact path='/agency' element={<Agency/>}/>
+                    <Route exact path='/contacts' element={<Contacts/>}/>
+                    <Route exact path='/news' element={<News/>}/>
+                    <Route exact path='/news/:id' element={<NewsDetail/>}/>
+                    <Route exact path='/admin/*' element={<PrivateRoute/>}/>
+                    {/* <Route path='/admin/*' element={<AdminPage />} /> */}
+                    {/* <Route exact path='/register' element={<Register/>} /> */}
+                    <Route exact path='/login' element={<Login/>}/>
+                </Routes>
+            </AxiosInterceptor>
+            {!shouldHideHeaderFooter && <AppFooter key={'footer_' + new Date().getTime()}/>}
 
-      </>
-  );
+        </>
+    );
 
 }
 
 function App() {
-  return (
-    <Provider store={store}>
-      <Router>
-          <HelmetProvider>
-          <AppWrapper />
-          </HelmetProvider>
-      </Router>
-    </Provider>
-  )
+    return (
+        <Provider store={store}>
+            <Router>
+                <HelmetProvider>
+                    <AppWrapper/>
+                </HelmetProvider>
+            </Router>
+        </Provider>
+    )
 
 }
 

@@ -69,7 +69,7 @@ const AppHeader = (props) => {
                 <div className="container">
                     <div className="header__wrap">
                         <Link to="/" className='header__logo'>
-                            <img src={logo} alt="DEUS" />
+                             <img src={logo} alt="DEUS" />
                         </Link>
                         <nav className="header__nav">
                             <ul className="header__nav-list">
