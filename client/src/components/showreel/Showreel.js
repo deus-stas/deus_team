@@ -96,7 +96,7 @@ const Showreel = (props) => {
 
             {
                 isMain ? (
-                    <div ref={showReelRef} className="showreel__s playIcon wow fadeInUpBig"
+                    <div ref={showReelRef} className="showreel__s playIcon wow fadeIn"
                          data-wow-duration="2s"
                          data-wow-delay="1.5s">
                         {
