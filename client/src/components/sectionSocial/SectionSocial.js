@@ -44,14 +44,18 @@ const SectionSocial = () => {
                         <div className="section-social__wrap">
                             <h2 className="heading-secondary wow slideInLeft"
                                 data-wow-duration="2s"
-                                data-wow-delay="0.5s">Узнать нас ближе</h2>
+                                data-wow-delay="0.5s"
+                                data-wow-offset="100">
+                                Узнать нас ближе
+                            </h2>
                             <div className="section-social__content">
                                 {
-                                    social.map(item => {
+                                    social.map((item, index) => {
                                         return (
                                             <Link to={item.link} className="section-social__item wow slideInRight"
                                                   data-wow-duration="2.5s"
-                                                  data-wow-delay="1.5s"
+                                                  data-wow-delay={`${index*0.2}s`}
+                                                  data-wow-offset="100"
                                                   target="_blank" key={item.id}
                                                   style={{background: item.color}}>
                                                 <div className="hidden">

@@ -2,3 +2,4 @@ node_modules
 /.idea
 /client/src1
 /uploads
+package-lock.json*
