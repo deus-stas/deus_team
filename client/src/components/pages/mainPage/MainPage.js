@@ -49,16 +49,11 @@ const classes = {
     input: () => 'select__search'
 }
 
-const onAcc = (e) => {
-    let accItem = e.target.closest('.tab-parent');
-    if (accItem.classList.contains('active')) {
-        accItem.classList.remove('active');
-    } else {
-        accItem.classList.add('active');
-    }
-}
+
+
 
 const MainPage = () => {
+    const [isActive, setIsActive] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [news, setNews] = useState([]);
     const [allTags, setAllTags] = useState(new Set());
@@ -71,6 +66,23 @@ const MainPage = () => {
     const [services, setServices] = useState([]);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
+
+    const onAcc = ({e,index}) => {
+        let accItem = e.target.closest('.tab-parent');
+        setIsActive(prevState => {
+            const newActiveState = [...prevState];
+            newActiveState[index] = !newActiveState[index];
+            return newActiveState;
+        });
+        if (accItem.classList.contains('active')) {
+            accItem.classList.remove('active');
+            accItem.classList.remove('wow');
+        } else {
+            accItem.classList.add('active');
+            accItem.classList.add('wow');
+            accItem.classList.add('fadeInDown');
+        }
+    }
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/news`)
@@ -260,9 +272,13 @@ const MainPage = () => {
                                                        data-wow-delay="1s"
                                                         >Презентация агентства</a>
                                                     <img src={mainBannerLine} alt="Touch Money"
-                                                         className="main-banner__line hidden-mobile"/>
+                                                         className="main-banner__line hidden-mobile wow fadeIn"
+                                                         data-wow-duration="0.5s"
+                                                         data-wow-delay="1.6s"/>
                                                     <img src={mainBannerLineMob} alt="Touch Money"
-                                                         className="main-banner__line hidden-desktop"/>
+                                                         className="main-banner__line hidden-desktop wow fadeIn"
+                                                         data-wow-duration="0.5s"
+                                                         data-wow-delay="1.6s"/>
                                                 </div>
                                                 <div className="main-banner__project hidden-mobile">
                                                     <div className="main-banner__project-marquee wow fadeIn"
@@ -374,7 +390,7 @@ const MainPage = () => {
                                         {
                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                 ?
-                                            <video className="wow fadeIn"
+                                            <video className="wow slideInLeft"
                                                    data-wow-duration="1s"
                                                    data-wow-delay={`${index* 0.2}s`}
                                                    data-wow-offset="400"
@@ -385,13 +401,19 @@ const MainPage = () => {
                                                 ?
                                                 <div ref={(ref) => addVideoRef(ref)} dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
                                                 :
-                                                <img ref={(ref) => addVideoRef(ref)} src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img wow fadeIn"
+                                                <img ref={(ref) => addVideoRef(ref)} src={project.image
+                                                    ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                                     alt={project.name}
+                                                     className="main-projects__img wow fadeIn"
                                                      data-wow-duration="2s"
                                                      data-wow-delay={`${index* 0.350}s`}
                                                      data-wow-offset="400" />
                                         }
                                     </div>
-                                    <div className="main-projects__name">{project.name}</div>
+                                    <div className="main-projects__name wow fadeIn"
+                                         data-wow-duration="2s"
+                                         data-wow-delay={`${index* 0.300}s`}
+                                         data-wow-offset="100">{project.name}</div>
                                 </a> :
                                 <Link to={`/projects/${project.nameInEng}`} className="main-projects__item"
                                       key={project.id}>
@@ -399,9 +421,9 @@ const MainPage = () => {
                                             {
                                                 project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                     ?
-                                                <video className="wow fadeIn"
-                                                       data-wow-duration="1s"
-                                                       data-wow-delay={`${index* 0.250}s`}
+                                                <video className="wow fadeInLeftBig"
+                                                       data-wow-duration="1.7s"
+                                                       data-wow-delay={`${index* 0.200}s`}
                                                        data-wow-offset="250"
                                                        ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline>
                                                     <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
@@ -417,7 +439,10 @@ const MainPage = () => {
                                                           ref={(ref) => addVideoRef(ref)} src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} />
                                             }
                                     </div>
-                                    <div className="main-projects__name">{project.name}</div>
+                                    <div className="main-projects__name wow fadeIn"
+                                         data-wow-duration="2s"
+                                         data-wow-delay={`${index* 0.300}s`}
+                                         data-wow-offset="100">{project.name}</div>
                                 </Link>
                             )
                         })
@@ -477,9 +502,9 @@ const MainPage = () => {
                                         <div className="main-services__item tab-parent wow fadeInDown"
                                              data-wow-duration="1s"
                                              data-wow-delay={`${index*0.5}s`}
-                                             data-wow-offset={`${index*5}`}
+                                             data-wow-offset={`${index*2}`}
                                              key={service.id}>
-                                            <div className="main-services__head" onClick={onAcc}>
+                                            <div className="main-services__head" onClick={(e) => onAcc({ e, index })}>
                                                  <div className="main-services__num">{index < 9 ? 0 : ''}{index + 1}</div>
                                                 <div className="main-services__name">{service.name}</div>
                                                 <div className="main-services__btn">
@@ -487,14 +512,23 @@ const MainPage = () => {
                                                 </div>
                                             </div>
                                             <div className="main-services__acc">
-                                                <div className="main-services__descr">{service.descr}</div>
-                                                <div className="main-services__bot">
+                                                <div className={`main-services__descr wow ${isActive[index] ? 'fadeInRight' : ''}`}
+                                                     data-wow-duration="0.8s"
+                                                     data-wow-delay="0.5"
+                                                >{service.descr}
+                                                </div>
+                                                <div className="main-services__bot"
+                                                >
                                                     {/* <div className="main-services__gallery">
                                                     <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
                                                     <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
                                                     <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
                                                 </div> */}
-                                                    <Link to={`/services/${service.path}`} className="btn --b-orange">Подробнее</Link>
+                                                    <Link to={`/services/${service.path}`} className={`btn --b-orange wow ${isActive[index] ? 'fadeInRight' : ''} `}
+
+                                                          data-wow-duration="0.8s"
+                                                          data-wow-delay="0.5"
+                                                    >Подробнее</Link>
                                                 </div>
                                             </div>
                                         </div> : null
