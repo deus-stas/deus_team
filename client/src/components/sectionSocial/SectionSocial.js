@@ -53,8 +53,8 @@ const SectionSocial = () => {
                                     social.map((item, index) => {
                                         return (
                                             <Link to={item.link} className="section-social__item wow slideInRight"
-                                                  data-wow-duration="1s"
-                                                  data-wow-delay={`${ index < 1 ? index+0.01 :index*0.3/25}s`}
+                                                  data-wow-duration="0.5s"
+                                                  data-wow-delay={`${index < 1 ? `0.1s` : `${0.4 + (index - 1 ) * 0.15}s`}`}
                                                   data-wow-offset="100"
                                                   target="_blank" key={item.id}
                                                   style={{background: item.color}}>
