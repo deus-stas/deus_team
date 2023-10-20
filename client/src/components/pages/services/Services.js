@@ -113,16 +113,13 @@ const Services = () => {
             {!isLoading &&
                 <main className="services">
 
-                    <section className="services-s wow backInUp"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="services-s wow fadeIn"
+                             data-wow-duration="0.1s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div className="container">
-                            <h1 className="heading-primary wow slideInLeft"
-                                data-wow-duration="1s"
-                                data-wow-delay="0.5s">Услуги</h1>
-                            <div className="services-s__wrap wow slideInLeft"
-                                 data-wow-duration="2s"
-                                 data-wow-delay="0.5s">
+                            <h1 className="heading-primary">Услуги</h1>
+                            <div className="services-s__wrap">
                                 <div className="services-s__content">
                                     <div className="services-s__subtitle">Отвечаем за качество своих услуг. Гордимся
                                         каждым проектом.
@@ -148,12 +145,13 @@ const Services = () => {
                                 </div>
                                 <div className="services-s__list">
                                     {
-                                        services ? services.map(service => {
+                                        services ? services.map((service, index) => {
+                                            const listDelay =  index < 1?  +.1 : index*.1
                                             return (
                                                 service.isInvisible ?
-                                                    <Link to={`/services/${service.path}`} className="services-s__item wow slideInRight"
-                                                          data-wow-duration="2.5s"
-                                                          data-wow-delay="0.5s"
+                                                    <Link to={`/services/${service.path}`} className="services-s__item wow fadeIn"
+                                                          data-wow-duration="0.5s"
+                                                          data-wow-delay={`${listDelay}s`}
                                                           key={service.id}>
                                                         <div className="services-s__name">{service.name}</div>
                                                         <div className="services-s__descr">{service.descrTotal}</div>
@@ -168,16 +166,16 @@ const Services = () => {
                             </div>
                         </div>
                     </section>
-                    <div className="wow fadeInUpBig"
-                         data-wow-offset="2"
-                         data-wow-duration="3s"
-                         data-wow-delay="1s">
+                    <div className="wow fadeIn"
+                         data-wow-offset="100"
+                         data-wow-duration="0.5s"
+                         data-wow-delay="0.1s">
                     <ProjectNext last={true}/>
                 </div>
-                    <section className="services-reviews wow fadeInUpBig"
-                             data-wow-offset="2"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="services-reviews wow fadeIn"
+                             data-wow-offset="100"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s">
                         <div className="container">
                             <h2 className="heading-secondary">Отзывы</h2>
                             <div className="services-reviews__wrap">
@@ -230,10 +228,10 @@ const Services = () => {
                             </div>
                         </div>
                     </section>
-                    <div className="wow fadeInUpBig"
-                         data-wow-offset="2"
-                         data-wow-duration="3s"
-                         data-wow-delay="1s">
+                    <div className="wow fadeIn"
+                         data-wow-offset="0"
+                         data-wow-duration="0.5s"
+                         data-wow-delay="0.1s">
                         <Cta  formName={'services'}/>
                     </div>
                         <Social/>
