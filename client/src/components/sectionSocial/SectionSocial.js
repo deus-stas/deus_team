@@ -42,9 +42,9 @@ const SectionSocial = () => {
                 <section className="section-social">
                     <div className="container">
                         <div className="section-social__wrap">
-                            <h2 className="heading-secondary wow slideInLeft"
+                            <h2 className="heading-secondary wow fadeIn"
                                 data-wow-duration="1s"
-                                data-wow-delay="0.5s"
+                                data-wow-delay="0.2s"
                                 data-wow-offset="100">
                                 Узнать нас ближе
                             </h2>
@@ -53,8 +53,8 @@ const SectionSocial = () => {
                                     social.map((item, index) => {
                                         return (
                                             <Link to={item.link} className="section-social__item wow slideInRight"
-                                                  data-wow-duration="1.5s"
-                                                  data-wow-delay={`${index*0.2}s`}
+                                                  data-wow-duration="1s"
+                                                  data-wow-delay={`${ index < 1 ? index+0.01 :index*0.3/25}s`}
                                                   data-wow-offset="100"
                                                   target="_blank" key={item.id}
                                                   style={{background: item.color}}>
