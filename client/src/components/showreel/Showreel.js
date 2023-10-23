@@ -3,17 +3,7 @@ import Popup from 'reactjs-popup';
 
 import './showreel.scss';
 import {usePrevious} from "react-admin";
-
-
-class MutedVideo extends HTMLVideoElement {
-    constructor() {
-      super();
-      this.muted = true;
-      this.autoPlay = true;
-    }
-  }
-
-customElements.define("x-muted", MutedVideo, { extends: "video" });
+import {current} from "@reduxjs/toolkit";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -23,9 +13,13 @@ const Showreel = (props) => {
     const [open, setOpen] = useState(false);
     const [isInViewport, setIsInViewport] = useState(false);
     const prevIsInViewport = usePrevious({isInViewport, setIsInViewport});
+    const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
+    const [isFirstClickVideo, setisFirstClickVideo] = useState(true);
+    const [currentTime, setCurrentTime] = useState(17);
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null)
+
 
     const closeModal = () => setOpen(false);
     const openModal = () => {
@@ -33,33 +27,7 @@ const Showreel = (props) => {
         videoRef.current.pause();
     };
 
-    const { data, isMain } = props;
-
-    useEffect(() => {
-        const videoElement = videoRef.current;
-        const showreelElement = showReelRef.current;
-        if (videoElement && showreelElement) {
-            videoElement.addEventListener("play", () => {
-              showreelElement.classList.remove("showreel__s");
-            });
-        
-            videoElement.addEventListener("pause", () => {
-              showreelElement.classList.add("showreel__s");
-            });
-        }
-        
-          return () => {
-            if (videoElement && showreelElement) {
-              videoElement.removeEventListener("play", () => {
-                showreelElement.classList.remove("showreel__s");
-              });
-        
-              videoElement.removeEventListener("pause", () => {
-                showreelElement.classList.add("showreel__s");
-              });
-            }
-          };
-    }, []);
+    const {data, isMain} = props;
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -68,14 +36,20 @@ const Showreel = (props) => {
         };
     }, []);
 
-    useEffect(() => {
-        if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
-            if (!isInViewport) {
-                videoRef.current.pause()
-            } else {
-                videoRef.current.play();
-            }
 
+    useEffect(() => {
+        videoRef.current.currentTime = currentTime; //всегда ставит вне окна
+        if (!!hasPlayedOnce) {
+            if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
+                if (!isInViewport) {
+                    videoRef.current.pause()
+                    setCurrentTime(videoRef.current.currentTime);
+                } else {
+                    videoRef.current.currentTime = currentTime;
+                    videoRef.current.play();
+                }
+
+            }
         }
     }, [isInViewport])
 
@@ -83,11 +57,29 @@ const Showreel = (props) => {
         const videoElement = videoRef.current;
         if (videoElement) {
             const videoRect = videoElement.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            const videoHeight = videoRect.height;
+            const scrollOffset = 0.5 * videoHeight;
             const isInViewport = (
-                videoRect.top >= 0 &&
-                videoRect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+                (videoRect.top >= -scrollOffset && videoRect.top <= windowHeight - scrollOffset) ||
+                (videoRect.bottom >= scrollOffset && videoRect.bottom <= windowHeight + scrollOffset)
             );
-            setIsInViewport(isInViewport)
+            setCurrentTime(videoRef.current.currentTime)
+            setIsInViewport(isInViewport);
+        }
+    };
+
+    const handlePlay = () => {
+        setHasPlayedOnce(!hasPlayedOnce);
+        if (!hasPlayedOnce) {
+            if (isFirstClickVideo) {
+                videoRef.current.currentTime = 0;
+                setisFirstClickVideo(false)
+            }
+            videoRef.current.play();
+
+        } else {
+            videoRef.current.pause();
         }
     };
 
@@ -96,19 +88,23 @@ const Showreel = (props) => {
 
             {
                 isMain ? (
-                    <div ref={showReelRef} className="showreel__s playIcon wow fadeIn"
+                    <div ref={showReelRef} className="showreel__s ${!isPlaying ? 'playIcon' : ''} wow fadeIn"
                          data-wow-duration="0.5s"
-                         data-wow-delay="0.1s">
+                         data-wow-delay="0.1s"
+                         onClick={handlePlay}
+                    >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' ?
-                            <video ref={videoRef} autoPlay muted loop  playsInline>
-                                <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                            </video> :
-                            data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
-                                <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
-                                <video autoPlay muted loop  playsInline>
-                                    <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                </video>
+                                <video ref={videoRef} muted loop playsInline>
+                                    <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                </video> :
+                                data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
+                                    <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
+                                    <video muted loop playsInline>
+                                        <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                                type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                    </video>
                         }
                     </div>
                 ) : (
@@ -119,20 +115,20 @@ const Showreel = (props) => {
                         </div>
                         <div className="showreel__s playIcon" onClick={openModal}>
 
-                                {
-                                    data.video && data.video !== 'undefined' && data.video !== 'null' ?
-                                        <video ref={videoRef} muted loop playsInline>
-                                            <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
-                                                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                        </video> :
-                                        data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
-                                            <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
-                                            <video muted loop playsInline>
-                                                <source
-                                                    src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
-                                                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                            </video>
-                                }
+                            {
+                                data.video && data.video !== 'undefined' && data.video !== 'null' ?
+                                    <video ref={videoRef} muted loop playsInline>
+                                        <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                                type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                    </video> :
+                                    data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
+                                        <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
+                                        <video muted loop playsInline>
+                                            <source
+                                                src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                                type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                        </video>
+                            }
                         </div>
                     </>
                 )
@@ -145,9 +141,9 @@ const Showreel = (props) => {
                     </div>
                     {
                         data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
-                            <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
+                            <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
                             <video muted controls playsInline loop autoPlay className="popup__video">
-                                <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null} />
+                                <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}/>
                             </video>
                     }
                 </div>
