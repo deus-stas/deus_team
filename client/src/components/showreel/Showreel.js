@@ -10,12 +10,13 @@ const apiUrl = process.env.NODE_ENV === 'production'
     : process.env.REACT_APP_LOCALHOST_URI;
 
 const Showreel = (props) => {
+    const {data, isMain} = props;
     const [open, setOpen] = useState(false);
     const [isInViewport, setIsInViewport] = useState(false);
     const prevIsInViewport = usePrevious({isInViewport, setIsInViewport});
     const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
     const [isFirstClickVideo, setisFirstClickVideo] = useState(true);
-    const [currentTime, setCurrentTime] = useState(17);
+    const [currentTime, setCurrentTime] = useState(isMain?17:0);
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null)
@@ -27,7 +28,7 @@ const Showreel = (props) => {
         videoRef.current.pause();
     };
 
-    const {data, isMain} = props;
+
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -38,8 +39,8 @@ const Showreel = (props) => {
 
 
     useEffect(() => {
-        videoRef.current.currentTime = currentTime; //всегда ставит вне окна
-        if (!!hasPlayedOnce) {
+        videoRef.current.currentTime = currentTime;
+        if (!!hasPlayedOnce || !isMain) {
             if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
                 if (!isInViewport) {
                     videoRef.current.pause()
