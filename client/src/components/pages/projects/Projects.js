@@ -144,7 +144,10 @@ const Projects = () => {
         <>
             {!isLoading &&
                 <main className="projects">
-                    <section className="projects-content">
+                    <section className="projects-content wow fadeIn"
+                             data-wow-duration="0.1s"
+                             data-wow-delay = "0.1s"
+                             data-wow-offset="10">
                         <div className="container">
                             <div className="projects__head">
                                 <h1 className="heading-primary">Наши проекты</h1>
@@ -159,11 +162,13 @@ const Projects = () => {
                             </div>
                             <div className="projects__wrap">
                                 {filteredProjects ? filteredProjects.map((project, index) => {
+                                        const delay = index < 1 ? 0.1 : (index* 0.1);
                                         return (
                                             project.controlURL ?
-                                                <a href={`${project.projectURL}`} className="projects__item wow fadeInUpBig"
-                                                   data-wow-duration="1s"
-                                                   data-wow-delay="1s"
+                                                <a href={`${project.projectURL}`} className="projects__item wow fadeIn"
+                                                   data-wow-duration="0.5s"
+                                                   data-wow-delay = {`${delay}s`}
+                                                   data-wow-offset="10"
                                                    key={project.id} style={{background: project.color}}>
                                                     <div className="projects__item-img-wrap">
                                                         {
@@ -187,9 +192,10 @@ const Projects = () => {
                                                     </div>
                                                     <div className="projects__item-name">{project.name}</div>
                                                 </a> :
-                                                <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeInUpBig"
-                                                      data-wow-duration="1s"
-                                                      data-wow-delay="1.5s"
+                                                <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeIn"
+                                                      data-wow-duration="0.5s"
+                                                      data-wow-delay = {`${delay}s`}
+                                                      data-wow-offset="10"
                                                       key={project.id} style={{background: project.color}}>
                                                     <div className="projects__item-img-wrap">
                                                         {
@@ -222,10 +228,10 @@ const Projects = () => {
                             </div>
                         </div>
                     </section>
-                    <div className="wow fadeInUpBig"
-                         data-wow-offset="2"
-                         data-wow-duration="3s"
-                         data-wow-delay="1s">
+                    <div className="wow fadeInUp"
+                         data-wow-offset="0"
+                         data-wow-duration="0.5s"
+                         data-wow-delay="0.2s">
                         <Cta formName={'projects'}/>
                     </div>
 

@@ -128,17 +128,22 @@ const ProjectDetail = () => {
             {console.log(detail)}
             <Breadcrumbs />
 
-            <section className="project-main">
+            <section className="project-main wow fadeIn"
+                     data-wow-duration="0.2s"
+                     data-wow-delay="0.2s"
+                     data-wow-offset="100">
                 <div className="container">
                     <div className="project-main__wrap">
-                        <h1 className="heading-primary wow slideInLeft"
-                            data-wow-duration="3s"
-                            data-wow-delay="0.5s"
+                        <h1 className="heading-primary wow fadeIn"
+                            data-wow-duration="0.3s"
+                            data-wow-delay="0.3s"
+                            data-wow-offset="100"
                             dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
                         {detail.about !== 'undefined' ?
-                            <div className="project-main__text  wow slideInRight"
-                                 data-wow-duration="3s"
-                                 data-wow-delay="0.5s">
+                            <div className="project-main__text  wow fadeIn"
+                                 data-wow-duration="0.2s"
+                                 data-wow-delay="0.2s"
+                                 data-wow-offset="100">
                                 <div className="project-main__subtitle">О клиенте</div>
                                 <div className="project-main__descr" dangerouslySetInnerHTML={{ __html: detail.about }}></div>
                                 {
@@ -158,9 +163,10 @@ const ProjectDetail = () => {
             {
                 detail.mainVideoFile && detail.mainVideoFile !== 'undefined' && detail.mainVideoFile !== 'null'
                 ?
-                    <section className="project-banner wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="project-banner wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <video autoPlay loop muted playsInline controls>
                             <source src={`${apiUrl}/uploads/${detail.mainVideoFile.filename}`}
                                     type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
@@ -168,9 +174,10 @@ const ProjectDetail = () => {
                     </section>
                  :
                 detail.bannerFirstVideo && detail.bannerFirstVideo !== 'undefined' && detail.bannerFirstVideo !== 'null' ?
-                    <section className="project-banner wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="project-banner wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFirstVideo }}></div>
                     </section>
                     : detail.bannerFirst ?
@@ -182,10 +189,10 @@ const ProjectDetail = () => {
             <div style={{ background: detail.aimColor }}>
                 {
                     detail.task !== 'undefined' && detail.task ?
-                    <section style={{ background: detail.aimColor }} className="project-goals wow fadeInUpBig"
-                             data-wow-offset="2"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section style={{ background: detail.aimColor }} className="project-goals wow fadeIn"
+                             data-wow-offset="100"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s">
                         <div className="container">
                             <div className="project-goals__wrap">
                                 <h2 className="heading-secondary">Цели и задачи</h2>
@@ -226,9 +233,10 @@ const ProjectDetail = () => {
 
             {
                 detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
-                    <section className="project-banner wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="project-banner wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerSecondVideo }}></div>
                     </section>
                     : detail.bannerSecond ?
@@ -245,9 +253,10 @@ const ProjectDetail = () => {
 
             {!!detail.approachList && detail.approachList.filter(val => !!val.approachPersons && val.text !== '').map((val, index) =>
                 <>
-                    <section style={{ background: val.resultsColor }} className="project-results wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section style={{ background: val.resultsColor }} className="project-results wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div className="container">
                             <div className="project-results__wrap">
                                 <h2 className="heading-secondary " style={{ color: val.resultsColor === '#000000' ? '#ffffff' : '#000000' }}>{val.title}</h2>
@@ -275,9 +284,10 @@ const ProjectDetail = () => {
             )
             }
             {detail.approach !== 'undefined' && detail.approachPersons && detail.approach !== '' ?
-                <section className="project-results wow fadeInUpBig"
-                         data-wow-duration="3s"
-                         data-wow-delay="1s">
+                <section className="project-results wow fadeIn"
+                         data-wow-duration="0.5s"
+                         data-wow-delay="0.1s"
+                         data-wow-offset="100">
                     <div className="container">
                         <div className="project-results__wrap">
                             <h2 className="heading-secondary text-black">Подход</h2>
@@ -302,9 +312,10 @@ const ProjectDetail = () => {
 
             {
                 detail.bannerThirdVideo && detail.bannerThirdVideo !== 'undefined' && detail.bannerThirdVideo !== 'null' ?
-                    <section className="project-banner wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="project-banner wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerThirdVideo }}></div>
                     </section>
                     : detail.bannerThird ?
@@ -322,9 +333,10 @@ const ProjectDetail = () => {
             {!!detail.approachListThird && detail.approachListThird.filter(val => !!val.approachPersons && val.text !== '')
                 .map((val, index) =>
                     <>
-                        <section className="project-results wow fadeInUpBig"
-                                 data-wow-duration="3s"
-                                 data-wow-delay="1s"
+                        <section className="project-results wow fadeIn"
+                                 data-wow-duration="0.5s"
+                                 data-wow-delay="0.1s"
+                                 data-wow-offset="100"
                                  style={{ background: val.resultsColor}}>
                             <div className="container">
                                 <div className="project-results__wrap">
@@ -355,9 +367,10 @@ const ProjectDetail = () => {
 
 
             {detail.body ?
-                <section className="project-results wow fadeInUpBig"
-                         data-wow-duration="3s"
-                         data-wow-delay="1s">
+                <section className="project-results wow fadeIn"
+                         data-wow-duration="0.5s"
+                         data-wow-delay="0.1s"
+                         data-wow-offset="100">
                     <div className="container">
                         <div className="project-results__wrap">
                             <div className="project-results__text" dangerouslySetInnerHTML={{ __html: detail.body }}></div>
@@ -368,9 +381,10 @@ const ProjectDetail = () => {
 
             {
                 detail.workSteps && detail.workSteps !== 'undefined' && detail.workSteps !== null && detail.workSteps !== "null" && detail.workSteps.length ?
-                    <section style={{ background: detail.workStepsColor }} className="project-steps wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section style={{ background: detail.workStepsColor }} className="project-steps wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div className="container">
                             <h2 className="heading-secondary">{detail.workStepsHeader}</h2>
                             {detail.workSteps.map((item, index) => (
@@ -402,9 +416,10 @@ const ProjectDetail = () => {
 
             {
                 detail.bannerFourthVideo && detail.bannerFourthVideo !== 'undefined' && detail.bannerFourthVideo !== 'null' ?
-                    <section className="project-banner wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="project-bannerwow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFourthVideo }}></div>
                     </section>
                     : detail.bannerFourth ?
@@ -423,9 +438,10 @@ const ProjectDetail = () => {
             {!!detail.approachListSecond && detail.approachListSecond.filter(val => !!val.approachPersons && val.text !== '')
                 .map((val, index) =>
                     <>
-                        <section className="project-results wow fadeInUpBig"
-                                 data-wow-duration="3s"
-                                 data-wow-delay="1s"
+                        <section className="project-results wow fadeIn"
+                                 data-wow-duration="0.5s"
+                                 data-wow-delay="0.1s"
+                                 data-wow-offset="100"
                                  style={{ background: val.resultsColor}}>
                             <div className="container">
                                 <div className="project-results__wrap">
@@ -456,9 +472,10 @@ const ProjectDetail = () => {
 
             {detail.result !== 'undefined' && detail.resultPersons && detail.resultPersonsText ?
 
-                <section style={{ background: detail.resultsColor }} className="project-results results_bg wow fadeInUpBig"
-                         data-wow-duration="3s"
-                         data-wow-delay="1s">
+                <section style={{ background: detail.resultsColor }} className="project-results results_bg wow fadeIn"
+                         data-wow-duration="0.5s"
+                         data-wow-delay="0.1s"
+                         data-wow-offset="100">
                     <div className="container">
                         <div className="project-results__wrap">
                             <h2 style={{ color: detail.resultsColor === '#000000' ? '#ffffff' : '#000000' }} className="heading-secondary">Результаты</h2>
@@ -480,9 +497,10 @@ const ProjectDetail = () => {
 
                 {detail.technologies && detail.technologies !== 'undefined' && detail.technologies !== '' ?
 
-                    <section className="project-results wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="project-results wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div className="container">
                             <div className="project-results__wrap">
                                 <h2  style={{ color: '#000000' }} className="heading-secondary">Технологии</h2>
@@ -504,9 +522,10 @@ const ProjectDetail = () => {
 
             {
                 detail.bannerFifthVideo && detail.bannerFifthVideo !== 'undefined' && detail.bannerFifthVideo !== 'null' ?
-                    <section className="project-banner wow fadeInUpBig"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                    <section className="project-banner wow fadeIn"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
+                             data-wow-offset="100">
                         <div dangerouslySetInnerHTML={{ __html: detail.bannerFifthVideo }}></div>
                     </section>
                     : detail.bannerFifth ?
@@ -524,9 +543,11 @@ const ProjectDetail = () => {
             {detail.imagesExtra ?
                 detail.imagesExtra.map((image, index) => {
                     return (
-                        <section className="project-banner --extra wow fadeInUpBig"
-                                 data-wow-duration="3s"
-                                 data-wow-delay="1s" key={index}>
+                        <section className="project-banner --extrawow fadeIn"
+                                 data-wow-duration="0.5s"
+                                 data-wow-delay="0.1s"
+                                 data-wow-offset="100"
+                                 key={index}>
                             <img src={`${apiUrl}/uploads/${image.filename}`} alt={image.fieldname} />
                         </section>
                     )
@@ -534,9 +555,10 @@ const ProjectDetail = () => {
                 : null}
 
         {detail.visibilityImg1 && detail.visibilityTitle1 && detail.visibilityImg1 !== 'undefined' && detail.visibilityTitle1 !== 'undefined' ?
-            <section className="project-analytics wow fadeInUpBig"
-                     data-wow-duration="3s"
-                     data-wow-delay="1s">
+            <section className="project-analytics wow fadeIn"
+                     data-wow-duration="0.5s"
+                     data-wow-delay="0.1s"
+                     data-wow-offset="100">
                 <div className="container">
                     <div className="project-analytics__wrap">
                         <div className="project-analytics__item">
@@ -559,14 +581,16 @@ const ProjectDetail = () => {
                 </div>
             </section> : null
         }
-            <div className="wow fadeInUpBig"
-                 data-wow-duration="3s"
-                 data-wow-delay="1s">
+            <div className="wow fadeIn"
+                 data-wow-duration="0.5s"
+                 data-wow-delay="0.1s"
+                 data-wow-offset="100">
                 <ProjectNext />
             </div>
-            <div className="wow fadeInUpBig"
-                 data-wow-duration="3s"
-                 data-wow-delay="1s">
+            <div className="wow fadeIn"
+                 data-wow-duration="0.5s"
+                 data-wow-delay="0.1s"
+                 data-wow-offset="100">
                 <Cta formName={'projects'} />
             </div>
         </main>
@@ -581,9 +605,10 @@ export default ProjectDetail;
 
 const BannerComponent = ({banner,detail}) => {
     return (
-        <section className="project-banner wow fadeInUpBig"
-                 data-wow-duration="3s"
-                 data-wow-delay="1s">
+        <section className="project-banner wow fadeIn"
+                 data-wow-duration="0.5s"
+                 data-wow-delay="0.1s"
+                 data-wow-offset="100">
             {banner.mimetype !== 'video/mp4'
                 ?
                 <img src={`${apiUrl}/uploads/${banner.filename}`} alt={detail.name}/>

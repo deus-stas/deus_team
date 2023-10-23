@@ -263,27 +263,27 @@ const MainPage = () => {
                                             <div className="main-banner__wrap">
                                                 <div className="main-banner__content">
                                                      <h1 className="heading-primary wow fadeIn"
-                                                         data-wow-duration="1s"
+                                                         data-wow-duration="0.5s"
                                                          data-wow-delay="0.3s">
                                                          Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей
                                                      </h1>
                                                     <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
                                                        className="btn --circle --orange wow rollIn"
-                                                       data-wow-duration="1s"
+                                                       data-wow-duration="0.5s"
                                                        data-wow-delay="0.3s"
                                                         >Презентация агентства</a>
                                                     <img src={mainBannerLine} alt="Touch Money"
                                                          className="main-banner__line hidden-mobile wow fadeIn"
-                                                         data-wow-duration="1s"
+                                                         data-wow-duration="0.5s"
                                                          data-wow-delay="0.5s"/>
                                                     <img src={mainBannerLineMob} alt="Touch Money"
                                                          className="main-banner__line hidden-desktop wow fadeIn"
-                                                         data-wow-duration="1s"
+                                                         data-wow-duration="0.5s"
                                                          data-wow-delay="0.5s"/>
                                                 </div>
                                                 <div className="main-banner__project hidden-mobile">
                                                     <div className="main-banner__project-marquee wow fadeIn"
-                                                         data-wow-duration="1s"
+                                                         data-wow-duration="0.5s"
                                                          data-wow-delay="0.3s">
                                                         {!!allProjects && sortColumns(...allProjects.map((val) => (
                                                             <Link to={`/projects/${val.id}`} target="_blank">
@@ -374,7 +374,7 @@ const MainPage = () => {
                 <div className="container">
                     <div className="main-projects__head wow fadeInUp"
                          data-wow-offset="100"
-                         data-wow-duration="1s"
+                         data-wow-duration="0.5s"
                          data-wow-delay="0.2s">
                         <h2 className="heading-secondary">Проекты</h2>
                         <div className="main-projects__filters hidden-mobile">
@@ -394,7 +394,7 @@ const MainPage = () => {
                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                 ?
                                             <video className="wow slideInLeft"
-                                                   data-wow-duration="1s"
+                                                   data-wow-duration="0.5s"
                                                    data-wow-delay={`${index* 0.2}s`}
                                                    data-wow-offset="100"
                                                    ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline>
@@ -419,8 +419,8 @@ const MainPage = () => {
                                          data-wow-offset="100">{project.name}</div>
                                 </a> :
                                 <Link to={`/projects/${project.nameInEng}`} className={`main-projects__item wow ${index < 1 ? 'fadeInLeft' : 'fadeIn'}`}
-                                      data-wow-duration="1"
-                                      data-wow-delay={`${index == 0? index+0.1 : index*0.15}s`}
+                                      data-wow-duration="0.5s"
+                                      data-wow-delay={`${index == 0? `0.1` : index*0.15}s`}
                                       data-wow-offset="100"
                                       key={project.id}>
                                     <div className="main-projects__img-wrap">
@@ -482,7 +482,7 @@ const MainPage = () => {
                             {
                                 foundShowreel ?
                                     <div className="wow fadeIn"
-                                         data-wow-duration="1s"
+                                         data-wow-duration="0.5s"
                                          data-wow-delay="0.2s"
                                          data-wow-offset="10">
 
@@ -497,7 +497,7 @@ const MainPage = () => {
                                 return (
                                     service.isInvisible ?
                                         <div className="main-services__item tab-parent wow fadeInDown"
-                                             data-wow-duration="1s"
+                                             data-wow-duration="0.5s"
                                              data-wow-delay={`${index *.25}s`}
                                              key={service.id}>
                                             <div className="main-services__head" onClick={(e) => onAcc({ e, index })}>
