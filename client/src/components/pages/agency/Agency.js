@@ -379,7 +379,6 @@ const Agency = () => {
                                                     {
                                                         raiting.raitingProject.map((project, i) => {
                                                             const raitingDelay =  .2
-                                                            console.log('Index:', i);
                                                             return (
                                                                 project.raitingControlVisibility === 'true' ?
                                                                 <div className="agency-benefits__item wow slideInRight"
