@@ -183,8 +183,8 @@ const Agency = () => {
             <section className="agency-start">
                 <div className="container">
                     <h1 className="heading-primary wow slideInLeft"
-                        data-wow-duration="1s"
-                        data-wow-delay="0.5s">Оказываем услуги, которые помогают нашим клиентам расти, открывать новые предприятия и масштабировать свой бизнес в цифровом пространстве.</h1>
+                        data-wow-duration="0.5s"
+                        data-wow-delay="0.1s">Оказываем услуги, которые помогают нашим клиентам расти, открывать новые предприятия и масштабировать свой бизнес в цифровом пространстве.</h1>
                 </div>
                 {
                     foundShowreel ? <Showreel data={foundShowreel} key={foundShowreel.id} isMain={true} /> : null
@@ -193,9 +193,9 @@ const Agency = () => {
 
             <section id='agency' className="agency-about">
                 <div className="container wow fadeInUp"
-                     data-wow-offset="2"
-                     data-wow-duration="3s"
-                     data-wow-delay="1s">
+                     data-wow-offset="100"
+                     data-wow-duration="0.5s"
+                     data-wow-delay="0.1s">
                     <h2 className="heading-secondary">Об агентстве</h2>
                     <div className="agency-about__wrap">
                         <div className="agency-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса</div>
@@ -284,8 +284,8 @@ const Agency = () => {
                     <div className="container">
                         <Tabs className="agency-benefits__wrap" selectedTabClassName="active">
                             <TabList className="agency-benefits__info wow slideInLeft"
-                                     data-wow-duration="3s"
-                                     data-wow-delay="0.5s">
+                                     data-wow-duration="0.5s"
+                                     data-wow-delay="0.1s">
                                 <h2 className="heading-secondary">Награды</h2>
                                 <div className="agency-benefits__info-wrap">
                                     {
@@ -315,11 +315,12 @@ const Agency = () => {
                                                 <div className="agency-benefits__content-wrap">
                                                     {
                                                         award.awardProject.map((project, i) => {
+                                                            const awardDelay =  .2
                                                             return (
                                                                 project.awardControlVisibility === 'true' ?
                                                                 <div className="agency-benefits__item wow slideInRight"
-                                                                     data-wow-duration="3s"
-                                                                     data-wow-delay="2.5s"
+                                                                     data-wow-duration="0.5s"
+                                                                     data-wow-delay={`${awardDelay}s`}
                                                                      key={i}>
                                                                     <div className="agency-benefits__name">{project.awardName}</div>
                                                                     <div className="agency-benefits__descr">{project.awardPlace}</div>
@@ -345,8 +346,8 @@ const Agency = () => {
                 raitings && (raitings[0] ? raitings[0].controlVisibility : null) ? <section className="agency-benefits">
                     <div className="container">
                         <Tabs className="agency-benefits__wrap wow slideInLeft"
-                              data-wow-duration="3s"
-                              data-wow-delay="0.5s"
+                              data-wow-duration="0.5s"
+                              data-wow-delay="0.1s"
                               selectedTabClassName="active">
                             <TabList className="agency-benefits__info">
                                 <h2 className="heading-secondary">Рейтинги</h2>
@@ -377,11 +378,14 @@ const Agency = () => {
                                                 <div className="agency-benefits__content-wrap">
                                                     {
                                                         raiting.raitingProject.map((project, i) => {
+                                                            const raitingDelay =  .2
+                                                            console.log('Index:', i);
                                                             return (
                                                                 project.raitingControlVisibility === 'true' ?
                                                                 <div className="agency-benefits__item wow slideInRight"
-                                                                     data-wow-duration="3s"
-                                                                     data-wow-delay="2.5s" key={i}>
+                                                                     data-wow-duration="0.5s"
+                                                                     data-wow-delay={`${raitingDelay}s`}
+                                                                     key={i}>
                                                                     <div className="agency-benefits__name">{project.raitingPlace}</div>
                                                                     <div className="agency-benefits__descr">{project.raitingName}</div>
                                                                     <div className="agency-benefits__year">{project.raitingYear}</div>
@@ -402,10 +406,10 @@ const Agency = () => {
 
 
             {
-                clients ? <section className="agency-clients  wow fadeInUpBig"
+                clients ? <section className="agency-clients  wow fadeIn"
                                    data-wow-offset="2"
-                                   data-wow-duration="3s"
-                                   data-wow-delay="1s"
+                                   data-wow-duration="0.5s"
+                                   data-wow-delay="0.1s"
                                    id="clients">
                     <div className="container">
                         <div className="agency-clients__head">
@@ -477,17 +481,24 @@ const Agency = () => {
                 <div className="container">
                     <div className="agency-team__wrap">
                         <div className="agency-team__t  wow slideInLeft"
-                             data-wow-offset="2"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s">
+                             data-wow-offset="100"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s">
                             <h2 className="heading-secondary">Команда мечты</h2>
                             <div className="agency-team__t-content">
                                 {
-                                    team ? team.sort((a, b) => a.priority - b.priority).map(item => {
+                                    team ? team.sort((a, b) => a.priority - b.priority).map((item,index) => {
+                                        const teamDelay = index < 1? index+0.2 : (index +.2)*0.1
                                         return (
-                                            <div className="agency-team__t-item" key={item.id}>
+                                            <div className="agency-team__t-item wow fadeInDown"
+                                                 data-wow-offset="100"
+                                                 data-wow-duration="0.5s"
+                                                 data-wow-delay="0.1s" key={item.id}>
                                                 <div className="agency-team__t-name">{item.name}</div>
-                                                <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null} alt={item.name} className="agency-team__t-img" />
+                                                <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null} alt={item.name} className="agency-team__t-img wow  bounceIn"
+                                                     data-wow-offset="50"
+                                                     data-wow-duration="0.8s"
+                                                     data-wow-delay={`${teamDelay}s`} />
                                                 <div className="agency-team__t-post">{item.post}</div>
                                             </div>
                                         )
@@ -495,10 +506,10 @@ const Agency = () => {
                                 }
                             </div>
                         </div>
-                        <div className="agency-team__content wow fadeInUpBig"
-                             data-wow-offset="2"
-                             data-wow-duration="3s"
-                             data-wow-delay="1s"
+                        <div className="agency-team__content wow fadeIn"
+                             data-wow-offset="100"
+                             data-wow-duration="0.5s"
+                             data-wow-delay="0.1s"
                              id='vacancies'>
                             <h2 className="heading-secondary">Ищем таланты</h2>
                             {
@@ -767,10 +778,10 @@ const Agency = () => {
             </section>
 
             <SectionProducts />
-            <div className="wow fadeInUpBig"
-                 data-wow-offset="2"
-                 data-wow-duration="3s"
-                 data-wow-delay="1s">
+            <div className="wow fadeIn"
+                 data-wow-offset="100"
+                 data-wow-duration="0.5s"
+                 data-wow-delay="0.1s">
             <Cta formName={'agency'} />
         </div>
             <SectionSocial />
