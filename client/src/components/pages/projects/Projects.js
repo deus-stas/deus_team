@@ -162,7 +162,7 @@ const Projects = () => {
                             </div>
                             <div className="projects__wrap">
                                 {filteredProjects ? filteredProjects.map((project, index) => {
-                                        const delay = index < 1 ? 0.1 : (index* 0.1);
+                                        const delay = index < 8 ? (index === 0 ? 0.1 :  index * 0.1 + 0.1) : 0.1
                                         return (
                                             project.controlURL ?
                                                 <a href={`${project.projectURL}`} className="projects__item wow fadeIn"
