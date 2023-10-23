@@ -92,7 +92,7 @@ const Contacts = () => {
             <section id="contactUs">
                 <div className="wow fadeIn"
                      data-wow-offset="500"
-                     data-wow-duration="0.5s"
+                     data-wow-duration="0.3s"
                      data-wow-delay="0.1s">
                 <Cta   formName={'contacts'} />
                 </div>
