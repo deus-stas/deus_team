@@ -145,10 +145,9 @@ const Services = () => {
                                 </div>
                                 <div className="services-s__list">
                                     {
-                                        services ? services.map((service, index) => {
-                                            const listDelay =  index < 1?  +.1 : index*.1
+                                        services ? services.filter((service)=> service.isInvisible).map((service, index) => {
+                                            const listDelay =  index < 1?  +.2 : (index+1)* 0.2
                                             return (
-                                                service.isInvisible ?
                                                     <Link to={`/services/${service.path}`} className="services-s__item wow fadeIn"
                                                           data-wow-duration="0.5s"
                                                           data-wow-delay={`${listDelay}s`}
@@ -158,7 +157,7 @@ const Services = () => {
                                                         <div className="services-s__icon">
                                                             <Icon icon="corner-arr"/>
                                                         </div>
-                                                    </Link> : null
+                                                    </Link>
                                             )
                                         }) : null
                                     }
