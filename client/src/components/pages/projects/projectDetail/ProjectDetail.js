@@ -148,8 +148,8 @@ const ProjectDetail = () => {
                                 <div className="project-main__descr" dangerouslySetInnerHTML={{ __html: detail.about }}></div>
                                 {
                                     detail.projectSite ? (
-                                        <div >
-                                            <a href={detail.projectURL} target='_blank' className="project-main__link">{detail.projectSite}</a>
+                                        <div className="project-main__link" >
+                                            <a href={detail.projectURL} target='_blank'>{detail.projectSite}</a>
                                             <Icon icon="arr" />
                                         </div>
                                     ) : null
