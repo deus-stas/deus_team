@@ -191,6 +191,8 @@ const Projects = () => {
 
                                                     </div>
                                                     <div className="projects__item-name">{project.name}</div>
+                                                    <div className="projects__item-descr">{project.descrProject}</div>
+
                                                 </a> :
                                                 <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeIn"
                                                       data-wow-duration="0.5s"
@@ -221,6 +223,7 @@ const Projects = () => {
 
                                                     </div>
                                                     <div className="projects__item-name">{project.name}</div>
+                                                    <div className="projects__item-descr">{project.descrProject}</div>
                                                 </Link>
                                         )
                                     })
