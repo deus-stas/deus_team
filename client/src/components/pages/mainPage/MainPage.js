@@ -397,7 +397,7 @@ const MainPage = () => {
                                                    data-wow-duration="0.5s"
                                                    data-wow-delay={`${index* 0.2}s`}
                                                    data-wow-offset="100"
-                                                   ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline>
+                                                   ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline loop>
                                                 <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                                             </video> :
                                             project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
@@ -428,7 +428,7 @@ const MainPage = () => {
                                                 project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                     ?
                                                 <video
-                                                       ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline>
+                                                       ref={(ref) => addVideoRef(ref)} autoPlay muted playsInline loop>
                                                     <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                                                 </video> :
                                                 project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'

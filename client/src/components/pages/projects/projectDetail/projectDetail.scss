@@ -13,6 +13,7 @@
             grid-template-columns: .52fr .24fr;
             grid-gap: 4rem;
             justify-content: space-between;
+            overflow: hidden;
 
             @include respond(md) {
                 grid-template-columns: .5fr .4fr;
@@ -54,6 +55,11 @@
             line-height: 120%;
             text-decoration-line: underline;
             cursor: pointer;
+            transition: transform 0.2s ease-out;
+
+            &:hover {
+                transform: scale(1.22) translateX(3.5rem) translateY(0.5rem);
+            }
         }
     }
 
