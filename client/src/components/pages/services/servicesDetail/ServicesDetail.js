@@ -335,10 +335,11 @@ const ServicesDetail = () => {
                             {
                                 service.subProjects && service.subProjects.length > 0 ?
                                 service.subProjects.map((project,i) => {
+                                    const portfolioDelay= i < 7 ? (i * 0.1 + 0.1) : 0.1
                                     return (
                                         <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeInUp"
                                               data-wow-duration="0.5s"
-                                              data-wow-delay={`${i == 0? `0.1` : i*0.1}s`}
+                                              data-wow-delay={`${portfolioDelay}s`}
                                               key={project.id} style={{ background: project.color }}>
                                             <div className="projects__item-img-wrap" >
                                                 {
