@@ -98,7 +98,7 @@ const Cta = (props) => {
         <>
             {!isLoading &&
         <section className="cta wow fadeIn"
-                 data-wow-offset="100"
+                 data-wow-offset="150"
                  data-wow-duration="0.5s"
                  data-wow-delay="0.1s">
             <div className="container">
