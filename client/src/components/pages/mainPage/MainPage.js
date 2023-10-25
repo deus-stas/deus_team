@@ -18,6 +18,7 @@ import './mainPage.scss';
 
 import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
+import TypeWriterText from "../../typeWriterText";
 
 
 SwiperCore.use([Autoplay]);
@@ -265,13 +266,17 @@ const MainPage = () => {
                                                      <h1 className="heading-primary wow fadeIn"
                                                          data-wow-duration="0.5s"
                                                          data-wow-delay="0.3s">
-                                                         Создавайте вместе с&nbsp;нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей
+                                                         <TypeWriterText
+                                                             text={"Создавайте вместе с нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей"}
+                                                         />
                                                      </h1>
-                                                    <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
-                                                       className="btn --circle --orange wow rollIn"
-                                                       data-wow-duration="0.5s"
-                                                       data-wow-delay="0.3s"
+                                                    <div className="rollCircleMain">
+                                                        <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
+                                                           className="btn --circle --orange wow rollIn"
+                                                           data-wow-duration="0.5s"
+                                                           data-wow-delay="0.3s"
                                                         >Презентация агентства</a>
+                                                    </div>
                                                     <img src={mainBannerLine} alt="Touch Money"
                                                          className="main-banner__line hidden-mobile wow fadeIn"
                                                          data-wow-duration="0.5s"

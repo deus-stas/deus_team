@@ -85,7 +85,10 @@
             .projects__item-img-wrap {
                 grid-column: 3/5;
                 margin-bottom: -10px;
-                cursor: url('../../../img/videoCursor.svg'), default !important;
+
+                video {
+                    cursor: url('../../../img/videoCursor.svg'), default !important;
+                }
 
                 @include respond(sm) {
                     grid-column: 1/2;
@@ -140,8 +143,6 @@
         &-img-wrap {
             overflow: hidden;
             margin-bottom: 2rem;
-            cursor: url('../../../img/videoCursor.svg'), default !important;
-
             p {
                 display: none;
             }
