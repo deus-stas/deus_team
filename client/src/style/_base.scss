@@ -283,8 +283,10 @@ main {
     }
 
     &.active {
-        &:nth-child(n+2) {
-            margin-bottom: 1rem;
+        @include respond(sm) {
+            &:nth-child(n+2) {
+                margin-bottom: 1rem;
+            }
         }
         .select__icon {
             transform: rotate(180deg) translateX(-1.3rem);
