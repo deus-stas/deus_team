@@ -1,23 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 const TypeWriterText = ({ text }) => {
-    const [currentText, setCurrentText] = useState("");
+    const [currentText, setCurrentText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
+    const elementRef = useRef(null);
+    const intervalRef = useRef(null);
+
+    const typeText = useCallback(() => {
+        if(currentIndex < text.length) {
+            setCurrentText(prevText => prevText + text[currentIndex]);
+            setCurrentIndex(prevIndex => prevIndex + 1);
+        } else if(intervalRef.current) {
+            clearInterval(intervalRef.current);
+        }
+    }, [currentIndex, text.length]);
 
     useEffect(() => {
-        if (currentIndex < text.length) {
-            const timeout = text.charAt(currentIndex) === "\n" ? 100 : 30;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    intervalRef.current = setInterval(typeText, 15);
+                }
+            });
+        });
 
-            const timer = setTimeout(() => {
-                setCurrentText(text.slice(0, currentIndex + 1));
-                setCurrentIndex(currentIndex + 1);
-            }, timeout);
-
-            return () => clearTimeout(timer);
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
         }
-    }, [text, currentIndex]);
 
-    return <div>{currentText}</div>;
+        return () => {
+            if (elementRef.current) {
+                observer.unobserve(elementRef.current);
+            }
+            if(intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        };
+    }, [typeText]);
+
+    return <div ref={elementRef}>{currentText}</div>;
 };
 
 export default TypeWriterText;
