@@ -285,7 +285,10 @@ const Cta = (props) => {
                                             <div className="form__error">{errors.budget && touched.budget && errors.budget}</div>
                                         </div>
 
-                                        <button type="submit" className='btn --orange --circle'>
+                                        <button type="submit" className='btn --orange --circle wow rollIn'
+                                                data-wow-offset="150"
+                                                data-wow-duration="0.5s"
+                                                data-wow-delay="0.3s">
                                             Отправить
                                         </button>
                                         <div className="form__check">
