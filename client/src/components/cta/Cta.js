@@ -8,8 +8,7 @@ import 'reactjs-popup/dist/index.css';
 import './cta.scss'
 
 import manager from '../../img/manager.png';
-import tender from '../../img/tender.png';
-import axios from "axios";
+import axios from './../../axios'
 import RetryImage from "../../helpers/RetryImage";
 
 const apiUrl = process.env.NODE_ENV === 'production'
@@ -51,9 +50,7 @@ const Cta = (props) => {
     const [worker, setWorker] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-
     useEffect(() => {
-        setIsLoading(true);
         axios.get(`${apiUrl}/api/contacts/`)
             .then((response) => {
                 console.log("data contc", response.data)
@@ -61,12 +58,28 @@ const Cta = (props) => {
                 response.data.map((item, index) => (
                     item.pageName === props.formName ? setWorker(item) : null
                 ))
-                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error);
             });
     }, [props]);
+
+    useEffect(() => {
+        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
+        window.dispatchEvent(event)
+
+        const handleLoad = (e) => {
+            if (e.detail.isLoading !== isLoading) {
+                setIsLoading(e.detail.isLoading);
+            }
+        };
+
+        window.addEventListener('isLoadingMainPage', handleLoad);
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    },[]);
+
 
     const { formName } = props;
     const [success, setSuccess] = useState(false);
@@ -84,7 +97,10 @@ const Cta = (props) => {
     return (
         <>
             {!isLoading &&
-        <section className="cta">
+        <section className="cta wow fadeIn"
+                 data-wow-offset="100"
+                 data-wow-duration="0.5s"
+                 data-wow-delay="0.1s">
             <div className="container">
                 <div className="cta__wrap">
                     <div>
@@ -284,13 +300,14 @@ const Cta = (props) => {
                                             </div>
                                             <div className="form__error">{errors.budget && touched.budget && errors.budget}</div>
                                         </div>
-
-                                        <button type="submit" className='btn --orange --circle wow rollIn'
-                                                data-wow-offset="150"
-                                                data-wow-duration="0.5s"
-                                                data-wow-delay="0.3s">
-                                            Отправить
-                                        </button>
+                                        <div className="wow rollIn"
+                                             data-wow-offset="150"
+                                             data-wow-duration="0.5s"
+                                             data-wow-delay="0.3s">
+                                            <button type="submit" className='btn --orange --circle'>
+                                                Отправить
+                                            </button>
+                                        </div>
                                         <div className="form__check">
                                             Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <span className='span'>
                                                 <Popup
