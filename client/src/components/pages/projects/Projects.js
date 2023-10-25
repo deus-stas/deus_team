@@ -6,6 +6,7 @@ import Select from 'react-select';
 import Cta from '../../cta/Cta';
 
 import './projects.scss'
+import TypeWriterText from "../../typeWriterText";
 
 const colourStyles = {
     control: (styles) => ({}),
@@ -165,12 +166,16 @@ const Projects = () => {
                                         const delay = index < 7 ? (index * 0.1 + 0.1) : 0.1
                                         return (
                                             project.controlURL ?
-                                                <a href={`${project.projectURL}`} className="projects__item wow fadeIn"
+                                                <a href={`${project.projectURL}`}
+                                                   className="projects__item wow fadeIn"
                                                    data-wow-duration="0.5s"
                                                    data-wow-delay = {`${delay}s`}
                                                    data-wow-offset="10"
                                                    key={project.id} style={{background: project.color}}>
-                                                    <div className="projects__item-img-wrap">
+                                                    <div className={`projects__item-img-wrap ${[0,3,7,11].includes(index) ? 'wow fadeIn' : ''}`}
+                                                         data-wow-duration="0.5s"
+                                                         data-wow-delay = "1.5s"
+                                                         data-wow-offset="10">
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
@@ -194,12 +199,16 @@ const Projects = () => {
                                                     <div className="projects__item-descr">{project.descrProject}</div>
 
                                                 </a> :
-                                                <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeIn"
+                                                <Link to={`/projects/${project.nameInEng}`}
+                                                      className="projects__item wow fadeIn"
                                                       data-wow-duration="0.5s"
                                                       data-wow-delay = {`${delay}s`}
                                                       data-wow-offset="10"
                                                       key={project.id} style={{background: project.color}}>
-                                                    <div className="projects__item-img-wrap">
+                                                    <div className={`projects__item-img-wrap wow ${[0,3,7,11].includes(index) ? 'fadeIn' : ''}`}
+                                                         data-wow-duration="3s"
+                                                         data-wow-delay = "0.1s"
+                                                         data-wow-offset="10">
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
@@ -222,9 +231,14 @@ const Projects = () => {
                                                         }
 
                                                     </div>
-                                                    <span className="projects__item-name">
-                                                       {project.name}
-                                                    <div className="projects__item-descr">{project.descrProject}</div>
+                                                    <span className="projects__item-name fadeInUp"
+                                                          data-wow-offset="0"
+                                                          data-wow-duration="0.5s"
+                                                          data-wow-delay="0.2s">
+                                                       {[0,3,7,11].includes(index) ?
+                                                           <TypeWriterText text={project.name}/> : project.name
+                                                       }
+                                                        <div className="projects__item-descr">{project.descrProject}</div>
                                                     </span>
 
                                                 </Link>
