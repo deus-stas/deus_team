@@ -72,7 +72,7 @@ const Contacts = () => {
                             <Link to="tel:+74951034351" className="contacts-main__phone">+7 (495) 103—4351</Link>
                             <Link to="https://yandex.ru/maps/?rtext=~55.677636, 37.272125" className="btn --orange" target="_blank">Как проехать</Link>
                         </div>
-                        <div className="contacts-main__map wow slideInRight"
+                        <div className="contacts-main__map wow fadeIn"
                              data-wow-duration="0.5s"
                              data-wow-delay="0.1s" id="contacts-map">
                             <YMaps>
@@ -91,8 +91,8 @@ const Contacts = () => {
             </section>
             <section id="contactUs">
                 <div className="wow fadeIn"
-                     data-wow-offset="500"
-                     data-wow-duration="0.3s"
+                     data-wow-offset="150"
+                     data-wow-duration="0.5s"
                      data-wow-delay="0.1s">
                 <Cta   formName={'contacts'} />
                 </div>
