@@ -216,8 +216,13 @@ const Agency = () => {
                         {/* <Link className="btn --circle --orange">Презентация агентства</Link> */}
                         {
                             headerData && headerData.presentation ? 
-                            <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`} target='_blank' rel="noopener noreferrer"  className="btn --circle --orange">Презентация агентства</a> :
-                            <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"  className="btn --circle --orange">Презентация агентства</a>
+                            <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`} target='_blank' rel="noopener noreferrer"  className="btn --circle --orange wow rollIn"
+                               data-wow-duration="0.5s"
+                               data-wow-delay="0.3s">Презентация агентства</a> :
+                                <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
+                                   className="btn --circle --orange wow rollIn"
+                                   data-wow-duration="0.5s"
+                                   data-wow-delay="0.3s">Презентация агентства</a>
                         }
                     </div>
                     <div className="agency-about__showreels hidden-desktop hidden-mobile">
@@ -625,7 +630,10 @@ const Agency = () => {
                                                             }} />
                                                         </div>
 
-                                                        <button type="submit" className='btn --orange --circle'>
+                                                        <button type="submit"
+                                                                className='btn --orange --circle wow rollIn'
+                                                                data-wow-duration="0.5s"
+                                                                data-wow-delay="0.3s">
                                                             Отправить
                                                         </button>
                                                         <div className="form__check">
@@ -779,12 +787,7 @@ const Agency = () => {
             </section>
 
             <SectionProducts />
-            <div className="wow fadeIn"
-                 data-wow-offset="100"
-                 data-wow-duration="0.5s"
-                 data-wow-delay="0.1s">
-            <Cta formName={'agency'} />
-        </div>
+            <Cta formName={'agency'}/>
             <SectionSocial />
 
         </main>
