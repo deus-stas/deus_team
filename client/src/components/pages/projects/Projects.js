@@ -222,8 +222,11 @@ const Projects = () => {
                                                         }
 
                                                     </div>
-                                                    <div className="projects__item-name">{project.name}</div>
+                                                    <span className="projects__item-name">
+                                                       {project.name}
                                                     <div className="projects__item-descr">{project.descrProject}</div>
+                                                    </span>
+
                                                 </Link>
                                         )
                                     })
