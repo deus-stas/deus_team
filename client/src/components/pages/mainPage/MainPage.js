@@ -417,6 +417,7 @@ const MainPage = () => {
                                          data-wow-duration="2s"
                                          data-wow-delay={`${index* 0.300}s`}
                                          data-wow-offset="100">{project.name}</div>
+                                    <div className="main-projects__descr">{project.descrProject}</div>
                                 </a> :
                                 <Link to={`/projects/${project.nameInEng}`} className={`main-projects__item wow ${index < 1 ? 'fadeInLeft' : 'fadeIn'}`}
                                       data-wow-duration="0.5s"
@@ -440,6 +441,7 @@ const MainPage = () => {
                                             }
                                     </div>
                                     <div className="main-projects__name">{project.name}</div>
+                                    <div className="main-projects__descr">{project.descrProject}</div>
                                 </Link>
                             )
                         })
