@@ -270,11 +270,13 @@ const MainPage = () => {
                                                              text={"Создавайте вместе с нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей"}
                                                          />
                                                      </h1>
-                                                    <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
-                                                       className="btn --circle --orange wow rollIn"
-                                                       data-wow-duration="0.5s"
-                                                       data-wow-delay="0.3s"
+                                                    <div className="rollCircleMain">
+                                                        <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
+                                                           className="btn --circle --orange wow rollIn"
+                                                           data-wow-duration="0.5s"
+                                                           data-wow-delay="0.3s"
                                                         >Презентация агентства</a>
+                                                    </div>
                                                     <img src={mainBannerLine} alt="Touch Money"
                                                          className="main-banner__line hidden-mobile wow fadeIn"
                                                          data-wow-duration="0.5s"

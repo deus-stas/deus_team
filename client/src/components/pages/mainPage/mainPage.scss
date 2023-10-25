@@ -654,3 +654,29 @@
         }
     }
 }
+
+.rollCircleMain {
+    position: absolute;
+    bottom: 0;
+    left: 30rem;
+
+    @include respond(sm) {
+        bottom: 19rem;
+        left: 15rem;
+    }
+
+    @include respond(xs) {
+        bottom: 15rem;
+        left: 8rem;
+    }
+
+    @include respond(xsx) {
+        bottom: 13rem;
+        left: 4rem;
+    }
+
+    @include respond(xsx) {
+        bottom: 12rem;
+        left: 0;
+    }
+}
