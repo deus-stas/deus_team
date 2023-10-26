@@ -67,7 +67,6 @@ const AppWrapper = () => {
             setIsLoading(e.detail.isLoading);
             const wow = new WOW.WOW();
             wow.init();
-            wow.sync();
             console.log(wow.init)
         };
 
