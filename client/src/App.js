@@ -67,7 +67,6 @@ const AppWrapper = () => {
             setIsLoading(e.detail.isLoading);
             const wow = new WOW.WOW();
             wow.init();
-            console.log(wow.init)
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
