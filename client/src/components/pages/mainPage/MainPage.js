@@ -280,7 +280,7 @@ const MainPage = () => {
                                                     <img src={mainBannerLine} alt="Touch Money"
                                                          className="main-banner__line hidden-mobile wow fadeIn"
                                                          data-wow-duration="0.5s"
-                                                         data-wow-delay="0.5s"/>
+                                                         data-wow-delay="3.5s"/>
                                                     <img src={mainBannerLineMob} alt="Touch Money"
                                                          className="main-banner__line hidden-desktop wow fadeIn"
                                                          data-wow-duration="0.5s"
