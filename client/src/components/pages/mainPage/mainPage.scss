@@ -226,7 +226,10 @@
         &__img-wrap {
             margin-bottom: 2.5rem;
             overflow: hidden;
-            cursor: url('../../../img/videoCursor.svg'), default !important;
+
+            video {
+                cursor: url('../../../img/videoCursor.svg'), default !important;
+            }
 
             p {
                 display: none;
