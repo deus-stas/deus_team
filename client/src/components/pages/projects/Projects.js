@@ -248,13 +248,7 @@ const Projects = () => {
                             </div>
                         </div>
                     </section>
-                    <div className="wow fadeInUp"
-                         data-wow-offset="0"
-                         data-wow-duration="0.5s"
-                         data-wow-delay="0.2s">
                         <Cta formName={'projects'}/>
-                    </div>
-
                 </main>
             }
         </>
