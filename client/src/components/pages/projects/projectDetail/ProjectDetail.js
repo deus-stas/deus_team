@@ -167,7 +167,7 @@ const ProjectDetail = () => {
                              data-wow-duration="0.5s"
                              data-wow-delay="0.1s"
                              data-wow-offset="100">
-                        <video autoPlay loop muted playsInline controls>
+                        <video autoPlay loop muted playsInline>
                             <source src={`${apiUrl}/uploads/${detail.mainVideoFile.filename}`}
                                     type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                         </video>
