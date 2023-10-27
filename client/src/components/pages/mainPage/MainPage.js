@@ -273,25 +273,25 @@ const MainPage = () => {
                                                     <div className="rollCircleMain">
                                                         <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
                                                            className="btn --circle --orange wow rollIn"
-                                                           data-wow-duration="0.5s"
-                                                           data-wow-delay="0.3s"
+                                                           data-wow-duration="1s"
+                                                           data-wow-delay="2.5s"
                                                         >Презентация агентства</a>
                                                     </div>
                                                     <img src={mainBannerLine} alt="Touch Money"
                                                          className="main-banner__line hidden-mobile wow fadeIn"
                                                          data-wow-duration="0.5s"
-                                                         data-wow-delay="3.5s"/>
+                                                         data-wow-delay="3.7s"/>
                                                     <img src={mainBannerLineMob} alt="Touch Money"
                                                          className="main-banner__line hidden-desktop wow fadeIn"
                                                          data-wow-duration="0.5s"
-                                                         data-wow-delay="0.5s"/>
+                                                         data-wow-delay="3.7s"/>
                                                 </div>
                                                 <div className="main-banner__project hidden-mobile">
                                                     <div className="main-banner__project-marquee wow fadeIn"
                                                          data-wow-duration="0.5s"
                                                          data-wow-delay="0.3s">
                                                         {!!allProjects && sortColumns(...allProjects.map((val) => (
-                                                            <Link to={`/projects/${val.id}`} target="_blank">
+                                                            <Link to={`/projects/${val.id}`} target="_blank" key={val.id}>
                                                                 <img className="main-banner__project-img"
                                                                      src={val.image ? `${apiUrl}/uploads/${val.image.filename}` : null}
                                                                 />
