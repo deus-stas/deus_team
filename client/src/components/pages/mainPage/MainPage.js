@@ -426,7 +426,7 @@ const MainPage = () => {
                                 </a> :
                                 <Link to={`/projects/${project.nameInEng}`} className={`main-projects__item wow ${index < 1 ? 'fadeInLeft' : 'fadeIn'}`}
                                       data-wow-duration="0.5s"
-                                      data-wow-delay={`${index == 0? `0.1` : index*0.15}s`}
+                                      data-wow-delay={`${index === 0 ? `0.1` : (0.1 + index * 0.2)}s`}
                                       data-wow-offset="100"
                                       key={project.id}>
                                     <div className="main-projects__img-wrap">
