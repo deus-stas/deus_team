@@ -58,6 +58,7 @@ const AppWrapper = () => {
     const adminBasePath = "/admin/";
     const [seoInfo, setSeoInfo] = useState(null)
     const currentId = location.pathname;
+    let footerKey = 'footer_' + Date.now();
 
 
     const [isLoading, setIsLoading] = useState(true);
@@ -65,8 +66,6 @@ const AppWrapper = () => {
     useEffect((event) => {
         const handleLoad = (e) => {
             setIsLoading(e.detail.isLoading);
-            const wow = new WOW.WOW();
-            wow.init();
         };
 
         window.addEventListener('isLoadingMainPage', handleLoad);
@@ -101,20 +100,20 @@ const AppWrapper = () => {
 
     return (
         <>
-            <ScrollToTop/>
-            <CustomCursor
-                targets={['.js-cursor-play']}
-                customClass='custom-cursor'
-                dimensions={20}
-                fill='none'
-                opacity={0}
-            />
-
+            {/*<ScrollToTop/>*/}
+            {/*<CustomCursor*/}
+            {/*    targets={['.js-cursor-play']}*/}
+            {/*    customClass='custom-cursor'*/}
+            {/*    dimensions={20}*/}
+            {/*    fill='none'*/}
+            {/*    opacity={0}*/}
+            {/*/>*/}
+            <AxiosInterceptor>
             {/* <AppHeader /> */}
             {!shouldHideHeaderFooter && <AppHeader/>}
             {!!isLoading && (
                 <div className="loader"/>)}
-            <AxiosInterceptor>
+
                 {!!seoInfo &&
                     <HelmetComponent
                     pageDescription={seoInfo.seoDescription}
@@ -137,9 +136,9 @@ const AppWrapper = () => {
                     {/* <Route exact path='/register' element={<Register/>} /> */}
                     <Route exact path='/login' element={<Login/>}/>
                 </Routes>
-            </AxiosInterceptor>
-            {!shouldHideHeaderFooter && <AppFooter key={'footer_' + new Date().getTime()}/>}
 
+            {!shouldHideHeaderFooter && <AppFooter key={footerKey}/>}
+        </AxiosInterceptor>
         </>
     );
 
