@@ -292,7 +292,7 @@ const MainPage = () => {
                                                          data-wow-delay="0.3s">
                                                         {!!allProjects && sortColumns(...allProjects.map((val) => (
                                                             <Link to={`/projects/${val.id}`} target="_blank" key={val.id}>
-                                                                <img className="main-banner__project-img"
+                                                                <img className="main-banner__project-img" alt=''
                                                                      src={val.image ? `${apiUrl}/uploads/${val.image.filename}` : null}
                                                                 />
                                                             </Link>
