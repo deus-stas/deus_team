@@ -10,6 +10,7 @@ import './cta.scss'
 import manager from '../../img/manager.png';
 import axios from './../../axios'
 import RetryImage from "../../helpers/RetryImage";
+import WOW from "wowjs";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -49,6 +50,15 @@ const Cta = (props) => {
 
     const [worker, setWorker] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(()=>{
+            const wow = new WOW.WOW();
+            wow.init();
+            wow.sync();
+        },100)
+
+    });
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/contacts/`)

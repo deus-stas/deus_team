@@ -64,9 +64,9 @@ const AppWrapper = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const wow = new WOW.WOW();
-        wow.init();
-        wow.sync();
+            const wow = new WOW.WOW();
+            wow.init();
+            wow.sync();
     });
 
     useEffect((event) => {
