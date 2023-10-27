@@ -219,48 +219,52 @@ main {
     cursor: none;
 }
 
-.loader {
-    margin: 0 auto;
-    visibility: hidden;
-    top: 20em;
-    color: rgba(255, 158, 158, 0.81);
-    font-size: 10px;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    position: relative;
-    text-indent: -9999em;
-    animation: mulShdSpin 1.9s infinite linear;
-    transform: translateZ(0);
+#preloader {
+    position: fixed;
+    top: 10em;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}
 
-    @keyframes mulShdSpin {
-        0%, 100% {
-            box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-        }
-        12.5% {
-            box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-        }
-        25% {
-            box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-        }
-        37.5% {
-            box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-        }
-        50% {
-            box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-        }
-        62.5% {
-            box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-        }
-        75% {
-            box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-        }
-        87.5% {
-            box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-        }
+#preloader.hide-preloader {
+    animation: hidePreloader 1s ease-in-out infinite;
+}
+
+#preloader.preloader-hidden {
+    //display: block;
+}
+
+#preloader svg {
+    width: 100%;
+    animation: bigSVG 2s ease-in-out infinite;
+}
+
+#preloader svg path {
+    animation: colorSVG 2s ease-in-out infinite;
+}
+
+@keyframes bigSVG {
+    0% {
+        height: 10%;
+    }
+
+    100% {
+        height: 50%;
     }
 }
 
+@keyframes colorSVG {
+    0% {
+        fill: rgba(0, 0, 0, 0.02);
+    }
+
+    100% {
+        fill: rgb(0, 0, 0);
+    }
+}
 
 .select {
     display: flex;
