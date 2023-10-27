@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from '../../axios'
 
 import './sectionSocial.scss'
+import WOW from "wowjs";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -12,6 +13,15 @@ const SectionSocial = () => {
 
     const [social, setSocial] = useState([]);
     const [isLoading, setIsLoading] = useState([]);
+
+    useEffect(() => {
+        setTimeout(()=>{
+            const wow = new WOW.WOW();
+            wow.init();
+            wow.sync();
+        },100)
+
+    });
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/social/`)
