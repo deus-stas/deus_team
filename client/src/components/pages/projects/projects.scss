@@ -58,13 +58,6 @@
             .projects__item-img {
                 transform: scale(1.1);
             }
-
-            .projects__item-descr {
-                will-change: transform, opacity;
-                transform: translate(0px, 0px);
-                //transition: transform 0.4s, opacity 0.4s;
-                opacity: 1;
-            }
         }
 
         &:nth-child(1),
@@ -164,6 +157,14 @@
         &-name {
             font-size: 2.4rem;
             line-height: 3.4rem;
+            &:hover {
+
+                .projects__item-descr {
+                    will-change: transform, opacity;
+                    transform: translate(0px, 0px);
+                    opacity: 1;
+                }
+            }
 
             @include respond(sm) {
                 font-size: 2rem;
