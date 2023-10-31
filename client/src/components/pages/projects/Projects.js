@@ -7,6 +7,7 @@ import Cta from '../../cta/Cta';
 
 import './projects.scss'
 import TypeWriterText from "../../typeWriterText";
+import {connect} from "react-redux";
 
 const colourStyles = {
     control: (styles) => ({}),
@@ -59,10 +60,15 @@ const Projects = () => {
             });
     }
     const loadThemes = (cb) => {
-        axios.get(`${apiUrl}/api/projects/`)
+        axios.get(`${apiUrl}/api/themes/`)
             .then((response) => {
-                setProjects(response.data);
                 console.log(response.data);
+                let projectOptionsTheme = [];
+                response.data.forEach((item, i) => {
+                    const { id, name } = item;
+                    projectOptionsTheme[i] = { value: id, label: name }
+                })
+                setOptionsTheme(projectOptionsTheme)
                 if (!!cb) {
                     cb()
                 }

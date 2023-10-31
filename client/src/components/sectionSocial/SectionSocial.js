@@ -14,14 +14,11 @@ const SectionSocial = () => {
     const [social, setSocial] = useState([]);
     const [isLoading, setIsLoading] = useState([]);
 
-    useEffect(() => {
-        setTimeout(()=>{
-            const wow = new WOW.WOW();
-            wow.init();
-            wow.sync();
-        },100)
-
-    });
+    // useEffect(() => {
+    //         const wow = new WOW.WOW();
+    //         wow.init();
+    //         wow.sync();
+    // });
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/social/`)

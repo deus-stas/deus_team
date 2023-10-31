@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import {
     SET_CURRENT_USER,
-    USER_LOADING
+  USER_LOADING
   } from "../actions/types";
   const isEmpty = require("is-empty");
   const initialState = {
