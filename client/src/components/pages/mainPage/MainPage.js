@@ -19,6 +19,7 @@ import './mainPage.scss';
 import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
 import TypeWriterText from "../../typeWriterText";
+import {connect, useSelector} from "react-redux";
 
 
 SwiperCore.use([Autoplay]);
@@ -53,7 +54,7 @@ const classes = {
 
 
 
-const MainPage = () => {
+const MainPage = (props) => {
     const [isActive, setIsActive] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [news, setNews] = useState([]);
@@ -67,6 +68,7 @@ const MainPage = () => {
     const [services, setServices] = useState([]);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
+
 
     const onAcc = ({e,index}) => {
         let accItem = e.target.closest('.tab-parent');
@@ -138,15 +140,10 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/services/`)
-            .then((response) => {
-                const sortedData = response.data.sort((a, b) => a.position - b.position);
-                setServices(sortedData);
-                console.log(sortedData);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        if(!!props.services){
+            const sortedData = props.services.sort((a, b) => a.position - b.position);
+            setServices(sortedData);
+        }
     }, []);
 
     useEffect(() => {
@@ -251,6 +248,7 @@ const MainPage = () => {
 
         return columns;
     }
+
     return (
         <>
             {!isLoading &&
@@ -500,7 +498,7 @@ const MainPage = () => {
 
                         </div>
                         <div className="main-services__content">
-                            {services ? services.map((service, index) => {
+                            {props.services ? props.services.map((service, index) => {
                                 return (
                                     service.isInvisible ?
                                         <div className="main-services__item tab-parent wow fadeInDown"
@@ -582,4 +580,10 @@ const MainPage = () => {
 
 }
 
-export default MainPage;
+export default connect(
+    (state) => (
+        {
+            services: state.app.services,
+        }
+    )
+)(MainPage)

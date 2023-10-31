@@ -70,7 +70,7 @@
 
 /* Остальные стили для полосы прокрутки */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: var(--scrollbar-width)
 }
 
 ::-webkit-scrollbar-track {

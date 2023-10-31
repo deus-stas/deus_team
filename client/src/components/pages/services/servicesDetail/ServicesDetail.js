@@ -345,7 +345,7 @@ const ServicesDetail = () => {
                                                 {
                                                     project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                         ?
-                                                    <video autoPlay loop muted playsInline controls>
+                                                    <video autoPlay loop muted playsInline>
                                                         <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                                                     </video> :
                                                     project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'

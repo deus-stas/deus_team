@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState} from 'react';
 import axios from '../../../axios'
 import WOW from 'wowjs';
 import 'wowjs/css/libs/animate.css';
@@ -13,39 +13,17 @@ import './services.scss'
 
 import person from '../../../img/discuss-btn.png';
 import RetryImage from "../../../helpers/RetryImage";
+import {connect, useSelector} from "react-redux";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? ''
     : process.env.REACT_APP_LOCALHOST_URI;
 
-const Services = () => {
-    const [services, setServices] = useState([]);
+const Services = (props) => {
+
     const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [openImage, setOpenImage] = useState(null);
-    const [headerData, setHeaderData] = useState([]);
-
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/headerData/`)
-            .then((response) => {
-                setHeaderData(response.data[0]);
-                console.log('header data', response.data[0]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/services/`)
-            .then((response) => {
-                setServices(response.data);
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/reviews/`)
@@ -107,11 +85,12 @@ const Services = () => {
     const handleCloseImage = () => {
         setOpenImage(null);
     };
+    const {headerData, services, projects} = props;
 
     return (
         <>
             {!isLoading &&
-                <main className="services">
+                <main className="services" >
 
                     <section className="services-s wow fadeIn"
                              data-wow-duration="0.1s"
@@ -234,10 +213,19 @@ const Services = () => {
                         <Cta  formName={'services'}/>
                     </div>
                         <Social/>
+                    {console.log('mm')}
                 </main>
             }
         </>
     )
 }
 
-export default Services;
+export default connect(
+    (state) => (
+        {
+            headerData: state.app.headerData,
+            services: state.app.services,
+            projects: state.app.projects,
+        }
+    )
+)(Services)

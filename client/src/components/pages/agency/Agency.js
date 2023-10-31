@@ -19,12 +19,13 @@ import 'reactjs-popup/dist/index.css';
 import "swiper/css";
 import "swiper/css/grid";
 import './agency.scss';
+import {connect} from "react-redux";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
     : process.env.REACT_APP_LOCALHOST_URI;
 
-const Agency = () => {
+const Agency = (props) => {
 
     const [awards, setAwards] = useState([]);
     const [diplomas, setDiplomas] = useState([]);
@@ -38,19 +39,7 @@ const Agency = () => {
     const [current, setCurrent] = useState(4);
     const [total, setTotal] = useState(0);
     const [endSlider, setEndSlider] = useState(false);
-    const [headerData, setHeaderData] = useState([]);
-
-
-
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/headerData/`)
-            .then((response) => {
-                setHeaderData(response.data[0]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    // const [headerData, setHeaderData] = useState([]);
 
 
     useEffect(() => {
@@ -174,7 +163,7 @@ const Agency = () => {
             console.error(error);
         }
     };
-
+    const {headerData } = props;
     return (
         <>
             {!isLoading &&
@@ -797,4 +786,10 @@ const Agency = () => {
 
 }
 
-export default Agency;
+export default connect(
+    (state) => (
+        {
+            headerData: state.app.headerData,
+        }
+    )
+)(Agency)

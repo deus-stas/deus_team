@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 import InputMask from "react-input-mask";
-import {useState, useEffect, useLayoutEffect} from 'react';
+import {useState, useEffect} from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
@@ -11,6 +11,7 @@ import manager from '../../img/manager.png';
 import axios from './../../axios'
 import RetryImage from "../../helpers/RetryImage";
 import WOW from "wowjs";
+import {connect, useSelector} from "react-redux";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -48,30 +49,20 @@ function Checkbox(props) {
 
 const Cta = (props) => {
 
+
     const [worker, setWorker] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        setTimeout(()=>{
-            const wow = new WOW.WOW();
-            wow.init();
-            wow.sync();
-        },100)
-
-    });
+    // useEffect(() => {
+    //         const wow = new WOW.WOW();
+    //         wow.init();
+    //         wow.sync();
+    // });
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/contacts/`)
-            .then((response) => {
-                console.log("data contc", response.data)
-                console.log("props", props)
-                response.data.map((item, index) => (
-                    item.pageName === props.formName ? setWorker(item) : null
-                ))
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        contacts.map((item, index) => (
+            item.pageName === props.formName ? setWorker(item) : null
+        ))
     }, [props]);
 
     useEffect(() => {
@@ -103,7 +94,7 @@ const Cta = (props) => {
             console.error(error);
         }
     };
-
+    const {services, contacts } = props;
     return (
         <>
             {!isLoading &&
@@ -469,4 +460,11 @@ const Cta = (props) => {
 
 }
 
-export default Cta;
+export default connect(
+    (state) => (
+        {
+            services: state.app.services,
+            contacts: state.app.contacts
+        }
+    )
+)(Cta)
