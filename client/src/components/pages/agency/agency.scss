@@ -26,6 +26,7 @@
 
     &-about {
         padding-top: 10rem;
+        overflow: hidden;
 
         @include respond(sm) {
             padding-top: 6rem;
