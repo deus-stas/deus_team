@@ -20,6 +20,7 @@ import "swiper/css";
 import "swiper/css/grid";
 import './agency.scss';
 import {connect} from "react-redux";
+import RoundButton from "../../animation/roundButton";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -204,14 +205,24 @@ const Agency = (props) => {
                         </div>
                         {/* <Link className="btn --circle --orange">Презентация агентства</Link> */}
                         {
-                            headerData && headerData.presentation ? 
-                            <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`} target='_blank' rel="noopener noreferrer"  className="btn --circle --orange wow rollIn"
-                               data-wow-duration="0.5s"
-                               data-wow-delay="0.3s">Презентация агентства</a> :
+                            headerData && headerData.presentation ?
+                                <div style={{width: "15rem",
+                                    height: "15rem"}}>
+                                    <RoundButton fromX={200} rotateZ={-360} delay={500} >
+                                    <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`}
+                                       target='_blank'
+                                       rel="noopener noreferrer"
+                                       className="btn --circle --orange"
+                                      >Презентация агентства</a>
+                                    </RoundButton >
+                                </div>
+                                :
+                                <RoundButton fromX={600} >
                                 <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
-                                   className="btn --circle --orange wow rollIn"
-                                   data-wow-duration="0.5s"
-                                   data-wow-delay="0.3s">Презентация агентства</a>
+                                   className="btn --circle --orange"
+                                >Презентация агентства</a>
+                                </RoundButton >
+
                         }
                     </div>
                     <div className="agency-about__showreels hidden-desktop hidden-mobile">
@@ -506,12 +517,12 @@ const Agency = (props) => {
                              data-wow-duration="0.5s"
                              data-wow-delay="0.1s"
                              id='vacancies'>
-                            <h2 className="heading-secondary">Ищем таланты</h2>
+
                             {
                                 vacancies.length ?
                                     <div className="agency-team__talent">
+                                        <h2 className="heading-secondary">Ищем таланты</h2>
                                         <div className="agency-team__talent-wrap">
-
                                             {vacancies.map(item => {
                                                 return (
                                                     <Link to={item.link} className="agency-team__talent-item" key={item.id}>
@@ -525,7 +536,9 @@ const Agency = (props) => {
                                             })}
                                         </div>
                                     </div>
-                                    : <div className="agency-team__feedback sticky-person">
+                                    :
+                                <div className="agency-team__feedback sticky-person">
+                                <h2 className="heading-secondary">Ищем таланты</h2>
                                         <Formik
                                             initialValues={{ name: '', link: '', phone: '', email: '', about: '', file: '', formName: 'Ищем таланты' }}
                                             validate={values => {
@@ -618,13 +631,12 @@ const Agency = (props) => {
                                                                 setFieldValue("file", event.currentTarget.files[0]);
                                                             }} />
                                                         </div>
-
+                                                        <RoundButton fromX={200} rotateZ={-360} delay={500} >
                                                         <button type="submit"
-                                                                className='btn --orange --circle wow rollIn'
-                                                                data-wow-duration="0.5s"
-                                                                data-wow-delay="0.3s">
+                                                                className='btn --orange --circle'>
                                                             Отправить
                                                         </button>
+                                                        </RoundButton>
                                                         <div className="form__check">
                                                             Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <span className='span'>
                                                                 <Popup

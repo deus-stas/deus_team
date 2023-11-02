@@ -12,6 +12,7 @@ import axios from './../../axios'
 import RetryImage from "../../helpers/RetryImage";
 import WOW from "wowjs";
 import {connect, useSelector} from "react-redux";
+import RoundButton from "../animation/roundButton";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -301,14 +302,11 @@ const Cta = (props) => {
                                             </div>
                                             <div className="form__error">{errors.budget && touched.budget && errors.budget}</div>
                                         </div>
-                                        <div className="wow rollIn"
-                                             data-wow-offset="150"
-                                             data-wow-duration="0.5s"
-                                             data-wow-delay="0.3s">
+                                        <RoundButton fromX={-200} rotateZ={360} delay={500}>
                                             <button type="submit" className='btn --orange --circle'>
                                                 Отправить
                                             </button>
-                                        </div>
+                                        </RoundButton>
                                         <div className="form__check">
                                             Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <span className='span'>
                                                 <Popup

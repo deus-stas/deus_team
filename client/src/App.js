@@ -63,17 +63,21 @@ const AppWrapper = () => {
     const currentId = location.pathname;
     const [isLoading, setIsLoading] = useState(true);
 
+    let footerKey = 'footer_' + Date.now();
+
+    // useEffect(() => {
+    //     const wow = new WOW.WOW();
+    //     wow.init();
+    //     wow.sync();
+    // });
+
     useEffect(() => {
         const timeout = setTimeout(()=>dispatch(fetchData()),1200)
         ;
         return ()=> clearTimeout(timeout)
     }, []);
 
-    useEffect(() => {
-        const wow = new WOW.WOW();
-        wow.init();
-        wow.sync();
-    });
+
 
 
     // Check if the current route starts with the adminBasePath
@@ -144,7 +148,7 @@ const AppWrapper = () => {
                         <Route exact path='/login' element={<Login/>}/>
                     </Routes>
 
-                    {!shouldHideHeaderFooter && <AppFooter/>}
+                    {!shouldHideHeaderFooter && <AppFooter key={footerKey}/>}
                 </AxiosInterceptor>
         </>
     );

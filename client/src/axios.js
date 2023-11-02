@@ -11,7 +11,6 @@ const resInterceptor = response => {
     const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: false}});
     window.dispatchEvent(event)
 
-
     // setTimeout(() => window.dispatchEvent(event), 1700)
     return response;
 }
@@ -21,11 +20,12 @@ const errInterceptor = error => {
 }
 instance.interceptors.response.use(resInterceptor, errInterceptor);
 
+
+
 const AxiosInterceptor = ({children}) => {
     const [timeSVG, setTimeSVG] = useState(Date.now())
     const [memoLoading, setMemoLoading] = useState(true)
     const previousIsLoading = usePrevious(memoLoading);
-
     const updatePreloader = (isVisible = true) => {
         const now = new Date().getTime()
         if (isVisible) {

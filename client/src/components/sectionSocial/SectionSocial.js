@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from '../../axios'
 
 import './sectionSocial.scss'
-import WOW from "wowjs";
+import TrailOn from "../animation/trailOn";
+import ScrollUp from "../animation/scrollUp";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -55,32 +56,34 @@ const SectionSocial = () => {
                                 data-wow-offset="100">
                                 Узнать нас ближе
                             </h2>
+                            <ScrollUp fromY={50} delay={100} >
                             <div className="section-social__content">
                                 {
                                     social.map((item, index) => {
+                                        const fromY =50 + index * 2
+                                        const delay = 1000 + index *0.5
                                         return (
-                                            <Link to={item.link} className="section-social__item wow slideInRight"
-                                                  data-wow-duration="0.5s"
-                                                  data-wow-delay={`${index < 1 ? `0.1s` : `${0.4 + (index - 1 ) * 0.15}s`}`}
-                                                  data-wow-offset="100"
-                                                  target="_blank" key={item.id}
-                                                  style={{background: item.color}}>
-                                                <div className="hidden">
-                                                    <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null}
-                                                         alt={item.name}/>
-                                                    <div className="section-social__descr">{item.descr}</div>
-                                                </div>
+                                                    <Link to={item.link} className="section-social__item wow slideInRight"
 
-                                                    <div className="section-social__btn">
-                                                        <div className="arrow" style={{'--custom-color': item.color}}></div>
-                                                    </div>
+                                                          target="_blank" key={item.id}
+                                                          style={{background: item.color}}>
+                                                        <ScrollUp fromY={fromY} delay={delay} >
+                                                            <div className="hidden">
+                                                                <img src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null}
+                                                                     alt={item.name}/>
+                                                                <div className="section-social__descr">{item.descr}</div>
+                                                            </div>
+                                                        </ScrollUp>
 
-
-                                            </Link>
+                                                        <div className="section-social__btn">
+                                                            <div className="arrow" style={{'--custom-color': item.color}}></div>
+                                                        </div>
+                                                    </Link>
                                         )
                                     })
                                 }
                             </div>
+                            </ScrollUp>
                         </div>
                     </div>
                 </section>
