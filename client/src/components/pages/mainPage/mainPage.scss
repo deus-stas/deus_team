@@ -440,6 +440,7 @@
         &__item {
             padding-bottom: 3rem;
             border-bottom: 1px solid #3B3D3F;
+            margin-bottom: 3rem;
 
             @include respond(sm) {
                 padding-bottom: 1.5rem;
