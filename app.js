@@ -6,6 +6,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const newsRoutes = require('./routes/api/news');
+const mainPageRoutes = require('./routes/api/mainPage');
 const tagsRoutes = require('./routes/api/tags');
 const seoRoutes = require('./routes/api/seo');
 const workingRoutes = require('./routes/api/working');
@@ -57,6 +58,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/api', newsRoutes);
+app.use('/api', mainPageRoutes);
 app.use('/api', tagsRoutes);
 app.use('/api', seoRoutes);
 app.use('/api', workingRoutes);
