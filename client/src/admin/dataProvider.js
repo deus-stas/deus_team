@@ -103,6 +103,8 @@ const dataProvider = {
         //свойства в которых объект нужно отдельно переводить в JSON
       } else if (key === "tasksList") {
         formData.append(key, JSON.stringify(value));
+      } else if (key === "textList") {
+        formData.append(key, JSON.stringify(value));
       } else if (key === "workSteps") {
         formData.append(key, JSON.stringify(value));
       } else if (arrayApproachKeys.includes(key) && value) {
@@ -176,6 +178,8 @@ const dataProvider = {
           });
           //свойства в которых объект нужно отдельно переводить в JSON
         } else if (key === "tasksList") {
+          formData.append(key, JSON.stringify(value));
+        }else if (key === "textList") {
           formData.append(key, JSON.stringify(value));
         }  else if (key === "workSteps") {
           formData.append(key, JSON.stringify(value));

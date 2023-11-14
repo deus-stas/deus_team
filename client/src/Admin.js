@@ -1,6 +1,7 @@
 import React from 'react';
 import { Admin, Resource, UserMenu, AppBar, Layout } from 'react-admin';
 import { NewsList, NewsCreate, NewsEdit } from './admin/resources/News';
+import { MainPageList, MainPageCreate, MainPageEdit } from './admin/resources/MainPage';
 import { WorkingList, WorkingCreate, WorkingEdit } from './admin/resources/Working';
 import { TagsList, TagsEdit, TagsCreate } from './admin/resources/Tags';
 import { SeoList, SeoEdit, SeoCreate } from './admin/resources/SEO';
@@ -39,6 +40,7 @@ const AdminPage = () => (
   <Admin layout={MyLayout} dataProvider={dataProvider} authProvider={authProvider} basename="/admin" theme={theme}>
     <Resource name="projects" list={ProjectsList} create={ProjectsCreate} edit={ProjectsEdit} options={{ label: 'Проекты' }} />
     <Resource name="news" list={NewsList} create={NewsCreate} edit={NewsEdit} options={{ label: 'Новости' }} />
+    <Resource name="mainPage" list={MainPageList} create={MainPageCreate} edit={MainPageEdit} options={{ label: 'Главная страница' }} />
     <Resource name="working" list={WorkingList} create={WorkingCreate} edit={WorkingEdit} options={{ label: 'В работе' }} />
     <Resource name="tags" list={TagsList} create={TagsCreate} edit={TagsEdit} options={{ label: 'Теги' }} />
     <Resource name="seo" list={SeoList} create={SeoCreate} edit={SeoEdit} options={{ label: 'SEO' }} />

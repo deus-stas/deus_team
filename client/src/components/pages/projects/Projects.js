@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link, useLocation, useSearchParams} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 import axios from '../../../axios'
 import Select from 'react-select';
@@ -36,16 +36,15 @@ const apiUrl = process.env.NODE_ENV === 'production'
     : process.env.REACT_APP_LOCALHOST_URI;
 
 const Projects = () => {
-
+    const [searchParams, setSearchParams] = useSearchParams();
     const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState([]);
     const [optionsTheme, setOptionsTheme] = useState([]);
     const [optionsType, setOptionsType] = useState([]);
-
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
-
-
+    const location = useLocation();
+    const THEME_KEY='theme'
     const loadProject = (cb) => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
@@ -68,7 +67,7 @@ const Projects = () => {
                     const { id, name } = item;
                     projectOptionsTheme[i] = { value: id, label: name }
                 })
-                setOptionsTheme(projectOptionsTheme)
+                updateOptionsTheme(projectOptionsTheme)
                 if (!!cb) {
                     cb()
                 }
@@ -76,6 +75,18 @@ const Projects = () => {
             .catch((error) => {
                 console.log(error);
             });
+    }
+    const updateOptionsTheme=(projectOptionsTheme)=>{
+        setOptionsTheme(projectOptionsTheme)
+        if (searchParams.has(THEME_KEY)) {
+            const optionId = searchParams.get(THEME_KEY)
+            const theme = projectOptionsTheme.find(({value}) => value === optionId)
+            if (theme) {
+                setSelectedTheme(theme);
+                searchParams.delete(THEME_KEY)
+                setSearchParams(searchParams)
+            }
+        }
     }
     const loadTypes = (cb) => {
         axios.get(`${apiUrl}/api/types/`)
@@ -161,9 +172,9 @@ const Projects = () => {
                                 {optionsTheme && optionsType ?
                                     <div className="projects__filters">
                                         <Select classNames={classes} options={optionsType} styles={colourStyles}
-                                                onChange={handleTypeChange} placeholder="Тип проекта"/>
+                                                onChange={handleTypeChange}  placeholder="Тип проекта"/>
                                         <Select classNames={classes} options={optionsTheme} styles={colourStyles}
-                                                onChange={handleThemeChange} placeholder="Тематика проекта"/>
+                                                onChange={handleThemeChange} value={selectedTheme} placeholder="Тематика проекта"/>
                                     </div>
                                     : null}
                             </div>
