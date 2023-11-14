@@ -79,10 +79,13 @@ router.put("/news/:id", upload.single('image'), async (req, res) => {
   const image = req.file;
 
   // Если есть новое изображение в запросе, обновляем ссылку на него
-  if (image) {
-    fs.unlinkSync(`uploads/${news.image.filename}`);
-    news.image = image;
-  }
+    if (image) {
+        const path = `uploads/${news.image.filename}`
+        if (fs.existsSync(path)) {
+            fs.unlinkSync(path);
+        }
+        news.image = image;
+    }
 
   // Обновляем остальные поля документа
   news.name = name;
