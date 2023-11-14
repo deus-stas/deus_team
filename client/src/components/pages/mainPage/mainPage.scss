@@ -934,7 +934,7 @@
 
         &__item {
             position: relative;
-
+            display: grid;
             @include respond(sm) {
                 grid-column: auto;
             }
@@ -954,9 +954,11 @@
             //    }
             //}
 
-            &:nth-child(2) {
-                .main-news__img {
-                    aspect-ratio: 1/2.025;
+            &:nth-child(even) {
+
+                .main-news__img-wrap {
+                    display: grid;
+                    align-items: stretch;
                 }
 
                 .main-news__descr {
