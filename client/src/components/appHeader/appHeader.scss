@@ -101,8 +101,13 @@
         align-items: center;
         font-size: 2rem;
         line-height: 2.6rem;
+        background: transparent;
+        border: 1px solid #000000;
+        border-radius: 46px;
+        margin: 0;
+        padding: 1rem 1.5rem 1rem;
 
-        &:hover {
+    &:hover {
             .header__discuss-text {
                 opacity: 0.5;
             }
