@@ -118,4 +118,35 @@
             color: #FFFFFF;
         }
     }
+
+    &.--black {
+        background: #121212;
+        color: #FFFFFF;
+        margin: 0;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    &.--footer {
+        background: transparent;
+        border: 1px solid white;
+        color: #FFFFFF;
+        margin: 0;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
 }
+
+.black {
+    color: #000000;
+    display: block;
+}
+
+.fw {
+    flex-wrap: wrap;
+}
+

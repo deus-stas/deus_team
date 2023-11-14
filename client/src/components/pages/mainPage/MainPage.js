@@ -14,7 +14,9 @@ import "swiper/css";
 import "swiper/css/grid";
 import './mainPage.scss';
 
-
+import arrorLink from '../../../img/icon/arrow-link.svg'
+import arrorGo from '../../../img/icon/arrow-go.svg'
+import arrorGo2 from '../../../img/icon/arrow-go2.svg'
 import mainBannerLine from '../../../img/main-banner-line.svg';
 import mainBannerLineMob from '../../../img/main-banner-line-mob.svg';
 import TypeWriterText from "../../typeWriterText";
@@ -22,6 +24,7 @@ import {connect} from "react-redux";
 import {useInView} from 'react-intersection-observer';
 import RoundButton from "../../animation/roundButton";
 import ScrollUp from "../../animation/scrollUp";
+import {isVisible} from "@testing-library/user-event/dist/utils";
 
 
 SwiperCore.use([Autoplay]);
@@ -62,10 +65,10 @@ const MainPage = (props) => {
     const [working, setWorking] = useState([]);
     const [showreels, setShowreels] = useState([]);
     const [allProjects, setAllProjects] = useState([]);
+    const [mainPage, setMainPage] = useState([]);
     const [total, setTotal] = useState(0);
     const [optionsTheme, setOptionsTheme] = useState([]);
     const [optionsType, setOptionsType] = useState([]);
-    const [services, setServices] = useState([]);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
 
@@ -140,11 +143,15 @@ const MainPage = (props) => {
     }, []);
 
     useEffect(() => {
-        if (!!props.services) {
-            const sortedData = props.services.sort((a, b) => a.position - b.position);
-            setServices(sortedData);
-        }
+        axios.get(`${apiUrl}/api/mainPage/`)
+            .then((response) => {
+                setMainPage(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
+
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/`)
@@ -217,6 +224,7 @@ const MainPage = (props) => {
         return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
             (selectedType ? project.projectType === selectedType.value : true) && project.visibility;
     }).slice(0, 3);
+    console.log("fol:", filteredProjects.length)
 
     const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
@@ -248,79 +256,211 @@ const MainPage = (props) => {
         return columns;
     }
 
+    const mainShowreel = showreels.find(showreel => showreel.mainShowreel === true);
+
+    const { services, headerData } = props;
+    services.sort((a, b) => a.position - b.position);
+
     return (
         <>
             {!isLoading &&
                 <main className="main">
                     <ScrollUp fromY={0} delay={1000}>
-                        <section className="main-banner"
-                                 style={{background: "rgba(0,0,0,0.82)"}}>
+                        <section className="main-banner">
                             <div className="container">
                                 <div className="main-banner__wrap">
                                     <div className="main-banner__content">
-                                        <h1 className="heading-primary wow fadeIn"
-                                            data-wow-duration="0.5s"
-                                            data-wow-delay="0.3s">
-                                            <TypeWriterText
-                                                text={"Создавайте вместе с нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей"}
-                                            />
-                                        </h1>
-                                        <div className="rollCircleMain">
-                                            <RoundButton fromX={-200} rotateZ={360} delay={2500}>
-                                                <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
-                                                   className="btn --circle --orange"
-                                                >Презентация агентства</a>
-                                            </RoundButton>
-                                        </div>
-                                        <RoundButton rotateZ={0} fromX={0} delay={4500}>
-                                            <img src={mainBannerLine} alt="Touch Money"
-                                                 className="main-banner__line hidden-mobile wow fadeIn"
-                                                 data-wow-duration="0.5s"
-                                                 data-wow-delay="3.7s"/>
-                                        </RoundButton>
-                                        <RoundButton rotateZ={0} fromX={0} delay={4500}>
-                                            <img src={mainBannerLineMob} alt="Touch Money"
-                                                 className="main-banner__line hidden-desktop"
-                                            />
-                                        </RoundButton>
+                                        <h4 className="heading-fourth">Digital агенство</h4>
+                                        <h1 className="heading-primary">
+                                            <span>Создаем продукты и услуги,</span>
+                                            <span>которые помогают нашим</span>
+                                            <span className="last-grid"> клиентам
+                                                    <btn className="btn --black hidden-mobile">Стать клиентом</btn>
+                                                        <p className="p-style wh-30">
+                                                            быть <span className="p-black-black">заметнее</span> в цифровом пространстве
+                                                        </p>
 
-                                    </div>
-                                    <div className="main-banner__project hidden-mobile">
-                                        <div className="main-banner__project-marquee wow fadeIn"
-                                             data-wow-duration="0.5s"
-                                             data-wow-delay="0.3s">
-                                            {!!allProjects && sortColumns(...allProjects.map((val) => (
-                                                <Link to={`/projects/${val.id}`} target="_blank" key={val.id}>
-                                                    <img className="main-banner__project-img" alt=''
-                                                         src={val.image ? `${apiUrl}/uploads/${val.image.filename}` : null}
-                                                    />
-                                                </Link>
-                                            ))).map((column, index) => (
-                                                <div className="main-banner__project-marquee__column">
-                                                    <div style={{
-                                                        gap: "0.5em",
-                                                        display: "flex",
-                                                        flexDirection: "column",
-                                                    }}
-                                                         key={index}>
-                                                        {column}
-                                                    </div>
-                                                    <div style={{
-                                                        gap: "0.5em",
-                                                        display: "flex",
-                                                        flexDirection: "column",
-                                                    }}
-                                                         key={index + "_2"}>
-                                                        {column}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
+                                            </span>
+                                        </h1>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </ScrollUp>
+                    {
+                        mainShowreel ? <Showreel data={mainShowreel}  isMain={true} /> : null
+                    }
+                    <section className="main-agency">
+                        <div className="container">
+                            {/*<div className="main-agency__wrap">*/}
+                            {/*    {filteredProjects.map((item, index) => {*/}
+                            {/*        const arrow = index !== 1;*/}
+                            {/*        const allServices = index == 1 && services.map(item => <div className="item-service p-black">{item.name}<img src={arrorGo} alt={'go'}/></div>);*/}
+                            {/*        const num = index < 9 ? '0' + (index + 1) : index + 1;*/}
+                            {/*        const name = (item.name).slice(0, 10);*/}
+                            {/*        const descr = index == 1? <div className="item__service">{allServices}</div> : <div className="item__descr">50+{item.descrProject} </div>*/}
+                            {/*        return (*/}
+                            {/*            <div className="main-agency__item" key={item.id}>*/}
+                            {/*                <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн"*/}
+                            {/*                     className="main-agency__item-img"/>*/}
+                            {/*                <div className="main-agency__item-header">*/}
+                            {/*                    <div className="main-agency__item-header__num">{num}</div>*/}
+                            {/*                    <div className="item__text heading-secondary">{name}</div>*/}
+                            {/*                </div>*/}
+                            {/*                {descr}*/}
+                            {/*                {!!arrow &&*/}
+                            {/*                    <img className="main-agency__item-arrow" src={arrorLink} alt={'go'}/>}*/}
+                            {/*            </div>*/}
+                            {/*        );*/}
+                            {/*    })}*/}
+                            {/*</div>*/}
+                            <ScrollUp fromY={0} delay={2000}>
+                            <div className="main-agency__wrap">
+                                {mainPage.map((item, index) => {
+                                    const arrow = index !== 1;
+                                    const allServices = index == 1 &&  props.services.filter((service,index)=> service.isInvisible).map((service, index) => <Link
+                                        to={`/services/${service.path}`}>
+                                        <div className="main-agency__item-link p-black">{service.name}<img src={arrorGo}
+                                                                                                           alt={'go'}/>
+                                        </div>
+                                    </Link>);
+                                    const num = index < 9 ? '0' + (index + 1) : index + 1;
+                                    const name = item.name
+                                    const descr = index == 1 ? <div className="main-agency__item-service">{allServices}</div> :
+                                        <div className={`main-agency__item__descr${index == 0 ? '1' : ''}`}>
+                                            {
+                                                item.textList !== 'undefined' && item.textList && (
+
+                                                    <div className="main-agency__item__descr-flex">
+                                                        {item.textList.map((item, ind) => (
+                                                            <div className={index == 2 ? "main-agency__item__descr-flex__item" : ""}>
+                                                                {item.textItem}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
+                                    return (
+
+                                        <div className="main-agency__item" key={item.id}>
+                                            <a href={`${item.pageURL}`} target="_blank">
+                                                <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн"
+                                                     className="main-agency__item-img"/>
+
+                                                <div className="main-agency__item-header">
+                                                    <div className="main-agency__item-header__num">{num}</div>
+                                                    <div
+                                                        className="main-agency__item-header__text heading-secondary">{name}</div>
+                                                </div>
+
+                                                {descr}
+                                                {!!arrow &&
+                                                    <img className="main-agency__item-arrow" src={arrorLink}
+                                                         alt={'go'}/>}</a>
+                                        </div>
+
+                                    );
+                                })}
+                            </div>
+                            </ScrollUp>
+                                <ScrollUp fromY={0} delay={2000}>
+                            <div className="main-projects__wrap">
+                                <h2 className="heading-secondary" >Проекты по индустриям</h2>
+                                <div className="main-projects__item">
+                                    <p className="p-black">Мы работаем с ведущими компаниями и брендами из различных отраслей. При создании могут решаться уникальные задачи, но это всегда проекты с характером</p>
+                                    <div className="main-projects__item-flex">
+                                        {optionsTheme ? optionsTheme.map((project, index) => {
+                                            const filterProjects = allProjects.filter(item => item.projectTheme === project.value && item.visibility);
+                                            const totalSum = filterProjects.length;
+                                            return (
+                                                <Link to={`/projects?theme=${project.value}`}>
+                                                <div className="main-projects__item-flex__inner">
+                                                    <div className="heading-secondary" >
+                                                        {project.label}
+                                                    </div>
+                                                    <div className="main-projects__num"><span>{totalSum}</span></div>
+                                                </div>
+                                        </Link>
+                                            );
+                                        }) : null}
+                                    </div>
+                                </div>
+                            </div>
+                                </ScrollUp>
+                        </div>
+
+
+                    </section>
+                    {/*<ScrollUp fromY={0} delay={1000}>*/}
+                    {/*    <section className="main-banner"*/}
+                    {/*             style={{background: "rgba(0,0,0,0.82)"}}>*/}
+                    {/*        <div className="container">*/}
+                    {/*            <div className="main-banner__wrap">*/}
+                    {/*                <div className="main-banner__content">*/}
+                    {/*                    <h1 className="heading-primary wow fadeIn"*/}
+                    {/*                        data-wow-duration="0.5s"*/}
+                    {/*                        data-wow-delay="0.3s">*/}
+                    {/*                        <TypeWriterText*/}
+                    {/*                            text={"Создавайте вместе с нами новые впечатления о Вашей компании, которые превзойдут ожидания потребителей"}*/}
+                    {/*                        />*/}
+                    {/*                    </h1>*/}
+                    {/*                    <div className="rollCircleMain">*/}
+                    {/*                        <RoundButton fromX={-200} rotateZ={360} delay={2500}>*/}
+                    {/*                            <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'*/}
+                    {/*                               className="btn --circle --orange"*/}
+                    {/*                            >Презентация агентства</a>*/}
+                    {/*                        </RoundButton>*/}
+                    {/*                    </div>*/}
+                    {/*                    <RoundButton rotateZ={0} fromX={0} delay={4500}>*/}
+                    {/*                        <img src={mainBannerLine} alt="Touch Money"*/}
+                    {/*                             className="main-banner__line hidden-mobile wow fadeIn"*/}
+                    {/*                             data-wow-duration="0.5s"*/}
+                    {/*                             data-wow-delay="3.7s"/>*/}
+                    {/*                    </RoundButton>*/}
+                    {/*                    <RoundButton rotateZ={0} fromX={0} delay={4500}>*/}
+                    {/*                        <img src={mainBannerLineMob} alt="Touch Money"*/}
+                    {/*                             className="main-banner__line hidden-desktop"*/}
+                    {/*                        />*/}
+                    {/*                    </RoundButton>*/}
+
+                    {/*                </div>*/}
+                    {/*                <div className="main-banner__project hidden-mobile">*/}
+                    {/*                    <div className="main-banner__project-marquee wow fadeIn"*/}
+                    {/*                         data-wow-duration="0.5s"*/}
+                    {/*                         data-wow-delay="0.3s">*/}
+                    {/*                        {!!allProjects && sortColumns(...allProjects.map((val) => (*/}
+                    {/*                            <Link to={`/projects/${val.id}`} target="_blank" key={val.id}>*/}
+                    {/*                                <img className="main-banner__project-img" alt=''*/}
+                    {/*                                     src={val.image ? `${apiUrl}/uploads/${val.image.filename}` : null}*/}
+                    {/*                                />*/}
+                    {/*                            </Link>*/}
+                    {/*                        ))).map((column, index) => (*/}
+                    {/*                            <div className="main-banner__project-marquee__column">*/}
+                    {/*                                <div style={{*/}
+                    {/*                                    gap: "0.5em",*/}
+                    {/*                                    display: "flex",*/}
+                    {/*                                    flexDirection: "column",*/}
+                    {/*                                }}*/}
+                    {/*                                     key={index}>*/}
+                    {/*                                    {column}*/}
+                    {/*                                </div>*/}
+                    {/*                                <div style={{*/}
+                    {/*                                    gap: "0.5em",*/}
+                    {/*                                    display: "flex",*/}
+                    {/*                                    flexDirection: "column",*/}
+                    {/*                                }}*/}
+                    {/*                                     key={index + "_2"}>*/}
+                    {/*                                    {column}*/}
+                    {/*                                </div>*/}
+                    {/*                            </div>*/}
+                    {/*                        ))}*/}
+                    {/*                    </div>*/}
+                    {/*                </div>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    </section>*/}
+                    {/*</ScrollUp>*/}
 
                     {/* {mainProjects ? mainProjects.map(project => { */}
                     {/* return ( */}
@@ -377,107 +517,108 @@ const MainPage = (props) => {
                     {/* )
             }) : null} */}
 
-                    <section className="main-projects wow fadeIn"
-                             data-wow-duration="0.1s"
-                             data-wow-delay="0.1s">
-                        <div className="container">
-                            <ScrollUp fromY={70} delay={500}>
-                            <div className="main-projects__head">
-                                <h2 className="heading-secondary">Проекты</h2>
-                                <div className="main-projects__filters hidden-mobile">
-                                    <Select classNames={classes} options={optionsType} styles={colourStyles}
-                                            onChange={handleTypeChange} placeholder="Тип проекта"/>
-                                    <Select classNames={classes} options={optionsTheme} styles={colourStyles}
-                                            onChange={handleThemeChange} placeholder="Тематика проекта"/>
-                                </div>
-                                <Link to="/projects" className="btn --orange hidden-mobile">Все проекты</Link>
-                            </div>
-                            </ScrollUp>
-                            <div className="main-projects__wrap">
-                                {filteredProjects ? filteredProjects.map((project, index) => {
-                                        const delay = 1000 + index * 200;
-                                        return (
-                                            project.controlURL ?
-                                                <ScrollUp fromY={50} delay={delay}>
-                                                <a href={`${project.projectURL}`} className="main-projects__item"
-                                                   key={project.id}>
-                                                    <div className="main-projects__img-wrap">
-                                                        {
-                                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
-                                                                ?
-                                                                <video className="wow slideInLeft"
-                                                                       data-wow-duration="0.5s"
-                                                                       data-wow-delay={`${index * 0.2}s`}
-                                                                       data-wow-offset="100"
-                                                                       ref={(ref) => addVideoRef(ref)} autoPlay muted
-                                                                       playsInline loop>
-                                                                    <source
-                                                                        src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
-                                                                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                                                </video> :
-                                                                project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
-                                                                    ?
-                                                                    <div ref={(ref) => addVideoRef(ref)}
-                                                                         dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>
-                                                                    :
-                                                                    <img ref={(ref) => addVideoRef(ref)} src={project.image
-                                                                        ? `${apiUrl}/uploads/${project.image.filename}` : null}
-                                                                         alt={project.name}
-                                                                         className="main-projects__img wow fadeIn"
-                                                                         data-wow-duration="2s"
-                                                                         data-wow-delay={`${index * 0.350}s`}
-                                                                         data-wow-offset="100"/>
-                                                        }
-                                                    </div>
-                                                    <div className="main-projects__name wow fadeIn"
-                                                         data-wow-duration="2s"
-                                                         data-wow-delay={`${index * 0.300}s`}
-                                                         data-wow-offset="100">{project.name}</div>
-                                                    <div className="main-projects__descr">{project.descrProject}</div>
+                    {/*<section className="main-projects wow fadeIn"*/}
+                    {/*         data-wow-duration="0.1s"*/}
+                    {/*         data-wow-delay="0.1s">*/}
+                    {/*    <div className="container">*/}
+                    {/*        <ScrollUp fromY={70} delay={500}>*/}
+                    {/*        <div className="main-projects__head">*/}
+                    {/*            <h2 className="heading-secondary">Проекты</h2>*/}
+                    {/*            <div className="main-projects__filters hidden-mobile">*/}
+                    {/*                <Select classNames={classes} options={optionsType} styles={colourStyles}*/}
+                    {/*                        onChange={handleTypeChange} placeholder="Тип проекта"/>*/}
+                    {/*                <Select classNames={classes} options={optionsTheme} styles={colourStyles}*/}
+                    {/*                        onChange={handleThemeChange} placeholder="Тематика проекта"/>*/}
+                    {/*            </div>*/}
+                    {/*            <Link to="/projects" className="btn --orange hidden-mobile">Все проекты</Link>*/}
+                    {/*        </div>*/}
+                    {/*        </ScrollUp>*/}
+                    {/*        <div className="main-projects__wrap">*/}
+                    {/*            {filteredProjects ? filteredProjects.map((project, index) => {*/}
+                    {/*                    const delay = 1000 + index * 200;*/}
+                    {/*                    return (*/}
+                    {/*                        project.controlURL ?*/}
+                    {/*                            <ScrollUp fromY={50} delay={delay}>*/}
+                    {/*                            <a href={`${project.projectURL}`} className="main-projects__item"*/}
+                    {/*                               key={project.id}>*/}
+                    {/*                                <div className="main-projects__img-wrap">*/}
+                    {/*                                    {*/}
+                    {/*                                        project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'*/}
+                    {/*                                            ?*/}
+                    {/*                                            <video className="wow slideInLeft"*/}
+                    {/*                                                   data-wow-duration="0.5s"*/}
+                    {/*                                                   data-wow-delay={`${index * 0.2}s`}*/}
+                    {/*                                                   data-wow-offset="100"*/}
+                    {/*                                                   ref={(ref) => addVideoRef(ref)} autoPlay muted*/}
+                    {/*                                                   playsInline loop>*/}
+                    {/*                                                <source*/}
+                    {/*                                                    src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}*/}
+                    {/*                                                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>*/}
+                    {/*                                            </video> :*/}
+                    {/*                                            project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'*/}
+                    {/*                                                ?*/}
+                    {/*                                                <div ref={(ref) => addVideoRef(ref)}*/}
+                    {/*                                                     dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>*/}
+                    {/*                                                :*/}
+                    {/*                                                <img ref={(ref) => addVideoRef(ref)} src={project.image*/}
+                    {/*                                                    ? `${apiUrl}/uploads/${project.image.filename}` : null}*/}
+                    {/*                                                     alt={project.name}*/}
+                    {/*                                                     className="main-projects__img wow fadeIn"*/}
+                    {/*                                                     data-wow-duration="2s"*/}
+                    {/*                                                     data-wow-delay={`${index * 0.350}s`}*/}
+                    {/*                                                     data-wow-offset="100"/>*/}
+                    {/*                                    }*/}
+                    {/*                                </div>*/}
+                    {/*                                <div className="main-projects__name wow fadeIn"*/}
+                    {/*                                     data-wow-duration="2s"*/}
+                    {/*                                     data-wow-delay={`${index * 0.300}s`}*/}
+                    {/*                                     data-wow-offset="100">{project.name}</div>*/}
+                    {/*                                <div className="main-projects__descr">{project.descrProject}</div>*/}
 
-                                                </a></ScrollUp> :
-                                                <ScrollUp fromY={50} delay={delay}>
-                                                <Link to={`/projects/${project.nameInEng}`}
-                                                      className={`main-projects__item wow ${index < 1 ? 'fadeInLeft' : 'fadeIn'}`}
-                                                      data-wow-duration="0.5s"
-                                                      data-wow-delay={`${index === 0 ? `0.1` : (0.1 + index * 0.2)}s`}
-                                                      data-wow-offset="100"
-                                                      key={project.id}>
-                                                    <div className="main-projects__img-wrap">
-                                                        {
-                                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
-                                                                ?
-                                                                <video
-                                                                    ref={(ref) => addVideoRef(ref)} autoPlay muted
-                                                                    playsInline loop>
-                                                                    <source
-                                                                        src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
-                                                                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                                                </video> :
-                                                                project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
-                                                                    ?
-                                                                    <div ref={(ref) => addVideoRef(ref)}
-                                                                         dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>
-                                                                    :
-                                                                    <img className="main-projects__img"
-                                                                         ref={(ref) => addVideoRef(ref)}
-                                                                         src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
-                                                                         alt={project.name}/>
-                                                        }
-                                                    </div>
-                                                    <div className="main-projects__name">{project.name}</div>
-                                                    <div className="main-projects__descr">{project.descrProject}</div>
-                                                </Link>
-                                                </ScrollUp>
-                                        )
-                                    })
-                                    : null}
-                            </div>
-                        </div>
-                    </section>
+                    {/*                            </a></ScrollUp> :*/}
+                    {/*                            <ScrollUp fromY={50} delay={delay}>*/}
+                    {/*                            <Link to={`/projects/${project.nameInEng}`}*/}
+                    {/*                                  className={`main-projects__item wow ${index < 1 ? 'fadeInLeft' : 'fadeIn'}`}*/}
+                    {/*                                  data-wow-duration="0.5s"*/}
+                    {/*                                  data-wow-delay={`${index === 0 ? `0.1` : (0.1 + index * 0.2)}s`}*/}
+                    {/*                                  data-wow-offset="100"*/}
+                    {/*                                  key={project.id}>*/}
+                    {/*                                <div className="main-projects__img-wrap">*/}
+                    {/*                                    {*/}
+                    {/*                                        project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'*/}
+                    {/*                                            ?*/}
+                    {/*                                            <video*/}
+                    {/*                                                ref={(ref) => addVideoRef(ref)} autoPlay muted*/}
+                    {/*                                                playsInline loop>*/}
+                    {/*                                                <source*/}
+                    {/*                                                    src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}*/}
+                    {/*                                                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>*/}
+                    {/*                                            </video> :*/}
+                    {/*                                            project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'*/}
+                    {/*                                                ?*/}
+                    {/*                                                <div ref={(ref) => addVideoRef(ref)}*/}
+                    {/*                                                     dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>*/}
+                    {/*                                                :*/}
+                    {/*                                                <img className="main-projects__img"*/}
+                    {/*                                                     ref={(ref) => addVideoRef(ref)}*/}
+                    {/*                                                     src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}*/}
+                    {/*                                                     alt={project.name}/>*/}
+                    {/*                                    }*/}
+                    {/*                                </div>*/}
+                    {/*                                <div className="main-projects__name">{project.name}</div>*/}
+                    {/*                                <div className="main-projects__descr">{project.descrProject}</div>*/}
+                    {/*                            </Link>*/}
+                    {/*                            </ScrollUp>*/}
+                    {/*                    )*/}
+                    {/*                })*/}
+                    {/*                : null}*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</section>*/}
 
                     {working ?
-                        <section style={{display: 'none'}} className="main-working">
+                        <ScrollUp fromY={0} delay={1000}>
+                        <section className="main-working">
                             <div className="container">
                                 <h3 className="heading-tertiary">Работаем сейчас над</h3>
                                 <div className="main-working__wrap">
@@ -498,97 +639,105 @@ const MainPage = (props) => {
                                 </div>
                             </div>
                         </section>
+                        </ScrollUp>
                         : null}
-                    <ScrollUp fromY={0} delay={500}>
-                    <section className="main-services">
-                        <div className="container">
-                            <div className="main-services__wrap">
-                                <div className="main-services__info">
-                                    <h2 className="heading-secondary">Услуги</h2>
-                                    {
-                                        foundShowreel ?
-                                            <ScrollUp fromY={10} delay={1000}>
-                                                <Showreel data={foundShowreel} key={foundShowreel.id}/>
-                                            </ScrollUp>
-                                            : null
-                                    }
+                    {/*<ScrollUp fromY={0} delay={500}>*/}
+                    {/*<section className="main-services">*/}
+                    {/*    <div className="container">*/}
+                    {/*        <div className="main-services__wrap">*/}
+                    {/*            <div className="main-services__info">*/}
+                    {/*                <h2 className="heading-secondary">Услуги</h2>*/}
+                    {/*                {*/}
+                    {/*                    foundShowreel ?*/}
+                    {/*                        <ScrollUp fromY={10} delay={1000}>*/}
+                    {/*                            <Showreel data={foundShowreel} key={foundShowreel.id}/>*/}
+                    {/*                        </ScrollUp>*/}
+                    {/*                        : null*/}
+                    {/*                }*/}
 
-                                </div>
-                                <div className="main-services__content">
-                                    {props.services ? props.services.filter((service,index)=> service.isInvisible).map((service, index) => {
-                                        const delay = 1000 + index * 200;
-                                        const fromY = 20 + index * 20;
-                                        return (
-                                            <ScrollUp fromY={fromY} delay={delay}>
-                                                <div className="main-services__item tab-parent"
-                                                     key={service.id}>
-                                                    <div className="main-services__head"
-                                                         onClick={(e) => onAcc({e, index})}>
-                                                        <div
-                                                            className="main-services__num">{index < 9 ? 0 : ''}{index + 1}</div>
-                                                        <div className="main-services__name">{service.name}</div>
-                                                        <div className="main-services__btn">
-                                                            <Icon icon="arr-acc"/>
-                                                        </div>
+                    {/*            </div>*/}
+                    {/*            <div className="main-services__content">*/}
+                    {/*                {props.services ? props.services.filter((service,index)=> service.isInvisible).map((service, index) => {*/}
+                    {/*                    const delay = 1000 + index * 200;*/}
+                    {/*                    const fromY = 20 + index * 20;*/}
+                    {/*                    return (*/}
+                    {/*                        <ScrollUp fromY={fromY} delay={delay}>*/}
+                    {/*                            <div className="main-services__item tab-parent"*/}
+                    {/*                                 key={service.id}>*/}
+                    {/*                                <div className="main-services__head"*/}
+                    {/*                                     onClick={(e) => onAcc({e, index})}>*/}
+                    {/*                                    <div*/}
+                    {/*                                        className="main-services__num">{index < 9 ? 0 : ''}{index + 1}</div>*/}
+                    {/*                                    <div className="main-services__name">{service.name}</div>*/}
+                    {/*                                    <div className="main-services__btn">*/}
+                    {/*                                        <Icon icon="arr-acc"/>*/}
+                    {/*                                    </div>*/}
+                    {/*                                </div>*/}
+                    {/*                                <div className="main-services__acc">*/}
+                    {/*                                    <div*/}
+                    {/*                                        className="main-services__descr"*/}
+                    {/*                                    >{service.descr}*/}
+                    {/*                                    </div>*/}
+                    {/*                                    <div className="main-services__bot"*/}
+                    {/*                                    >*/}
+                    {/*                                        /!* <div className="main-services__gallery">*/}
+                    {/*                                <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />*/}
+                    {/*                                <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />*/}
+                    {/*                                <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />*/}
+                    {/*                            </div> *!/*/}
+                    {/*                                        <Link to={`/services/${service.path}`}*/}
+                    {/*                                              className="btn --b-orange"*/}
+                    {/*                                        >Подробнее</Link>*/}
+                    {/*                                    </div>*/}
+                    {/*                                </div>*/}
+                    {/*                            </div>*/}
+                    {/*                        </ScrollUp>*/}
+                    {/*                    )*/}
+                    {/*                }) : null}*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</section>*/}
+                    {/*</ScrollUp>*/}
+                    <ScrollUp fromY={0} delay={1000}>
+                        <section className="main-news">
+                            <div className="container">
+                                <div className="main-news__wrap">
+                                    <div className="main-news__info">
+                                        <h2 className="heading-secondary">Журнал</h2>
+                                        <div className="main-news__info-wrap">
+                                            {[...allTags].map((tag, i) => (
+                                                <Link to={`/news?tag=${tag}`} className="main-news__info-item"
+                                                      key={i}><p className="p-black-black">#{tag}</p> <img src={arrorGo2} alt={'go'}/></Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="main-news__content">
+                                        {news.map((item) => {
+                                            return (
+                                                <Link to={`/news/${item.id}`} className="main-news__item" key={item.id}>
+                                                    <div className="main-news__img-wrap">
+                                                        <img src={`${apiUrl}/uploads/${item.image.filename}`}
+                                                             alt="Дизайн" className="main-news__img"/>
                                                     </div>
-                                                    <div className="main-services__acc">
-                                                        <div
-                                                            className="main-services__descr"
-                                                        >{service.descr}
-                                                        </div>
-                                                        <div className="main-services__bot"
-                                                        >
-                                                            {/* <div className="main-services__gallery">
-                                                    <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
-                                                    <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
-                                                    <img src={serviceImg} alt="Фирменный стиль" className="main-services__img" />
-                                                </div> */}
-                                                            <Link to={`/services/${service.path}`}
-                                                                  className="btn --b-orange"
-                                                            >Подробнее</Link>
-                                                        </div>
+                                                    <div className="main-news__text">
+                                                        <div className="main-news__tag">#{item.tags}</div>
                                                     </div>
-                                                </div>
-                                            </ScrollUp>
-                                        )
-                                    }) : null}
+                                                    <div className="main-news__descr">
+                                                        <div className="main-news__name">{item.name}</div>
+                                                    </div>
+                                                    <img className="main-agency__item-arrow" src={arrorLink}
+                                                         alt={'go'}/>
+                                                </Link>
+                                            )
+                                        }).slice(0, 2)}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
                     </ScrollUp>
 
-                    {/* <section className="main-news">
-                <div className="container">
-                    <div className="main-news__wrap">
-                        <div className="main-news__info">
-                            <h2 className="heading-secondary">Журнал</h2>
-                            <div className="main-news__info-wrap">
-                                {[...allTags].map((tag, i) => (
-                                    <Link to={`/news?tag=${tag}`} className="main-news__info-item" key={i}>#{tag}</Link>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="main-news__content">
-                            {news.map((item) => {
-                                return (
-                                    <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
-                                        <div className="news__img-wrap">
-                                            <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
-                                        </div>
-                                        <div className="news__text">
-                                            <div className="news__tag">{item.tags}</div>
-                                            <div className="news__name">{item.name}</div>
-                                        </div>
-                                    </Link>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-
-                    <SectionSocial/>
+                    {/*<SectionSocial/>*/}
 
                     {/*<SectionProducts />*/}
                 </main>
@@ -600,7 +749,7 @@ const MainPage = (props) => {
 
 export default connect(
     (state) => (
-        {
+        {   headerData: state.app.headerData,
             services: state.app.services,
         }
     )
