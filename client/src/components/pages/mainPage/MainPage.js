@@ -316,7 +316,7 @@ const MainPage = (props) => {
                             {/*</div>*/}
                             <ScrollUp fromY={0} delay={2000}>
                             <div className="main-agency__wrap">
-                                {mainPage.map((item, index) => {
+                                {mainPage ? mainPage.map((item, index) => {
                                     const arrow = index !== 1;
                                     const allServices = index == 1 &&  props.services.filter((service,index)=> service.isInvisible).map((service, index) => <Link
                                         to={`/services/${service.path}`}>
@@ -361,7 +361,7 @@ const MainPage = (props) => {
                                         </div>
 
                                     );
-                                })}
+                                }) : null}
                             </div>
                             </ScrollUp>
                                 <ScrollUp fromY={0} delay={2000}>
