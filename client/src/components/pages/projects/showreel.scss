@@ -1,4 +1,4 @@
-@import '../../style/mixins';
+@import '../../../style/mixins';
 
 .showreel {
     &__title {
@@ -54,7 +54,7 @@
                 content: '';
                 width: 6rem;
                 height: 6rem;
-                background: url('../../img/play-video.svg')no-repeat center/cover;
+                background: url('../../../img/play-video.svg')no-repeat center/cover;
                 position: absolute;
                 top: 50%;
                 left: 50%;
