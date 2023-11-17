@@ -1,15 +1,11 @@
 @import '../../style/_mixins.scss';
 
-.fade-in {
-    opacity: 0;
-    //transition: opacity 0.1s;
-    display: none;
-}
-
 .footer {
     padding: 10rem 0 2.8rem;
     background: #191B1D;
     color: #FFFFFF;
+    opacity: 0;
+    transition: opacity 0.1s;
 
     @include respond(sm) {
         padding: 6rem 0;

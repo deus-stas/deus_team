@@ -38,10 +38,15 @@ const AxiosInterceptor = ({children}) => {
             console.log('event:time', diffTime, isVisible)
             const element = document.querySelector("#preloader.preloader-hidden");
             const scroll = document.documentElement.style;
+            const footer = document.querySelector(".footer");
 
             if (!!element) {
-                element.style.display = isVisible ? 'block' : 'none';
+                setTimeout(() => {
+                    footer.style.opacity = isVisible ? '0' : '1';
+                }, delayTime);
+                element.style.transform = isVisible ? 'translateY(0)' : 'translateY(120%)'; // Добавляем плавное изменение положения
                 scroll.setProperty('--scrollbar-width', isVisible ? '0px' : '0.5rem');
+                element.style.opacity = isVisible ? '1' : '.95'; // Добавляем плавное изменение прозрачности
             }
 
         }, isVisible ? 0 : delayTime - (diffTime % delayTime))

@@ -18,7 +18,7 @@
     &__wrap {
         display: grid;
         align-items: center;
-        grid-template-columns: 0.2fr auto auto 0.45fr;
+        grid-template-columns: 0.35fr auto auto 0.3fr;;
         grid-gap: 4rem;
 
         @include respond(md) {
@@ -106,7 +106,6 @@
         align-items: center;
         font-size: 2.4rem;
         line-height: 2.6rem;
-        white-space: nowrap;
         background: transparent;
         border: 1px solid #000000;
         border-radius: 46px;
@@ -129,6 +128,7 @@
 
         &-text {
             transition: opacity .5s;
+            white-space: nowrap;
             cursor: pointer;
         }
     }
