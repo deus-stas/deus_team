@@ -35,6 +35,8 @@
 
         video {
             width: 100%;
+            object-fit: cover;
+            max-height: 83rem;
         }
 
         iframe {

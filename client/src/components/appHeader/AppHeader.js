@@ -80,19 +80,19 @@ const AppHeader = (props) => {
                                     </ul>
                                 </nav>
 
-                                {headerData && headerData.phone && headerData.email ?
+                                {headerData && headerData.phone ?
                                     (
                                         <div className="header__contacts hidden-mobile">
-                                            <Link to={`mailto:${headerData.email}`}
-                                                  className="header__contacts-link">{headerData.email}</Link>
+                                            {/*<Link to={`mailto:${headerData.email}`}*/}
+                                            {/*      className="header__contacts-link">{headerData.email}</Link>*/}
                                             <Link to={`tel:${headerData.phone}`}
                                                   className="header__contacts-link">{headerData.phone}</Link>
                                         </div>
                                     ) :
                                     (
                                         <div className="header__contacts hidden-mobile">
-                                            <Link to="mailto:hello@de-us.ru"
-                                                  className="header__contacts-link">hello@de-us.ru</Link>
+                                            {/*<Link to="mailto:hello@de-us.ru"*/}
+                                            {/*      className="header__contacts-link">hello@de-us.ru</Link>*/}
                                             <Link to="tel:+74951034351" className="header__contacts-link">+7 (495)
                                                 103—4351</Link>
                                         </div>
@@ -153,11 +153,11 @@ const AppHeader = (props) => {
                                 </div>
                             </nav>
                             {
-                                headerData && headerData.email && headerData.phone ?
+                                headerData && headerData.phone ?
                                     (
                                         <div className="header__menu-contacts">
-                                            <Link to={`mailto:${headerData.email}`}
-                                                  className="header__menu-contacts-link">{headerData.email}</Link>
+                                            {/*<Link to={`mailto:${headerData.email}`}*/}
+                                            {/*      className="header__menu-contacts-link">{headerData.email}</Link>*/}
                                             <Link to={`tel:${headerData.phone}`}
                                                   className="header__menu-contacts-link">{headerData.phone}</Link>
                                         </div>
@@ -165,8 +165,8 @@ const AppHeader = (props) => {
                                         <div className="header__menu-contacts">
                                             <Link to="tel:+74951034351" className="header__menu-contacts-link">+7 (495)
                                                 103—4351</Link>
-                                            <Link to="mailto:hello@de-us.ru"
-                                                  className="header__menu-contacts-link">hello@de-us.ru</Link>
+                                            {/*<Link to="mailto:hello@de-us.ru"*/}
+                                            {/*      className="header__menu-contacts-link">hello@de-us.ru</Link>*/}
                                         </div>
                                     )
                             }

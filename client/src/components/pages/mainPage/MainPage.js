@@ -25,6 +25,8 @@ import {useInView} from 'react-intersection-observer';
 import RoundButton from "../../animation/roundButton";
 import ScrollUp from "../../animation/scrollUp";
 import {isVisible} from "@testing-library/user-event/dist/utils";
+import RetryImage from "../../../helpers/RetryImage";
+import manager from "../../../img/manager.png";
 
 
 SwiperCore.use([Autoplay]);
@@ -71,6 +73,7 @@ const MainPage = (props) => {
     const [optionsType, setOptionsType] = useState([]);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
+    const [worker, setWorker] = useState([]);
 
 
     const onAcc = ({e, index}) => {
@@ -212,6 +215,17 @@ const MainPage = (props) => {
         };
     }, []);
 
+    useEffect(() => {
+        axios.get(`${apiUrl}/api/persons/`)
+            .then((response) => {
+                setWorker(response.data);
+                console.log('workers:', response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     const handleThemeChange = (selectedOption) => {
         setSelectedTheme(selectedOption);
     };
@@ -275,9 +289,11 @@ const MainPage = (props) => {
                                             <span>Создаем продукты и услуги,</span>
                                             <span>которые помогают нашим</span>
                                             <span className="last-grid"> клиентам
-                                                    <btn className="btn --black hidden-mobile">Стать клиентом</btn>
+                                                    <Link to={`/contacts`}>
+                                                     <btn  className="btn --black hidden-mobile">Стать клиентом</btn>
+                                                    </Link>
                                                         <p className="p-style wh-30">
-                                                            быть <span className="p-black-black">заметнее</span> в цифровом пространстве
+                                                            быть <span className="p-style-black">заметнее</span> в цифровом пространстве
                                                         </p>
 
                                             </span>
@@ -295,7 +311,7 @@ const MainPage = (props) => {
                             {/*<div className="main-agency__wrap">*/}
                             {/*    {filteredProjects.map((item, index) => {*/}
                             {/*        const arrow = index !== 1;*/}
-                            {/*        const allServices = index == 1 && services.map(item => <div className="item-service p-black">{item.name}<img src={arrorGo} alt={'go'}/></div>);*/}
+                            {/*        const allServices = index == 1 && services.map(item => <div className="item-service p-style">{item.name}<img src={arrorGo} alt={'go'}/></div>);*/}
                             {/*        const num = index < 9 ? '0' + (index + 1) : index + 1;*/}
                             {/*        const name = (item.name).slice(0, 10);*/}
                             {/*        const descr = index == 1? <div className="item__service">{allServices}</div> : <div className="item__descr">50+{item.descrProject} </div>*/}
@@ -315,79 +331,101 @@ const MainPage = (props) => {
                             {/*    })}*/}
                             {/*</div>*/}
                             <ScrollUp fromY={0} delay={2000}>
-                            <div className="main-agency__wrap">
-                                {mainPage ? mainPage.map((item, index) => {
-                                    const arrow = index !== 1;
-                                    const allServices = index == 1 &&  props.services.filter((service,index)=> service.isInvisible).map((service, index) => <Link
-                                        to={`/services/${service.path}`}>
-                                        <div className="main-agency__item-link p-black">{service.name}<img src={arrorGo}
-                                                                                                           alt={'go'}/>
-                                        </div>
-                                    </Link>);
-                                    const num = index < 9 ? '0' + (index + 1) : index + 1;
-                                    const name = item.name
-                                    const descr = index == 1 ? <div className="main-agency__item-service">{allServices}</div> :
-                                        <div className={`main-agency__item__descr${index == 0 ? '1' : ''}`}>
-                                            {
-                                                item.textList !== 'undefined' && item.textList && (
-
-                                                    <div className="main-agency__item__descr-flex">
-                                                        {item.textList.map((item, ind) => (
-                                                            <div className={index == 2 ? "main-agency__item__descr-flex__item" : ""}>
-                                                                {item.textItem}
-                                                            </div>
-                                                        ))}
-                                                    </div>
+                                <div className="main-agency__wrap">
+                                    {mainPage ? mainPage.map((item, index) => {
+                                        const arrow = index !== 1;
+                                        const workers = index == 0 && <>
+                                            {worker.map((item) => {
+                                                return (
+                                                    <img src={`${apiUrl}/uploads/${item.image.filename}`}
+                                                         alt=''
+                                                         className="person-img"
+                                                    />
                                                 )
                                             }
-                                        </div>
-                                    return (
 
-                                        <div className="main-agency__item" key={item.id}>
-                                            <a href={`${item.pageURL}`} target="_blank">
-                                                <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн"
-                                                     className="main-agency__item-img"/>
+                                            ).slice(0,3)}</>
 
-                                                <div className="main-agency__item-header">
-                                                    <div className="main-agency__item-header__num">{num}</div>
-                                                    <div
-                                                        className="main-agency__item-header__text heading-secondary">{name}</div>
+                                        const allServices = index == 1 && props.services.filter((service, index) => service.isInvisible).map((service, index) =>
+                                            <Link
+                                                to={`/services/${service.path}`}>
+                                                <div className="main-agency__item-link p-style"><div>{service.name}</div><img
+                                                    src={arrorGo}
+                                                    alt={'go'}/>
                                                 </div>
+                                            </Link>);
+                                        const num = index < 9 ? '0' + (index + 1) : index + 1;
+                                        const name = item.name
+                                        const descr = index == 1 ?
+                                            <div className="main-agency__item-service">{allServices}</div> :
+                                            <div className={`main-agency__item__descr${index == 0 ? '1' : ''}`}>
+                                                {workers}
+                                                {
+                                                    item.textList !== 'undefined' && item.textList && (
 
-                                                {descr}
-                                                {!!arrow &&
-                                                    <img className="main-agency__item-arrow" src={arrorLink}
-                                                         alt={'go'}/>}</a>
-                                        </div>
+                                                        <div className="main-agency__item__descr-flex">
+                                                            {item.textList.map((item, ind) => (
+                                                                <div
+                                                                    className={index == 2 ? "main-agency__item__descr-flex__item" : ""}>
+                                                                    {item.textItem}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        return (
 
-                                    );
-                                }) : null}
-                            </div>
-                            </ScrollUp>
-                                <ScrollUp fromY={0} delay={2000}>
-                            <div className="main-projects__wrap">
-                                <h2 className="heading-secondary" >Проекты по индустриям</h2>
-                                <div className="main-projects__item">
-                                    <p className="p-black">Мы работаем с ведущими компаниями и брендами из различных отраслей. При создании могут решаться уникальные задачи, но это всегда проекты с характером</p>
-                                    <div className="main-projects__item-flex">
-                                        {optionsTheme ? optionsTheme.map((project, index) => {
-                                            const filterProjects = allProjects.filter(item => item.projectTheme === project.value && item.visibility);
-                                            const totalSum = filterProjects.length;
-                                            return (
-                                                <Link to={`/projects?theme=${project.value}`}>
-                                                <div className="main-projects__item-flex__inner">
-                                                    <div className="heading-secondary" >
-                                                        {project.label}
+                                            <div className="main-agency__item" >
+                                                <a href={`${item.pageURL}`} target="_blank">
+                                                    <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн"
+                                                         className="main-agency__item-img"/>
+
+                                                    <div className="main-agency__item-header">
+                                                        <div className="main-agency__item-header__num">{num}</div>
+                                                        <div
+                                                            className="main-agency__item-header__text heading-secondary">{name}</div>
                                                     </div>
-                                                    <div className="main-projects__num"><span>{totalSum}</span></div>
-                                                </div>
-                                        </Link>
-                                            );
-                                        }) : null}
+                                                        {descr}
+                                                        {!!arrow &&
+                                                            <img className="main-agency__item-arrow" src={arrorLink}
+                                                                 alt={'go'}/>}
+                                                    </a>
+                                            </div>
+
+                                        );
+                                    }) : null}
+                                </div>
+                            </ScrollUp>
+                            <ScrollUp fromY={0} delay={2000}>
+                                <div className="main-projects__wrap">
+                                <span className="main-projects__item">
+                                   <h2 className="heading-secondary sticky-h2">Проекты по индустриям</h2>
+                                </span>
+                                    <div className="main-projects__item">
+                                        <p className="p-style">Мы работаем с ведущими компаниями и брендами из различных
+                                            отраслей. При создании могут решаться уникальные задачи, но это всегда
+                                            проекты с характером</p>
+                                        <div className="main-projects__item-flex">
+                                            {optionsTheme ? optionsTheme.map((project, index) => {
+                                                const filterProjects = allProjects.filter(item => item.projectTheme === project.value && item.visibility);
+                                                const totalSum = filterProjects.length;
+                                                return (
+                                                    <Link to={`/projects?theme=${project.value}`}>
+                                                        <div className="main-projects__item-flex__inner">
+                                                            <div className="heading-secondary">
+                                                                <p className='hover'>{project.label}</p>
+                                                            </div>
+                                                            <div className="main-projects__num"><span>{totalSum}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
+                                                );
+                                            }) : null}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                                </ScrollUp>
+                            </ScrollUp>
                         </div>
 
 
@@ -704,11 +742,13 @@ const MainPage = (props) => {
                             <div className="container">
                                 <div className="main-news__wrap">
                                     <div className="main-news__info">
-                                        <h2 className="heading-secondary">Журнал</h2>
+                                        <span>
+                                            <h2 className="heading-secondary sticky-h2">Журнал</h2>
+                                        </span>
                                         <div className="main-news__info-wrap">
                                             {[...allTags].map((tag, i) => (
                                                 <Link to={`/news?tag=${tag}`} className="main-news__info-item"
-                                                      key={i}><p className="p-black-black">#{tag}</p> <img src={arrorGo2} alt={'go'}/></Link>
+                                                      key={i}><p className="p-style-black">#{tag}</p> <img src={arrorGo2} alt={'go'}/></Link>
                                             ))}
                                         </div>
                                     </div>
