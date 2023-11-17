@@ -22,17 +22,27 @@
         position: relative;
 
         .to-top {
+            width: 7rem;
+            height: 7rem;
             position: absolute;
-            right: 0;
+            right: 1rem;
             top: 0;
-            width: 5rem;
-            height: 5rem;
             transition: transform 0.3s ease-in-out;
             transform: rotate(225deg);
             cursor: pointer;
 
             &:hover {
                 transform: scale(1.2) rotate(225deg);
+            }
+
+            @include respond(sm) {
+                width: 5.5rem;
+                height: 5.5rem;
+            }
+
+            @include respond(xs) {
+                width: 5rem;
+                height: 5rem;
             }
         }
 
@@ -42,6 +52,7 @@
             justify-content: start;
             gap: 3rem;
         }
+
     }
 
 
@@ -50,12 +61,12 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 3rem;
         margin-bottom: 7.8rem;
-        font-size: 2rem;
-        line-height: 3.2rem;
+        font-size: 2.8rem;
+        line-height: 3.3rem;
         transition: opacity .4s;
 
         @include respond(sm) {
-            grid-template-columns: 100%;
+            grid-template-columns: 1fr 1fr;
             grid-gap: 4rem;
             margin-bottom: 4rem;
         }
@@ -118,7 +129,7 @@
         }
 
         @include respond(sm) {
-            margin-top: 2rem;
+            margin-top: 0 ;
         }
 
         &-item {
@@ -131,9 +142,17 @@
         }
     }
 
+    @include respond(sm) {
+        nav {
+            display: none;
+        }
+
+    }
+
     &__pages {
         display: flex;
         flex-wrap: wrap;
+        gap: 1rem;
         & > * {
             flex-basis: calc(50% - 1rem);
         }
@@ -156,14 +175,15 @@
         }
 
         }
+
     }
 
     &__list {
         &-item {
-            font-size: 2rem;
-            line-height: 3.2rem;
+            font-size: 2.8rem;
+            line-height: 3.3rem;
             transition: opacity .4s;
-            max-width: 20rem;
+            //max-width: 20rem;
 
             &:not(:last-child) {
                 margin-bottom: 1rem;
@@ -188,7 +208,35 @@
         }
     }
     &__copyright {
-        line-height: 1.8rem;
+        line-height: 2.4rem;
         opacity: 0.5;
+    }
+}
+
+.heading-footer{
+    font-size: 9.6rem;
+    line-height: 10.6rem;
+    font-weight: 500;
+
+    @include respond(sm) {
+        font-size: 4.5rem;
+        line-height: 6rem;
+
+        .p-style {
+            font-size: 1.8rem;
+            line-height: 2.3rem;
+        }
+
+    }
+
+    @include respond(xs) {
+        font-size: 3rem;
+        line-height: 4rem;
+
+        .p-style {
+            font-size: 1.4rem;
+            line-height: 1.5rem;
+        }
+
     }
 }

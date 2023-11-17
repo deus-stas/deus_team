@@ -50,7 +50,7 @@ const AppFooter = (props) => {
                     data-wow-duration="3s"
                     data-wow-delay="1s">
                 <div className="container">
-                    <p className="footer-header heading-primary">
+                    <p className="footer-header heading-footer">
                         <span> Расскажите нам
                             <img onClick={handleButtonClick} className="to-top" src={arrorLink} alt={'go'}/>
                         </span>
@@ -63,7 +63,7 @@ const AppFooter = (props) => {
                     <div className="footer__wrap">
                         <>
                             <div className="footer__item hidden-mobile">
-                            <div className="footer__list-item">г. Одинцово, ул. Молодежная, д.46, <br/> строение 1 офис
+                            <div className="footer__list-item">г. Одинцово, ул. <br/> Молодежная, д.46, <br/>  строение 1 офис
                                 24, 25
                             </div>
                             {/* <a className='btn' href={`${apiUrl}/uploads/DEUS.pdf`}>Скачать презентацию</a> */}
@@ -96,12 +96,12 @@ const AppFooter = (props) => {
                                 {/*        <li className="footer__list-item"><Link to="/contacts">Контакты </Link></li>*/}
                                 {/*    </ul>*/}
                                 {/*</nav>*/}
-                                <p>+7 (495) 103—4351</p>
-                                <p>hello@de-us.ru</p>
+                                <p className="p-style">+7 (495) 103—4351</p>
+                                <p className="p-style">hello@de-us.ru</p>
                             </div>
 
                             <nav>
-                                <ul className="footer__pages">
+                                <ul className="footer__pages p-style">
                                     <li className="footer__pages-item hidden-mobile">
                                     <NavLink to="/agency">Агентство</NavLink>
                                     </li>
@@ -129,13 +129,13 @@ const AppFooter = (props) => {
                         <a href="mailto:hello@de-us.ru" className="footer__contacts-item">hello@de-us.ru</a> */}
                                 {
                                     headerData && headerData.vk && headerData.telegram && headerData.behance ?
-                                        <div className="footer__social">
+                                        <div className="footer__social p-style">
                                             <Link className="footer__social-item" to={`${headerData.dprofile}`}>Dprofile</Link>
                                             <Link className="footer__social-item" to={`${headerData.vk}`}>VK</Link>
                                             <Link className="footer__social-item" to={`${headerData.behance}`}>Behance</Link>
                                             <Link className="footer__social-item" to={`${headerData.telegram}`}>Telegram</Link>
                                         </div> :
-                                        <div className="footer__social">
+                                        <div className="footer__social p-style">
                                             <Link className="footer__social-item" to="/">Dprofile</Link>
                                             <Link className="footer__social-item" to="/">VK</Link>
                                             <Link className="footer__social-item" to="/">Behance</Link>
@@ -148,8 +148,8 @@ const AppFooter = (props) => {
 
                     </div>
                     }
-                    <div className="footer-info__wrap footer__copyright">
-                        <p className="">© 2016–2023 DEUS agency</p>
+                    <div className="footer-info__wrap footer__copyright p-style">
+                        <p >© 2016–2023 DEUS agency</p>
                         <p>Политика конфиденциальности</p>
                     </div>
 

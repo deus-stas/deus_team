@@ -147,6 +147,7 @@
     .btn {
         margin: 6rem auto 3rem;
         display: block;
+        font-size: 2rem;
 
         @include respond(sm) {
             margin: 3rem auto;
@@ -154,10 +155,11 @@
     }
 
     &__check {
-        max-width: 36.2rem;
+        max-width: 40rem;
         margin: 0 auto;
         text-align: center;
         line-height: 1.8rem;
+        font-size: 1.8rem;
 
         @include respond(sm) {
             max-width: 33.5rem;

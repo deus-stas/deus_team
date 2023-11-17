@@ -18,7 +18,7 @@
     &__wrap {
         display: grid;
         align-items: center;
-        grid-template-columns: 0.2fr auto auto 0.25fr;
+        grid-template-columns: 0.2fr auto auto 0.45fr;
         grid-gap: 4rem;
 
         @include respond(md) {
@@ -35,13 +35,18 @@
     }
 
     &__logo {
+        margin-right: auto;
         @include respond(sm) {
+           margin-right: auto;
+        }
+
+        @include respond(xs) {
             margin-right: auto;
         }
 
         img {
             display: block;
-            width: 7.8rem;
+            width: 11.3rem;
         }
     }
 
@@ -49,7 +54,7 @@
         &-list {
             display: flex;
             align-items: center;
-            font-size: 2rem;
+            font-size: 2.4rem;
             line-height: 2.6rem;
         }
 
@@ -81,7 +86,7 @@
         margin-right: auto;
 
         &-link {
-            font-size: 2rem;
+            font-size: 2.4rem;
             line-height: 2.6rem;
             transition: opacity .5s;
 
@@ -99,13 +104,14 @@
         justify-self: end;
         display: flex;
         align-items: center;
-        font-size: 2rem;
+        font-size: 2.4rem;
         line-height: 2.6rem;
+        white-space: nowrap;
         background: transparent;
         border: 1px solid #000000;
         border-radius: 46px;
         margin: 0;
-        padding: 1rem 1.5rem 1rem;
+        padding: 1.5rem 2.7rem 1.5rem 2.1rem;
 
     &:hover {
             .header__discuss-text {

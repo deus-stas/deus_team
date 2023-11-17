@@ -58,7 +58,7 @@
     &__item {
 
         &:nth-child(10n + 10),
-        &:first-child {
+        &:first-child, &:last-child {
             grid-column: span 2;
             position: relative;
 
@@ -91,11 +91,28 @@
 
             .news__text {
                 max-width: 36rem;
-
                 color: #fff;
+                border: 1px solid rgb(255, 254, 254);
+                border-radius: 45px;
 
                 position: absolute;
                 top: 5rem;
+                left: 5rem;
+                z-index: 3;
+
+                @include respond(sm) {
+                    max-width: none;
+                    position: static;
+                    color: #191B1D;
+                }
+            }
+
+            .news__descr {
+                max-width: 36rem;
+                color: #fff;
+
+                position: absolute;
+                bottom: 5rem;
                 left: 5rem;
                 z-index: 3;
 
@@ -117,6 +134,7 @@
     &__img-wrap {
         overflow: hidden;
         margin-bottom: 3rem;
+        color: #FFFFFF;
 
         @include respond(sm) {
             margin-bottom: 2rem;
@@ -131,10 +149,9 @@
     }
 
     &__tag {
-        margin-bottom: 0.7rem;
+        padding: 1rem;
         font-size: 2rem;
         line-height: 2.6rem;
-        color: #FF4D01;
 
         @include respond(sm) {
             font-size: 1.6rem;
@@ -146,6 +163,7 @@
         font-weight: 500;
         font-size: 2.8rem;
         line-height: 3.4rem;
+        color: #FFFFFF;
 
         @include respond(sm) {
             font-size: 2.6rem;
