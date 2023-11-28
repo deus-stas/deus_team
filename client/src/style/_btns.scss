@@ -46,6 +46,14 @@
         }
     }
 
+    &.--dark {
+        background: #121212;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
     &.--white {
         background: #FFFFFF;
         color: #191B1D;
@@ -88,6 +96,22 @@
         &.--orange {
             &::after {
                 background: #FF4D01;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        &.--dark {
+            width: 20rem;
+            height: 20rem;
+            padding: 6.6rem 0.8rem;
+            font-size: 2.4rem;
+            line-height: 3.3rem ;
+            font-weight: 400;
+            &::after {
+                background: #121212;
             }
 
             &:hover {

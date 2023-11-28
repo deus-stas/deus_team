@@ -30,7 +30,6 @@ const RoundButton = ({children, fromX, rotateZ, delay}) => {
             }, delay);
         }
     }, [inView, api]);
-    console.log("inV",inView)
     return (
         <>
         <animated.div
