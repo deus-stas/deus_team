@@ -130,7 +130,7 @@ input {
 
 html {
     font-size: 11px;
-
+    scroll-behavior: smooth;
     @include respond(xxxl) {
         font-size: 10px;
     }
@@ -179,9 +179,9 @@ body {
 }
 
 main {
-    flex: 1;
-    padding-top: 8.3rem;
-    opacity: 0;
+    //flex: 1;
+    //padding-top: 8.3rem;
+    //opacity: 0;
     animation: fadeIn 0.3s ease 0.3s forwards;
 
     @include respond(sm) {

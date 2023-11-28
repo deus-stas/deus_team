@@ -65,6 +65,10 @@ body {
         color: #FFFFFF;
     }
 
+    &-grey {
+        color: #757677;
+    }
+
     @include respond(sm) {
         font-size: 1.8rem;
         line-height: 3.3rem;
