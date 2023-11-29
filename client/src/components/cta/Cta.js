@@ -14,6 +14,7 @@ import WOW from "wowjs";
 import {connect, useSelector} from "react-redux";
 import RoundButton from "../animation/roundButton";
 import {Icon} from "../icon/Icon";
+import arrorGo from '../../img/icon/arrow-go.svg'
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -110,25 +111,25 @@ const Cta = (props) => {
                             <a href="/services/firmennii-stil">
                                 <div className="item p-style">
                                     <div>Фирменный стиль</div>
-                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                    <img src={arrorGo} alt="go"/>
                                 </div>
                             </a>
                             <a href="/services/saiti-i-servisi">
                                 <div className="item p-style">
                                     <div>Сайты и сервисы</div>
-                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                    <img src={arrorGo} alt="go"/>
                                 </div>
                             </a>
                             <a href="/services/podderzhka-i-razvitie">
                                 <div className="item p-style">
                                     <div>Поддержка и развитие</div>
-                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                    <img src={arrorGo} alt="go"/>
                                 </div>
                             </a>
                             <a href="/services/seo-prodvizhenie">
                                 <div className="item p-style">
                                     <div>SEO продвижение</div>
-                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                    <img src={arrorGo} alt="go"/>
                                 </div>
                             </a>
                         </div>
