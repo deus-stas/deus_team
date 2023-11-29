@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 import InputMask from "react-input-mask";
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
@@ -13,6 +13,7 @@ import RetryImage from "../../helpers/RetryImage";
 import WOW from "wowjs";
 import {connect, useSelector} from "react-redux";
 import RoundButton from "../animation/roundButton";
+import {Icon} from "../icon/Icon";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -99,41 +100,69 @@ const Cta = (props) => {
     return (
         <>
             {!isLoading &&
-        <section className="cta wow fadeIn"
-                 data-wow-offset="150"
-                 data-wow-duration="0.5s"
-                 data-wow-delay="0.1s">
+        <section className="cta">
             <div className="container">
                 <div className="cta__wrap">
                     <div>
-                        <h2 className="heading-secondary sticky-h2">{worker ? worker.title : null}</h2>
-                    </div>
-                    <div>
-                        <div className="cta__person sticky-person">
-                            {/* <img src={formName === 'tender' ? tender : manager} alt={formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'} className="cta__person-img" /> */}
-                            {
-                                worker && worker.image ?
-                                    (
-                                            <RetryImage src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title}
-                                                 className="cta__person-img"/>
-                                    ) : (
-                                            <img src={manager} alt="Хотите обсудить проект?" className="cta__person-img"/>
-                                    )
-                            }
-                            <div className="cta__person-descr">
-                                {/* {
-                                formName === 'tender' ? 'Алена Фролова — тендерный специалист, ответит на ваши вопросы и организует встречу'
-                                    : 'Павел Докторов — Менеджер проектов, ответит на ваши вопросы и организует встречу'
-                            } */}
-                                {
-                                    worker && worker.description ? worker.description : null
-                                }
-                            </div>
+                        <span className="sticky-h2">
+                        <h2 className="heading-secondary">Брифы для заполнения</h2>
+                        <div className="cta__wrap-wrapper">
+                            <a href="/services/firmennii-stil">
+                                <div className="item p-style">
+                                    <div>Фирменный стиль</div>
+                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                </div>
+                            </a>
+                            <a href="/services/saiti-i-servisi">
+                                <div className="item p-style">
+                                    <div>Сайты и сервисы</div>
+                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                </div>
+                            </a>
+                            <a href="/services/podderzhka-i-razvitie">
+                                <div className="item p-style">
+                                    <div>Поддержка и развитие</div>
+                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                </div>
+                            </a>
+                            <a href="/services/seo-prodvizhenie">
+                                <div className="item p-style">
+                                    <div>SEO продвижение</div>
+                                    <img src="/static/media/arrow-go.16debacde59dcde765fc801f2b622b05.svg" alt="go"/>
+                                </div>
+                            </a>
                         </div>
+                        <p className="p-style-grey pb-20">После заполнения брифа<br/> пришлите его нам на почту</p>
+                        <p className="heading-tertiary">hello@de-us.ru</p>
+                        </span>
+                    </div>
+
+                    <div>
+                        {/*<div className="cta__person sticky-person">*/}
+                        {/*    /!* <img src={formName === 'tender' ? tender : manager} alt={formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'} className="cta__person-img" /> *!/*/}
+                        {/*    {*/}
+                        {/*        worker && worker.image ?*/}
+                        {/*            (*/}
+                        {/*                    <RetryImage src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title}*/}
+                        {/*                         className="cta__person-img"/>*/}
+                        {/*            ) : (*/}
+                        {/*                    <img src={manager} alt="Хотите обсудить проект?" className="cta__person-img"/>*/}
+                        {/*            )*/}
+                        {/*    }*/}
+                        {/*    <div className="cta__person-descr">*/}
+                        {/*        /!* {*/}
+                        {/*        formName === 'tender' ? 'Алена Фролова — тендерный специалист, ответит на ваши вопросы и организует встречу'*/}
+                        {/*            : 'Павел Докторов — Менеджер проектов, ответит на ваши вопросы и организует встречу'*/}
+                        {/*    } *!/*/}
+                        {/*        {*/}
+                        {/*            worker && worker.description ? worker.description : null*/}
+                        {/*        }*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
                     <div className="cta__f">
                         <Formik
-                            initialValues={{ name: '', company: '', phone: '', email: '', about: '', file: '', ctaServices: [], budget: '', formName: formName === 'tender' ? 'Тендер' : 'Обсудить проект' }}
+                            initialValues={{ name: '', company: '', phone: '', email: '', about: '', file: '', ctaServices: [], budget: '', formName: formName === 'tender' ? 'Тендер' : 'Хотите обсудить проект?' }}
                             validate={values => {
                                 const errors = {};
                                 if (!values.name || values.name.length < 2) {
@@ -197,9 +226,9 @@ const Cta = (props) => {
                                 <form className="form" onSubmit={handleSubmit}>
                                     <div className="form__inner" style={{ display: success ? 'none' : 'block' }}>
                                         <input type="hidden" name="formName" value={formName === 'tender' ? 'Тендер' : 'Обсудить проект'} />
-                                        <div className="form__title">Заполните форму</div>
+                                        <div className="form__title">Хотите обсудить проект?</div>
                                         <div className="form__checks">
-                                            <div className="form__checks-title">Услуги</div>
+                                            <div className="form__checks-title">Выберите услугу</div>
                                             <div className="form__checks-wrap">
                                                 <Checkbox name="ctaServices" value="Фирменный стиль" text="Фирменный стиль" />
                                                 <Checkbox name="ctaServices" value="Сайты и сервисы" text="Сайты и сервисы" />
@@ -232,29 +261,9 @@ const Cta = (props) => {
                                         </div>
                                         <div className="form__wrap">
                                             <div className="form__group">
-                                                <textarea type="text" name="about" className="form__textarea" onChange={handleChange} value={values.about} placeholder="Расскажите кратко о себе" />
+                                                <textarea type="text" name="about" className="form__textarea h-170" onChange={handleChange} value={values.about} placeholder="Расскажите кратко о себе" />
                                                 <div className="form__error">{errors.about && touched.about && errors.about}</div>
                                             </div>
-                                        </div>
-
-                                        <div className="form__file">
-                                            <label className="form__file-label">
-                                                <div className="form__file-btn">Прикрепить файл</div>
-                                                <input id="file" name="file" type="file" onChange={(event) => {
-                                                    console.log(event.currentTarget.files[0]);
-                                                    setFieldValue("file", event.currentTarget.files[0]);
-                                                }} />
-                                            </label>
-                                            {
-                                                values.file ?
-                                                    <div className="form__file-f">
-                                                        {values.file.name}
-                                                        <div className="form__file-delete" onClick={(event) => {
-                                                            setFieldValue("file", null);
-                                                        }}>&times;</div>
-                                                    </div>
-                                                    : null
-                                            }
                                         </div>
 
                                         <div className="form__checks">
@@ -299,25 +308,72 @@ const Cta = (props) => {
                                                         </div>
                                                     </div>
                                                 </label>
+                                                <label className="form__checks-label">
+                                                    <input
+                                                        type="radio"
+                                                        name="budget"
+                                                        checked={values.budget === "Лидогенерация"}
+                                                        onChange={() => setFieldValue("budget", "Лидогенерация")}
+                                                    />
+                                                    <div className="form__checks-c">
+                                                        <div className="form__checks-text">
+                                                            Лидогенерация
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <label className="form__checks-label">
+                                                    <input
+                                                        type="radio"
+                                                        name="budget"
+                                                        checked={values.budget === "Поддержка и развитие"}
+                                                        onChange={() => setFieldValue("budget", "Поддержка и развитие")}
+                                                    />
+                                                    <div className="form__checks-c">
+                                                        <div className="form__checks-text">
+                                                            Поддержка и развитие
+                                                        </div>
+                                                    </div>
+                                                </label>
                                             </div>
                                             <div className="form__error">{errors.budget && touched.budget && errors.budget}</div>
                                         </div>
-                                        <RoundButton fromX={-200} rotateZ={360} delay={500}>
-                                            <button type="submit" className='btn --orange --circle'>
+
+                                        <div className="form__file">
+                                            <label className="form__file-label">
+                                                Прикрепить файл
+                                            </label>
+                                            <label>
+                                                <input id="file" name="file" type="file" onChange={(event) => {
+                                                    console.log(event.currentTarget.files[0]);
+                                                    setFieldValue("file", event.currentTarget.files[0]);
+                                                }} />
+                                                <Icon icon="file" />
+                                            </label>
+
+                                            {
+                                                values.file ?
+                                                    <div className="form__file-f">
+                                                        {values.file.name}
+                                                        <div className="form__file-delete" onClick={(event) => {
+                                                            setFieldValue("file", null);
+                                                        }}>&times;</div>
+                                                    </div>
+                                                    : null
+                                            }
+                                            <button type="submit" className='btn --white'>
                                                 Отправить
                                             </button>
-                                        </RoundButton>
-                                        <div className="form__check">
-                                            Нажимая кнопку, вы соглашаетесь с нашей политикой в отношении обработки <span className='span'>
+                                            <div className="form__check p-style-grey">
+                                             <span className='span'>
                                                 <Popup
-                                                    trigger={<span> персональных данных </span>}
+                                                    trigger={<span>Нажимая кнопку «Отправить», вы соглашаетесь с нашей политикой в отношении обработки персональных данных </span>}
                                                     modal
                                                     nested
                                                 >
                                                     {close => (
                                                         <div className="modalAgree">
                                                             <button className="modalClose" onClick={close}>
-                                                            &times;
+                                                                &times;
                                                             </button>
                                                             <div className="modalHeader"> Политика в отношении обработки персональных данных </div>
                                                             <div className='modalContent'>
@@ -438,7 +494,9 @@ const Cta = (props) => {
 
 
                                             </span>
+                                            </div>
                                         </div>
+
                                     </div>
                                     <div className="form__success" style={{ display: success ? 'block' : 'none' }}>
                                         <div className="form__success-title">Заявка отправлена!</div>
