@@ -136,6 +136,27 @@
     </defs>
   </svg>
 
+  <svg xmlns="http://www.w3.org/2000/svg" id="icon-line" viewBox="0 0 32 2" fill="none">
+    <path d="M31.5 0.999512L0 0.999512" stroke="#757677" stroke-width="2"/>
+  </svg>
+
+
+  <svg viewBox="0 0 70 70" fill="none" id="icon-roundArrow" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_b_525_1473)">
+      <rect x="0.5" y="0.5" width="69" height="69" rx="34.5" stroke="white"/>
+      <path d="M45 25V45M45 45H25M45 45L25 25" stroke="white" stroke-width="2"/>
+    </g>
+    <defs>
+      <filter id="filter0_b_525_1473" x="-24" y="-24" width="118" height="118" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feGaussianBlur in="BackgroundImageFix" stdDeviation="12"/>
+        <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_525_1473"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_525_1473" result="shape"/>
+      </filter>
+    </defs>
+  </svg>
+
+
 
 
 </svg>

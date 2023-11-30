@@ -293,17 +293,15 @@ main {
 .select {
     display: flex;
     align-items: center;
-    padding: 1.5rem 3rem;
-
+    padding: 5rem 0;
     background-color: transparent;
-    border: 1px solid #191B1D;
-    border-radius: 45px;
+    //border: 1px solid rgba(255, 255, 255, 0.2);
+    //border-radius: 45px;
     cursor: pointer;
+    font-size: 2.8rem;
 
-    font-size: 2rem;
     line-height: 2.6rem;
-    color: #191B1D;
-
+    color: #ffffff;
     transition: border-color .3s;
 
     @include respond(sm) {
@@ -328,6 +326,7 @@ main {
     &__icon {
         padding-left: 1rem;
         transition: transform .3s;
+        display: none;
 
         [class$='indicatorContainer'] {
             padding: 0;
@@ -343,7 +342,7 @@ main {
         border: 1px solid #191B1D;
         backdrop-filter: blur(10px);
         border-radius: 25px;
-        position: absolute;
+        position: relative;
         right: 0;
         top: calc(100% + 1rem);
         z-index: 5;

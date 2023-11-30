@@ -1,5 +1,5 @@
 import {Link, useLocation, useSearchParams} from 'react-router-dom';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios from '../../../axios'
 import Select from 'react-select';
 
@@ -8,6 +8,8 @@ import Cta from '../../cta/Cta';
 import './projects.scss'
 import TypeWriterText from "../../typeWriterText";
 import {connect} from "react-redux";
+import projectBanner from "../../../img/project-main.mp4";
+import {Icon} from "../../icon/Icon";
 
 const colourStyles = {
     control: (styles) => ({}),
@@ -43,8 +45,12 @@ const Projects = () => {
     const [optionsType, setOptionsType] = useState([]);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
+    const [menuTheme,setMenuTheme] = useState(true);
+    const [menuType, setMenuType] = useState(false);
+    const [select, setSelect] = useState(false);
     const location = useLocation();
     const THEME_KEY='theme'
+    const TYPE_KEY ='type'
     const loadProject = (cb) => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
@@ -78,12 +84,28 @@ const Projects = () => {
     }
     const updateOptionsTheme=(projectOptionsTheme)=>{
         setOptionsTheme(projectOptionsTheme)
+        console.log("lolo:", searchParams)
         if (searchParams.has(THEME_KEY)) {
+
             const optionId = searchParams.get(THEME_KEY)
             const theme = projectOptionsTheme.find(({value}) => value === optionId)
             if (theme) {
                 setSelectedTheme(theme);
                 searchParams.delete(THEME_KEY)
+                setSearchParams(searchParams)
+            }
+        }
+    }
+
+    const updateOptionsType=(projectOptionsType)=>{
+        setOptionsType(projectOptionsType)
+        if (searchParams.has(TYPE_KEY)) {
+            const optionId = searchParams.get(TYPE_KEY)
+            const type = projectOptionsType.find(({value}) => value === optionId)
+            console.log("lo:",type,projectOptionsType,searchParams.has(TYPE_KEY))
+            if (type) {
+                setSelectedType(type);
+                // searchParams.delete(TYPE_KEY)
                 setSearchParams(searchParams)
             }
         }
@@ -109,6 +131,13 @@ const Projects = () => {
     useEffect(() => {
         loadTypes(() => loadThemes(() => loadProject()))
     }, []);
+
+    useEffect(()=>{
+        updateOptionsTheme(optionsTheme);
+    },[searchParams])
+    useEffect(()=>{
+        updateOptionsType(optionsType)
+    },[searchParams])
 
 
     useEffect(() => {
@@ -157,42 +186,105 @@ const Projects = () => {
         videoRefs.current.push(ref);
     };
 
-
     return (
         <>
             {!isLoading &&
                 <main className="projects">
-                    <section className="projects-content wow fadeIn"
-                             data-wow-duration="0.1s"
-                             data-wow-delay = "0.1s"
-                             data-wow-offset="10">
-                        <div className="container">
-                            <div className="projects__head">
-                                <h1 className="heading-primary">Наши проекты</h1>
-                                {optionsTheme && optionsType ?
-                                    <div className="projects__filters">
-                                        <Select classNames={classes} options={optionsType} styles={colourStyles}
-                                                onChange={handleTypeChange}  placeholder="Тип проекта"/>
-                                        <Select classNames={classes} options={optionsTheme} styles={colourStyles}
-                                                onChange={handleThemeChange} value={selectedTheme} placeholder="Тематика проекта"/>
-                                    </div>
-                                    : null}
+                    <section className="projects-start">
+                            <div className="projects-start-video">
+                                <video autoPlay muted loop>
+                                    <source src={projectBanner} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                </video>
                             </div>
+                        <div className="container grid-main">
+                            <h1 className="heading-primary">Мы гордимся каждым<br/> выполненным<br/>  проектом</h1>
+                            <div className="projects-start__filters">
+                                <div className="item" onClick={()=>{
+                                    setMenuTheme(!menuTheme)
+                                    setMenuType(false)}}>
+                                    <p className="p-style-white">По отраслям</p>
+                                    <div className={menuTheme ? 'active' : 'inActive'}>
+                                        <Icon icon="line"/>
+                                        <Icon icon="line"/>
+                                    </div>
+
+                                </div>
+                                <div className="item" onClick={()=>{
+                                    setMenuType(!menuType)
+                                    setMenuTheme(false)
+                                }}>
+                                    <p className="p-style-white">По услугам</p>
+                                    <div className={menuType ? 'active' : 'inActive'}>
+                                        <Icon icon="line"/>
+                                        <Icon icon="line"/>
+                                    </div>
+                                </div>
+                                {/*<Select classNames={classes} options={optionsType} styles={colourStyles}*/}
+                                {/*        onChange={handleTypeChange}  placeholder="Тип проекта">*/}
+                                {/*<p>-</p>*/}
+                                {/*</Select>*/}
+                                {/*<Select classNames={classes} options={optionsTheme} styles={colourStyles}*/}
+                                {/*        onChange={handleThemeChange} value={selectedTheme} placeholder="Тематика проекта"/>*/}
+                            </div>
+                            {optionsTheme && optionsType ?
+                                null
+                                :
+                                null
+                            }
+                        </div>
+                    </section>
+                    <section className="projects-content">
+                        <div className="container">
+                            <div className={`projects-menu ${menuType || menuTheme ? 'active' : ''}`}>
+                                <div className="main-projects__item-flex">
+                                    {menuTheme ? (
+                                        <>
+                                            {optionsTheme ? optionsTheme.map((project, index) => {
+                                                const filterProjects = projects.filter(item => item.projectTheme === project.value && item.visibility);
+                                                const totalSum = filterProjects.length;
+                                                return (
+                                                    <Link  to={`/projects?theme=${project.value}`} >
+                                                        <div className="main-projects__item-flex__inner">
+                                                            <div className="heading-secondary">
+                                                                <p className='hover'>{project.label}</p>
+                                                            </div>
+                                                            <div className="main-projects__num"><span>{totalSum}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
+                                                );
+                                            }) : null}
+                                        </>
+                                    )
+                                        :
+                                    menuType && (
+                                        <>
+                                            {optionsType ? optionsType.map((project, index) => {
+                                                return (
+                                                    <Link  to={`/projects?type=${project.value}`}>
+                                                        <div className="main-projects__item-flex__inner">
+                                                            <div className="heading-secondary">
+                                                                <p className='hover'>{project.label}</p>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
+                                                );
+                                            }) : null}
+                                        </>
+                                    )
+                                    }
+                                </div>
+                            </div>
+
                             <div className="projects__wrap">
                                 {filteredProjects ? filteredProjects.map((project, index) => {
-                                        const delay = index < 7 ? (index * 0.1 + 0.1) : 0.1
+                                        {console.log('project-data:',project)}
                                         return (
                                             project.controlURL ?
                                                 <a href={`${project.projectURL}`}
-                                                   className="projects__item wow fadeIn"
-                                                   data-wow-duration="0.5s"
-                                                   data-wow-delay = {`${delay}s`}
-                                                   data-wow-offset="10"
+                                                   className="projects__item"
                                                    key={project.id} style={{background: project.color}}>
-                                                    <div className={`projects__item-img-wrap ${[0,3,7,11].includes(index) ? 'wow fadeIn' : ''}`}
-                                                         data-wow-duration="0.5s"
-                                                         data-wow-delay = "1.5s"
-                                                         data-wow-offset="10">
+                                                    <div className="projects__item-img-wrap">
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
@@ -214,18 +306,13 @@ const Projects = () => {
                                                     </div>
                                                     <div className="projects__item-name">{project.name}</div>
                                                     <div className="projects__item-descr">{project.descrProject}</div>
+                                                    <div className="num">{project.customId}</div>
 
                                                 </a> :
                                                 <Link to={`/projects/${project.nameInEng}`}
-                                                      className="projects__item wow fadeIn"
-                                                      data-wow-duration="0.5s"
-                                                      data-wow-delay = {`${delay}s`}
-                                                      data-wow-offset="10"
+                                                      className="projects__item"
                                                       key={project.id} style={{background: project.color}}>
-                                                    <div className={`projects__item-img-wrap wow ${[0,3,7,11].includes(index) ? 'fadeIn' : ''}`}
-                                                         data-wow-duration="3s"
-                                                         data-wow-delay = "0.1s"
-                                                         data-wow-offset="10">
+                                                    <div className="projects__item-img-wrap">
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
@@ -248,14 +335,14 @@ const Projects = () => {
                                                         }
 
                                                     </div>
-                                                    <span className="projects__item-name fadeInUp"
-                                                          data-wow-offset="0"
-                                                          data-wow-duration="0.5s"
-                                                          data-wow-delay="0.2s">
-                                                       {[0,3,7,11].includes(index) ?
-                                                           <TypeWriterText text={project.name}/> : project.name
-                                                       }
-                                                        <div className="projects__item-descr">{project.descrProject}</div>
+                                                    <span className="projects__item-header">
+                                                        <div className="num">{index+1}</div>
+                                                        <div className="name">{project.name}</div>
+
+                                                    </span>
+                                                    <span className="projects__item-descr">
+                                                        <div className="descr">{project.descrProject}</div>
+                                                    <Icon icon="roundArrow"/>
                                                     </span>
 
                                                 </Link>
