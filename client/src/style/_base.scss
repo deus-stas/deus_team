@@ -183,7 +183,7 @@ main {
     //padding-top: 8.3rem;
     //opacity: 0;
     animation: fadeIn 0.3s ease 0.3s forwards;
-
+    background: white;
     @include respond(sm) {
         padding-top: 6rem;
     }

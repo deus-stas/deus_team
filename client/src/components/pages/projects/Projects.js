@@ -190,7 +190,7 @@ const Projects = () => {
         <>
             {!isLoading &&
                 <main className="projects">
-                    <section className="projects-start">
+                    <section className="projects-start whiteHeader">
                             <div className="projects-start-video">
                                 <video autoPlay muted loop>
                                     <source src={projectBanner} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
@@ -219,6 +219,10 @@ const Projects = () => {
                                         <Icon icon="line"/>
                                     </div>
                                 </div>
+                                {/*<div className="item">*/}
+                                {/*    <p className="p-style-white">Очистить все</p>*/}
+                                {/*</div>*/}
+
                                 {/*<Select classNames={classes} options={optionsType} styles={colourStyles}*/}
                                 {/*        onChange={handleTypeChange}  placeholder="Тип проекта">*/}
                                 {/*<p>-</p>*/}

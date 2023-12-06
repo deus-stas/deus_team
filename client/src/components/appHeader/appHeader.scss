@@ -1,5 +1,13 @@
 @import '../../style/_mixins.scss';
 
+.white {
+    color: #FFFFFF;
+
+    .header__discuss {
+        border: 1px solid #ffffff;
+    }
+}
+
 .header {
     padding: 1.9rem 0;
     width: 100%;
@@ -17,7 +25,7 @@
     &__wrap {
         display: grid;
         align-items: center;
-        grid-template-columns: 0.35fr auto auto 0.3fr;;
+        grid-template-columns: 0.35fr auto auto 0.45fr;;
         grid-gap: 4rem;
 
         @include respond(md) {

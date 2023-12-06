@@ -656,7 +656,7 @@ const MainPage = (props) => {
 
                     {working ?
                         <ScrollUp fromY={0} delay={1000}>
-                        <section className="main-working">
+                        <section className="main-working whiteHeader">
                             <div className="container">
                                 <h3 className="heading-tertiary">Работаем сейчас над</h3>
                                 <div className="main-working__wrap">

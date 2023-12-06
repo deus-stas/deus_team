@@ -101,7 +101,7 @@ const Cta = (props) => {
     return (
         <>
             {!isLoading &&
-        <section className="cta">
+        <section className="cta whiteHeader">
             <div className="container">
                 <div className="cta__wrap">
                     <div>
