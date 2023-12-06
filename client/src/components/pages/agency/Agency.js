@@ -401,10 +401,7 @@ const Agency = (props) => {
             {/*}*/}
 
             {
-                clients ? <section className="agency-clients  wow fadeIn"
-                                   data-wow-offset="2"
-                                   data-wow-duration="0.5s"
-                                   data-wow-delay="0.1s"
+                clients ? <section className="agency-clients whiteHeader"
                                    id="clients">
                     <div className="container">
                         <div className="agency-clients__head">

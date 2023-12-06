@@ -17,6 +17,43 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const AppHeader = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
+    // function updateHeaderColor() {
+    //     const header = document.querySelector(".header");
+    //     let progress = (.5 + window.scrollY / window.innerHeight) | 0;
+    //     header.classList.remove("white", "black");
+    //     header.classList.add(progress % 2 ? "white" : "black");
+    // }
+
+    useEffect(() => {
+        const handleScroll = () => {
+            let header = document.querySelector('.header')
+            let whiteHeaders = document.querySelectorAll('.whiteHeader')
+
+            const find = Array.from(whiteHeaders).find((whiteHeader) => {
+                console.log("whiteHeader:", whiteHeader.offsetTop, whiteHeader.offsetHeight, window.scrollY)
+
+                return window.scrollY >= whiteHeader.offsetTop && window.scrollY <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
+            })
+            if (!!find) {
+                if (window.scrollY >= find.offsetTop) {
+                    header.classList.add('white');
+                } else {
+                    header.classList.remove('white');
+                }
+                if (window.scrollY > find.offsetTop + find.offsetHeight) {
+                    header.classList.remove('white');
+                }
+            } else {
+                header.classList.remove('white');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     useEffect(() => {
         const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
         window.dispatchEvent(event)
