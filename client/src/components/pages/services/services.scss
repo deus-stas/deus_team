@@ -182,7 +182,7 @@
         &__wrap {
             display: grid;
             grid-template-columns: .5fr .25fr .25fr;
-            grid-gap: 4rem;
+            grid-gap: 25.6rem;
             padding-bottom: 5rem;
 
             @include respond(sm) {
@@ -273,7 +273,7 @@
             }
 
             .describe {
-                height: 0;
+                max-height: 0;
                 opacity: 0;
                 visibility: hidden;
                 transition: all 0.5s;
@@ -351,13 +351,15 @@
                 .describe {
                     padding: 5rem 0 9.5rem;
                     color: #FFFFFF;
-                    height: 77.5rem;
+                    max-height: 120rem;
+                    height: 100%;
                     background: #121212;
                     opacity: 1;
                     visibility: visible;
 
                     &-title {
                         position: relative;
+                        display: table;
                         margin: auto auto auto auto;
                     }
 
@@ -365,8 +367,14 @@
                         position: relative;
                         display: flex;
                         flex-wrap: nowrap;
-                        flex: 0 0 1;
-                        gap: 5rem;
+                        overflow-x: auto;
+                        gap: 6rem;
+                        font-size: 6.4rem;
+                        padding-top: 3rem;
+                        padding-bottom: 8rem;
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
                     }
 
                     &__wrapp {
@@ -374,11 +382,18 @@
                         display: grid;
                         grid-template-columns: repeat(2, 0.5fr);
                         grid-gap: 2rem;
+                        padding-top: 3rem;
 
                         &-btn {
                             display: flex;
                             flex-direction: column;
                             gap: 2rem;
+                            margin: auto auto 0 0;
+                        }
+
+                        .btn {
+                            padding: 2.3rem 4rem;
+                            font-size: 2.8rem;
                         }
 
                         &-benefits {
@@ -386,7 +401,11 @@
                             position: relative;
                             display: grid;
                             grid-template-columns: repeat(2, 0.5fr);
-                            grid-gap: 2rem;
+                            grid-gap: 3.5rem 16.6rem;
+
+                            .tariffs {
+                                font-size: 2.8rem;
+                            }
                         }
                     }
 
@@ -399,6 +418,11 @@
                     top: 0;
                     left: 0;
                     right: 0;
+
+                    transition: all 0.3s ease-in-out;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
 
                 .icon {
@@ -457,6 +481,25 @@
             grid-template-columns: repeat(2, 0.5fr);
             grid-gap:  3rem 6.6rem;
             padding: 5.6rem 0 6rem;
+
+            .worker {
+                display: flex;
+                align-items: center;
+                gap: 3rem;
+                &-name {
+
+                }
+                &-img {
+                    border: 1px solid #FFFFFF;
+                    border-radius: 50%;
+                    width: 10rem;
+                    height: 10rem;
+                }
+
+                &-descr {
+
+                }
+            }
 
         }
 
