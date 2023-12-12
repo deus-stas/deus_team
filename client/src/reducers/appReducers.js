@@ -3,6 +3,7 @@ const initialState = {
     headerData: {},
     services: [],
     contacts: [],
+    team: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -27,6 +28,12 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: action.payload,
+            };
+        case 'SET_TEAM':
+            console.log("SET_TEAM", action.payload)
+            return {
+                ...state,
+                team: action.payload,
             };
         default:
             return state;

@@ -20,17 +20,26 @@ export const setContacts = (contacts) => ({
     payload: contacts,
 });
 
+export const setTeam = (team) => ({
+    type: 'SET_TEAM',
+    payload: team,
+});
+
+
+
 export const fetchData = () => async (dispatch) => {
     try {
 
-        const [servicesResponse,contactResponse ] =
+        const [servicesResponse,contactResponse, teamResponse ] =
             await Promise.all([
                 axios.get(`${apiUrl}/api/services/`),
                 axios.get(`${apiUrl}/api/contacts/`),
+                axios.get(`${apiUrl}/api/team/`),
             ]);
 
         dispatch(setServices(servicesResponse.data));
         dispatch(setContacts(contactResponse.data));
+        dispatch(setTeam(teamResponse.data));
         const headerResponse = await axios.get(`${apiUrl}/api/headerData/`)
         dispatch(setHeaderData(headerResponse.data[0]))
 
