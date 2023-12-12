@@ -34,23 +34,32 @@ router.get('/team', async (req, res) => {
     const rangeStart = skip;
     const rangeEnd = Math.min(skip + limit - 1, count - 1);
     const contentRange = `team ${rangeStart}-${rangeEnd}/${count}`;
-
     res.set('Content-Range', contentRange);
     team = compareUtil.sortByField(team, sort, order)
     res.json(team);
 });
 
-router.post('/team', upload.single('image'), async (req, res) => {
-    const { name, post, priority } = req.body;
-    console.log(req.file);
+router.post('/team', upload.fields([{name:'image'}, {name:'mainImg'}]), async (req, res) => {
+    const { name, post, priority, mainControl, agencyControl, serviceControl } = req.body;
 
-    const image = req.file;
+
+    const image = req.files.image;
+
+    let mainImg
+
+    if (req.files.mainImg) {
+        mainImg = req.files.mainImg[0];
+    }
 
     const team = new Team({
         name,
         post,
         image,
+        mainImg,
         priority,
+        mainControl,
+        agencyControl,
+        serviceControl,
     });
 
     await team.save();
@@ -70,7 +79,7 @@ router.get('/team/:id', async (req, res) => {
     res.json(team);
 });
 
-router.put("/team/:id", upload.single('image'), async (req, res) => {
+router.put("/team/:id", upload.fields([{name:'image'}, {name:'mainImg'}]), async (req, res) => {
     const { id } = req.params;
 
     // Проверяем, есть ли такой документ в базе данных
@@ -78,20 +87,44 @@ router.put("/team/:id", upload.single('image'), async (req, res) => {
     if (!team) {
         return res.status(404).json({ error: 'team not found' });
     }
+    console.log("реквест",req.files)
+    const { name, post, priority, mainControl, agencyControl, serviceControl } = req.body;
 
-    const { name, post, priority } = req.body;
-    const image = req.file;
+    const mainImg = !!req.files.mainImg ? req.files.mainImg[0] : null;
+
+
 
     // Если есть новое изображение в запросе, обновляем ссылку на него
-    if (image) {
-        fs.unlinkSync(`uploads/${team.image.filename}`);
+    const imgUpload = !['true'].includes(req.body.image)
+    if (team.image && imgUpload) {
+        const path = `uploads/${team.image.filename}`
+        if (fs.existsSync(path)) {
+            fs.unlinkSync(path);
+        }
+    }
+    if(imgUpload){
+        const image = !!req.files.image ? req.files.image[0] :null;
         team.image = image;
     }
+
+
+    // Если есть новое изображение в запросе, обновляем ссылку на него
+    if (team.mainImg) {
+        const path = `uploads/${team.mainImg.filename}`
+        if (fs.existsSync(path)) {
+            fs.unlinkSync(path);
+        }
+    }
+    team.mainImg = mainImg;
+
 
     // Обновляем остальные поля документа
     team.name = name;
     team.post = post;
     team.priority = priority;
+    team.mainControl = mainControl;
+    team.agencyControl = agencyControl;
+    team.serviceControl = serviceControl;
 
     // Сохраняем изменения
     await team.save();
@@ -106,10 +139,14 @@ router.delete("/team/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Team not found" });
     }
 
-    const { image } = team;
+    const { image, mainImg } = team;
 
-    if (image) {
+    if (image && fs.existsSync(`uploads/${image.filename}`)) {
         fs.unlinkSync(`uploads/${image.filename}`);
+    }
+
+    if (mainImg && fs.existsSync(`uploads/${mainImg.filename}`)) {
+        fs.unlinkSync(`uploads/${mainImg.filename}`);
     }
 
     res.json({ success: true });
