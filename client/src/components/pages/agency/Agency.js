@@ -37,7 +37,6 @@ const Agency = (props) => {
     const [diplomas, setDiplomas] = useState([]);
     const [raitings, setRaitings] = useState([]);
     const [clients, setClients] = useState([]);
-    const [team, setTeam] = useState([]);
     const [vacancies, setVacancies] = useState([]);
     const [showreels, setShowreels] = useState([]);
     const [success, setSuccess] = useState(false);
@@ -45,7 +44,6 @@ const Agency = (props) => {
     const [current, setCurrent] = useState(4);
     const [total, setTotal] = useState(0);
     const [endSlider, setEndSlider] = useState(false);
-    const [worker, setWorker] = useState([]);
 
 
     useEffect(() => {
@@ -81,31 +79,10 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/persons/`)
-            .then((response) => {
-                setWorker(response.data);
-                console.log('workers:', response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
-    useEffect(() => {
         axios.get(`${apiUrl}/api/clients/`)
             .then((response) => {
                 setClients(response.data);
                 setTotal(response.data.length)
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/team/`)
-            .then((response) => {
-                setTeam(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -180,7 +157,7 @@ const Agency = (props) => {
             console.error(error);
         }
     };
-    const {headerData } = props;
+    const {headerData, team } = props;
     return (
         <>
             {!isLoading &&
@@ -307,9 +284,9 @@ const Agency = (props) => {
                             </span>
                         </span>
                         <div className="agency-workers__wrap-person">
-                            {worker.map((item) => {
+                            {team.filter(item=>item.agencyControl).map((item) => {
                                     return (
-                                        <img src={`${apiUrl}/uploads/${item.image.filename}`}
+                                        <img src={`${apiUrl}/uploads/${item.mainImg.filename}`}
                                              alt=''
                                              className="person-img"
                                         />
@@ -877,6 +854,7 @@ export default connect(
     (state) => (
         {
             headerData: state.app.headerData,
+            team: state.app.team,
         }
     )
 )(Agency)
