@@ -73,7 +73,6 @@ const MainPage = (props) => {
     const [optionsType, setOptionsType] = useState([]);
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
-    const [worker, setWorker] = useState([]);
 
 
     const onAcc = ({e, index}) => {
@@ -215,17 +214,6 @@ const MainPage = (props) => {
         };
     }, []);
 
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/persons/`)
-            .then((response) => {
-                setWorker(response.data);
-                console.log('workers:', response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
     const handleThemeChange = (selectedOption) => {
         setSelectedTheme(selectedOption);
     };
@@ -272,7 +260,7 @@ const MainPage = (props) => {
 
     const mainShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
-    const { services, headerData } = props;
+    const { services, headerData, team } = props;
     services.sort((a, b) => a.position - b.position);
 
     return (
@@ -286,9 +274,9 @@ const MainPage = (props) => {
                                     <div className="main-banner__content">
                                         <h4 className="heading-fourth">Digital агенство</h4>
                                         <h1 className="heading-primary">
-                                            <span>Создаем продукты и услуги,</span>
-                                            <span>которые помогают нашим</span>
-                                            <span className="last-grid"> клиентам
+                                            <span>Создаем продукты и</span>
+                                            <span> услуги, которые помогают </span>
+                                            <span className="last-grid">нашим клиентам
                                                     <Link to={`/contacts`}>
                                                      <btn  className="btn --black hidden-mobile">Стать клиентом</btn>
                                                     </Link>
@@ -298,6 +286,9 @@ const MainPage = (props) => {
 
                                             </span>
                                         </h1>
+                                        <Link to={`/contacts`} className="hidden-desktop">
+                                            <btn  className="btn --black">Стать клиентом</btn>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -331,13 +322,13 @@ const MainPage = (props) => {
                             {/*    })}*/}
                             {/*</div>*/}
                             <ScrollUp fromY={0} delay={2000}>
-                                <div className="main-agency__wrap">
+                                <div className="main-agency__wrap whiteHeader">
                                     {mainPage ? mainPage.map((item, index) => {
                                         const arrow = index !== 1;
                                         const workers = index == 0 && <>
-                                            {worker.map((item) => {
+                                            {team.filter(item=> item.mainControl).map((item) => {
                                                 return (
-                                                    <img src={`${apiUrl}/uploads/${item.image.filename}`}
+                                                    <img src={`${apiUrl}/uploads/${item.mainImg.filename}`}
                                                          alt=''
                                                          className="person-img"
                                                     />
@@ -349,9 +340,8 @@ const MainPage = (props) => {
                                         const allServices = index == 1 && props.services.filter((service, index) => service.isInvisible).map((service, index) =>
                                             <Link
                                                 to={`/services/${service.path}`}>
-                                                <div className="main-agency__item-link p-style"><div>{service.name}</div><img
-                                                    src={arrorGo}
-                                                    alt={'go'}/>
+                                                <div className="main-agency__item-link p-style"><p>{service.name}</p>
+                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
                                                 </div>
                                             </Link>);
                                         const num = index < 9 ? '0' + (index + 1) : index + 1;
@@ -388,8 +378,9 @@ const MainPage = (props) => {
                                                     </div>
                                                         {descr}
                                                         {!!arrow &&
-                                                            <img className="main-agency__item-arrow" src={arrorLink}
-                                                                 alt={'go'}/>}
+                                                            <span className="main-agency__item-arrow">
+                                                                <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                            </span> }
                                                     </a>
                                             </div>
 
@@ -409,11 +400,11 @@ const MainPage = (props) => {
                                         <div className="main-projects__item-flex">
                                             {optionsTheme ? optionsTheme.map((project, index) => {
                                                 const filterProjects = allProjects.filter(item => item.projectTheme === project.value && item.visibility);
-                                                const totalSum = filterProjects.length;
+                                                const totalSum = filterProjects.length < 10? "0" + filterProjects.length : filterProjects.length ;
                                                 return (
                                                     <Link to={`/projects?theme=${project.value}`}>
                                                         <div className="main-projects__item-flex__inner">
-                                                            <div className="heading-secondary">
+                                                            <div className="type-name">
                                                                 <p className='hover'>{project.label}</p>
                                                             </div>
                                                             <div className="main-projects__num"><span>{totalSum}</span>
@@ -748,7 +739,7 @@ const MainPage = (props) => {
                                         <div className="main-news__info-wrap">
                                             {[...allTags].map((tag, i) => (
                                                 <Link to={`/news?tag=${tag}`} className="main-news__info-item"
-                                                      key={i}><p className="p-style-black">#{tag}</p> <img src={arrorGo2} alt={'go'}/></Link>
+                                                      key={i}><p className="p-style-black">#{tag}</p> <Icon viewBox="0 0 30 31" icon="arrowGo"/></Link>
                                             ))}
                                         </div>
                                     </div>
@@ -766,8 +757,9 @@ const MainPage = (props) => {
                                                     <div className="main-news__descr">
                                                         <div className="main-news__name">{item.name}</div>
                                                     </div>
-                                                    <img className="main-agency__item-arrow" src={arrorLink}
-                                                         alt={'go'}/>
+                                                    <span className="main-agency__item-arrow">
+                                                         <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                    </span>
                                                 </Link>
                                             )
                                         }).slice(0, 2)}
@@ -791,6 +783,7 @@ export default connect(
     (state) => (
         {   headerData: state.app.headerData,
             services: state.app.services,
+            team: state.app.team,
         }
     )
 )(MainPage)
