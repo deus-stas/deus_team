@@ -36,22 +36,9 @@
 
         &__wrap {
             display: grid;
-            grid-template-columns: 3fr 1fr;
+            grid-template-columns: 100%;
             align-items: start;
             grid-gap: 4rem;
-
-            @include  respond(lg) {
-                grid-template-columns: 4fr 1fr;
-            }
-
-            @include respond(md) {
-                grid-template-columns: 100%;
-            }
-
-            @include respond(sm) {
-                grid-template-columns: 100%;
-                grid-gap: 0;
-            }
         }
 
         &__content {
@@ -62,8 +49,8 @@
             }
 
             .heading-fourth {
-                font-weight: 500;
-                font-size: 2.8rem;
+                font-weight: 400;
+                font-size: clamp(1.6rem, 5vw, 2.8rem);
                 color: #757677;
                 margin-bottom: 2rem;
 
@@ -71,10 +58,11 @@
 
             .heading-primary {
                 display: flex;
-                font-size: 9.6rem;
-                line-height: 10.6rem;
+                //font-size: 9.6rem;
+                line-height: clamp(3.5rem, 5vw, 10.6rem);
                 flex-direction: column;
                 color: rgba(0,0,0,0.82);
+                font-size: clamp(3.2rem, 4vw, 9.6rem);
                 //margin: 0;
 
                 .last-grid {
@@ -82,10 +70,29 @@
                     align-items: center;
                     justify-content: start;
                     gap: 3rem;
+                    width: 85%;
+
+                    :nth-child(n+1) {
+                        margin-top: 1.3rem;
+                    }
+
+                    @include respond(md){
+                        width: 100%;
+                    }
+
+                    @include respond(sm){
+                        display: inline-block;
+                        white-space: nowrap;
+                    }
+
+
+
+
                 }
 
                 .p-style {
-                    font-size: 2.8rem;
+                    font-weight: 400;
+                    font-size: clamp(1.6rem, 2vw, 2.4rem);
                     color: #757677;
                     display: block;
                     flex-wrap: nowrap;
@@ -94,38 +101,39 @@
                     align-items: center;
                 }
 
-                @include respond(sm) {
-                    font-size: 4.5rem;
-                    line-height: 6rem;
-
-                    .p-style {
-                        font-size: 1.8rem;
-                        line-height: 2.3rem;
-                    }
-
-                    .wh-30 {
-                        width: 40%;
-                    }
-                }
-
-                @include respond(xs) {
-                    font-size: 3.5rem;
-                    line-height: 4rem;
-
-                    .p-style {
-                        font-size: 1.4rem;
-                        line-height: 1.5rem;
-                    }
-
-                    .wh-30 {
-                        width: 40%;
-                    }
-                }
+                //@include respond(sm) {
+                //    font-size: 4.5rem;
+                //    line-height: 6rem;
+                //
+                //    .p-style {
+                //        font-size: 1.8rem;
+                //        line-height: 2.3rem;
+                //    }
+                //
+                //    .wh-30 {
+                //        width: 40%;
+                //    }
+                //}
+                //
+                //@include respond(xs) {
+                //    font-size: 3.5rem;
+                //    line-height: 4rem;
+                //
+                //    .p-style {
+                //        font-size: 1.4rem;
+                //        line-height: 1.5rem;
+                //    }
+                //
+                //    .wh-30 {
+                //        width: 40%;
+                //    }
+                //}
             }
 
             .btn {
                 margin: 0;
                 display: block;
+                font-weight: 400;
 
                 @include respond(sm) {
                     margin: 0 0 0 1.8rem;
@@ -233,7 +241,7 @@
         color: #000000;
 
         @include respond(sm) {
-            padding-top: 6rem;
+            padding-top: 4rem;
         }
 
         &__wrap {
@@ -246,27 +254,40 @@
                 grid-template-columns: repeat(2, 0.50fr);
             }
 
-            //
-            //@include respond(sm) {
-            //    grid-template-columns: 1fr;
-            //    grid-gap: 4rem;
-            //}
+
+            @include respond(sm) {
+                grid-gap: 3rem;
+                grid-template-columns: 100%;
+                padding-bottom: 6rem;
+            }
+
+            @include respond(xs) {
+                display: flex;
+                flex-direction: column;
+                gap: 5rem;
+            }
         }
 
         &__item {
             position: relative;
-            max-height: 73rem;
+            height: 73rem;
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
 
-            @include respond(xs) {
-                max-height: 45rem;
-                grid-column: span 2;
+            @include respond(sm) {
+                height: 46rem;
+                grid-column: inherit;
 
             }
 
             &-img {
                 width: 100%;
-                height: 100%;
+                height: 73rem;
                 object-fit: cover;
+
+                @include respond(sm) {
+                    height: 46rem;
+
+                }
             }
 
             &-header {
@@ -293,10 +314,6 @@
                     margin-top: 0.4rem;
                 }
 
-                &__text {
-                    margin-top: 0.5rem;
-                }
-
                 @include respond(sm) {
                    left: 2rem;
                 }
@@ -308,7 +325,6 @@
                 flex-direction: column;
                 color: #ffffff;
                 position: absolute;
-                white-space: nowrap;
                 gap: 1.5rem;
                 bottom: 0;
                 padding: 4rem;
@@ -327,25 +343,38 @@
                 flex-direction: row;
                 //gap: 5.2rem;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-                padding: 0.5rem 0;
+                padding: 1.5rem 0;
                 align-items: center;
                 justify-content: space-between;
-                opacity: 0.5;
                 transition: transform 0.3s ease-in-out, opacity 0.1s ease-in;
 
-                &:hover {
-                    transform: scale(1.01);
+                p {
                     opacity: 1;
+                    transition: opacity 0.3s;
+                }
+                p:hover {
+                    opacity: 0.5;
+                }
+
+                .icon {
+                    width: 3rem;
+                    height: 3rem;
                 }
             }
 
-            &:not(:hover) &-link {
-                opacity: 1;
-            }
-
             &-arrow {
-                width: 7rem;
-                height: 7rem;
+                color: white;
+                display: inline-flex;
+                padding: 15px;
+                justify-content: center;
+                align-items: center;
+
+                border-radius: 43px;
+                border: 1px solid white;
+                background: rgba(255, 255, 255, 0.03);
+
+                backdrop-filter: blur(12px);
+
                 position: absolute;
                 bottom: 4rem;
                 right: 3rem;
@@ -364,10 +393,15 @@
                     width: 5rem;
                     height: 5rem;
                 }
+
+                .icon {
+                    width: 3rem;
+                    height: 3rem;
+                }
             }
 
             &__descr {
-                max-width: 42rem;
+                max-width: 50rem;
                 color: #ffffff;
 
                 position: absolute;
@@ -443,7 +477,7 @@
                         &:nth-child(1) {
                             position: relative;
                             z-index: 1;
-                            margin-right: -2rem;
+                            margin-right: -1.5rem;
                         }
 
                         &:nth-child(2) {
@@ -471,7 +505,9 @@
             &:nth-child(3) {
                 grid-column: span 2;
 
-
+                @include respond(sm) {
+                    grid-column: inherit;
+                }
 
             }
 
@@ -501,15 +537,17 @@
             flex-direction: column;
             gap: 5rem;
 
-            p {
-
+            .p-style {
+                font-weight: 400;
+                @include respond(xsx) {
+                    font-size: 1.6rem;
+                }
             }
 
 
             &-flex {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 1rem;
                 align-items: center;
 
 
@@ -517,7 +555,7 @@
                     cursor: pointer;
                     display: flex;
                     flex-wrap: wrap;
-                    align-items: flex-start;
+                    align-items: center;
                     gap: 1rem;
                     transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
                     opacity: 0.3;
@@ -530,13 +568,18 @@
                         content: "/";
                         color: #DBDBDB;
                         font-weight: 100;
-                        font-size: 3rem;
-                        margin: 0 1rem;
+                        font-size: 3.6rem;
+                        margin: 0 2rem 0 1rem;
 
                         @include respond(xs) {
                             font-size: 2.3rem;
                         }
 
+                    }
+
+                    .type-name {
+                        font-weight: 500;
+                        font-size: clamp(2rem, 5vw, 3.6rem);
                     }
                 }
 
@@ -551,6 +594,7 @@
 
         &__num {
             display: flex;
+            line-height: normal;
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -559,8 +603,12 @@
             font-size: 1.6rem;
             gap: 1rem;
             border-radius: 39px;
-            padding: 0.4rem 1.9rem 0.1rem 2rem;
-            margin-bottom: 0.4rem;
+            padding: 1rem 1.8rem 0.6rem 1.8rem;
+
+            @include respond(xs) {
+                font-size: 1.4rem;
+                padding: 0.6rem 1.2rem 0.4rem 1.2rem;
+            }
         }
     }
 
@@ -1015,7 +1063,9 @@
 
             .main-news__content {
                 grid-column: span 3;
-
+                @include respond(sm) {
+                    grid-column: inherit;
+                }
             }
 
             @include respond(sm) {
@@ -1061,13 +1111,29 @@
                 font-size: 2.8rem;
                 line-height: 2.6rem;
                 color: #000000;
-                transition: opacity .4s;
                 border-bottom: 1px solid rgba(65, 66, 66, 0.15);
-                white-space: nowrap;
+                transition: opacity 0.4s;
+
+                p {
+                    transition: opacity 0.4s;
+                }
+
+                p:hover {
+                    opacity: 0.5;
+                }
+
+
+
+                .icon {
+                    width: 3rem;
+                    height: 3rem;
+                }
+
+                @include respond(sm) {
+                    white-space: nowrap;
+                }
 
                 &:hover {
-                    opacity: 0.5;
-
                     .main-news__tag {
                         background: rgba(211, 209, 209, 0.34);
                         color: #121212;
@@ -1109,7 +1175,7 @@
 
             @include respond(sm) {
                 grid-template-columns: 1fr;
-                grid-gap: 0;
+                grid-gap: 1rem;
 
             }
         }
@@ -1117,30 +1183,34 @@
         &__item {
             position: relative;
             display: grid;
-            max-height: 73rem;
+            height: 73rem;
+            grid-gap: 1rem;
             transition: all 0.3s ease-in-out;
             will-change: transform;
             @include respond(sm) {
                 grid-column: auto;
-
+                height: 46rem;
                 &:nth-child(1){
                     grid-column: auto;
                 }
 
             }
-            &:hover {
-                .main-news__text {
-                    background: #FF4D01;
-                }
-
-                .main-news__name {
-                    color: #FF4D01;
-                }
-
-            }
+            //&:hover {
+            //    .main-news__text {
+            //        background: #FF4D01;
+            //    }
+            //
+            //    .main-news__name {
+            //        color: #FF4D01;
+            //    }
+            //
+            //}
 
             &:nth-child(1){
                 grid-column: span 2;
+                @include respond(sm) {
+                    grid-column: inherit;
+                }
             }
 
 
@@ -1276,6 +1346,10 @@
 
 .wh-30 {
     width: 30%;
+
+    @include respond(sm) {
+        width: 100%;
+    }
 }
 
 

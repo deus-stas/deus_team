@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { List, Datagrid, TextField, EditButton } from 'react-admin';
+import {List, Datagrid, TextField, EditButton, BooleanInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, AutocompleteInput } from 'react-admin';
 import axios from "axios";
 
@@ -62,10 +62,26 @@ export const TeamCreate = (props) => {
                     choices={[]}
                     optionText="name" // Использует поле "name" для отображения результатов поиска
                 />
-                <ImageInput className="fileInput" placeholder="+" source="image" label="Картинка"
-                            validate={[required()]} accept="image/*">
-                    <ImageField source="src" title="title"/>
+
+                <ImageInput className="fileInput" placeholder="+" source="mainImg" label="Фотография"
+                            accept="image/*">
+                    <FilenameField source="src" title="title"/>
                 </ImageInput>
+                <BooleanInput
+                    source="mainControl"
+                    label="Показывать на главной"/>
+                <BooleanInput
+                    source="serviceControl"
+                    label="Показывать в услугах"/>
+                <BooleanInput
+                    source="agencyControl"
+                    label="Показывать в агенстве"/>
+
+                <ImageInput className="fileInput" placeholder="+" source="image" label="Emoji"
+                            accept="image/*">
+                    <FilenameField source="src" title="title"/>
+                </ImageInput>
+
             </SimpleForm>
         </Create>
     )
@@ -101,9 +117,22 @@ export const TeamEdit = (props) => {
                     choices={choices}
                     optionText="name" // Использует поле "name" для отображения результатов поиска
                 />
-                <ImageInput className="fileInput" placeholder="+" source="image" label="Картинка"
-                            validate={[required()]} accept="image/*">
-                    <FilenameField source="image" title="title"/>
+                <ImageInput className="fileInput" placeholder="+" source="mainImg" label="Фотография"
+                            accept="image/*">
+                    <FilenameField source="src" title="title"/>
+                </ImageInput>
+                <BooleanInput
+                    source="mainControl"
+                    label="Показывать на главной"/>
+                <BooleanInput
+                    source="serviceControl"
+                    label="Показывать в услугах"/>
+                <BooleanInput
+                    source="agencyControl"
+                    label="Показывать в агенстве"/>
+
+                <ImageInput className="fileInput" placeholder="+" source="image" label="Emoji" accept="image/*">
+                    <FilenameField source="src" title="title"/>
                 </ImageInput>
             </SimpleForm>
         </Edit>

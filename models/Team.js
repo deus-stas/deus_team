@@ -5,6 +5,10 @@ const TeamSchema = new Schema({
     name: { type: String, required: true },
     post: { type: String, required: true },
     image: { type: Object },
+    mainControl: {type: Boolean},
+    serviceControl: {type: Boolean},
+    agencyControl: {type: Boolean},
+    mainImg: { type: Object},
     priority: { type: String }
 });
 

@@ -5,6 +5,10 @@
 
     .header__discuss {
         border: 1px solid #ffffff;
+        &:hover {
+            background: #FFFFFF;
+            color: #121212;
+        }
     }
 }
 
@@ -51,13 +55,15 @@
             margin-right: auto;
         }
 
-        img {
+        .icon {
             display: block;
             width: 11.3rem;
+            height: 7.6rem;
         }
     }
 
     &__nav {
+        position: relative;
         &-list {
             display: flex;
             align-items: center;
@@ -66,6 +72,8 @@
         }
 
         &-item {
+            cursor: pointer;
+            position: relative;
             transition: opacity .5s;
 
             &:hover {
@@ -74,6 +82,7 @@
 
             a {
                 display: block;
+
             }
 
             &:not(:last-child) {
@@ -82,6 +91,17 @@
                 @include respond(sm) {
                     margin-right: 0;
                 }
+            }
+
+            &:before {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: calc(100% + 5rem);
+                height: calc(100% + 5rem);
             }
         }
     }
@@ -118,11 +138,11 @@
         border-radius: 46px;
         margin: 0;
         padding: 1.5rem 2.7rem 1.5rem 2.1rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
     &:hover {
-            .header__discuss-text {
-                opacity: 0.5;
-            }
+        background: #121212;
+        color: #FFFFFF;
         }
 
         &-img {

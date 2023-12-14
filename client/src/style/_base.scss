@@ -168,6 +168,10 @@ html {
     margin-right: auto;
     margin-left: auto;
     //overflow: hidden;
+
+    @include respond(sm){
+        padding: 0 1rem;
+    }
 }
 
 body {
@@ -506,4 +510,64 @@ main {
 ::-webkit-scrollbar {
     width: 0;
     background: transparent;
+}
+
+.hover-flip {
+    overflow: hidden;
+    height: auto;
+}
+
+.hover-flip span {
+    display: inline-block;
+    position: relative;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.hover-flip span::before {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 120%;
+    content: attr(data-hover);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.hover-flip:hover span {
+    -webkit-transform: translateY(-120%);
+    transform: translateY(-120%);
+}
+
+.hover-flip-arrow {
+    overflow: hidden;
+    height: auto;
+}
+
+.hover-flip-arrow span {
+    display: inline-block;
+    position: relative;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.hover-flip-arrow span::before {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 120%;
+    content: attr(data-hover);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.hover-flip-arrow:hover span {
+    -webkit-transform: translateY(-120%);
+    transform: translateY(-120%);
 }

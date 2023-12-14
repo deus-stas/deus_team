@@ -8,6 +8,7 @@ import './appHeader.scss';
 import logo from '../../img/logo.svg';
 import btn from '../../img/discuss-btn.png';
 import RetryImage from "../../helpers/RetryImage";
+import {Icon} from "../icon/Icon";
 
 
 const apiUrl = process.env.NODE_ENV === 'production'
@@ -17,20 +18,12 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const AppHeader = (props) => {
     const [isLoading, setIsLoading] = useState(true);
 
-    // function updateHeaderColor() {
-    //     const header = document.querySelector(".header");
-    //     let progress = (.5 + window.scrollY / window.innerHeight) | 0;
-    //     header.classList.remove("white", "black");
-    //     header.classList.add(progress % 2 ? "white" : "black");
-    // }
-
     useEffect(() => {
         const handleScroll = () => {
             let header = document.querySelector('.header')
             let whiteHeaders = document.querySelectorAll('.whiteHeader')
 
             const find = Array.from(whiteHeaders).find((whiteHeader) => {
-                console.log("whiteHeader:", whiteHeader.offsetTop, whiteHeader.offsetHeight, window.scrollY)
 
                 return window.scrollY >= whiteHeader.offsetTop && window.scrollY <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
             })
@@ -86,7 +79,7 @@ const AppHeader = (props) => {
 
     const [menu, setMenu] = useState(false);
     const {headerData} = props;
-    console.log("SET_HEADER_DATA", headerData)
+
     return (
         <>
             {!isLoading && headerData &&
@@ -95,24 +88,30 @@ const AppHeader = (props) => {
                         <div className="container">
                             <div className="header__wrap">
                                 <Link to="/" className='header__logo'>
-                                    <img src={logo} alt="DEUS"/>
+                                    {/*<img src={logo} alt="DEUS"/>*/}
+                                    <Icon icon="headerLogo"  viewBox="0"/>
                                 </Link>
                                 <nav className="header__nav">
                                     <ul className="header__nav-list">
-                                        <li className="header__nav-item ">
-                                            <NavLink to="/projects">Проекты</NavLink>
+                                        <li className="header__nav-item hover-flip">
+                                            <NavLink to="/projects">
+                                            <span data-hover="Проекты">Проекты</span>
+                                            </NavLink>
                                         </li>
-                                        <li className="header__nav-item hidden-mobile">
-                                            <NavLink to="/services">Услуги</NavLink>
+                                        <li className="header__nav-item hover-flip hidden-mobile">
+                                            <NavLink to="/services">
+                                                <span data-hover="Услуги">Услуги</span>
+                                            </NavLink>
                                         </li>
-                                        <li className="header__nav-item hidden-mobile">
-                                            <NavLink to="/agency">Агентство</NavLink>
+                                        <li className="header__nav-item hover-flip hidden-mobile">
+                                            <NavLink to="/agency">
+                                                <span data-hover="Агентство">Агентство</span>
+                                            </NavLink>
                                         </li>
-                                        {/* <li className="header__nav-item hidden-mobile">
-                                    <NavLink to="/news">Журнал</NavLink>
-                                </li> */}
-                                        <li className="header__nav-item hidden-mobile">
-                                            <NavLink to="/contacts">Контакты</NavLink>
+                                        <li className="header__nav-item hover-flip hidden-mobile">
+                                            <NavLink to="/contacts">
+                                                <span data-hover="Контакты">Контакты</span>
+                                            </NavLink>
                                         </li>
                                     </ul>
                                 </nav>

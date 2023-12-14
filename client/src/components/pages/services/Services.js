@@ -26,6 +26,13 @@ const Services = (props) => {
     const [openImage, setOpenImage] = useState(null);
     const [openList, setOpenList]= useState([])
 
+    const gotoAnchor = (e) => {
+        setTimeout(() => {
+            let element = document.getElementById(e.target.getAttribute('datahash'));
+            element.scrollIntoView({behavior: "smooth", block: "start"});
+        }, 750)
+    }
+
     useEffect(() => {
         axios.get(`${apiUrl}/api/reviews/`)
             .then((response) => {
@@ -91,7 +98,7 @@ const Services = (props) => {
     const handleCloseImage = () => {
         setOpenImage(null);
     };
-    const {headerData, services, projects} = props;
+    const {headerData, services, team, projects} = props;
 
     return (
         <>
@@ -141,10 +148,8 @@ const Services = (props) => {
 
                             {
                                 !!services && services.filter((service) => service.isInvisible).map((service, index) => {
-                                    console.log("open:",services )
                                     return (
                                         <div className={`${index === openList ? 'active' : ''}`}>
-
                                             <div className="container">
                                                 <div to={`/services/${service.path}`}
                                                      className="services-list__wrapp-item"
@@ -154,7 +159,6 @@ const Services = (props) => {
                                                      }}>
                                                     <div className="services-s__name">{service.name}</div>
                                                     <Icon icon="plus"/>
-
                                                 </div>
                                             </div>
 
@@ -162,24 +166,47 @@ const Services = (props) => {
                                                 <img src={spiral} alt=""/>
                                                 <div className="container">
                                                     <p className="describe-title">{service.blockTitle}</p>
-                                                    <p className="describe-services">{service.descrTotal}</p>
+
+                                                    <div className="describe-services">
+                                                        {service.tariffs.map(tariffs => {
+                                                                return (
+                                                                    <>
+                                                                        {tariffs.tariffsCategory && (
+                                                                            <>
+                                                                                <p>{tariffs.tariffsCategory}</p>
+                                                                                <p className="dot">•</p>
+                                                                            </>
+                                                                        )}
+                                                                    </>)
+                                                            }
+                                                        )}
+
+                                                    </div>
+
+
                                                     <div className="describe__wrapp">
                                                         <div className="describe__wrapp-btn">
-                                                            <div className="btn --b-white ">Посмотреть кейсы</div>
-                                                            <div className="btn --white">Обсудить проект</div>
+                                                            <Link to="/projects" className="btn --b-white ">Посмотреть кейсы</Link>
+                                                            <Link to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</Link>
                                                         </div>
                                                         <div>
-                                                            <h3 className="heading-tertiary">Разработка интернет-проектов на платформе 1С-Битрикс.
-                                                                Поможем на всех этапах проекта, от формулирования техзадания, до старта проекта.
-                                                                Имеем большой опыт и не боимся сложных интеграций с различными сервисами и системами.
+                                                            <h3 className="heading-tertiary">
+                                                                {service.descr}
                                                             </h3>
                                                             <div className="describe__wrapp-benefits">
-                                                                {service.benefits.map(benefit=> {
-                                                                    console.log(benefit)
+                                                                {service.tariffs.map(tariffs => {
                                                                     return (
-                                                                        <div className="">
-                                                                            {benefit.benefitsName}
-                                                                            {benefit.benefitsTitle}
+                                                                        <div className="tariffs">
+                                                                            {tariffs.tariffsCategory}
+                                                                            {tariffs.tariffsItems.map(tariffsItem => {
+                                                                                    return (
+                                                                                        <p className="p-style-grey">
+                                                                                            {tariffsItem.tariffPrice} &nbsp;/&nbsp; {tariffsItem.tariffDeadline}
+
+                                                                                        </p>
+                                                                                    )
+                                                                                }
+                                                                            )}
                                                                         </div>
                                                                     )
                                                                 })}
@@ -250,10 +277,19 @@ const Services = (props) => {
                                 <div>
                                     <h2>Команда</h2>
                                     <div className="services-team__wrapper">
-                                        <div className="worker-img">1</div>
-                                        <div className="worker-img">2</div>
-                                        <div className="worker-img">3</div>
-                                        <div className="worker-img">4</div>
+                                        {team.filter(team => team.serviceControl).map((team,index) => {
+                                            console.log('team:', team.mainImg)
+                                            return (
+                                                <div className="worker">
+
+                                                    <img className="worker-img" src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null} alt=""/>
+                                                    <span>
+                                                      <div className="worker-name">{team.name}</div>
+                                                    <div className="worker-descr">{team.post}</div>
+                                                    </span>
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                     <div className="services-team__table">
                                         <div className="item">
@@ -354,6 +390,7 @@ export default connect(
             headerData: state.app.headerData,
             services: state.app.services,
             projects: state.app.projects,
+            team: state.app.team,
         }
     )
 )(Services)
