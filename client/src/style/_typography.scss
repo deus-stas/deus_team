@@ -9,6 +9,7 @@ body {
 }
 
 .heading-primary {
+    color: #121212;
     font-weight: 500;
     font-size: 9.6rem;
     line-height: 10.6rem;
@@ -41,6 +42,12 @@ body {
 
     @include respond(xs) {
         font-size: 2.8rem;
+        line-height: 3.3rem;
+
+    }
+
+    @include respond(xsx) {
+        font-size: 2.4rem;
         line-height: 3.3rem;
 
     }

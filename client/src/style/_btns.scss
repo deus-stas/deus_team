@@ -11,11 +11,12 @@
     line-height: 2.6rem;
     color: #FFFFFF;
 
-    transition: all .3s;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
     @include respond(sm) {
         font-size: 1.6rem;
         line-height: 1.8rem;
+        padding: 1.5rem 3rem;
     }
 
     &:hover {
@@ -90,7 +91,7 @@
             left: 0;
             top: 0;
             z-index: -1;
-            transition: all 0.6s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
         &.--orange {
@@ -148,9 +149,16 @@
         background: #121212;
         color: #FFFFFF;
         margin: 0;
+        border: 1px solid #121212;
 
         &:hover {
-            opacity: 0.5;
+            background: #FFFFFF;
+            color: #121212;
+        }
+
+        @include respond(sm) {
+            font-size: 1.6rem;
+            display: inline-block;
         }
     }
 
@@ -159,10 +167,12 @@
         background: transparent;
         border: 1px solid white;
         color: #FFFFFF;
+        align-self: end;
         margin: 0;
 
         &:hover {
-            opacity: 0.5;
+            background: #FFFFFF;
+            color: #121212;
         }
     }
 }
