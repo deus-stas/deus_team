@@ -96,27 +96,27 @@ const AppFooter = (props) => {
                                 {/*        <li className="footer__list-item"><Link to="/contacts">Контакты </Link></li>*/}
                                 {/*    </ul>*/}
                                 {/*</nav>*/}
-                                <p className="p-style">+7 (495) 103—4351</p>
-                                <p className="p-style">hello@de-us.ru</p>
+                                <p className="p-style hover-flip"><span data-hover="+7 (495) 103—4351">+7 (495) 103—4351</span></p>
+                                <p className="p-style hover-flip"><span data-hover="hello@de-us.ru">hello@de-us.ru</span></p>
                             </div>
 
                             <nav>
                                 <ul className="footer__pages p-style">
-                                    <li className="footer__pages-item hidden-mobile">
-                                    <NavLink to="/agency">Агентство</NavLink>
+                                    <li className="footer__pages-item hover-flip hidden-mobile">
+                                        <NavLink to="/agency"> <span data-hover="Агентство">Агентство</span></NavLink>
                                     </li>
-                                    <li className="footer__pages-item ">
-                                        <NavLink to="/projects">Услуги</NavLink>
+                                    <li className="footer__pages-item hover-flip ">
+                                        <NavLink to="/projects"><span data-hover="Услуги">Услуги</span></NavLink>
                                     </li>
-                                    <li className="footer__pages-item hidden-mobile">
-                                        <NavLink to="/services">Проекты</NavLink>
+                                    <li className="footer__pages-item hover-flip hidden-mobile">
+                                        <NavLink to="/services"><span data-hover="Проекты">Проекты</span></NavLink>
                                     </li>
 
                                     {/* <li className="header__nav-item hidden-mobile">
                                     <NavLink to="/news">Журнал</NavLink>
                                 </li> */}
-                                    <li className="footer__pages-item hidden-mobile">
-                                        <NavLink to="/contacts">Контакты</NavLink>
+                                    <li className="footer__pages-item hover-flip hidden-mobile">
+                                        <NavLink to="/contacts"><span data-hover="Контакты">Контакты</span></NavLink>
                                     </li>
                                 </ul>
                             </nav>
@@ -130,16 +130,16 @@ const AppFooter = (props) => {
                                 {
                                     headerData && headerData.vk && headerData.telegram && headerData.behance ?
                                         <div className="footer__social p-style">
-                                            <Link className="footer__social-item" to={`${headerData.dprofile}`}>Dprofile</Link>
-                                            <Link className="footer__social-item" to={`${headerData.vk}`}>VK</Link>
-                                            <Link className="footer__social-item" to={`${headerData.behance}`}>Behance</Link>
-                                            <Link className="footer__social-item" to={`${headerData.telegram}`}>Telegram</Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.dprofile}`}>Dprofile</Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.vk}`}>VK</Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.behance}`}>Behance</Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.telegram}`}>Telegram</Link>
                                         </div> :
                                         <div className="footer__social p-style">
-                                            <Link className="footer__social-item" to="/">Dprofile</Link>
-                                            <Link className="footer__social-item" to="/">VK</Link>
-                                            <Link className="footer__social-item" to="/">Behance</Link>
-                                            <Link className="footer__social-item" to="/">Telegram</Link>
+                                            <Link className="footer__social-item hover-flip" to="/"><span data-hover="Dprofile">Dprofile</span></Link>
+                                            <Link className="footer__social-item hover-flip" to="/"><span data-hover="VK">VK</span></Link>
+                                            <Link className="footer__social-item hover-flip" to="/"><span data-hover="Behance">Behance</span></Link>
+                                            <Link className="footer__social-item hover-flip" to="/"><span data-hover="Telegram">Telegram</span></Link>
                                         </div>
                                 }
 
