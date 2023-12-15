@@ -56,13 +56,15 @@ const AppFooter = (props) => {
                         </span>
                         <span>о своем проекте, подумаем </span>
                         <span className="last-grid">над ним вместе  <btn className="btn --footer  hidden-mobile">Обсудить проект</btn></span>
-
+                        <Link to={`/contacts`} className="hidden-desktop">
+                            <btn  className="btn --footer">Стать клиентом</btn>
+                        </Link>
 
                         </p>
                     {headerData &&
                     <div className="footer__wrap">
                         <>
-                            <div className="footer__item hidden-mobile">
+                            <div className="footer__item">
                             <div className="footer__list-item">г. Одинцово, ул. <br/> Молодежная, д.46, <br/>  строение 1 офис
                                 24, 25
                             </div>
@@ -102,20 +104,20 @@ const AppFooter = (props) => {
 
                             <nav>
                                 <ul className="footer__pages p-style">
-                                    <li className="footer__pages-item hover-flip hidden-mobile">
+                                    <li className="footer__pages-item hover-flip">
                                         <NavLink to="/agency"> <span data-hover="Агентство">Агентство</span></NavLink>
                                     </li>
                                     <li className="footer__pages-item hover-flip ">
                                         <NavLink to="/projects"><span data-hover="Услуги">Услуги</span></NavLink>
                                     </li>
-                                    <li className="footer__pages-item hover-flip hidden-mobile">
+                                    <li className="footer__pages-item hover-flip">
                                         <NavLink to="/services"><span data-hover="Проекты">Проекты</span></NavLink>
                                     </li>
 
                                     {/* <li className="header__nav-item hidden-mobile">
                                     <NavLink to="/news">Журнал</NavLink>
                                 </li> */}
-                                    <li className="footer__pages-item hover-flip hidden-mobile">
+                                    <li className="footer__pages-item hover-flip">
                                         <NavLink to="/contacts"><span data-hover="Контакты">Контакты</span></NavLink>
                                     </li>
                                 </ul>

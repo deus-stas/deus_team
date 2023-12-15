@@ -1,6 +1,6 @@
 import React from 'react'
 import {useEffect, useState, useRef} from 'react';
-import axios from './../../../axios'
+import axios, {setIsLoadingMainPageEvent} from './../../../axios'
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
 import SwiperCore, {Grid, Autoplay} from "swiper";
@@ -199,8 +199,7 @@ const MainPage = (props) => {
     }, []);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        setIsLoadingMainPageEvent(true)
 
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {

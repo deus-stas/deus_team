@@ -1,7 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import axios from '../../../../axios'
+import axios, {setIsLoadingMainPageEvent} from '../../../../axios'
 
 import Breadcrumbs from '../../../breadcrubms/Breadcrumbs'
 import Cta from '../../../cta/Cta';
@@ -166,8 +166,7 @@ const ServicesDetail = () => {
     }, []);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        setIsLoadingMainPageEvent(true)
 
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {

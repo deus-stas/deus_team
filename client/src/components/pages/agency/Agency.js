@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../../axios'
+import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Marquee from "react-fast-marquee";
@@ -112,8 +112,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        setIsLoadingMainPageEvent(true)
 
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from '../../axios'
+import axios, {setIsLoadingMainPageEvent} from '../../axios'
 import { Link, useLocation } from 'react-router-dom';
 
 import './news.scss';
@@ -49,8 +49,7 @@ const News = () => {
     }, []);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        setIsLoadingMainPageEvent(true)
 
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {
