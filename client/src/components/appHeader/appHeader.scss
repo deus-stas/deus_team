@@ -111,7 +111,7 @@
     }
 
     .hidden {
-        transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        //transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
         visibility: hidden;
         opacity: 0;
     }
@@ -149,7 +149,7 @@
         border-radius: 46px;
         margin: 0;
         padding: 1.5rem 2.7rem 1.5rem 2.1rem;
-        transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        //transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 
     &:hover {
         background: #121212;
