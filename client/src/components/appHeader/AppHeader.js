@@ -1,14 +1,12 @@
-import {useState, useEffect,} from 'react';
-import axios from 'axios'
-import {Link, NavLink, useNavigate} from 'react-router-dom';
-import PropTypes from "prop-types";
-import {connect, useSelector} from "react-redux";
+import {useEffect, useState,} from 'react';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {connect} from "react-redux";
 import './appHeader.scss';
-
-import logo from '../../img/logo.svg';
 import btn from '../../img/discuss-btn.png';
 import RetryImage from "../../helpers/RetryImage";
 import {Icon} from "../icon/Icon";
+import DelayedLink, {DelayedNavLink} from "./DelayedLink";
+import {setIsLoadingMainPageEvent} from "../../axios";
 
 
 const apiUrl = process.env.NODE_ENV === 'production'
@@ -17,6 +15,23 @@ const apiUrl = process.env.NODE_ENV === 'production'
 
 const AppHeader = (props) => {
     const [isLoading, setIsLoading] = useState(true);
+    const [prevScroll, setPrevScroll] = useState(0);
+    const [lastShowPos, setLastShowPos] = useState(0);
+    const [visible, setVisible] = useState(true);
+    const location = useLocation()
+
+    useEffect(()=>{
+        const defaultColor = ['/', '/contacts']
+        let header = document.querySelector('.header')
+        if (!!header) {
+            if (defaultColor.includes(location.pathname)) {
+                header.classList.remove('white');
+            } else {
+                header.classList.add('white');
+            }
+        }
+
+    },[isLoading, location])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,7 +39,6 @@ const AppHeader = (props) => {
             let whiteHeaders = document.querySelectorAll('.whiteHeader')
 
             const find = Array.from(whiteHeaders).find((whiteHeader) => {
-
                 return window.scrollY >= whiteHeader.offsetTop && window.scrollY <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
             })
             if (!!find) {
@@ -36,7 +50,7 @@ const AppHeader = (props) => {
                 if (window.scrollY > find.offsetTop + find.offsetHeight) {
                     header.classList.remove('white');
                 }
-            } else {
+            } else if( Array.from(whiteHeaders).length>0) {
                 header.classList.remove('white');
             }
         };
@@ -48,8 +62,27 @@ const AppHeader = (props) => {
     }, []);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        const handleScroll = () => {
+            const scrolled = window.scrollY;
+
+            if (scrolled > 0 && scrolled > prevScroll) {
+                setVisible(false);
+                setLastShowPos(scrolled);
+            } else if (scrolled <= Math.max(lastShowPos - 100, 0)) {
+                setVisible(true);
+            }
+            setPrevScroll(scrolled);
+
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [prevScroll, lastShowPos]);
+
+    useEffect(() => {
+        setIsLoadingMainPageEvent(true)
 
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {
@@ -87,31 +120,30 @@ const AppHeader = (props) => {
                     <header className="header">
                         <div className="container">
                             <div className="header__wrap">
-                                <Link to="/" className='header__logo'>
-                                    {/*<img src={logo} alt="DEUS"/>*/}
+                                <DelayedLink to="/" className='header__logo' >
                                     <Icon icon="headerLogo"  viewBox="0"/>
-                                </Link>
-                                <nav className="header__nav">
+                                </DelayedLink>
+                                <nav className={`header__nav ${visible ? '' : 'hidden'}`}>
                                     <ul className="header__nav-list">
                                         <li className="header__nav-item hover-flip">
-                                            <NavLink to="/projects">
+                                            <DelayedNavLink  to="/projects">
                                             <span data-hover="Проекты">Проекты</span>
-                                            </NavLink>
+                                            </DelayedNavLink>
                                         </li>
                                         <li className="header__nav-item hover-flip hidden-mobile">
-                                            <NavLink to="/services">
+                                            <DelayedNavLink to="/services">
                                                 <span data-hover="Услуги">Услуги</span>
-                                            </NavLink>
+                                            </DelayedNavLink>
                                         </li>
                                         <li className="header__nav-item hover-flip hidden-mobile">
-                                            <NavLink to="/agency">
+                                            <DelayedNavLink to="/agency">
                                                 <span data-hover="Агентство">Агентство</span>
-                                            </NavLink>
+                                            </DelayedNavLink>
                                         </li>
                                         <li className="header__nav-item hover-flip hidden-mobile">
-                                            <NavLink to="/contacts">
+                                            <DelayedNavLink to="/contacts">
                                                 <span data-hover="Контакты">Контакты</span>
-                                            </NavLink>
+                                            </DelayedNavLink>
                                         </li>
                                     </ul>
                                 </nav>
@@ -121,16 +153,16 @@ const AppHeader = (props) => {
                                         <div className="header__contacts hidden-mobile">
                                             {/*<Link to={`mailto:${headerData.email}`}*/}
                                             {/*      className="header__contacts-link">{headerData.email}</Link>*/}
-                                            <Link to={`tel:${headerData.phone}`}
-                                                  className="header__contacts-link">{headerData.phone}</Link>
+                                            <DelayedLink to={`tel:${headerData.phone}`}
+                                                  className="header__contacts-link">{headerData.phone}</DelayedLink>
                                         </div>
                                     ) :
                                     (
                                         <div className="header__contacts hidden-mobile">
                                             {/*<Link to="mailto:hello@de-us.ru"*/}
                                             {/*      className="header__contacts-link">hello@de-us.ru</Link>*/}
-                                            <Link to="tel:+74951034351" className="header__contacts-link">+7 (495)
-                                                103—4351</Link>
+                                            <DelayedLink to="tel:+74951034351" className="header__contacts-link">+7 (495)
+                                                103—4351</DelayedLink>
                                         </div>
                                     )
                                 }
@@ -140,7 +172,7 @@ const AppHeader = (props) => {
                             <img src={btn} alt="Обсудить проект" className="header__discuss-img" />
                             <div className="header__discuss-text">Обсудить проект</div>
                         </div> */}
-                                <Link to="/contacts" className="header__discuss hidden-mobile" datahash="contactUs"
+                                <DelayedLink to="/contacts" className="header__discuss hidden-mobile" datahash="contactUs"
                                       onClick={(e) => gotoAnchor(e)}>
                                     {
                                         headerData.headerPhoto ?
@@ -156,7 +188,7 @@ const AppHeader = (props) => {
                                     <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
                                          className="header__discuss-text">Обсудить проект
                                     </div>
-                                </Link>
+                                </DelayedLink>
 
                                 <div className={`header__burger hidden-desktop ${menu ? 'active' : ''}`}
                                      onClick={() => setMenu(!menu)}>
@@ -170,19 +202,19 @@ const AppHeader = (props) => {
                             <nav className="header__menu-nav">
                                 <ul className="header__menu-list">
                                     <li className="header__menu-item">
-                                        <NavLink to="/projects" onClick={() => setMenu(!menu)}>Проекты</NavLink>
+                                        <DelayedNavLink to="/projects" onClick={() => setMenu(!menu)}>Проекты</DelayedNavLink>
                                     </li>
                                     <li className="header__menu-item">
-                                        <NavLink to="/services" onClick={() => setMenu(!menu)}>Услуги</NavLink>
+                                        <DelayedNavLink to="/services" onClick={() => setMenu(!menu)}>Услуги</DelayedNavLink>
                                     </li>
                                     <li className="header__menu-item">
-                                        <NavLink to="/agency" onClick={() => setMenu(!menu)}>Агентство</NavLink>
+                                        <DelayedNavLink to="/agency" onClick={() => setMenu(!menu)}>Агентство</DelayedNavLink>
                                     </li>
                                     {/* <li className="header__menu-item">
                                 <NavLink to="/news" onClick={() => setMenu(!menu)}>Журнал</NavLink>
                             </li> */}
                                     <li className="header__menu-item">
-                                        <NavLink to="/contacts" onClick={() => setMenu(!menu)}>Контакты</NavLink>
+                                        <DelayedNavLink to="/contacts" onClick={() => setMenu(!menu)}>Контакты</DelayedNavLink>
                                     </li>
                                 </ul>
                                 <div>
@@ -194,13 +226,13 @@ const AppHeader = (props) => {
                                         <div className="header__menu-contacts">
                                             {/*<Link to={`mailto:${headerData.email}`}*/}
                                             {/*      className="header__menu-contacts-link">{headerData.email}</Link>*/}
-                                            <Link to={`tel:${headerData.phone}`}
-                                                  className="header__menu-contacts-link">{headerData.phone}</Link>
+                                            <DelayedLink to={`tel:${headerData.phone}`}
+                                                  className="header__menu-contacts-link">{headerData.phone}</DelayedLink>
                                         </div>
                                     ) : (
                                         <div className="header__menu-contacts">
-                                            <Link to="tel:+74951034351" className="header__menu-contacts-link">+7 (495)
-                                                103—4351</Link>
+                                            <DelayedLink to="tel:+74951034351" className="header__menu-contacts-link">+7 (495)
+                                                103—4351</DelayedLink>
                                             {/*<Link to="mailto:hello@de-us.ru"*/}
                                             {/*      className="header__menu-contacts-link">hello@de-us.ru</Link>*/}
                                         </div>
@@ -208,12 +240,12 @@ const AppHeader = (props) => {
                             }
 
                             <div className="header__bot">
-                                <Link to="/contacts" className="header__cta" datahash="contactUs"
+                                <DelayedLink to="/contacts" className="header__cta" datahash="contactUs"
                                       onClick={(e) => gotoAnchor(e)}>
                                     <img datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={btn}
                                          alt="Обсудить проект"/>
                                     Обсудить проект
-                                </Link>
+                                </DelayedLink>
                                 {/* <a href='contacts#contactWithUsPart'>
                            
                         </a> */}
