@@ -232,7 +232,7 @@ main {
     position: fixed;
     top: -20%;
     left: 0;
-    z-index: 999;
+    z-index: 9000;
     -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
     clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
     -webkit-transition: opacity .7s, transform .7s;
