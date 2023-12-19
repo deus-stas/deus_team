@@ -1,6 +1,6 @@
 import React from 'react'
 import {useEffect, useState, useRef} from 'react';
-import axios from './../../../axios'
+import axios, {setIsLoadingMainPageEvent} from './../../../axios'
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
 import SwiperCore, {Grid, Autoplay} from "swiper";
@@ -27,6 +27,7 @@ import ScrollUp from "../../animation/scrollUp";
 import {isVisible} from "@testing-library/user-event/dist/utils";
 import RetryImage from "../../../helpers/RetryImage";
 import manager from "../../../img/manager.png";
+import * as ReactDom from "react-dom/server";
 
 
 SwiperCore.use([Autoplay]);
@@ -199,8 +200,7 @@ const MainPage = (props) => {
     }, []);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        setIsLoadingMainPageEvent(true)
 
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {
@@ -257,6 +257,9 @@ const MainPage = (props) => {
 
         return columns;
     }
+
+    const double =  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+
 
     const mainShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
@@ -341,7 +344,13 @@ const MainPage = (props) => {
                                             <Link
                                                 to={`/services/${service.path}`}>
                                                 <div className="main-agency__item-link p-style"><p>{service.name}</p>
-                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                    <div className="hover-flip-arrow">
+                                                      <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                       <div className="hover-double">
+                                                            {double}
+                                                        </div>
+                                                      </span>
+                                                    </div>
                                                 </div>
                                             </Link>);
                                         const num = index < 9 ? '0' + (index + 1) : index + 1;
@@ -377,10 +386,18 @@ const MainPage = (props) => {
                                                             className="main-agency__item-header__text heading-secondary">{name}</div>
                                                     </div>
                                                         {descr}
-                                                        {!!arrow &&
-                                                            <span className="main-agency__item-arrow">
-                                                                <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                                            </span> }
+                                                    {!!arrow &&
+                                                        <span className="main-agency__item-arrow">
+                                                               <div className="hover-flip-arrow">
+                                                                  <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-circle">
+                                                                      {double}
+                                                                     </div>
+                                                                  </span>
+                                                               </div>
+
+                                                        </span>}
                                                     </a>
                                             </div>
 
@@ -739,7 +756,13 @@ const MainPage = (props) => {
                                         <div className="main-news__info-wrap">
                                             {[...allTags].map((tag, i) => (
                                                 <Link to={`/news?tag=${tag}`} className="main-news__info-item"
-                                                      key={i}><p className="p-style-black">#{tag}</p> <Icon viewBox="0 0 30 31" icon="arrowGo"/></Link>
+                                                      key={i}><p className="p-style-black">#{tag}</p> <div className="hover-flip-arrow">
+                                                      <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                       <div className="hover-double_news">
+                                                            {double}
+                                                        </div>
+                                                      </span>
+                                                </div></Link>
                                             ))}
                                         </div>
                                     </div>
@@ -758,7 +781,14 @@ const MainPage = (props) => {
                                                         <div className="main-news__name">{item.name}</div>
                                                     </div>
                                                     <span className="main-agency__item-arrow">
-                                                         <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                         <div className="hover-flip-arrow">
+                                                                  <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-circle__news">
+                                                                      {double}
+                                                                     </div>
+                                                                  </span>
+                                                               </div>
                                                     </span>
                                                 </Link>
                                             )

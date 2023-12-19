@@ -11,8 +11,8 @@ body {
 .heading-primary {
     color: #121212;
     font-weight: 500;
-    font-size: 9.6rem;
-    line-height: 10.6rem;
+    font-size: clamp(3.2rem, 4vw, 9.6rem);
+    line-height: clamp(3.5rem, 5vw, 10.6rem);
 
     @include respond(md) {
         font-size: 6.4rem;

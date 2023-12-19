@@ -8,7 +8,7 @@ import 'reactjs-popup/dist/index.css';
 import './cta.scss'
 
 import manager from '../../img/manager.png';
-import axios from './../../axios'
+import axios, {setIsLoadingMainPageEvent} from './../../axios'
 import RetryImage from "../../helpers/RetryImage";
 import WOW from "wowjs";
 import {connect, useSelector} from "react-redux";
@@ -69,8 +69,7 @@ const Cta = (props) => {
     }, [props]);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        setIsLoadingMainPageEvent(true)
 
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {

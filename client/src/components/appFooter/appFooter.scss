@@ -119,8 +119,9 @@
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
+        margin-right: 5rem;
         & > * {
-            flex-basis: calc(50% - 5.5rem);
+            flex-basis: calc(50% - 0.5rem);
         }
 
         &:nth-child(2n) {
@@ -141,27 +142,17 @@
         }
     }
 
-    @include respond(sm) {
-        nav {
-            display: none;
-        }
-
-    }
-
     &__pages {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
+        margin-right: 5rem;
         & > * {
-            flex-basis: calc(50% - 1rem);
+            flex-basis: calc(50% - 0.5rem);
         }
 
         &:nth-child(2n) {
             margin-right: 0;
-        }
-
-        @include respond(sm) {
-            margin-top: 2rem;
         }
 
         &-item {

@@ -37,6 +37,11 @@
         border: 1px solid #FFFFFF;
         color: #fff;
         background: transparent;
+
+        &:hover {
+            background: #FFFFFF;
+            color: #121212;
+        }
     }
 
     &.--orange {

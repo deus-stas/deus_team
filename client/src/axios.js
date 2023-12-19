@@ -6,10 +6,15 @@ import {usePrevious} from "react-admin";
 
 const instance = axios.create()
 
+const IS_LOADING_MAIN_PAGE_KEY = "isLoadingMainPage";
+const setIsLoadingMainPageEvent = (isLoading) => {
+    window.dispatchEvent(new CustomEvent(IS_LOADING_MAIN_PAGE_KEY, {detail: {isLoading: isLoading}}));
+}
+
+
 const resInterceptor = response => {
     console.log('event:response:',)
-    const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: false}});
-    window.dispatchEvent(event)
+    setIsLoadingMainPageEvent(false)
 
     // setTimeout(() => window.dispatchEvent(event), 1700)
     return response;
@@ -19,7 +24,6 @@ const errInterceptor = error => {
     return Promise.reject(error);
 }
 instance.interceptors.response.use(resInterceptor, errInterceptor);
-
 
 
 const AxiosInterceptor = ({children}) => {
@@ -64,9 +68,9 @@ const AxiosInterceptor = ({children}) => {
             setMemoLoading(e.detail.isLoading)
         };
 
-        window.addEventListener('isLoadingMainPage', handleLoad);
+        window.addEventListener(IS_LOADING_MAIN_PAGE_KEY, handleLoad);
         return () => {
-            window.removeEventListener('isLoadingMainPage', handleLoad);
+            window.removeEventListener(IS_LOADING_MAIN_PAGE_KEY, handleLoad);
         };
 
     }, [])
@@ -77,3 +81,4 @@ const AxiosInterceptor = ({children}) => {
 
 export default instance;
 export {AxiosInterceptor}
+export {setIsLoadingMainPageEvent}

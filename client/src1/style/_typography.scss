@@ -10,18 +10,18 @@ body {
 
 .heading-primary {
     font-weight: 500;
-    font-size: 6.4rem;
-    line-height: 7rem;
+    font-size: clamp(3.2rem, 4vw, 9.6rem);
+    line-height: clamp(3.5rem, 5vw, 10.6rem);
 
-    @include respond(md) {
-        font-size: 4.4rem;
-        line-height: 5rem;
-    }
-
-    @include respond(sm) {
-        font-size: 3.6rem;
-        line-height: 4rem;
-    }
+    //@include respond(md) {
+    //    font-size: 4.4rem;
+    //    line-height: 5rem;
+    //}
+    //
+    //@include respond(sm) {
+    //    font-size: 3.6rem;
+    //    line-height: 4rem;
+    //}
 }
 
 .heading-secondary {

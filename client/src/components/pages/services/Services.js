@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import React, { useEffect, useRef, useState} from 'react';
-import axios from '../../../axios'
+import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import 'wowjs/css/libs/animate.css';
 import { Icon } from '../../icon/Icon'
 
@@ -72,8 +72,7 @@ const Services = (props) => {
     }, []);
 
     useEffect(() => {
-        const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
-        window.dispatchEvent(event)
+        setIsLoadingMainPageEvent(true)
         const handleLoad = (e) => {
             if (e.detail.isLoading !== isLoading) {
                 setIsLoading(e.detail.isLoading);
