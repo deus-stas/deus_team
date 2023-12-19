@@ -542,32 +542,64 @@ main {
     transform: translateY(-120%);
 }
 
+//arrow
+
 .hover-flip-arrow {
     overflow: hidden;
-    height: auto;
+    width: 3rem;
+    height: 3rem;
 }
 
 .hover-flip-arrow span {
     display: inline-block;
     position: relative;
-    -webkit-transition: -webkit-transform 0.3s;
-    transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
-    transition: transform 0.3s, -webkit-transform 0.3s;
-}
-
-.hover-flip-arrow span::before {
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    top: 120%;
-    content: attr(data-hover);
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    transition: transform 0.3s;
 }
 
 .hover-flip-arrow:hover span {
-    -webkit-transform: translateY(-120%);
-    transform: translateY(-120%);
+    transform: translatex(100%) translatey(100%) ;
+}
+
+.hover-flip-arrow:hover div {
+    transform: translatex(0) translatey(0);
+}
+
+.hover-double {
+    transform: translate(0, 0);
+    transition: transform 0.3s;
+    position: absolute;
+    width: calc(100% + 3rem);
+    height: calc(100% + 3rem);
+    top: calc(100% - 7rem);
+    right: calc(100% - 3rem);
+}
+
+.hover-double_news {
+    transform: translate(0, 0);
+    transition: transform 0.3s;
+    position: absolute;
+    width: calc(100% + 3rem);
+    height: calc(100% + 3rem);
+    top: calc(100% - 6.5rem);
+    right: calc(100% - 3rem);
+}
+
+.hover-circle {
+    transform: translate(0, 0);
+    transition: transform 0.3s;
+    position: absolute;
+    width: calc(100% + 3rem);
+    height: calc(100% + 3rem);
+    top: calc(100% - 8rem);
+    right: calc(100% - 3rem);
+}
+
+.hover-circle__news {
+    transition: transform 0.3s;
+    position: absolute;
+    width: calc(100% + 3rem);
+    height: calc(100% + 3rem);
+    top: calc(100% - 7.5rem);
+    right: calc(100% - 3rem);
 }
