@@ -14,6 +14,7 @@ import octagon from "../../../img/octagon.png"
 import elipse from "../../../img/elipse.png"
 import spiral from "../../../img/spiral.png"
 import includes from "validator/es/lib/util/includes";
+import Marquee from "react-fast-marquee";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? ''
@@ -118,9 +119,8 @@ const Services = (props) => {
                         <div className="container">
                             <h2 className="heading-secondary">Почему стоит заказать<br/> разработку сайта в DEUS?</h2>
                             <div className="services-about__wrap">
-                                <div className="services-about__descr">Объединяем аналитику, маркетинг, дизайн,
-                                    разработку и интеграции в единую систему для получения максимальной эффективности
-                                    для вашего бизнеса
+                                <div className="services-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку
+                                    и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса
                                 </div>
                                 <div className="services-about__adv">
                                     <div className="services-about__adv-item">
@@ -165,23 +165,30 @@ const Services = (props) => {
                                                 <img src={spiral} alt=""/>
                                                 <div className="container">
                                                     <p className="describe-title">{service.blockTitle}</p>
-
-                                                    <div className="describe-services">
-                                                        {service.tariffs.map(tariffs => {
-                                                                return (
-                                                                    <>
-                                                                        {tariffs.tariffsCategory && (
-                                                                            <>
-                                                                                <p>{tariffs.tariffsCategory}</p>
-                                                                                <p className="dot">•</p>
-                                                                            </>
-                                                                        )}
-                                                                    </>)
-                                                            }
-                                                        )}
-
-                                                    </div>
-
+                                                    <Marquee speed="50">
+                                                        <div className="describe-services ">
+                                                            {service.tariffs.map((tariffs, index) => (
+                                                                <React.Fragment key={index}>
+                                                                    {tariffs.tariffsCategory && (
+                                                                        <>
+                                                                            <p>{tariffs.tariffsCategory}</p>
+                                                                            <p className="dot">•</p>
+                                                                        </>
+                                                                    )}
+                                                                </React.Fragment>
+                                                            ))}
+                                                            {service.tariffs.map((tariffs, index) => (
+                                                                <React.Fragment key={index}>
+                                                                    {tariffs.tariffsCategory && (
+                                                                        <>
+                                                                            <p>{tariffs.tariffsCategory}</p>
+                                                                            <p className="dot">•</p>
+                                                                        </>
+                                                                    )}
+                                                                </React.Fragment>
+                                                            ))}
+                                                        </div>
+                                                    </Marquee>
 
                                                     <div className="describe__wrapp">
                                                         <div className="describe__wrapp-btn">
@@ -268,8 +275,7 @@ const Services = (props) => {
                                     <h2 className="heading-secondary">
                                         Как мы работаем?
                                     </h2>
-                                    <p className="p-style-black">Предлагаем форматы работы с учётом особенностей проекта.
-                                        Если разработка требует большей гибкости, миксуем подходы.
+                                    <p className="p-style-black">Предлагаем форматы работы с учётом особенностей проекта. Если разработка требует большей гибкости, миксуем подходы.
                                     </p>
                                 </div>
                                 <div></div>
@@ -283,8 +289,8 @@ const Services = (props) => {
 
                                                     <img className="worker-img" src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null} alt=""/>
                                                     <span>
-                                                      <div className="worker-name">{team.name}</div>
-                                                    <div className="worker-descr">{team.post}</div>
+                                                      <div className="worker-name heading-tertiary">{team.name}</div>
+                                                    <p className="worker-descr">{team.post}</p>
                                                     </span>
                                                 </div>
                                             )

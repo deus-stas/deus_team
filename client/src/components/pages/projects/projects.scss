@@ -60,22 +60,28 @@
                 flex-wrap: nowrap;
                 gap: 2rem;
                 margin-bottom: 4.5rem;
-                transition: all 0.3s ease-in-out;
+                transition: all 0.3s ;
 
-                .p-style-white {
+                p {
+                    transition: all 1s ;
                     padding-top: 0.5rem
                 }
 
                 .icon {
                     width: 3rem;
                     height: 3rem;
-                    transition: all 0.3s ease-in-out;
+                    transition: all 0.3s ;
+                }
+
+                .change {
+                    color: #757677 !important;
                 }
 
                 .active {
+                    color: #757677;
                     width: 3rem;
                     height: 3rem;
-                    transition: all 0.3s ease-in-out;
+                    transition: all 0.3s ;
                     opacity: 1;
                     visibility: visible;
 
@@ -89,15 +95,12 @@
                         visibility: visible;
                     }
 
-                    .p-style-white {
-                        opacity: 0.5;
-                    }
                 }
 
                 .inActive {
                     width: 3rem;
                     height: 3rem;
-                    transition: all 0.3s ease-in-out;
+                    transition: all 0.3s ;
                     :nth-child(2) {
                         transform: rotate(90deg);
                         opacity: 1;
@@ -119,11 +122,10 @@
         display: grid;
         grid-template-columns: repeat(2, .5fr);
         grid-gap: 4rem;
-        transition: all 1s ease-in-out;
+        transition: all 0.5s ease;
         opacity: 0;
         visibility: hidden;
         max-height: 0;
-        height: 100%;
 
         :nth-child(1) {
             grid-column: 2;
@@ -132,12 +134,14 @@
 
     }
 
-    .active {
+    .open {
         opacity: 1;
         visibility: visible;
-        max-height: 100rem;
-        transition: all 1s ease-in-out;
+        max-height: 120rem;
+        height: 100%;
+        transition: all 0.5s ease;
     }
+
 
 
     &__wrap {
@@ -323,6 +327,7 @@
         &-descr {
             display: flex;
             position: absolute;
+            align-items: flex-end;
             justify-content: space-between;
             bottom: 5rem;
             left: 4rem;
@@ -351,6 +356,41 @@
             }
 
 
+        }
+
+        &-arrow {
+            color: white;
+            display: inline-flex;
+            padding: 15px;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 43px;
+            border: 1px solid white;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s ease-in-out;
+
+
+            @include respond(sm) {
+                width: 5.5rem;
+                height: 5.5rem;
+            }
+
+            @include respond(xs) {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .icon {
+                width: 3rem;
+                height: 3rem;
+
+                @include respond(sm) {
+                    width: 1.15em;
+                    height: 3.2rem;
+                }
+            }
         }
     }
 }

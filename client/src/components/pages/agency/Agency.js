@@ -126,6 +126,7 @@ const Agency = (props) => {
         };
     },[]);
 
+
     const slideChange = (slider) => {
         if (slider.touches.diff > 0) {
             if (endSlider) {
@@ -145,6 +146,8 @@ const Agency = (props) => {
     }
 
     const amountSlides = Math.round(clients.length / 3);
+
+    const double =  <Icon icon="arrowGo" viewBox="0 0 30 30"/>
 
     const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
@@ -235,7 +238,14 @@ const Agency = (props) => {
                                                                 src={award.image ? `${apiUrl}/uploads/${award.image.filename}` : null}
                                                                 alt={award.name}/>
                                                             {award.name}
-                                                            <Icon icon="arrowGo"></Icon>
+                                                            <div className="hover-flip-arrow">
+                                                                <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-double">
+                                                                       {double}
+                                                                     </div>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     );
                                                 })
@@ -247,7 +257,14 @@ const Agency = (props) => {
                                                                 src={raiting.image ? `${apiUrl}/uploads/${raiting.image.filename}` : null}
                                                                 alt={raiting.name}/>
                                                             {raiting.name}
-                                                            <Icon icon="arrowGo"></Icon>
+                                                            <div className="hover-flip-arrow">
+                                                                <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-double">
+                                                                       {double}
+                                                                     </div>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     )
                                                 )
@@ -277,8 +294,8 @@ const Agency = (props) => {
                            <h2 className="heading-secondary">Объединяем аналитику, маркетинг,<br/> дизайн, разработку и интеграции в<br/> единую
                             систему для получения<br/> максимальной эффективности для<br/> вашего бизнеса
                            </h2>
-                            <span className='p-style-white'>
-                                <p>Брижань Вячеслав</p>
+                            <span>
+                                <p className="p-style-white">Брижань Вячеслав</p>
                                 <p>Генеральный директор</p>
                             </span>
                         </span>
@@ -306,7 +323,7 @@ const Agency = (props) => {
                                     <p className="num">01</p>
                                     <p>Цена слова</p>
                                 </span>
-                                <p className="p-style-black">Верим в силу рукопожатия. Форма договоренности не имеет значения — мы выполняем свои обещания. Всегда.</p>
+                                <p>Верим в силу рукопожатия. Форма договоренности не имеет значения — мы выполняем свои обещания. Всегда.</p>
                             </div>
                             <div className="agency-principle__wrap-item">
                                 <span className="flex-wrap">
@@ -453,34 +470,40 @@ const Agency = (props) => {
                         <div className="agency-reviews__wrap-item">
                             <img alt="" src={choice}/>
                             <p className="p-style-black">Мы работаем с ведущими компаниями и брендами из различных отраслей.<br/> При создании могут
-                                решаться уникальные…</p>
+                                решаться…</p>
                             <div className="mr-t">
-                                <p className="p-style-black">Мария Богатова</p>
-                                <p className="p-style-black fs-20">Директор по развитию, Choice Constraction</p>
+                                <p>Мария Богатова</p>
+                                <p>Директор по развитию, Choice Constraction</p>
 
                             </div>
-                            <Icon icon="pdf" />
+                            <span className="agency-reviews__wrap-arrow">
+                                <Icon icon="pdf" viewBox="0 0 24 24"/>
+                            </span>
                         </div>
                         <div className="agency-reviews__wrap-item">
                             <img alt="" src={rtk}/>
                             <p className="p-style-black">Мы работаем с ведущими компаниями и брендами из различных отраслей.<br/> При создании могут
-                                решаться уникальные…</p>
+                                решаться…</p>
                             <div className="mr-t">
-                                <p className="p-style-black">Мария Богатова</p>
-                                <p className="p-style-black fs-20">Директор по развитию, Choice Constraction</p>
+                                <p>Мария Богатова</p>
+                                <p>Директор по развитию, Choice Constraction</p>
 
                             </div>
-                            <Icon icon="pdf" />
+                            <span className="agency-reviews__wrap-arrow">
+                                <Icon icon="pdf" viewBox="0 0 24 24"/>
+                            </span>
                         </div>
                         <div className="agency-reviews__wrap-item">
                             <img alt="" src={ucgroup}/>
                             <p className="p-style-black">Мы работаем с ведущими компаниями и брендами из различных отраслей.<br/> При создании могут
-                                решаться уникальные…</p>
+                                решаться…</p>
                             <div className="mr-t">
-                                <p className="p-style-black">Мария Богатова</p>
-                                <p className="p-style-black fs-20">Директор по развитию, Choice Constraction</p>
+                                <p>Мария Богатова</p>
+                                <p>Директор по развитию, Choice Constraction</p>
                             </div>
-                            <Icon icon="pdf" />
+                            <span className="agency-reviews__wrap-arrow">
+                                <Icon icon="pdf" viewBox="0 0 24 24"/>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -500,32 +523,69 @@ const Agency = (props) => {
                             <h3 className="heading-tertiary">
                                 UX/UI дизайнер
                             </h3>
-                            <div className="p-style-black">Офис</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Офис</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
+
 
                         </Link>
                         <Link to="/agency" className="agency-vacancy__table-item">
                             <h3 className="heading-tertiary">
                                 Front-end разработчик
                             </h3>
-                            <div className="p-style-black">Удаленно</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Удаленно</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
 
                         </Link>
                         <Link to="/agency" className="agency-vacancy__table-item">
                             <h3 className="heading-tertiary">
                                 PHP-разработчик
                             </h3>
-                            <div className="p-style-black">Удаленно</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Удаленно</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
 
                         </Link>
                         <Link to="/agency" className="agency-vacancy__table-item">
                             <h3 className="heading-tertiary">
                                 Тестировщик QA
                             </h3>
-                            <div className="p-style-black">Офис</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Офис</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
 
                         </Link>
                     </div>

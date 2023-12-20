@@ -91,7 +91,7 @@
     &__file {
         display: grid;
         align-items: center;
-        grid-template-columns: 0.45fr 0.55fr  1fr ;
+        grid-template-columns: 0.55fr 0.55fr  1fr ;
         margin-top: 4rem;
         margin-bottom: 6rem;
 
@@ -111,20 +111,7 @@
 
         &-label {
             display: block;
-        }
-
-        .icon {
-            width: 7rem;
-            flex: 0 0 5rem;
-            height: 7rem;
-            bottom: 0;
-            right: 0;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-
-            :hover {
-                transform: scale(1);
-            }
+            font-size: 2.4rem;
         }
 
         &-btn {
@@ -176,6 +163,54 @@
 
         input {
             display: none;
+        }
+
+        &-arrow {
+            cursor: pointer;
+
+            @include respond(sm) {
+                margin-right: 1rem;
+            }
+
+            color: #ffffff;
+            display: inline-flex;
+            padding: 2.3rem ;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 43px;
+            border: 1px solid #ffffff;
+            background: rgba(255, 255, 255, 0.03);
+
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+
+
+            @include respond(sm) {
+                width: 5.5rem;
+                height: 5.5rem;
+            }
+
+            @include respond(xs) {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .icon {
+                width: 2.5rem;
+                height: 2.5rem;
+
+                @include respond(sm) {
+                    width: 1.15em;
+                    height: 3.2rem;
+                }
+            }
+
+            &:hover {
+                transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+                background: #ffffff;
+                color: #121212;
+            }
         }
     }
 

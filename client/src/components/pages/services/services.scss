@@ -181,7 +181,7 @@
 
         &__wrap {
             display: grid;
-            grid-template-columns: .5fr .25fr .25fr;
+            grid-template-columns: .5fr .5fr ;
             grid-gap: 25.6rem;
             padding-bottom: 5rem;
 
@@ -210,25 +210,26 @@
                 }
             }
 
-            &__descr {
-                max-width: 69.5rem;
-                font-size: 2.8rem;
-                line-height: 3.4rem;
-                font-weight: 400;
 
-                @include respond(sm) {
-                    max-width: none;
-                    font-size: 2.6rem;
-                    line-height: 3.1rem;
-                }
+
+        }
+
+        &__descr {
+            font-size: 2.4rem;
+            line-height: 3.3rem;
+            font-weight: 400;
+
+            @include respond(sm) {
+                max-width: none;
+                font-size: 2.6rem;
+                line-height: 3.1rem;
             }
-
         }
 
         &__adv {
             &-item {
-                max-width: 33rem;
                 display: flex;
+                font-weight: 500;
                 align-items: center;
                 font-size: 2.4rem;
                 line-height: 3.4rem;
@@ -290,6 +291,7 @@
             }
 
             .icon {
+                transition: all .3s;
                 width: 3rem;
                 height: 3rem;
                 margin-left: auto;
@@ -375,6 +377,13 @@
                         &::-webkit-scrollbar {
                             display: none;
                         }
+
+                        .dot {
+                            &:last-child {
+                                margin-right: 6rem;
+                            }
+                        }
+
                     }
 
                     &__wrapp {
@@ -455,13 +464,18 @@
 
             &-item {
 
+
+
                 img {
                     width: 18rem;
                     height: 18rem;
                 }
 
-                .p-style-white {
-                    opacity: .8;
+                p {
+                    font-weight: 400;
+                    font-size: 2.4rem;
+                    line-height: 3.3rem;
+                    opacity: 0.8;
                 }
             }
         }
@@ -473,7 +487,17 @@
 
         &__wrap {
             display: grid;
-            grid-template-columns: 0.25fr 0.25fr 0.5fr;
+            grid-template-columns: 0.30fr 0.20fr 0.5fr;
+
+            .heading-secondary {
+                margin-bottom: 2rem;
+            }
+
+            p {
+                font-weight: 400;
+                font-size: 2.4rem;
+                line-height: 3.3rem;
+            }
         }
 
         &__wrapper {
@@ -497,7 +521,7 @@
                 }
 
                 &-descr {
-
+                    font-size: 2.4rem;
                 }
             }
 
@@ -512,6 +536,10 @@
                 grid-gap:  3rem 6.6rem;
                 padding: 1rem 0;
                 border-bottom: 1px solid gray;
+
+                p {
+                    font-size: 2.4rem;
+                }
             }
         }
 

@@ -347,20 +347,40 @@
                 padding: 1.5rem 0;
                 align-items: center;
                 justify-content: space-between;
-                transition: transform 0.3s ease-in-out, opacity 0.1s ease-in;
+                transition: all 0.3s ease-in-out;
 
                 p {
                     opacity: 1;
                     transition: opacity 0.3s;
                 }
-                p:hover {
-                    opacity: 0.5;
-                }
+
 
                 .icon {
                     width: 3rem;
                     height: 3rem;
+
+                    @include respond(sm) {
+                        width: 1.15em;
+                        height: 3.2rem;
+                    }
                 }
+
+              &:hover {
+                  .hover-flip-arrow span{
+                    transition: all 0.3s ease-in-out;
+                  }
+                .hover-flip-arrow span{
+                  transform: translatex(100%) translatey(100%) ;
+                }
+
+                .hover-flip-arrow div{
+                  transform: translatex(0) translatey(0);
+                }
+
+                p {
+                  opacity: 0.5;
+                }
+              }
             }
 
             &-arrow {
@@ -369,7 +389,7 @@
                 padding: 15px;
                 justify-content: center;
                 align-items: center;
-
+                overflow: hidden;
                 border-radius: 43px;
                 border: 1px solid white;
                 background: rgba(255, 255, 255, 0.03);
@@ -395,6 +415,11 @@
                 .icon {
                     width: 3rem;
                     height: 3rem;
+
+                    @include respond(sm) {
+                        width: 1.15em;
+                        height: 3.2rem;
+                    }
                 }
             }
 
@@ -1132,10 +1157,21 @@
                 }
 
                 &:hover {
-                    .main-news__tag {
-                        background: rgba(211, 209, 209, 0.34);
-                        color: #121212;
+                    p{
+                        opacity: 0.5;
                     }
+
+                    .hover-flip-arrow span{
+                        transition: all 0.3s ease-in-out;
+                    }
+                    .hover-flip-arrow span{
+                        transform: translatex(100%) translatey(100%) ;
+                    }
+
+                    .hover-flip-arrow div{
+                        transform: translatex(0) translatey(0);
+                    }
+
 
                 }
 

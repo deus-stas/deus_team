@@ -388,7 +388,7 @@ const MainPage = (props) => {
                                                         {descr}
                                                     {!!arrow &&
                                                         <span className="main-agency__item-arrow">
-                                                               <div className="hover-flip-arrow">
+                                                               <div className="hover-flip-circle">
                                                                   <span>
                                                                     <Icon icon="arrowGo" viewBox="0 0 30 31"/>
                                                                     <div className="hover-circle">
@@ -755,14 +755,16 @@ const MainPage = (props) => {
                                         </span>
                                         <div className="main-news__info-wrap">
                                             {[...allTags].map((tag, i) => (
-                                                <Link to={`/news?tag=${tag}`} className="main-news__info-item"
-                                                      key={i}><p className="p-style-black">#{tag}</p> <div className="hover-flip-arrow">
+                                                <Link to={`/news?tag=${tag}`} className="main-news__info-item "
+                                                      key={i}><p className="p-style-black">#{tag}</p>
+                                                    <div className="hover-flip-arrow">
                                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
                                                        <div className="hover-double_news">
                                                             {double}
                                                         </div>
                                                       </span>
-                                                </div></Link>
+                                                    </div>
+                                                </Link>
                                             ))}
                                         </div>
                                     </div>
@@ -781,14 +783,14 @@ const MainPage = (props) => {
                                                         <div className="main-news__name">{item.name}</div>
                                                     </div>
                                                     <span className="main-agency__item-arrow">
-                                                         <div className="hover-flip-arrow">
-                                                                  <span>
-                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                         <div className="hover-flip-circle">
+                                                             <span>
+                                                                 <Icon icon="arrowGo" viewBox="0 0 30 31"/>
                                                                     <div className="hover-circle__news">
                                                                       {double}
                                                                      </div>
-                                                                  </span>
-                                                               </div>
+                                                             </span>
+                                                         </div>
                                                     </span>
                                                 </Link>
                                             )
