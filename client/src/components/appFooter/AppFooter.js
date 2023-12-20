@@ -132,10 +132,10 @@ const AppFooter = (props) => {
                                 {
                                     headerData && headerData.vk && headerData.telegram && headerData.behance ?
                                         <div className="footer__social p-style">
-                                            <Link className="footer__social-item hover-flip" to={`${headerData.dprofile}`}>Dprofile</Link>
-                                            <Link className="footer__social-item hover-flip" to={`${headerData.vk}`}>VK</Link>
-                                            <Link className="footer__social-item hover-flip" to={`${headerData.behance}`}>Behance</Link>
-                                            <Link className="footer__social-item hover-flip" to={`${headerData.telegram}`}>Telegram</Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.dprofile}`}> <span data-hover="Dprofile">Dprofile</span></Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.vk}`}><span data-hover="VK">VK</span></Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.behance}`}><span data-hover="Behance">Behance</span></Link>
+                                            <Link className="footer__social-item hover-flip" to={`${headerData.telegram}`}><span data-hover="Telegram">Telegram</span></Link>
                                         </div> :
                                         <div className="footer__social p-style">
                                             <Link className="footer__social-item hover-flip" to="/"><span data-hover="Dprofile">Dprofile</span></Link>

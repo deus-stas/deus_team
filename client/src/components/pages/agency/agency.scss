@@ -96,8 +96,8 @@
             }
 
             .icon {
-                width: 2rem;
-                height: 2rem;
+                width: 3rem;
+                height: 3rem;
                 margin-left: auto;
 
                 @include respond(sm) {
@@ -155,7 +155,7 @@
             max-width: 69.5rem;
             font-size: 2.8rem;
             line-height: 3.4rem;
-            font-weight: 500;
+            font-weight: 400;
 
             @include respond(sm) {
                 max-width: none;
@@ -166,7 +166,7 @@
 
         &__adv {
             &-item {
-                max-width: 33rem;
+                font-weight: 500;
                 display: flex;
                 align-items: center;
                 font-size: 2.4rem;
@@ -254,6 +254,7 @@
 
                 .p-style-white {
                     font-size: 2.8rem;
+                    font-weight: 500;
 
                     @include respond(sm) {
                         font-size: 2.2rem;
@@ -311,7 +312,6 @@
             display: grid;
             grid-template-columns: repeat(4, 0.25fr);
             justify-content: space-evenly;
-            gap: 4rem;
 
             @include  respond(md) {
                 grid-template-columns: repeat(2, 0.5fr);
@@ -332,12 +332,12 @@
             }
 
             &-item {
-                margin-bottom: 6rem;
+                margin-bottom: 5rem;
 
                 .flex-wrap {
                     display: flex;
-                    gap: 2rem;
-                    align-items: flex-end;
+                    gap: 1.5rem;
+                    align-items: flex-start;
                     margin-bottom: 2rem;
 
                     .num {
@@ -376,14 +376,19 @@
         &__wrap {
             display: grid;
             grid-template-columns: repeat(3, 0.34fr);
-            grid-gap: 15rem;
+            grid-gap: 10rem;
             position: relative;
 
             &-item{
                 position: relative;
 
-                .p-style-black {
-                    padding-left: 2.6rem;
+                p {
+                    padding: 0 2.6rem;
+                    font-size: 2.4rem;
+
+                    &:last-child {
+                        font-size: 2rem;
+                    }
                 }
 
                 .mr-t {
@@ -399,16 +404,49 @@
                     font-size: 2rem;
                 }
 
+            }
+
+            &-arrow {
+                flex: 0 0 5rem;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+
+                @include respond(sm) {
+                    margin-right: 1rem;
+                }
+
+                color: #121212;
+                display: inline-flex;
+                padding: 0 23px ;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                border-radius: 43px;
+                border: 1px solid #121212;
+                background: rgba(255, 255, 255, 0.03);
+
+                backdrop-filter: blur(12px);
+                transition: transform 0.3s ease-in-out;
+
+
+                @include respond(sm) {
+                    width: 5.5rem;
+                    height: 5.5rem;
+                }
+
+                @include respond(xs) {
+                    width: 5rem;
+                    height: 5rem;
+                }
+
                 .icon {
-                    width: 7rem;
-                    flex: 0 0 5rem;
-                    height: 7rem;
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
+                    width: 4rem;
+                    height: 4rem;
 
                     @include respond(sm) {
-                        margin-right: 1rem;
+                        width: 1.15em;
+                        height: 3.2rem;
                     }
                 }
             }

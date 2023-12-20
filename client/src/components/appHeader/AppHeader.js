@@ -21,7 +21,7 @@ const AppHeader = (props) => {
     const location = useLocation()
 
     useEffect(()=>{
-        const defaultColor = ['/', '/contacts']
+        const defaultColor = ['/', '/contacts', '/login', '/services/']
         let header = document.querySelector('.header')
         if (!!header) {
             if (defaultColor.includes(location.pathname)) {
@@ -150,7 +150,7 @@ const AppHeader = (props) => {
 
                                 {headerData && headerData.phone ?
                                     (
-                                        <div className="header__contacts hover-flip hidden-mobile">
+                                        <div className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
                                             {/*<Link to={`mailto:${headerData.email}`}*/}
                                             {/*      className="header__contacts-link">{headerData.email}</Link>*/}
                                             <DelayedLink to={`tel:${headerData.phone}`}
@@ -160,7 +160,7 @@ const AppHeader = (props) => {
                                         </div>
                                     ) :
                                     (
-                                        <div className="header__contacts hover-flip hidden-mobile">
+                                        <div className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
                                             {/*<Link to="mailto:hello@de-us.ru"*/}
                                             {/*      className="header__contacts-link">hello@de-us.ru</Link>*/}
                                             <DelayedLink to="tel:+74951034351" className="header__contacts-link">

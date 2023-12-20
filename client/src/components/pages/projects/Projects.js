@@ -181,6 +181,8 @@ const Projects = () => {
         // video.currentTime = 0; // Rewind the video to the beginning
     };
 
+    const double =  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+
     const addVideoRef = (ref) => {
         videoRefs.current.push(ref);
     };
@@ -201,7 +203,7 @@ const Projects = () => {
                                 <div className="item" onClick={()=>{
                                     setMenuTheme(!menuTheme)
                                     setMenuType(false)}}>
-                                    <p className="p-style-white">По отраслям</p>
+                                    <p className={menuTheme? 'change' : ''}>По отраслям</p>
                                     <div className={menuTheme ? 'active' : 'inActive'}>
                                         <Icon icon="line"/>
                                         <Icon icon="line"/>
@@ -212,7 +214,7 @@ const Projects = () => {
                                     setMenuType(!menuType)
                                     setMenuTheme(false)
                                 }}>
-                                    <p className="p-style-white">По услугам</p>
+                                    <p className={menuType ? 'change' : ''}>По услугам</p>
                                     <div className={menuType ? 'active' : 'inActive'}>
                                         <Icon icon="line"/>
                                         <Icon icon="line"/>
@@ -238,7 +240,7 @@ const Projects = () => {
                     </section>
                     <section className="projects-content">
                         <div className="container">
-                            <div className={`projects-menu ${menuType || menuTheme ? 'active' : ''}`}>
+                            <div className={`projects-menu ${menuType || menuTheme ? 'open' : ''}`}>
                                 <div className="main-projects__item-flex">
                                     {menuTheme ? (
                                         <>
@@ -345,7 +347,17 @@ const Projects = () => {
                                                     </span>
                                                     <span className="projects__item-descr">
                                                         <div className="descr">{project.descrProject}</div>
-                                                    <Icon icon="roundArrow"/>
+                                                        <div className="projects__item-arrow">
+                                                            <div className="hover-flip-circle">
+                                                             <span>
+                                                                 <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-circle__news">
+                                                                       {double}
+                                                                    </div>
+                                                             </span>
+                                                         </div>
+                                                        </div>
+
                                                     </span>
 
                                                 </Link>
