@@ -14,6 +14,7 @@ import octagon from "../../../img/octagon.png"
 import elipse from "../../../img/elipse.png"
 import spiral from "../../../img/spiral.png"
 import includes from "validator/es/lib/util/includes";
+import Marquee from "react-fast-marquee";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? ''
@@ -165,23 +166,30 @@ const Services = (props) => {
                                                 <img src={spiral} alt=""/>
                                                 <div className="container">
                                                     <p className="describe-title">{service.blockTitle}</p>
-
-                                                    <div className="describe-services">
-                                                        {service.tariffs.map(tariffs => {
-                                                                return (
-                                                                    <>
-                                                                        {tariffs.tariffsCategory && (
-                                                                            <>
-                                                                                <p>{tariffs.tariffsCategory}</p>
-                                                                                <p className="dot">•</p>
-                                                                            </>
-                                                                        )}
-                                                                    </>)
-                                                            }
-                                                        )}
-
-                                                    </div>
-
+                                                    <Marquee speed="50">
+                                                        <div className="describe-services ">
+                                                            {service.tariffs.map((tariffs, index) => (
+                                                                <React.Fragment key={index}>
+                                                                    {tariffs.tariffsCategory && (
+                                                                        <>
+                                                                            <p>{tariffs.tariffsCategory}</p>
+                                                                            <p className="dot">•</p>
+                                                                        </>
+                                                                    )}
+                                                                </React.Fragment>
+                                                            ))}
+                                                            {service.tariffs.map((tariffs, index) => (
+                                                                <React.Fragment key={index}>
+                                                                    {tariffs.tariffsCategory && (
+                                                                        <>
+                                                                            <p>{tariffs.tariffsCategory}</p>
+                                                                            <p className="dot">•</p>
+                                                                        </>
+                                                                    )}
+                                                                </React.Fragment>
+                                                            ))}
+                                                        </div>
+                                                    </Marquee>
 
                                                     <div className="describe__wrapp">
                                                         <div className="describe__wrapp-btn">

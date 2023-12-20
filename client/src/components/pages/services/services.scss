@@ -376,6 +376,13 @@
                         &::-webkit-scrollbar {
                             display: none;
                         }
+
+                        .dot {
+                            &:last-child {
+                                margin-right: 6rem;
+                            }
+                        }
+
                     }
 
                     &__wrapp {
