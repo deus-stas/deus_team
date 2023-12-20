@@ -787,8 +787,8 @@ const MainPage = (props) => {
                                                              <span>
                                                                  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
                                                                     <div className="hover-circle__news">
-                                                                       {double}
-                                                                    </div>
+                                                                      {double}
+                                                                     </div>
                                                              </span>
                                                          </div>
                                                     </span>

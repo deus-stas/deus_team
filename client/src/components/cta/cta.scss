@@ -22,6 +22,7 @@
 
         &-wrapper {
             padding: 6rem 0;
+
             .item {
                 align-items: center;
                 border-bottom: 1px solid hsla(0,0%,100%,.2);
@@ -31,17 +32,36 @@
                 font-weight: 500;
                 line-height: 3.4rem;
                 padding: 1.5rem 0;
-                transition: color .3s;
-
+                transition: opacity 0.4s;
                 :nth-child(1) {
                     margin-right: auto;
+                }
+
+                &:hover {
+                    p {
+                        transition: opacity 0.4s;
+                        opacity: 0.5;
+                    }
+
+                    .hover-flip-arrow span{
+                        transition: all 0.3s ease-in-out;
+                    }
+                    .hover-flip-arrow span{
+                        transform: translatex(100%) translatey(100%) ;
+                    }
+
+                    .hover-flip-arrow div{
+                        transform: translatex(0) translatey(0);
+                    }
+
+
                 }
             }
 
             .icon {
-                height: 2rem;
+                height: 3rem;
                 margin-left: auto;
-                width: 2rem;
+                width: 3rem;
             }
         }
 

@@ -62,6 +62,8 @@ const Cta = (props) => {
     //         wow.sync();
     // });
 
+    const double =  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+
     useEffect(() => {
         contacts.map((item, index) => (
             item.pageName === props.formName ? setWorker(item) : null
@@ -109,26 +111,50 @@ const Cta = (props) => {
                         <div className="cta__wrap-wrapper">
                             <a href="/services/firmennii-stil">
                                 <div className="item p-style">
-                                    <div>Фирменный стиль</div>
-                                    <img src={arrorGo} alt="go"/>
+                                    <p>Фирменный стиль</p>
+                                    <div className="hover-flip-arrow">
+                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                          <div className="hover-double">
+                                             {double}
+                                          </div>
+                                       </span>
+                                    </div>
                                 </div>
                             </a>
                             <a href="/services/saiti-i-servisi">
                                 <div className="item p-style">
-                                    <div>Сайты и сервисы</div>
-                                    <img src={arrorGo} alt="go"/>
+                                    <p>Сайты и сервисы</p>
+                                    <div className="hover-flip-arrow">
+                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                          <div className="hover-double">
+                                             {double}
+                                          </div>
+                                       </span>
+                                    </div>
                                 </div>
                             </a>
                             <a href="/services/podderzhka-i-razvitie">
                                 <div className="item p-style">
-                                    <div>Поддержка и развитие</div>
-                                    <img src={arrorGo} alt="go"/>
+                                    <p>Поддержка и развитие</p>
+                                    <div className="hover-flip-arrow">
+                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                          <div className="hover-double">
+                                             {double}
+                                          </div>
+                                       </span>
+                                    </div>
                                 </div>
                             </a>
                             <a href="/services/seo-prodvizhenie">
                                 <div className="item p-style">
-                                    <div>SEO продвижение</div>
-                                    <img src={arrorGo} alt="go"/>
+                                    <p>SEO продвижение</p>
+                                     <div className="hover-flip-arrow">
+                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                          <div className="hover-double">
+                                             {double}
+                                          </div>
+                                       </span>
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -347,7 +373,9 @@ const Cta = (props) => {
                                                     console.log(event.currentTarget.files[0]);
                                                     setFieldValue("file", event.currentTarget.files[0]);
                                                 }} />
-                                                <Icon icon="file" />
+                                                <div className="form__file-arrow">
+                                                    <Icon icon="file" viewBox="0 0 24 24"/>
+                                                </div>
                                             </label>
 
                                             {

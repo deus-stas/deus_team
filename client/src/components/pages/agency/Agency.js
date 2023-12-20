@@ -147,6 +147,8 @@ const Agency = (props) => {
 
     const amountSlides = Math.round(clients.length / 3);
 
+    const double =  <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+
     const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
     const sendEmail = async (values) => {
@@ -236,7 +238,14 @@ const Agency = (props) => {
                                                                 src={award.image ? `${apiUrl}/uploads/${award.image.filename}` : null}
                                                                 alt={award.name}/>
                                                             {award.name}
-                                                            <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                            <div className="hover-flip-arrow">
+                                                                <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-double">
+                                                                       {double}
+                                                                     </div>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     );
                                                 })
@@ -248,7 +257,14 @@ const Agency = (props) => {
                                                                 src={raiting.image ? `${apiUrl}/uploads/${raiting.image.filename}` : null}
                                                                 alt={raiting.name}/>
                                                             {raiting.name}
-                                                            <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                            <div className="hover-flip-arrow">
+                                                                <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-double">
+                                                                       {double}
+                                                                     </div>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     )
                                                 )
@@ -461,7 +477,7 @@ const Agency = (props) => {
 
                             </div>
                             <span className="agency-reviews__wrap-arrow">
-                                <Icon icon="pdf" viewBox="0"/>
+                                <Icon icon="pdf" viewBox="0 0 24 24"/>
                             </span>
                         </div>
                         <div className="agency-reviews__wrap-item">
@@ -473,7 +489,9 @@ const Agency = (props) => {
                                 <p>Директор по развитию, Choice Constraction</p>
 
                             </div>
-                            <Icon icon="pdf" />
+                            <span className="agency-reviews__wrap-arrow">
+                                <Icon icon="pdf" viewBox="0 0 24 24"/>
+                            </span>
                         </div>
                         <div className="agency-reviews__wrap-item">
                             <img alt="" src={ucgroup}/>
@@ -483,7 +501,9 @@ const Agency = (props) => {
                                 <p>Мария Богатова</p>
                                 <p>Директор по развитию, Choice Constraction</p>
                             </div>
-                            <Icon icon="pdf" />
+                            <span className="agency-reviews__wrap-arrow">
+                                <Icon icon="pdf" viewBox="0 0 24 24"/>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -503,32 +523,69 @@ const Agency = (props) => {
                             <h3 className="heading-tertiary">
                                 UX/UI дизайнер
                             </h3>
-                            <div className="p-style-black">Офис</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Офис</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
+
 
                         </Link>
                         <Link to="/agency" className="agency-vacancy__table-item">
                             <h3 className="heading-tertiary">
                                 Front-end разработчик
                             </h3>
-                            <div className="p-style-black">Удаленно</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Удаленно</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
 
                         </Link>
                         <Link to="/agency" className="agency-vacancy__table-item">
                             <h3 className="heading-tertiary">
                                 PHP-разработчик
                             </h3>
-                            <div className="p-style-black">Удаленно</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Удаленно</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
 
                         </Link>
                         <Link to="/agency" className="agency-vacancy__table-item">
                             <h3 className="heading-tertiary">
                                 Тестировщик QA
                             </h3>
-                            <div className="p-style-black">Офис</div>
-                            <Icon icon="arrowUp"></Icon>
+                            <div className="flex-sb">
+                                <p className="p-style-black">Офис</p>
+                                <div className="hover-flip-arrow">
+                                   <span>
+                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                       <div className="hover-circle">
+                                           {double}
+                                       </div>
+                                   </span>
+                                </div>
+                            </div>
 
                         </Link>
                     </div>

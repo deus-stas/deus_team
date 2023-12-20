@@ -98,6 +98,9 @@
             .icon {
                 width: 3rem;
                 height: 3rem;
+            }
+
+            .hover-flip-arrow {
                 margin-left: auto;
 
                 @include respond(sm) {
@@ -128,6 +131,25 @@
                     color: rgba(86, 86, 86, 0.8);
                 }
 
+                &:hover {
+                    p{
+                        opacity: 0.5;
+                    }
+
+                    .hover-flip-arrow span{
+                        transition: all 0.3s ease-in-out;
+                    }
+                    .hover-flip-arrow span{
+                        transform: translatex(100%) translatey(100%) ;
+                    }
+
+                    .hover-flip-arrow div{
+                        transform: translatex(0) translatey(0);
+                    }
+
+
+                }
+
                 img {
                     display: inline-block;
                     width: 5rem;
@@ -153,7 +175,7 @@
 
         &__descr {
             max-width: 69.5rem;
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             line-height: 3.4rem;
             font-weight: 400;
 
@@ -398,6 +420,7 @@
                 img {
                     margin-bottom: 5.3rem;
                     padding: 1rem 2.84rem 0.97rem 2.8rem;
+                    height: 10rem;
                 }
 
                 .fs-20 {
@@ -411,6 +434,7 @@
                 position: absolute;
                 bottom: 0;
                 right: 0;
+                cursor: pointer;
 
                 @include respond(sm) {
                     margin-right: 1rem;
@@ -418,7 +442,7 @@
 
                 color: #121212;
                 display: inline-flex;
-                padding: 0 23px ;
+                padding: 2.3rem ;
                 justify-content: center;
                 align-items: center;
                 overflow: hidden;
@@ -427,7 +451,7 @@
                 background: rgba(255, 255, 255, 0.03);
 
                 backdrop-filter: blur(12px);
-                transition: transform 0.3s ease-in-out;
+                transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
 
 
                 @include respond(sm) {
@@ -441,13 +465,19 @@
                 }
 
                 .icon {
-                    width: 4rem;
-                    height: 4rem;
+                    width: 2.5rem;
+                    height: 2.5rem;
 
                     @include respond(sm) {
                         width: 1.15em;
                         height: 3.2rem;
                     }
+                }
+
+                &:hover {
+                    transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+                    background: #121212;
+                    color: #FFFFFF;
                 }
             }
 
@@ -477,6 +507,7 @@
 
         &__table {
             padding: 6rem 0;
+            transition: all 0.3s ease-in-out;
 
             &-item {
                 display: grid;
@@ -490,22 +521,42 @@
                 position: relative;
 
                 .icon {
-                    width: 2rem;
-                    flex: 0 0 5rem;
-                    height: 2rem;
-                    position: absolute;
-                    bottom: 2.2rem;
-                    right: 0;
+                    width: 3rem;
+                    height: 3rem;
 
+                }
+
+                p {
+                    font-size: 2.4rem;
                 }
 
                 &:not(:first-child) {
                     padding: 1.5rem 0;
                 }
 
+                .hover-flip-arrow {
+                    transform: rotate(270deg);
+                }
 
+                &:hover {
+
+                    .hover-flip-arrow span{
+                        transition: all 0.3s ease-in-out;
+                    }
+                    .hover-flip-arrow span{
+                        transform: translatex(100%) translatey(100%) ;
+                    }
+
+                    .hover-flip-arrow div{
+                        transform: translatex(0) translatey(0);
+                    }
+
+
+                }
 
             }
+
+
         }
     }
 
@@ -989,4 +1040,9 @@
             }
         }
     }
+}
+
+.flex-sb {
+    display: flex;
+    justify-content: space-between;
 }

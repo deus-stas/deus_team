@@ -119,9 +119,8 @@ const Services = (props) => {
                         <div className="container">
                             <h2 className="heading-secondary">Почему стоит заказать<br/> разработку сайта в DEUS?</h2>
                             <div className="services-about__wrap">
-                                <div className="services-about__descr">Объединяем аналитику, маркетинг, дизайн,
-                                    разработку и интеграции в единую систему для получения максимальной эффективности
-                                    для вашего бизнеса
+                                <div className="services-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку
+                                    и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса
                                 </div>
                                 <div className="services-about__adv">
                                     <div className="services-about__adv-item">
@@ -276,8 +275,7 @@ const Services = (props) => {
                                     <h2 className="heading-secondary">
                                         Как мы работаем?
                                     </h2>
-                                    <p className="p-style-black">Предлагаем форматы работы с учётом особенностей проекта.
-                                        Если разработка требует большей гибкости, миксуем подходы.
+                                    <p className="p-style-black">Предлагаем форматы работы с учётом особенностей проекта. Если разработка требует большей гибкости, миксуем подходы.
                                     </p>
                                 </div>
                                 <div></div>
@@ -291,8 +289,8 @@ const Services = (props) => {
 
                                                     <img className="worker-img" src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null} alt=""/>
                                                     <span>
-                                                      <div className="worker-name">{team.name}</div>
-                                                    <div className="worker-descr">{team.post}</div>
+                                                      <div className="worker-name heading-tertiary">{team.name}</div>
+                                                    <p className="worker-descr">{team.post}</p>
                                                     </span>
                                                 </div>
                                             )
