@@ -190,7 +190,7 @@ const Projects = () => {
     return (
         <>
             {!isLoading &&
-                <main className="projects">
+                <main className="projects" style={{padding:"inherit"}}>
                     <section className="projects-start whiteHeader">
                             <div className="projects-start-video">
                                 <video autoPlay muted loop>
@@ -367,7 +367,7 @@ const Projects = () => {
                             </div>
                         </div>
                     </section>
-                        <Cta formName={'projects'}/>
+                        {/*<Cta formName={'projects'}/>*/}
                 </main>
             }
         </>

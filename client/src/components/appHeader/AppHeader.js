@@ -23,11 +23,14 @@ const AppHeader = (props) => {
     useEffect(()=>{
         const defaultColor = ['/', '/contacts', '/login', '/services/']
         let header = document.querySelector('.header')
+        let main = document.querySelector('main')
         if (!!header) {
             if (defaultColor.includes(location.pathname)) {
                 header.classList.remove('white');
+
             } else {
                 header.classList.add('white');
+
             }
         }
 

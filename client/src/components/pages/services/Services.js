@@ -103,7 +103,7 @@ const Services = (props) => {
     return (
         <>
             {!isLoading &&
-                <main className="services" >
+                <main className="services" style={{padding:"inherit"}}>
 
                     <section className="services-s whiteHeader">
                         <div className="services-s__video">

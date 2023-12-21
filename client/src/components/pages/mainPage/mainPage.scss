@@ -7,10 +7,6 @@
         position: relative;
         overflow:hidden;
 
-        @include respond(md) {
-            padding: 4.5rem 0 4.5rem;
-        }
-
         @include respond(sm) {
             padding: 4.5rem 0 2.2rem;
         }

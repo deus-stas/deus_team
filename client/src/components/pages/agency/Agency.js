@@ -163,7 +163,7 @@ const Agency = (props) => {
     return (
         <>
             {!isLoading &&
-        <main className="agency">
+        <main className="agency" style={{padding:"inherit"}}>
 
             <section className="agency-start whiteHeader">
                 <div className="agency-start__video">
