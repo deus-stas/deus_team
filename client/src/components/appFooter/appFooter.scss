@@ -265,8 +265,12 @@
     &__copyright {
         line-height: 2.4rem;
         p {
-            font-size: 1.4rem;
             opacity: 0.5;
+            @include respond(sm){
+                font-size: 1.4rem;
+
+            }
+
         }
     }
 }
