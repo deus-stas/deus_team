@@ -14,20 +14,20 @@ body {
     font-size: clamp(3.2rem, 4vw, 9.6rem);
     line-height: clamp(3.5rem, 5vw, 10.6rem);
 
-    @include respond(md) {
-        font-size: 6.4rem;
-        line-height: 7rem;
-    }
-
-    @include respond(sm) {
-        font-size: 4.5rem;
-        line-height: 6rem;
-    }
-
-    @include respond(xs) {
-        font-size: 3.5rem;
-        line-height: 4rem;
-    }
+    //@include respond(md) {
+    //    font-size: 6.4rem;
+    //    line-height: 7rem;
+    //}
+    //
+    //@include respond(sm) {
+    //    font-size: 4.5rem;
+    //    line-height: 6rem;
+    //}
+    //
+    //@include respond(xs) {
+    //    font-size: 3.5rem;
+    //    line-height: 4rem;
+    //}
 }
 
 .heading-secondary {

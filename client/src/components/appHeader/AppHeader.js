@@ -23,11 +23,14 @@ const AppHeader = (props) => {
     useEffect(()=>{
         const defaultColor = ['/', '/contacts', '/login', '/services/']
         let header = document.querySelector('.header')
+        let main = document.querySelector('main')
         if (!!header) {
             if (defaultColor.includes(location.pathname)) {
                 header.classList.remove('white');
+
             } else {
                 header.classList.add('white');
+
             }
         }
 
@@ -125,7 +128,7 @@ const AppHeader = (props) => {
                                 </DelayedLink>
                                 <nav className={`header__nav ${visible ? '' : 'hidden'}`}>
                                     <ul className="header__nav-list">
-                                        <li className="header__nav-item hover-flip">
+                                        <li className="header__nav-item hover-flip hidden-mobile">
                                             <DelayedNavLink  to="/projects">
                                             <span data-hover="Проекты">Проекты</span>
                                             </DelayedNavLink>

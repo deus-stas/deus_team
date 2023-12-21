@@ -732,3 +732,11 @@
         }
     }
 }
+
+.overlay {
+
+    &::before,
+    &::after {
+        content: none;
+    }
+}

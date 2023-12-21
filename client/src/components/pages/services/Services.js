@@ -103,7 +103,7 @@ const Services = (props) => {
     return (
         <>
             {!isLoading &&
-                <main className="services" >
+                <main className="services" style={{padding:"inherit"}}>
 
                     <section className="services-s whiteHeader">
                         <div className="services-s__video">
@@ -151,7 +151,7 @@ const Services = (props) => {
                                         <div className={`${index === openList ? 'active' : ''}`}>
                                             <div className="container">
                                                 <div to={`/services/${service.path}`}
-                                                     className="services-list__wrapp-item"
+                                                     className="services-list__wrapp-item "
                                                      key={service.id}
                                                      onClick={() => {
                                                          handleItemClick(index);
@@ -190,8 +190,8 @@ const Services = (props) => {
                                                         </div>
                                                     </Marquee>
 
-                                                    <div className="describe__wrapp">
-                                                        <div className="describe__wrapp-btn">
+                                                    <div className="describe__wrapp ">
+                                                        <div className="describe__wrapp-btn ">
                                                             <Link to="/projects" className="btn --b-white ">Посмотреть кейсы</Link>
                                                             <Link to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</Link>
                                                         </div>
