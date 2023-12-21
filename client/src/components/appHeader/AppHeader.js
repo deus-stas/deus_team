@@ -125,7 +125,7 @@ const AppHeader = (props) => {
                                 </DelayedLink>
                                 <nav className={`header__nav ${visible ? '' : 'hidden'}`}>
                                     <ul className="header__nav-list">
-                                        <li className="header__nav-item hover-flip">
+                                        <li className="header__nav-item hover-flip hidden-mobile">
                                             <DelayedNavLink  to="/projects">
                                             <span data-hover="Проекты">Проекты</span>
                                             </DelayedNavLink>

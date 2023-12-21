@@ -297,9 +297,13 @@ const MainPage = (props) => {
                             </div>
                         </section>
                     </ScrollUp>
-                    {
-                        mainShowreel ? <Showreel data={mainShowreel}  isMain={true} /> : null
-                    }
+
+                    <section className="main-showreel">
+                        {
+                            mainShowreel ? <Showreel data={mainShowreel}  isMain={true} /> : null
+                        }
+                    </section>
+
                     <section className="main-agency">
                         <div className="container">
                             {/*<div className="main-agency__wrap">*/}

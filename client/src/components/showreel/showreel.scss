@@ -1,6 +1,7 @@
 @import '../../style/mixins';
 
 .showreel {
+  position: relative;
     &__title {
         display: flex;
         align-items: center;
@@ -31,17 +32,25 @@
     &__s {
         cursor: url('../../img/videoCursor.svg'), default !important;
         opacity: 1;
+        height: 83rem;
         position: relative;
+        @include respond(sm) {
+            max-height: 42rem;
+        }
 
         video {
             width: 100%;
             object-fit: cover;
-            max-height: 83rem;
+            height: 83rem;
+
+            @include respond(sm) {
+                height: 42rem;
+            }
         }
 
         iframe {
             width: 100%;
-            height: auto;
+            height: 100%;
             aspect-ratio: 1/0.5625;
         }
 
@@ -49,18 +58,18 @@
             display: none;
         }
 
-        @include respond(sm) {
-            &::before {
-                content: '';
-                width: 6rem;
-                height: 6rem;
-                background: url('../../img/play-video.svg')no-repeat center/cover;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
+        //@include respond(sm) {
+        //    &::before {
+        //        content: '';
+        //        width: 6rem;
+        //        height: 6rem;
+        //        background: url('../../img/play-video.svg')no-repeat center/cover;
+        //        position: absolute;
+        //        top: 50%;
+        //        left: 50%;
+        //        transform: translate(-50%, -50%);
+        //    }
+        //}
     }
 }
 .popup-content {

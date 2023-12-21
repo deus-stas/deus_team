@@ -174,10 +174,18 @@
         color: #FFFFFF;
         align-self: end;
         margin: 0;
+        text-align: center;
 
         &:hover {
             background: #FFFFFF;
             color: #121212;
+        }
+
+        @include respond(sm) {
+            font-size: 1.6rem;
+            display: block;
+            font-weight: normal;
+            opacity: 0.8;
         }
     }
 }
