@@ -45,7 +45,7 @@
             display: flex;
             justify-content: space-between;
             grid-gap: 0;
-            gap: 1rem;
+            gap: 4.5rem;
         }
 
         @include respond(sm) {
@@ -66,7 +66,6 @@
         }
 
         .icon {
-            display: block;
             width: 11.3rem;
             height: 7.6rem;
 
@@ -82,11 +81,15 @@
         opacity: 1;
         transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
         position: relative;
+
         &-list {
             display: flex;
             align-items: center;
             font-size: 2.4rem;
             line-height: 2.6rem;
+            @include respond(md) {
+                font-size: 2rem;
+            }
         }
 
         &-item {
@@ -136,11 +139,14 @@
         align-items: center;
         margin-right: auto;
 
+
         &-link {
             font-size: 2.4rem;
             line-height: 2.6rem;
             transition: opacity .5s;
-
+            @include respond(md) {
+                font-size: 2rem;
+            }
             &:hover {
                 opacity: 0.5;
             }
@@ -164,6 +170,9 @@
         margin: 0;
         padding: 1.5rem 2.7rem 1.5rem 2.1rem;
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        @include respond(md) {
+            font-size: 2rem;
+        }
 
     &:hover {
         background: #121212;
@@ -230,6 +239,10 @@
                 top: 1rem;
                 left: 0;
                 transition: transform .3s;
+            }
+
+            @include respond(xss) {
+                height: 4px;
             }
         }
     }
