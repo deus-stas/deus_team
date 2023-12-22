@@ -73,6 +73,10 @@ export const ServicesCreate = (props) => (
             <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
                 <SelectArrayInput className="customWidth" optionText="name" label="Услуги" />
             </ReferenceArrayInput>
+            <ImageInput className="fileInput" placeholder="+" source="descrImg" label="Фотография"
+                        accept="image/*">
+                <FilenameField source="src" title="title"/>
+            </ImageInput>
 
             <ArrayInput
                 source="work"
@@ -150,6 +154,10 @@ export const ServicesEdit = (props) => (
             <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
                 <SelectArrayInput className="customWidth" optionText="name" label="Элементы блока" />
             </ReferenceArrayInput>
+            <ImageInput className="fileInput" placeholder="+" source="descrImg" label="Фотография"
+                        accept="image/*">
+                <FilenameField source="src" title="title"/>
+            </ImageInput>
 
             <ArrayInput
                 source="work"
