@@ -107,7 +107,7 @@ const AppFooter = (props) => {
         footerRenderArr.push(contactNode)
     }
 
-    console.log('render',footerRenderArr,isMobile)
+
 
     return (
         <>

@@ -1,5 +1,6 @@
 .form {
     overflow: hidden;
+
     &__title {
         margin-bottom: 6rem;
         font-weight: 500;
@@ -7,7 +8,7 @@
         line-height: 3.4rem;
 
         @include respond(sm) {
-            margin-bottom: 2rem;
+            margin-bottom: 0;
             font-size: 2.6rem;
             line-height: 3.1rem;
         }
@@ -69,7 +70,7 @@
         @include respond(sm) {
             height: 3.1rem;
             padding: 0 0 .5rem 0;
-            font-size: 2rem;
+            font-size: 1.6rem;
         }
 
         &::placeholder {
@@ -91,9 +92,16 @@
     &__file {
         display: grid;
         align-items: center;
-        grid-template-columns: 0.55fr 0.55fr  1fr ;
+        grid-template-columns: auto 0.55fr 1fr;
+        grid-gap: 2rem;
         margin-top: 4rem;
         margin-bottom: 6rem;
+
+        @include respond(sm) {
+            font-size: 1.6rem;
+            grid-template-columns: auto 1fr ;
+            grid-gap: 2rem;
+        }
 
         :nth-child(4) {
             grid-column: 3;
@@ -101,7 +109,7 @@
             padding: 0 1rem;
 
             @include respond(sm) {
-                grid-column: span 3;
+                grid-column: span 2;
             }
         }
 
@@ -112,6 +120,9 @@
         &-label {
             display: block;
             font-size: 2.4rem;
+            @include respond(sm) {
+                font-size: 1.6rem;
+            }
         }
 
         &-btn {
@@ -187,6 +198,7 @@
 
 
             @include respond(sm) {
+                padding: 1.5rem ;
                 width: 5.5rem;
                 height: 5.5rem;
             }
@@ -219,7 +231,7 @@
         font-size: 2rem;
 
         @include respond(sm) {
-            margin: 3rem auto;
+            grid-column: span 2;
         }
     }
 
@@ -228,9 +240,6 @@
         line-height: 2rem;
         font-size: 1.6rem;
 
-        @include respond(sm) {
-            max-width: 33.5rem;
-        }
     }
 
     &__checks {
@@ -239,6 +248,7 @@
 
         @include respond(sm) {
             margin-bottom: 3rem;
+            overflow: hidden;
         }
 
         &-title {
@@ -247,9 +257,10 @@
             line-height: 3.4rem;
 
             @include respond(sm) {
-                margin-bottom: 1rem;
+                margin: 3rem 0 1.5rem;
                 font-size: 2rem;
                 line-height: 2.6rem;
+                font-weight: 500;
             }
         }
 
@@ -259,7 +270,12 @@
             gap: 1rem;
 
             @include respond(sm) {
-                gap: .5rem;
+                align-items: flex-start;
+                overflow: auto;
+                flex-wrap: nowrap;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
             }
         }
 
@@ -284,9 +300,11 @@
             transition: all .3s;
 
             @include respond(sm) {
-                padding: 1rem 2rem;
+                padding: 1.5rem 3.0rem;
                 font-size: 1.6rem;
                 line-height: 1.8rem;
+                flex: 0 0 1rem;
+                white-space: nowrap;
             }
 
             &:hover {

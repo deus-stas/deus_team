@@ -13,6 +13,7 @@ import SectionProducts from '../../sectionProducts/SectionProducts';
 import SectionSocial from '../../sectionSocial/SectionSocial';
 import Showreel from '../../showreel/Showreel';
 import chiefTeam from "../../../img/chief-team.png"
+import chiefMob from "../../../img/chief-mob.png"
 import choice from "../../../img/choice.png"
 import ucgroup from "../../../img/ucgroup.png"
 import agencyBanner from "../../../img/agency-main.mp4"
@@ -203,14 +204,14 @@ const Agency = (props) => {
                         {/* <Link className="btn --circle --orange">Презентация агентства</Link> */}
                         {
                             headerData && headerData.presentation ?
-                                <div style={{width: "20rem",
+                                <div className="hidden-mobile" style={{width: "20rem",
                                     height: "20rem", marginTop: "auto",
                                     marginLeft: "auto"}}>
                                     <RoundButton fromX={100} rotateZ={-360} delay={500} >
                                     <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`}
                                        target='_blank'
                                        rel="noopener noreferrer"
-                                       className="btn --circle --dark"
+                                       className="btn --circle --dark hidden-mobile"
                                       >Скачать презентацию</a>
                                     </RoundButton >
                                 </div>
@@ -287,16 +288,17 @@ const Agency = (props) => {
                 </div>
             </section>
             <section id='agency' className="agency-workers whiteHeader">
-                <img src={chiefTeam} alt=""
-                     className="chief-team"/>
-                <div className="agency-workers__wrap">
+                <img src={chiefTeam} alt="" className="chief-team hidden-mobile"/>
+                <img src={chiefMob} alt="" className="chief-team hidden-desktop"/>
+
+                    <div className="agency-workers__wrap container">
                         <span className="agency-workers__wrap-item">
                            <h2 className="heading-secondary">Объединяем аналитику, маркетинг,<br/> дизайн, разработку и интеграции в<br/> единую
                             систему для получения<br/> максимальной эффективности для<br/> вашего бизнеса
                            </h2>
                             <span>
                                 <p className="p-style-white">Брижань Вячеслав</p>
-                                <p>Генеральный директор</p>
+                                <p className="descr-name">Генеральный директор</p>
                             </span>
                         </span>
                         <div className="agency-workers__wrap-person">
@@ -311,7 +313,7 @@ const Agency = (props) => {
 
                             )}
                         </div>
-                </div>
+                    </div>
             </section>
             <section id='principle' className="agency-principle">
                 <div className="container">
@@ -400,9 +402,9 @@ const Agency = (props) => {
                         <div className="agency-clients__head">
                             <h2 className="heading-secondary">Наши клиенты</h2>
                             <div className="agency-clients__pag hidden-desktop">
-                                <div className="agency-clients__pag-current">{current}</div>
-                                <div className="agency-clients__pag-sep">/</div>
-                                <div className="agency-clients__pag-total">{total}</div>
+                                {/*<div className="agency-clients__pag-current">{current}</div>*/}
+                                {/*<div className="agency-clients__pag-sep">/</div>*/}
+                                {/*<div className="agency-clients__pag-total">{total}</div>*/}
                             </div>
                         </div>
                     </div>
@@ -445,7 +447,7 @@ const Agency = (props) => {
                     <Swiper
                         slidesPerView={2}
                         grid={{
-                            rows: 2,
+                            rows: 7,
                         }}
                         spaceBetween={10}
                         modules={[Grid]}
@@ -594,7 +596,7 @@ const Agency = (props) => {
                         <span>
                             <h2 className="heading-tertiary">Не нашли подходящую вакансию?</h2>
                             <p className="p-style-grey pb-30">Пришлите нам резюме</p>
-                            <h2 className="heading-secondary">job@de-us.ru</h2>
+                            <h2 className="heading-secondary job">job@de-us.ru</h2>
                             <p className="p-style-grey">Присоединиться к команде</p>
                         </span>
                     </div>
