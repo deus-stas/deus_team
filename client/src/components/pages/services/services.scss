@@ -413,6 +413,14 @@
                         }
                     }
 
+                    .overlay {
+
+                        &::before,
+                        &::after {
+                            content: none;
+                        }
+                    }
+
                     &-services {
                         position: relative;
                         display: flex;
@@ -436,6 +444,15 @@
                                 margin-right: 6rem;
                             }
                         }
+
+                        .overlay {
+
+                            &::before,
+                            &::after {
+                                content: none;
+                            }
+                        }
+
 
                     }
 
@@ -911,10 +928,3 @@
     }
 }
 
-.overlay {
-
-    &::before,
-    &::after {
-        content: none;
-    }
-}

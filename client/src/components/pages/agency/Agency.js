@@ -168,7 +168,7 @@ const Agency = (props) => {
 
             <section className="agency-start whiteHeader">
                 <div className="agency-start__video">
-                    <video autoPlay muted loop>
+                    <video autoPlay playsInline muted loop>
                         <source src={agencyBanner} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                     </video>
                 </div>
