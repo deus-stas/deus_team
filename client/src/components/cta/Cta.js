@@ -56,12 +56,6 @@ const Cta = (props) => {
     const [worker, setWorker] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // useEffect(() => {
-    //         const wow = new WOW.WOW();
-    //         wow.init();
-    //         wow.sync();
-    // });
-
     const double =  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
 
     useEffect(() => {

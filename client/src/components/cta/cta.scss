@@ -4,7 +4,13 @@
     padding: 10rem 0 0 0;
     background: #121212;
     @include respond(sm) {
-        padding: 6rem 0;
+        padding: 4rem 0;
+    }
+
+    .container {
+        @include respond(sm) {
+            padding: 0 2rem;
+        }
     }
 
     &__wrap {
@@ -17,11 +23,17 @@
 
 
         @include respond(sm) {
-            grid-template-columns: 100%;
+            grid-template-columns: inherit;
+            display: flex;
+            gap: 4rem;
+            flex-direction: column-reverse;
         }
 
         &-wrapper {
             padding: 6rem 0;
+            @include respond(sm) {
+                padding: 3rem 0;
+            }
 
             .item {
                 align-items: center;
@@ -35,6 +47,10 @@
                 transition: opacity 0.4s;
                 :nth-child(1) {
                     margin-right: auto;
+                }
+
+                @include respond(sm) {
+                    font-size: 2rem;
                 }
 
                 &:hover {
@@ -67,6 +83,18 @@
 
         .pb-20 {
             padding-bottom: 2rem;
+        }
+
+        .p-style-grey {
+            @include respond(sm) {
+                font-size: 1.6rem;
+            }
+        }
+
+        .heading-tertiary{
+            @include respond(sm) {
+                font-size: 2rem;
+            }
         }
     }
 

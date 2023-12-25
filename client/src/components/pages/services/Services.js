@@ -162,12 +162,12 @@ const Services = (props) => {
                                             </div>
 
                                             <div className="describe">
-                                                <img src={spiral} alt=""/>
+                                                {!!service.descrImg &&<img src={`${apiUrl}/uploads/${service.descrImg.filename}`} alt=""/>}
                                                 <div className="container">
                                                     <p className="describe-title">{service.blockTitle}</p>
                                                     <Marquee speed="50">
                                                         <div className="describe-services ">
-                                                            {service.tariffs.map((tariffs, index) => (
+                                                            {!!service.tariffs &&service.tariffs.map((tariffs, index) => (
                                                                 <React.Fragment key={index}>
                                                                     {tariffs.tariffsCategory && (
                                                                         <>
@@ -177,7 +177,7 @@ const Services = (props) => {
                                                                     )}
                                                                 </React.Fragment>
                                                             ))}
-                                                            {service.tariffs.map((tariffs, index) => (
+                                                            {!!service.tariffs && service.tariffs.map((tariffs, index) => (
                                                                 <React.Fragment key={index}>
                                                                     {tariffs.tariffsCategory && (
                                                                         <>
@@ -191,7 +191,7 @@ const Services = (props) => {
                                                     </Marquee>
 
                                                     <div className="describe__wrapp ">
-                                                        <div className="describe__wrapp-btn ">
+                                                        <div className="describe__wrapp-btn hidden-mobile ">
                                                             <Link to="/projects" className="btn --b-white ">Посмотреть кейсы</Link>
                                                             <Link to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</Link>
                                                         </div>
@@ -200,7 +200,7 @@ const Services = (props) => {
                                                                 {service.descr}
                                                             </h3>
                                                             <div className="describe__wrapp-benefits">
-                                                                {service.tariffs.map(tariffs => {
+                                                                {!!service.tariffs && service.tariffs.map(tariffs => {
                                                                     return (
                                                                         <div className="tariffs">
                                                                             {tariffs.tariffsCategory}
@@ -218,6 +218,10 @@ const Services = (props) => {
                                                                 })}
                                                             </div>
 
+                                                        </div>
+                                                        <div className="describe__wrapp-btn__mob hidden-desktop ">
+                                                            <Link to="/projects" className="btn --b-white ">Посмотреть кейсы</Link>
+                                                            <Link to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</Link>
                                                         </div>
 
                                                     </div>
@@ -280,7 +284,7 @@ const Services = (props) => {
                                 </div>
                                 <div></div>
                                 <div>
-                                    <h2>Команда</h2>
+                                    <h2 className="heading-secondary">Команда</h2>
                                     <div className="services-team__wrapper">
                                         {team.filter(team => team.serviceControl).map((team,index) => {
                                             console.log('team:', team.mainImg)

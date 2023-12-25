@@ -298,7 +298,7 @@ const MainPage = (props) => {
                         </section>
                     </ScrollUp>
 
-                    <section className="main-showreel">
+                    <section className="main-showreel whiteHeader">
                         {
                             mainShowreel ? <Showreel data={mainShowreel}  isMain={true} /> : null
                         }
@@ -344,7 +344,8 @@ const MainPage = (props) => {
 
                                             ).slice(0,3)}</>
 
-                                        const allServices = index == 1 && props.services.filter((service, index) => service.isInvisible).map((service, index) =>
+                                        const allServices = index == 1 && props.services.filter((service, index) =>
+                                            service.isInvisible).map((service, index) =>
                                             <Link
                                                 to={`/services/${service.path}`}>
                                                 <div className="main-agency__item-link p-style"><p>{service.name}</p>

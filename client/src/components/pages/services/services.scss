@@ -7,16 +7,23 @@
         height: 69rem;
 
         @include respond(sm) {
-            padding: 6rem 0 3rem;
+            padding-top: 4.5rem;
+            height:  36rem;
+
+            .container{
+                padding: 0 2rem;
+            }
         }
 
         .heading-primary {
             position: relative;
             margin-bottom: 6rem;
             color: #FFFFFF;
+            z-index: 100;
+            font-weight: 500;
 
             @include respond(sm) {
-                margin-bottom: 3rem;
+                margin-top: 4.5rem;
             }
         }
 
@@ -28,6 +35,11 @@
                 height: 69rem;
                 top: 0;
                 object-fit: cover;
+
+                @include respond(sm) {
+                    height: 100%;
+                    max-height:  36rem;
+                }
             }
         }
 
@@ -149,7 +161,7 @@
             transition: all 0.3s ease;
 
             @include respond(sm) {
-                font-size: 2.6rem;
+                font-size: 2.4rem;
                 line-height: 3.1rem;
             }
 
@@ -171,12 +183,20 @@
         padding: 10rem 0;
         overflow: hidden;
 
+        .container {
+            padding: 0 2rem;
+        }
+
         @include respond(sm) {
-            padding-top: 6rem;
+            padding: 4rem 0;
         }
 
         .heading-secondary {
             margin-bottom: 3rem;
+
+            @include respond(sm) {
+                margin-bottom: 1rem;
+            }
         }
 
         &__wrap {
@@ -187,7 +207,8 @@
 
             @include respond(sm) {
                 grid-template-columns: 100%;
-                grid-gap: 2rem;
+                grid-gap: 3rem;
+                padding: 0;
             }
 
             .btn {
@@ -221,8 +242,8 @@
 
             @include respond(sm) {
                 max-width: none;
-                font-size: 2.6rem;
-                line-height: 3.1rem;
+                font-size: 1.6rem;
+                line-height: normal;
             }
         }
 
@@ -243,7 +264,7 @@
                     margin-bottom: 3rem;
 
                     @include respond(sm) {
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 2rem;
                     }
                 }
 
@@ -254,7 +275,7 @@
                     margin-right: 2rem;
 
                     @include respond(sm) {
-                        margin-right: 1rem;
+                        margin-right: 2rem;
                     }
                 }
             }
@@ -264,6 +285,10 @@
     &-list {
         padding-bottom: 8rem;
         position: relative;
+
+        @include respond(sm) {
+            padding-bottom: 4rem;
+        }
 
         &__wrapp {
             transition: all 0.5s;
@@ -288,6 +313,10 @@
                 display: flex;
                 position: relative;
                 z-index: 1000;
+
+                @include respond(sm) {
+                    padding: 2rem 0 2rem;
+                }
             }
 
             .icon {
@@ -324,6 +353,8 @@
                     color: rgba(86, 86, 86, 0.8);
                 }
 
+
+
                 img {
                     display: inline-block;
                     width: 5rem;
@@ -350,6 +381,12 @@
                 color: white;
                 transition: all 0.5s;
 
+                .services-list__wrapp-item {
+                    @include respond(sm) {
+                        padding: 4.7rem 0 2rem !important;
+                    }
+                }
+
                 .describe {
                     padding: 5rem 0 9.5rem;
                     color: #FFFFFF;
@@ -359,10 +396,21 @@
                     opacity: 1;
                     visibility: visible;
 
+                    @include respond(sm) {
+                        .container {
+                            padding: 0 2rem;
+                        }
+                        padding: 4rem 0;
+                    }
+
                     &-title {
                         position: relative;
                         display: table;
                         margin: auto auto auto auto;
+                        @include respond(sm) {
+                            display: block;
+                            margin: auto;
+                        }
                     }
 
                     &-services {
@@ -374,6 +422,11 @@
                         font-size: 6.4rem;
                         padding-top: 3rem;
                         padding-bottom: 8rem;
+
+                        @include respond(sm) {
+                            font-size: 3.2rem;
+                            padding: 1.5rem 0 3rem;
+                        }
                         &::-webkit-scrollbar {
                             display: none;
                         }
@@ -393,16 +446,44 @@
                         grid-gap: 2rem;
                         padding-top: 3rem;
 
+                        @include respond(sm) {
+                            gap: 3rem;
+                            grid-template-columns: 100%;
+                            padding-top: 0;
+
+
+                            .heading-tertiary {
+                                opacity: .8;
+                                font-size: 1.6rem;
+                                font-weight: 400;
+                                line-height: normal;
+                            }
+                        }
+
                         &-btn {
                             display: flex;
                             flex-direction: column;
                             gap: 2rem;
                             margin: auto auto 0 0;
+                            &__mob {
+                                @include respond(sm) {
+                                    display: flex !important;
+                                    flex-direction: column;
+                                    gap: 1.5rem;
+                                    margin: inherit;
+                                }
+                            }
+
                         }
 
                         .btn {
                             padding: 2.3rem 4rem;
                             font-size: 2.8rem;
+                            @include respond(sm) {
+                                padding: 1.5rem 3rem;
+                               font-size: 1.6rem;
+                                text-align: center;
+                            }
                         }
 
                         &-benefits {
@@ -412,8 +493,26 @@
                             grid-template-columns: repeat(2, 0.5fr);
                             grid-gap: 3.5rem 16.6rem;
 
+                            @include respond(sm) {
+                                padding: 3rem 0 0 0;
+                                grid-template-columns: 100%;
+                            }
+
                             .tariffs {
                                 font-size: 2.8rem;
+
+                                @include respond(sm) {
+                                    font-size: 2rem;
+                                    line-height: 2.8rem;
+                                }
+
+                                .p-style-grey {
+                                    @include respond(sm) {
+                                        padding: 0.1rem 0;
+                                        font-size: 1.6rem;
+                                        line-height: normal;
+                                    }
+                                }
                             }
                         }
                     }
@@ -448,12 +547,23 @@
         color: white;
         padding: 10rem 0 9.5rem;
 
+        @include respond(sm) {
+            padding: 4rem 1rem;
+        }
+
         .heading-secondary {
             padding-bottom: 5.6rem;
+            @include respond(sm) {
+               max-width: 90%;
+                padding-bottom: 4rem;
+            }
         }
 
         .heading-tertiary {
             padding: 4rem 0 2rem;
+            @include respond(sm) {
+                padding: 3rem 0 1.5rem;
+            }
         }
 
         &__wrap {
@@ -462,6 +572,11 @@
             grid-gap: 13.4rem;
             position: relative;
 
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                grid-gap: 4rem;
+            }
+
             &-item {
 
 
@@ -469,13 +584,21 @@
                 img {
                     width: 18rem;
                     height: 18rem;
+                    @include respond(sm) {
+                        width: 10rem;
+                        height: 10rem;
+                    }
                 }
 
                 p {
                     font-weight: 400;
                     font-size: 2.4rem;
                     line-height: 3.3rem;
-                    opacity: 0.8;
+                    opacity: 0.7;
+                    @include respond(sm) {
+                        font-size: 1.6rem;
+                        line-height: normal;
+                    }
                 }
             }
         }
@@ -484,19 +607,41 @@
     &-team {
         position: relative;
         padding: 10rem 0 7.5rem;
+        @include respond(sm) {
+            padding: 4rem 0;
+
+            .container {
+                padding: 0 2rem;
+            }
+        }
 
         &__wrap {
             display: grid;
             grid-template-columns: 0.30fr 0.20fr 0.5fr;
 
+            @include respond(sm) {
+                grid-template-columns: 100%;
+            }
+
             .heading-secondary {
                 margin-bottom: 2rem;
+
+                @include respond(sm) {
+                    .heading-secondary {
+                        font-size: 2.4rem;
+                    }
+                }
             }
 
             p {
                 font-weight: 400;
                 font-size: 2.4rem;
                 line-height: 3.3rem;
+                @include respond(sm) {
+                    font-size: 1.6rem;
+                    line-height: 2.1rem;
+                    padding-bottom: 2rem;
+                }
             }
         }
 
@@ -506,22 +651,42 @@
             grid-gap:  3rem 6.6rem;
             padding: 5.6rem 0 6rem;
 
+            @include respond(sm) {
+                grid-template-columns: 100%;
+                padding: 1rem 0;
+            }
+
             .worker {
                 display: flex;
                 align-items: center;
                 gap: 3rem;
+                @include respond(sm) {
+                    gap: 2rem;
+                }
                 &-name {
-
+                    @include respond(sm) {
+                        font-size: 2rem;
+                    }
                 }
                 &-img {
                     border: 1px solid #FFFFFF;
                     border-radius: 50%;
                     width: 10rem;
                     height: 10rem;
+
+                    @include respond(sm) {
+                        width: 7rem;
+                        height: 7rem;
+                    }
+
                 }
 
                 &-descr {
                     font-size: 2.4rem;
+                    padding-bottom: 0;
+                    @include respond(sm) {
+                        font-size: 1.6rem;
+                    }
                 }
             }
 
@@ -536,9 +701,22 @@
                 grid-gap:  3rem 6.6rem;
                 padding: 1rem 0;
                 border-bottom: 1px solid gray;
+                @include respond(sm) {
+                    padding: 1.5rem 0;
+                   grid-gap:0 ;
+                }
+                .heading-tertiary {
+                    @include respond(sm) {
+                        font-size: 2rem ;
+                    }
+                }
 
                 p {
                     font-size: 2.4rem;
+                    @include respond(sm) {
+                        margin-left: auto;
+                        font-size: 1.6rem;
+                    }
                 }
             }
         }

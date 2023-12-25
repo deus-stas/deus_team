@@ -68,9 +68,9 @@
                     gap: 3rem;
                     width: 85%;
 
-                    :nth-child(n+1) {
-                        margin-top: 1.3rem;
-                    }
+                    //:nth-child(n+1) {
+                    //    margin-top: 1.3rem;
+                    //}
 
                     @include respond(md){
                         width: 100%;
@@ -92,9 +92,15 @@
                     color: #757677;
                     display: block;
                     flex-wrap: nowrap;
-                    line-height: 3.3rem;
+                    line-height: normal;
                     flex-direction: row;
                     align-items: center;
+                    margin-top: 2rem;
+
+                    @include respond(sm) {
+                        margin: 2rem 0;
+                    }
+
                 }
 
                 //@include respond(sm) {
@@ -1149,6 +1155,7 @@
 
             &-wrap {
                 padding: 0 1rem;
+                margin-top: auto;
             }
 
             &-item {

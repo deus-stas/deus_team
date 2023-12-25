@@ -2,6 +2,7 @@
 
 .agency {
     &-start {
+        position: relative;
         padding-top: 17rem;
         background: #121212;
         color: #FFFFFF;
@@ -9,19 +10,24 @@
 
         @include respond(sm) {
             padding-top: 4.5rem;
-            height: 40rem;
+            height:  36rem;
+
+            .container{
+                padding: 0 2rem;
+            }
         }
+
 
         .heading-primary {
             position: relative;
+            margin-bottom: 6rem;
             color: #FFFFFF;
             z-index: 100;
-            font-size: 9.6rem;
-            line-height: 10.6rem;
             font-weight: 500;
             max-width: 100rem;
+
             @include respond(sm) {
-                margin-bottom: 6rem;
+                margin-top: 4.5rem;
             }
         }
 
@@ -33,6 +39,11 @@
                 height: 69rem;
                 top: 0;
                 object-fit: cover;
+
+                @include respond(sm) {
+                    height: 100%;
+                    max-height:  36rem;
+                }
             }
         }
 
@@ -41,13 +52,26 @@
     &-about {
         padding: 10rem 0;
         overflow: hidden;
+        position: relative;
+        .container {
+            padding: 0 2rem;
+        }
+
+        &__adv {
+            @include respond(sm) {
+                padding-bottom: 3rem;
+            }
+        }
 
         @include respond(sm) {
-            padding-top: 6rem;
+            padding: 4rem 0;
         }
 
         .heading-secondary {
             margin-bottom: 3rem;
+            @include respond(sm) {
+                margin-bottom: 1rem;
+            }
         }
 
         &__wrap {
@@ -58,7 +82,8 @@
 
             @include respond(sm) {
                 grid-template-columns: 100%;
-                grid-gap: 2rem;
+                grid-gap: 3rem;
+                padding: 0;
             }
 
             .btn {
@@ -93,6 +118,9 @@
             &-item {
                 border-top: 1px solid rgba(18, 18, 18, 0.2);
                 padding: 5rem 0 0 0;
+                @include respond(sm) {
+                    padding: 0;
+                }
             }
 
             .icon {
@@ -121,7 +149,7 @@
                 padding: 0 0 1.5rem 0;
 
                 @include respond(sm) {
-                    font-size: 2.6rem;
+                    font-size: 1.8rem;
                     line-height: 3.1rem;
                     white-space: nowrap;
                 }
@@ -166,7 +194,13 @@
                     padding: 1.5rem 0;
 
                     @include respond(sm) {
-                        padding: 1.5rem 0;
+                        padding: 1rem 0;
+                    }
+                }
+
+                &:first-child {
+                    @include respond(sm) {
+                        padding: 1rem 0;
                     }
                 }
             }
@@ -181,8 +215,8 @@
 
             @include respond(sm) {
                 max-width: none;
-                font-size: 2.6rem;
-                line-height: 3.1rem;
+                font-size: 1.6rem;
+                line-height: normal;
             }
         }
 
@@ -195,7 +229,7 @@
                 line-height: 3.4rem;
 
                 @include respond(sm) {
-                    font-size: 2rem;
+                    font-size: 1.8rem;
                     line-height: 2.6rem;
                 }
 
@@ -203,7 +237,7 @@
                     margin-bottom: 3rem;
 
                     @include respond(sm) {
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 2rem;
                     }
                 }
 
@@ -214,7 +248,7 @@
                     margin-right: 2rem;
 
                     @include respond(sm) {
-                        margin-right: 1rem;
+                        margin-right: 2rem;
                     }
                 }
             }
@@ -238,8 +272,27 @@
 
     &-workers {
         width: 100%;
-        max-height: 104rem;
+        height: 100%;
         position: relative;
+
+        .container {
+            @include respond(sm) {
+                padding: 0 2rem;
+            }
+        }
+
+
+        img {
+            display: block;
+            //position: absolute;
+            //top: 0;
+            //left: 0;
+            //right: 0;
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .chief-team {
             height: 100%;
@@ -247,6 +300,7 @@
         }
 
         &__wrap{
+            overflow: hidden;
             position: absolute;
             margin: 0 4rem ;
             color: white;
@@ -269,7 +323,7 @@
 
                     @include respond(sm) {
                         padding: 3rem 0;
-                        font-size: 2.8rem;
+                        font-size: 2rem;
                         line-height: 2.8rem;
                     }
                 }
@@ -279,7 +333,7 @@
                     font-weight: 500;
 
                     @include respond(sm) {
-                        font-size: 2.2rem;
+                        font-size: 2rem;
                     }
 
                     p {
@@ -292,6 +346,17 @@
                         }
                     }
 
+                }
+
+                .descr-name {
+                    font-weight: 400;
+                    font-size: 2.4rem;
+                    line-height: 3.3rem;
+                    @include respond(sm) {
+                        font-size: 1.6rem;
+                        line-height: 2.1rem;
+                        padding-bottom: 2rem;
+                    }
                 }
             }
 
@@ -306,10 +371,15 @@
                 bottom: 10rem;
 
                 @include respond(sm) {
+                    margin: 0 2rem;
                     display: flex;
                     align-items: flex-start;
+                    overflow: auto;
                     padding-top: 3rem;
                     bottom: 5rem;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
                 }
                 .person-img {
                     width: 12rem;
@@ -318,6 +388,7 @@
                     border: 2px solid rgba(255, 255, 255, 0.3);
 
                     @include respond(sm) {
+                        flex: 0 0 1rem;
                         width: 7rem;
                         height: 7rem;
                     }
@@ -328,8 +399,16 @@
     }
 
     &-principle {
+        position: relative;
         padding: 10rem 0 0;
         overflow: hidden;
+        @include respond(sm) {
+            .container {
+                padding: 0 2rem;
+            }
+
+            padding: 4rem 0 0;
+        }
         &__wrap {
             display: grid;
             grid-template-columns: repeat(4, 0.25fr);
@@ -339,7 +418,8 @@
                 grid-template-columns: repeat(2, 0.5fr);
             }
 
-            @include  respond(sm ) {
+            @include respond(sm ) {
+
                 grid-template-columns: 100%
             }
 
@@ -351,16 +431,27 @@
                 @include  respond(md) {
                     grid-column: span 1;
                 }
+
+                @include respond(sm) {
+                   margin-bottom: 3rem;
+                }
             }
 
             &-item {
                 margin-bottom: 5rem;
-
+                @include respond(sm) {
+                    margin-bottom: 3rem;
+                }
                 .flex-wrap {
                     display: flex;
                     gap: 1.5rem;
                     align-items: flex-start;
                     margin-bottom: 2rem;
+
+                    @include respond(sm) {
+                        align-items: baseline;
+                        margin-bottom: 1.5rem;
+                    }
 
                     .num {
                         display: flex;
@@ -374,13 +465,28 @@
                         border-radius: 39px;
                         padding: 1rem 1.8rem 0.6rem 1.8rem;
                         margin-top: 0.4rem;
+
+                        @include respond(sm) {
+                            padding: .6rem 1.2rem .4rem 1.2rem;
+                            font-size: 1.4rem;
+                        }
                     }
 
                     p {
                         &:nth-last-child(1) {
                             font-size: 2.8rem;
                            font-weight: 500;
+                            @include respond(sm) {
+                                font-size: 2rem;
+                            }
                         }
+                    }
+                }
+
+                p {
+                    @include respond(sm) {
+                        font-size: 1.6rem;
+                        line-height: normal;
                     }
                 }
             }
@@ -390,9 +496,22 @@
     &-reviews {
         padding: 10rem 0 10.7rem;
         overflow: hidden;
+        position: relative;
+
+
+        @include respond(sm) {
+            padding: 4rem 0;
+        }
 
         .heading-secondary {
             padding-bottom: 6rem;
+            @include respond(sm) {
+                padding-bottom: 3.8rem;
+            }
+        }
+
+        .container{
+            padding: 0 2.5rem;
         }
 
         &__wrap {
@@ -401,26 +520,63 @@
             grid-gap: 10rem;
             position: relative;
 
+            @include respond(sm) {
+                width: 100vw;
+                grid-gap: 0;
+                display: flex;
+                overflow: auto;
+                gap: 3rem;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
             &-item{
                 position: relative;
+                flex: 0 0 30.5rem;
+
+                &:last-child {
+                    @include respond(sm) {
+                        margin-right: 5rem;
+                    }
+                }
+
 
                 p {
-                    padding: 0 2.6rem;
                     font-size: 2.4rem;
+                    @include respond(sm) {
+                        font-size: 1.6rem;
+                        line-height: normal;
+                        margin-bottom: 0.5rem;
+                    }
+
 
                     &:last-child {
                         font-size: 2rem;
+                        @include respond(sm) {
+                            width: 50%;
+                            font-size: 1.4rem;
+                            line-height: normal;
+                        }
                     }
                 }
 
                 .mr-t {
                     margin-top: 4rem;
+
+                    @include respond(sm) {
+                        margin-top: 2rem;
+                    }
                 }
 
                 img {
                     margin-bottom: 5.3rem;
-                    padding: 1rem 2.84rem 0.97rem 2.8rem;
-                    height: 10rem;
+                    height: 6rem;
+                    width: 14rem;
+                    @include respond(sm) {
+                        height: 4.8rem;
+                        width: 11.4rem;
+                    }
                 }
 
                 .fs-20 {
@@ -436,9 +592,6 @@
                 right: 0;
                 cursor: pointer;
 
-                @include respond(sm) {
-                    margin-right: 1rem;
-                }
 
                 color: #121212;
                 display: inline-flex;
@@ -455,6 +608,7 @@
 
 
                 @include respond(sm) {
+                    padding: 1.5rem ;
                     width: 5.5rem;
                     height: 5.5rem;
                 }
@@ -485,8 +639,12 @@
     }
 
     &-vacancy {
+        position: relative;
         background: rgba(117, 118, 119, 0.05);
         padding: 10rem 0;
+        @include respond(sm) {
+            padding: 4rem 0;
+        }
         &__wrap {
             display: grid;
             grid-template-columns: repeat(2, .5fr);
@@ -494,20 +652,55 @@
 
             @include respond(sm) {
                 grid-template-columns: 100%;
+                grid-gap: 0;
+            }
+
+            .heading-secondary {
+                @include respond(sm) {
+                    margin-bottom: 2rem;
+                }
+            }
+
+            .job {
+                @include respond(sm) {
+                    margin-bottom: inherit !important;
+                }
+            }
+
+            .heading-tertiary {
+                @include respond(sm) {
+                    font-size: 2rem;
+                    line-height: 2.8rem;
+                }
+            }
+
+            .p-style-grey {
+                @include respond(sm) {
+                    font-size: 1.6rem;
+                }
             }
 
             .pt-15 {
                 padding-top: 1.5rem;
+                @include respond(sm) {
+                    padding-top: 1rem;
+                }
             }
 
             .pb-30 {
                 padding-bottom: 3rem;
+                @include respond(sm) {
+                    padding-bottom: 2rem;
+                }
             }
         }
 
         &__table {
             padding: 6rem 0;
             transition: all 0.3s ease-in-out;
+            @include respond(sm) {
+                padding: 3rem 0;
+            }
 
             &-item {
                 display: grid;
@@ -520,18 +713,41 @@
                 cursor: pointer;
                 position: relative;
 
+                @include respond(sm) {
+                    padding-bottom: 1rem;
+                }
+
+                .heading-tertiary {
+                    @include respond(sm) {
+                        font-size: 2rem;
+                        line-height: 2.8rem;
+                    }
+                }
+
                 .icon {
                     width: 3rem;
                     height: 3rem;
+
+                    @include respond(sm) {
+                        width: 2.8rem;
+                        height: 2.8rem;
+                    }
 
                 }
 
                 p {
                     font-size: 2.4rem;
+                    @include respond(sm) {
+                        font-size: 1.6rem;
+                        font-weight: 400;
+                    }
                 }
 
                 &:not(:first-child) {
                     padding: 1.5rem 0;
+                    @include respond(sm) {
+                        padding: 1rem 0;
+                    }
                 }
 
                 .hover-flip-arrow {
@@ -561,6 +777,7 @@
     }
 
     &-benefits {
+        position: relative;
         padding: 5rem 0 0;
         overflow: hidden;
 
@@ -737,6 +954,7 @@
     }
 
     &-clients {
+        position: relative;
         padding: 10rem 0;
         background: #191B1D;
         color: #fff;
@@ -819,6 +1037,7 @@
     }
 
     &-team {
+        position: relative;
         padding: 10rem 0;
 
         @include respond(sm) {

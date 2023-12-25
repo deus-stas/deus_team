@@ -107,14 +107,11 @@ const AppFooter = (props) => {
         footerRenderArr.push(contactNode)
     }
 
-    console.log('render',footerRenderArr,isMobile)
+
 
     return (
         <>
-            <footer className="footer"
-                    data-wow-offset="2"
-                    data-wow-duration="3s"
-                    data-wow-delay="1s">
+            <footer className="footer whiteHeader">
                 <div className="container">
                     <p className="footer-header heading-footer">
                         <span> Расскажите нам

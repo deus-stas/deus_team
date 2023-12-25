@@ -67,6 +67,7 @@ const dataProvider = {
     const formData = new FormData();
     const images = [
       "image",
+      "descrImg",
       "mainImg",
       "bannerFirst",
       "bannerSecond",
@@ -87,6 +88,7 @@ const dataProvider = {
     ];
     const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths' ]
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
+    const jsonKeys = ['tasksList', 'textList', 'workSteps','tariffs','work','benefits']
     let hasImage = false;
 
     for (const [key, value] of Object.entries(params.data)) {
@@ -102,11 +104,7 @@ const dataProvider = {
           formData.append(key, image);
         });
         //свойства в которых объект нужно отдельно переводить в JSON
-      } else if (key === "tasksList") {
-        formData.append(key, JSON.stringify(value));
-      } else if (key === "textList") {
-        formData.append(key, JSON.stringify(value));
-      } else if (key === "workSteps") {
+      } else if (jsonKeys.includes(key) && !!value){
         formData.append(key, JSON.stringify(value));
       } else if (arrayApproachKeys.includes(key) && value) {
         const imagesFile = !!value
@@ -131,9 +129,10 @@ const dataProvider = {
 
   update: (resource, params) => {
     const formData = new FormData();
-    const images = ['image', 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
+    const images = ['image',"descrImg", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
     const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths']
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
+    const jsonKeys = ['tasksList', 'textList', 'workSteps','tariffs','work','benefits']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
 
@@ -178,13 +177,9 @@ const dataProvider = {
             }
           });
           //свойства в которых объект нужно отдельно переводить в JSON
-        } else if (key === "tasksList") {
+        } else if (jsonKeys.includes(key) && !!value){
           formData.append(key, JSON.stringify(value));
-        }else if (key === "textList") {
-          formData.append(key, JSON.stringify(value));
-        }  else if (key === "workSteps") {
-          formData.append(key, JSON.stringify(value));
-        }  else if (arrayApproachKeys.includes(key) && value) {
+        } else if (arrayApproachKeys.includes(key) && value) {
             const imagesFile = !!value
                 ? value.map((image) => !!image.imageI ? image.imageI.rawFile : null)
                 : [];
