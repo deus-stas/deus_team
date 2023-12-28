@@ -349,13 +349,13 @@ const Projects = () => {
                                                         <div className="descr">{project.descrProject}</div>
                                                         <div className="projects__item-arrow">
                                                             <div className="hover-flip-circle">
-                                                             <span>
-                                                                 <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                                                    <div className="hover-circle__news">
-                                                                       {double}
-                                                                    </div>
-                                                             </span>
-                                                         </div>
+                                                                  <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-circle">
+                                                                      {double}
+                                                                     </div>
+                                                                  </span>
+                                                             </div>
                                                         </div>
 
                                                     </span>

@@ -7,6 +7,7 @@ import RetryImage from "../../helpers/RetryImage";
 import {Icon} from "../icon/Icon";
 import DelayedLink, {DelayedNavLink} from "./DelayedLink";
 import {setIsLoadingMainPageEvent} from "../../axios";
+import {gotoAnchor} from "../anchors";
 
 
 const apiUrl = process.env.NODE_ENV === 'production'
@@ -23,7 +24,7 @@ const AppHeader = (props) => {
     useEffect(()=>{
         const defaultColor = ['/', '/contacts', '/login', '/services/']
         let header = document.querySelector('.header')
-        let main = document.querySelector('main')
+
         if (!!header) {
             if (defaultColor.includes(location.pathname)) {
                 header.classList.remove('white');
@@ -106,12 +107,6 @@ const AppHeader = (props) => {
         navigate('/contacts#contactUs');
     };
 
-    const gotoAnchor = (e) => {
-        setTimeout(() => {
-            let element = document.getElementById(e.target.getAttribute('datahash'));
-            element.scrollIntoView({behavior: "smooth", block: "start"});
-        }, 750)
-    }
 
 
     const [menu, setMenu] = useState(false);

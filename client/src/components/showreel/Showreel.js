@@ -86,7 +86,7 @@ const Showreel = (props) => {
 
     return (
         <div className="showreel">
-
+            {console.log('rend')}
             {
                 isMain ? (
                     <div ref={showReelRef} className="showreel__s ${!isPlaying ? 'playIcon' : ''} wow fadeIn"
@@ -96,13 +96,13 @@ const Showreel = (props) => {
                     >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' ?
-                                <video ref={videoRef} muted loop playsInline>
+                                <video ref={videoRef} muted loop playsInline preload={'auto'}>
                                     <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                             type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                                 </video> :
                                 data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
                                     <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
-                                    <video muted loop playsInline>
+                                    <video muted loop playsInline  preload={'auto'}>
                                         <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                                 type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                                     </video>
