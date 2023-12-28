@@ -410,14 +410,13 @@
             &-arrow {
                 color: white;
                 display: inline-flex;
-                padding: 15px;
+                padding: 2rem;
                 justify-content: center;
                 align-items: center;
                 overflow: hidden;
                 border-radius: 43px;
                 border: 1px solid white;
                 background: rgba(255, 255, 255, 0.03);
-
                 backdrop-filter: blur(12px);
 
                 position: absolute;
@@ -427,23 +426,13 @@
 
 
                 @include respond(sm) {
-                    width: 5.5rem;
-                    height: 5.5rem;
+                    padding: 1.5rem;
                 }
 
-                @include respond(xs) {
-                    width: 5rem;
-                    height: 5rem;
-                }
 
                 .icon {
                     width: 3rem;
                     height: 3rem;
-
-                    @include respond(sm) {
-                        width: 1.15em;
-                        height: 3.2rem;
-                    }
                 }
             }
 
@@ -1129,9 +1118,7 @@
             grid-template-columns: repeat(4, 0.25fr);
             grid-gap: 4rem;
             justify-content: space-between;
-            font-weight: 500;
-            font-size: 2.8rem;
-            line-height: 3.4rem;
+
 
             .main-news__content {
                 grid-column: span 3;

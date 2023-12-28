@@ -15,6 +15,7 @@ import elipse from "../../../img/elipse.png"
 import spiral from "../../../img/spiral.png"
 import includes from "validator/es/lib/util/includes";
 import Marquee from "react-fast-marquee";
+import {gotoAnchor} from "../../anchors";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? ''
@@ -27,12 +28,6 @@ const Services = (props) => {
     const [openImage, setOpenImage] = useState(null);
     const [openList, setOpenList]= useState([])
 
-    const gotoAnchor = (e) => {
-        setTimeout(() => {
-            let element = document.getElementById(e.target.getAttribute('datahash'));
-            element.scrollIntoView({behavior: "smooth", block: "start"});
-        }, 750)
-    }
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/reviews/`)
@@ -107,7 +102,7 @@ const Services = (props) => {
 
                     <section className="services-s whiteHeader">
                         <div className="services-s__video">
-                            <video autoPlay muted loop>
+                            <video autoPlay playsInline muted loop>
                                 <source src={agencyBanner} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                             </video>
                         </div>

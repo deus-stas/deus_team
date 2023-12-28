@@ -27,6 +27,7 @@ import "swiper/css/grid";
 import './agency.scss';
 import {connect} from "react-redux";
 import RoundButton from "../../animation/roundButton";
+import includes from "validator/es/lib/util/includes";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -45,6 +46,7 @@ const Agency = (props) => {
     const [current, setCurrent] = useState(4);
     const [total, setTotal] = useState(0);
     const [endSlider, setEndSlider] = useState(false);
+    const [currentPerson, setCurrentPerson] = useState(0);
 
 
     useEffect(() => {
@@ -152,6 +154,10 @@ const Agency = (props) => {
 
     const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
+    const changePerson = (index) => {
+        setCurrentPerson(index);
+    };
+
     const sendEmail = async (values) => {
         try {
             const response = await axios.post(`${apiUrl}/api/mail`, values);
@@ -161,6 +167,7 @@ const Agency = (props) => {
         }
     };
     const {headerData, team } = props;
+    const agencyControlTeam = team.filter((item) => !!item.agencyControl)
     return (
         <>
             {!isLoading &&
@@ -168,7 +175,7 @@ const Agency = (props) => {
 
             <section className="agency-start whiteHeader">
                 <div className="agency-start__video">
-                    <video autoPlay muted loop>
+                    <video autoPlay playsInline muted loop>
                         <source src={agencyBanner} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                     </video>
                 </div>
@@ -235,10 +242,8 @@ const Agency = (props) => {
                                                 awards.map(award => {
                                                     return (
                                                         <div className="agency-about__wrapp-btn" key={award.id}>
-                                                            <img
-                                                                src={award.image ? `${apiUrl}/uploads/${award.image.filename}` : null}
-                                                                alt={award.name}/>
-                                                            {award.name}
+                                                            <img src={award.image ? `${apiUrl}/uploads/${award.image.filename}` : null} alt={award.name}/>
+                                                            <p>{award.name}</p>
                                                             <div className="hover-flip-arrow">
                                                                 <span>
                                                                     <Icon icon="arrowGo" viewBox="0 0 30 31"/>
@@ -291,34 +296,46 @@ const Agency = (props) => {
                 <img src={chiefTeam} alt="" className="chief-team hidden-mobile"/>
                 <img src={chiefMob} alt="" className="chief-team hidden-desktop"/>
 
+
                     <div className="agency-workers__wrap container">
                         <span className="agency-workers__wrap-item">
                            <h2 className="heading-secondary">Объединяем аналитику, маркетинг,<br/> дизайн, разработку и интеграции в<br/> единую
                             систему для получения<br/> максимальной эффективности для<br/> вашего бизнеса
                            </h2>
-                            <span>
-                                <p className="p-style-white">Брижань Вячеслав</p>
-                                <p className="descr-name">Генеральный директор</p>
+                            {agencyControlTeam.filter((item,index) => index === currentPerson)
+                                .map((item, index) => (
+                            <span className= {index === currentPerson ? 'activeInfo' : ''}>
+                                <p className="p-style-white">{item.name}</p>
+                                <p className="descr-name">{item.post}</p>
                             </span>
+                            ))}
                         </span>
                         <div className="agency-workers__wrap-person">
-                            {team.filter(item=>item.agencyControl).map((item) => {
-                                    return (
-                                        <img src={`${apiUrl}/uploads/${item.mainImg.filename}`}
-                                             alt=''
-                                             className="person-img"
-                                        />
-                                    )
-                                }
+                            {agencyControlTeam.map((item, index) => (
+                                <>
+                                    <img
+                                        src={`${apiUrl}/uploads/${item.mainImg.filename}`}
+                                        alt=""
+                                        className={`person-img ${index === currentPerson ? 'active' : ''}`}
+                                        onClick={() => {
+                                            changePerson(index)
+                                        }}
+                                    />
+                                </>
 
-                            )}
+                            ))}
                         </div>
                     </div>
+
             </section>
             <section id='principle' className="agency-principle">
                 <div className="container">
                     <div className="agency-principle__wrap">
-                        <h2 className="heading-secondary">Принципы, которых мы<br/> придерживаемся в работе</h2>
+                        <h2 className="heading-secondary">
+                           <p className="sticky-h2">
+                               Принципы, которых мы<br/> придерживаемся в работе
+                           </p>
+                        </h2>
                         <div>
                             <div className="agency-principle__wrap-item" >
                                 <span className="flex-wrap" >
@@ -530,7 +547,7 @@ const Agency = (props) => {
                                 <div className="hover-flip-arrow">
                                    <span>
                                        <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                       <div className="hover-circle">
+                                       <div className="hover-double">
                                            {double}
                                        </div>
                                    </span>
@@ -548,7 +565,7 @@ const Agency = (props) => {
                                 <div className="hover-flip-arrow">
                                    <span>
                                        <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                       <div className="hover-circle">
+                                       <div className="hover-double">
                                            {double}
                                        </div>
                                    </span>
@@ -565,7 +582,7 @@ const Agency = (props) => {
                                 <div className="hover-flip-arrow">
                                    <span>
                                        <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                       <div className="hover-circle">
+                                       <div className="hover-double">
                                            {double}
                                        </div>
                                    </span>
@@ -582,7 +599,7 @@ const Agency = (props) => {
                                 <div className="hover-flip-arrow">
                                    <span>
                                        <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                       <div className="hover-circle">
+                                        <div className="hover-double">
                                            {double}
                                        </div>
                                    </span>

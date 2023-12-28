@@ -299,8 +299,8 @@ const MainPage = (props) => {
                     </ScrollUp>
 
                     <section className="main-showreel whiteHeader">
-                        {
-                            mainShowreel ? <Showreel data={mainShowreel}  isMain={true} /> : null
+                        {mainShowreel &&
+                            <Showreel data={mainShowreel}  isMain={true} key={mainShowreel.videoUrl}/>
                         }
                     </section>
 
@@ -764,7 +764,7 @@ const MainPage = (props) => {
                                                       key={i}><p className="p-style-black">#{tag}</p>
                                                     <div className="hover-flip-arrow">
                                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                                       <div className="hover-double_news">
+                                                       <div className="hover-double">
                                                             {double}
                                                         </div>
                                                       </span>
@@ -787,16 +787,16 @@ const MainPage = (props) => {
                                                     <div className="main-news__descr">
                                                         <div className="main-news__name">{item.name}</div>
                                                     </div>
-                                                    <span className="main-agency__item-arrow">
-                                                         <div className="hover-flip-circle">
-                                                             <span>
-                                                                 <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                                                    <div className="hover-circle__news">
+                                                    <div className="main-agency__item-arrow">
+                                                        <div className="hover-flip-circle">
+                                                                  <span>
+                                                                    <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                                    <div className="hover-circle">
                                                                       {double}
                                                                      </div>
-                                                             </span>
-                                                         </div>
-                                                    </span>
+                                                                  </span>
+                                                        </div>
+                                                    </div>
                                                 </Link>
                                             )
                                         }).slice(0, 2)}

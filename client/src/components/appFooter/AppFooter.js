@@ -7,6 +7,7 @@ import {Icon} from '../icon/Icon';
 import {connect, useSelector} from "react-redux";
 import arrorLink from "../../img/icon/arrow-link.svg";
 import {debounce} from "@material-ui/core";
+import {gotoAnchor} from "../anchors";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -39,12 +40,7 @@ const AppFooter = (props) => {
             behavior: "smooth"
         });
     };
-    const gotoAnchor = (e) => {
-        setTimeout(() => {
-            let element = document.getElementById(e.target.getAttribute('datahash'));
-            element.scrollIntoView({behavior: "smooth", block: "start"});
-        }, 750)
-    }
+
     const {headerData, services} = props;
 
     const addressNode = <div className="footer__item">
@@ -119,9 +115,13 @@ const AppFooter = (props) => {
                                  alt={'go'}/>
                         </span>
                         <span>о своем проекте, подумаем </span>
-                        <span className="last-grid">над ним вместе  <btn className="btn --footer  hidden-mobile">Обсудить проект</btn></span>
-                        <Link to={`/contacts`} className="hidden-desktop">
-                            <btn className="btn --footer">Обсудить проект</btn>
+                        <span className="last-grid">над ним вместе
+                            <Link datahash="contactUs" className="btn --footer  hidden-mobile" onClick={(e) => gotoAnchor(e)} to={`/contacts`}>
+                                Обсудить проект
+                            </Link>
+                        </span>
+                        <Link to={`/contacts`} datahash="contactUs" className="btn --footer" onClick={(e) => gotoAnchor(e)}  className="hidden-desktop">
+                            Обсудить проект
                         </Link>
 
                     </p>
