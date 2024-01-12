@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 
 import './projectNext.scss'
 import RetryImage from "../../../../helpers/RetryImage";
+import {gotoAnchor} from "../../../anchors";
+import DelayedLink from "../../../appHeader/DelayedLink";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -52,7 +54,7 @@ const ProjectNext = (props) => {
                             {props.last ? 'Последний созданный проект' : 'Следующий проект'}
                         </div>
                         <div className="project-next__name" dangerouslySetInnerHTML={{ __html: project.name }}></div>
-                        <Link to={`/projects/${project.nameInEng}`} className="btn --white">Перейти к проекту</Link>
+                        <DelayedLink to={`/projects/${project.nameInEng}`} datahash="toUp" onClick={(e) => gotoAnchor(e)} className="btn --white">Перейти к проекту</DelayedLink>
                     </div>
                     <RetryImage src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt="Academy профессионального образовательного ресурса" className="project-next__img" />
 

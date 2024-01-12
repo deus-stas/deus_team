@@ -81,13 +81,28 @@
     &__error {
         color: red;
         position: absolute;
-        bottom: -3rem;
-        left: 0;
+        top: -1rem;
+        right: 0;
+        font-size: 1.5rem;
 
         @include respond(sm) {
             bottom: -2.5rem;
         }
+
     }
+
+    &__label {
+        font-size: 1.5rem;
+        color: #757677;
+        position: absolute;
+        top: -1rem;
+        left: 0;
+        padding-left: 2rem;
+        @include respond(sm) {
+            bottom: -2.5rem;
+        }
+    }
+
 
     &__file {
         display: grid;
@@ -350,4 +365,16 @@
     @include respond(sm) {
         width: 100%;
     }
+}
+
+.error {
+    border-bottom: 1px solid #fa0202 !important;
+    border-left: 1px solid #fa0202 !important;
+}
+
+.check-error {
+    .form__checks-c {
+        border-color: #fa0202 !important;
+    }
+
 }

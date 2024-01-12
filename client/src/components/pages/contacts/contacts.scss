@@ -35,9 +35,26 @@
             }
 
             .mail {
+                transition: all 0.3s ease;
                 @include respond(sm) {
                     padding-top: 3rem;
                 }
+
+
+                h2 {
+                    .hoverMail {
+                        transition: all 0.3s ease;
+                        opacity: 1;
+                    }
+                    &:hover {
+                        //transition: all 0.3s ease;
+                        .hoverMail {
+                            transition: all 0.3s ease;
+                            opacity: .5;
+                        }
+                    }
+                }
+
 
                 .pb-32 {
                     padding-bottom: 3.2rem;
@@ -216,4 +233,21 @@
         }
     }
 
+}
+
+.popup-content {
+    margin: auto;
+    padding: 10px;
+    border-radius: 8px;
+
+    button {
+        margin: auto;
+
+    }
+
+}
+
+.popup-overlay {
+    background: rgb(0 0 0 / 79%);
+    z-index: 9999 !important;
 }

@@ -28,6 +28,8 @@ import {isVisible} from "@testing-library/user-event/dist/utils";
 import RetryImage from "../../../helpers/RetryImage";
 import manager from "../../../img/manager.png";
 import * as ReactDom from "react-dom/server";
+import {goProjects, gotoAnchor} from "../../anchors";
+import DelayedLink from "../../appHeader/DelayedLink";
 
 
 SwiperCore.use([Autoplay]);
@@ -280,17 +282,17 @@ const MainPage = (props) => {
                                             <span>Создаем продукты и</span>
                                             <span> услуги, которые помогают </span>
                                             <span className="last-grid">нашим клиентам
-                                                    <Link to={`/contacts`}>
-                                                     <btn  className="btn --black hidden-mobile">Стать клиентом</btn>
-                                                    </Link>
+                                                    <DelayedLink to={`/contacts`} className="btn --black hidden-mobile"  datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
+                                                     Стать клиентом
+                                                    </DelayedLink>
                                                         <p className="p-style wh-30">
                                                             быть <span className="p-style-black">заметнее</span> в цифровом пространстве
                                                         </p>
 
                                             </span>
                                         </h1>
-                                        <Link to={`/contacts`} className="hidden-desktop">
-                                            <btn  className="btn --black">Стать клиентом</btn>
+                                        <Link to={`/contacts`} className="btn --black hidden-desktop" datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
+                                            Стать клиентом
                                         </Link>
                                     </div>
                                 </div>
@@ -346,7 +348,7 @@ const MainPage = (props) => {
 
                                         const allServices = index == 1 && props.services.filter((service, index) =>
                                             service.isInvisible).map((service, index) =>
-                                            <Link
+                                            <DelayedLink
                                                 to={`/services/${service.path}`}>
                                                 <div className="main-agency__item-link p-style"><p>{service.name}</p>
                                                     <div className="hover-flip-arrow">
@@ -357,7 +359,7 @@ const MainPage = (props) => {
                                                       </span>
                                                     </div>
                                                 </div>
-                                            </Link>);
+                                            </DelayedLink>);
                                         const num = index < 9 ? '0' + (index + 1) : index + 1;
                                         const name = item.name
                                         const descr = index == 1 ?
@@ -424,15 +426,15 @@ const MainPage = (props) => {
                                                 const filterProjects = allProjects.filter(item => item.projectTheme === project.value && item.visibility);
                                                 const totalSum = filterProjects.length < 10? "0" + filterProjects.length : filterProjects.length ;
                                                 return (
-                                                    <Link to={`/projects?theme=${project.value}`}>
+                                                    <DelayedLink to={`/projects?theme=${project.value}`} onClick={(e) => gotoAnchor(e)}>
                                                         <div className="main-projects__item-flex__inner">
                                                             <div className="type-name">
-                                                                <p className='hover'>{project.label}</p>
+                                                                <p className='hover' datahash="projectNav">{project.label}</p>
                                                             </div>
                                                             <div className="main-projects__num"><span>{totalSum}</span>
                                                             </div>
                                                         </div>
-                                                    </Link>
+                                                    </DelayedLink>
                                                 );
                                             }) : null}
                                         </div>
@@ -760,7 +762,7 @@ const MainPage = (props) => {
                                         </span>
                                         <div className="main-news__info-wrap">
                                             {[...allTags].map((tag, i) => (
-                                                <Link to={`/news?tag=${tag}`} className="main-news__info-item "
+                                                <DelayedLink to={`/news?tag=${tag}`} className="main-news__info-item "
                                                       key={i}><p className="p-style-black">#{tag}</p>
                                                     <div className="hover-flip-arrow">
                                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
@@ -769,14 +771,14 @@ const MainPage = (props) => {
                                                         </div>
                                                       </span>
                                                     </div>
-                                                </Link>
+                                                </DelayedLink>
                                             ))}
                                         </div>
                                     </div>
                                     <div className="main-news__content">
                                         {news.map((item) => {
                                             return (
-                                                <Link to={`/news/${item.id}`} className="main-news__item" key={item.id}>
+                                                <DelayedLink to={`/news/${item.id}`} className="main-news__item" key={item.id}>
                                                     <div className="main-news__img-wrap">
                                                         <img src={`${apiUrl}/uploads/${item.image.filename}`}
                                                              alt="Дизайн" className="main-news__img"/>
@@ -797,7 +799,7 @@ const MainPage = (props) => {
                                                                   </span>
                                                         </div>
                                                     </div>
-                                                </Link>
+                                                </DelayedLink>
                                             )
                                         }).slice(0, 2)}
                                     </div>

@@ -6,6 +6,11 @@ import SectionSocial from '../../sectionSocial/SectionSocial';
 
 import './contacts.scss';
 import {connect} from "react-redux";
+import axios from "../../../axios";
+import InputMask from "react-input-mask";
+import RoundButton from "../../animation/roundButton";
+import Popup from "reactjs-popup";
+import {Formik} from "formik";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? ''
@@ -13,6 +18,7 @@ const apiUrl = process.env.NODE_ENV === 'production'
 const Contacts = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         const event = new CustomEvent("isLoadingMainPage", {detail: {isLoading: true}});
@@ -27,6 +33,14 @@ const Contacts = (props) => {
         }
     }, [isLoading])
 
+    const sendEmail = async (values) => {
+        try {
+            const response = await axios.post(`/api/mail`, values);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const { team } = props;
 
@@ -48,9 +62,9 @@ const Contacts = (props) => {
                                           className="btn --white" target="_blank">Как проехать</Link>
                                 </div>
                                 <span className="mail">
-                                    <h2 className="heading-secondary">hello@de-us.ru</h2>
+                                    <h2 className="heading-secondary"><Link className="hoverMail" to="mailto:hello@de-us.ru">hello@de-us.ru</Link></h2>
                                     <p className="p-style-grey pb-32">Стать клиентом или партнером</p>
-                                    <h2 className="heading-secondary">job@de-us.ru</h2>
+                                    <h2 className="heading-secondary"><Link className="hoverMail" to="mailto:job@de-us.ru">job@de-us.ru</Link></h2>
                                     <p className="p-style-grey">Присоединиться к команде</p>
                                  </span>
                                 {/*<div className="contacts-main__map wow fadeIn"*/}
@@ -80,7 +94,132 @@ const Contacts = (props) => {
                             <div className="contacts-general__wrap">
                                 <div className="chat">
                                     <h2 className="heading-secondary">Напишите лично генеральному директору</h2>
-                                    <div className="btn --white hidden-mobile"><p>Написать сообщение</p></div>
+                                    <div className="btn --white hidden-mobile">
+                                        <Popup
+                                            trigger={<p>Написать сообщение</p>}
+                                        modal
+                                        nested
+                                    >
+                                        {close => (
+                                                <Formik
+                                                    initialValues={{
+                                                        name: '',
+                                                        email: '',
+                                                        about: '',
+                                                        formName: 'Ищем таланты'
+                                                    }}
+                                                    validate={values => {
+                                                        const errors = {};
+                                                        if (!values.name || values.name.length < 1) {
+                                                            errors.name = 'Обязательное поле';
+                                                        }
+                                                        if (!values.email || values.email.length < 1) {
+                                                            errors.email = 'Обязательное поле';
+                                                        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+                                                            errors.email = 'Некорректный email адрес';
+                                                        }
+                                                        if (!values.about || values.about.length < 1) {
+                                                            errors.about = 'Обязательное поле';
+                                                        }
+                                                        return errors;
+                                                    }}
+                                                    onSubmit={(values, {setSubmitting, resetForm}) => {
+                                                        setTimeout(() => {
+                                                            sendEmail(values);
+                                                            setSuccess(true);
+                                                            const formData = new FormData();
+                                                            for (const [key, value] of Object.entries(values)) {
+                                                                formData.append(key, value);
+                                                            }
+
+                                                            axios.post(`${apiUrl}/api/form/`, formData)
+                                                                .then((response) => {
+                                                                    console.log(response.data);
+                                                                })
+                                                                .catch((error) => {
+                                                                    console.log(error);
+                                                                });
+                                                            setSubmitting(false);
+                                                            resetForm();
+                                                        }, 400);
+                                                        setTimeout(() => {
+                                                            setSuccess(false);
+                                                            close()
+                                                        }, 4554);
+                                                    }}
+                                                >
+                                                    {({
+                                                          values,
+                                                          errors,
+                                                          touched,
+                                                          handleChange,
+                                                          handleBlur,
+                                                          handleSubmit,
+                                                          isSubmitting,
+                                                          setFieldValue,
+                                                      }) => (
+
+                                                        <form className="form" onSubmit={handleSubmit}>
+                                                            <div className="form__inner"
+                                                                 style={{display: success ? 'none' : 'block'}}>
+                                                                <div className="form__title">Заполните форму</div>
+                                                                <input type="hidden" name="formName" value="Ищем таланты"/>
+                                                                <div className="form__wrap">
+                                                                    <div className="form__group">
+                                                                        <div className={`form__group ${errors.name && touched.name ? 'error' : ''}`}>
+                                                                            {values.name && <label htmlFor="name" className="form__label">Ваше имя</label>}
+                                                                        <input type="text" name="name" className="form__input"
+                                                                               onChange={handleChange} value={values.name}
+                                                                               placeholder="Ваше имя"/>
+                                                                        <div
+                                                                            className="form__error">{errors.name && touched.name && errors.name}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="form__group">
+                                                                        <div className={`form__group ${errors.email && touched.email ? 'error' : ''}`}>
+                                                                            {values.email && <label htmlFor="email" className="form__label">E-mail</label>}
+                                                                            <input type="text" name="email" className="form__input"
+                                                                                   onChange={handleChange} value={values.email}
+                                                                                   placeholder="E-mail"/>
+                                                                            <div
+                                                                                className="form__error">{errors.email && touched.email && errors.email}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="form__wrap">
+                                                                    <div className="form__group">
+                                                                        <div className={`form__group ${errors.about && touched.about ? 'error' : ''}`}>
+                                                                            {values.about && <label htmlFor="about" className="form__label">О себе</label>}
+                                                                          <textarea type="text" name="about"
+                                                                          className="form__textarea"
+                                                                          onChange={handleChange} value={values.about}
+                                                                          placeholder="Расскажите кратко о себе"/>
+                                                                        <div
+                                                                            className="form__error">{errors.about && touched.about && errors.about}</div>
+                                                                        </div>
+                                                                        </div>
+                                                                </div>
+                                                                <button type="submit"
+                                                                        className='btn --dark --circle'>
+                                                                    Отправить
+                                                                </button>
+
+                                                            </div>
+                                                            <div className="form__success"
+                                                                 style={{display: success ? 'block' : 'none'}}>
+                                                                <div className="form__success-title">Заявка отправлена!</div>
+                                                                <div className="form__success-descr">Ожидайте, скоро мы с вами
+                                                                    свяжемся
+                                                                </div>
+                                                            </div>
+                                                        </form>
+
+                                                    )}
+                                                </Formik>
+                                        )}
+                                    </Popup>
+
+                                    </div>
                                 </div>
                                 <div></div>
                                 <div className="info">

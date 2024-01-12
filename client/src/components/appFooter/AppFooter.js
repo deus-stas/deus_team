@@ -78,8 +78,15 @@ const AppFooter = (props) => {
         {/*        <li className="footer__list-item"><Link to="/contacts">Контакты </Link></li>*/}
         {/*    </ul>*/}
         {/*</nav>*/}
-        <p className="p-style hover-flip"><span data-hover="+7 (495) 103—4351">+7 (495) 103—4351</span></p>
-        <p className="p-style hover-flip"><span data-hover="hello@de-us.ru">hello@de-us.ru</span></p>
+        <Link to="tel:+74951034351">
+            <p className="p-style hover-flip"><span data-hover="+7 (495) 103—4351">+7 (495) 103—4351</span></p>
+        </Link>
+
+        <Link to="mailto:hello@de-us.ru">
+            <p className="p-style hover-flip"><span data-hover="hello@de-us.ru">hello@de-us.ru</span></p>
+        </Link>
+
+
     </div>
 
     useEffect(() => {

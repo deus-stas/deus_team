@@ -421,6 +421,10 @@
                         }
                     }
 
+                    .rfm-marquee {
+                        --duration: 76.39625244140625s;
+                    }
+
                     &-services {
                         position: relative;
                         display: flex;

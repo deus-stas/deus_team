@@ -15,6 +15,7 @@ import {connect, useSelector} from "react-redux";
 import RoundButton from "../animation/roundButton";
 import {Icon} from "../icon/Icon";
 import arrorGo from '../../img/icon/arrow-go.svg'
+import DelayedLink from "../appHeader/DelayedLink";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -103,7 +104,7 @@ const Cta = (props) => {
                         <span className="sticky-h2">
                         <h2 className="heading-secondary">Брифы для заполнения</h2>
                         <div className="cta__wrap-wrapper">
-                            <a href="/services/firmennii-stil">
+                            <DelayedLink to="/services/firmennii-stil">
                                 <div className="item p-style">
                                     <p>Фирменный стиль</p>
                                     <div className="hover-flip-arrow">
@@ -114,8 +115,8 @@ const Cta = (props) => {
                                        </span>
                                     </div>
                                 </div>
-                            </a>
-                            <a href="/services/saiti-i-servisi">
+                            </DelayedLink>
+                            <DelayedLink to="/services/saiti-i-servisi">
                                 <div className="item p-style">
                                     <p>Сайты и сервисы</p>
                                     <div className="hover-flip-arrow">
@@ -126,8 +127,8 @@ const Cta = (props) => {
                                        </span>
                                     </div>
                                 </div>
-                            </a>
-                            <a href="/services/podderzhka-i-razvitie">
+                            </DelayedLink>
+                            <DelayedLink to="/services/podderzhka-i-razvitie">
                                 <div className="item p-style">
                                     <p>Поддержка и развитие</p>
                                     <div className="hover-flip-arrow">
@@ -138,8 +139,8 @@ const Cta = (props) => {
                                        </span>
                                     </div>
                                 </div>
-                            </a>
-                            <a href="/services/seo-prodvizhenie">
+                            </DelayedLink>
+                            <DelayedLink to="/services/seo-prodvizhenie">
                                 <div className="item p-style">
                                     <p>SEO продвижение</p>
                                      <div className="hover-flip-arrow">
@@ -150,10 +151,10 @@ const Cta = (props) => {
                                        </span>
                                     </div>
                                 </div>
-                            </a>
+                            </DelayedLink>
                         </div>
                         <p className="p-style-grey pb-20">После заполнения брифа<br/> пришлите его нам на почту</p>
-                        <p className="heading-tertiary">hello@de-us.ru</p>
+                        <p className="heading-tertiary"><Link className="hoverMail" to="mailto:hello@de-us.ru">hello@de-us.ru</Link></p>
                         </span>
                     </div>
 
@@ -257,30 +258,35 @@ const Cta = (props) => {
                                                 <Checkbox name="ctaServices" value="Лидогенерация" text="Лидогенерация" />
                                                 <Checkbox name="ctaServices" value="Поддержка и развитие" text="Поддержка и развитие" />
                                             </div>
-                                            <div className="form__error">{errors.ctaServices && touched.ctaServices && errors.ctaServices}</div>
+                                            <div className="form__error check-error ">{errors.ctaServices && touched.ctaServices && errors.ctaServices}</div>
                                         </div>
                                         <div className="form__wrap">
-                                            <div className="form__group">
+                                            <div className={`form__group ${errors.name && touched.name ? 'error' : ''}`}>
+                                                {values.name && <label htmlFor="name" className="form__label">Ваше имя</label>}
                                                 <input type="text" name="name" className="form__input" onChange={handleChange} value={values.name} placeholder="Ваше имя" />
                                                 <div className="form__error">{errors.name && touched.name && errors.name}</div>
                                             </div>
-                                            <div className="form__group">
+                                            <div className={`form__group ${errors.company && touched.company ? 'error' : ''}`}>
+                                                {values.company && <label htmlFor="company" className="form__label">Компания</label>}
                                                 <input type="text" name="company" className="form__input" onChange={handleChange} value={values.company} placeholder="Компания" />
                                                 <div className="form__error">{errors.company && touched.company && errors.company}</div>
                                             </div>
                                         </div>
                                         <div className="form__wrap">
-                                            <div className="form__group">
+                                            <div className={`form__group ${errors.phone && touched.phone ? 'error' : ''}`}>
+                                                {values.phone && <label htmlFor="phone" className="form__label">Номер телефона</label>}
                                                 <InputMask type="text" name="phone" className="form__input" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
                                                 <div className="form__error">{errors.phone && touched.phone && errors.phone}</div>
                                             </div>
-                                            <div className="form__group">
+                                            <div className={`form__group ${errors.email && touched.email ? 'error' : ''}`}>
+                                                {values.email && <label htmlFor="email" className="form__label">E-mail</label>}
                                                 <input type="text" name="email" className="form__input" onChange={handleChange} value={values.email} placeholder="E-mail" />
                                                 <div className="form__error">{errors.email && touched.email && errors.email}</div>
                                             </div>
                                         </div>
                                         <div className="form__wrap">
-                                            <div className="form__group">
+                                            <div className={`form__group ${errors.about && touched.about ? 'error' : ''}`}>
+                                                {values.about && <label htmlFor="about" className="form__label">О себе</label>}
                                                 <textarea type="text" name="about" className="form__textarea h-170" onChange={handleChange} value={values.about} placeholder="Расскажите кратко о себе" />
                                                 <div className="form__error">{errors.about && touched.about && errors.about}</div>
                                             </div>

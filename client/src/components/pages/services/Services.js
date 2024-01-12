@@ -16,6 +16,7 @@ import spiral from "../../../img/spiral.png"
 import includes from "validator/es/lib/util/includes";
 import Marquee from "react-fast-marquee";
 import {gotoAnchor} from "../../anchors";
+import DelayedLink from "../../appHeader/DelayedLink";
 
 const apiUrl = process.env.NODE_ENV === 'production'
     ? ''
@@ -23,49 +24,49 @@ const apiUrl = process.env.NODE_ENV === 'production'
 
 const Services = (props) => {
 
-    const [reviews, setReviews] = useState([]);
+    // const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [openImage, setOpenImage] = useState(null);
     const [openList, setOpenList]= useState([])
 
 
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/reviews/`)
-            .then((response) => {
-                const reviews = response.data;
-                const projectIds = reviews.map((review) => review.reviewProject);
-                const serviceIds = reviews.map((review) => review.reviewService);
-
-                Promise.all([
-                    axios.get(`${apiUrl}/api/projects/?ids=${projectIds.join(',')}`),
-                    axios.get(`${apiUrl}/api/services/?ids=${serviceIds.join(',')}`)
-                ])
-                    .then((results) => {
-                        const projects = results[0].data;
-                        const services = results[1].data;
-
-                        const updatedReviews = reviews.map((review) => {
-                            const project = projects.find((p) => p.id === review.reviewProject);
-                            const service = services.find((s) => s.id === review.reviewService);
-
-                            return {
-                                ...review,
-                                reviewProject: project,
-                                reviewService: service
-                            };
-                        });
-
-                        setReviews(updatedReviews);
-                        console.log(updatedReviews);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios.get(`${apiUrl}/api/reviews/`)
+    //         .then((response) => {
+    //             const reviews = response.data;
+    //             const projectIds = reviews.map((review) => review.reviewProject);
+    //             const serviceIds = reviews.map((review) => review.reviewService);
+    //
+    //             Promise.all([
+    //                 axios.get(`${apiUrl}/api/projects/?ids=${projectIds.join(',')}`),
+    //                 axios.get(`${apiUrl}/api/services/?ids=${serviceIds.join(',')}`)
+    //             ])
+    //                 .then((results) => {
+    //                     const projects = results[0].data;
+    //                     const services = results[1].data;
+    //
+    //                     const updatedReviews = reviews.map((review) => {
+    //                         const project = projects.find((p) => p.id === review.reviewProject);
+    //                         const service = services.find((s) => s.id === review.reviewService);
+    //
+    //                         return {
+    //                             ...review,
+    //                             reviewProject: project,
+    //                             reviewService: service
+    //                         };
+    //                     });
+    //
+    //                     setReviews(updatedReviews);
+    //                     console.log(updatedReviews);
+    //                 })
+    //                 .catch((error) => {
+    //                     console.log(error);
+    //                 });
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // }, []);
 
     useEffect(() => {
         setIsLoadingMainPageEvent(true)
@@ -187,8 +188,8 @@ const Services = (props) => {
 
                                                     <div className="describe__wrapp ">
                                                         <div className="describe__wrapp-btn hidden-mobile ">
-                                                            <Link to="/projects" className="btn --b-white ">Посмотреть кейсы</Link>
-                                                            <Link to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</Link>
+                                                            <DelayedLink to="/projects" className="btn --b-white " datahash="projectNav"  onClick={(e) => gotoAnchor(e)}>Посмотреть кейсы</DelayedLink>
+                                                            <DelayedLink to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</DelayedLink>
                                                         </div>
                                                         <div>
                                                             <h3 className="heading-tertiary">
@@ -215,8 +216,8 @@ const Services = (props) => {
 
                                                         </div>
                                                         <div className="describe__wrapp-btn__mob hidden-desktop ">
-                                                            <Link to="/projects" className="btn --b-white ">Посмотреть кейсы</Link>
-                                                            <Link to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</Link>
+                                                            <DelayedLink to="/projects" className="btn --b-white ">Посмотреть кейсы</DelayedLink>
+                                                            <DelayedLink to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</DelayedLink>
                                                         </div>
 
                                                     </div>

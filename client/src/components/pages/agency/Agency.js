@@ -28,9 +28,10 @@ import './agency.scss';
 import {connect} from "react-redux";
 import RoundButton from "../../animation/roundButton";
 import includes from "validator/es/lib/util/includes";
+import TruncatedSentence from "./TruncatedSentence";
 
 const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
+    ? ''
     : process.env.REACT_APP_LOCALHOST_URI;
 
 const Agency = (props) => {
@@ -47,10 +48,10 @@ const Agency = (props) => {
     const [total, setTotal] = useState(0);
     const [endSlider, setEndSlider] = useState(false);
     const [currentPerson, setCurrentPerson] = useState(0);
-
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/awards/`)
+        axios.get(`/api/awards/`)
             .then((response) => {
                 setAwards(response.data);
                 console.log(response.data);
@@ -61,7 +62,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/diplomas/`)
+        axios.get(`/api/diplomas/`)
             .then((response) => {
                 setDiplomas(response.data);
             })
@@ -71,7 +72,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/raitings/`)
+        axios.get(`/api/raitings/`)
             .then((response) => {
                 setRaitings(response.data);
                 console.log(response.data);
@@ -82,7 +83,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/clients/`)
+        axios.get(`/api/clients/`)
             .then((response) => {
                 setClients(response.data);
                 setTotal(response.data.length)
@@ -93,7 +94,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/vacancies/`)
+        axios.get(`/api/vacancies/`)
             .then((response) => {
                 console.log(response.data);
                 setVacancies(response.data);
@@ -104,10 +105,48 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/showreels/`)
+        axios.get(`/api/showreels/`)
             .then((response) => {
                 setShowreels(response.data);
                 console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`/api/reviews/`)
+            .then((response) => {
+                const reviews = response.data;
+                const projectIds = reviews.map((review) => review.reviewProject);
+                const serviceIds = reviews.map((review) => review.reviewService);
+
+                Promise.all([
+                    axios.get(`/api/projects/?ids=${projectIds.join(',')}`),
+                    axios.get(`/api/services/?ids=${serviceIds.join(',')}`)
+                ])
+                    .then((results) => {
+                        const projects = results[0].data;
+                        const services = results[1].data;
+
+                        const updatedReviews = reviews.map((review) => {
+                            const project = projects.find((p) => p.id === review.reviewProject);
+                            const service = services.find((s) => s.id === review.reviewService);
+
+                            return {
+                                ...review,
+                                reviewProject: project,
+                                reviewService: service
+                            };
+                        });
+
+                        setReviews(updatedReviews);
+                        console.log(updatedReviews);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             })
             .catch((error) => {
                 console.log(error);
@@ -160,7 +199,7 @@ const Agency = (props) => {
 
     const sendEmail = async (values) => {
         try {
-            const response = await axios.post(`${apiUrl}/api/mail`, values);
+            const response = await axios.post(`/api/mail`, values);
             console.log(response.data);
         } catch (error) {
             console.error(error);
@@ -215,7 +254,7 @@ const Agency = (props) => {
                                     height: "20rem", marginTop: "auto",
                                     marginLeft: "auto"}}>
                                     <RoundButton fromX={100} rotateZ={-360} delay={500} >
-                                    <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`}
+                                    <a href={`/uploads/${headerData.presentation.filename}`}
                                        target='_blank'
                                        rel="noopener noreferrer"
                                        className="btn --circle --dark hidden-mobile"
@@ -224,7 +263,7 @@ const Agency = (props) => {
                                 </div>
                                 :
                                 <RoundButton fromX={100} rotateZ={-360} delay={500}>
-                                <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
+                                <a href={`/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
                                    className="btn --circle --dark"
                                 >Скачать презентацию</a>
                                 </RoundButton >
@@ -242,7 +281,7 @@ const Agency = (props) => {
                                                 awards.map(award => {
                                                     return (
                                                         <div className="agency-about__wrapp-btn" key={award.id}>
-                                                            <img src={award.image ? `${apiUrl}/uploads/${award.image.filename}` : null} alt={award.name}/>
+                                                            <img src={award.image ? `/uploads/${award.image.filename}` : null} alt={award.name}/>
                                                             <p>{award.name}</p>
                                                             <div className="hover-flip-arrow">
                                                                 <span>
@@ -260,7 +299,7 @@ const Agency = (props) => {
                                                 raitings.map(raiting => (
                                                         <div className="agency-about__wrapp-btn" key={raiting.id}>
                                                             <img
-                                                                src={raiting.image ? `${apiUrl}/uploads/${raiting.image.filename}` : null}
+                                                                src={raiting.image ? `/uploads/${raiting.image.filename}` : null}
                                                                 alt={raiting.name}/>
                                                             {raiting.name}
                                                             <div className="hover-flip-arrow">
@@ -314,7 +353,7 @@ const Agency = (props) => {
                             {agencyControlTeam.map((item, index) => (
                                 <>
                                     <img
-                                        src={`${apiUrl}/uploads/${item.mainImg.filename}`}
+                                        src={`/uploads/${item.mainImg.filename}`}
                                         alt=""
                                         className={`person-img ${index === currentPerson ? 'active' : ''}`}
                                         onClick={() => {
@@ -432,7 +471,7 @@ const Agency = (props) => {
                                 clients.map((client, i) => {
                                     if (i < amountSlides) {
                                         return (
-                                            <img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                            <img className='agency-clients__img' src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
                                         )
                                     } else return null
                                 })
@@ -443,7 +482,7 @@ const Agency = (props) => {
                                 clients.map((client, i) => {
                                     if (i > amountSlides - 1 && i < amountSlides * 2) {
                                         return (
-                                            <img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                            <img className='agency-clients__img' src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
                                         )
                                     } else return null
                                 })
@@ -454,7 +493,7 @@ const Agency = (props) => {
                                 clients.map((client, i) => {
                                     if (i > amountSlides * 2 - 1) {
                                         return (
-                                            <img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
+                                            <img className='agency-clients__img' src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} key={client.id} />
                                         )
                                     } else return null
                                 })
@@ -473,7 +512,7 @@ const Agency = (props) => {
                         {
                             clients.map(client => {
                                 return (
-                                    <SwiperSlide className="agency-clients__item" key={client.id}><img className='agency-clients__img' src={client.image ? `${apiUrl}/uploads/${client.image.filename}` : null} alt={client.name} /></SwiperSlide>
+                                    <SwiperSlide className="agency-clients__item" key={client.id}><img className='agency-clients__img' src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} /></SwiperSlide>
                                 )
                             })
                         }
@@ -481,145 +520,86 @@ const Agency = (props) => {
                 </section> : null
             }
 
+            {reviews && (
             <section id='agency' className="agency-reviews">
                 <div className="container">
                     <h2 className="heading-secondary">Клиенты о нас</h2>
                     <div className="agency-reviews__wrap">
+                        {reviews.map((item)=>{
+                            return(
+                                <div className="agency-reviews__wrap-item">
+                                    <img alt="" src={`/uploads/${item.reviewBg.filename}`}/>
+                                    <p className="p-style-black"><TruncatedSentence sentence={item.review}/></p>
+                                    <div className="mr-t">
+                                        <p>{item.reviewName}</p>
+                                        <p>{item.reviewPost}</p>
 
-                        <div className="agency-reviews__wrap-item">
-                            <img alt="" src={choice}/>
-                            <p className="p-style-black">Мы работаем с ведущими компаниями и брендами из различных отраслей.<br/> При создании могут
-                                решаться…</p>
-                            <div className="mr-t">
-                                <p>Мария Богатова</p>
-                                <p>Директор по развитию, Choice Constraction</p>
+                                    </div>
+                                    {item.reviewFile.filename && (<Link className="agency-reviews__wrap-arrow"
+                                            to={`/uploads/${item.reviewFile.filename}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}
+                                            target="_blank">
+                                           <Icon icon="pdf" viewBox="0 0 24 24"/>
+                                    </Link>
+                                    )}
+                                </div>
+                            )
+                        })}
 
-                            </div>
-                            <span className="agency-reviews__wrap-arrow">
-                                <Icon icon="pdf" viewBox="0 0 24 24"/>
-                            </span>
-                        </div>
-                        <div className="agency-reviews__wrap-item">
-                            <img alt="" src={rtk}/>
-                            <p className="p-style-black">Мы работаем с ведущими компаниями и брендами из различных отраслей.<br/> При создании могут
-                                решаться…</p>
-                            <div className="mr-t">
-                                <p>Мария Богатова</p>
-                                <p>Директор по развитию, Choice Constraction</p>
 
-                            </div>
-                            <span className="agency-reviews__wrap-arrow">
-                                <Icon icon="pdf" viewBox="0 0 24 24"/>
-                            </span>
-                        </div>
-                        <div className="agency-reviews__wrap-item">
-                            <img alt="" src={ucgroup}/>
-                            <p className="p-style-black">Мы работаем с ведущими компаниями и брендами из различных отраслей.<br/> При создании могут
-                                решаться…</p>
-                            <div className="mr-t">
-                                <p>Мария Богатова</p>
-                                <p>Директор по развитию, Choice Constraction</p>
-                            </div>
-                            <span className="agency-reviews__wrap-arrow">
-                                <Icon icon="pdf" viewBox="0 0 24 24"/>
-                            </span>
-                        </div>
+
                     </div>
                 </div>
 
             </section>
+            )}
+
+            {vacancies && (
             <section id="agency" className="agency-vacancy">
                 <div className="container">
                     <div className="agency-vacancy__wrap">
                         <h2 className="heading-secondary">Вакансии</h2>
                         <span>
                             <h2 className="heading-tertiary">Мы находимся в постоянном поиске<br/> лучших специалистов.</h2>
-                            <p className="p-style-grey pt-15">Больше вакансий на hh.ru</p>
+                            <Link  target="_blank" to={"https://hh.ru/employer/2174085"}><p className="p-style-grey pt-15">Больше вакансий на hh.ru</p></Link>
                         </span>
                     </div>
                     <div className="agency-vacancy__table">
-                        <Link to="/agency" className="agency-vacancy__table-item">
-                            <h3 className="heading-tertiary">
-                                UX/UI дизайнер
-                            </h3>
-                            <div className="flex-sb">
-                                <p className="p-style-black">Офис</p>
-                                <div className="hover-flip-arrow">
+                        {vacancies.map((item)=> {
+                            return (
+                            <Link target="_blank" to={item.link} className="agency-vacancy__table-item">
+                                <h3 className="heading-tertiary">
+                                   {item.name}
+                                </h3>
+                                <div className="flex-sb">
+                                    <p className="p-style-black">{item.place}</p>
+                                    <div className="hover-flip-arrow">
                                    <span>
                                        <Icon icon="arrowGo" viewBox="0 0 30 30"/>
                                        <div className="hover-double">
                                            {double}
                                        </div>
                                    </span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
+                            )
+                        })}
 
 
-                        </Link>
-                        <Link to="/agency" className="agency-vacancy__table-item">
-                            <h3 className="heading-tertiary">
-                                Front-end разработчик
-                            </h3>
-                            <div className="flex-sb">
-                                <p className="p-style-black">Удаленно</p>
-                                <div className="hover-flip-arrow">
-                                   <span>
-                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                       <div className="hover-double">
-                                           {double}
-                                       </div>
-                                   </span>
-                                </div>
-                            </div>
-
-                        </Link>
-                        <Link to="/agency" className="agency-vacancy__table-item">
-                            <h3 className="heading-tertiary">
-                                PHP-разработчик
-                            </h3>
-                            <div className="flex-sb">
-                                <p className="p-style-black">Удаленно</p>
-                                <div className="hover-flip-arrow">
-                                   <span>
-                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                       <div className="hover-double">
-                                           {double}
-                                       </div>
-                                   </span>
-                                </div>
-                            </div>
-
-                        </Link>
-                        <Link to="/agency" className="agency-vacancy__table-item">
-                            <h3 className="heading-tertiary">
-                                Тестировщик QA
-                            </h3>
-                            <div className="flex-sb">
-                                <p className="p-style-black">Офис</p>
-                                <div className="hover-flip-arrow">
-                                   <span>
-                                       <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                        <div className="hover-double">
-                                           {double}
-                                       </div>
-                                   </span>
-                                </div>
-                            </div>
-
-                        </Link>
                     </div>
                     <div className="agency-vacancy__wrap">
                         <div></div>
                         <span>
                             <h2 className="heading-tertiary">Не нашли подходящую вакансию?</h2>
                             <p className="p-style-grey pb-30">Пришлите нам резюме</p>
-                            <h2 className="heading-secondary job">job@de-us.ru</h2>
+                            <h2 className="heading-secondary job"><Link className="hoverMail" to="mailto:job@de-us.ru">job@de-us.ru</Link></h2>
                             <p className="p-style-grey">Присоединиться к команде</p>
                         </span>
                     </div>
 
                 </div>
             </section>
+            )}
 
             {/*<section className="agency-team" id="team">*/}
             {/*    <div className="container">*/}
@@ -927,6 +907,7 @@ const Agency = (props) => {
     )
 
 }
+
 
 export default connect(
     (state) => (

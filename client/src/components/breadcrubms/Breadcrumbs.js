@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import useBreadcrumbs from 'use-react-router-breadcrumbs'
 
 import './breadcrumbs.scss'
+import DelayedLink from "../appHeader/DelayedLink";
 
 const routes = [
     { path: '/', breadcrumb: 'Главная' },
@@ -21,7 +22,7 @@ function Breadcrumbs() {
             <div className="container">
                 <div className="breadcrumbs__wrap">
                     {breadcrumbs.map(({ match, breadcrumb }, i) => (
-                        i !== breadcrumbs.length - 1 ? <Link className='breadcrumbs__item' key={breadcrumb.key} to={match.pathname}>{breadcrumb}</Link> : null
+                        i !== breadcrumbs.length - 1 ? <DelayedLink className='breadcrumbs__item' key={breadcrumb.key} to={match.pathname}>{breadcrumb}</DelayedLink> : null
                     ))}
                 </div>
             </div>

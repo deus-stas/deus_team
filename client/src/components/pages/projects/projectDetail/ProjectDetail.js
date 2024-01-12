@@ -123,7 +123,7 @@ const ProjectDetail = () => {
             <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords} pageDescription={detail.seoDescription}/>
             {!isLoading &&
 
-        <main className="project">
+        <main id="toUp" className="project">
             {console.log(detail)}
             <Breadcrumbs />
 
