@@ -132,11 +132,11 @@
             }
         }
 
-        &:hover {
-            &::after {
-                transform: scale(1.12);
-            }
-        }
+        //&:hover {
+        //    &::after {
+        //        transform: scale(1.12);
+        //    }
+        //}
     }
 
     &.--grey {

@@ -150,8 +150,8 @@
                 border-bottom: 1px solid rgba(18, 18, 18, 0.2);
                 padding: 0 0 1.5rem 0;
 
-                p{
-                    opacity: 0.5;
+                p {
+                    transition: all 0.3s ;
                 }
 
                 @include respond(sm) {
@@ -417,7 +417,7 @@
 
                 .active {
                     transition: all .3s;
-                    border: 2px solid red;
+                    border: 3px solid #ffffff;
                 }
 
             }
@@ -581,7 +581,7 @@
                     &:last-child {
                         font-size: 2rem;
                         @include respond(sm) {
-                            width: 50%;
+
                             font-size: 1.4rem;
                             line-height: normal;
                         }
@@ -590,7 +590,7 @@
 
                 .mr-t {
                     margin-top: 4rem;
-
+                    width: 90%;
                     @include respond(sm) {
                         margin-top: 2rem;
                     }

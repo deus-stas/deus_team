@@ -843,7 +843,8 @@
             grid-gap: 3rem;
 
             @include respond(md) {
-                grid-gap: 1rem;
+                grid-gap: 2rem;
+                grid-template-columns: repeat(7, 1fr);
             }
 
             @include respond(sm) {
@@ -895,8 +896,12 @@
 
         &__img {
             width: 100%;
-            height: auto;
-            aspect-ratio: 1/1;
+            height: 18rem;
+            //aspect-ratio: 1/1;
+            @supports not (aspect-ratio: 1 / 1) {
+                height: 0;
+                padding-bottom: 100%;
+            }
             display: block;
             object-fit: cover;
             border-radius: 50%;

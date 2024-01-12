@@ -152,18 +152,18 @@ const AppHeader = (props) => {
                                         <div className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
                                             {/*<Link to={`mailto:${headerData.email}`}*/}
                                             {/*      className="header__contacts-link">{headerData.email}</Link>*/}
-                                            <DelayedLink to={`tel:${headerData.phone}`}
+                                            <Link to={`tel:${headerData.phone}`}
                                                   className="header__contacts-link">
                                                 <span data-hover={headerData.phone}> {headerData.phone}</span>
-                                               </DelayedLink>
+                                               </Link>
                                         </div>
                                     ) :
                                     (
                                         <div className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
                                             {/*<Link to="mailto:hello@de-us.ru"*/}
                                             {/*      className="header__contacts-link">hello@de-us.ru</Link>*/}
-                                            <DelayedLink to="tel:+74951034351" className="header__contacts-link">
-                                                <span data-hover="+7 (495) 103—4351 ">+7 (495) 103—4351 </span></DelayedLink>
+                                            <Link to="tel:+74951034351" className="header__contacts-link">
+                                                <span data-hover="+7 (495) 103—4351 ">+7 (495) 103—4351 </span></Link>
                                         </div>
                                     )
                                 }

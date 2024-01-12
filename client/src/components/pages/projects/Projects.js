@@ -10,6 +10,8 @@ import TypeWriterText from "../../typeWriterText";
 import {connect} from "react-redux";
 import projectBanner from "../../../img/project-main.mp4";
 import {Icon} from "../../icon/Icon";
+import {gotoAnchor} from "../../anchors";
+import DelayedLink from "../../appHeader/DelayedLink";
 
 const colourStyles = {
     control: (styles) => ({}),
@@ -238,7 +240,7 @@ const Projects = () => {
                             }
                         </div>
                     </section>
-                    <section className="projects-content">
+                    <section id="projectNav" className="projects-content">
                         <div className="container">
                             <div className={`projects-menu ${menuType || menuTheme ? 'open' : ''}`}>
                                 <div className="main-projects__item-flex">
@@ -248,10 +250,10 @@ const Projects = () => {
                                                 const filterProjects = projects.filter(item => item.projectTheme === project.value && item.visibility);
                                                 const totalSum = filterProjects.length;
                                                 return (
-                                                    <Link  to={`/projects?theme=${project.value}`} >
+                                                    <Link onClick={(e) => gotoAnchor(e,'start',false)} to={`/projects?theme=${project.value}`} >
                                                         <div className="main-projects__item-flex__inner">
                                                             <div className="heading-secondary">
-                                                                <p className='hover'>{project.label}</p>
+                                                                <p datahash="projectNav"  className='hover'>{project.label}</p>
                                                             </div>
                                                             <div className="main-projects__num"><span>{totalSum}</span>
                                                             </div>
@@ -314,7 +316,7 @@ const Projects = () => {
                                                     <div className="num">{project.customId}</div>
 
                                                 </a> :
-                                                <Link to={`/projects/${project.nameInEng}`}
+                                                <DelayedLink  to={`/projects/${project.nameInEng}`}
                                                       className="projects__item"
                                                       key={project.id} style={{background: project.color}}>
                                                     <div className="projects__item-img-wrap">
@@ -360,7 +362,7 @@ const Projects = () => {
 
                                                     </span>
 
-                                                </Link>
+                                                </DelayedLink>
                                         )
                                     })
                                     : null}
