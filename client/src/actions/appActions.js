@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? ''
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = '';
 export const setHeaderData = (headerData) => {
     return {
         type: 'SET_HEADER_DATA',

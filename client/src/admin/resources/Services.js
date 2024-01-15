@@ -1,12 +1,10 @@
 import React from 'react';
-import { List, Datagrid, TextField, EditButton } from 'react-admin';
+import {List, Datagrid, TextField, EditButton, ReferenceInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, ArrayInput, SimpleFormIterator, SelectArrayInput } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 
 const FilenameField = props => {
@@ -45,6 +43,9 @@ export const ServicesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
+            <ReferenceArrayInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
+                <SelectInput className="customWidth" optionText="name" />
+            </ReferenceArrayInput>
             {/* <TextInput className="customWidth" source="path" label="URL" /> */}
             <BooleanInput 
                 source="isInvisible" 
@@ -125,6 +126,9 @@ export const ServicesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
+            <ReferenceInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
+                <SelectInput className="customWidth" optionText="name" />
+            </ReferenceInput>
             <BooleanInput 
                 source="isInvisible" 
                 label="Показать/Скрыть"/>

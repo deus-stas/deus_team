@@ -3,9 +3,7 @@ import {List, Datagrid, TextField, EditButton, BooleanInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, AutocompleteInput } from 'react-admin';
 import axios from "axios";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const FilenameField = props => {
     return (

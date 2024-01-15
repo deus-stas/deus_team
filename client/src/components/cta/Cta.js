@@ -17,9 +17,7 @@ import {Icon} from "../icon/Icon";
 import arrorGo from '../../img/icon/arrow-go.svg'
 import DelayedLink from "../appHeader/DelayedLink";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 function Checkbox(props) {
     return (
@@ -154,7 +152,7 @@ const Cta = (props) => {
                             </DelayedLink>
                         </div>
                         <p className="p-style-grey pb-20">После заполнения брифа<br/> пришлите его нам на почту</p>
-                        <p className="heading-tertiary"><Link className="hoverMail" to="mailto:hello@de-us.ru">hello@de-us.ru</Link></p>
+                        <p className="heading-tertiary hover-flip"><Link className="hoverMail" to="mailto:hello@de-us.ru"><span data-hover="hello@de-us.ru">hello@de-us.ru</span></Link></p>
                         </span>
                     </div>
 

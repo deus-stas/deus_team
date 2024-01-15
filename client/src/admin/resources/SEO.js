@@ -3,9 +3,7 @@ import {List, Datagrid, TextField, EditButton, required} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, AutocompleteInput  } from 'react-admin';
 import SelectInput from "@material-ui/core/Select/SelectInput";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 export const SeoList = (props) => (
     <List {...props}>

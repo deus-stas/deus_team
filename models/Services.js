@@ -18,6 +18,7 @@ const servicesSchema = new Schema({
   seoDescription: {type:String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   seoKeywords: {type:String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   subProjects: {type: Array},
+  types: [{ type: Schema.Types.ObjectId, ref: 'Types' }],
   isInvisible: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v },
 });
 

@@ -213,9 +213,10 @@ main {
 
 
 .custom-cursor {
-    opacity: 0;
-    background: url('../img/play.svg') no-repeat 50% 50%/.5rem .5rem #FF4D01;
+    opacity: 1;
+    background: url('../img/play.svg') no-repeat 50% 50%/.5rem .5rem #000000;
     border-radius: 50%;
+    position: absolute;
 
     @include respond(sm) {
         display: none;

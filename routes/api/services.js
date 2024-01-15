@@ -66,6 +66,7 @@ router.post('/services', addPosition, upload.single('descrImg'), async (req, res
 
     const {
         name,
+        types,
         descrTotal,
         descr,
         benefitsTitle,
@@ -158,6 +159,7 @@ router.post('/services', addPosition, upload.single('descrImg'), async (req, res
 
     const services = new Services({
         name,
+        types,
         descrTotal,
         descr,
         descrImg,
@@ -207,9 +209,11 @@ router.get('/services/:id', async (req, res) => {
 router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
     try {
         const {id} = req.params;
+
         const {
             position,
             name,
+            types,
             descrTotal,
             descr,
             benefitsTitle,
@@ -273,6 +277,7 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
         service.seoTitle = seoTitle;
         service.seoDescription = seoDescription;
         service.seoKeywords = seoKeywords;
+        service.types = types;
 
 
         console.log("new", servicesServices)

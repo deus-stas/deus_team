@@ -21,9 +21,7 @@ const onAcc = (e) => {
     }
 }
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? ''
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = '';
 
 const ServicesDetail = () => {
 

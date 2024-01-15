@@ -2,6 +2,7 @@ import {
     BrowserRouter as Router,
     Route,
     Routes,
+    Navigate,
     useLocation,
 } from 'react-router-dom';
 
@@ -51,9 +52,7 @@ if (localStorage.jwtToken) {
     }
 }
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? ''
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = '';
 
 const AppWrapper = () => {
     const dispatch = useDispatch()
@@ -116,13 +115,13 @@ const AppWrapper = () => {
                 </div>
 
                 {/*<ScrollToTop/>*/}
-                {/*<CustomCursor*/}
-                {/*    targets={['.js-cursor-play']}*/}
-                {/*    customClass='custom-cursor'*/}
-                {/*    dimensions={20}*/}
-                {/*    fill='none'*/}
-                {/*    opacity={0}*/}
-                {/*/>*/}
+                <CustomCursor
+                    targets={['.js-cursor-play']}
+                    customClass='custom-cursor'
+                    dimensions={8}
+                    fill=''
+                    opacity={1}
+                />
                 <AxiosInterceptor>
                     {!shouldHideHeaderFooter && <AppHeader/>}
                     {!!seoInfo &&
@@ -146,6 +145,7 @@ const AppWrapper = () => {
                         {/* <Route path='/admin/*' element={<AdminPage />} /> */}
                         {/* <Route exact path='/register' element={<Register/>} /> */}
                         <Route exact path='/login' element={<Login/>}/>
+                        <Route path='*' element={<Navigate to="/"/>}/>
                     </Routes>
 
                     {!shouldHideHeaderFooter && <AppFooter key={footerKey}/>}

@@ -380,6 +380,7 @@
                 position: relative;
                 color: white;
                 transition: all 0.5s;
+                background: #121212;
 
                 .services-list__wrapp-item {
                     @include respond(sm) {

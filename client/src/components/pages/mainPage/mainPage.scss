@@ -290,6 +290,7 @@
             position: relative;
             height: 73rem;
             font-size: clamp(1.6rem, 5vw, 2.4rem);
+            background: #121212;
 
             @include respond(sm) {
                 height: 46.5rem;
@@ -626,7 +627,6 @@
                     }
 
                     &:hover {
-                        transform: scale(1.01);
                         opacity: 1;
                     }
                     &::after {

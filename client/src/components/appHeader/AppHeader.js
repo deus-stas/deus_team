@@ -10,9 +10,7 @@ import {setIsLoadingMainPageEvent} from "../../axios";
 import {gotoAnchor} from "../anchors";
 
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const AppHeader = (props) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -22,11 +20,18 @@ const AppHeader = (props) => {
     const location = useLocation()
 
     useEffect(()=>{
-        const defaultColor = ['/', '/contacts', '/login', '/services/']
+        const defaultColor = [
+            /^\/$/,
+            /^\/contacts$/,
+            /^\/news$/,
+            /^\/login$/,
+            /^\/services\/.*$/,
+            /^\/projects\/.*$/
+        ];
         let header = document.querySelector('.header')
-
+        console.log('path', !!header,location.pathname,defaultColor.some(pattern => pattern.test(location.pathname)))
         if (!!header) {
-            if (defaultColor.includes(location.pathname)) {
+            if (defaultColor.some(pattern => pattern.test(location.pathname)) ) {
                 header.classList.remove('white');
 
             } else {

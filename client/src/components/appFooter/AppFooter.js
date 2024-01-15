@@ -9,9 +9,7 @@ import arrorLink from "../../img/icon/arrow-link.svg";
 import {debounce} from "@material-ui/core";
 import {gotoAnchor} from "../anchors";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const AppFooter = (props) => {
 

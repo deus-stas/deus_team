@@ -53,7 +53,7 @@ const Login = (props) => {
 
   return (
     <main className="login">
-        <div className="container authContainer" style={{ marginTop: "4rem" }} >
+        <div className="container authContainer" style={{ marginTop: "16rem", marginBottom: "16rem" }} >
           <div >
             <div>
               <h4 className="heading-secondary">

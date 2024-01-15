@@ -36,23 +36,31 @@ router.get('/mainPage', async (req, res) => {
     res.json(mainPage);
 });
 
-router.post('/mainPage', upload.single('image'), async (req, res) => {
-    const { name, pageURL } = req.body;
-    const textList = !!req.body.textList && req.body.textList !=='undefined' ? JSON.parse(req.body.textList): [];
-    console.log(req.file);
+router.post('/mainPage', upload.single('mainVideoFile'), async (req, res) => {
+    try {
+        const { name, pageURL } = req.body;
+        const textList = !!req.body.textList && req.body.textList !=='undefined' ? JSON.parse(req.body.textList): [];
+        console.log(req.file);
 
-    const image = req.file;
+        let mainVideoFile;
+        if (req.file.mainVideoFile) {
+            mainVideoFile = req.file.mainVideoFile[0];
+        }
 
-    const mainPage = new MainPage({
-        name,
-        image,
-        textList,
-        pageURL,
-    });
+        const mainPage = new MainPage({
+            name,
+            mainVideoFile,
+            textList,
+            pageURL,
+        });
 
-    await mainPage.save();
+        await mainPage.save();
 
-    res.json(mainPage);
+        res.json(mainPage);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 
@@ -67,9 +75,9 @@ router.get('/mainPage/:id', async (req, res) => {
     res.json(mainPage);
 });
 
-router.put("/mainPage/:id", upload.single('image'), async (req, res) => {
+router.put("/mainPage/:id", upload.single('mainVideoFile'), async (req, res) => {
     const { id } = req.params;
-
+    console.log('okok', req.file)
     // Проверяем, есть ли такой документ в базе данных
     const mainPage = await MainPage.findById(id);
     if (!mainPage) {
@@ -78,12 +86,27 @@ router.put("/mainPage/:id", upload.single('image'), async (req, res) => {
 
     const { name, pageURL } = req.body;
     const textList = JSON.parse(req.body.textList);
-    const image = req.file;
+    const mainVideoFile = req.file;
 
     // Если есть новое изображение в запросе, обновляем ссылку на него
-    if (image) {
-        fs.unlinkSync(`uploads/${mainPage.image.filename}`);
-        mainPage.image = image;
+    if (mainVideoFile) {
+        if (mainPage.mainVideoFile) {
+            fs.unlink(mainPage.mainVideoFile.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        mainPage.mainVideoFile = mainVideoFile;
+    } else {
+        if (mainPage.mainVideoFile && mainPage.mainVideoFile.path && req.body.mainVideoFile !== 'true') {
+            fs.unlink(mainPage.mainVideoFile.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            mainPage.mainVideoFile = null;
+        }
     }
 
     // Обновляем остальные поля документа
@@ -104,10 +127,10 @@ router.delete("/mainPage/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Main page not found" });
     }
 
-    const { image } = mainPage;
+    const { mainVideoFile } = mainPage;
 
-    if (image) {
-        fs.unlinkSync(`uploads/${image.filename}`);
+    if (mainVideoFile) {
+        fs.unlinkSync(`uploads/${mainVideoFile.filename}`);
     }
 
     res.json({ success: true });

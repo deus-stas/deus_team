@@ -1,8 +1,8 @@
 import {Link} from 'react-router-dom';
-import React, { useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import 'wowjs/css/libs/animate.css';
-import { Icon } from '../../icon/Icon'
+import {Icon} from '../../icon/Icon'
 
 import './services.scss'
 
@@ -18,17 +18,14 @@ import Marquee from "react-fast-marquee";
 import {gotoAnchor} from "../../anchors";
 import DelayedLink from "../../appHeader/DelayedLink";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? ''
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = '';
 
 const Services = (props) => {
 
     // const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [openImage, setOpenImage] = useState(null);
-    const [openList, setOpenList]= useState([])
-
+    const [openList, setOpenList] = useState([])
 
     // useEffect(() => {
     //     axios.get(`${apiUrl}/api/reviews/`)
@@ -80,7 +77,7 @@ const Services = (props) => {
         return () => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
-    },[]);
+    }, []);
 
     const handleImageClick = (filename) => {
         setOpenImage(filename);
@@ -99,7 +96,7 @@ const Services = (props) => {
     return (
         <>
             {!isLoading &&
-                <main className="services" style={{padding:"inherit"}}>
+                <main className="services" style={{padding: "inherit"}}>
 
                     <section className="services-s whiteHeader">
                         <div className="services-s__video">
@@ -115,8 +112,10 @@ const Services = (props) => {
                         <div className="container">
                             <h2 className="heading-secondary">Почему стоит заказать<br/> разработку сайта в DEUS?</h2>
                             <div className="services-about__wrap">
-                                <div className="services-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку
-                                    и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса
+                                <div className="services-about__descr">Объединяем аналитику, маркетинг, дизайн,
+                                    разработку
+                                    и интеграции в единую систему для получения максимальной эффективности для вашего
+                                    бизнеса
                                 </div>
                                 <div className="services-about__adv">
                                     <div className="services-about__adv-item">
@@ -158,12 +157,13 @@ const Services = (props) => {
                                             </div>
 
                                             <div className="describe">
-                                                {!!service.descrImg &&<img src={`${apiUrl}/uploads/${service.descrImg.filename}`} alt=""/>}
+                                                {!!service.descrImg &&
+                                                    <img src={`${apiUrl}/uploads/${service.descrImg.filename}`} alt=""/>}
                                                 <div className="container">
                                                     <p className="describe-title">{service.blockTitle}</p>
                                                     <Marquee speed="50">
                                                         <div className="describe-services ">
-                                                            {!!service.tariffs &&service.tariffs.map((tariffs, index) => (
+                                                            {!!service.tariffs && service.tariffs.map((tariffs, index) => (
                                                                 <React.Fragment key={index}>
                                                                     {tariffs.tariffsCategory && (
                                                                         <>
@@ -188,8 +188,17 @@ const Services = (props) => {
 
                                                     <div className="describe__wrapp ">
                                                         <div className="describe__wrapp-btn hidden-mobile ">
-                                                            <DelayedLink to="/projects" className="btn --b-white " datahash="projectNav"  onClick={(e) => gotoAnchor(e)}>Посмотреть кейсы</DelayedLink>
-                                                            <DelayedLink to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</DelayedLink>
+                                                            <DelayedLink to={`/projects?type=${service.types}`}
+                                                                         disabled={!service.types || service.types.length === 0}
+                                                                         className="btn --b-white " datahash="projectNav"
+                                                                         onClick={(e) => gotoAnchor(e)}>
+                                                                Посмотреть кейсы
+                                                            </DelayedLink>
+
+                                                            <DelayedLink to="/contacts" className="btn --white"
+                                                                         datahash="contactUs"
+                                                                         onClick={(e) => gotoAnchor(e)}>Обсудить
+                                                                проект</DelayedLink>
                                                         </div>
                                                         <div>
                                                             <h3 className="heading-tertiary">
@@ -216,8 +225,17 @@ const Services = (props) => {
 
                                                         </div>
                                                         <div className="describe__wrapp-btn__mob hidden-desktop ">
-                                                            <DelayedLink to="/projects" className="btn --b-white ">Посмотреть кейсы</DelayedLink>
-                                                            <DelayedLink to="/contacts" className="btn --white" datahash="contactUs"  onClick={(e) => gotoAnchor(e)}>Обсудить проект</DelayedLink>
+
+                                                            <DelayedLink to={`/projects?type=${service.id}`}
+                                                                         className="btn --b-white " datahash="projectNav"
+                                                                         onClick={(e) => gotoAnchor(e)}>Посмотреть
+                                                                кейсы</DelayedLink>
+
+
+                                                            <DelayedLink to="/contacts" className="btn --white"
+                                                                         datahash="contactUs"
+                                                                         onClick={(e) => gotoAnchor(e)}>Обсудить
+                                                                проект</DelayedLink>
                                                         </div>
 
                                                     </div>
@@ -242,7 +260,8 @@ const Services = (props) => {
                                     <div>
                                         <h3 className="heading-tertiary">Прозрачность</h3>
                                         <p className="p-style-white">
-                                            Подробно и понятно рассказываем, что клиент получает по итогам каждого этапа — держим фокус и не отклоняемся от стратегической цели проекта
+                                            Подробно и понятно рассказываем, что клиент получает по итогам каждого этапа
+                                            — держим фокус и не отклоняемся от стратегической цели проекта
                                         </p>
                                     </div>
                                 </div>
@@ -251,7 +270,8 @@ const Services = (props) => {
                                     <div>
                                         <h3 className="heading-tertiary">Индивидуальный подход</h3>
                                         <p className="p-style-white">
-                                            Всесторонне изучаем рынок и бизнес клиента, предлагаем уникальные решения, шиюко подбираем команду, условия работы и оплаты на основе интересов клиента
+                                            Всесторонне изучаем рынок и бизнес клиента, предлагаем уникальные решения,
+                                            шиюко подбираем команду, условия работы и оплаты на основе интересов клиента
                                         </p>
                                     </div>
                                 </div>
@@ -260,7 +280,9 @@ const Services = (props) => {
                                     <div>
                                         <h3 className="heading-tertiary">Экспертиза</h3>
                                         <p className="p-style-white">
-                                            Проактивность — ключ к достойному результату. В ходе проекта мы постоянно предлагаем улучшения и идеи, опираясь на глубокую экспертизу и многолетний опыт                                        </p>
+                                            Проактивность — ключ к достойному результату. В ходе проекта мы постоянно
+                                            предлагаем улучшения и идеи, опираясь на глубокую экспертизу и многолетний
+                                            опыт </p>
                                     </div>
                                 </div>
                             </div>
@@ -275,19 +297,21 @@ const Services = (props) => {
                                     <h2 className="heading-secondary">
                                         Как мы работаем?
                                     </h2>
-                                    <p className="p-style-black">Предлагаем форматы работы с учётом особенностей проекта. Если разработка требует большей гибкости, миксуем подходы.
+                                    <p className="p-style-black">Предлагаем форматы работы с учётом особенностей
+                                        проекта. Если разработка требует большей гибкости, миксуем подходы.
                                     </p>
                                 </div>
                                 <div></div>
                                 <div>
                                     <h2 className="heading-secondary">Команда</h2>
                                     <div className="services-team__wrapper">
-                                        {team.filter(team => team.serviceControl).map((team,index) => {
-                                            console.log('team:', team.mainImg)
+                                        {team.filter(team => team.serviceControl).map((team, index) => {
                                             return (
                                                 <div className="worker">
 
-                                                    <img className="worker-img" src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null} alt=""/>
+                                                    <img className="worker-img"
+                                                         src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null}
+                                                         alt=""/>
                                                     <span>
                                                       <div className="worker-name heading-tertiary">{team.name}</div>
                                                     <p className="worker-descr">{team.post}</p>

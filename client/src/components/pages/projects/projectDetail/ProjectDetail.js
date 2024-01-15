@@ -10,9 +10,7 @@ import { Icon } from '../../../icon/Icon';
 import './projectDetail.scss'
 import HelmetComponent from "../../../helmetComponent";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const ProjectDetail = () => {
     const [detail, setDetail] = useState([]);
@@ -148,7 +146,7 @@ const ProjectDetail = () => {
                                 {
                                     detail.projectSite ? (
                                         <div className="project-main__link" >
-                                            <a href={detail.projectURL} target='_blank'>{detail.projectSite}</a>
+                                            <a href={detail.projectURL}>{detail.projectSite}</a>
                                             <Icon icon="arr" />
                                         </div>
                                     ) : null
