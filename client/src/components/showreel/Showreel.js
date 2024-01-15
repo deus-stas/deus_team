@@ -5,9 +5,7 @@ import './showreel.scss';
 import {usePrevious} from "react-admin";
 import {current} from "@reduxjs/toolkit";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const Showreel = (props) => {
     const {data, isMain} = props;

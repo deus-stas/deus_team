@@ -9,9 +9,7 @@ import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 
 import './newsDetail.scss'
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const NewsDetail = () => {
 

@@ -1,10 +1,44 @@
 import React from 'react';
-import {List, Datagrid, TextField, EditButton, SimpleFormIterator, ArrayInput} from 'react-admin';
+import {List, Datagrid, TextField, EditButton, SimpleFormIterator, ArrayInput, FileField, FileInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField } from 'react-admin';
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
+
+const VideoOrImageField = ({ file }) => {
+
+    const isVideo = (funcFile) => {
+        return funcFile && funcFile.filename && funcFile.mimetype.indexOf('mp4') !== -1;
+    };
+
+    if (!!file) {
+        if (isVideo(file)) {
+            return (
+                <video style={{ width: '300px' }} autoPlay loop playsInline>
+                    <source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                </video>
+            );
+        } else {
+            return <img style={{ width: '300px' }} src={`${apiUrl}/uploads/${file.filename}`} alt={file.filename} title="image" />;
+        }
+    }
+    return null; // Return null if file is not available
+};
+
+const FunctionFieldForArrayItem = (props) => (
+    <FunctionField {...props} render={(record, source) => {
+        const splitter = source.split(".");
+        const field = splitter[0];
+        const index = splitter[1];
+        console.log(record, source)
+        if(!!record[field] && !!record[field][index]){
+            const file = record[field][index];
+            return (
+                <VideoOrImageField file={file}/>
+            )
+        }
+
+    }}/>
+);
 
 
 const FilenameField = props => {
@@ -12,11 +46,8 @@ const FilenameField = props => {
         <FunctionField
             {...props}
             render={record => {
-                if (record.filename) {
-                    return <img src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
-                } else {
-                    return <img src={`${record.src}`} alt={record.src} title="image" />;
-                }
+                console.log('record:',record,props);
+                return (<VideoOrImageField file={record} />)
             }}
         />
     )
@@ -37,9 +68,12 @@ export const MainPageCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
-            <ImageInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*">
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <TextInput className="customWidth" source="pageURL" label="Ссылка на страницу" placeholder="/название страницы"/>
+            <FileInput
+                source="mainVideoFile"
+                label="Баннер видео">
+                <FileField source="src" title="title" />
+            </FileInput>
             <ArrayInput
                 source="textList"
                 label="Описание"
@@ -60,9 +94,11 @@ export const MainPageEdit = (props) => (
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
             <TextInput className="customWidth" source="pageURL" label="Ссылка на страницу" placeholder="/название страницы"/>
-            <ImageInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*">
-                <FilenameField source="image" title="title" />
-            </ImageInput>
+            <FileInput
+                source="mainVideoFile"
+                label="Баннер видео">
+                <FileField source="src" title="title" />
+            </FileInput>
             <ArrayInput
                 source="textList"
                 label="Описание"

@@ -35,9 +35,7 @@ const classes = {
     input: () => 'select__search'
 }
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const Projects = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -86,7 +84,6 @@ const Projects = () => {
     }
     const updateOptionsTheme=(projectOptionsTheme)=>{
         setOptionsTheme(projectOptionsTheme)
-        console.log("lolo:", searchParams)
         if (searchParams.has(THEME_KEY)) {
 
             const optionId = searchParams.get(THEME_KEY)
@@ -100,14 +97,14 @@ const Projects = () => {
     }
 
     const updateOptionsType=(projectOptionsType)=>{
-        setOptionsType(projectOptionsType)
         if (searchParams.has(TYPE_KEY)) {
+            setMenuType(true)
+            setMenuTheme(false)
             const optionId = searchParams.get(TYPE_KEY)
             const type = projectOptionsType.find(({value}) => value === optionId)
-            console.log("lo:",type,projectOptionsType,searchParams.has(TYPE_KEY))
             if (type) {
                 setSelectedType(type);
-                // searchParams.delete(TYPE_KEY)
+                searchParams.delete(TYPE_KEY)
                 setSearchParams(searchParams)
             }
         }
@@ -115,7 +112,6 @@ const Projects = () => {
     const loadTypes = (cb) => {
         axios.get(`${apiUrl}/api/types/`)
             .then((response) => {
-                console.log(response.data);
                 let projectOptionsType = [];
                 response.data.forEach((item, i) => {
                     const {id, name} = item;
@@ -137,9 +133,10 @@ const Projects = () => {
     useEffect(()=>{
         updateOptionsTheme(optionsTheme);
     },[searchParams])
+
     useEffect(()=>{
         updateOptionsType(optionsType)
-    },[searchParams])
+    },[searchParams,optionsType])
 
 
     useEffect(() => {
@@ -316,7 +313,7 @@ const Projects = () => {
                                                     <div className="num">{project.customId}</div>
 
                                                 </a> :
-                                                <DelayedLink  to={`/projects/${project.nameInEng}`}
+                                                <DelayedLink to={`/projects/${project.nameInEng}`}
                                                       className="projects__item"
                                                       key={project.id} style={{background: project.color}}>
                                                     <div className="projects__item-img-wrap">

@@ -2,9 +2,7 @@ import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, AutocompleteArrayInput, ImageField, FunctionField, FileInput, FileField, ReferenceArrayInput, SelectInput } from 'react-admin';
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 
 const FilenameField = props => {

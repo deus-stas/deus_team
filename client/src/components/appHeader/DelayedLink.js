@@ -16,13 +16,12 @@
  @param {string} children - содержимое NavLink
  @returns {JSX.Element} - компонент задержанной NavLink
  */
-
 import React from 'react';
 import {Link, NavLink, useNavigate} from 'react-router-dom';
 import {setIsLoadingMainPageEvent} from "../../axios";
 
 const DelayedLink = (props) => {
-    const {to, children, onClick, timeout = 1000, isNav} = props
+    const {to, children, onClick, timeout = 1000, isNav, disabled} = props
 
     const navigate = useNavigate()
 
@@ -42,10 +41,17 @@ const DelayedLink = (props) => {
     }
 
     return <>
-        {isNav ?
-            <NavLink {...props} onClick={handleLinkClick}>{children}</NavLink> :
-            <Link {...props} onClick={handleLinkClick}>{children}</Link>
+        {disabled ?
+            <div {...props} onClick={()=>{}}>{children}</div>
+            :
+            <>
+                {isNav ?
+                    <NavLink {...props} onClick={handleLinkClick}>{children}</NavLink> :
+                    <Link {...props} onClick={handleLinkClick}>{children}</Link>
+                }
+            </>
         }
+
     </>;
 }
 

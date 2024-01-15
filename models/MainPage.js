@@ -6,6 +6,7 @@ const mainPageSchema = new Schema({
     pageURL: { type: String},
     image: { type: Object },
     textList: { type: Array },
+    mainVideoFile: { type: Object },
 });
 
 mainPageSchema.set('toJSON', { virtuals: true });

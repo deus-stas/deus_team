@@ -8,9 +8,7 @@ import RetryImage from "../../../../helpers/RetryImage";
 import {gotoAnchor} from "../../../anchors";
 import DelayedLink from "../../../appHeader/DelayedLink";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const ProjectNext = (props) => {
     const { id } = useParams();

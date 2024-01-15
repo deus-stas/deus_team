@@ -3,26 +3,25 @@ import axios, {setIsLoadingMainPageEvent} from '../../axios'
 import { Link, useLocation } from 'react-router-dom';
 
 import './news.scss';
-
-const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'http://188.120.232.38'
-  : process.env.REACT_APP_LOCALHOST_URI;
+import {connect} from "react-redux";
 
 const News = () => {
     const location = useLocation()
     const params = new URLSearchParams(location.search)
     let tagInit = params.get('tag') ? params.get('tag') : 'Все';
 
-    const [news, setNews] = useState([]);
+    const [news, setNews] = useState([]);const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'http://188.120.232.38'
+    : process.env.REACT_APP_LOCALHOST_URI;
     const [allTags, setAllTags] = useState(new Set());
     const [selectedTag, setSelectedTag] = useState(tagInit);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/news`)
+        axios.get(`/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`${apiUrl}/api/tags/${news.tags}`)
+                    return axios.get(`/api/tags/${news.tags}`)
                         .then((tagResponse) => {
                             news.tags = tagResponse.data.name;
                             return news;
@@ -69,6 +68,7 @@ const News = () => {
 
     const filteredNews = selectedTag === 'Все' ? news : news.filter((newsItem) => newsItem.tags === selectedTag);
 
+
     return (
         <>
             {!isLoading &&
@@ -90,7 +90,7 @@ const News = () => {
                             return (
                                 <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
                                     <div className="news__img-wrap">
-                                        <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                        <img src={`/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
                                     </div>
                                     <div className="news__text">
                                         <div className="news__tag">{item.tags}</div>
@@ -109,4 +109,4 @@ const News = () => {
 
 }
 
-export default News;
+export default connect()(News)

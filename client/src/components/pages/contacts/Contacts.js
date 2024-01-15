@@ -12,9 +12,7 @@ import RoundButton from "../../animation/roundButton";
 import Popup from "reactjs-popup";
 import {Formik} from "formik";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? ''
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = '';
 const Contacts = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);

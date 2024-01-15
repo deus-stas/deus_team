@@ -3,9 +3,7 @@ import { List, Datagrid, TextField, EditButton } from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, ReferenceArrayInput, SelectInput, required, FunctionField } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 
 const FilenameField = props => {

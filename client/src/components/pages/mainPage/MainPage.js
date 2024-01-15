@@ -34,9 +34,7 @@ import DelayedLink from "../../appHeader/DelayedLink";
 
 SwiperCore.use([Autoplay]);
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 
 const colourStyles = {
@@ -384,15 +382,24 @@ const MainPage = (props) => {
 
                                             <div className="main-agency__item" >
                                                 <a href={`${item.pageURL}`} target="_blank">
-                                                    <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн"
-                                                         className="main-agency__item-img"/>
+                                                    {/*<img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн"*/}
+                                                    {/*     className="main-agency__item-img"/>*/}
+                                                    {item.mainVideoFile && item.mainVideoFile !== 'undefined' && item.mainVideoFile !== 'null'
+                                                        && (
+                                                            <video className="main-agency__item-img" autoPlay loop muted playsInline>
+                                                            <source
+                                                                    src={`${apiUrl}/uploads/${item.mainVideoFile.filename}`}
+                                                                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                                            </video>
+                                                        )}
+
 
                                                     <div className="main-agency__item-header">
                                                         <div className="main-agency__item-header__num">{num}</div>
                                                         <div
                                                             className="main-agency__item-header__text heading-secondary">{name}</div>
                                                     </div>
-                                                        {descr}
+                                                    {descr}
                                                     {!!arrow &&
                                                         <span className="main-agency__item-arrow">
                                                                <div className="hover-flip-circle">
@@ -405,7 +412,7 @@ const MainPage = (props) => {
                                                                </div>
 
                                                         </span>}
-                                                    </a>
+                                                </a>
                                             </div>
 
                                         );

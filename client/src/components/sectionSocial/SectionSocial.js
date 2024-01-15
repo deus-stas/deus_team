@@ -6,9 +6,7 @@ import './sectionSocial.scss'
 import TrailOn from "../animation/trailOn";
 import ScrollUp from "../animation/scrollUp";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38'
-    : process.env.REACT_APP_LOCALHOST_URI;
+const apiUrl = ''
 
 const SectionSocial = () => {
 

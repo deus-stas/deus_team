@@ -30,9 +30,7 @@ import RoundButton from "../../animation/roundButton";
 import includes from "validator/es/lib/util/includes";
 import TruncatedSentence from "./TruncatedSentence";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? ''
-    : process.env.REACT_APP_LOCALHOST_URI;
+
 
 const Agency = (props) => {
 
