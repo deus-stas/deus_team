@@ -8,7 +8,7 @@ const RetryImage = (props) => {
 
     const handleImageError = () => {
         setImageLoadError(true);
-        setTimeout(()=>retryImageLoad(),400);
+        setTimeout(()=>retryImageLoad(),30000);
     };
 
     const retryImageLoad = () => {

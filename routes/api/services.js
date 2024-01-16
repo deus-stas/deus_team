@@ -63,17 +63,18 @@ router.post('/services', addPosition, upload.single('descrImg'), async (req, res
     const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' ? JSON.parse(req.body.benefits) : [];
     const work = !!req.body.work && req.body.work !== 'undefined' ? JSON.parse(req.body.work) : [];
     const tariffs = !!req.body.tariffs && req.body.tariffs !== 'undefined' ? JSON.parse(req.body.tariffs) : [];
+    const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' ? JSON.parse(req.body.subProjects) : [];
 
     const {
         name,
         types,
+        brief,
         descrTotal,
         descr,
         benefitsTitle,
         servicesServices,
         position,
         blockTitle,
-        subProjects,
         seoTitle,
         seoDescription,
         seoKeywords,
@@ -160,6 +161,7 @@ router.post('/services', addPosition, upload.single('descrImg'), async (req, res
     const services = new Services({
         name,
         types,
+        brief,
         descrTotal,
         descr,
         descrImg,
@@ -214,21 +216,32 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
             position,
             name,
             types,
+            brief,
             descrTotal,
             descr,
             benefitsTitle,
             servicesServices,
             blockTitle,
-            subProjects,
             path,
             seoTitle,
             seoDescription,
             seoKeywords,
             isInvisible
         } = req.body;
-        const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' ? JSON.parse(req.body.benefits) : [];
-        const work = !!req.body.work && req.body.work !== 'undefined' ? JSON.parse(req.body.work) : [];
-        const tariffs = !!req.body.tariffs && req.body.tariffs !== 'undefined' ? JSON.parse(req.body.tariffs) : [];
+        const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' && typeof req.body.benefits === 'string'
+            ? JSON.parse(req.body.benefits)
+            : [];
+        const work = !!req.body.work && req.body.work !== 'undefined' && typeof req.body.work === 'string'
+            ? JSON.parse(req.body.work)
+            : [];
+
+        const tariffs = !!req.body.tariffs && req.body.tariffs !== 'undefined' && typeof req.body.tariffs === 'string'
+            ? JSON.parse(req.body.tariffs)
+            : [];
+
+        const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' && typeof req.body.subProjects === 'string'
+            ? JSON.parse(req.body.subProjects)
+            : [];
 
         const service = await Services.findById(id);
 
@@ -278,9 +291,9 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
         service.seoDescription = seoDescription;
         service.seoKeywords = seoKeywords;
         service.types = types;
+        service.brief = brief;
 
 
-        console.log("new", servicesServices)
 
         await service.save();
 

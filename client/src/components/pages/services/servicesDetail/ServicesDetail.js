@@ -34,7 +34,6 @@ const ServicesDetail = () => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/services/${id}`)
             .then((response) => {
-                console.log(response.data);
                 const benefitsPersonsPromises = response.data.benefits.map((item) => {
                     return axios.get(`${apiUrl}/api/persons/${item.benefitsPersons}`)
                         .then((benefitsResponse) => {
@@ -97,7 +96,6 @@ const ServicesDetail = () => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
                 setProjects(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -334,27 +332,39 @@ const ServicesDetail = () => {
                                 service.subProjects.map((project,i) => {
                                     const portfolioDelay= i < 7 ? (i * 0.1 + 0.1) : 0.1
                                     return (
-                                        <Link to={`/projects/${project.nameInEng}`} className="projects__item wow fadeInUp"
-                                              data-wow-duration="0.5s"
-                                              data-wow-delay={`${portfolioDelay}s`}
-                                              key={project.id} style={{ background: project.color }}>
-                                            <div className="projects__item-img-wrap" >
-                                                {
-                                                    project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
-                                                        ?
-                                                    <video autoPlay loop muted playsInline>
-                                                        <source src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                                                    </video> :
-                                                    project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
-                                                        ?
-                                                        <div dangerouslySetInnerHTML={{ __html: project.mainVideo }}></div>
-                                                        :
-                                                        <RetryImage key={project.image.filename} src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt={project.name} className="main-projects__img" />
-                                                }
+                                        <div>
+                                            {!!project && !!project.nameInEng &&
+                                                <Link to={`/projects/${project.nameInEng}`}
+                                                      className="projects__item wow fadeInUp"
+                                                      data-wow-duration="0.5s"
+                                                      data-wow-delay={`${portfolioDelay}s`}
+                                                      key={project.id} style={{background: project.color}}>
+                                                    <div className="projects__item-img-wrap">
+                                                        {
+                                                            project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
+                                                                ?
+                                                                <video autoPlay loop muted playsInline>
+                                                                    <source
+                                                                        src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
+                                                                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                                                                </video> :
+                                                                project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
+                                                                    ?
+                                                                    <div
+                                                                        dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>
+                                                                    :
+                                                                    <RetryImage key={project.image.filename}
+                                                                                src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                                                                alt={project.name}
+                                                                                className="main-projects__img"/>
+                                                        }
 
-                                            </div>
-                                            <div className="projects__item-name">{project.name}</div>
-                                        </Link>
+                                                    </div>
+                                                    <div className="projects__item-name">{project.name}</div>
+                                                </Link>
+                                            }
+                                        </div>
+
                                     )
                                 }) :
                                 projects.map((project,i) => {

@@ -53,6 +53,7 @@ export const TeamCreate = (props) => {
             <SimpleForm>
                 <TextInput className="customWidth" source="name" label="Имя"/>
                 <TextInput className="customWidth" source="post" label="Должность"/>
+                <TextInput className="customWidth" source="sign" label="Подпись"/>
                 <AutocompleteInput
                     debounce={500}
                     source="priority"
@@ -109,6 +110,7 @@ export const TeamEdit = (props) => {
             <SimpleForm>
                 <TextInput className="customWidth" source="name" label="Имя"/>
                 <TextInput className="customWidth" source="post" label="Должность"/>
+                <TextInput className="customWidth" source="sign" label="Подпись"/>
                 <AutocompleteInput
                     source="priority"
                     label="Приоритет"

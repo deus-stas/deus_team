@@ -29,7 +29,6 @@ const AppHeader = (props) => {
             /^\/projects\/.*$/
         ];
         let header = document.querySelector('.header')
-        console.log('path', !!header,location.pathname,defaultColor.some(pattern => pattern.test(location.pathname)))
         if (!!header) {
             if (defaultColor.some(pattern => pattern.test(location.pathname)) ) {
                 header.classList.remove('white');
@@ -51,7 +50,9 @@ const AppHeader = (props) => {
             const find = Array.from(whiteHeaders).find((whiteHeader) => {
                 return window.scrollY >= whiteHeader.offsetTop && window.scrollY <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
             })
+
             if (!!find && !menu) {
+                console.log('path', window.scrollY,find.offsetTop,find.offsetHeight)
                 if (window.scrollY >= find.offsetTop) {
                     header.classList.add('white');
                 } else {

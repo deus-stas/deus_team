@@ -30,6 +30,7 @@ import manager from "../../../img/manager.png";
 import * as ReactDom from "react-dom/server";
 import {goProjects, gotoAnchor} from "../../anchors";
 import DelayedLink from "../../appHeader/DelayedLink";
+import FadeInOnScroll from "../../animation/fadeInOnScroll";
 
 
 SwiperCore.use([Autoplay]);
@@ -270,7 +271,7 @@ const MainPage = (props) => {
         <>
             {!isLoading &&
                 <main className="main">
-                    <ScrollUp fromY={0} delay={1000}>
+                    <FadeInOnScroll>
                         <section className="main-banner">
                             <div className="container">
                                 <div className="main-banner__wrap">
@@ -296,13 +297,15 @@ const MainPage = (props) => {
                                 </div>
                             </div>
                         </section>
-                    </ScrollUp>
+                    </ FadeInOnScroll>
 
+                    <FadeInOnScroll>
                     <section className="main-showreel whiteHeader">
                         {mainShowreel &&
                             <Showreel data={mainShowreel}  isMain={true} key={mainShowreel.videoUrl}/>
                         }
                     </section>
+                    </FadeInOnScroll>
 
                     <section className="main-agency">
                         <div className="container">
@@ -328,7 +331,7 @@ const MainPage = (props) => {
                             {/*        );*/}
                             {/*    })}*/}
                             {/*</div>*/}
-                            <ScrollUp fromY={0} delay={2000}>
+                            < FadeInOnScroll>
                                 <div className="main-agency__wrap whiteHeader">
                                     {mainPage ? mainPage.map((item, index) => {
                                         const arrow = index !== 1;
@@ -418,8 +421,8 @@ const MainPage = (props) => {
                                         );
                                     }) : null}
                                 </div>
-                            </ScrollUp>
-                            <ScrollUp fromY={0} delay={2000}>
+                            </ FadeInOnScroll>
+                            < FadeInOnScroll>
                                 <div className="main-projects__wrap">
                                 <span className="main-projects__item">
                                    <h2 className="heading-secondary sticky-h2">Проекты по индустриям</h2>
@@ -447,7 +450,7 @@ const MainPage = (props) => {
                                         </div>
                                     </div>
                                 </div>
-                            </ScrollUp>
+                            </ FadeInOnScroll>
                         </div>
 
 
@@ -677,7 +680,7 @@ const MainPage = (props) => {
                     {/*</section>*/}
 
                     {working ?
-                        <ScrollUp fromY={0} delay={1000}>
+                        < FadeInOnScroll>
                         <section className="main-working whiteHeader">
                             <div className="container">
                                 <h3 className="heading-tertiary">Работаем сейчас над</h3>
@@ -699,7 +702,7 @@ const MainPage = (props) => {
                                 </div>
                             </div>
                         </section>
-                        </ScrollUp>
+                        </ FadeInOnScroll>
                         : null}
                     {/*<ScrollUp fromY={0} delay={500}>*/}
                     {/*<section className="main-services">*/}
@@ -759,7 +762,7 @@ const MainPage = (props) => {
                     {/*    </div>*/}
                     {/*</section>*/}
                     {/*</ScrollUp>*/}
-                    <ScrollUp fromY={0} delay={1000}>
+                    < FadeInOnScroll>
                         <section className="main-news">
                             <div className="container">
                                 <div className="main-news__wrap">
@@ -813,7 +816,7 @@ const MainPage = (props) => {
                                 </div>
                             </div>
                         </section>
-                    </ScrollUp>
+                    </ FadeInOnScroll>
 
                     {/*<SectionSocial/>*/}
 
