@@ -332,7 +332,7 @@ const Agency = (props) => {
             <section id='agency' className="agency-workers whiteHeader">
                 {/*<img src={chiefTeam} alt="" className="chief-team hidden-mobile"/>*/}
                 {/*<img src={chiefMob} alt="" className="chief-team hidden-desktop"/>*/}
-                <div className="agency-workers__main overlay">
+                <div className="agency-workers__main gradient">
 
 
                 <div className="agency-workers__wrap container">
