@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const TeamSchema = new Schema({
     name: { type: String, required: true },
     post: { type: String, required: true },
+    sign: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
     image: { type: Object },
     mainControl: {type: Boolean},
     serviceControl: {type: Boolean},

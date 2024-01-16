@@ -6,7 +6,8 @@ module.exports = function (app) {
         createProxyMiddleware({
             target: process.env.NODE_ENV === 'development' ? process.env.REACT_APP_LOCALHOST_URI : "http://converter.web-hands.ru",
             changeOrigin: true,
-            secure: false
+            secure: false,
+            timeout:10000
         })
     );
     app.use(
@@ -14,7 +15,8 @@ module.exports = function (app) {
         createProxyMiddleware({
             target: process.env.NODE_ENV === 'development' ? process.env.REACT_APP_LOCALHOST_URI : "http://converter.web-hands.ru",
             changeOrigin: true,
-            secure: false
+            secure: false,
+            timeout:10000
         })
     );
 };

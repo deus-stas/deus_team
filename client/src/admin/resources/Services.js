@@ -46,6 +46,7 @@ export const ServicesCreate = (props) => (
             <ReferenceArrayInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceArrayInput>
+            <TextInput className="customWidth" source="brief" label="Ссылка для брифа"/>
             {/* <TextInput className="customWidth" source="path" label="URL" /> */}
             <BooleanInput 
                 source="isInvisible" 
@@ -129,6 +130,7 @@ export const ServicesEdit = (props) => (
             <ReferenceInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceInput>
+            <TextInput className="customWidth" source="brief" label="Ссылка для брифа"/>
             <BooleanInput 
                 source="isInvisible" 
                 label="Показать/Скрыть"/>

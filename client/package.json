@@ -14,7 +14,7 @@
     "classnames": "^2.3.2",
     "custom-cursor-react": "^1.0.5",
     "formik": "^2.2.9",
-    "gsap": "^3.11.4",
+    "gsap": "^3.12.4",
     "http-proxy-middleware": "^2.0.6",
     "jwt-decode": "^3.1.2",
     "ra-data-simple-rest": "^4.9.1",

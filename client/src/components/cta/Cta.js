@@ -102,54 +102,80 @@ const Cta = (props) => {
                         <span className="sticky-h2">
                         <h2 className="heading-secondary">Брифы для заполнения</h2>
                         <div className="cta__wrap-wrapper">
-                            <DelayedLink to="/services/firmennii-stil">
-                                <div className="item p-style">
-                                    <p>Фирменный стиль</p>
+                            {props.services && props.services.filter((service, index) =>
+                                service.isInvisible).map((service, index) => {
+                                const disabled = !service.brief || service.brief.length === 0
+                                const children = <div className="main-agency__item-link p-style"><p>{service.name}</p>
                                     <div className="hover-flip-arrow">
-                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                          <div className="hover-double">
-                                             {double}
-                                          </div>
-                                       </span>
+                                                      <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                       <div className="hover-double">
+                                                            {double}
+                                                        </div>
+                                                      </span>
                                     </div>
                                 </div>
-                            </DelayedLink>
-                            <DelayedLink to="/services/saiti-i-servisi">
-                                <div className="item p-style">
-                                    <p>Сайты и сервисы</p>
-                                    <div className="hover-flip-arrow">
-                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                          <div className="hover-double">
-                                             {double}
-                                          </div>
-                                       </span>
-                                    </div>
-                                </div>
-                            </DelayedLink>
-                            <DelayedLink to="/services/podderzhka-i-razvitie">
-                                <div className="item p-style">
-                                    <p>Поддержка и развитие</p>
-                                    <div className="hover-flip-arrow">
-                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                          <div className="hover-double">
-                                             {double}
-                                          </div>
-                                       </span>
-                                    </div>
-                                </div>
-                            </DelayedLink>
-                            <DelayedLink to="/services/seo-prodvizhenie">
-                                <div className="item p-style">
-                                    <p>SEO продвижение</p>
-                                     <div className="hover-flip-arrow">
-                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                          <div className="hover-double">
-                                             {double}
-                                          </div>
-                                       </span>
-                                    </div>
-                                </div>
-                            </DelayedLink>
+                                return (
+                                    <>
+                                        {disabled ? <div> {children}</div> : <Link
+                                            target="_blank" isExternal
+                                            to={service.brief}
+                                        >
+                                            {children}
+                                        </Link>}
+                                    </>
+
+                                );
+
+                            })}
+
+                            {/*<DelayedLink to="/services/firmennii-stil">*/}
+                            {/*    <div className="item p-style">*/}
+                            {/*        <p>Фирменный стиль</p>*/}
+                            {/*        <div className="hover-flip-arrow">*/}
+                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
+                            {/*              <div className="hover-double">*/}
+                            {/*                 {double}*/}
+                            {/*              </div>*/}
+                            {/*           </span>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</DelayedLink>*/}
+                            {/*<DelayedLink to="/services/saiti-i-servisi">*/}
+                            {/*    <div className="item p-style">*/}
+                            {/*        <p>Сайты и сервисы</p>*/}
+                            {/*        <div className="hover-flip-arrow">*/}
+                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
+                            {/*              <div className="hover-double">*/}
+                            {/*                 {double}*/}
+                            {/*              </div>*/}
+                            {/*           </span>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</DelayedLink>*/}
+                            {/*<DelayedLink to="/services/podderzhka-i-razvitie">*/}
+                            {/*    <div className="item p-style">*/}
+                            {/*        <p>Поддержка и развитие</p>*/}
+                            {/*        <div className="hover-flip-arrow">*/}
+                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
+                            {/*              <div className="hover-double">*/}
+                            {/*                 {double}*/}
+                            {/*              </div>*/}
+                            {/*           </span>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</DelayedLink>*/}
+                            {/*<DelayedLink to="/services/seo-prodvizhenie">*/}
+                            {/*    <div className="item p-style">*/}
+                            {/*        <p>SEO продвижение</p>*/}
+                            {/*         <div className="hover-flip-arrow">*/}
+                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
+                            {/*              <div className="hover-double">*/}
+                            {/*                 {double}*/}
+                            {/*              </div>*/}
+                            {/*           </span>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</DelayedLink>*/}
                         </div>
                         <p className="p-style-grey pb-20">После заполнения брифа<br/> пришлите его нам на почту</p>
                         <p className="heading-tertiary hover-flip"><Link className="hoverMail" to="mailto:hello@de-us.ru"><span data-hover="hello@de-us.ru">hello@de-us.ru</span></Link></p>

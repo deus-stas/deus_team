@@ -40,7 +40,7 @@ router.get('/team', async (req, res) => {
 });
 
 router.post('/team', upload.fields([{name:'image'}, {name:'mainImg'}]), async (req, res) => {
-    const { name, post, priority, mainControl, agencyControl, serviceControl } = req.body;
+    const { name, post, sign,  priority, mainControl, agencyControl, serviceControl } = req.body;
 
 
     const image = req.files.image;
@@ -54,6 +54,7 @@ router.post('/team', upload.fields([{name:'image'}, {name:'mainImg'}]), async (r
     const team = new Team({
         name,
         post,
+        sign,
         image,
         mainImg,
         priority,
@@ -88,39 +89,34 @@ router.put("/team/:id", upload.fields([{name:'image'}, {name:'mainImg'}]), async
         return res.status(404).json({ error: 'team not found' });
     }
     console.log("реквест",req.files)
-    const { name, post, priority, mainControl, agencyControl, serviceControl } = req.body;
-
-    const mainImg = !!req.files.mainImg ? req.files.mainImg[0] : null;
-
-
+    const { name, post, sign, priority, mainControl, agencyControl, serviceControl } = req.body;
 
     // Если есть новое изображение в запросе, обновляем ссылку на него
-    const imgUpload = !['true'].includes(req.body.image)
-    if (team.image && imgUpload) {
-        const path = `uploads/${team.image.filename}`
-        if (fs.existsSync(path)) {
-            fs.unlinkSync(path);
+    function updateImage(team, imageKey, imgUpload) {
+        if (team[imageKey] && imgUpload) {
+            const path = `uploads/${team[imageKey].filename}`
+            if (fs.existsSync(path)) {
+                fs.unlinkSync(path);
+            }
+        }
+        if (imgUpload){
+            const image = !!req.files[imageKey] ? req.files[imageKey][0] : null;
+            team[imageKey] = image;
         }
     }
-    if(imgUpload){
-        const image = !!req.files.image ? req.files.image[0] :null;
-        team.image = image;
-    }
 
+    const imgUpload = !['true'].includes(req.body.image);
+    updateImage(team, 'image', imgUpload);
 
-    // Если есть новое изображение в запросе, обновляем ссылку на него
-    if (team.mainImg) {
-        const path = `uploads/${team.mainImg.filename}`
-        if (fs.existsSync(path)) {
-            fs.unlinkSync(path);
-        }
-    }
-    team.mainImg = mainImg;
+    const mainImgUpload = !['true'].includes(req.body.mainImg);
+    updateImage(team, 'mainImg', mainImgUpload);
+
 
 
     // Обновляем остальные поля документа
     team.name = name;
     team.post = post;
+    team.sign = sign;
     team.priority = priority;
     team.mainControl = mainControl;
     team.agencyControl = agencyControl;

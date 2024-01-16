@@ -4,7 +4,9 @@ import {useNavigate} from 'react-router-dom'
 import WOW from "wowjs";
 import {usePrevious} from "react-admin";
 
-const instance = axios.create()
+const instance = axios.create({
+    maxRequests: 5, // устанавливаем максимальное количество одновременных запросов
+})
 
 const IS_LOADING_MAIN_PAGE_KEY = "isLoadingMainPage";
 const setIsLoadingMainPageEvent = (isLoading) => {

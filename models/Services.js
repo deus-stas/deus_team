@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const servicesSchema = new Schema({
   name: { type: String, required: true },
   path: {type: String},
+  brief: {type:String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   descrTotal: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   descr: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   descrImg : {type: Object},

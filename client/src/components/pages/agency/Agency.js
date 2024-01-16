@@ -251,20 +251,20 @@ const Agency = (props) => {
                                 <div className="hidden-mobile" style={{width: "20rem",
                                     height: "20rem", marginTop: "auto",
                                     marginLeft: "auto"}}>
-                                    <RoundButton fromX={100} rotateZ={-360} delay={500} >
+                                    {/*<RoundButton fromX={100} rotateZ={-360} delay={500} >*/}
                                     <a href={`/uploads/${headerData.presentation.filename}`}
                                        target='_blank'
                                        rel="noopener noreferrer"
                                        className="btn --circle --dark hidden-mobile"
                                       >Скачать презентацию</a>
-                                    </RoundButton >
+                                    {/*</RoundButton >*/}
                                 </div>
                                 :
-                                <RoundButton fromX={100} rotateZ={-360} delay={500}>
+                                // <RoundButton fromX={100} rotateZ={-360} delay={500}>
                                 <a href={`/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
                                    className="btn --circle --dark"
                                 >Скачать презентацию</a>
-                                </RoundButton >
+                                // </RoundButton >
 
                         }
 
@@ -330,39 +330,49 @@ const Agency = (props) => {
                 </div>
             </section>
             <section id='agency' className="agency-workers whiteHeader">
-                <img src={chiefTeam} alt="" className="chief-team hidden-mobile"/>
-                <img src={chiefMob} alt="" className="chief-team hidden-desktop"/>
+                {/*<img src={chiefTeam} alt="" className="chief-team hidden-mobile"/>*/}
+                {/*<img src={chiefMob} alt="" className="chief-team hidden-desktop"/>*/}
+                <div className="agency-workers__main overlay">
 
 
-                    <div className="agency-workers__wrap container">
+                <div className="agency-workers__wrap container">
+                    {agencyControlTeam.map((item, index) => (
+                        <img
+                            className={`bgPerson ${index === currentPerson ? 'visible' : 'hidden'}`}
+                            alt="person"
+                            src={`/uploads/${item.image.filename}`}
+                        />
+                    ))}
                         <span className="agency-workers__wrap-item">
                            <h2 className="heading-secondary">Объединяем аналитику, маркетинг,<br/> дизайн, разработку и интеграции в<br/> единую
                             систему для получения<br/> максимальной эффективности для<br/> вашего бизнеса
                            </h2>
-                            {agencyControlTeam.filter((item,index) => index === currentPerson)
+                            {agencyControlTeam.filter((item, index) => index === currentPerson)
                                 .map((item, index) => (
-                            <span className= {index === currentPerson ? 'activeInfo' : ''}>
-                                <p className="p-style-white">{item.name}</p>
+                                    <span className={index === currentPerson ? 'activeInfo visible' : ''}>
+                                <p className="p-style-white" >{item.name}</p>
                                 <p className="descr-name">{item.post}</p>
+                                <p className="sign">{item.sign}</p>
                             </span>
-                            ))}
+                                ))}
                         </span>
-                        <div className="agency-workers__wrap-person">
-                            {agencyControlTeam.map((item, index) => (
-                                <>
-                                    <img
-                                        src={`/uploads/${item.mainImg.filename}`}
-                                        alt=""
-                                        className={`person-img ${index === currentPerson ? 'active' : ''}`}
-                                        onClick={() => {
-                                            changePerson(index)
-                                        }}
-                                    />
-                                </>
+                    <div className="agency-workers__wrap-person">
+                        {agencyControlTeam.map((item, index) => (
+                            <>
+                                <img
+                                    src={`/uploads/${item.mainImg.filename}`}
+                                    alt=""
+                                    className={`person-img ${index === currentPerson ? 'active' : ''}`}
+                                    onClick={() => {
+                                        changePerson(index)
+                                    }}
+                                />
+                            </>
 
-                            ))}
-                        </div>
+                        ))}
                     </div>
+                </div>
+                </div>
 
             </section>
             <section id='principle' className="agency-principle">
