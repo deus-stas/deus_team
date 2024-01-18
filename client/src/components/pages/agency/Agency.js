@@ -536,7 +536,7 @@ const Agency = (props) => {
                         spaceBetween={10}
                         modules={[Grid]}
                         onSlideChange={(e) => slideChange(e)}
-                        className="agency-clients__slider hidden-desktop">
+                        className="agency-clients__slider">
                         {
                             clients.map(client => {
                                 return (

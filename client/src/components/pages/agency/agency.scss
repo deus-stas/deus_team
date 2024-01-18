@@ -1106,6 +1106,10 @@
         }
 
         &__slider {
+            display: none;
+            @include respond(sm){
+                display: block;
+            }
             .swiper-wrapper {
                 flex-direction: row;
             }

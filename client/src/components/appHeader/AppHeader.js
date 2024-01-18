@@ -122,7 +122,7 @@ const AppHeader = (props) => {
         <>
             {!isLoading && headerData &&
                 <>
-                    <header className="header">
+                    <header className="header hidden-mobile">
                         <div className="container">
                             <div className="header__wrap">
                                 <DelayedLink to="/" className='header__logo' >
@@ -197,31 +197,66 @@ const AppHeader = (props) => {
                                     </div>
                                 </DelayedLink>
 
-                                <div className={`header__burger hidden-desktop ${menu ? 'activeMenu' : ''}`}
+                                <div className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
                                      onClick={() => setMenu(!menu)}>
                                     <span></span>
                                 </div>
                             </div>
                         </div>
                     </header>
-                    <div className={`header__menu ${menu ? 'activeMenu' : ''}`}>
+
+                    <header className="headerMob hidden-desktop">
+                        <div className="">
+                            <div className="headerMob__wrap">
+                                <DelayedLink to="/" className='headerMob__logo'>
+                                    <Icon icon="headerLogo" viewBox="0"/>
+                                </DelayedLink>
+
+                                <div className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
+                                     onClick={() => setMenu(!menu)}>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div className={`header__menu ${menu ? 'activeMenu active' : ''}`}>
                         <div className="header__menu-wrap">
+
+                            <div className="">
+                                <div style={{display:"flex", flexWrap:"wrap"}}>
+                                    <DelayedLink to="/" className='header__logo'>
+                                        <Icon icon="headerLogo" viewBox="0"/>
+                                    </DelayedLink>
+
+                                    <div
+                                        className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
+                                        onClick={() => setMenu(!menu)}>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <nav className="header__menu-nav">
                                 <ul className="header__menu-list">
                                     <li className="header__menu-item">
-                                        <DelayedNavLink to="/projects" onClick={() => setMenu(!menu)}>Проекты</DelayedNavLink>
+                                        <DelayedNavLink to="/projects"
+                                                        onClick={() => setMenu(!menu)}>Проекты</DelayedNavLink>
                                     </li>
                                     <li className="header__menu-item">
-                                        <DelayedNavLink to="/services" onClick={() => setMenu(!menu)}>Услуги</DelayedNavLink>
+                                        <DelayedNavLink to="/agency"
+                                                        onClick={() => setMenu(!menu)}>Агентство</DelayedNavLink>
                                     </li>
                                     <li className="header__menu-item">
-                                        <DelayedNavLink to="/agency" onClick={() => setMenu(!menu)}>Агентство</DelayedNavLink>
+                                        <DelayedNavLink to="/services"
+                                                        onClick={() => setMenu(!menu)}>Услуги</DelayedNavLink>
                                     </li>
                                     {/* <li className="header__menu-item">
                                 <NavLink to="/news" onClick={() => setMenu(!menu)}>Журнал</NavLink>
                             </li> */}
                                     <li className="header__menu-item">
-                                        <DelayedNavLink to="/contacts" onClick={() => setMenu(!menu)}>Контакты</DelayedNavLink>
+                                        <DelayedNavLink to="/contacts"
+                                                        onClick={() => setMenu(!menu)}>Контакты</DelayedNavLink>
                                     </li>
                                 </ul>
                                 <div>
@@ -234,11 +269,12 @@ const AppHeader = (props) => {
                                             {/*<Link to={`mailto:${headerData.email}`}*/}
                                             {/*      className="header__menu-contacts-link">{headerData.email}</Link>*/}
                                             <DelayedLink to={`tel:${headerData.phone}`}
-                                                  className="header__menu-contacts-link">{headerData.phone}</DelayedLink>
+                                                         className="header__menu-contacts-link">{headerData.phone}</DelayedLink>
                                         </div>
                                     ) : (
                                         <div className="header__menu-contacts">
-                                            <DelayedLink to="tel:+74951034351" className="header__menu-contacts-link">+7 (495)
+                                            <DelayedLink to="tel:+74951034351" className="header__menu-contacts-link">+7
+                                                (495)
                                                 103—4351</DelayedLink>
                                             {/*<Link to="mailto:hello@de-us.ru"*/}
                                             {/*      className="header__menu-contacts-link">hello@de-us.ru</Link>*/}
@@ -246,24 +282,35 @@ const AppHeader = (props) => {
                                     )
                             }
 
-                            <div className="header__bot">
-                                <DelayedLink to="/contacts" className="header__cta" datahash="contactUs"
-                                      onClick={(e) => gotoAnchor(e)}>
-                                    <img datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={btn}
-                                         alt="Обсудить проект"/>
-                                    Обсудить проект
+                            <div className="header__bot hidden-desktop">
+                                <DelayedLink to="/contacts" className="header__discuss" datahash="contactUs"
+                                             onClick={(e) => gotoAnchor(e)}>
+                                    {
+                                        headerData.headerPhoto ?
+                                            (
+                                                <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                                            src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
+                                                            alt="Обсудить проект" className="header__discuss-img"/>
+                                            ) : (
+                                                <img datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={btn}
+                                                     alt="Обсудить проект" className="header__discuss-img"/>
+                                            )
+                                    }
+                                    <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                         className="header__discuss-text">Обсудить проект
+                                    </div>
                                 </DelayedLink>
-                                {/* <a href='contacts#contactWithUsPart'>
-                           
-                        </a> */}
-                                {/* <Link to="/" className="header__presa">Презентация агентства</Link> */}
-                                {
-                                    headerData && headerData.presentation ?
-                                        <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`}
-                                           target='_blank' className="header__presa">Презентация агентства</a> :
-                                        <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'
-                                           className="header__presa">Презентация агентства</a>
-                                }
+                                {/*        /!* <a href='contacts#contactWithUsPart'>*/}
+                                {/*   */}
+                                {/*</a> *!/*/}
+                                {/*        /!* <Link to="/" className="header__presa">Презентация агентства</Link> *!/*/}
+                                {/*        {*/}
+                                {/*            headerData && headerData.presentation ?*/}
+                                {/*                <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`}*/}
+                                {/*                   target='_blank' className="header__presa">Презентация агентства</a> :*/}
+                                {/*                <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'*/}
+                                {/*                   className="header__presa">Презентация агентства</a>*/}
+                                {/*        }*/}
                             </div>
                         </div>
                     </div>

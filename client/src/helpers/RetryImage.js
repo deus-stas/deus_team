@@ -16,13 +16,13 @@ const RetryImage = (props) => {
     };
 
     return (
-        <div>
+        <>
             {imageLoadError ? (
                 <p>Ошибка загрузки изображения. Повторная попытка...</p>
             ) : (
                 <img className={className} src={memoizedSrc} alt={alt} onError={handleImageError} />
             )}
-        </div>
+        </>
     );
 };
 

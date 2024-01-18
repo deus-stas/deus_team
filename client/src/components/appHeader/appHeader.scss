@@ -19,28 +19,75 @@
     }
 }
 
-.header {
-    padding: 1.9rem 0;
-    width: 100%;
+.headerMob {
+    margin: 0 auto;
     background: transparent;
-    backdrop-filter: blur(2px);
     position: fixed;
     z-index: 8000;
-    top: 0;
-    left: 0;
-
+    //top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
     @include respond(sm) {
         padding: 1.5rem 0;
+        top: inherit;
+        bottom: 1.5rem;
         .container{
             padding: 0 2rem;
         }
     }
 
     &__wrap {
+        display: flex;
+        align-items: center;
+        backdrop-filter: blur(2px);
+        padding: 1rem;
+        @include respond(sm) {
+            backdrop-filter: blur(22px);
+            border-radius: 6.4rem;
+            background: rgba(255, 255, 255, 0.16);
+            gap: 1.5rem;
+            justify-content: flex-start;
+        }
+    }
+
+    &__logo {
+        transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        @include respond(sm) {
+            margin-right: 0;
+        }
+
+        @include respond(xs) {
+            margin-right: 0;
+        }
+
+        .icon {
+            width: 11.3rem;
+            height: 7.6rem;
+
+            @include respond(sm) {
+                width: 8rem;
+                height: 3.2rem;
+            }
+        }
+    }
+
+}
+
+.header {
+    padding: 1.9rem 0;
+    width: 100%;
+    background: transparent;
+    position: fixed;
+    z-index: 8000;
+    top: 0;
+    left: 0;
+
+    &__wrap {
         display: grid;
         align-items: center;
         grid-template-columns: 0.35fr auto auto 0.45fr;;
         grid-gap: 4rem;
+        backdrop-filter: blur(2px);
 
         @include respond(md) {
             display: flex;
@@ -49,10 +96,7 @@
             gap: 4.5rem;
         }
 
-        @include respond(sm) {
-            gap: 1.5rem;
-            justify-content: flex-start;
-        }
+
     }
 
     &__logo {
@@ -186,12 +230,21 @@
             height: 4.5rem;
             margin-right: 2rem;
             border-radius: 50%;
+            @include respond(sm) {
+                margin-right: 1.5rem;
+                flex: none;
+                width: 3rem;
+                height: 3rem;
+            }
         }
 
         &-text {
             transition: opacity .5s;
             white-space: nowrap;
             cursor: pointer;
+            @include respond(sm) {
+                font-size: 1.6rem;
+            }
         }
     }
 
@@ -251,14 +304,13 @@
     &__menu {
         height: 100%;
         width: 100%;
-        padding: 14.6rem 2rem 2rem;
-
-        background: #fff;
+        padding: 1rem;
         opacity: 0;
         visibility: hidden;
         overflow-y: auto;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        backdrop-filter: blur(4px);
         &::-webkit-scrollbar {
             display: none;
         }
@@ -277,34 +329,34 @@
         }
 
         &-wrap {
-            height: 100%;
             display: flex;
             flex-direction: column;
+            background: #FFFFFF;
+            padding: 2rem 1.5rem 4rem;
         }
 
         &-nav {
-            margin-bottom: 8rem;
+            margin-bottom: 4rem;
         }
 
         &-item {
             font-weight: 500;
-            font-size: 2.8rem;
-            line-height: 3.4rem;
+            font-size: 2rem;
+            line-height: 2.8rem;
+            border-bottom: 1px solid rgba(18, 18, 18, 0.2);
+            padding: 1rem 0;
 
-            &:not(:last-child) {
-                margin-bottom: 1rem;
-            }
         }
 
         &-contacts {
-            margin-bottom: auto;
             font-weight: 500;
             font-size: 2.8rem;
             line-height: 3.4rem;
 
             &-link {
-                display: table;
-                margin-left: auto;
+                display: block;
+                font-size: 2rem;
+                margin-bottom: 2rem;
 
                 &:not(:last-child) {
                     margin-bottom: 1rem;
