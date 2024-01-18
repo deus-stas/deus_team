@@ -14,7 +14,7 @@ const Showreel = (props) => {
     const prevIsInViewport = usePrevious({isInViewport, setIsInViewport});
     const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
     const [isFirstClickVideo, setisFirstClickVideo] = useState(true);
-    const [currentTime, setCurrentTime] = useState(isMain?17:0);
+    const [currentTime, setCurrentTime] = useState(0);
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null)
@@ -37,15 +37,19 @@ const Showreel = (props) => {
 
 
     useEffect(() => {
-        videoRef.current.currentTime = currentTime;
-        if (!!hasPlayedOnce || !isMain) {
+        if (!!hasPlayedOnce || !!isMain) {
             if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
                 if (!isInViewport) {
-                    videoRef.current.pause()
-                    setCurrentTime(videoRef.current.currentTime);
+                    if(!videoRef.current.paused || !hasPlayedOnce){
+                        setCurrentTime(videoRef.current.currentTime);
+                        console.log("play:", videoRef.current.currentTime)
+                        videoRef.current.pause()
+                        videoRef.current.currentTime = 17;
+                    }
                 } else {
                     videoRef.current.currentTime = currentTime;
                     videoRef.current.play();
+                    setHasPlayedOnce(true)
                 }
 
             }
@@ -63,28 +67,29 @@ const Showreel = (props) => {
                 (videoRect.top >= -scrollOffset && videoRect.top <= windowHeight - scrollOffset) ||
                 (videoRect.bottom >= scrollOffset && videoRect.bottom <= windowHeight + scrollOffset)
             );
-            setCurrentTime(videoRef.current.currentTime)
             setIsInViewport(isInViewport);
         }
     };
 
     const handlePlay = () => {
-        setHasPlayedOnce(!hasPlayedOnce);
-        if (!hasPlayedOnce) {
+
+        if (!!videoRef.current.paused) {
             if (isFirstClickVideo) {
                 videoRef.current.currentTime = 0;
                 setisFirstClickVideo(false)
             }
+            setHasPlayedOnce(true);
+            videoRef.current.currentTime = currentTime;
             videoRef.current.play();
-
         } else {
+            setCurrentTime(videoRef.current.currentTime);
             videoRef.current.pause();
+            videoRef.current.currentTime = 17;
         }
     };
 
     return (
         <div className="showreel">
-            {console.log('rend')}
             {
                 isMain ? (
                     <div ref={showReelRef} className="showreel__s ${!isPlaying ? 'playIcon' : ''} wow fadeIn"

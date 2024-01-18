@@ -245,6 +245,9 @@
             width: 100%;
             object-fit: cover;
             max-height: 83rem;
+            @include respond(md) {
+                object-fit: fill;
+            }
 
             @include respond(sm) {
                 max-height: 42rem;
@@ -310,7 +313,7 @@
             }
 
             &-header {
-                align-items: start;
+                align-items: center;
                 cursor: pointer;
                 display: flex;
                 gap: 1rem;
@@ -320,21 +323,46 @@
                 left: 4rem;
                 z-index: 3;
                 &__num {
-                    display: flex;  // Добавляем flex-контейнер
-                    justify-content: center;  // Выравнивание по центру по горизонтали
-                    align-items: center;  // Выравнивание по центру по вертикали
+                    -webkit-backdrop-filter: blur(12px);
+                    backdrop-filter: blur(12px);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     text-align: center;
                     border: 1px solid #757677;
                     color: #757677;
                     font-size: 1.6rem;
                     gap: 1rem;
                     border-radius: 39px;
-                    padding: 0.5rem 1.8rem 0.2rem 1.8rem;
-                    margin-top: 0.4rem;
+                    padding: 1rem 1.8rem 0.6rem 1.8rem;
 
                     @include respond(sm) {
                         padding: 0.6rem 1.2rem 0.4rem 1.2rem;
                     }
+
+                    .num_flex {
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        height: 2rem;
+                        font-size: 1.6rem;
+
+                        @include respond(sm) {
+                            font-size: 1.4rem;
+                            height: 1.8rem;
+                        }
+                    }
+
+                }
+
+                &__text {
+                    line-height: 4.7rem !important;
+                    height: 4.68rem;
+                    @include respond(sm) {
+                        height: 3.1rem;
+                        line-height: 3.12rem !important;
+                    }
+
                 }
 
                 @include respond(sm) {
@@ -419,6 +447,7 @@
                 border: 1px solid white;
                 background: rgba(255, 255, 255, 0.03);
                 backdrop-filter: blur(12px);
+                z-index: 5;
 
                 position: absolute;
                 bottom: 4rem;
@@ -838,20 +867,22 @@
         }
 
         &__wrap {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-gap: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 3.4rem;
 
-            @include respond(md) {
-                grid-gap: 2rem;
-                grid-template-columns: repeat(7, 1fr);
-            }
+            //@include respond(md) {
+            //    grid-gap: 2rem;
+            //    grid-template-columns: repeat(7, 1fr);
+            //}
 
             @include respond(sm) {
+                flex-wrap: nowrap;
                 width: 100vw;
                 margin-left: -2rem;
                 padding: 1rem 3rem;
-                grid-gap: 0;
+                gap: 0rem;
                 display: flex;
                 overflow-x: auto;
                 -ms-overflow-style: none;
@@ -865,7 +896,7 @@
 
         &__item {
             @include respond(sm) {
-                flex: 0 0 16.3rem;
+                flex: 0 0 14.81rem;
 
                 &:not(:last-child) {
                     margin-right: 1rem;
@@ -878,6 +909,10 @@
             margin-bottom: 2rem;
             border-radius: 50%;
             position: relative;
+
+            @include respond(sm) {
+                padding: .81rem;
+            }
 
             &::after {
                 content: '';
@@ -895,7 +930,7 @@
         }
 
         &__img {
-            width: 100%;
+            width: 18rem;
             height: 18rem;
             //aspect-ratio: 1/1;
             @supports not (aspect-ratio: 1 / 1) {
@@ -911,17 +946,22 @@
             will-change: transform;
 
             @include respond(sm) {
-                width: 100%;
-                height: auto;
-                aspect-ratio: 1/1;
+                width: 14rem;
+                height: 14rem;
             }
         }
 
         &__name {
-            line-height: 1.8rem;
+            line-height: 2.6rem;
+            font-size: 2rem;
             text-align: center;
-            font-weight: 500;
+            font-weight: 400;
             transition: opacity .5s;
+
+            @include respond(sm) {
+                font-size: 1.4rem;
+                line-height: normal;
+            }
         }
     }
 
@@ -1224,6 +1264,7 @@
         }
 
         &__item {
+            background: black;
             position: relative;
             display: grid;
             height: 73rem;
@@ -1292,6 +1333,7 @@
         }
 
         &__img {
+            padding: 3rem;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -1398,6 +1440,21 @@
     @include respond(sm) {
         width: 100%;
     }
+}
+
+.gradient::before {
+    content: '';
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    background:
+            linear-gradient(0deg, rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
+            linear-gradient(90deg,rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
+            linear-gradient(180deg,rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
+            linear-gradient(270deg, rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
+
 }
 
 

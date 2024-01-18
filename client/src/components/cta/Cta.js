@@ -128,82 +128,14 @@ const Cta = (props) => {
 
                             })}
 
-                            {/*<DelayedLink to="/services/firmennii-stil">*/}
-                            {/*    <div className="item p-style">*/}
-                            {/*        <p>Фирменный стиль</p>*/}
-                            {/*        <div className="hover-flip-arrow">*/}
-                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
-                            {/*              <div className="hover-double">*/}
-                            {/*                 {double}*/}
-                            {/*              </div>*/}
-                            {/*           </span>*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*</DelayedLink>*/}
-                            {/*<DelayedLink to="/services/saiti-i-servisi">*/}
-                            {/*    <div className="item p-style">*/}
-                            {/*        <p>Сайты и сервисы</p>*/}
-                            {/*        <div className="hover-flip-arrow">*/}
-                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
-                            {/*              <div className="hover-double">*/}
-                            {/*                 {double}*/}
-                            {/*              </div>*/}
-                            {/*           </span>*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*</DelayedLink>*/}
-                            {/*<DelayedLink to="/services/podderzhka-i-razvitie">*/}
-                            {/*    <div className="item p-style">*/}
-                            {/*        <p>Поддержка и развитие</p>*/}
-                            {/*        <div className="hover-flip-arrow">*/}
-                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
-                            {/*              <div className="hover-double">*/}
-                            {/*                 {double}*/}
-                            {/*              </div>*/}
-                            {/*           </span>*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*</DelayedLink>*/}
-                            {/*<DelayedLink to="/services/seo-prodvizhenie">*/}
-                            {/*    <div className="item p-style">*/}
-                            {/*        <p>SEO продвижение</p>*/}
-                            {/*         <div className="hover-flip-arrow">*/}
-                            {/*           <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
-                            {/*              <div className="hover-double">*/}
-                            {/*                 {double}*/}
-                            {/*              </div>*/}
-                            {/*           </span>*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*</DelayedLink>*/}
                         </div>
-                        <p className="p-style-grey pb-20">После заполнения брифа<br/> пришлите его нам на почту</p>
+                        <p className="p-style-grey pb-20 hidden-mobile">После заполнения брифа<br/> пришлите его нам на почту</p>
+                            <p className="p-style-grey pb-20 hidden-desktop">После заполнения брифа пришлите его нам на почту</p>
                         <p className="heading-tertiary hover-flip"><Link className="hoverMail" to="mailto:hello@de-us.ru"><span data-hover="hello@de-us.ru">hello@de-us.ru</span></Link></p>
                         </span>
                     </div>
 
-                    <div>
-                        {/*<div className="cta__person sticky-person">*/}
-                        {/*    /!* <img src={formName === 'tender' ? tender : manager} alt={formName === 'tender' ? 'Позвать в тендер' : 'Хотите обсудить проект?'} className="cta__person-img" /> *!/*/}
-                        {/*    {*/}
-                        {/*        worker && worker.image ?*/}
-                        {/*            (*/}
-                        {/*                    <RetryImage src={`${apiUrl}/uploads/${worker.image.filename}`} alt={worker.title}*/}
-                        {/*                         className="cta__person-img"/>*/}
-                        {/*            ) : (*/}
-                        {/*                    <img src={manager} alt="Хотите обсудить проект?" className="cta__person-img"/>*/}
-                        {/*            )*/}
-                        {/*    }*/}
-                        {/*    <div className="cta__person-descr">*/}
-                        {/*        /!* {*/}
-                        {/*        formName === 'tender' ? 'Алена Фролова — тендерный специалист, ответит на ваши вопросы и организует встречу'*/}
-                        {/*            : 'Павел Докторов — Менеджер проектов, ответит на ваши вопросы и организует встречу'*/}
-                        {/*    } *!/*/}
-                        {/*        {*/}
-                        {/*            worker && worker.description ? worker.description : null*/}
-                        {/*        }*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
+                    <div className="hidden-mobile">
                     </div>
                     <div className="cta__f">
                         <Formik

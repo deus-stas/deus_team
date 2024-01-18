@@ -338,3 +338,18 @@
         margin-bottom: 2rem;
     }
 }
+
+.hidden-footer-mobile {
+    @include respond(sm) {
+        display: none !important;
+    }
+}
+
+.hidden-footer-desktop {
+    display: none !important;
+
+    @include respond(sm) {
+        display: block !important;
+        align-self: normal;
+    }
+}

@@ -245,14 +245,14 @@ const Projects = () => {
                                         <>
                                             {optionsTheme ? optionsTheme.map((project, index) => {
                                                 const filterProjects = projects.filter(item => item.projectTheme === project.value && item.visibility);
-                                                const totalSum = filterProjects.length;
+                                                const totalSum = filterProjects.length < 10? "0" + filterProjects.length : filterProjects.length ;
                                                 return (
                                                     <Link onClick={(e) => gotoAnchor(e,'start',false)} to={`/projects?theme=${project.value}`} >
                                                         <div className="main-projects__item-flex__inner">
                                                             <div className="heading-secondary">
                                                                 <p datahash="projectNav"  className='hover'>{project.label}</p>
                                                             </div>
-                                                            <div className="main-projects__num"><span>{totalSum}</span>
+                                                            <div className="main-agency__item-header__num"><span className="num_flex">{totalSum}</span>
                                                             </div>
                                                         </div>
                                                     </Link>
@@ -282,7 +282,7 @@ const Projects = () => {
 
                             <div className="projects__wrap">
                                 {filteredProjects ? filteredProjects.map((project, index) => {
-                                        {console.log('project-data:',project)}
+                                        const numProject = index < 10 ? "0" + (index+1) : (index+1)
                                         return (
                                             project.controlURL ?
                                                 <a href={`${project.projectURL}`}
@@ -340,7 +340,9 @@ const Projects = () => {
 
                                                     </div>
                                                     <span className="projects__item-header">
-                                                        <div className="num">{index+1}</div>
+                                                        <div className="num">
+                                                            <div className="num-flex">{numProject}</div>
+                                                        </div>
                                                         <div className="name">{project.name}</div>
 
                                                     </span>

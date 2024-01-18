@@ -290,9 +290,9 @@ const MainPage = (props) => {
 
                                             </span>
                                         </h1>
-                                        <Link to={`/contacts`} className="btn --black hidden-desktop" datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
+                                        <DelayedLink to={`/contacts`} className="btn --black hidden-desktop" datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
                                             Стать клиентом
-                                        </Link>
+                                        </DelayedLink>
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +302,7 @@ const MainPage = (props) => {
                     <FadeInOnScroll>
                     <section className="main-showreel whiteHeader">
                         {mainShowreel &&
-                            <Showreel data={mainShowreel}  isMain={true} key={mainShowreel.videoUrl}/>
+                            <Showreel data={mainShowreel}  isMain={true}/>
                         }
                     </section>
                     </FadeInOnScroll>
@@ -398,7 +398,7 @@ const MainPage = (props) => {
 
 
                                                     <div className="main-agency__item-header">
-                                                        <div className="main-agency__item-header__num">{num}</div>
+                                                        <span className="main-agency__item-header__num"><div className="num_flex">{num}</div></span>
                                                         <div
                                                             className="main-agency__item-header__text heading-secondary">{name}</div>
                                                     </div>
@@ -439,9 +439,9 @@ const MainPage = (props) => {
                                                     <DelayedLink to={`/projects?theme=${project.value}`} onClick={(e) => gotoAnchor(e)}>
                                                         <div className="main-projects__item-flex__inner">
                                                             <div className="type-name">
-                                                                <p className='hover' datahash="projectNav">{project.label}</p>
+                                                                <p className='hover custom-cursor-link' datahash="projectNav">{project.label}</p>
                                                             </div>
-                                                            <div className="main-projects__num"><span>{totalSum}</span>
+                                                            <div className="main-agency__item-header__num"><span className="num_flex">{totalSum}</span>
                                                             </div>
                                                         </div>
                                                     </DelayedLink>
@@ -789,7 +789,7 @@ const MainPage = (props) => {
                                         {news.map((item) => {
                                             return (
                                                 <DelayedLink to={`/news/${item.id}`} className="main-news__item" key={item.id}>
-                                                    <div className="main-news__img-wrap">
+                                                    <div className="main-news__img-wrap gradient">
                                                         <img src={`${apiUrl}/uploads/${item.image.filename}`}
                                                              alt="Дизайн" className="main-news__img"/>
                                                     </div>

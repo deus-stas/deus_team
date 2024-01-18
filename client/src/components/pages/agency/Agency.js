@@ -229,34 +229,53 @@ const Agency = (props) => {
                 <div className="container">
                     <h2 className="heading-secondary">О компании</h2>
                     <div className="agency-about__wrap">
-                        <div className="agency-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую
-                            систему для получения максимальной эффективности для вашего бизнеса</div>
-                        <div className="agency-about__adv">
+                        <div className="agency-about__descr">Объединяем аналитику, маркетинг, дизайн, разработку и
+                            интеграции в единую
+                            систему для получения максимальной эффективности для вашего бизнеса
+                        </div>
+                        <div className="agency-about__adv hidden-mobile">
                             <div className="agency-about__adv-item">
                                 <Icon icon="star"></Icon>
-                                Работаем<br /> с 2016 года
+                                Работаем<br/> с 2016 года
                             </div>
                             <div className="agency-about__adv-item">
                                 <Icon icon="star"></Icon>
-                                Входим в ТОП-40<br /> креативности студий
+                                Входим в ТОП-40<br/> креативности студий
                             </div>
                             <div className="agency-about__adv-item">
                                 <Icon icon="star"></Icon>
-                                Комплексные решения<br /> для различных индустрий
+                                Комплексные решения<br/> для различных индустрий
+                            </div>
+                        </div>
+
+                        <div className="agency-about__adv hidden-desktop">
+                            <div className="agency-about__adv-item">
+                                <Icon icon="star"></Icon>
+                                Работаем с 2016 года
+                            </div>
+                            <div className="agency-about__adv-item">
+                                <Icon icon="star"></Icon>
+                                Входим в ТОП-40<br/> креативности студий
+                            </div>
+                            <div className="agency-about__adv-item">
+                                <Icon icon="star"></Icon>
+                                Комплексные решения для<br/> различных индустрий
                             </div>
                         </div>
                         {/* <Link className="btn --circle --orange">Презентация агентства</Link> */}
                         {
                             headerData && headerData.presentation ?
-                                <div className="hidden-mobile" style={{width: "20rem",
+                                <div className="hidden-mobile" style={{
+                                    width: "20rem",
                                     height: "20rem", marginTop: "auto",
-                                    marginLeft: "auto"}}>
+                                    marginLeft: "auto"
+                                }}>
                                     {/*<RoundButton fromX={100} rotateZ={-360} delay={500} >*/}
                                     <a href={`/uploads/${headerData.presentation.filename}`}
                                        target='_blank'
                                        rel="noopener noreferrer"
                                        className="btn --circle --dark hidden-mobile"
-                                      >Скачать презентацию</a>
+                                    >Скачать презентацию</a>
                                     {/*</RoundButton >*/}
                                 </div>
                                 :
@@ -264,7 +283,7 @@ const Agency = (props) => {
                                 <a href={`/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
                                    className="btn --circle --dark"
                                 >Скачать презентацию</a>
-                                // </RoundButton >
+                            // </RoundButton >
 
                         }
 
@@ -272,15 +291,16 @@ const Agency = (props) => {
 
                     {
                         awards && (awards[0] ? awards[0].controlVisibility : null) ?
-                                    <div className="agency-about__wrapp">
-                                        <div></div>
-                                        <div className="agency-about__wrapp-item">
-                                            {
-                                                awards.map(award => {
-                                                    return (
-                                                        <div className="agency-about__wrapp-btn" key={award.id}>
-                                                            <img src={award.image ? `/uploads/${award.image.filename}` : null} alt={award.name}/>
-                                                            <p>{award.name}</p>
+                            <div className="agency-about__wrapp">
+                                <div></div>
+                                <div className="agency-about__wrapp-item">
+                                    {
+                                        awards.map(award => {
+                                            return (
+                                                <div className="agency-about__wrapp-btn" key={award.id}>
+                                                    <img src={award.image ? `/uploads/${award.image.filename}` : null}
+                                                         alt={award.name}/>
+                                                    <p>{award.name}</p>
                                                             <div className="hover-flip-arrow">
                                                                 <span>
                                                                     <Icon icon="arrowGo" viewBox="0 0 30 31"/>
@@ -352,7 +372,7 @@ const Agency = (props) => {
                                     <span className={index === currentPerson ? 'activeInfo visible' : ''}>
                                 <p className="p-style-white" >{item.name}</p>
                                 <p className="descr-name">{item.post}</p>
-                                <p className="sign">{item.sign}</p>
+                                <p className="descr-name">{item.sign}</p>
                             </span>
                                 ))}
                         </span>

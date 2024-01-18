@@ -115,7 +115,7 @@
         @include respond(sm) {
             font-size: 1.6rem;
             grid-template-columns: auto 1fr ;
-            grid-gap: 2rem;
+            grid-gap: 3rem 2rem;
         }
 
         :nth-child(4) {
