@@ -383,6 +383,7 @@
             &-item {
                 position: absolute;
                 top: 0;
+                z-index: 5;
 
                 .heading-secondary {
                     padding: 10rem 0;
@@ -432,7 +433,6 @@
                     @include respond(sm) {
                         font-size: 1.6rem;
                         line-height: 2.1rem;
-                        padding-bottom: 2rem;
                     }
                 }
             }
@@ -1106,6 +1106,10 @@
         }
 
         &__slider {
+            display: none;
+            @include respond(sm){
+                display: block;
+            }
             .swiper-wrapper {
                 flex-direction: row;
             }

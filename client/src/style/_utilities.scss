@@ -12,7 +12,7 @@
     display: none !important;
 
     @include respond(sm) {
-        display: block !important;
+        display: inline-block !important;
     }
 }
 

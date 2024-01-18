@@ -8,6 +8,7 @@ import {connect, useSelector} from "react-redux";
 import arrorLink from "../../img/icon/arrow-link.svg";
 import {debounce} from "@material-ui/core";
 import {gotoAnchor} from "../anchors";
+import DelayedLink from "../appHeader/DelayedLink";
 
 const apiUrl = ''
 
@@ -116,18 +117,18 @@ const AppFooter = (props) => {
                 <div className="container">
                     <p className="footer-header heading-footer">
                         <span> Расскажите нам
-                            <img onClick={handleButtonClick} className="to-top hidden-mobile" src={arrorLink}
+                            <img onClick={handleButtonClick} className="to-top hidden-footer-mobile" src={arrorLink}
                                  alt={'go'}/>
                         </span>
                         <span>о своем проекте, подумаем </span>
                         <span className="last-grid">над ним вместе
-                            <Link datahash="contactUs" className="btn --footer  hidden-mobile" onClick={(e) => gotoAnchor(e)} to={`/contacts`}>
+                            <DelayedLink datahash="contactUs" className="btn --footer  hidden-footer-mobile" onClick={(e) => gotoAnchor(e)} to={`/contacts`}>
                                 Обсудить проект
-                            </Link>
+                            </DelayedLink>
                         </span>
-                        <Link to={`/contacts`} datahash="contactUs" className="btn --footer" onClick={(e) => gotoAnchor(e)}  className="hidden-desktop">
+                        <DelayedLink to={`/contacts`} datahash="contactUs" className="btn --footer hidden-footer-desktop" onClick={(e) => gotoAnchor(e)}>
                             Обсудить проект
-                        </Link>
+                        </DelayedLink>
 
                     </p>
                     {headerData &&
@@ -204,7 +205,7 @@ const AppFooter = (props) => {
                     <div className="footer-info__wrap footer__copyright p-style">
                         <p>© 2016–2023 DEUS agency</p>
                         <p>Политика конфиденциальности</p>
-                        <img onClick={handleButtonClick} className="to-top-mob hidden-desktop" src={arrorLink}
+                        <img onClick={handleButtonClick} className="to-top-mob hidden-footer-desktop" src={arrorLink}
                              alt={'go'}/>
                     </div>
 

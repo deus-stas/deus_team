@@ -105,7 +105,8 @@ const Services = (props) => {
                             </video>
                         </div>
                         <div className="container">
-                            <h1 className="heading-primary">Отвечаем за качество<br/> своих услуг</h1>
+                            <h1 className="heading-primary hidden-mobile">Отвечаем за качество<br/> своих услуг</h1>
+                            <h1 className="heading-primary hidden-desktop">Отвечаем за<br/> качество своих услуг</h1>
                         </div>
                     </section>
                     <section className="services-about">
@@ -117,7 +118,7 @@ const Services = (props) => {
                                     и интеграции в единую систему для получения максимальной эффективности для вашего
                                     бизнеса
                                 </div>
-                                <div className="services-about__adv">
+                                <div className="services-about__adv hidden-mobile">
                                     <div className="services-about__adv-item">
                                         <Icon icon="star"></Icon>
                                         Работаем<br/> с 2016 года
@@ -129,6 +130,21 @@ const Services = (props) => {
                                     <div className="services-about__adv-item">
                                         <Icon icon="star"></Icon>
                                         Комплексные решения<br/> для различных индустрий
+                                    </div>
+                                </div>
+
+                                <div className="services-about__adv hidden-desktop">
+                                    <div className="services-about__adv-item">
+                                        <Icon icon="star"></Icon>
+                                        Работаем с 2016 года
+                                    </div>
+                                    <div className="services-about__adv-item">
+                                        <Icon icon="star"></Icon>
+                                        Входим в ТОП-40<br/> креативности студий
+                                    </div>
+                                    <div className="services-about__adv-item">
+                                        <Icon icon="star"></Icon>
+                                        Комплексные решения для<br/> различных индустрий
                                     </div>
                                 </div>
 
@@ -315,6 +331,7 @@ const Services = (props) => {
                                                     <span>
                                                       <div className="worker-name heading-tertiary">{team.name}</div>
                                                     <p className="worker-descr">{team.post}</p>
+                                                    <p className="worker-descr">{team.sign}</p>
                                                     </span>
                                                 </div>
                                             )

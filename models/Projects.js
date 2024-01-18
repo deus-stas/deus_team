@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const projectsSchema = new Schema({
   name: { type: String, required: true },
-  descrProject: { type: String},
-  seoTitle: { type: String, required: true },
-  seoKeywords: { type: String, required: true },
-  seoDescription: { type: String, required: true },
+  descrProject: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
+  seoTitle: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
+  seoKeywords: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
+  seoDescription: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
   nameInEng: {type: String},
   customId: {type: String},
   image: { type: Object },
