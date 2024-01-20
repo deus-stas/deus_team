@@ -281,7 +281,7 @@ const Agency = (props) => {
                                 :
                                 // <RoundButton fromX={100} rotateZ={-360} delay={500}>
                                 <a href={`/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
-                                   className="btn --circle --dark"
+                                   className="btn --circle --dark hidden-mobile"
                                 >Скачать презентацию</a>
                             // </RoundButton >
 
@@ -599,7 +599,7 @@ const Agency = (props) => {
                                    {item.name}
                                 </h3>
                                 <div className="flex-sb">
-                                    <p className="p-style-black">{item.place}</p>
+                                    <p className="p-style-black" style={{fontWeight: "400"}}>{item.place}</p>
                                     <div className="hover-flip-arrow">
                                    <span>
                                        <Icon icon="arrowGo" viewBox="0 0 30 30"/>

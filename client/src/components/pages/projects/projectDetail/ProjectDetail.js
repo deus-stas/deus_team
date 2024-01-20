@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../../../axios'
-import { useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 import Cta from '../../../cta/Cta';
 import Breadcrumbs from '../../../breadcrubms/Breadcrumbs';
@@ -146,7 +146,7 @@ const ProjectDetail = () => {
                                 {
                                     detail.projectSite ? (
                                         <div className="project-main__link" >
-                                            <a href={detail.projectURL}>{detail.projectSite}</a>
+                                            <Link target="_blank" to={detail.projectURL}>{detail.projectSite}</Link>
                                             <Icon icon="arr" />
                                         </div>
                                     ) : null

@@ -687,14 +687,17 @@ const MainPage = (props) => {
                                 <div className="main-working__wrap">
                                     {
                                         working.map(item => {
+                                            const fileUrl = item.file ? `${apiUrl}/uploads/${item.file.filename}` : null;
+                                            const isVideo = item.file ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.file.filename) : false;
+                                            const isImage = item.file ? /\.(jpeg|jpg|gif|png)$/i.test(item.file.filename) : false;
+
                                             return (
                                                 <div className="main-working__item" key={item.id}>
                                                     <div className="main-working__img-wrap">
-                                                        <img
-                                                            src={item.image ? `${apiUrl}/uploads/${item.image.filename}` : null}
-                                                            alt={item.name} className="main-working__img"/>
+                                                        {isVideo && <video autoPlay muted playsInline src={fileUrl} alt={item.name} className="main-working__img" autoPlay loop muted playsInline />}
+                                                        {isImage && <img src={fileUrl} alt={item.name} className="main-working__img" />}
                                                     </div>
-                                                    <div className="main-working__name">{item.name}</div>
+                                                    <p className="main-working__name">{item.name}</p>
                                                 </div>
                                             )
                                         })
@@ -788,7 +791,8 @@ const MainPage = (props) => {
                                     <div className="main-news__content">
                                         {news.map((item) => {
                                             return (
-                                                <DelayedLink to={`/news/${item.id}`} className="main-news__item" key={item.id}>
+                                                <DelayedLink to={`/news/${item.id}`} className="main-news__item"
+                                                             key={item.id}>
                                                     <div className="main-news__img-wrap gradient">
                                                         <img src={`${apiUrl}/uploads/${item.image.filename}`}
                                                              alt="Дизайн" className="main-news__img"/>
@@ -830,7 +834,8 @@ const MainPage = (props) => {
 
 export default connect(
     (state) => (
-        {   headerData: state.app.headerData,
+        {
+            headerData: state.app.headerData,
             services: state.app.services,
             team: state.app.team,
         }

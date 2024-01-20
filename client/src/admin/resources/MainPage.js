@@ -14,7 +14,7 @@ const VideoOrImageField = ({ file }) => {
         if (isVideo(file)) {
             return (
                 <video style={{ width: '300px' }} autoPlay loop playsInline>
-                    <source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
+                    <source src={`${apiUrl}/uploads/${file.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
                 </video>
             );
         } else {

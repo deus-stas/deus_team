@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const workingSchema = new Schema({
   name: { type: String, required: true },
-  image: { type: Object },
+  file: { type: Object },
 });
 
 workingSchema.set('toJSON', { virtuals: true });
