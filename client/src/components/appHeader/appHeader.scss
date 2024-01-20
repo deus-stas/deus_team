@@ -23,7 +23,7 @@
     margin: 0 auto;
     background: transparent;
     position: fixed;
-    z-index: 8000;
+    z-index: 8001;
     //top: 50%;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -74,11 +74,12 @@
 }
 
 .header {
-    padding: 1.9rem 0;
+    padding-top: 2rem;
     width: 100%;
     background: transparent;
     position: fixed;
     z-index: 8000;
+    backdrop-filter: blur(2px);
     top: 0;
     left: 0;
 
@@ -87,7 +88,7 @@
         align-items: center;
         grid-template-columns: 0.35fr auto auto 0.45fr;;
         grid-gap: 4rem;
-        backdrop-filter: blur(2px);
+
 
         @include respond(md) {
             display: flex;
@@ -261,12 +262,12 @@
                 top: 1.1rem;
                 border-radius: 0;
                 width: 2rem;
-                height: 0.25rem;
+                height: 0.264rem;
                 transform: rotate(-45deg) translate(-1.1rem);
 
                 &::before {
                     border-radius: 0;
-                    height: 2px;
+                    height: 2.1px;
                     transform: rotate(90deg) translate(-1rem, -0.1rem);
                 }
             }
@@ -275,7 +276,7 @@
         span {
             border-radius: 34px;
             width: 0.5rem;
-            height: 5px;
+            height: 4.9px;
             background: #191B1D;
             position: absolute;
             top: 1.3rem;
@@ -306,6 +307,7 @@
         width: 100%;
         padding: 1rem;
         opacity: 0;
+        z-index: 8000;
         visibility: hidden;
         overflow-y: auto;
         -ms-overflow-style: none;
@@ -318,24 +320,24 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 9;
 
         transition: all .3s;
 
         &.activeMenu {
             opacity: 1;
             visibility: visible;
-            z-index: 7000;
+
         }
 
         &-wrap {
             display: flex;
             flex-direction: column;
             background: #FFFFFF;
-            padding: 2rem 1.5rem 4rem;
+            padding: 1.5rem 2rem 4rem;
         }
 
         &-nav {
+            margin-top: 2rem;
             margin-bottom: 4rem;
         }
 
@@ -421,4 +423,16 @@
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.hiddenScroll {
+    transition: all .25s ;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.activeScroll {
+    transition: all .25s ;
+    visibility: visible;
+    opacity: 1;
 }
