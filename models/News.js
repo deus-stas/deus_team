@@ -5,7 +5,7 @@ const newsSchema = new Schema({
   name: { type: String, required: true },
   image: { type: Object },
   body: { type: String },
-  tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }]
+  newsTags: [{ type: Schema.Types.ObjectId, ref: 'NewsTags' }]
 });
 
 newsSchema.set('toJSON', { virtuals: true });

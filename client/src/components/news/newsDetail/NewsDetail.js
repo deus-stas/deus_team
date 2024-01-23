@@ -23,9 +23,9 @@ const NewsDetail = () => {
             .then((response) => {
 
                 const dataDetail = response.data;
-                axios.get(`${apiUrl}/api/tags/${response.data.tags}`)
+                axios.get(`${apiUrl}/api/newsTags/${response.data.newsTags}`)
                     .then((response) => {
-                        dataDetail.tags = response.data.name;
+                        dataDetail.newsTags = response.data.name;
                         setDetail(dataDetail);
                         console.log(dataDetail);
                     })
@@ -43,9 +43,9 @@ const NewsDetail = () => {
         axios.get(`${apiUrl}/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`${apiUrl}/api/tags/${news.tags}`)
+                    return axios.get(`${apiUrl}/api/tags/${news.newsTags}`)
                         .then((tagResponse) => {
-                            news.tags = tagResponse.data.name;
+                            news.newsTags = tagResponse.data.name;
                             return news;
                         })
                         .catch((error) => {
@@ -93,7 +93,7 @@ const NewsDetail = () => {
                 <Breadcrumbs />
                 <div className="container">
                     <div className="news-detail__main-content">
-                        <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.tags }}></div>
+                        <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.newsTags }}></div>
                         <h1 className="heading-primary" dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
                     </div>
                     <img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />
@@ -122,7 +122,7 @@ const NewsDetail = () => {
                                             <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
                                         </div>
                                         <div className="news__text">
-                                            <div className="news__tag">{item.tags}</div>
+                                            <div className="news__tag">{item.newsTags}</div>
                                             <div className="news__name">{item.name}</div>
                                         </div>
                                     </Link>

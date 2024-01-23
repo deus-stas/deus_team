@@ -8,6 +8,7 @@ const passport = require("passport");
 const newsRoutes = require('./routes/api/news');
 const mainPageRoutes = require('./routes/api/mainPage');
 const tagsRoutes = require('./routes/api/tags');
+const newsTagsRoutes = require('./routes/api/newsTags');
 const seoRoutes = require('./routes/api/seo');
 const workingRoutes = require('./routes/api/working');
 const projectsRoutes = require('./routes/api/projects');
@@ -60,6 +61,7 @@ app.use((req, res, next) => {
 app.use('/api', newsRoutes);
 app.use('/api', mainPageRoutes);
 app.use('/api', tagsRoutes);
+app.use('/api', newsTagsRoutes);
 app.use('/api', seoRoutes);
 app.use('/api', workingRoutes);
 app.use('/api', projectsRoutes);

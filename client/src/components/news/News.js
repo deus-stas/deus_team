@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 const News = () => {
     const location = useLocation()
     const params = new URLSearchParams(location.search)
-    let tagInit = params.get('tag') ? params.get('tag') : 'Все';
+    let tagInit = params.get('newsTags') ? params.get('newsTags') : 'Все';
 
     const [news, setNews] = useState([]);const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -93,7 +93,7 @@ const News = () => {
                                         <img src={`/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
                                     </div>
                                     <div className="news__text">
-                                        <div className="news__tag">{item.tags}</div>
+                                        <div className="news__tag">{item.newsTags}</div>
                                         <div className="news__name">{item.name}</div>
                                     </div>
                                 </Link>

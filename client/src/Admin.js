@@ -29,6 +29,7 @@ import { theme } from "./admin/theme";
 import MyLogoutButton from '../src/components/appHeader/MyLogoutButton';
 import { DiplomasList, DiplomasEdit, DiplomasCreate } from './admin/resources/Diplomas';
 import { ContactsList, ContactsEdit, ContactsCreate } from './admin/resources/Contacts';
+import {NewsTagsCreate, NewsTagsEdit, NewsTagsList} from "./admin/resources/NewsTags";
 
 const MyUserMenu = () => <UserMenu><MyLogoutButton /></UserMenu>;
 
@@ -43,6 +44,7 @@ const AdminPage = () => (
     <Resource name="mainPage" list={MainPageList} create={MainPageCreate} edit={MainPageEdit} options={{ label: 'Главная страница' }} />
     <Resource name="working" list={WorkingList} create={WorkingCreate} edit={WorkingEdit} options={{ label: 'В работе' }} />
     <Resource name="tags" list={TagsList} create={TagsCreate} edit={TagsEdit} options={{ label: 'Теги' }} />
+    <Resource name="newsTags" list={NewsTagsList} create={NewsTagsCreate} edit={NewsTagsEdit} options={{ label: 'Рубрики' }} />
     <Resource name="seo" list={SeoList} create={SeoCreate} edit={SeoEdit} options={{ label: 'SEO' }} />
     <Resource name="themes" list={ThemesList} create={ThemesCreate} edit={ThemesEdit} options={{ label: 'Темы' }} />
     <Resource name="types" list={TypesList} create={TypesCreate} edit={TypesEdit} options={{ label: 'Тип проекта' }} />

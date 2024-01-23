@@ -65,7 +65,7 @@ const MainPage = (props) => {
     const [isActive, setIsActive] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [news, setNews] = useState([]);
-    const [allTags, setAllTags] = useState(new Set());
+    const [allNewsTags, setAllNewsTags] = useState(new Set());
     const [working, setWorking] = useState([]);
     const [showreels, setShowreels] = useState([]);
     const [allProjects, setAllProjects] = useState([]);
@@ -98,9 +98,10 @@ const MainPage = (props) => {
         axios.get(`${apiUrl}/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`${apiUrl}/api/tags/${news.tags}`)
+                    return axios.get(`${apiUrl}/api/newsTags/${news.newsTags}`)
                         .then((tagResponse) => {
-                            news.tags = tagResponse.data.name;
+                            news.newsTags = tagResponse.data.name;
+                            console.log("newsTag newsWithTags", news,tagResponse)
                             return news;
                         })
                         .catch((error) => {
@@ -109,11 +110,13 @@ const MainPage = (props) => {
                         });
                 });
 
+
                 Promise.all(newsWithTags)
                     .then((news) => {
                         setNews(news);
-                        const tags = new Set(news.flatMap((news) => news.tags));
-                        setAllTags(tags);
+                        const newsTags = new Set(news.flatMap((news) => news.newsTags));
+                        console.log("newsTag", newsTags)
+                        setAllNewsTags(newsTags);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -774,8 +777,8 @@ const MainPage = (props) => {
                                             <h2 className="heading-secondary sticky-h2">Журнал</h2>
                                         </span>
                                         <div className="main-news__info-wrap">
-                                            {[...allTags].map((tag, i) => (
-                                                <DelayedLink to={`/news?tag=${tag}`} className="main-news__info-item "
+                                            {[...allNewsTags].map((tag, i) => (
+                                                <DelayedLink to={`/news?newsTags=${tag}`} className="main-news__info-item "
                                                       key={i}><p className="p-style-black">#{tag}</p>
                                                     <div className="hover-flip-arrow">
                                                       <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
@@ -798,7 +801,7 @@ const MainPage = (props) => {
                                                              alt="Дизайн" className="main-news__img"/>
                                                     </div>
                                                     <div className="main-news__text">
-                                                        <div className="main-news__tag">#{item.tags}</div>
+                                                        <div className="main-news__tag">#{item.newsTags}</div>
                                                     </div>
                                                     <div className="main-news__descr">
                                                         <div className="main-news__name">{item.name}</div>

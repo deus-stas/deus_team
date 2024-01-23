@@ -39,7 +39,7 @@ export const NewsCreate = (props) => (
             <ImageInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <ReferenceArrayInput source="tags" reference="tags" label="Тэги" validate={[required()]}>
+            <ReferenceArrayInput source="newsTags" reference="newsTags" label="Рубрики" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceArrayInput>
             <RichTextInput className="customWidth" source="body" fullWidth validate={[required()]} />
@@ -55,7 +55,7 @@ export const NewsEdit = (props) => (
                 <FilenameField source="image" title="title" />
             </ImageInput>
 
-            <ReferenceArrayInput source="tags" reference="tags" label="Тэги" validate={[required()]}>
+            <ReferenceArrayInput source="newsTags" reference="newsTags" label="Рубрики" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceArrayInput>
             <RichTextInput className="customWidth" source="body" fullWidth validate={[required()]} />
