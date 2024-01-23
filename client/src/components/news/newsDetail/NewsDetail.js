@@ -85,6 +85,7 @@ const NewsDetail = () => {
     const fileUrl = detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null;
     const isVideo = detail.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.image.filename) : false;
     const isImage = detail.image ? /\.(jpeg|jpg|gif|png)$/i.test(detail.image.filename) : false;
+    const shouldAutoPlay = detail.detailControl;
 
 
     return (
@@ -101,11 +102,10 @@ const NewsDetail = () => {
                     </div>
                     {/*<img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />*/}
 
-                    {isVideo && <video autoPlay muted playsInline
+                    {isVideo && <video autoPlay={shouldAutoPlay} muted playsInline
                                        src={fileUrl} alt={detail.name}
                                        className="news-detail__main-img"
-                                       autoPlay loop muted
-                                       playsInline/>}
+                                        loop/>}
                     {isImage && <img src={fileUrl} alt={detail.name}
                                      className="news-detail__main-img"/>}
                 </div>

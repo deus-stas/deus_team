@@ -796,6 +796,7 @@ const MainPage = (props) => {
                                             const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
                                             const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
                                             const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
+                                            const shouldAutoPlay = item.mainControl;
 
 
                                             return (
@@ -803,11 +804,11 @@ const MainPage = (props) => {
                                                              key={item.id}>
                                                     <div className="main-news__img-wrap gradient">
 
-                                                        {isVideo && <video autoPlay muted playsInline
+                                                        {isVideo && <video autoPlay={shouldAutoPlay} muted playsInline
                                                                            src={fileUrl} alt={item.name}
                                                                            className="main-news__img"
-                                                                           autoPlay loop muted
-                                                                           playsInline/>}
+                                                                           loop
+                                                                           />}
                                                         {isImage && <img src={fileUrl} alt={item.name}
                                                                          className="main-news__img"/>}
 

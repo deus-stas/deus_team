@@ -5,6 +5,8 @@ const newsSchema = new Schema({
   name: { type: String, required: true },
   image: { type: Object },
   body: { type: String },
+  mainControl: {type: Boolean},
+  detailControl: {type: Boolean},
   newsTags: [{ type: Schema.Types.ObjectId, ref: 'NewsTags' }]
 });
 

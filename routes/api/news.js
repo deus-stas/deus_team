@@ -37,7 +37,7 @@ router.get('/news', async (req, res) => {
 });
 
 router.post('/news', upload.single('image'), async (req, res) => {
-  const { name, newsTags, body } = req.body;
+  const { name, newsTags, mainControl, detailControl, body } = req.body;
   console.log(req.file);
 
   const image = req.file;
@@ -46,7 +46,9 @@ router.post('/news', upload.single('image'), async (req, res) => {
     name,
     image,
     body,
-    newsTags
+    newsTags,
+    mainControl,
+    detailControl,
   });
 
   await news.save();
@@ -75,7 +77,7 @@ router.put("/news/:id", upload.single('image'), async (req, res) => {
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, newsTags, body } = req.body;
+  const { name, newsTags, mainControl, detailControl,  body } = req.body;
   const image = req.file;
 
   // Если есть новое изображение в запросе, обновляем ссылку на него
@@ -90,6 +92,8 @@ router.put("/news/:id", upload.single('image'), async (req, res) => {
   // Обновляем остальные поля документа
   news.name = name;
   news.newsTags = newsTags;
+  news.mainControl = mainControl;
+  news.detailControl = detailControl;
   news.body = body;
 
   // Сохраняем изменения

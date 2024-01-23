@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, Datagrid, TextField, EditButton, FileInput} from 'react-admin';
+import {List, Datagrid, TextField, EditButton, FileInput, BooleanInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, ReferenceArrayInput, SelectInput, required, FunctionField } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 
@@ -61,6 +61,12 @@ export const NewsCreate = (props) => (
             <FileInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*,video/*">
                 <FileField source="src" title="title" />
             </FileInput>
+            <BooleanInput
+                source="mainControl"
+                label="Главная страница Превью/Видео"/>
+            <BooleanInput
+                source="detailControl"
+                label="Деталка Превью/Видео"/>
             <ReferenceArrayInput source="newsTags" reference="newsTags" label="Рубрики" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceArrayInput>
@@ -76,6 +82,12 @@ export const NewsEdit = (props) => (
             <FileInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*,video/*">
                 <FileField source="image" title="title" />
             </FileInput>
+            <BooleanInput
+                source="mainControl"
+                label="Главная страница Превью/Видео"/>
+            <BooleanInput
+                source="detailControl"
+                label="Деталка Превью/Видео"/>
 
             <ReferenceArrayInput source="newsTags" reference="newsTags" label="Рубрики" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
