@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
@@ -82,6 +82,9 @@ const NewsDetail = () => {
         };
     },[]);
 
+    const fileUrl = detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null;
+    const isVideo = detail.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.image.filename) : false;
+    const isImage = detail.image ? /\.(jpeg|jpg|gif|png)$/i.test(detail.image.filename) : false;
 
 
     return (
@@ -96,7 +99,15 @@ const NewsDetail = () => {
                         <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.newsTags }}></div>
                         <h1 className="heading-primary" dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
                     </div>
-                    <img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />
+                    {/*<img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />*/}
+
+                    {isVideo && <video autoPlay muted playsInline
+                                       src={fileUrl} alt={detail.name}
+                                       className="news-detail__main-img"
+                                       autoPlay loop muted
+                                       playsInline/>}
+                    {isImage && <img src={fileUrl} alt={detail.name}
+                                     className="news-detail__main-img"/>}
                 </div>
             </section>
 
@@ -116,10 +127,21 @@ const NewsDetail = () => {
 
                             {news.map((item) => {
                                 if (item.id === detail.id) return null;
+                                const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
+                                const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
+                                const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
+
+
                                 return (
                                     <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
                                         <div className="news__img-wrap">
-                                            <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                            {isVideo && <video autoPlay muted playsInline
+                                                               src={fileUrl} alt={item.name}
+                                                               className="news__img"
+                                                               autoPlay loop muted
+                                                               playsInline/>}
+                                            {isImage && <img src={fileUrl} alt={item.name}
+                                                             className="news__img"/>}
                                         </div>
                                         <div className="news__text">
                                             <div className="news__tag">{item.newsTags}</div>

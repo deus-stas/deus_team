@@ -793,12 +793,25 @@ const MainPage = (props) => {
                                     </div>
                                     <div className="main-news__content">
                                         {news.map((item) => {
+                                            const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
+                                            const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
+                                            const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
+
+
                                             return (
                                                 <DelayedLink to={`/news/${item.id}`} className="main-news__item"
                                                              key={item.id}>
                                                     <div className="main-news__img-wrap gradient">
-                                                        <img src={`${apiUrl}/uploads/${item.image.filename}`}
-                                                             alt="Дизайн" className="main-news__img"/>
+
+                                                        {isVideo && <video autoPlay muted playsInline
+                                                                           src={fileUrl} alt={item.name}
+                                                                           className="main-news__img"
+                                                                           autoPlay loop muted
+                                                                           playsInline/>}
+                                                        {isImage && <img src={fileUrl} alt={item.name}
+                                                                         className="main-news__img"/>}
+
+
                                                     </div>
                                                     <div className="main-news__text">
                                                         <div className="main-news__tag">#{item.newsTags}</div>
