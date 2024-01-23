@@ -58,6 +58,10 @@ export const NewsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
+            {/*<TextInput*/}
+            {/*    className="customWidth"*/}
+            {/*    source="urlName"*/}
+            {/*    label="URL" fullWidth  />*/}
             <FileInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*,video/*">
                 <FileField source="src" title="title" />
             </FileInput>
@@ -79,6 +83,10 @@ export const NewsEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
+            <TextInput
+                className="customWidth"
+                source="urlName"
+                label="URL" fullWidth  />
             <FileInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*,video/*">
                 <FileField source="image" title="title" />
             </FileInput>

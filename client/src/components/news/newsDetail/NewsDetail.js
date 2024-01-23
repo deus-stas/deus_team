@@ -8,6 +8,7 @@ import SectionSocial from '../../sectionSocial/SectionSocial';
 import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 
 import './newsDetail.scss'
+import DelayedLink from "../../appHeader/DelayedLink";
 
 const apiUrl = ''
 
@@ -19,7 +20,7 @@ const NewsDetail = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/news/${id}`)
+        axios.get(`${apiUrl}/api/news/url/${id}`)
             .then((response) => {
 
                 const dataDetail = response.data;
@@ -133,7 +134,7 @@ const NewsDetail = () => {
 
 
                                 return (
-                                    <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
+                                    <DelayedLink to={`/news/${item.urlName}`} className="news__item" key={item.urlName}>
                                         <div className="news__img-wrap">
                                             {isVideo && <video autoPlay muted playsInline
                                                                src={fileUrl} alt={item.name}
@@ -144,10 +145,10 @@ const NewsDetail = () => {
                                                              className="news__img"/>}
                                         </div>
                                         <div className="news__text">
-                                            <div className="news__tag">{item.newsTags}</div>
+                                            <div className="news__tag">{item.name}</div>
                                             <div className="news__name">{item.name}</div>
                                         </div>
-                                    </Link>
+                                    </DelayedLink>
                                 )
                             })}
                         </div>

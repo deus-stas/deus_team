@@ -800,7 +800,7 @@ const MainPage = (props) => {
 
 
                                             return (
-                                                <DelayedLink to={`/news/${item.id}`} className="main-news__item"
+                                                <DelayedLink to={`/news/${item.urlName}`} className="main-news__item"
                                                              key={item.id}>
                                                     <div className="main-news__img-wrap gradient">
 

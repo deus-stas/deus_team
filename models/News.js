@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const newsSchema = new Schema({
   name: { type: String, required: true },
+  urlName: {type: String},
   image: { type: Object },
   body: { type: String },
   mainControl: {type: Boolean},
