@@ -657,7 +657,7 @@
                 img {
                     margin-bottom: 5.3rem;
                     @include respond(sm) {
-                        height: 4.8rem;
+                        margin-bottom: 2rem;
                         width: 11.4rem;
                     }
                 }
