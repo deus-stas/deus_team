@@ -46,7 +46,7 @@
 
             .heading-fourth {
                 font-weight: 400;
-                font-size: clamp(1.6rem, 5vw, 2.8rem);
+                font-size: clamp(1.6rem, 5vw, 2.2rem);
                 color: #757677;
                 margin-bottom: 2rem;
 
@@ -55,10 +55,10 @@
             .heading-primary {
                 display: flex;
                 //font-size: 9.6rem;
-                line-height: clamp(3.5rem, 5vw, 10.6rem);
+                line-height: clamp(3.5rem, 5vw, 9rem);
                 flex-direction: column;
                 color: rgba(0,0,0,0.82);
-                font-size: clamp(3.2rem, 4vw, 9.6rem);
+                font-size: clamp(3.2rem, 4vw, 7rem);
                 //margin: 0;
 
                 .last-grid {
@@ -88,15 +88,14 @@
 
                 .p-style {
                     font-weight: 400;
-                    font-size: clamp(1.6rem, 2vw, 2.4rem);
+                    font-size: clamp(1.6rem, 2vw, 2rem);
                     color: #757677;
                     display: block;
                     flex-wrap: nowrap;
-                    line-height: normal;
                     flex-direction: row;
                     align-items: center;
-                    margin-top: 2rem;
-
+                    line-height: 3.3rem;
+                    margin-top: 1rem;
                     @include respond(sm) {
                         margin: 2rem 0;
                     }
@@ -292,7 +291,7 @@
         &__item {
             position: relative;
             height: 73rem;
-            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            font-size: clamp(1.6rem, 5vw, 2rem);
             background: #121212;
 
             @include respond(sm) {
@@ -508,7 +507,7 @@
                         &:nth-child(1) {
                             font-weight: 500;
                             font-size:9.6rem;
-                            padding-top: 1rem;
+                            //padding-top: 1rem;
 
                             @include respond(sm) {
                                 font-size: 6rem;
@@ -619,6 +618,7 @@
             display: flex;
             flex-direction: column;
             gap: 5rem;
+            max-width: 90%;
 
             @include respond(sm) {
                 grid-template-columns: 1fr;
@@ -640,6 +640,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
+                padding: 0;
 
 
                 &__inner {
@@ -674,7 +675,7 @@
 
                     .type-name {
                         font-weight: 500;
-                        font-size: 3.6rem;
+                        font-size: 3rem;
                         @include respond(sm) {
                             font-size: 2rem;
                         }
@@ -876,6 +877,7 @@
         }
 
         &__wrap {
+            margin-top: 4rem;
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
@@ -887,6 +889,7 @@
             //}
 
             @include respond(sm) {
+                margin-top: 3rem;
                 flex-wrap: nowrap;
                 width: 100vw;
                 margin-left: -2rem;
@@ -953,7 +956,7 @@
         &__name {
             hyphens: auto;
             line-height: 2.6rem;
-            font-size: 2rem;
+            font-size: 1.8rem;
             text-align: center;
             font-weight: 400;
             transition: opacity .5s;
@@ -1196,7 +1199,7 @@
                 padding: 1.5rem 0;
                 align-items: center;
                 justify-content: space-between;
-                font-size: 2.8rem;
+                font-size: 2.2rem;
                 line-height: 2.6rem;
                 color: #000000;
                 border-bottom: 1px solid rgba(65, 66, 66, 0.15);
@@ -1382,7 +1385,7 @@
 
         &__tag {
             padding: 1rem;
-            font-size: 2rem;
+            font-size: 1.8rem;
             line-height: 2.6rem;
             z-index: 100;
 
@@ -1394,7 +1397,7 @@
 
         &__name {
             font-weight: 500;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             line-height: 3.4rem;
             color: #FFFFFF;
             z-index: 100;
@@ -1436,7 +1439,7 @@
 
 
 .wh-30 {
-    width: 30%;
+    width: 20%;
 
     @include respond(sm) {
         width: 100%;

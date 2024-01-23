@@ -686,7 +686,7 @@ const MainPage = (props) => {
                         < FadeInOnScroll>
                         <section className="main-working whiteHeader">
                             <div className="container">
-                                <h3 className="heading-tertiary">Работаем сейчас над</h3>
+                                <h3 className="heading-secondary">Работаем сейчас над</h3>
                                 <div className="main-working__wrap">
                                     {
                                         working.map(item => {
