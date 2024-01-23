@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import SectionSocial from '../../sectionSocial/SectionSocial';
 import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 
 import './newsDetail.scss'
+import DelayedLink from "../../appHeader/DelayedLink";
 
 const apiUrl = ''
 
@@ -19,13 +20,13 @@ const NewsDetail = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/news/${id}`)
+        axios.get(`${apiUrl}/api/news/url/${id}`)
             .then((response) => {
 
                 const dataDetail = response.data;
-                axios.get(`${apiUrl}/api/tags/${response.data.tags}`)
+                axios.get(`${apiUrl}/api/newsTags/${response.data.newsTags}`)
                     .then((response) => {
-                        dataDetail.tags = response.data.name;
+                        dataDetail.newsTags = response.data.name;
                         setDetail(dataDetail);
                         console.log(dataDetail);
                     })
@@ -43,9 +44,9 @@ const NewsDetail = () => {
         axios.get(`${apiUrl}/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`${apiUrl}/api/tags/${news.tags}`)
+                    return axios.get(`${apiUrl}/api/tags/${news.newsTags}`)
                         .then((tagResponse) => {
-                            news.tags = tagResponse.data.name;
+                            news.newsTags = tagResponse.data.name;
                             return news;
                         })
                         .catch((error) => {
@@ -82,6 +83,10 @@ const NewsDetail = () => {
         };
     },[]);
 
+    const fileUrl = detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null;
+    const isVideo = detail.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.image.filename) : false;
+    const isImage = detail.image ? /\.(jpeg|jpg|gif|png)$/i.test(detail.image.filename) : false;
+    const shouldAutoPlay = detail.detailControl;
 
 
     return (
@@ -93,10 +98,17 @@ const NewsDetail = () => {
                 <Breadcrumbs />
                 <div className="container">
                     <div className="news-detail__main-content">
-                        <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.tags }}></div>
+                        <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.newsTags }}></div>
                         <h1 className="heading-primary" dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
                     </div>
-                    <img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />
+                    {/*<img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />*/}
+
+                    {isVideo && <video autoPlay={shouldAutoPlay} muted playsInline
+                                       src={fileUrl} alt={detail.name}
+                                       className="news-detail__main-img"
+                                        loop/>}
+                    {isImage && <img src={fileUrl} alt={detail.name}
+                                     className="news-detail__main-img"/>}
                 </div>
             </section>
 
@@ -116,16 +128,27 @@ const NewsDetail = () => {
 
                             {news.map((item) => {
                                 if (item.id === detail.id) return null;
+                                const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
+                                const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
+                                const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
+
+
                                 return (
-                                    <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
+                                    <DelayedLink to={`/news/${item.urlName}`} className="news__item" key={item.urlName}>
                                         <div className="news__img-wrap">
-                                            <img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
+                                            {isVideo && <video autoPlay muted playsInline
+                                                               src={fileUrl} alt={item.name}
+                                                               className="news__img"
+                                                               autoPlay loop muted
+                                                               playsInline/>}
+                                            {isImage && <img src={fileUrl} alt={item.name}
+                                                             className="news__img"/>}
                                         </div>
                                         <div className="news__text">
-                                            <div className="news__tag">{item.tags}</div>
+                                            <div className="news__tag">{item.name}</div>
                                             <div className="news__name">{item.name}</div>
                                         </div>
-                                    </Link>
+                                    </DelayedLink>
                                 )
                             })}
                         </div>

@@ -4,11 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 
 import './news.scss';
 import {connect} from "react-redux";
+import DelayedLink from "../appHeader/DelayedLink";
 
 const News = () => {
     const location = useLocation()
     const params = new URLSearchParams(location.search)
-    let tagInit = params.get('tag') ? params.get('tag') : 'Все';
+    let tagInit = params.get('newsTags') ? params.get('newsTags') : 'Все';
 
     const [news, setNews] = useState([]);const apiUrl = process.env.NODE_ENV === 'production'
     ? 'http://188.120.232.38'
@@ -88,15 +89,15 @@ const News = () => {
                     <div className="news__wrap">
                         {filteredNews.map((item) => {
                             return (
-                                <Link to={`/news/${item.id}`} className="news__item" key={item.id}>
+                                <DelayedLink to={`/news/${item.urlName}`} className="news__item" key={item.id}>
                                     <div className="news__img-wrap">
                                         <img src={`/uploads/${item.image.filename}`} alt="Дизайн" className="news__img" />
                                     </div>
                                     <div className="news__text">
-                                        <div className="news__tag">{item.tags}</div>
+                                        <div className="news__tag">{item.newsTags}</div>
                                         <div className="news__name">{item.name}</div>
                                     </div>
-                                </Link>
+                                </DelayedLink>
                             )
                         })}
                     </div>

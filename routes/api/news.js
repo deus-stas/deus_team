@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const { transliterate } = require('transliteration');
 const fs = require('fs');
 const News = require("../../models/News");
 
@@ -37,8 +38,16 @@ router.get('/news', async (req, res) => {
 });
 
 router.post('/news', upload.single('image'), async (req, res) => {
-  const { name, tags, body } = req.body;
-  console.log(req.file);
+  const { name, newsTags, mainControl, detailControl, body } = req.body;
+
+  function generateUrl(name) {
+    const transliteratedName = transliterate(name);
+    const rmPercent = transliteratedName.replace(/%/g, '');
+    return rmPercent.split(' ').join('-');
+  }
+
+  const urlName = generateUrl(name);
+
 
   const image = req.file;
 
@@ -46,7 +55,10 @@ router.post('/news', upload.single('image'), async (req, res) => {
     name,
     image,
     body,
-    tags
+    urlName,
+    newsTags,
+    mainControl,
+    detailControl,
   });
 
   await news.save();
@@ -57,7 +69,23 @@ router.post('/news', upload.single('image'), async (req, res) => {
 
 router.get('/news/:id', async (req, res) => {
   const { id } = req.params;
-  const news = await News.findById(id);
+  let news;
+
+
+  news = await News.findById(id);
+
+  if (!news) {
+    return res.status(404).json({ error: 'News not found' });
+  }
+
+  res.json(news);
+});
+
+router.get('/news/url/:url', async (req, res) => {
+  const { url } = req.params;
+  let news;
+
+  news = await News.findOne({ urlName: url });
 
   if (!news) {
     return res.status(404).json({ error: 'News not found' });
@@ -75,7 +103,7 @@ router.put("/news/:id", upload.single('image'), async (req, res) => {
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, tags, body } = req.body;
+  const { name, newsTags, urlName, mainControl,  detailControl,  body } = req.body;
   const image = req.file;
 
   // Если есть новое изображение в запросе, обновляем ссылку на него
@@ -89,7 +117,10 @@ router.put("/news/:id", upload.single('image'), async (req, res) => {
 
   // Обновляем остальные поля документа
   news.name = name;
-  news.tags = tags;
+  news.newsTags = newsTags;
+  news.urlName = urlName;
+  news.mainControl = mainControl;
+  news.detailControl = detailControl;
   news.body = body;
 
   // Сохраняем изменения
