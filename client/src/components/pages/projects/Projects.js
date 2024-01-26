@@ -250,7 +250,7 @@ const Projects = () => {
                                                     <Link onClick={(e) => gotoAnchor(e,'start',false)} to={`/projects?theme=${project.value}`} >
                                                         <div className="main-projects__item-flex__inner">
                                                             <div className="heading-secondary">
-                                                                <p datahash="projectNav"  className='hover'>{project.label}</p>
+                                                                <p datahash="projectNav"  className='hover type-name'>{project.label}</p>
                                                             </div>
                                                             <div className="main-agency__item-header__num"><span className="num_flex">{totalSum}</span>
                                                             </div>
