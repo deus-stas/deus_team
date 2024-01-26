@@ -88,6 +88,7 @@
         align-items: center;
         grid-template-columns: 0.35fr auto auto 0.45fr;;
         grid-gap: 4rem;
+        padding: .8rem 0;
 
 
         @include respond(md) {
@@ -113,7 +114,7 @@
 
         .icon {
             width: 11.3rem;
-            height: 7.6rem;
+            height: 4.6rem;
 
             @include respond(sm) {
                 width: 8rem;
@@ -131,11 +132,12 @@
         &-list {
             display: flex;
             align-items: center;
-            font-size: 2.4rem;
+            font-weight: 500;
+            font-size: 1.6rem;
             line-height: 2.6rem;
-            @include respond(md) {
-                font-size: 2rem;
-            }
+            //@include respond(md) {
+            //    font-size: 2rem;
+            //}
         }
 
         &-item {
@@ -187,12 +189,13 @@
 
 
         &-link {
-            font-size: 2.4rem;
+            font-weight: 500;
+            font-size: 1.6rem;
             line-height: 2.6rem;
             transition: opacity .5s;
-            @include respond(md) {
-                font-size: 2rem;
-            }
+            //@include respond(md) {
+            //    font-size: 2rem;
+            //}
             &:hover {
                 opacity: 0.5;
             }
@@ -207,18 +210,18 @@
         justify-self: end;
         display: flex;
         align-items: center;
-        font-size: 2.4rem;
+        font-size: 1.6rem;
         line-height: 2.6rem;
         background: transparent;
         border: 1px solid #000000;
         backdrop-filter: blur(3px);
         border-radius: 46px;
         margin: 0;
-        padding: 1.5rem 2.7rem 1.5rem 2.1rem;
+        padding: .7rem 1.6rem .7rem 1rem;
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-        @include respond(md) {
-            font-size: 2rem;
-        }
+        //@include respond(md) {
+        //    font-size: 2rem;
+        //}
 
     &:hover {
         background: #121212;
