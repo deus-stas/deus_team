@@ -1,5 +1,5 @@
 .btn {
-    padding: 2.3rem 4rem;
+    padding: 1.2rem 4rem;
     display: inline-block;
 
     background: #3B3D3F;
@@ -151,7 +151,7 @@
     }
 
     &.--black {
-        font-size: 2.2rem;
+        font-size: 2rem;
         background: #121212;
         color: #FFFFFF;
         margin: 0;
@@ -169,8 +169,9 @@
     }
 
     &.--footer {
-        font-size: 2.8rem;
+        font-size: 2rem;
         background: transparent;
+        font-weight: 400;
         border: 1px solid white;
         color: #FFFFFF;
         align-self: end;
