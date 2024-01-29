@@ -282,7 +282,7 @@ const Projects = () => {
 
                             <div className="projects__wrap">
                                 {filteredProjects ? filteredProjects.map((project, index) => {
-                                        const numProject = index < 10 ? "0" + (index+1) : (index+1)
+                                        const numProject = index < 9 ? "0" + (index+1) : (index+1)
                                         return (
                                             project.controlURL ?
                                                 <a href={`${project.projectURL}`}
