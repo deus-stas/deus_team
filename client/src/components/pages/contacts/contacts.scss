@@ -3,7 +3,7 @@
 .contacts {
     &-main {
         overflow: hidden;
-        padding-top: 17rem;
+        padding-top: 32.9rem;
         padding-bottom: 10rem;
 
         @include respond(sm) {
@@ -11,10 +11,8 @@
         }
 
         .heading-primary {
-            width: 20%;
             @include respond(sm) {
                 margin-bottom: 4rem;
-                width: 100%;
             }
         }
 
@@ -23,7 +21,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             justify-content: space-evenly;
-            gap: 4.9rem;
+            gap: 8.9rem;
 
             @include respond(md) {
                 grid-gap: 4rem;
@@ -57,7 +55,7 @@
 
 
                 .pb-32 {
-                    padding-bottom: 3.2rem;
+                    padding-bottom: 3rem;
                     @include respond(sm) {
                         padding-bottom: 2rem;
                         font-size: 1.6rem;
@@ -73,7 +71,7 @@
 
             .content {
                 &__address {
-                    margin-bottom: 3.4rem;
+                    margin-bottom: 5.4rem;
 
                     @include respond(sm) {
                         margin-bottom: 1.5rem;
@@ -84,10 +82,10 @@
                 .btn {
                     display: inline-block;
                     font-weight: 400;
-                    font-size: 2.8rem;
+                    font-size: 2rem;
                     flex-direction: column;
                     text-align: center;
-                    padding: 2.3rem 4rem ;
+                    padding: 1.2rem 4rem;
                     gap: 2rem;
                     @include respond(sm) {
                         font-size: 2rem;
@@ -145,8 +143,8 @@
             display: inline-block;
             flex-direction: column;
             text-align: center;
-            font-size: 2.8rem;
-            padding: 1.5rem 3rem ;
+            font-size: 2rem;
+            padding: 1.3rem 3rem ;
             gap: 2rem;
             margin-top: 11.1rem;
             @include respond(sm) {
@@ -218,7 +216,7 @@
                     }
 
                     &-descr {
-                        font-size: 2.4rem;
+                        font-size: 1.6rem;
                         padding-bottom: 0;
                         @include respond(sm) {
                             font-size: 1.6rem;
