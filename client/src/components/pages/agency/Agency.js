@@ -263,29 +263,46 @@ const Agency = (props) => {
                             </div>
                         </div>
                         {/* <Link className="btn --circle --orange">Презентация агентства</Link> */}
-                        {
-                            headerData && headerData.presentation ?
-                                <div className="hidden-mobile" style={{
-                                    width: "20rem",
-                                    height: "20rem", marginTop: "auto",
-                                    marginLeft: "auto"
-                                }}>
-                                    {/*<RoundButton fromX={100} rotateZ={-360} delay={500} >*/}
-                                    <a href={`/uploads/${headerData.presentation.filename}`}
-                                       target='_blank'
-                                       rel="noopener noreferrer"
-                                       className="btn --circle --dark hidden-mobile"
-                                    >Скачать презентацию</a>
-                                    {/*</RoundButton >*/}
-                                </div>
-                                :
-                                // <RoundButton fromX={100} rotateZ={-360} delay={500}>
-                                <a href={`/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"
-                                   className="btn --circle --dark hidden-mobile"
-                                >Скачать презентацию</a>
-                            // </RoundButton >
+
+                        {  headerData && headerData.presentation &&
+                            <div className="presentation">
+                                <Link to={`/uploads/${headerData.presentation.filename}`}
+                                      target='_blank'
+                                      className="agency-about__pdf"
+                                      rel="noopener noreferrer">
+                                    <Icon icon="pdf" viewBox="0 0 24 24"/>
+
+                                </Link>
+                                <p>Скачать презентацию</p>
+                            </div>
 
                         }
+
+
+                        {/*{*/}
+                        {/*    headerData && headerData.presentation ?*/}
+                        {/*        <div className="hidden-mobile" style={{*/}
+                        {/*            width: "20rem",*/}
+                        {/*            height: "20rem", marginTop: "auto",*/}
+                        {/*            marginLeft: "auto"*/}
+                        {/*        }}>*/}
+
+                        {/*            <a href={`/uploads/${headerData.presentation.filename}`}*/}
+                        {/*               target='_blank'*/}
+                        {/*               rel="noopener noreferrer"*/}
+                        {/*               className="btn --circle --dark hidden-mobile"*/}
+                        {/*            ><Icon icon="pdf" viewBox="0 0 24 24"/>Скачать презентацию</a>*/}
+
+                        {/*        </div>*/}
+                        {/*        :*/}
+
+
+                        {/*        <a href={`/uploads/DEUS.pdf`} target='_blank' rel="noopener noreferrer"*/}
+                        {/*           className=" hidden-mobile"*/}
+                        {/*        > <Icon icon="pdf" viewBox="0 0 24 24"/> Скачать презентацию</a>*/}
+
+
+                        {/*}*/}
 
                     </div>
 

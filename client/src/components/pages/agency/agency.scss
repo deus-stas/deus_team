@@ -267,6 +267,67 @@
             }
         }
 
+        .presentation {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            justify-content: flex-end;
+            margin-top: auto;
+
+            p {
+                width: 30%;
+                font-weight: 500;
+            }
+        }
+
+        &__pdf {
+            //flex: 0 0 5rem;
+            //position: absolute;
+            //bottom: 0;
+            //right: 0;
+            cursor: pointer;
+
+            color: #121212;
+            display: inline-flex;
+            padding: 1.8rem ;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 43px;
+            border: 1px solid #121212;
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+
+
+            @include respond(sm) {
+                padding: 1.5rem ;
+                width: 5.5rem;
+                height: 5.5rem;
+            }
+
+            @include respond(xs) {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .icon {
+                width: 2.4rem;
+                height: 2.4rem;
+
+                @include respond(sm) {
+                    width: 1.15em;
+                    height: 3.2rem;
+                }
+            }
+
+            &:hover {
+                transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+                background: #121212;
+                color: #FFFFFF;
+            }
+        }
+
         &__showreels {
             display: grid;
             grid-template-columns: repeat(2, .5fr);
