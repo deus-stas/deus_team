@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, TextField, EditButton } from 'react-admin';
+import {List, Datagrid, TextField, EditButton, SelectArrayInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, AutocompleteArrayInput, ImageField, FunctionField, FileInput, FileField, ReferenceArrayInput, SelectInput } from 'react-admin';
 
 const apiUrl = ''
@@ -48,8 +48,9 @@ export const ReviewsCreate = (props) => (
             <ReferenceArrayInput  source="reviewProject" reference="projects" perPage={100000000000}>
                 <AutocompleteArrayInput className="customWidth" optionText="name" label="Проект"  filterToQuery={searchText => ({ name: searchText })}/>
             </ReferenceArrayInput>
-            <ReferenceArrayInput source="reviewService" reference="services">
-                <SelectInput className="customWidth" optionText="name" label="Услуга" />
+
+            <ReferenceArrayInput source="reviewService" reference="services" perPage={100000000000} allowEmpty={true}>
+                <AutocompleteArrayInput className="customWidth" optionText="name" label="Услуга" />
             </ReferenceArrayInput>
             <ImageInput className="fileInput" placeholder="+"  source="reviewBg" label="Фото отзывa" accept="image/*">
                 <ImageField source="src" title="title" />
@@ -76,9 +77,11 @@ export const ReviewsEdit = (props) => (
             <ReferenceArrayInput  source="reviewProject" reference="projects" perPage={100000000000}>
                 <AutocompleteArrayInput className="customWidth" optionText="name" label="Проект" filterToQuery={searchText => ({ name: searchText })}/>
             </ReferenceArrayInput>
-            <ReferenceArrayInput source="reviewService" reference="services">
-                <SelectInput className="customWidth" optionText="name" label="Услуга" />
+
+            <ReferenceArrayInput source="reviewService" reference="services" perPage={100000000000} allowEmpty={true}>
+                <AutocompleteArrayInput className="customWidth" optionText="name" label="Услуга" />
             </ReferenceArrayInput>
+
             <ImageInput className="fileInput" placeholder="+" source="reviewBg" label="Фото отзывa" accept="image/*">
                 <FilenameField source="src" title="title" />
             </ImageInput>

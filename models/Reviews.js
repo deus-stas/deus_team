@@ -10,8 +10,8 @@ const servicesSchema = new Schema({
     reviewPost: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
     reviewImage: { type: Object },
     review: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
-    reviewProject: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
-    reviewService: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
+    reviewProject: {type: Array},
+    reviewService: {type: Array},
     reviewBg: { type: Object },
 });
 
