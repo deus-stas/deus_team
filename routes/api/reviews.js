@@ -37,7 +37,9 @@ router.get('/reviews', async (req, res) => {
 });
 
 router.post('/reviews', upload.fields([{ name: 'reviewFile' }, { name: 'reviewImage' }, { name: 'reviewBg'}]), async (req, res) => {
-    const { name, service, type, reviewName, reviewPost, review, reviewProject, reviewService } = req.body;
+    const { name, service, type, reviewName, reviewPost, review } = req.body;
+    const reviewProject = !!req.body.reviewProject && req.body.reviewProject !=='undefined' ? JSON.parse(req.body.reviewProject): [];
+    const reviewService = !!req.body.reviewService && req.body.reviewService !=='undefined' ? JSON.parse(req.body.reviewService): [];
     console.log(req.file);
 
     let reviewFile, reviewImage, reviewBg;
@@ -89,13 +91,16 @@ router.put("/reviews/:id", upload.fields([{ name: 'reviewFile' }, { name: 'revie
     const { id } = req.params;
     const reviews = await Reviews.findById(id);
 
+    const reviewProject = !!req.body.reviewProject && req.body.reviewProject !=='undefined' ? JSON.parse(req.body.reviewProject): [];
+    const reviewService = !!req.body.reviewService && req.body.reviewService !=='undefined' ? JSON.parse(req.body.reviewService): [];
+
     if (!reviews) {
         return res.status(404).json({ success: false, message: "reviews not found" });
     }
     console.log(req.body);
     console.log(req.files);
 
-    const { name, service, type, reviewName, reviewPost, review, reviewProject, reviewService } = req.body;
+    const { name, service, type, reviewName, reviewPost, review} = req.body;
 
     if (req.files && req.files.reviewFile) {
         if (reviews.reviewFile) {

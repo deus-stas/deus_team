@@ -250,7 +250,7 @@ const Projects = () => {
                                                     <Link onClick={(e) => gotoAnchor(e,'start',false)} to={`/projects?theme=${project.value}`} >
                                                         <div className="main-projects__item-flex__inner">
                                                             <div className="heading-secondary">
-                                                                <p datahash="projectNav"  className='hover'>{project.label}</p>
+                                                                <p datahash="projectNav"  className='hover type-name'>{project.label}</p>
                                                             </div>
                                                             <div className="main-agency__item-header__num"><span className="num_flex">{totalSum}</span>
                                                             </div>
@@ -282,7 +282,7 @@ const Projects = () => {
 
                             <div className="projects__wrap">
                                 {filteredProjects ? filteredProjects.map((project, index) => {
-                                        const numProject = index < 10 ? "0" + (index+1) : (index+1)
+                                        const numProject = index < 9 ? "0" + (index+1) : (index+1)
                                         return (
                                             project.controlURL ?
                                                 <a href={`${project.projectURL}`}

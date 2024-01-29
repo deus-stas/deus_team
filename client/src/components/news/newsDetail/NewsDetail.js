@@ -9,6 +9,7 @@ import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 
 import './newsDetail.scss'
 import DelayedLink from "../../appHeader/DelayedLink";
+import {Icon} from "../../icon/Icon";
 
 const apiUrl = ''
 
@@ -44,7 +45,7 @@ const NewsDetail = () => {
         axios.get(`${apiUrl}/api/news`)
             .then((response) => {
                 const newsWithTags = response.data.map((news) => {
-                    return axios.get(`${apiUrl}/api/tags/${news.newsTags}`)
+                    return axios.get(`${apiUrl}/api/newsTags/${news.newsTags}`)
                         .then((tagResponse) => {
                             news.newsTags = tagResponse.data.name;
                             return news;
@@ -83,6 +84,7 @@ const NewsDetail = () => {
         };
     },[]);
 
+    const double =  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
     const fileUrl = detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null;
     const isVideo = detail.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.image.filename) : false;
     const isImage = detail.image ? /\.(jpeg|jpg|gif|png)$/i.test(detail.image.filename) : false;
@@ -95,10 +97,12 @@ const NewsDetail = () => {
 
         <main className="news-detail">
             <section className="news-detail__main">
-                <Breadcrumbs />
+                {/*<Breadcrumbs />*/}
                 <div className="container">
                     <div className="news-detail__main-content">
-                        <div className="news-detail__main-tag" dangerouslySetInnerHTML={{ __html: detail.newsTags }}></div>
+                        <div className="news-detail__main-tag">
+                            {`#${detail.newsTags}`}
+                        </div>
                         <h1 className="heading-primary" dangerouslySetInnerHTML={{ __html: detail.name }}></h1>
                     </div>
                     {/*<img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />*/}
@@ -115,6 +119,7 @@ const NewsDetail = () => {
             <section className="news-detail__article">
                 <div className="container">
                     <div className="news-detail__article-content">
+                        <h2 className="heading-secondary">О клиенте</h2>
                         <div dangerouslySetInnerHTML={{ __html: detail.body }}></div>
                     </div>
                 </div>
@@ -134,31 +139,45 @@ const NewsDetail = () => {
 
 
                                 return (
-                                    <DelayedLink to={`/news/${item.urlName}`} className="news__item" key={item.urlName}>
+                                    <DelayedLink to={`/news/${item.urlName}`} className="news__item"
+                                                 key={item.id}>
                                         <div className="news__img-wrap">
-                                            {isVideo && <video autoPlay muted playsInline
+
+                                            {isVideo && <video autoPlay={shouldAutoPlay} muted playsInline
                                                                src={fileUrl} alt={item.name}
-                                                               className="news__img"
-                                                               autoPlay loop muted
-                                                               playsInline/>}
+                                                               className="news__img-wrap"
+                                                               loop
+                                            />}
                                             {isImage && <img src={fileUrl} alt={item.name}
-                                                             className="news__img"/>}
+                                                             className="news__img-wrap"/>}
+
                                         </div>
+
                                         <div className="news__text">
-                                            <div className="news__tag">{item.name}</div>
-                                            <div className="news__name">{item.name}</div>
+                                            <div className="tag">#{item.newsTags}</div>
                                         </div>
+                                        <div className="news__descr">
+                                            <div className="name">{item.name}</div>
+                                        </div>
+                                        <div className="news__arrow">
+                                            <div className="hover-flip-circle">
+                                                    <span>
+                                                        <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                                        <div className="hover-circle">
+                                                            {double}
+                                                        </div>
+                                                    </span>
+                                            </div>
+                                        </div>
+
+
                                     </DelayedLink>
                                 )
-                            })}
+                            }).slice(0,3)}
                         </div>
                     </div>
                 </div>
             </section>
-
-            <ProjectNext last={true} />
-
-            <SectionSocial />
 
         </main>
             }

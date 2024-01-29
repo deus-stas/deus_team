@@ -129,7 +129,7 @@ const Cta = (props) => {
                             })}
 
                         </div>
-                        <p className="p-style-grey pb-20 hidden-mobile">После заполнения брифа<br/> пришлите его нам на почту</p>
+                        <p className="p-style-grey pb-20 hidden-mobile">После заполнения брифа пришлите его нам на почту</p>
                             <p className="p-style-grey pb-20 hidden-desktop">После заполнения брифа пришлите его нам на почту</p>
                         <p className="heading-tertiary hover-flip"><Link className="hoverMail" to="mailto:hello@de-us.ru"><span data-hover="hello@de-us.ru">hello@de-us.ru</span></Link></p>
                         </span>

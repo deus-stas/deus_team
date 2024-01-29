@@ -48,21 +48,20 @@ const Contacts = (props) => {
                 <main className="contacts">
                     <section className="contacts-main">
                         <div className="container">
-                            <h1 className="heading-primary">Свяжитесь с нами</h1>
                             <div className="contacts-main__wrap">
-                                <div></div>
+                                <div><h1 className="heading-primary">Свяжитесь с нами</h1></div>
                                 <div></div>
                                 <div className="content">
-                                    <h2 className="heading-secondary content__address">г. Одинцово, ул.
+                                    <h2 className="heading-tertiary content__address">г. Одинцово, ул.
                                         Молодежная, д.46, строение
                                         1 офис 24, 25</h2>
                                     <Link to="https://yandex.ru/maps/?rtext=~55.677636, 37.272125"
                                           className="btn --white" target="_blank">Как проехать</Link>
                                 </div>
                                 <span className="mail">
-                                    <h2 className="heading-secondary"><Link className="hoverMail" to="mailto:hello@de-us.ru">hello@de-us.ru</Link></h2>
+                                    <h2 className="heading-tertiary"><Link className="hoverMail" to="mailto:hello@de-us.ru">hello@de-us.ru</Link></h2>
                                     <p className="p-style-grey pb-32">Стать клиентом или партнером</p>
-                                    <h2 className="heading-secondary"><Link className="hoverMail" to="mailto:job@de-us.ru">job@de-us.ru</Link></h2>
+                                    <h2 className="heading-tertiary"><Link className="hoverMail" to="mailto:job@de-us.ru">job@de-us.ru</Link></h2>
                                     <p className="p-style-grey">Присоединиться к команде</p>
                                  </span>
                                 {/*<div className="contacts-main__map wow fadeIn"*/}

@@ -2,7 +2,7 @@
     overflow: hidden;
 
     &__title {
-        margin-bottom: 6rem;
+        margin-bottom: 4rem;
         font-weight: 500;
         font-size: 3.6rem;
         line-height: 3.4rem;
@@ -134,7 +134,7 @@
 
         &-label {
             display: block;
-            font-size: 2.4rem;
+            font-size: 1.6rem;
             @include respond(sm) {
                 font-size: 1.6rem;
             }
@@ -224,8 +224,8 @@
             }
 
             .icon {
-                width: 2.5rem;
-                height: 2.5rem;
+                width: 2.4rem;
+                height: 2.4rem;
 
                 @include respond(sm) {
                     width: 1.15em;
@@ -243,7 +243,8 @@
 
     .btn {
         display: block;
-        font-size: 2rem;
+        font-size: 1.6rem;
+        padding: 1.3rem 3rem;
 
         @include respond(sm) {
             grid-column: span 2;
@@ -270,6 +271,7 @@
             margin: 4rem 0 2rem;
             font-size: 2.8rem;
             line-height: 3.4rem;
+            font-weight: 500;
 
             @include respond(sm) {
                 margin: 3rem 0 1.5rem;
@@ -282,7 +284,7 @@
         &-wrap {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1rem 1rem;
 
             @include respond(sm) {
                 align-items: flex-start;
@@ -304,11 +306,11 @@
         }
 
         &-c {
-            padding: 1.5rem 3rem;
+            padding: 1.3rem 3rem;
             background: transparent;
             border: 1px solid hsla(0,0%,100%,.2);
             border-radius: 38px;
-            font-size: 2.4rem;
+            font-size: 1.6rem;
             font-weight: 400;
             line-height: 3.3rem;
             cursor: pointer;

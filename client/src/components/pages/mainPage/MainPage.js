@@ -432,7 +432,7 @@ const MainPage = (props) => {
                                 </span>
                                     <div className="main-projects__item">
                                         <p className="p-style">Мы работаем с ведущими компаниями и брендами из различных
-                                            отраслей. При создании могут решаться уникальные задачи, но это всегда
+                                            отраслей.<br/> При создании могут решаться уникальные задачи, но это всегда
                                             проекты с характером</p>
                                         <div className="main-projects__item-flex">
                                             {optionsTheme ? optionsTheme.map((project, index) => {

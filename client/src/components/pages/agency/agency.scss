@@ -3,7 +3,7 @@
 .agency {
     &-start {
         position: relative;
-        padding-top: 17rem;
+        padding-top: 32.9rem;
         background: #121212;
         color: #FFFFFF;
         height: 69rem;
@@ -143,7 +143,7 @@
                 display: flex;
                 align-items: center;
                 font-weight: 500;
-                font-size: 2.8rem;
+                font-size: 2.4rem;
                 line-height: 3rem;
                 transition: color .3s;
                 cursor: pointer;
@@ -222,8 +222,8 @@
 
         &__descr {
             max-width: 69.5rem;
-            font-size: 2.4rem;
-            line-height: 3.4rem;
+            font-size: 1.6rem;
+            line-height: 2.24rem;
             font-weight: 400;
 
             @include respond(sm) {
@@ -239,7 +239,7 @@
                 display: flex;
                 align-items: center;
                 font-size: 2.4rem;
-                line-height: 3.4rem;
+                line-height: 3.36rem;
 
                 @include respond(sm) {
                     font-size: 1.8rem;
@@ -264,6 +264,67 @@
                         margin-right: 2rem;
                     }
                 }
+            }
+        }
+
+        .presentation {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            justify-content: flex-end;
+            margin-top: auto;
+
+            p {
+                width: 30%;
+                font-weight: 500;
+            }
+        }
+
+        &__pdf {
+            //flex: 0 0 5rem;
+            //position: absolute;
+            //bottom: 0;
+            //right: 0;
+            cursor: pointer;
+
+            color: #121212;
+            display: inline-flex;
+            padding: 1.8rem ;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 43px;
+            border: 1px solid #121212;
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+
+
+            @include respond(sm) {
+                padding: 1.5rem ;
+                width: 5.5rem;
+                height: 5.5rem;
+            }
+
+            @include respond(xs) {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .icon {
+                width: 2.4rem;
+                height: 2.4rem;
+
+                @include respond(sm) {
+                    width: 1.15em;
+                    height: 3.2rem;
+                }
+            }
+
+            &:hover {
+                transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+                background: #121212;
+                color: #FFFFFF;
             }
         }
 
@@ -428,7 +489,7 @@
 
                 .descr-name {
                     font-weight: 400;
-                    font-size: 2.4rem;
+                    font-size: 1.6rem;
                     line-height: 3.3rem;
                     @include respond(sm) {
                         font-size: 1.6rem;
@@ -530,7 +591,7 @@
                 .flex-wrap {
                     display: flex;
                     gap: 1.5rem;
-                    align-items: flex-start;
+                    align-items: center;
                     margin-bottom: 2rem;
 
                     @include respond(sm) {
@@ -545,10 +606,10 @@
                         text-align: center;
                         border: 1px solid #757677;
                         color: #757677;
-                        font-size: 1.6rem;
+                        font-size: 1.4rem;
                         gap: 1rem;
                         border-radius: 39px;
-                        padding: 1rem 1.8rem 0.6rem 1.8rem;
+                        padding: .6rem 1.3rem .5rem 1.3rem;
                         margin-top: 0.4rem;
 
                         @include respond(sm) {
@@ -628,22 +689,13 @@
 
 
                 p {
-                    font-size: 2.4rem;
+                    font-size: 2rem;
                     @include respond(sm) {
                         font-size: 1.6rem;
                         line-height: normal;
                         margin-bottom: 0.5rem;
                     }
 
-
-                    &:last-child {
-                        font-size: 2rem;
-                        @include respond(sm) {
-
-                            font-size: 1.4rem;
-                            line-height: normal;
-                        }
-                    }
                 }
 
                 .mr-t {
@@ -652,6 +704,26 @@
                     @include respond(sm) {
                         margin-top: 2rem;
                     }
+
+                    p {
+                        font-size: 1.6rem;
+                        @include respond(sm) {
+
+                            font-size: 1.6rem;
+                            line-height: normal;
+                        }
+
+                        &:nth-child(2) {
+                            font-size: 1.4rem;
+                            @include respond(sm) {
+
+                                font-size: 1.4rem;
+                                line-height: normal;
+                            }
+                        }
+                    }
+
+
                 }
 
                 img {
@@ -822,7 +894,7 @@
 
                 p {
                     transition: all 0.3s;
-                    font-size: 2.4rem;
+                    font-size: 1.6rem;
                     @include respond(sm) {
                         font-size: 1.6rem;
                         font-weight: 400;

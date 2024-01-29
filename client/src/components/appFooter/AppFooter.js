@@ -42,6 +42,9 @@ const AppFooter = (props) => {
         });
     };
 
+    const getCurrentYear = () => new Date().getFullYear();
+
+
     const {headerData, services} = props;
 
     const addressNode = <div className="footer__item">
@@ -205,7 +208,7 @@ const AppFooter = (props) => {
                         </>
                     }
                     <div className="footer-info__wrap footer__copyright p-style">
-                        <p>© 2016–2023 DEUS agency</p>
+                        <p>© 2016–{getCurrentYear()} DEUS agency</p>
                         <Popup
                             trigger={
                                 <p className="hover-flip"><span data-hover="Политика конфиденциальности">Политика конфиденциальности</span></p>
