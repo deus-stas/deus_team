@@ -55,7 +55,6 @@ const Projects = () => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
                 setProjects(response.data);
-                console.log(response.data);
                 if (!!cb) {
                     cb()
                 }
@@ -67,7 +66,6 @@ const Projects = () => {
     const loadThemes = (cb) => {
         axios.get(`${apiUrl}/api/themes/`)
             .then((response) => {
-                console.log(response.data);
                 let projectOptionsTheme = [];
                 response.data.forEach((item, i) => {
                     const { id, name } = item;
@@ -171,7 +169,6 @@ const Projects = () => {
 
     const handleMouseEnter = (index) => {
         videoRefs.current[index].play();
-        console.log("hovered", index)
     };
 
     const handleMouseLeave = (index) => {

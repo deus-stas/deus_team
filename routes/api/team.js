@@ -88,7 +88,6 @@ router.put("/team/:id", upload.fields([{name:'image'}, {name:'mainImg'}]), async
     if (!team) {
         return res.status(404).json({ error: 'team not found' });
     }
-    console.log("реквест",req.files)
     const { name, post, sign, priority, mainControl, agencyControl, serviceControl } = req.body;
 
     // Если есть новое изображение в запросе, обновляем ссылку на него

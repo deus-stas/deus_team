@@ -29,7 +29,6 @@ const NewsDetail = () => {
                     .then((response) => {
                         dataDetail.newsTags = response.data.name;
                         setDetail(dataDetail);
-                        console.log(dataDetail);
                     })
                     .catch((error) => {
                         console.log(error);

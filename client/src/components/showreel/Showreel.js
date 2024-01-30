@@ -42,7 +42,6 @@ const Showreel = (props) => {
                 if (!isInViewport) {
                     if(!videoRef.current.paused || !hasPlayedOnce){
                         setCurrentTime(videoRef.current.currentTime);
-                        console.log("play:", videoRef.current.currentTime)
                         videoRef.current.pause()
                         videoRef.current.currentTime = 17;
                     }

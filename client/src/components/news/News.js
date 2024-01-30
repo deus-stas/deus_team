@@ -35,7 +35,6 @@ const News = () => {
                             return news;
                         });
                 });
-                console.log("tags:", newsWithTags)
 
                 Promise.all(newsWithTags)
                     .then((news) => {

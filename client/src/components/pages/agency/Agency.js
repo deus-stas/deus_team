@@ -52,7 +52,6 @@ const Agency = (props) => {
         axios.get(`/api/awards/`)
             .then((response) => {
                 setAwards(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -73,7 +72,6 @@ const Agency = (props) => {
         axios.get(`/api/raitings/`)
             .then((response) => {
                 setRaitings(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -94,7 +92,6 @@ const Agency = (props) => {
     useEffect(() => {
         axios.get(`/api/vacancies/`)
             .then((response) => {
-                console.log(response.data);
                 setVacancies(response.data);
             })
             .catch((error) => {
@@ -106,7 +103,6 @@ const Agency = (props) => {
         axios.get(`/api/showreels/`)
             .then((response) => {
                 setShowreels(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -140,7 +136,6 @@ const Agency = (props) => {
                         });
 
                         setReviews(updatedReviews);
-                        console.log(updatedReviews);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -198,7 +193,6 @@ const Agency = (props) => {
     const sendEmail = async (values) => {
         try {
             const response = await axios.post(`/api/mail`, values);
-            console.log(response.data);
         } catch (error) {
             console.error(error);
         }

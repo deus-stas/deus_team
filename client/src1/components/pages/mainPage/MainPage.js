@@ -227,7 +227,6 @@ const MainPage = () => {
 
     const handleMouseEnter = (index) => {
         videoRefs.current[index].play();
-        console.log("hovered", index)
     };
 
     const handleMouseLeave = (index) => {

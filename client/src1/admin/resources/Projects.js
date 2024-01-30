@@ -15,9 +15,7 @@ const FilenameField = props => {
         <FunctionField
             {...props}
             render={record => {
-                console.log('record:',record);
                 if (record.filename) {
-                    console.log("in if")
                     if (record.mimetype.indexOf('mp4') !== -1) {
                         return (
                             <video style={{width:'300px'}} autoPlay loop playsInline><source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
@@ -26,7 +24,6 @@ const FilenameField = props => {
                         return <img style={{width:'300px'}} src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
                     }
                 } else {
-                    console.log("in else")
                     return <img style={{width:'300px'}} src={`${record.src}`} alt={record.src} title="image" />;
                 }
             }}

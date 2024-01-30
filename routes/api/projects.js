@@ -85,7 +85,6 @@ router.post(
     addCustomId,
     async (req, res) => {
     const { name ,descrProject, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility, seoTitle, seoKeywords, seoDescription  } = req.body;
-   console.log(req.body.tasksList,!!req.body.tasksList)
     const tasksList = !!req.body.tasksList && req.body.tasksList !=='undefined' ? JSON.parse(req.body.tasksList): [];
     const workSteps = !!req.body.workSteps && req.body.workSteps !=='undefined'? JSON.parse(req.body.workSteps) : [];
     const approachList = !!req.body.approachList && req.body.approachList !=='undefined'? JSON.parse(req.body.approachList) : [];
@@ -107,7 +106,6 @@ router.post(
     // console.log('workSteps', workSteps);
     // console.log(req.files);
     // console.log(req.body);
-    console.log('inside', req.body.customId);
     let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
@@ -248,7 +246,6 @@ router.get('/projects/:id', async (req, res) => {
     const { id } = req.params;
     if (id.includes("-")) {
         const projects = await Projects.findOne({ nameInEng: id });
-        console.log("pr", projects)
 
         if (!projects) {
             return res.status(404).json({ error: 'projects not found' });

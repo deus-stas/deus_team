@@ -34,7 +34,6 @@ const Contacts = (props) => {
     const sendEmail = async (values) => {
         try {
             const response = await axios.post(`/api/mail`, values);
-            console.log(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -131,7 +130,6 @@ const Contacts = (props) => {
 
                                                             axios.post(`${apiUrl}/api/form/`, formData)
                                                                 .then((response) => {
-                                                                    console.log(response.data);
                                                                 })
                                                                 .catch((error) => {
                                                                     console.log(error);
@@ -224,7 +222,6 @@ const Contacts = (props) => {
                                         могут решаться уникальные задачи, но это всегда проекты с характером
                                     </h2>
                                     {team.filter(team => team.name == "Вячеслав Брижань").map((team, index) => {
-                                        console.log('team:', team.mainImg)
                                         return (
                                             <div className="worker">
                                                 <img className="worker-img"

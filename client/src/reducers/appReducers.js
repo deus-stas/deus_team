@@ -9,7 +9,6 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_HEADER_DATA':
-            console.log("SET_HEADER_DATA", action.payload)
             return {
                 ...state,
                 headerData: action.payload,
@@ -30,7 +29,6 @@ export default function reducer(state = initialState, action) {
                 isLoading: action.payload,
             };
         case 'SET_TEAM':
-            console.log("SET_TEAM", action.payload)
             return {
                 ...state,
                 team: action.payload,

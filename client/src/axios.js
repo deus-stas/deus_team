@@ -15,7 +15,7 @@ const setIsLoadingMainPageEvent = (isLoading) => {
 
 
 const resInterceptor = response => {
-    console.log('event:response:',)
+    // console.log('event:response:',)
     setIsLoadingMainPageEvent(false)
 
     // setTimeout(() => window.dispatchEvent(event), 1700)
@@ -39,9 +39,9 @@ const AxiosInterceptor = ({children}) => {
         }
         const delayTime = 1500
         const diffTime = Date.now() - timeSVG
-        console.log('XXXX:diff', diffTime, isVisible)
+        // console.log('XXXX:diff', diffTime, isVisible)
         setTimeout(() => {
-            console.log('event:time', diffTime, isVisible)
+            // console.log('event:time', diffTime, isVisible)
             const element = document.querySelector("#preloader.preloader-hidden");
             const scroll = document.documentElement.style;
             const footer = document.querySelector(".footer");

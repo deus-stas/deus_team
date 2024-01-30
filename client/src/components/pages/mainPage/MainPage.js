@@ -101,7 +101,6 @@ const MainPage = (props) => {
                     return axios.get(`${apiUrl}/api/newsTags/${news.newsTags}`)
                         .then((tagResponse) => {
                             news.newsTags = tagResponse.data.name;
-                            console.log("newsTag newsWithTags", news,tagResponse)
                             return news;
                         })
                         .catch((error) => {
@@ -115,7 +114,6 @@ const MainPage = (props) => {
                     .then((news) => {
                         setNews(news);
                         const newsTags = new Set(news.flatMap((news) => news.newsTags));
-                        console.log("newsTag", newsTags)
                         setAllNewsTags(newsTags);
                     })
                     .catch((error) => {
@@ -131,7 +129,6 @@ const MainPage = (props) => {
         axios.get(`${apiUrl}/api/working/`)
             .then((response) => {
                 setWorking(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -142,7 +139,6 @@ const MainPage = (props) => {
         axios.get(`${apiUrl}/api/showreels/`)
             .then((response) => {
                 setShowreels(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -174,7 +170,6 @@ const MainPage = (props) => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/themes/`)
             .then((response) => {
-                console.log(response.data);
                 let projectOptionsTheme = [];
                 response.data.forEach((item, i) => {
                     const {id, name} = item;
@@ -190,7 +185,6 @@ const MainPage = (props) => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/types/`)
             .then((response) => {
-                console.log(response.data);
                 let projectOptionsType = [];
                 response.data.forEach((item, i) => {
                     const {id, name} = item;
@@ -230,7 +224,6 @@ const MainPage = (props) => {
         return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
             (selectedType ? project.projectType === selectedType.value : true) && project.visibility;
     }).slice(0, 3);
-    console.log("fol:", filteredProjects.length)
 
     const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
 
@@ -239,7 +232,6 @@ const MainPage = (props) => {
 
     const handleMouseEnter = (index) => {
         videoRefs.current[index].play();
-        console.log("hovered", index)
     };
 
     const handleMouseLeave = (index) => {

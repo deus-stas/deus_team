@@ -49,7 +49,6 @@ const FilenameField = props => {
         <FunctionField
             {...props}
             render={record => {
-                console.log('record:',record,props);
                 return (<VideoOrImageField file={record} />)
             }}
         />
