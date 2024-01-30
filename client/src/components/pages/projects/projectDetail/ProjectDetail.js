@@ -122,7 +122,6 @@ const ProjectDetail = () => {
             {!isLoading &&
 
         <main id="toUp" className="project">
-            {console.log(detail)}
             <Breadcrumbs />
 
             <section className="project-main wow fadeIn"
@@ -290,7 +289,6 @@ const ProjectDetail = () => {
                             <h2 className="heading-secondary text-black">Подход</h2>
                             <div className="quote">
                                 <div className="quote__box">
-                                    {console.log(detail.approachPersons)}
                                     <div className="quote__person">
                                         {detail.approachPersons.image ? <img src={`${apiUrl}/uploads/${detail.approachPersons.image.filename}`} alt={detail.approachPersons.name} className="quote__img" /> : null}
 

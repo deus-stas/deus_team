@@ -53,14 +53,14 @@ const AppHeader = (props) => {
 
 
             const find = Array.from(whiteHeaders).find((whiteHeader) => {
-                return !!headerMob?
+                return !!headerMob && getComputedStyle(header).visibility === 'hidden'?
                     window.scrollY + window.innerHeight >= whiteHeader.offsetTop && window.scrollY + window.innerHeight <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
                     :
                     window.scrollY >= whiteHeader.offsetTop && window.scrollY <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
             })
 
 
-            if (!!headerMob) {
+            if (!!headerMob && getComputedStyle(header).visibility === 'hidden') {
                 if (!!find && !menu) {
                     const offsetBot = find.offsetHeight + find.offsetTop
                     if (headerMob.offsetTop < offsetBot) {
@@ -71,23 +71,20 @@ const AppHeader = (props) => {
                 } else if (Array.from(whiteHeaders).length > 1) {
                     headerMob.classList.remove('white');
                 }
-            } else if (!!header) {
-                if (!!find && !menu) {
-
+            } else if (!!header && getComputedStyle(headerMob).display === 'none') {
+                if (!!find) {
                     if (window.scrollY >= find.offsetTop) {
                         header.classList.add('white');
-                        headerMob.classList.add('white');
                     } else {
                         header.classList.remove('white');
-                        headerMob.classList.remove('white');
+
                     }
                     if (window.scrollY > find.offsetTop + find.offsetHeight) {
                         header.classList.remove('white');
-                        headerMob.classList.remove('white');
                     }
                 } else if (Array.from(whiteHeaders).length > 0) {
                     header.classList.remove('white');
-                    headerMob.classList.remove('white');
+
                 }
             }
         }
@@ -122,7 +119,6 @@ const AppHeader = (props) => {
         const hiddenHeader = () => {
             const scrollMob = window.scrollY;
             if (window.innerWidth <= 767) {
-                console.log("mob", scrollMob)
                 if (scrollMob < 40) {
                     setVisibleDesktop(true);
                 } else {
@@ -270,20 +266,6 @@ const AppHeader = (props) => {
                     <div className={`header__menu ${menu ? 'activeMenu active' : ''}`}>
                         <div className="header__menu-wrap">
 
-                            <div className="">
-                                <div style={{display: "flex", flexWrap: "wrap"}}>
-                                    <DelayedLink to="/" className='header__logo'>
-                                        <Icon icon="headerLogo" viewBox="0"/>
-                                    </DelayedLink>
-
-                                    <div
-                                        className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
-                                        onClick={() => setMenu(!menu)}>
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </div>
-
                             <nav className="header__menu-nav">
                                 <ul className="header__menu-list">
                                     <li className="header__menu-item">
@@ -358,6 +340,19 @@ const AppHeader = (props) => {
                                 {/*                <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'*/}
                                 {/*                   className="header__presa">Презентация агентства</a>*/}
                                 {/*        }*/}
+                            </div>
+                            <div style={{marginTop: "auto"}}>
+                                <div style={{display: "flex", flexWrap: "wrap"}}>
+                                    <DelayedLink to="/" className='header__logo'>
+                                        <Icon icon="headerLogo" viewBox="0"/>
+                                    </DelayedLink>
+
+                                    <div
+                                        className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
+                                        onClick={() => setMenu(!menu)}>
+                                        <span></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

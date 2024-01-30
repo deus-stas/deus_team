@@ -190,7 +190,6 @@ router.get('/services/:id', async (req, res) => {
     const {id} = req.params;
     if (id.includes("-")) {
         const services = await Services.findOne({path: id});
-        console.log("srvcs", services)
 
         if (!services) {
             return res.status(404).json({error: 'Services not found'});
@@ -260,7 +259,6 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
         }
         service.descrImg = descrImg;
         const oldServicesServices = service.servicesServices;
-        // console.log("old", oldServicesServices)
         service.servicesServices = []; // Clearing the field
 
         const oldPosition = service.position;

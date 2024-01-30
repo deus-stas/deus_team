@@ -93,7 +93,6 @@ const AppWrapper = () => {
             .then((response) => {
                 const currentSeoInfo = response.data.find((item) => item.seoPages === currentId);
                 setSeoInfo(currentSeoInfo);
-                console.log('что пришло:', response)
             })
             .catch((error) => {
                 console.log(error)

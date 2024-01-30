@@ -177,7 +177,6 @@ const Cta = (props) => {
 
                                     axios.post(`${apiUrl}/api/form/`, formData)
                                         .then((response) => {
-                                            console.log(response.data);
                                         })
                                         .catch((error) => {
                                             console.log(error);
@@ -326,7 +325,6 @@ const Cta = (props) => {
                                             </label>
                                             <label>
                                                 <input id="file" name="file" type="file" onChange={(event) => {
-                                                    console.log(event.currentTarget.files[0]);
                                                     setFieldValue("file", event.currentTarget.files[0]);
                                                 }} />
                                                 <div className="form__file-arrow">

@@ -103,7 +103,6 @@ const Projects = () => {
 
     const handleMouseEnter = (index) => {
         videoRefs.current[index].play();
-        console.log("hovered", index)
     };
 
     const handleMouseLeave = (index) => {
