@@ -208,6 +208,7 @@
 
     &__discuss {
         justify-self: end;
+        width: max-content;
         display: flex;
         align-items: center;
         font-size: 1.6rem;
@@ -219,9 +220,9 @@
         margin: 0;
         padding: .7rem 1.6rem .7rem 1rem;
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-        //@include respond(md) {
-        //    font-size: 2rem;
-        //}
+        @include respond(md) {
+            padding: 1rem 1.6rem 1rem 1rem;
+        }
 
     &:hover {
         background: #121212;
@@ -265,7 +266,7 @@
                 top: 1.1rem;
                 border-radius: 0;
                 width: 2rem;
-                height: 0.264rem;
+                height: 0.21rem;
                 transform: rotate(-45deg) translate(-1.1rem);
 
                 &::before {
@@ -279,7 +280,7 @@
         span {
             border-radius: 34px;
             width: 0.5rem;
-            height: 4.9px;
+            height: .49rem;
             background: #191B1D;
             position: absolute;
             top: 1.3rem;
@@ -308,9 +309,9 @@
     &__menu {
         height: 100%;
         width: 100%;
-        padding: 1rem;
+        padding: 1rem 1rem 3rem 1rem;
         opacity: 0;
-        z-index: 8000;
+        z-index: 9000;
         visibility: hidden;
         overflow-y: auto;
         -ms-overflow-style: none;
@@ -334,13 +335,14 @@
 
         &-wrap {
             display: flex;
+            height: 100%;
             flex-direction: column;
             background: #FFFFFF;
-            padding: 1.5rem 2rem 4rem;
+            padding: 1.5rem 2rem;
+            border-radius: 2rem;
         }
 
         &-nav {
-            margin-top: 2rem;
             margin-bottom: 4rem;
         }
 
