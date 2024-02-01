@@ -93,7 +93,7 @@ const NewsDetail = () => {
             {!isLoading &&
 
         <main className="news-detail">
-            <section className="news-detail__main">
+            <section className="news-detail__main whiteHeader">
                 {/*<Breadcrumbs />*/}
                 <div className="container">
                     <div className="news-detail__main-content">
