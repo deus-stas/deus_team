@@ -87,20 +87,22 @@ const dataProvider = {
       'headerPhoto',
       'contactPhoto',
     ];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths' ]
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'photoSlider' ]
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false;
-
+    console.log(params.data)
     for (const [key, value] of Object.entries(params.data)) {
       if (images.includes(key) && value) {
         hasImage = true;
         formData.append(key, value.rawFile);
       } else if (arrayImages.includes(key) && value) {
+
         const imagesFile = !!value
-          ? value.map((image) => image.imageI.rawFile)
+          ? value.map((image) => (!!image.imageI ? image.imageI.rawFile : image.filename))
           : [];
         // добавляем картинки из arrayImages в formData
+        console.log('imagesFile',imagesFile)
         imagesFile.forEach((image, index) => {
           formData.append(key, image);
         });
@@ -131,7 +133,7 @@ const dataProvider = {
   update: (resource, params) => {
     const formData = new FormData();
     const images = ['image',"file","descrImg", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths']
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'photoSlider']
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
@@ -168,7 +170,10 @@ const dataProvider = {
           });
         } else if (arrayImages.includes(key) && value) {
           const images = !!value
-            ? value.map((image) => image.imageI?.rawFile)
+            ? value.map((image) => (!!image.imageI ? image.imageI.rawFile : null )).filter(v1 =>!!v1)
+            : [];
+          const imagesNames = !!value
+            ? value.map((image) => (!!image.imageI ? null : image.filename)).filter(v1 =>!!v1)
             : [];
 
           // добавляем картинки из arrayImages в formData
@@ -177,6 +182,7 @@ const dataProvider = {
               formData.append(key, image);
             }
           });
+          formData.append(key+'Names', JSON.stringify(imagesNames));
           //свойства в которых объект нужно отдельно переводить в JSON
         } else if (jsonKeys.includes(key) && !!value){
           formData.append(key, JSON.stringify(value));

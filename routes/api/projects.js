@@ -151,11 +151,11 @@ router.post(
     }
 
     if (req.files.bannerFourths) {
-        bannerFourths = req.files.bannerThirds;
+        bannerFourths = req.files.bannerFourths;
     }
 
     if (req.files.bannerFifths) {
-        bannerFifths = req.files.bannerThirds;
+        bannerFifths = req.files.bannerFifths;
     }
 
     if (req.files.mainVideoFile) {
