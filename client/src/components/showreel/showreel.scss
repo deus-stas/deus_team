@@ -32,19 +32,21 @@
     &__s {
         cursor: url('../../img/videoCursor.svg'), default !important;
         opacity: 1;
-        height: 83rem;
+        //max-height: 83rem;
+        height: 100%;
         position: relative;
         @include respond(sm) {
-            max-height: 42rem;
+            //max-height: 42rem;
         }
 
         video {
             width: 100%;
             object-fit: cover;
-            height: 83rem;
+            //max-height: 83rem;
+            height: 100%;
 
             @include respond(sm) {
-                height: 42rem;
+                //max-height: 42rem;
             }
         }
 
