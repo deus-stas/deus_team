@@ -22,25 +22,22 @@ const News = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`/api/news/`)
-            .then((response) => {
-                const newsWithTags = response.data.map((news) => {
-                    return axios.get(`/api/newsTags/${news.newsTags}`)
-                        .then((tagResponse) => {
-                            news.newsTags = tagResponse.data.name;
-                            return news;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return news;
-                        });
-                });
+        axios.get(`/api/newsTags`)
+            .then((tagResponse) => {
+                const tags = tagResponse.data.reduce((obj, tag) => {
+                    obj[tag._id] = tag.name;
+                    return obj;
+                }, {});
 
-                Promise.all(newsWithTags)
-                    .then((news) => {
+                // Получить все новости
+                axios.get(`/api/news`)
+                    .then((response) => {
+                        const news = response.data.map((newsItem) => {
+                            newsItem.newsTags = tags[newsItem.newsTags];
+                            return newsItem;
+                        });
                         setNews(news);
-                        const tags = new Set(news.flatMap((news) => news.newsTags));
-                        setAllTags(tags);
+                        setAllTags(new Set(news.flatMap((news) => news.newsTags)));
                     })
                     .catch((error) => {
                         console.log(error);

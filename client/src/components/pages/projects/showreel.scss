@@ -32,11 +32,11 @@
     &__s {
         cursor: none;
         position: relative;
-        max-height: 83rem;
+        //max-height: 83rem;
 
         video {
           width: 100%;
-          object-fit: cover;
+          object-fit: contain;
         }
 
         iframe {

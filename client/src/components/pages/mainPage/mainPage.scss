@@ -8,7 +8,7 @@
         overflow:hidden;
 
         @include respond(sm) {
-            padding: 4.5rem 0 2.2rem;
+            padding: 4.5rem 0 2.6rem;
         }
 
         &__line {
@@ -88,14 +88,14 @@
 
                 .p-style {
                     font-weight: 400;
-                    font-size: clamp(1.6rem, 2vw, 1.6rem);
+                    font-size: clamp(1.6rem, 2vw, 2rem);
                     color: #757677;
                     display: block;
                     flex-wrap: nowrap;
                     flex-direction: row;
                     align-items: center;
                     line-height: 2.24rem;
-                    margin-top: 1rem;
+                    margin-top: 2rem;
                     @include respond(sm) {
                         margin: 2rem 0;
                     }
@@ -234,22 +234,23 @@
 
     &-showreel {
         position: relative;
-        max-height: 83rem;
+        //max-height: 83rem;
         height: 100%;
         @include respond(sm) {
-            max-height: 42rem;
+            //max-height: 42rem;
         }
 
         video {
             width: 100%;
             object-fit: cover;
-            max-height: 83rem;
+            //max-height: 83rem;
+            height: 100%;
             @include respond(md) {
-                object-fit: fill;
+                object-fit: contain;
             }
 
             @include respond(sm) {
-                max-height: 42rem;
+                //max-height: 42rem;
             }
         }
     }
@@ -500,7 +501,7 @@
                     }
 
                     &__item {
-                        max-width: 41%;
+                        max-width: 47%;
                         @include respond(xs) {
                             max-width: 45%;
                         }
@@ -1414,6 +1415,9 @@
 
 .wh-30 {
     width: 20%;
+    @include respond(md) {
+        width: 25%;
+    }
 
     @include respond(sm) {
         width: 100%;

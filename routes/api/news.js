@@ -37,8 +37,11 @@ router.get('/news', async (req, res) => {
   res.json(news);
 });
 
-router.post('/news', upload.single('image'), async (req, res) => {
-  const { name, newsTags, mainControl, detailControl, body } = req.body;
+router.post('/news', upload.fields([
+  { name: 'image' },
+  { name: 'photoSlider' }])
+    , async (req, res) => {
+  const { name, newsTags, mainControl, detailControl, aboutClient, aboutClient2, body, workStepsItem, body2 } = req.body;
 
   function generateUrl(name) {
     const transliteratedName = transliterate(name);
@@ -48,15 +51,25 @@ router.post('/news', upload.single('image'), async (req, res) => {
 
   const urlName = generateUrl(name);
 
+ let photoSlider;
 
-  const image = req.file;
+ if (req.files.photoSlider) {
+   photoSlider = req.files.photoSlider;
+ }
+
+ const image = req.files.image[0];
 
   const news = new News({
     name,
     image,
     body,
+    body2,
+    photoSlider,
+    workStepsItem,
     urlName,
     newsTags,
+    aboutClient,
+    aboutClient2,
     mainControl,
     detailControl,
   });
@@ -94,7 +107,10 @@ router.get('/news/url/:url', async (req, res) => {
   res.json(news);
 });
 
-router.put("/news/:id", upload.single('image'), async (req, res) => {
+router.put("/news/:id", upload.fields([
+  { name: 'image' },
+  { name: 'photoSlider' }]),
+    async (req, res) => {
   const { id } = req.params;
 
   // Проверяем, есть ли такой документ в базе данных
@@ -103,8 +119,9 @@ router.put("/news/:id", upload.single('image'), async (req, res) => {
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, newsTags, urlName, mainControl,  detailControl,  body } = req.body;
+  const { name, newsTags, urlName, mainControl, aboutClient, aboutClient2,  detailControl, workStepsItem,  body, body2 } = req.body;
   const image = req.file;
+  const photoSliderNames = JSON.parse(req.body.photoSliderNames);
 
   // Если есть новое изображение в запросе, обновляем ссылку на него
     if (image) {
@@ -115,13 +132,47 @@ router.put("/news/:id", upload.single('image'), async (req, res) => {
         news.image = image;
     }
 
+      if (req.files.photoSlider) {
+        if (news.photoSlider && news.photoSlider.length > 0) {
+          news.photoSlider.filter(image=> !photoSliderNames.includes(image.filename)).forEach((image) => {
+            fs.unlink(image.path, (err) => {
+              if (err) {
+                console.error(err);
+              }
+            });
+          });
+        }
+        news.photoSlider = [
+          ...(news.photoSlider ? news.photoSlider.filter(image => photoSliderNames.includes(image.filename)) : []),
+          ...(!!req.files ? req.files.photoSlider : [])
+        ];
+        console.log()
+      } else {
+        if (news.photoSlider && news.photoSlider.length > 0) {
+          news.photoSlider.filter(image=> !photoSliderNames.includes(image.filename)).forEach((image) => {
+            fs.unlink(image.path, (err) => {
+              if (err) {
+                console.error(err);
+              }
+            });
+          });
+          news.photoSlider = [
+            ...(news.photoSlider ? news.photoSlider.filter(image => photoSliderNames.includes(image.filename)) : [])
+          ];
+        }
+      }
+
   // Обновляем остальные поля документа
   news.name = name;
   news.newsTags = newsTags;
   news.urlName = urlName;
   news.mainControl = mainControl;
   news.detailControl = detailControl;
+  news.aboutClient = aboutClient;
+  news.aboutClient2 = aboutClient2;
   news.body = body;
+  news.body2 = body2;
+  news.workStepsItem = workStepsItem;
 
   // Сохраняем изменения
   await news.save();
@@ -136,11 +187,22 @@ router.delete("/news/:id", async (req, res) => {
     return res.status(404).json({ success: false, message: "News not found" });
   }
 
-  const { image } = news;
+  const { image, photoSlider } = news;
 
   if (image) {
     fs.unlinkSync(`uploads/${image.filename}`);
   }
+
+  const multiImages = [
+    photoSlider
+  ]
+  multiImages.forEach(files => {
+    if (files) {
+      files.forEach((file) => {
+        fs.unlinkSync(`uploads/${file.filename}`);
+      });
+    }
+  })
 
   res.json({ success: true });
 });

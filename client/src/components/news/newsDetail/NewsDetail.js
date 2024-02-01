@@ -41,22 +41,20 @@ const NewsDetail = () => {
     }, [id]);
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/news`)
-            .then((response) => {
-                const newsWithTags = response.data.map((news) => {
-                    return axios.get(`${apiUrl}/api/newsTags/${news.newsTags}`)
-                        .then((tagResponse) => {
-                            news.newsTags = tagResponse.data.name;
-                            return news;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return news;
-                        });
-                });
+        axios.get(`${apiUrl}/api/newsTags`)
+            .then((tagResponse) => {
+                const tags = tagResponse.data.reduce((obj, tag) => {
+                    obj[tag._id] = tag.name;
+                    return obj;
+                }, {});
 
-                Promise.all(newsWithTags)
-                    .then((news) => {
+                // Получить все новости
+                axios.get(`${apiUrl}/api/news`)
+                    .then((response) => {
+                        const news = response.data.map((newsItem) => {
+                            newsItem.newsTags = tags[newsItem.newsTags];
+                            return newsItem;
+                        });
                         setNews(news);
                     })
                     .catch((error) => {
@@ -95,7 +93,7 @@ const NewsDetail = () => {
             {!isLoading &&
 
         <main className="news-detail">
-            <section className="news-detail__main">
+            <section className="news-detail__main whiteHeader">
                 {/*<Breadcrumbs />*/}
                 <div className="container">
                     <div className="news-detail__main-content">
@@ -118,8 +116,30 @@ const NewsDetail = () => {
             <section className="news-detail__article">
                 <div className="container">
                     <div className="news-detail__article-content">
-                        <h2 className="heading-secondary">О клиенте</h2>
-                        <div dangerouslySetInnerHTML={{ __html: detail.body }}></div>
+                        {news.map((item) =>
+                            <h2 className="heading-secondary">{item.aboutClient}</h2>
+
+                        )}
+                        <div className="news-detail__article-about" dangerouslySetInnerHTML={{__html: detail.body}}/>
+                    </div>
+                    <div className="news-detail__article-photos">
+                        {detail.photoSlider ? (
+                            <>
+                                {detail.photoSlider.filter(val => !!val).map((banner, index) => (
+                                    <BannerComponent key={index} banner={banner} detail={detail}/>
+                                ))}
+                            </>
+                        ) : null}
+                    </div>
+
+                    <div className="news-detail__article-content">
+                        {news.map((item) =>
+                            <h2 className="heading-secondary">{item.aboutClient2}</h2>
+                        )}
+                        <div className="news-detail__article-about" dangerouslySetInnerHTML={{__html: detail.body2}}/>
+
+
+                        <div className="news-detail__article-steps" dangerouslySetInnerHTML={{__html: detail.workStepsItem}}/>
                     </div>
                 </div>
             </section>
@@ -185,3 +205,20 @@ const NewsDetail = () => {
 }
 
 export default NewsDetail;
+
+const BannerComponent = ({banner,detail}) => {
+    const isVideo = banner.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(banner.image.filename) : false;
+    return (
+        <>
+            {!isVideo
+                ?
+                <img src={`${apiUrl}/uploads/${banner.filename}`} alt={detail.name} className="image"/>
+                :
+                <video className="image" autoPlay loop muted playsInline>
+                    <source src={`${apiUrl}/uploads/${banner.filename}`}
+                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                </video>
+            }
+        </>
+    )
+}

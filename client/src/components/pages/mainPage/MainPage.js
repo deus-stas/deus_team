@@ -95,26 +95,21 @@ const MainPage = (props) => {
     }
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/news`)
-            .then((response) => {
-                const newsWithTags = response.data.map((news) => {
-                    return axios.get(`${apiUrl}/api/newsTags/${news.newsTags}`)
-                        .then((tagResponse) => {
-                            news.newsTags = tagResponse.data.name;
-                            return news;
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            return news;
+        axios.get(`${apiUrl}/api/newsTags`)
+            .then((tagResponse) => {
+                const tags = tagResponse.data.reduce((obj, tag) => {
+                    obj[tag._id] = tag.name; // Предполагая, что _id - это идентификатор тега
+                    return obj;
+                }, {});
+
+                axios.get(`${apiUrl}/api/news`)
+                    .then((response) => {
+                        const news = response.data.map((newsItem) => {
+                            newsItem.newsTags = tags[newsItem.newsTags];
+                            return newsItem;
                         });
-                });
-
-
-                Promise.all(newsWithTags)
-                    .then((news) => {
                         setNews(news);
-                        const newsTags = new Set(news.flatMap((news) => news.newsTags));
-                        setAllNewsTags(newsTags);
+                        setAllNewsTags(new Set(news.flatMap((news) => news.newsTags)));
                     })
                     .catch((error) => {
                         console.log(error);
@@ -225,8 +220,6 @@ const MainPage = (props) => {
             (selectedType ? project.projectType === selectedType.value : true) && project.visibility;
     }).slice(0, 3);
 
-    const foundShowreel = showreels.find(showreel => showreel.mainShowreel === true);
-
 
     const videoRefs = useRef([]);
 
@@ -276,7 +269,7 @@ const MainPage = (props) => {
                                             <span>Создаем продукты и</span>
                                             <span> услуги, которые помогают </span>
                                             <span className="last-grid">нашим клиентам
-                                                    <DelayedLink to={`/contacts`} className="btn --black hidden-mobile"  datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
+                                                    <DelayedLink to={`/contacts`} style={{marginTop: "2rem"}} className="btn --black hidden-mobile"  datahash="contactUs" onClick={(e) => gotoAnchor(e)}>
                                                      Стать клиентом
                                                     </DelayedLink>
                                                         <p className="p-style wh-30">
@@ -766,7 +759,10 @@ const MainPage = (props) => {
                                 <div className="main-news__wrap">
                                     <div className="main-news__info">
                                         <span>
-                                            <h2 className="heading-secondary sticky-h2">Журнал</h2>
+                                            <h2 className="heading-secondary sticky-h2 hover-flip">
+                                                <DelayedLink to={`/news`}>
+                                                    <span data-hover="Журнал">Журнал</span>
+                                                </DelayedLink></h2>
                                         </span>
                                         <div className="main-news__info-wrap">
                                             {[...allNewsTags].map((tag, i) => (

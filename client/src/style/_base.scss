@@ -611,6 +611,10 @@ main {
     position: absolute;
     width: calc(100% + 3rem);
     height: calc(100% + 3rem);
-    top: calc(100% - 8.5rem);
+    top: calc(100% - 8rem);
     right: calc(100% - 3rem);
+
+    @include respond(sm) {
+        top: calc(100% - 8.4rem);
+    }
 }
