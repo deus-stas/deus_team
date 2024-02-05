@@ -3,3 +3,4 @@ node_modules
 /client/src1
 /uploads
 package-lock.json*
+*.env
