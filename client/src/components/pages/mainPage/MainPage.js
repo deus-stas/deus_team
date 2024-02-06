@@ -269,9 +269,7 @@ const MainPage = (props) => {
 
   useEffect(() => {
     function handler() {
-      const scale = 1 - window.scrollY / 1000;
-      mainBannerRef.current.style.transition = "transform 0.1s linear";
-      mainBannerRef.current.style.transform = `scale(${Math.min(1, scale)})`;
+      if (mainBannerRef.current) mainBannerRef.current.style.top = -window.scrollY / 2 + "px";
     }
     document.addEventListener("scroll", handler);
 
