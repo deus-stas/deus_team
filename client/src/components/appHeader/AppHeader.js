@@ -44,55 +44,28 @@ const AppHeader = (props) => {
 
     }, [isLoading, location])
 
+    // хук для изменения цвета хедера, с троттлингом для производительности
     useEffect(() => {
-        const handleScroll = () => {
-            let header = document.querySelector('.header')
-            let headerMob = document.querySelector('.headerMob')
-            let whiteHeaders = document.querySelectorAll('.whiteHeader')
-            let menu = document.querySelector('.activeMenu')
+      let id;
+      const handleScroll = () => {
+        clearTimeout(id);
+        id = setTimeout(() => {
+          let header = document.querySelector(".header");
+          let headerMob = document.querySelector(".headerMob");
+          let menu = document.querySelector(".activeMenu");
+          [header, headerMob, menu].filter(Boolean).forEach((el) => {
+            el.style.pointerEvents = "none";
+            const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
+            isWhite ? el.classList.add("white") : el.classList.remove("white");
+            el.style.pointerEvents = "";
+          });
+        }, 50);
+      };
 
-
-            const find = Array.from(whiteHeaders).find((whiteHeader) => {
-                return !!headerMob && getComputedStyle(header).visibility === 'hidden'?
-                    window.scrollY + window.innerHeight >= whiteHeader.offsetTop && window.scrollY + window.innerHeight <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
-                    :
-                    window.scrollY >= whiteHeader.offsetTop && window.scrollY <= (whiteHeader.offsetHeight + whiteHeader.offsetTop)
-            })
-
-
-            if (!!headerMob && getComputedStyle(header).visibility === 'hidden') {
-                if (!!find && !menu) {
-                    const offsetBot = find.offsetHeight + find.offsetTop
-                    if (headerMob.offsetTop < offsetBot) {
-                        headerMob.classList.add('white');
-                    } else {
-                        headerMob.classList.remove('white');
-                    }
-                } else if (Array.from(whiteHeaders).length > 1) {
-                    headerMob.classList.remove('white');
-                }
-            } else if (!!header && getComputedStyle(headerMob).display === 'none') {
-                if (!!find) {
-                    if (window.scrollY >= find.offsetTop) {
-                        header.classList.add('white');
-                    } else {
-                        header.classList.remove('white');
-
-                    }
-                    if (window.scrollY > find.offsetTop + find.offsetHeight) {
-                        header.classList.remove('white');
-                    }
-                } else if (Array.from(whiteHeaders).length > 0) {
-                    header.classList.remove('white');
-
-                }
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     }, []);
 
     useEffect(() => {
