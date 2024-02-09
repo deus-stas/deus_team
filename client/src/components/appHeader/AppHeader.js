@@ -223,7 +223,7 @@ const AppHeader = (props) => {
                     <div className={`header-conatiner hidden-desktop ${visibleDesktop ? "hiddenScroll" : "activeScroll"}`}>
                         <header className={`headerMob ${menu ? 'headerMob-active' : ''}`}>
                             <div className="headerMob-top">
-                                <div className={`menu ${menu ? 'activeMenu active' : ''}`}>
+                                <div className={`menu ${menu ? 'activeMenu' : ''}`}>
                                     <div className={`menu-wrap ${menu ? 'menu-wrap-active' : ''}`}>
 
                                         <nav className="menu-nav">
