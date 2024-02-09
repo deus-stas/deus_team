@@ -41,8 +41,9 @@
             background: transparent;
             display: flex;
             flex-direction: column;
-            width: 40%;
+            width: 43%;
             transition: all .4s;
+            transition-delay: .5s;
 
             &-active {
                 transition: all .4s;
@@ -53,7 +54,6 @@
             &-top {
                 //max-height: 0;
                 //transition: all .4s;
-
 
 
                 .menu {
@@ -68,21 +68,24 @@
                     -ms-overflow-style: none;
                     scrollbar-width: none;
                     backdrop-filter: blur(4px);
+
                     &::-webkit-scrollbar {
                         display: none;
                     }
+
                     position: fixed;
                     height: 100%;
                     bottom: 5.5rem;
                     left: 0;
                     max-height: 0;
-                    transition: all .4s, opacity 0.2s;
+                    transition: all .4s, opacity .7s;
                     margin: 0 auto;
 
                     &.activeMenu {
                         color: #000000;
                         bottom: 0;
-                        transition: all .4s, opacity 0.2s;
+                        transition: all .4s, opacity .1s;
+                        transition-delay: .2s;
                         opacity: 1;
                         visibility: visible;
                         width: 100%;
@@ -99,9 +102,10 @@
                         padding: 1.5rem 2rem;
                         border-radius: 2rem;
                         margin: 0 auto;
-                        max-width: 0;
+                        max-width: 100%;
                         width: 100%;
                         transition: all .5s;
+
                         &-active {
                             transition: all .4s;
                             max-width: 100%;
@@ -139,8 +143,9 @@
                 }
             }
 
-            &-bottom{
+            &-bottom {
                 position: relative;
+
                 &__wrap {
                     position: absolute;
                     display: flex;
@@ -155,21 +160,23 @@
                         background: rgba(255, 255, 255, 0.16);
                         gap: 1.5rem;
                         justify-content: space-between;
-
+                        transition: all .4s;
+                        transition-delay: 0.2s;
                         &-activeBot {
                             transition: all .4s;
                             background: white;
                             backdrop-filter: blur(0);
                             border-radius: 2rem;
+                            color: black;
                         }
                     }
                 }
 
-    &__logo {
-        transition: all 0.15s linear;
-        @include respond(sm) {
-            margin-right: 0;
-        }
+                &__logo {
+                    transition: all 0.15s linear;
+                    @include respond(sm) {
+                        margin-right: 0;
+                    }
 
                     @include respond(xs) {
                         margin-right: 0;
