@@ -8,16 +8,19 @@ import {Icon} from "../icon/Icon";
 import DelayedLink, {DelayedNavLink} from "./DelayedLink";
 import {setIsLoadingMainPageEvent} from "../../axios";
 import {gotoAnchor} from "../anchors";
+import {isVisible} from "@testing-library/user-event/dist/utils";
 
 
 const apiUrl = ''
 
 const AppHeader = (props) => {
     const [isLoading, setIsLoading] = useState(true);
+
+    const [menu, setMenu] = useState(false);
     const [prevScroll, setPrevScroll] = useState(0);
     const [lastShowPos, setLastShowPos] = useState(0);
     const [visible, setVisible] = useState(true);
-    const [visibleDesktop, setVisibleDesktop] = useState(true);
+    const [visibleMob, setVisibleMob] = useState(true);
     const location = useLocation()
 
     useEffect(() => {
@@ -90,12 +93,13 @@ const AppHeader = (props) => {
 
     useEffect(()=>{
         const hiddenHeader = () => {
+
             const scrollMob = window.scrollY;
             if (window.innerWidth <= 767) {
-                if (scrollMob < 40) {
-                    setVisibleDesktop(true);
+                if (scrollMob < 10 && !menu ) {
+                    setVisibleMob(true);
                 } else {
-                    setVisibleDesktop(false);
+                    setVisibleMob(false);
                 }
             }
         }
@@ -128,14 +132,14 @@ const AppHeader = (props) => {
     };
 
 
-    const [menu, setMenu] = useState(false);
     const {headerData} = props;
 
     return (
         <>
             {!isLoading && headerData &&
                 <>
-                    <header className={`header ${visibleDesktop ? "activeScroll": "hiddenScroll"} ${menu ? 'hidden-mobile' : ''} `}>
+                    {console.log("visi", visibleMob)}
+                    <header className={`header ${visibleMob ? "activeScroll": "hiddenScroll"} ${menu ? 'hidden-mobile' : ''} `}>
                         <div className="container">
                             <div className="header__wrap">
                                 <DelayedLink to="/" className='header__logo'>
@@ -170,8 +174,6 @@ const AppHeader = (props) => {
                                     (
                                         <div
                                             className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
-                                            {/*<Link to={`mailto:${headerData.email}`}*/}
-                                            {/*      className="header__contacts-link">{headerData.email}</Link>*/}
                                             <Link to={`tel:${headerData.phone}`}
                                                   className="header__contacts-link">
                                                 <span data-hover={headerData.phone}> {headerData.phone}</span>
@@ -181,19 +183,12 @@ const AppHeader = (props) => {
                                     (
                                         <div
                                             className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
-                                            {/*<Link to="mailto:hello@de-us.ru"*/}
-                                            {/*      className="header__contacts-link">hello@de-us.ru</Link>*/}
                                             <Link to="tel:+74951034351" className="header__contacts-link">
                                                 <span data-hover="+7 (495) 103—4351 ">+7 (495) 103—4351 </span></Link>
                                         </div>
                                     )
                                 }
 
-
-                                {/* <div onClick={handleClick} className="header__discuss hidden-mobile">
-                            <img src={btn} alt="Обсудить проект" className="header__discuss-img" />
-                            <div className="header__discuss-text">Обсудить проект</div>
-                        </div> */}
                                 <DelayedLink to="/contacts" className="header__discuss hidden-mobile"
                                              datahash="contactUs"
                                              onClick={(e) => gotoAnchor(e)}>
@@ -214,13 +209,15 @@ const AppHeader = (props) => {
                                 </DelayedLink>
 
                                 <div className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
-                                     onClick={() => setMenu(!menu)}>
+                                     onClick={() =>{
+                                         setMenu(!menu)
+                                     }}>
                                     <span></span>
                                 </div>
                             </div>
                         </div>
                     </header>
-                    <div className={`header-conatiner hidden-desktop ${visibleDesktop ? "hiddenScroll" : "activeScroll"}`}>
+                    <div className={`header-conatiner hidden-desktop `}>
                         <header className={`headerMob ${menu ? 'headerMob-active' : ''}`}>
                             <div className="headerMob-top">
                                 <div className={`menu ${menu ? 'activeMenu' : ''}`}>
@@ -240,9 +237,7 @@ const AppHeader = (props) => {
                                                     <DelayedNavLink to="/services"
                                                                     onClick={() => setMenu(!menu)}>Услуги</DelayedNavLink>
                                                 </li>
-                                                {/* <li className="menu-item">
-                                        <NavLink to="/news" onClick={() => setMenu(!menu)}>Журнал</NavLink>
-                                    </li> */}
+
                                                 <li className="menu-item">
                                                     <DelayedNavLink to="/contacts"
                                                                     onClick={() => setMenu(!menu)}>Контакты</DelayedNavLink>
@@ -255,8 +250,6 @@ const AppHeader = (props) => {
                                             headerData && headerData.phone ?
                                                 (
                                                     <div className="menu-contacts">
-                                                        {/*<Link to={`mailto:${headerData.email}`}*/}
-                                                        {/*      className="menu-contacts-link">{headerData.email}</Link>*/}
                                                         <DelayedLink to={`tel:${headerData.phone}`}
                                                                      className="menu-contacts-link">{headerData.phone}</DelayedLink>
                                                     </div>
@@ -266,8 +259,6 @@ const AppHeader = (props) => {
                                                                      className="menu-contacts-link">+7
                                                             (495)
                                                             103—4351</DelayedLink>
-                                                        {/*<Link to="mailto:hello@de-us.ru"*/}
-                                                        {/*      className="menu-contacts-link">hello@de-us.ru</Link>*/}
                                                     </div>
                                                 )
                                         }
@@ -293,34 +284,12 @@ const AppHeader = (props) => {
                                                      className="header__discuss-text">Обсудить проект
                                                 </div>
                                             </DelayedLink>
-                                            {/*        /!* <a href='contacts#contactWithUsPart'>*/}
-                                            {/*   */}
-                                            {/*</a> *!/*/}
-                                            {/*        /!* <Link to="/" className="presa">Презентация агентства</Link> *!/*/}
-                                            {/*        {*/}
-                                            {/*            headerData && headerData.presentation ?*/}
-                                            {/*                <a href={`${apiUrl}/uploads/${headerData.presentation.filename}`}*/}
-                                            {/*                   target='_blank' className="presa">Презентация агентства</a> :*/}
-                                            {/*                <a href={`${apiUrl}/uploads/DEUS.pdf`} target='_blank'*/}
-                                            {/*                   className="presa">Презентация агентства</a>*/}
-                                            {/*        }*/}
-                                        </div>
-                                        {/*<div style={{marginTop: "auto"}}>*/}
-                                        {/*    <div style={{display: "flex", flexWrap: "wrap"}}>*/}
-                                        {/*        <DelayedLink to="/" className='logo'>*/}
-                                        {/*            <Icon icon="headerLogo" viewBox="0"/>*/}
-                                        {/*        </DelayedLink>*/}
 
-                                        {/*        <div*/}
-                                        {/*            className={`burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}*/}
-                                        {/*            onClick={() => setMenu(!menu)}>*/}
-                                        {/*            <span></span>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            {(!visibleMob || menu) &&
                             <div className="headerMob-bottom">
                                 <div className={`headerMob-bottom__wrap ${menu ? 'headerMob-bottom__wrap-activeBot' : ''}`}>
                                     <DelayedLink to="/" className='headerMob-bottom__logo'>
@@ -328,11 +297,14 @@ const AppHeader = (props) => {
                                     </DelayedLink>
 
                                     <div className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
-                                         onClick={() => setMenu(!menu)}>
+                                         onClick={() => {
+                                             setMenu(!menu)
+                                         }}>
                                         <span></span>
                                     </div>
                                 </div>
                             </div>
+                            }
                         </header>
                     </div>
 

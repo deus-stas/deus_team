@@ -13,7 +13,8 @@
     }
 
     .header__burger {
-        transition: all 0.15s linear;
+        transition: all 0.4s;
+        transition-delay: .5s;
         background: #FFFFFF;
         z-index: 8000;
     }
@@ -160,10 +161,10 @@
                         background: rgba(255, 255, 255, 0.16);
                         gap: 1.5rem;
                         justify-content: space-between;
-                        transition: all .4s;
-                        transition-delay: 0.2s;
+                        transition: all .4s, color .01s;
+                        //transition-delay: 0.2s;
                         &-activeBot {
-                            transition: all .4s;
+                            transition: all .4s, color .01s;
                             background: white;
                             backdrop-filter: blur(0);
                             border-radius: 2rem;
@@ -380,12 +381,13 @@
     }
 
     &__burger {
-        transition: all 0.15s linear;
+        transition: all .4s;
         width: 4rem;
         height: 4rem;
         position: relative;
         border-radius: 34px;
         background: rgba(18, 18, 18, 0.10);
+        transition-delay: .5s;
 
         &.active {
             span {
