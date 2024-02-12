@@ -6,9 +6,10 @@
     color: #fff;
     position: fixed;
     overflow: hidden;
+    top: 0;
 
     @include respond(sm) {
-      padding: 4.5rem 0 2.6rem;
+      padding: 9rem 0 2.6rem;
     }
 
     &__line {
