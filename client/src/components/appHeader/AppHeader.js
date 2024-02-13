@@ -47,6 +47,30 @@ const AppHeader = (props) => {
 
     }, [isLoading, location])
 
+
+    useEffect(() => {
+        let header = document.querySelector(".header");
+        let headerMob = document.querySelector(".headerMob");
+        let menu = document.querySelector(".activeMenu");
+        [header, headerMob, menu].filter(Boolean).forEach((el) => {
+            el.style.pointerEvents = "none";
+            const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
+            if (isWhite) {
+                if (menu) {
+                    headerMob.classList.remove("white")
+                    header.classList.remove("white")
+                } else {
+                    headerMob.classList.add("white")
+                    header.classList.add("white")
+                }
+            } else {
+                headerMob.classList.remove("white")
+                header.classList.remove("white")
+            }
+            el.style.pointerEvents = "";
+        });
+    }, [menu]);
+
     // хук для изменения цвета хедера, с троттлингом для производительности
     useEffect(() => {
       let id;
@@ -65,10 +89,10 @@ const AppHeader = (props) => {
         }, 50);
       };
 
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
     useEffect(() => {
@@ -138,7 +162,6 @@ const AppHeader = (props) => {
         <>
             {!isLoading && headerData &&
                 <>
-                    {console.log("visi", visibleMob)}
                     <header className={`header ${visibleMob ? "activeScroll": "hiddenScroll"} ${menu ? 'hidden-mobile' : ''} `}>
                         <div className="container">
                             <div className="header__wrap">
@@ -208,7 +231,7 @@ const AppHeader = (props) => {
                                     </div>
                                 </DelayedLink>
 
-                                <div className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
+                                <div className={`header__burger hidden-desktop  ${menu ? 'activeMenu active' : ''}`}
                                      onClick={() =>{
                                          setMenu(!menu)
                                      }}>
@@ -296,7 +319,7 @@ const AppHeader = (props) => {
                                         <Icon icon="headerLogo" viewBox="0"/>
                                     </DelayedLink>
 
-                                    <div className={`header__burger hidden-desktop ${menu ? 'activeMenu active' : ''}`}
+                                    <div className={`header__burger mob hidden-desktop ${menu ? 'activeMenu active' : ''}`}
                                          onClick={() => {
                                              setMenu(!menu)
                                          }}>
