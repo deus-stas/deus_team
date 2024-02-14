@@ -14,8 +14,8 @@ import octagon from "../../../img/octagon.png"
 import elipse from "../../../img/elipse.png"
 import spiral from "../../../img/spiral.png"
 import includes from "validator/es/lib/util/includes";
-import Marquee from "react-fast-marquee";
 import {gotoAnchor} from "../../anchors";
+import MarqueeComponent from "../../MarqueeComponent";
 import DelayedLink from "../../appHeader/DelayedLink";
 
 const apiUrl = '';
@@ -177,30 +177,23 @@ const Services = (props) => {
                                                     <img src={`${apiUrl}/uploads/${service.descrImg.filename}`} alt=""/>}
                                                 <div className="container">
                                                     <p className="describe-title">{service.blockTitle}</p>
-                                                    <Marquee speed="50">
+                                                    {/*<Marquee speed="50">*/}
+                                                    <MarqueeComponent >
                                                         <div className="describe-services ">
-                                                            {!!service.tariffs && service.tariffs.map((tariffs, index) => (
-                                                                <React.Fragment key={index}>
-                                                                    {tariffs.tariffsCategory && (
-                                                                        <>
-                                                                            <p>{tariffs.tariffsCategory}</p>
-                                                                            <p className="dot">•</p>
-                                                                        </>
-                                                                    )}
-                                                                </React.Fragment>
-                                                            ))}
-                                                            {!!service.tariffs && service.tariffs.map((tariffs, index) => (
-                                                                <React.Fragment key={index}>
-                                                                    {tariffs.tariffsCategory && (
-                                                                        <>
-                                                                            <p>{tariffs.tariffsCategory}</p>
-                                                                            <p className="dot">•</p>
-                                                                        </>
-                                                                    )}
-                                                                </React.Fragment>
-                                                            ))}
+                                                                    {!!service.tariffs && service.tariffs.map((tariffs, index) => (
+                                                                        <React.Fragment key={index}>
+                                                                            {tariffs.tariffsCategory && (
+                                                                                <>
+                                                                                    <p>{tariffs.tariffsCategory}</p>
+                                                                                    <p className="dot">•</p>
+                                                                                </>
+                                                                            )}
+                                                                        </React.Fragment>
+                                                                    ))}
+
                                                         </div>
-                                                    </Marquee>
+                                            </MarqueeComponent>
+                                                    {/*</Marquee>*/}
 
                                                     <div className="describe__wrapp ">
                                                         <div className="describe__wrapp-btn hidden-mobile ">
