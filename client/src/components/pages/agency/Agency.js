@@ -259,7 +259,7 @@ const Agency = (props) => {
                         {/* <Link className="btn --circle --orange">Презентация агентства</Link> */}
 
                         {  headerData && headerData.presentation &&
-                            <div className="presentation">
+                            <div className="presentation hidden-mobile">
                                 <Link to={`/uploads/${headerData.presentation.filename}`}
                                       target='_blank'
                                       className="agency-about__pdf"
