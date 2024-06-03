@@ -1,33 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import { Link } from 'react-router-dom';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Marquee from "react-fast-marquee";
-import { Formik } from 'formik';
-import InputMask from "react-input-mask";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid } from "swiper";
-
 import { Icon } from '../../icon/Icon';
-import SectionProducts from '../../sectionProducts/SectionProducts';
-import SectionSocial from '../../sectionSocial/SectionSocial';
-import Showreel from '../../showreel/Showreel';
-import chiefTeam from "../../../img/chief-team.png"
-import chiefMob from "../../../img/chief-mob.png"
-import choice from "../../../img/choice.png"
-import ucgroup from "../../../img/ucgroup.png"
 import agencyBanner from "../../../img/agency-main.mp4"
-import rtk from "../../../img/rtk.png"
-import Cta from '../../cta/Cta';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-
 import "swiper/css";
 import "swiper/css/grid";
 import './agency.scss';
 import {connect} from "react-redux";
-import RoundButton from "../../animation/roundButton";
-import includes from "validator/es/lib/util/includes";
 import TruncatedSentence from "./TruncatedSentence";
 
 
@@ -211,7 +194,7 @@ const Agency = (props) => {
                     </video>
                 </div>
                 <div className="container">
-                    <h1 className="heading-primary">Оказываем услуги, которые помогают нашим клиентам</h1>
+                    <h1 className="heading-primary">Помогаем выделиться вашему бренду в цифровом пространстве</h1>
                 </div>
 
                 {/*{*/}
@@ -411,30 +394,30 @@ const Agency = (props) => {
                     <div className="agency-principle__wrap">
                         <h2 className="heading-secondary">
                            <p className="sticky-h2">
-                               Принципы, которых мы<br/> придерживаемся в работе
+                               Принципы нашей работы
                            </p>
                         </h2>
                         <div>
                             <div className="agency-principle__wrap-item" >
                                 <span className="flex-wrap" >
                                     <p className="num">01</p>
-                                    <p>Цена слова</p>
+                                    <p>Держим слово</p>
                                 </span>
-                                <p>Верим в силу рукопожатия. Форма договоренности не имеет значения — мы выполняем свои обещания. Всегда.</p>
+                                <p>Выполняем свои обязательства и обещания вне зависимости от формы договоренности</p>
                             </div>
                             <div className="agency-principle__wrap-item">
                                 <span className="flex-wrap">
                                     <p  className="num">02</p>
-                                    <p>Доверие и ответственность</p>
+                                    <p>Фокусируемся на взаимном доверии</p>
                                 </span>
-                                <p>Основа наших отношений с клиентами — взаимное доверие. Мы всегда берем на себя ответственность за результат.</p>
+                                <p>Несем ответственность за результат на всех этапах работы</p>
                             </div>
                             <div className="agency-principle__wrap-item">
                                 <span className="flex-wrap">
                                     <p  className="num">03</p>
-                                    <p>Процесс имеет значение</p>
+                                    <p>Соблюдаем этичный подход</p>
                                 </span>
-                                <p>Для нас результаты, достигнутые путем нарушения этических норм, недопустимы.</p>
+                                <p>Дорожим репутацией и достигаем успешного результата, используя только прозрачные и добросовестные методы работы</p>
                             </div>
 
                         </div>
