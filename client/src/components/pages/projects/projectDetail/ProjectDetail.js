@@ -502,7 +502,6 @@ const ProjectDetail = () => {
                             </>
                         )
                     }
-                    {console.log("результат:", detail.result, Date.now())}
 
                     {!!detail.result !== 'undefined'    ?
 
@@ -517,17 +516,16 @@ const ProjectDetail = () => {
                                         className="heading-secondary">Результаты</h2>
                                     <div className="project-results__content">
                                         <div className="project-results__person">
-                                            {detail.resultPersons &&
+                                            {detail.resultPersons && detail.resultPersons.name && detail.resultPersons.post ?
                                             <div className="project-results__person-info">
                                                 <div
-                                                    className="project-results__person-name">{detail.resultPersons.name},
+                                                    className="project-results__person-name">{detail.resultPersons.name}{','}
                                                 </div>
                                                 <div
-                                                    className="project-results__person-position">{detail.resultPersons.post} @
-                                                    DEUS
+                                                    className="project-results__person-position">{detail.resultPersons.post} {'@ DEUS'}
                                                 </div>
                                             </div>
-                                            }
+                                            : null}
                                             {detail.resultPersonsText &&
                                             <div className="project-results__person-text">
                                                 <div dangerouslySetInnerHTML={{__html: detail.resultPersonsText}}></div>
