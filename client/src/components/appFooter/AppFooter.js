@@ -121,12 +121,12 @@ const AppFooter = (props) => {
             <footer className="footer whiteHeader">
                 <div className="container">
                     <p className="footer-header heading-footer">
-                        <span> Расскажите нам
+                        <span> Расскажите
                             <img onClick={handleButtonClick} className="to-top hidden-footer-mobile" src={arrorLink}
                                  alt={'go'}/>
                         </span>
-                        <span>о своем проекте, подумаем </span>
-                        <span className="last-grid">над ним вместе
+                        <span>о своем проекте, и мы </span>
+                        <span className="last-grid"> найдем решение
                             <DelayedLink datahash="contactUs" className="btn --footer  hidden-footer-mobile" onClick={(e) => gotoAnchor(e)} to={`/contacts`}>
                                 Обсудить проект
                             </DelayedLink>

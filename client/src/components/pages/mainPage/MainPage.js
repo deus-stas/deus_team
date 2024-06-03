@@ -287,10 +287,11 @@ const MainPage = (props) => {
                   <div className="main-banner__content">
                     <h4 className="heading-fourth">Digital агенство</h4>
                     <h1 className="heading-primary">
-                      <span>Создаем продукты и</span>
-                      <span> услуги, которые помогают </span>
+
+                      <span>Помогаем выделиться</span>
+                      <span> вашему бренду в </span>
                       <span className="last-grid">
-                        нашим клиентам
+                        цифровом пространстве
                         <DelayedLink
                           to={`/contacts`}
                           style={{ marginTop: "2rem" }}
