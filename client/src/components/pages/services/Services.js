@@ -105,18 +105,17 @@ const Services = (props) => {
                             </video>
                         </div>
                         <div className="container">
-                            <h1 className="heading-primary hidden-mobile">Отвечаем за качество<br/> своих услуг</h1>
-                            <h1 className="heading-primary hidden-desktop">Отвечаем за<br/> качество своих услуг</h1>
+                            <h1 className="heading-primary hidden-mobile">Персональные решения для <br/>эффективного результата</h1>
+                            <h1 className="heading-primary hidden-desktop">Персональные решения<br/>для эффективного результата</h1>
                         </div>
                     </section>
                     <section className="services-about">
                         <div className="container">
-                            <h2 className="heading-secondary">Почему стоит заказать<br/> разработку сайта в DEUS?</h2>
+                            <h2 className="heading-secondary">Работая с нами, вы получите...</h2>
                             <div className="services-about__wrap">
-                                <div className="services-about__descr">Объединяем аналитику, маркетинг, дизайн,
-                                    разработку
-                                    и интеграции в единую систему для получения максимальной эффективности для вашего
-                                    бизнеса
+                                <div className="services-about__descr">максимальную эффективность вашего бизнеса
+                                    за счет объединения инструментов аналитики, маркетинга, дизайна и современных
+                                    методов разработки
                                 </div>
                                 <div className="services-about__adv hidden-mobile">
                                     <div className="services-about__adv-item">
@@ -262,36 +261,51 @@ const Services = (props) => {
 
                     <section className="services-principle whiteHeader">
                         <div className="container">
-                            <h2 className="heading-secondary">Принцип управления проектами</h2>
+                            <h2 className="heading-secondary">Как мы работаем</h2>
                             <div className="services-principle__wrap">
                                 <div className="services-principle__wrap-item">
                                     <img src={pentagon} alt=""/>
                                     <div>
                                         <h3 className="heading-tertiary">Прозрачность</h3>
                                         <p className="p-style-white">
-                                            Подробно и понятно рассказываем, что клиент получает по итогам каждого этапа
-                                            — держим фокус и не отклоняемся от стратегической цели проекта
+                                            Подробно и простым языком рассказываем о результатах каждого этапа работы.
+                                            Делаем фокус на результат, а не на чек, поэтому предлагаем только те услуги,
+                                            которые приведут к достижению цели.
+
                                         </p>
                                     </div>
                                 </div>
                                 <div className="services-principle__wrap-item">
                                     <img src={octagon} alt=""/>
                                     <div>
-                                        <h3 className="heading-tertiary">Индивидуальный подход</h3>
+                                        <h3 className="heading-tertiary">Индивидуальность</h3>
                                         <p className="p-style-white">
-                                            Всесторонне изучаем рынок и бизнес клиента, предлагаем уникальные решения,
-                                            шиюко подбираем команду, условия работы и оплаты на основе интересов клиента
+                                            Разрабатываем уникальные проекты, соответствующие индивидуальности бренда и
+                                            вашим интересам.
+                                            Не останавливаемся на достигнутом и постоянно подбираем идеи для улучшения
+                                            результата,
+                                            опираясь на глубокую экспертизу и опыт.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="services-principle__wrap-item">
                                     <img src={elipse} alt=""/>
                                     <div>
-                                        <h3 className="heading-tertiary">Экспертиза</h3>
+                                        <h3 className="heading-tertiary">Персональный подход</h3>
                                         <p className="p-style-white">
-                                            Проактивность — ключ к достойному результату. В ходе проекта мы постоянно
-                                            предлагаем улучшения и идеи, опираясь на глубокую экспертизу и многолетний
-                                            опыт </p>
+                                            Предлагаем персональные решения на основе детального изучения вашего бизнеса
+                                            и рынка.
+                                            Выделяем проектные команды, условия работы и оплаты на основе ваших
+                                            интересов. </p>
+                                    </div>
+                                </div>
+                                <div className="services-principle__wrap-item">
+                                    <img src={elipse} alt=""/>
+                                    <div>
+                                        <h3 className="heading-tertiary">Вектор в вашу пользу</h3>
+                                        <p className="p-style-white">
+                                            Предложим несколько форматов работы с учетом особенностей вашего проекта, найдем гибкий подход для достижения результата.
+                                        </p>
                                     </div>
                                 </div>
                             </div>

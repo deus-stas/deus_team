@@ -193,7 +193,7 @@ export const ProjectsCreate = (props) => (
                 label="Список задач"
             >
                 <SimpleFormIterator>
-                    <TextInput
+                    <RichTextInput
                         className="customWidth"
                         source="tasksItem"
                         label="Задача" />
@@ -639,7 +639,7 @@ export const ProjectsEdit = (props) => (
                 label="Список задач"
             >
                 <SimpleFormIterator>
-                    <TextInput
+                    <RichTextInput
                         className="customWidth"
                         source="tasksItem"
                         label="Задача" />

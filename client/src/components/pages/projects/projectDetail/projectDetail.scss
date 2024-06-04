@@ -147,7 +147,7 @@
                 align-items: flex-start;
                 font-size: 2.4rem;
                 line-height: 3.4rem;
-                height: 4.5rem;
+                min-height: 4.5rem;
 
                 @include respond(sm) {
                     font-size: 2rem;
