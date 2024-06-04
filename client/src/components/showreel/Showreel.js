@@ -43,7 +43,7 @@ const Showreel = (props) => {
                     if(!videoRef.current.paused || !hasPlayedOnce){
                         setCurrentTime(videoRef.current.currentTime);
                         videoRef.current.pause()
-                        videoRef.current.currentTime = 17;
+                        videoRef.current.currentTime = 4;
                     }
                 } else {
                     videoRef.current.currentTime = currentTime;
