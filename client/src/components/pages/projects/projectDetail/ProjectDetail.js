@@ -188,7 +188,7 @@ const ProjectDetail = () => {
 
                     <div style={{background: detail.aimColor}}>
                         {
-                            detail.task !== 'undefined' && detail.task ?
+                            detail.task !== 'undefined' || detail.tasksList !== 'undefined' && detail.task || detail.tasksList ?
                                 <section style={{background: detail.aimColor}} className="project-goals wow fadeIn"
                                          data-wow-offset="100"
                                          data-wow-duration="0.5s"
@@ -198,14 +198,14 @@ const ProjectDetail = () => {
                                             <h2 className="heading-secondary">Цели и задачи</h2>
                                             <div className="project-goals__content">
                                                 <div className="project-goals__text">{detail.taskDescr}</div>
+                                                { detail.taskPersons && detail.taskPersons.name && detail.taskPersons.post?
                                                 <div className="project-goals__person">
                                                     <div className="project-goals__person-info">
                                                         <div
-                                                            className="project-goals__person-name">{detail.taskPersons.name},
+                                                            className="project-goals__person-name">{detail.taskPersons.name}{','}
                                                         </div>
                                                         <div
-                                                            className="project-goals__person-position">{detail.taskPersons.post} @
-                                                            DEUS
+                                                            className="project-goals__person-position">{detail.taskPersons.post} {'@ DEUS'}
                                                         </div>
                                                     </div>
                                                     <div className="project-goals__person-text">
@@ -216,23 +216,24 @@ const ProjectDetail = () => {
                                                         alt={detail.taskPersons.name}
                                                         className="project-goals__person-photo"/> : null}
                                                 </div>
+                                                : null}
                                                 {
                                                     detail.tasksList !== 'undefined' && detail.tasksList ?
                                                         <div>
                                                             {
                                                                 detail.tasksList.map((item, index) => (
-                                                                    // <div key={index}>{item.tasksItem}</div>
                                                                     <div>
                                                                         <div className="project-goals__tasks-item">
-                                                                            {/* <Icon icon="task" /> */}
                                                                             <div key={index}
-                                                                                 style={{color: detail.aimColor === '#000000' ? '#ffffff' : '#000000'}}>{item.tasksItem}</div>
+                                                                                 style={{color: detail.aimColor === '#000000' ? '#ffffff' : '#000000'}}
+                                                                                 dangerouslySetInnerHTML={{__html: item.tasksItem }}/>
                                                                         </div>
                                                                     </div>
                                                                 ))
                                                             }
                                                         </div> : null
                                                 }
+
                                             </div>
                                         </div>
                                     </div>
@@ -515,8 +516,8 @@ const ProjectDetail = () => {
                                     <h2 style={{color: detail.resultsColor === '#000000' ? '#ffffff' : '#000000'}}
                                         className="heading-secondary">Результаты</h2>
                                     <div className="project-results__content">
+                                        {detail.resultPersons && detail.resultPersons.name && detail.resultPersons.post ?
                                         <div className="project-results__person">
-                                            {detail.resultPersons && detail.resultPersons.name && detail.resultPersons.post ?
                                             <div className="project-results__person-info">
                                                 <div
                                                     className="project-results__person-name">{detail.resultPersons.name}{','}
@@ -525,7 +526,7 @@ const ProjectDetail = () => {
                                                     className="project-results__person-position">{detail.resultPersons.post} {'@ DEUS'}
                                                 </div>
                                             </div>
-                                            : null}
+
                                             {detail.resultPersonsText &&
                                             <div className="project-results__person-text">
                                                 <div dangerouslySetInnerHTML={{__html: detail.resultPersonsText}}></div>
@@ -537,6 +538,7 @@ const ProjectDetail = () => {
                                                      alt={detail.resultPersons.name}
                                                      className="project-results__person-photo"/> : null}
                                         </div>
+                                        : null}
                                         <div
                                             className={detail.resultTextColor === '#ffffff' ? 'whiteText' : 'blackText'}
                                             style={{color: detail.resultTextColor}}
