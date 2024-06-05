@@ -185,20 +185,20 @@ const ProjectDetail = () => {
                                     : null
                     }
 
-
-                    <div style={{background: detail.aimColor}}>
-                        {
-                            detail.task !== 'undefined' || detail.tasksList !== 'undefined' && detail.task || detail.tasksList ?
-                                <section style={{background: detail.aimColor}} className="project-goals wow fadeIn"
-                                         data-wow-offset="100"
-                                         data-wow-duration="0.5s"
-                                         data-wow-delay="0.1s">
-                                    <div className="container">
-                                        <div className="project-goals__wrap">
-                                            <h2 className="heading-secondary">Цели и задачи</h2>
-                                            <div className="project-goals__content">
-                                                <div className="project-goals__text">{detail.taskDescr}</div>
-                                                { detail.taskPersons && detail.taskPersons.name && detail.taskPersons.post?
+                    {!!detail.tasksList && detail.tasksList !== 'undefined' && detail.tasksList !== null && detail.tasksList !== "null"
+                        && detail.tasksList.length > 0
+                        ?
+                        <div style={{background: detail.aimColor}}>
+                            <section style={{background: detail.aimColor}} className="project-goals wow fadeIn"
+                                     data-wow-offset="100"
+                                     data-wow-duration="0.5s"
+                                     data-wow-delay="0.1s">
+                                <div className="container">
+                                    <div className="project-goals__wrap">
+                                        <h2 className="heading-secondary">Цели и задачи</h2>
+                                        <div className="project-goals__content">
+                                            <div className="project-goals__text">{detail.taskDescr}</div>
+                                            {detail.taskPersons && detail.taskPersons.name && detail.taskPersons.post ?
                                                 <div className="project-goals__person">
                                                     <div className="project-goals__person-info">
                                                         <div
@@ -217,29 +217,30 @@ const ProjectDetail = () => {
                                                         className="project-goals__person-photo"/> : null}
                                                 </div>
                                                 : null}
-                                                {
-                                                    detail.tasksList !== 'undefined' && detail.tasksList ?
-                                                        <div>
-                                                            {
-                                                                detail.tasksList.map((item, index) => (
-                                                                    <div>
-                                                                        <div className="project-goals__tasks-item">
-                                                                            <div key={index}
-                                                                                 style={{color: detail.aimColor === '#000000' ? '#ffffff' : '#000000'}}
-                                                                                 dangerouslySetInnerHTML={{__html: item.tasksItem }}/>
-                                                                        </div>
+                                            {!!detail.tasksList && detail.tasksList !== 'undefined' && detail.tasksList !== null && detail.tasksList !== "null"?
+                                                    <div>
+                                                        {
+                                                            detail.tasksList.map((item, index) => (
+                                                                <div>
+                                                                    <div className="project-goals__tasks-item">
+                                                                        <div key={index}
+                                                                             style={{color: detail.aimColor === '#000000' ? '#ffffff' : '#000000'}}
+                                                                             dangerouslySetInnerHTML={{__html: item.tasksItem}}/>
                                                                     </div>
-                                                                ))
-                                                            }
-                                                        </div> : null
-                                                }
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </div> : null
+                                            }
 
-                                            </div>
                                         </div>
                                     </div>
-                                </section> : null
-                        }
-                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        : null
+                    }
+
 
                     {
                         detail.bannerSecondVideo && detail.bannerSecondVideo !== 'undefined' && detail.bannerSecondVideo !== 'null' ?
@@ -504,7 +505,7 @@ const ProjectDetail = () => {
                         )
                     }
 
-                    {!!detail.result !== 'undefined'    ?
+                    {detail.result && detail.result !== 'undefined' && detail.result !== null && detail.result !== "null"?
 
                         <section style={{background: detail.resultsColor}}
                                  className="project-results results_bg wow fadeIn"
