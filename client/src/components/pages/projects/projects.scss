@@ -213,7 +213,7 @@
 
         &:hover {
             .projects__item-img, img {
-                transform: scale(1.8);
+                transform: scale(1.15);
                 //object-fit: contain;
             }
         }
@@ -431,7 +431,7 @@
                     max-width: 100%;
                 }
                 :hover {
-                    transform: scale(1.1);
+                    transform: scale(1.15);
                 }
             }
 
