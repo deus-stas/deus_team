@@ -266,15 +266,35 @@ const MainPage = (props) => {
   services.sort((a, b) => a.position - b.position);
 
   const mainBannerRef = useRef(null);
+  const videoModal = useRef(null);
 
   useEffect(() => {
-    function handler() {
-      if (mainBannerRef.current) mainBannerRef.current.style.top = -window.scrollY / 2 + "px";
+    const handler = () => {
+      if (mainBannerRef.current) {
+        mainBannerRef.current.style.top = -window.scrollY / 2 + "px";
+        const OpacityTransition = 2
+        const BlurTransition = 7
+        // Вычисляем новое значение прозрачности на основе прокрутки
+        let newOpacity = 1 - (window.scrollY * OpacityTransition ) / window.innerHeight; // Умножаем scrollY на 2
+        newOpacity = newOpacity < 0 ? 0 : newOpacity; // Убедимся, что прозрачность не уходит ниже 0
+
+        // Вычисляем новое значение размытия на основе прокрутки
+        let newBlur = (window.scrollY * BlurTransition) / window.innerHeight; // Умножаем scrollY на 2
+        newBlur = newBlur > 50 ? 50 : newBlur; // Убедимся, что размытие не превышает 50
+
+
+        mainBannerRef.current.style.opacity = newOpacity;
+        mainBannerRef.current.style.filter = `blur(${newBlur}px)`;
+      }
     }
     document.addEventListener("scroll", handler);
 
     return () => document.removeEventListener("scroll", handler);
   }, []);
+
+
+
+
 
   return (
     <>
@@ -287,7 +307,6 @@ const MainPage = (props) => {
                   <div className="main-banner__content">
                     <h4 className="heading-fourth">Digital агенство</h4>
                     <h1 className="heading-primary">
-
                       <span>Помогаем выделиться</span>
                       <span> вашему бренду в </span>
                       <span className="last-grid">
@@ -323,7 +342,7 @@ const MainPage = (props) => {
           <div style={{ background: "white", position: "relative", zIndex: 1 }}>
             <FadeInOnScroll>
               <section className="main-showreel whiteHeader">
-                {mainShowreel && <Showreel data={mainShowreel} isMain={true} />}
+                {mainShowreel  && <Showreel data={mainShowreel} isMain={true}  />}
               </section>
             </FadeInOnScroll>
 
