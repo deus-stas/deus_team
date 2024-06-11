@@ -160,30 +160,30 @@ const ProjectDetail = () => {
                         </div>
                     </section>
 
-                    {
-                        detail.mainVideoFile && detail.mainVideoFile !== 'undefined' && detail.mainVideoFile !== 'null'
-                            ?
-                            <section className="project-banner wow fadeIn"
-                                     data-wow-duration="0.5s"
-                                     data-wow-delay="0.1s"
-                                     data-wow-offset="100">
-                                <video autoPlay loop muted playsInline>
-                                    <source src={`${apiUrl}/uploads/${detail.mainVideoFile.filename}`}
-                                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                </video>
-                            </section>
-                            :
-                            detail.bannerFirstVideo && detail.bannerFirstVideo !== 'undefined' && detail.bannerFirstVideo !== 'null' ?
-                                <section className="project-banner wow fadeIn"
-                                         data-wow-duration="0.5s"
-                                         data-wow-delay="0.1s"
-                                         data-wow-offset="100">
-                                    <div dangerouslySetInnerHTML={{__html: detail.bannerFirstVideo}}></div>
-                                </section>
-                                : detail.bannerFirst ?
-                                    <BannerComponent banner={detail.bannerFirst} detail={detail}/>
-                                    : null
-                    }
+                    {/*{*/}
+                    {/*    detail.mainVideoFile && detail.mainVideoFile !== 'undefined' && detail.mainVideoFile !== 'null'*/}
+                    {/*        ?*/}
+                    {/*        <section className="project-banner wow fadeIn"*/}
+                    {/*                 data-wow-duration="0.5s"*/}
+                    {/*                 data-wow-delay="0.1s"*/}
+                    {/*                 data-wow-offset="100">*/}
+                    {/*            <video autoPlay loop muted playsInline>*/}
+                    {/*                <source src={`${apiUrl}/uploads/${detail.mainVideoFile.filename}`}*/}
+                    {/*                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>*/}
+                    {/*            </video>*/}
+                    {/*        </section>*/}
+                    {/*        :*/}
+                    {/*        detail.bannerFirstVideo && detail.bannerFirstVideo !== 'undefined' && detail.bannerFirstVideo !== 'null' ?*/}
+                    {/*            <section className="project-banner wow fadeIn"*/}
+                    {/*                     data-wow-duration="0.5s"*/}
+                    {/*                     data-wow-delay="0.1s"*/}
+                    {/*                     data-wow-offset="100">*/}
+                    {/*                <div dangerouslySetInnerHTML={{__html: detail.bannerFirstVideo}}></div>*/}
+                    {/*            </section>*/}
+                    {/*            : detail.bannerFirst ?*/}
+                    {/*                <BannerComponent banner={detail.bannerFirst} detail={detail}/>*/}
+                    {/*                : null*/}
+                    {/*}*/}
 
                     {!!detail.tasksList && detail.tasksList !== 'undefined' && detail.tasksList !== null && detail.tasksList !== "null"
                         && detail.tasksList.length > 0
