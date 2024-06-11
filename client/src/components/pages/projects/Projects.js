@@ -189,7 +189,7 @@ const Projects = () => {
                 <main className="projects" style={{padding:"inherit"}}>
                     <section className="projects-start whiteHeader">
                             <div className="projects-start-video">
-                                <video autoPlay playsInline muted loop>
+                                <video autoPlay playsInline muted  loop>
                                     <source src={projectBanner} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                                 </video>
                             </div>
@@ -289,7 +289,7 @@ const Projects = () => {
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
-                                                                <video autoPlay loop muted playsInline controls>
+                                                                <video autoPlay  loop muted playsInline controls>
                                                                     <source
                                                                         src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
                                                                         type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
@@ -317,7 +317,7 @@ const Projects = () => {
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
-                                                                <video autoPlay loop ref={(ref) => addVideoRef(ref)}
+                                                                <video autoPlay  loop ref={(ref) => addVideoRef(ref)}
                                                                        // onMouseEnter={() => handleMouseEnter(index)}
                                                                        // onMouseLeave={() => handleMouseLeave(index)} muted
                                                                        playsInline>
