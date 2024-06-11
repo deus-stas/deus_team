@@ -80,8 +80,9 @@ const Showreel = (props) => {
         // videoRef.current.currentTime = currentTime
 
         videoRef.current.style.transition = 'all 0.3s ease-in-out';
-        videoRef.current.style.transform = isTrue ? 'translateY(-30vw)' : 'translateY(0)';
+        videoRef.current.style.transform = isTrue ? 'translateY(-30.4vw)' : 'translateY(0)';
         videoRef.current.style.position = isTrue ? 'fixed' : 'relative';
+        videoRef.current.style.height = isTrue ? '110vh' : '';
         header.style.opacity = isTrue ? '0' : '1';
         footer.style.opacity = isTrue ? '0' : '1';
         videoRef.current.style.zIndex = isTrue ? 8001 : 'auto';
