@@ -4,13 +4,14 @@
   &-banner {
     padding: 17rem 0 10rem;
     color: #fff;
-    position: fixed;
+    position: relative;
     overflow: hidden;
-    top: 0;
-    left: 0;
-    right: 0;
-    opacity: 1;
-    filter: blur(0);
+    z-index: 1;
+    //top: 0;
+    //left: 0;
+    //right: 0;
+    //opacity: 1;
+    //filter: blur(0);
 
     @include respond(sm) {
       padding: 9rem 0 2.6rem;
@@ -230,7 +231,7 @@
   &-showreel {
     position: relative;
     height: 100%;
-    margin-top: 30vw;
+    //margin-top: 30vw;
     @include respond(sm) {
       margin-top: 400px;
     }

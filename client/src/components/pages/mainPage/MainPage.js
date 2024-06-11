@@ -268,29 +268,29 @@ const MainPage = (props) => {
   const mainBannerRef = useRef(null);
   const videoModal = useRef(null);
 
-  useEffect(() => {
-    const handler = () => {
-      if (mainBannerRef.current) {
-        mainBannerRef.current.style.top = -window.scrollY / 2 + "px";
-        const OpacityTransition = 2
-        const BlurTransition = 7
-        // Вычисляем новое значение прозрачности на основе прокрутки
-        let newOpacity = 1 - (window.scrollY * OpacityTransition ) / window.innerHeight; // Умножаем scrollY на 2
-        newOpacity = newOpacity < 0 ? 0 : newOpacity; // Убедимся, что прозрачность не уходит ниже 0
-
-        // Вычисляем новое значение размытия на основе прокрутки
-        let newBlur = (window.scrollY * BlurTransition) / window.innerHeight; // Умножаем scrollY на 2
-        newBlur = newBlur > 50 ? 50 : newBlur; // Убедимся, что размытие не превышает 50
-
-
-        mainBannerRef.current.style.opacity = newOpacity;
-        mainBannerRef.current.style.filter = `blur(${newBlur}px)`;
-      }
-    }
-    document.addEventListener("scroll", handler);
-
-    return () => document.removeEventListener("scroll", handler);
-  }, []);
+  // useEffect(() => {
+  //   const handler = () => {
+  //     if (mainBannerRef.current) {
+  //       mainBannerRef.current.style.top = -window.scrollY / 2 + "px";
+  //       const OpacityTransition = 2
+  //       const BlurTransition = 7
+  //       // Вычисляем новое значение прозрачности на основе прокрутки
+  //       let newOpacity = 1 - (window.scrollY * OpacityTransition ) / window.innerHeight; // Умножаем scrollY на 2
+  //       newOpacity = newOpacity < 0 ? 0 : newOpacity; // Убедимся, что прозрачность не уходит ниже 0
+  //
+  //       // Вычисляем новое значение размытия на основе прокрутки
+  //       let newBlur = (window.scrollY * BlurTransition) / window.innerHeight; // Умножаем scrollY на 2
+  //       newBlur = newBlur > 50 ? 50 : newBlur; // Убедимся, что размытие не превышает 50
+  //
+  //
+  //       mainBannerRef.current.style.opacity = newOpacity;
+  //       mainBannerRef.current.style.filter = `blur(${newBlur}px)`;
+  //     }
+  //   }
+  //   document.addEventListener("scroll", handler);
+  //
+  //   return () => document.removeEventListener("scroll", handler);
+  // }, []);
 
 
 

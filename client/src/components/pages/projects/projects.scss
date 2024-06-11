@@ -37,7 +37,7 @@
                 max-height: 69rem;
                 height: 100%;
                 top: 0;
-                object-fit: cover;
+                object-fit: inherit;
 
                 @include respond(sm) {
                     height: 100%;
@@ -310,7 +310,7 @@
                 display: block;
                 //aspect-ratio: 1/0.55;
                 height: 100%;
-                object-fit: cover;
+                object-fit: inherit;
             }
 
             video {

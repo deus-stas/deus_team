@@ -299,15 +299,15 @@ const Services = (props) => {
                                             интересов. </p>
                                     </div>
                                 </div>
-                                <div className="services-principle__wrap-item">
-                                    <img src={elipse} alt=""/>
-                                    <div>
-                                        <h3 className="heading-tertiary">Вектор в вашу пользу</h3>
-                                        <p className="p-style-white">
-                                            Предложим несколько форматов работы с учетом особенностей вашего проекта, найдем гибкий подход для достижения результата.
-                                        </p>
-                                    </div>
-                                </div>
+                                {/*<div className="services-principle__wrap-item">*/}
+                                {/*    <img src={elipse} alt=""/>*/}
+                                {/*    <div>*/}
+                                {/*        <h3 className="heading-tertiary">Вектор в вашу пользу</h3>*/}
+                                {/*        <p className="p-style-white">*/}
+                                {/*            Предложим несколько форматов работы с учетом особенностей вашего проекта, найдем гибкий подход для достижения результата.*/}
+                                {/*        </p>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
 
@@ -318,10 +318,11 @@ const Services = (props) => {
                             <div className="services-team__wrap">
                                 <div>
                                     <h2 className="heading-secondary">
-                                        Как мы работаем?
+                                        Вектор в вашу пользу
                                     </h2>
-                                    <p className="p-style-black">Предлагаем форматы работы с учётом особенностей
-                                        проекта. Если разработка требует большей гибкости, миксуем подходы.
+                                    <p className="p-style-black">Предложим несколько форматов работы с учетом особенностей вашего проекта,
+                                        найдем гибкий подход для достижения результата.
+
                                     </p>
                                 </div>
                                 <div></div>
@@ -346,7 +347,7 @@ const Services = (props) => {
                                     </div>
                                     <div className="services-team__table">
                                         <div className="item">
-                                            <h3 className="heading-tertiary">Менеджмент и управления</h3>
+                                            <h3 className="heading-tertiary">Менеджмент</h3>
                                             <p>4 человека</p>
                                         </div>
                                         <div className="item">
