@@ -5,7 +5,7 @@ import WOW from "wowjs";
 import {usePrevious} from "react-admin";
 
 const instance = axios.create({
-    maxRequests: 50, // устанавливаем максимальное количество одновременных запросов
+    maxRequests: 10, // устанавливаем максимальное количество одновременных запросов
 })
 
 const IS_LOADING_MAIN_PAGE_KEY = "isLoadingMainPage";
