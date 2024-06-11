@@ -77,7 +77,7 @@ const Showreel = (props) => {
         const header = document.querySelector('.header')
         const footer = document.querySelector('.footer')
         const isTrue = videoRef.current.paused
-        videoRef.current.currentTime = currentTime
+        // videoRef.current.currentTime = currentTime
 
         videoRef.current.style.transition = 'all 0.3s ease-in-out';
         videoRef.current.style.transform = isTrue ? 'translateY(-30vw)' : 'translateY(0)';
@@ -89,12 +89,18 @@ const Showreel = (props) => {
         isTrue ? videoRef.current.play() : videoRef.current.pause();
     };
 
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.currentTime = 4;
+        }
+    }, []);
+
 
     return (
         <div className="showreel">
             {
                 isMain ? (
-                    <div ref={showReelRef} className="showreel__s" onClick={handlePlay} >
+                    <div ref={showReelRef}  className="showreel__s" onClick={handlePlay} >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
                             <video ref={videoRef} muted loop playsInline preload={'auto'}>
