@@ -347,7 +347,7 @@ const Services = (props) => {
                                     </div>
                                     <div className="services-team__table">
                                         <div className="item">
-                                            <h3 className="heading-tertiary">Менеджмент и управления</h3>
+                                            <h3 className="heading-tertiary">Менеджмент</h3>
                                             <p>4 человека</p>
                                         </div>
                                         <div className="item">
