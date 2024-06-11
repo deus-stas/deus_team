@@ -318,8 +318,8 @@ const Projects = () => {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
                                                                 <video autoPlay ref={(ref) => addVideoRef(ref)}
-                                                                       onMouseEnter={() => handleMouseEnter(index)}
-                                                                       onMouseLeave={() => handleMouseLeave(index)} muted
+                                                                       // onMouseEnter={() => handleMouseEnter(index)}
+                                                                       // onMouseLeave={() => handleMouseLeave(index)} muted
                                                                        playsInline>
                                                                     <source
                                                                         src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
