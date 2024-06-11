@@ -317,7 +317,7 @@ const Projects = () => {
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
-                                                                <video autoPlay ref={(ref) => addVideoRef(ref)}
+                                                                <video autoPlay loop ref={(ref) => addVideoRef(ref)}
                                                                        // onMouseEnter={() => handleMouseEnter(index)}
                                                                        // onMouseLeave={() => handleMouseLeave(index)} muted
                                                                        playsInline>
