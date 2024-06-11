@@ -289,7 +289,7 @@ const Projects = () => {
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
-                                                                <video autoPlay  loop muted playsInline controls>
+                                                                <video autoPlay loop muted playsInline controls>
                                                                     <source
                                                                         src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
                                                                         type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
@@ -317,9 +317,7 @@ const Projects = () => {
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
-                                                                <video autoPlay  loop ref={(ref) => addVideoRef(ref)}
-                                                                       // onMouseEnter={() => handleMouseEnter(index)}
-                                                                       // onMouseLeave={() => handleMouseLeave(index)} muted
+                                                                <video autoPlay loop
                                                                        playsInline>
                                                                     <source
                                                                         src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
