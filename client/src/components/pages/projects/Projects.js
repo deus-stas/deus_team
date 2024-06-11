@@ -246,8 +246,8 @@ const Projects = () => {
                                                 return (
                                                     <Link onClick={(e) => gotoAnchor(e,'start',false)} to={`/projects?theme=${project.value}`} >
                                                         <div className="main-projects__item-flex__inner">
-                                                            <div className="heading-secondary">
-                                                                <p datahash="projectNav"  className='hover type-name'>{project.label}</p>
+                                                            <div className="heading-secondary type-name ">
+                                                                <p datahash="projectNav" className='hover '>{project.label}</p>
                                                             </div>
                                                             <div className="main-agency__item-header__num"><span className="num_flex">{totalSum}</span>
                                                             </div>
@@ -264,7 +264,7 @@ const Projects = () => {
                                                 return (
                                                     <Link  to={`/projects?type=${project.value}`}>
                                                         <div className="main-projects__item-flex__inner">
-                                                            <div className="heading-secondary">
+                                                            <div className="heading-secondary type-name">
                                                                 <p className='hover'>{project.label}</p>
                                                             </div>
                                                         </div>
@@ -318,8 +318,8 @@ const Projects = () => {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
                                                                 ?
                                                                 <video autoPlay ref={(ref) => addVideoRef(ref)}
-                                                                       onMouseEnter={() => handleMouseEnter(index)}
-                                                                       onMouseLeave={() => handleMouseLeave(index)} muted
+                                                                       // onMouseEnter={() => handleMouseEnter(index)}
+                                                                       // onMouseLeave={() => handleMouseLeave(index)} muted
                                                                        playsInline>
                                                                     <source
                                                                         src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}

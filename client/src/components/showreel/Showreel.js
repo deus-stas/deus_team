@@ -14,11 +14,10 @@ const Showreel = (props) => {
     const prevIsInViewport = usePrevious({isInViewport, setIsInViewport});
     const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
     const [isFirstClickVideo, setisFirstClickVideo] = useState(true);
-    const [currentTime, setCurrentTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState(4);
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null)
-
 
     const closeModal = () => setOpen(false);
     const openModal = () => {
@@ -28,86 +27,86 @@ const Showreel = (props) => {
 
 
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
 
 
-    useEffect(() => {
-        if (!!hasPlayedOnce || !!isMain) {
-            if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
-                if (!isInViewport) {
-                    if(!videoRef.current.paused || !hasPlayedOnce){
-                        setCurrentTime(videoRef.current.currentTime);
-                        videoRef.current.pause()
-                        videoRef.current.currentTime = 4;
-                    }
-                } else {
-                    videoRef.current.currentTime = currentTime;
-                    videoRef.current.play();
-                    setHasPlayedOnce(true)
-                }
+    // useEffect(() => {
+    //     if (!!hasPlayedOnce || !!isMain) {
+    //         if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
+    //             if (!isInViewport) {
+    //                 if(!videoRef.current.paused || !hasPlayedOnce){
+    //                     setCurrentTime(videoRef.current.currentTime);
+    //                     videoRef.current.pause()
+    //                     videoRef.current.currentTime = 4;
+    //                 }
+    //             } else {
+    //                 videoRef.current.currentTime = currentTime;
+    //                 videoRef.current.play();
+    //                 setHasPlayedOnce(true)
+    //             }
+    //
+    //         }
+    //     }
+    // }, [isInViewport])
 
-            }
-        }
-    }, [isInViewport])
+    useEffect(()=> {
 
-    const handleScroll = () => {
-        const videoElement = videoRef.current;
-        if (videoElement) {
-            const videoRect = videoElement.getBoundingClientRect();
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            const videoHeight = videoRect.height;
-            const scrollOffset = 0.5 * videoHeight;
-            const isInViewport = (
-                (videoRect.top >= -scrollOffset && videoRect.top <= windowHeight - scrollOffset) ||
-                (videoRect.bottom >= scrollOffset && videoRect.bottom <= windowHeight + scrollOffset)
-            );
-            setIsInViewport(isInViewport);
-        }
-    };
+    },[])
+
+    // const handleScroll = () => {
+    //     const videoElement = videoRef.current;
+    //     if (videoElement) {
+    //         const videoRect = videoElement.getBoundingClientRect();
+    //         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    //         const videoHeight = videoRect.height;
+    //         const scrollOffset = 0.5 * videoHeight;
+    //         const isInViewport = (
+    //             (videoRect.top >= -scrollOffset && videoRect.top <= windowHeight - scrollOffset) ||
+    //             (videoRect.bottom >= scrollOffset && videoRect.bottom <= windowHeight + scrollOffset)
+    //         );
+    //         setIsInViewport(isInViewport);
+    //     }
+    // };
 
     const handlePlay = () => {
+        const header = document.querySelector('.header')
+        const footer = document.querySelector('.footer')
+        const isTrue = videoRef.current.paused
+        // videoRef.current.currentTime = currentTime
 
-        if (!!videoRef.current.paused) {
-            if (isFirstClickVideo) {
-                videoRef.current.currentTime = 0;
-                setisFirstClickVideo(false)
-            }
-            setHasPlayedOnce(true);
-            videoRef.current.currentTime = currentTime;
-            videoRef.current.play();
-        } else {
-            setCurrentTime(videoRef.current.currentTime);
-            videoRef.current.pause();
-            videoRef.current.currentTime = 17;
-        }
+        videoRef.current.style.transition = 'all 0.3s ease-in-out';
+        videoRef.current.style.transform = isTrue ? 'translateY(-30vw)' : 'translateY(0)';
+        videoRef.current.style.position = isTrue ? 'fixed' : 'relative';
+        header.style.opacity = isTrue ? '0' : '1';
+        footer.style.opacity = isTrue ? '0' : '1';
+        videoRef.current.style.zIndex = isTrue ? 8001 : 'auto';
+
+        isTrue ? videoRef.current.play() : videoRef.current.pause();
     };
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.currentTime = 4;
+        }
+    }, []);
+
 
     return (
         <div className="showreel">
             {
                 isMain ? (
-                    <div ref={showReelRef} className="showreel__s ${!isPlaying ? 'playIcon' : ''} wow fadeIn"
-                         data-wow-duration="0.5s"
-                         data-wow-delay="0.1s"
-                         onClick={handlePlay}
-                    >
+                    <div ref={showReelRef}  className="showreel__s" onClick={handlePlay} >
                         {
-                            data.video && data.video !== 'undefined' && data.video !== 'null' ?
-                                <video ref={videoRef} muted loop playsInline preload={'auto'}>
-                                    <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
-                                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                </video> :
-                                data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
-                                    <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
-                                    <video muted loop playsInline  preload={'auto'}>
-                                        <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
-                                                type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                    </video>
+                            data.video && data.video !== 'undefined' && data.video !== 'null' &&
+                            <video ref={videoRef} muted loop playsInline preload={'auto'}>
+                                <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                            </video>
                         }
                     </div>
                 ) : (

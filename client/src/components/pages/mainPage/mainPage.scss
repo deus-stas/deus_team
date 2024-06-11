@@ -7,6 +7,10 @@
     position: fixed;
     overflow: hidden;
     top: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    filter: blur(0);
 
     @include respond(sm) {
       padding: 9rem 0 2.6rem;
@@ -225,9 +229,8 @@
 
   &-showreel {
     position: relative;
-    //max-height: 83rem;
     height: 100%;
-    margin-top: 35vw;
+    margin-top: 30vw;
     @include respond(sm) {
       margin-top: 400px;
     }
@@ -239,14 +242,9 @@
     video {
       width: 100%;
       object-fit: cover;
-      //max-height: 83rem;
       height: 100%;
       @include respond(md) {
         object-fit: contain;
-      }
-
-      @include respond(sm) {
-        //max-height: 42rem;
       }
     }
   }
