@@ -299,15 +299,15 @@ const Services = (props) => {
                                             интересов. </p>
                                     </div>
                                 </div>
-                                <div className="services-principle__wrap-item">
-                                    <img src={elipse} alt=""/>
-                                    <div>
-                                        <h3 className="heading-tertiary">Вектор в вашу пользу</h3>
-                                        <p className="p-style-white">
-                                            Предложим несколько форматов работы с учетом особенностей вашего проекта, найдем гибкий подход для достижения результата.
-                                        </p>
-                                    </div>
-                                </div>
+                                {/*<div className="services-principle__wrap-item">*/}
+                                {/*    <img src={elipse} alt=""/>*/}
+                                {/*    <div>*/}
+                                {/*        <h3 className="heading-tertiary">Вектор в вашу пользу</h3>*/}
+                                {/*        <p className="p-style-white">*/}
+                                {/*            Предложим несколько форматов работы с учетом особенностей вашего проекта, найдем гибкий подход для достижения результата.*/}
+                                {/*        </p>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
 
