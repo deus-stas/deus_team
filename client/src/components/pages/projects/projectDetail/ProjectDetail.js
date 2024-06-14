@@ -186,7 +186,7 @@ const ProjectDetail = () => {
                     {/*}*/}
 
                     {!!detail.tasksList && detail.tasksList !== 'undefined' && detail.tasksList !== null && detail.tasksList !== "null"
-                        && detail.tasksList.length > 0
+                        && detail.tasksList.length >= 0
                         ?
                         <div style={{background: detail.aimColor}}>
                             <section style={{background: detail.aimColor}} className="project-goals wow fadeIn"
@@ -505,7 +505,7 @@ const ProjectDetail = () => {
                         )
                     }
 
-                    {detail.result && detail.result !== 'undefined' && detail.result !== null && detail.result !== "null"?
+                    {detail.result && detail.resultPersonsText !== 'undefined' && detail.resultPersonsText !== null && detail.resultPersonsText !== "null"?
 
                         <section style={{background: detail.resultsColor}}
                                  className="project-results results_bg wow fadeIn"
