@@ -185,8 +185,7 @@ const ProjectDetail = () => {
                     {/*                : null*/}
                     {/*}*/}
 
-                    {!!detail.tasksList && detail.tasksList !== 'undefined' && detail.tasksList !== null && detail.tasksList !== "null"
-                        && detail.tasksList.length >= 0
+                    {!!detail.taskDescr || !!detail.tasksList
                         ?
                         <div style={{background: detail.aimColor}}>
                             <section style={{background: detail.aimColor}} className="project-goals wow fadeIn"
@@ -198,16 +197,17 @@ const ProjectDetail = () => {
                                         <h2 className="heading-secondary">Цели и задачи</h2>
                                         <div className="project-goals__content">
                                             <div className="project-goals__text">{detail.taskDescr}</div>
-                                            {detail.taskPersons && detail.taskPersons.name && detail.taskPersons.post ?
+                                            { !!detail.task &&
                                                 <div className="project-goals__person">
-                                                    <div className="project-goals__person-info">
+                                                    {detail.taskPersons && detail.taskPersons.name && detail.taskPersons.post ?
+                                                        <div className="project-goals__person-info">
                                                         <div
                                                             className="project-goals__person-name">{detail.taskPersons.name}{','}
                                                         </div>
                                                         <div
                                                             className="project-goals__person-position">{detail.taskPersons.post} {'@ DEUS'}
                                                         </div>
-                                                    </div>
+                                                    </div> : null}
                                                     <div className="project-goals__person-text">
                                                         <div dangerouslySetInnerHTML={{__html: detail.task}}></div>
                                                     </div>
@@ -216,7 +216,8 @@ const ProjectDetail = () => {
                                                         alt={detail.taskPersons.name}
                                                         className="project-goals__person-photo"/> : null}
                                                 </div>
-                                                : null}
+                                            }
+
                                             {!!detail.tasksList && detail.tasksList !== 'undefined' && detail.tasksList !== null && detail.tasksList !== "null"?
                                                     <div>
                                                         {
@@ -240,6 +241,7 @@ const ProjectDetail = () => {
                         </div>
                         : null
                     }
+
 
 
                     {
@@ -505,7 +507,7 @@ const ProjectDetail = () => {
                         )
                     }
 
-                    {detail.result && detail.resultPersonsText !== 'undefined' && detail.resultPersonsText !== null && detail.resultPersonsText !== "null"?
+                    {detail.result || detail.resultPersonsText ?
 
                         <section style={{background: detail.resultsColor}}
                                  className="project-results results_bg wow fadeIn"
@@ -517,39 +519,44 @@ const ProjectDetail = () => {
                                     <h2 style={{color: detail.resultsColor === '#000000' ? '#ffffff' : '#000000'}}
                                         className="heading-secondary">Результаты</h2>
                                     <div className="project-results__content">
-                                        {detail.resultPersons && detail.resultPersons.name && detail.resultPersons.post ?
-                                        <div className="project-results__person">
-                                            <div className="project-results__person-info">
-                                                <div
-                                                    className="project-results__person-name">{detail.resultPersons.name}{','}
-                                                </div>
-                                                <div
-                                                    className="project-results__person-position">{detail.resultPersons.post} {'@ DEUS'}
-                                                </div>
-                                            </div>
-
-                                            {detail.resultPersonsText &&
-                                            <div className="project-results__person-text">
-                                                <div dangerouslySetInnerHTML={{__html: detail.resultPersonsText}}></div>
-                                            </div>
-                                            }
-                                            {/* <img src="/img/maks.png" alt="person" className="project-results__person-photo"/> */}
-                                            {detail?.resultPersons?.image ?
-                                                <img src={`${apiUrl}/uploads/${detail.resultPersons.image.filename}`}
-                                                     alt={detail.resultPersons.name}
-                                                     className="project-results__person-photo"/> : null}
-                                        </div>
-                                        : null}
                                         <div
-                                            className={detail.resultTextColor === '#ffffff' ? 'whiteText' : 'blackText'}
+                                            className={` ${detail.resultTextColor === '#ffffff' ? 'whiteText' : 'blackText'} project-results__text`}
                                             style={{color: detail.resultTextColor}}
-                                            dangerouslySetInnerHTML={{__html: detail.result}}></div>
+                                            dangerouslySetInnerHTML={{__html: detail.result}}>
+
+                                        </div>
+                                        {detail.resultPersons && detail.resultPersons.name && detail.resultPersons.post || detail.resultPersonsText ?
+                                            <div className="project-results__person">
+                                                <div className="project-results__person-info">
+                                                    <div
+                                                        className="project-results__person-name">{detail.resultPersons.name}{','}
+                                                    </div>
+                                                    <div
+                                                        className="project-results__person-position">{detail.resultPersons.post} {'@ DEUS'}
+                                                    </div>
+                                                </div>
+
+                                                {detail.resultPersonsText &&
+                                                    <div className="project-results__person-text">
+                                                        <div
+                                                            dangerouslySetInnerHTML={{__html: detail.resultPersonsText}}></div>
+                                                    </div>
+                                                }
+                                                {/* <img src="/img/maks.png" alt="person" className="project-results__person-photo"/> */}
+                                                {detail?.resultPersons?.image ?
+                                                    <img
+                                                        src={`${apiUrl}/uploads/${detail.resultPersons.image.filename}`}
+                                                        alt={detail.resultPersons.name}
+                                                        className="project-results__person-photo"/> : null}
+                                            </div>
+                                            : null}
+
                                     </div>
                                 </div>
                             </div>
                         </section> : null}
-
-
+                    {console.log('taskDescr:', detail.taskDescr, detail.task)}
+                    {console.log('task:', detail.taskDescr, detail.task)}
 
 
                     {detail.technologies && detail.technologies !== 'undefined' && detail.technologies !== '' ?
