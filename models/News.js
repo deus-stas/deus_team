@@ -6,13 +6,13 @@ const newsSchema = new Schema({
   urlName: {type: String},
   image: { type: Object },
   photoSlider: { type: Array },
-  body: { type: String },
-  body2: { type: String },
-  workStepsItem: { type: String },
+  body: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v  },
+  body2: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v  },
+  workStepsItem: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v  },
   mainControl: {type: Boolean},
   detailControl: {type: Boolean},
-  aboutClient: {type: String},
-  aboutClient2: {type: String},
+  aboutClient: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
+  aboutClient2: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   newsTags: [{ type: Schema.Types.ObjectId, ref: 'NewsTags' }]
 });
 

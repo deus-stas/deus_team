@@ -116,10 +116,7 @@ const NewsDetail = () => {
             <section className="news-detail__article">
                 <div className="container">
                     <div className="news-detail__article-content">
-                        {news.map((item) =>
-                            <h2 className="heading-secondary">{item.aboutClient}</h2>
-
-                        )}
+                         <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.aboutClient}}/>
                         <div className="news-detail__article-about" dangerouslySetInnerHTML={{__html: detail.body}}/>
                     </div>
                     <div className="news-detail__article-photos">
@@ -133,9 +130,7 @@ const NewsDetail = () => {
                     </div>
 
                     <div className="news-detail__article-content">
-                        {news.map((item) =>
-                            <h2 className="heading-secondary">{item.aboutClient2}</h2>
-                        )}
+                            <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.aboutClient2}}/>
                         <div className="news-detail__article-about" dangerouslySetInnerHTML={{__html: detail.body2}}/>
 
 
