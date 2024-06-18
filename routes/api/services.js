@@ -250,14 +250,34 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
 
         const descrImg = req.file;
 
-        if (service.descrImg) {
-            const path = `uploads/${service.descrImg.filename}`
-            if (fs.existsSync(path)) {
-                fs.unlinkSync(path);
-            }
+        if (descrImg) {
+            if (service.descrImg) {
+                const path = `uploads/${service.descrImg.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
 
+            }
+            service.descrImg = descrImg;
+        } else {
+            if (service.descrImg && service.descrImg.path && req.body.descrImg !== 'true') {
+                const path = `uploads/${service.descrImg.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+                service.descrImg = null;
+            }
         }
-        service.descrImg = descrImg;
+
         const oldServicesServices = service.servicesServices;
         service.servicesServices = []; // Clearing the field
 
