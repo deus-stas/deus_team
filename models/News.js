@@ -5,6 +5,7 @@ const newsSchema = new Schema({
   name: { type: String, required: true },
   urlName: {type: String},
   image: { type: Object },
+  mainNewsImage: { type: Object },
   photoSlider: { type: Array },
   body: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v  },
   body2: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v  },
