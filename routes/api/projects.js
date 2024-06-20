@@ -68,6 +68,7 @@ router.post(
     '/projects',
     upload.fields([
         { name: 'image' },
+        { name: 'imageMob' },
         { name: 'bannerFirst' },
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
@@ -81,6 +82,7 @@ router.post(
         { name: 'bannerFifth' },
         { name: 'bannerFifths' },
         { name: 'imagesExtra' },
+        { name: 'mainMobVideoFile' },
         { name: 'mainVideoFile' }]),
     addCustomId,
     async (req, res) => {
@@ -106,7 +108,7 @@ router.post(
     // console.log('workSteps', workSteps);
     // console.log(req.files);
     // console.log(req.body);
-    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2;
+    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -161,6 +163,9 @@ router.post(
     if (req.files.mainVideoFile) {
         mainVideoFile = req.files.mainVideoFile[0];
     }
+    if (req.files.mainMobVideoFile) {
+        mainMobVideoFile = req.files.mainMobVideoFile[0];
+    }
 
     if (req.files.visibilityImg1) {
         visibilityImg1 = req.files.visibilityImg1[0];
@@ -171,11 +176,13 @@ router.post(
     }
 
     const image = req.files.image[0];
+    const imageMob = req.files.image[0];
 
     const projects = new Projects({
         name,
         descrProject,
         image,
+        imageMob,
         mainVideo,
         color,
         about,
@@ -214,6 +221,7 @@ router.post(
         projectURL,
         projectSite,
         mainVideoFile,
+        mainMobVideoFile,
         workSteps,
         aimColor,
         workStepsColor,
@@ -279,6 +287,7 @@ router.get('/projects/:id', async (req, res) => {
 router.put("/projects/:id",
     upload.fields([
         { name: 'image' },
+        { name: 'imageMob' },
         { name: 'bannerFirst' },
         { name: 'bannerSecond' },
         { name: 'bannerSeconds' },
@@ -293,6 +302,7 @@ router.put("/projects/:id",
         { name: 'bannerFifths' },
         { name: 'imagesExtra' },
         { name: 'mainVideoFile' },
+        { name: 'mainMobVideoFile' },
         { name: 'visibilityImg1'},
         { name: 'visibilityImg2'}
     ]), async (req, res) => {
@@ -313,9 +323,65 @@ router.put("/projects/:id",
     const approachListSecond = JSON.parse(req.body.approachListSecond);
     const approachListThird = JSON.parse(req.body.approachListThird);
 
-    if (req.files.image) {
-        project.image = req.files.image[0];
+    const image = req.files.image ? req.files.image[0] : undefined;
+    const imageMob = req.files.imageMob ? req.files.imageMob[0] : undefined;
+
+    if (image) {
+        if (project.image) {
+            const path = `uploads/${project.image.filename}`
+            if (fs.existsSync(path)) {
+                fs.unlink(path, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+        }
+        project.image = image;
+    } else {
+        if (project.image && project.image.path && req.body.image !== 'true') {
+            const path = `uploads/${project.image.filename}`
+            if (fs.existsSync(path)) {
+                fs.unlink(path, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+            project.image = null;
+        }
     }
+
+    if (imageMob) {
+        if (project.imageMob) {
+            const path = `uploads/${project.imageMob.filename}`
+            if (fs.existsSync(path)) {
+                fs.unlink(path, (err) => {
+                    if (err) {
+                            console.error(err);
+                    }
+                });
+            }
+
+        }
+        project.imageMob = imageMob;
+    } else {
+        if (project.imageMob && project.imageMob.path && req.body.imageMob !== 'true') {
+            const path = `uploads/${project.imageMob.filename}`
+            if (fs.existsSync(path)) {
+                fs.unlink(path, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+            project.imageMob = null;
+        }
+    }
+
 
     if (req.files.bannerFirst) {
         if (project.bannerFirst) {
@@ -569,6 +635,26 @@ router.put("/projects/:id",
         }
     }
 
+    if (req.files.mainMobVideoFile) {
+        if (project.mainMobVideoFile) {
+            fs.unlink(project.mainMobVideoFile.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        project.mainMobVideoFile = req.files.mainMobVideoFile[0];
+    } else {
+        if (project.mainMobVideoFile && project.mainMobVideoFile.path && req.body.mainMobVideoFile !== 'true') {
+            fs.unlink(project.mainMobVideoFile.path, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            project.mainMobVideoFile = null;
+        }
+    }
+
     if (req.files.visibilityImg1) {
         if (project.visibilityImg1) {
             fs.unlink(project.visibilityImg1.path, (err) => {
@@ -674,10 +760,10 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, visibilityImg1, visibilityImg2 } = project;
+    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
-    const singleImage = [ image,bannerFirst,bannerSecond,bannerThird,bannerFourth,bannerFifth, mainVideoFile, visibilityImg1, visibilityImg2 ]
+    const singleImage = [ image,bannerFirst,bannerSecond,bannerThird,bannerFourth,bannerFifth, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2 ]
     singleImage.forEach(file=>{
         if (file) {
             fs.unlinkSync(`uploads/${file.filename}`);

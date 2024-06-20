@@ -50,6 +50,7 @@ const Projects = () => {
     const [menuType, setMenuType] = useState(false);
     const [select, setSelect] = useState(false);
     const location = useLocation();
+    const [isMob, setIsMob] = useState(window.innerWidth < 700);
 
     const lastItemRef = useRef()
     const THEME_KEY = 'theme'
@@ -240,6 +241,18 @@ const Projects = () => {
         videoRefs.current.push(ref);
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMob(window.innerWidth < 700);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [window.innerWidth]);
+
     return (
         <>
             {!isLoading &&
@@ -343,47 +356,20 @@ const Projects = () => {
                                 {limitProjects ? limitProjects.map((project, index, array) => {
                                         const numProject = index < 9 ? "0" + (index + 1) : (index + 1)
                                         const isLastItem = index + 1 === array.length
+                                        const imgSize = isMob && project.imageMob ? `${apiUrl}/uploads/${project.imageMob.filename}` : project.image ? `${apiUrl}/uploads/${project.image.filename}` : null;
+                                        const videoSize = isMob && project.mainMobVideoFile ? `${apiUrl}/uploads/${project.mainMobVideoFile.filename}` : project.mainVideoFile ? `${apiUrl}/uploads/${project.mainVideoFile.filename}` : null;
                                         return (
-                                            // project.controlURL ?
-                                            //     <a href={`${project.projectURL}`}
-                                            //        className="projects__item"
-                                            //        key={project.id} style={{background: project.color}}>
-                                            //         <div className="projects__item-img-wrap">
-                                            //             {
-                                            //                 project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'
-                                            //                     ?
-                                            //                     <video autoPlay loop muted playsInline controls>
-                                            //                         <source
-                                            //                             src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
-                                            //                             type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                            //                     </video> :
-                                            //                     project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
-                                            //                         ?
-                                            //                         <div
-                                            //                             dangerouslySetInnerHTML={{__html: project.mainVideo}}></div>
-                                            //                         :
-                                            //                         <img
-                                            //                             src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
-                                            //                             alt={project.name} className="main-projects__img"/>
-                                            //             }
-                                            //
-                                            //         </div>
-                                            //         <div className="projects__item-name">{project.name}</div>
-                                            //         <div className="projects__item-descr">{project.descrProject}</div>
-                                            //         <div className="num">{project.customId}</div>
-                                            //
-                                            //     </a> :
                                             <DelayedLink to={`/projects/${project.nameInEng}`}
                                                          className="projects__item"
                                                          key={project.id} style={{background: project.color}}>
                                                 <div className="projects__item-img-wrap">
+
                                                     {project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' ?
-                                                        <VideoComponent project={project} apiUrl={apiUrl} /> : project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null' ?
-                                                            <div ref={(ref) => addVideoRef(ref)}
-                                                                 dangerouslySetInnerHTML={{__html: project.mainVideo}}></div> :
+                                                        <VideoComponent project={project} isMob={isMob} videoSize={videoSize} apiUrl={apiUrl} />  :
                                                             <img ref={(ref) => addVideoRef(ref)}
-                                                                 src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                                                 src={project.image ? imgSize : null}
                                                                  alt={project.name} className="main-projects__img"/>}
+
 
                                                 </div>
                                                 <span className="projects__item-header">
@@ -424,16 +410,18 @@ const Projects = () => {
 
 }
 
-const VideoComponent = ({ project, apiUrl }) => {
+const VideoComponent = ({ project, apiUrl, videoSize }) => {
     const videoRef = useRef();
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    videoRef.current.play();
+                    videoRef.current.play().catch(error => console.log(error));
                 } else {
-                    videoRef.current.pause();
+                    if (videoRef.current.currentTime > 0 && !videoRef.current.paused && !videoRef.current.ended && videoRef.current.readyState > 2) {
+                        videoRef.current.pause();
+                    }
                 }
             },
             {
@@ -452,15 +440,17 @@ const VideoComponent = ({ project, apiUrl }) => {
                 observer.unobserve(videoRef.current);
             }
         };
-    }, []);
+    }, [videoSize]);
 
     return (
-        <video ref={videoRef} loop playsInline>
+        <video key={'videoSize_'+ videoSize} ref={videoRef} muted loop playsInline>
             <source
-                src={`${apiUrl}/uploads/${project.mainVideoFile.filename}`}
+                src={videoSize}
                 type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"
             />
+            {console.log("mainMobVideoFile:", project.mainMobVideoFile)}
         </video>
+
     );
 };
 

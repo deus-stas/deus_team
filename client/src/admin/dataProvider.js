@@ -67,6 +67,8 @@ const dataProvider = {
     const formData = new FormData();
     const images = [
       "image",
+      "imageMob",
+      "mainNewsImage",
       "file",
       "descrImg",
       "mainImg",
@@ -80,6 +82,7 @@ const dataProvider = {
       "reviewImage",
       "reviewBg",
       "mainVideoFile",
+      "mainMobVideoFile",
       "presentation",
       'img',
       'visibilityImg1',
@@ -132,7 +135,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     const formData = new FormData();
-    const images = ['image',"file","descrImg", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
+    const images = ['image', 'imageMob', 'mainNewsImage',"file", "descrImg", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'mainMobVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
     const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'photoSlider']
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
