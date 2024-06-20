@@ -4,6 +4,7 @@ import Popup from 'reactjs-popup';
 import './showreel.scss';
 import {usePrevious} from "react-admin";
 import {current} from "@reduxjs/toolkit";
+import showPng from "./showreel.png"
 
 const apiUrl = ''
 
@@ -14,7 +15,7 @@ const Showreel = (props) => {
     const prevIsInViewport = usePrevious({isInViewport, setIsInViewport});
     const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
     const [isFirstClickVideo, setisFirstClickVideo] = useState(true);
-    const [currentTime, setCurrentTime] = useState(4);
+    // const [currentTime, setCurrentTime] = useState(4);
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null)
@@ -90,11 +91,11 @@ const Showreel = (props) => {
         isTrue ? videoRef.current.play() : videoRef.current.pause();
     };
 
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.currentTime = 4;
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (videoRef.current) {
+    //         videoRef.current.currentTime = 4;
+    //     }
+    // }, []);
 
 
     return (
@@ -104,7 +105,7 @@ const Showreel = (props) => {
                     <div ref={showReelRef}  className="showreel__s" onClick={handlePlay} >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
-                            <video ref={videoRef} loop playsInline preload={'auto'}>
+                            <video ref={videoRef} poster={showPng} loop playsInline preload={'auto'}>
                                 <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                         type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                             </video>

@@ -109,6 +109,15 @@ export const ProjectsCreate = (props) => (
             >
                 <FilenameField source="src" title="title" />
             </ImageInput>
+            <ImageInput
+                className="fileInput"
+                placeholder="+"
+                source="imageMob"
+                label="Главное мобильное изображение"
+                accept="image/*"
+            >
+                <FilenameField source="src" title="title" />
+            </ImageInput>
             <BooleanInput
                 source="controlURL"
                 label="Переход на URL при клике"/>
@@ -123,6 +132,11 @@ export const ProjectsCreate = (props) => (
             <FileInput
                 source="mainVideoFile"
                 label="Баннер видео">
+                <FileField source="src" title="title" />
+            </FileInput>
+            <FileInput
+                source="mainMobVideoFile"
+                label="Баннер мобильное видео">
                 <FileField source="src" title="title" />
             </FileInput>
             <TextInput
@@ -555,6 +569,15 @@ export const ProjectsEdit = (props) => (
             >
                 <FilenameField source="src" title="title" />
             </ImageInput>
+            <ImageInput
+                className="fileInput"
+                placeholder="+"
+                source="imageMob"
+                label="Главное мобильное изображение"
+                accept="image/*"
+            >
+                <FilenameField source="src" title="title" />
+            </ImageInput>
             <BooleanInput
                 source="controlURL"
                 label="Переход на URL при клике"/>
@@ -569,6 +592,11 @@ export const ProjectsEdit = (props) => (
             <FileInput
                 source="mainVideoFile"
                 label="Баннер видео">
+                <FileField source="src" title="title" />
+            </FileInput>
+            <FileInput
+                source="mainMobVideoFile"
+                label="Баннер мобильное видео">
                 <FileField source="src" title="title" />
             </FileInput>
             <TextInput

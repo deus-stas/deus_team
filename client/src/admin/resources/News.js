@@ -99,7 +99,10 @@ export const NewsCreate = (props) => (
             {/*    className="customWidth"*/}
             {/*    source="urlName"*/}
             {/*    label="URL" fullWidth  />*/}
-            <FileInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*,video/*">
+            <FileInput className="fileInput" placeholder="+" source="image" label="Превью" validate={[required()]} accept="image/*,video/*">
+                <FileField source="src" title="title" />
+            </FileInput>
+            <FileInput className="fileInput" placeholder="+" source="mainNewsImage" label="Баннер" validate={[required()]} accept="image/*,video/*">
                 <FileField source="src" title="title" />
             </FileInput>
             <BooleanInput
@@ -115,7 +118,7 @@ export const NewsCreate = (props) => (
                 className="customWidth"
                 source="aboutClient"
                 label="О клиенте"  />
-            <RichTextInput className="customWidth" source="body" fullWidth validate={[required()]} />
+            <RichTextInput className="customWidth" source="body" fullWidth/>
 
             <ArrayInput
                 label="Фотогалерея"
@@ -137,7 +140,7 @@ export const NewsCreate = (props) => (
                 className="customWidth"
                 source="aboutClient2"
                 label="О клиенте"  />
-            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth validate={[required()]} />
+            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth  />
 
             <RichTextInput
                 className="customWidth"
@@ -157,7 +160,10 @@ export const NewsEdit = (props) => {
                 className="customWidth"
                 source="urlName"
                 label="URL" fullWidth  />
-            <FileInput className="fileInput" placeholder="+" source="image" label="Баннер" validate={[required()]} accept="image/*,video/*">
+            <FileInput className="fileInput" placeholder="+" source="image" label="Превью" validate={[required()]} accept="image/*,video/*">
+                <FileField source="image" title="title" />
+            </FileInput>
+            <FileInput className="fileInput" placeholder="+" source="mainNewsImage" label="Баннер" validate={[required()]} accept="image/*,video/*">
                 <FileField source="image" title="title" />
             </FileInput>
             <BooleanInput
@@ -174,7 +180,7 @@ export const NewsEdit = (props) => {
                 className="customWidth"
                 source="aboutClient"
                 label="О клиенте"  />
-            <RichTextInput className="customWidth" label="Текст" source="body" fullWidth validate={[required()]} />
+            <RichTextInput className="customWidth" label="Текст" source="body" fullWidth />
             <ArrayInput
                 label="Фотогалерея"
                 source="photoSlider"
@@ -195,7 +201,7 @@ export const NewsEdit = (props) => {
                 className="customWidth"
                 source="aboutClient2"
                 label="О клиенте"  />
-            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth validate={[required()]} />
+            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth />
 
             <RichTextInput
                 className="customWidth"

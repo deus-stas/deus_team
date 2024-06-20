@@ -39,6 +39,7 @@ router.get('/news', async (req, res) => {
 
 router.post('/news', upload.fields([
   { name: 'image' },
+  { name: 'mainNewsImage' },
   { name: 'photoSlider' }])
     , async (req, res) => {
   const { name, newsTags, mainControl, detailControl, aboutClient, aboutClient2, body, workStepsItem, body2 } = req.body;
@@ -58,10 +59,12 @@ router.post('/news', upload.fields([
  }
 
  const image = req.files.image[0];
+ const mainNewsImage = req.files.mainNewsImage[0];
 
   const news = new News({
     name,
     image,
+    mainNewsImage,
     body,
     body2,
     photoSlider,
@@ -109,6 +112,7 @@ router.get('/news/url/:url', async (req, res) => {
 
 router.put("/news/:id", upload.fields([
   { name: 'image' },
+  { name: 'mainNewsImage' },
   { name: 'photoSlider' }]),
     async (req, res) => {
   const { id } = req.params;
@@ -120,17 +124,68 @@ router.put("/news/:id", upload.fields([
   }
 
   const { name, newsTags, urlName, mainControl, aboutClient, aboutClient2,  detailControl, workStepsItem,  body, body2 } = req.body;
-  const image = req.file;
+  const image = req.files.image ? req.files.image[0] : undefined;
+  const mainNewsImage = req.files.mainNewsImage ? req.files.mainNewsImage[0] : undefined;
   const photoSliderNames = JSON.parse(req.body.photoSliderNames);
 
-  // Если есть новое изображение в запросе, обновляем ссылку на него
-    if (image) {
-        const path = `uploads/${news.image.filename}`
-        if (fs.existsSync(path)) {
-            fs.unlinkSync(path);
+     console.log(image, mainNewsImage)
+      if (image) {
+        if (news.image) {
+          const path = `uploads/${news.image.filename}`
+          if (fs.existsSync(path)) {
+            fs.unlink(path, (err) => {
+              if (err) {
+                console.error(err);
+              }
+            });
+          }
+
         }
         news.image = image;
-    }
+      } else {
+        if (news.image && news.image.path && req.body.image !== 'true') {
+          const path = `uploads/${news.image.filename}`
+          if (fs.existsSync(path)) {
+            fs.unlink(path, (err) => {
+              if (err) {
+                console.error(err);
+              }
+            });
+          }
+
+          news.image = null;
+        }
+      }
+
+      if (mainNewsImage) {
+        if (news.mainNewsImage) {
+          const path = `uploads/${news.mainNewsImage.filename}`
+          if (fs.existsSync(path)) {
+            fs.unlink(path, (err) => {
+              if (err) {
+                console.error(err);
+              }
+            });
+          }
+
+        }
+        news.mainNewsImage = mainNewsImage;
+      } else {
+        if (news.mainNewsImage && news.mainNewsImage.path && req.body.mainNewsImage !== 'true') {
+          const path = `uploads/${news.mainNewsImage.filename}`
+          if (fs.existsSync(path)) {
+            fs.unlink(path, (err) => {
+              if (err) {
+                console.error(err);
+              }
+            });
+          }
+
+          news.mainNewsImage = null;
+        }
+      }
+
+
 
       if (req.files.photoSlider) {
         if (news.photoSlider && news.photoSlider.length > 0) {
@@ -187,10 +242,14 @@ router.delete("/news/:id", async (req, res) => {
     return res.status(404).json({ success: false, message: "News not found" });
   }
 
-  const { image, photoSlider } = news;
+  const { image, mainNewsImage, photoSlider } = news;
 
   if (image) {
     fs.unlinkSync(`uploads/${image.filename}`);
+  }
+
+  if (mainNewsImage) {
+    fs.unlinkSync(`uploads/${mainNewsImage.filename}`);
   }
 
   const multiImages = [

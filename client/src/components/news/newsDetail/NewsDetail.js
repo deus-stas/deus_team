@@ -82,9 +82,10 @@ const NewsDetail = () => {
     },[]);
 
     const double =  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-    const fileUrl = detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null;
-    const isVideo = detail.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.image.filename) : false;
-    const isImage = detail.image ? /\.(jpeg|jpg|gif|png)$/i.test(detail.image.filename) : false;
+
+    const fileUrl = detail.mainNewsImage ? `${apiUrl}/uploads/${detail.mainNewsImage.filename}` : null;
+    const isVideo = detail.mainNewsImage ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.mainNewsImage.filename) : false;
+    const isImage = detail.mainNewsImage ? /\.(jpeg|jpg|gif|png)$/i.test(detail.mainNewsImage.filename) : false;
     const shouldAutoPlay = detail.detailControl;
 
 
@@ -105,7 +106,7 @@ const NewsDetail = () => {
                     {/*<img className="news-detail__main-img" src={detail.image ? `${apiUrl}/uploads/${detail.image.filename}` : null} alt={detail.name} />*/}
 
                     {isVideo && <video autoPlay={shouldAutoPlay} muted playsInline
-                                       src={fileUrl} alt={detail.name}
+                                       src={fileUrl}
                                        className="news-detail__main-img"
                                         loop/>}
                     {isImage && <img src={fileUrl} alt={detail.name}
@@ -115,13 +116,13 @@ const NewsDetail = () => {
 
             <section className="news-detail__article">
                 <div className="container">
+                    {detail.body && detail.body !== 'undefined' && detail.body !== 'null' &&
                     <div className="news-detail__article-content">
-                        {news.map((item) =>
-                            <h2 className="heading-secondary">{item.aboutClient}</h2>
-
-                        )}
+                         <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.aboutClient}}/>
                         <div className="news-detail__article-about" dangerouslySetInnerHTML={{__html: detail.body}}/>
                     </div>
+                    }
+                    {detail.photoSlider && detail.photoSlider.length > 0 &&
                     <div className="news-detail__article-photos">
                         {detail.photoSlider ? (
                             <>
@@ -131,16 +132,16 @@ const NewsDetail = () => {
                             </>
                         ) : null}
                     </div>
-
+                    }
+                    {detail.body2 && detail.body2 !== 'undefined' && detail.body2 !== 'null' &&
                     <div className="news-detail__article-content">
-                        {news.map((item) =>
-                            <h2 className="heading-secondary">{item.aboutClient2}</h2>
-                        )}
+                            <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.aboutClient2}}/>
                         <div className="news-detail__article-about" dangerouslySetInnerHTML={{__html: detail.body2}}/>
 
 
                         <div className="news-detail__article-steps" dangerouslySetInnerHTML={{__html: detail.workStepsItem}}/>
                     </div>
+                    }
                 </div>
             </section>
 
