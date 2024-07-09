@@ -43,21 +43,10 @@ router.post('/headerData', upload.fields([
     const { phone, email, vk, telegram, behance } = req.body;
     console.log(req.file);
 
-    // const presentation = req.file;
-    let presentation, headerPhoto, contactPhoto;
+    const presentation = req.files.image[0];
+    const headerPhoto = req.files.mainNewsImage[0];
+    const contactPhoto = req.files.mainNewsImage[0];
 
-    if (req.files.presentation) {
-        presentation = req.files.presentation[0];
-    }
-
-    if (req.files.headerPhoto) {
-        headerPhoto = req.files.headerPhoto[0];
-    }
-
-    if (req.files.contactPhoto) {
-        contactPhoto = req.files.contactPhoto[0];
-    }
-    
 
     
     const headerData = new HeaderData({
@@ -102,73 +91,94 @@ router.put("/headerData/:id", upload.fields([
       }
   
       const { email, phone, vk, telegram, behance } = req.body;
-    //   const presentation = req.file;
-  
-    //   if (presentation) {
-    //     fs.unlinkSync(`uploads/${headerData.presentation.filename}`);
-    //     headerData.presentation = presentation;
-    //     console.log("pres", presentation)
-    // }
+      const headerPhoto = req.files.headerPhoto ? req.files.headerPhoto[0] : undefined;
+      const presentation = req.files.presentation ? req.files.presentation[0] : undefined;
+      const contactPhoto = req.files.contactPhoto ? req.files.contactPhoto[0] : undefined;
 
-    if (req.files.presentation) {
-        if (headerData.presentation) {
-            fs.unlink(headerData.presentation.path, (err) => {
-                if (err) {
-                    console.error(err);
+        if (presentation) {
+            if (headerData.presentation) {
+                const path = `uploads/${headerData.presentation.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
                 }
-            });
-        }
-        headerData.presentation = req.files.presentation[0];
-    } else {
-        if (headerData.presentation && headerData.presentation.path && req.body.presentation !== 'true') {
-            fs.unlink(headerData.presentation.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            headerData.presentation = null;
-        }
-    }
 
-    if (req.files.headerPhoto) {
-        if (headerData.headerPhoto) {
-            fs.unlink(headerData.headerPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
+            }
+            headerData.presentation = presentation;
+        } else {
+            if (headerData.presentation && headerData.presentation.path && req.body.presentation !== 'true') {
+                const path = `uploads/${headerData.presentation.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
                 }
-            });
-        }
-        headerData.headerPhoto = req.files.headerPhoto[0];
-    } else {
-        if (headerData.headerPhoto && headerData.headerPhoto.path && req.body.headerPhoto !== 'true') {
-            fs.unlink(headerData.headerPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            headerData.headerPhoto = null;
-        }
-    }
 
-    if (req.files.contactPhoto) {
-        if (headerData.contactPhoto) {
-            fs.unlink(headerData.contactPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
+                headerData.presentation = null;
+            }
         }
-        headerData.contactPhoto = req.files.contactPhoto[0];
-    } else {
-        if (headerData.contactPhoto && headerData.contactPhoto.path && req.body.contactPhoto !== 'true') {
-            fs.unlink(headerData.contactPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
+
+        if (headerPhoto) {
+            if (headerData.headerPhoto) {
+                const path = `uploads/${headerData.headerPhoto.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
                 }
-            });
-            headerData.contactPhoto = null;
+
+            }
+            headerData.headerPhoto = headerPhoto;
+        } else {
+            if (headerData.headerPhoto && headerData.headerPhoto.path && req.body.headerPhoto !== 'true') {
+                const path = `uploads/${headerData.headerPhoto.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+                headerData.headerPhoto = null;
+            }
         }
-    }
+
+        if (contactPhoto) {
+            if (headerData.contactPhoto) {
+                const path = `uploads/${headerData.contactPhoto.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+            }
+            headerData.contactPhoto = contactPhoto;
+        } else {
+            if (headerData.contactPhoto && headerData.contactPhoto.path && req.body.contactPhoto !== 'true') {
+                const path = `uploads/${headerData.contactPhoto.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+                headerData.contactPhoto = null;
+            }
+        }
+
   
       // Update the other fields of the document
       headerData.email = email;
