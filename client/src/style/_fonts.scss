@@ -1,19 +1,19 @@
 @font-face {
-    font-family: 'Stapel';
-    src: url('../fonts/Stapel-Light.woff2') format('woff');
-    src: url('../fonts/Stapel-Light.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/Stapel-Light.woff') format('woff'),
-        url('../fonts/Stapel-Light.ttf') format('truetype');
+    font-family: 'Graphik LC Web';
+    src: url('../fonts/Graphik-LC-Web-Regular.woff2') format('woff2');
+    src: url('../fonts/Graphik-LC-Web-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Graphik-LC-Web-Regular.woff') format('woff'),
+        url('../fonts/Graphik-LC-Web-Regular.ttf') format('truetype');
     font-weight: 400;
-    font-style: 400;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'Stapel';
-    src: url('../fonts/Stapel-Medium.woff2');
-    src: url('../fonts/Stapel-Medium.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/Stapel-Medium.woff') format('woff'),
-        url('../fonts/Stapel-Medium.ttf') format('truetype');
+    font-family: 'Graphik LC Web';
+    src: url('../fonts/Graphik-LC-Web-Medium.woff2') format('woff2');
+    src: url('../fonts/Graphik-LC-Web-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Graphik-LC-Web-Medium.woff') format('woff'),
+        url('../fonts/Graphik-LC-Web-Medium.ttf') format('truetype');
     font-weight: 500;
-    font-style: 500;
+    font-style: normal;
 }
