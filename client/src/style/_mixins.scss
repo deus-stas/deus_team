@@ -1,3 +1,5 @@
+@import './_constants.scss';
+
 @mixin absCenter {
     position: absolute;
     top: 50%;
@@ -41,7 +43,13 @@
 
 
 
+@mixin font-size($selector, $size-key) {
+  font-size: map-get(map-get($font-sizes, $size-key), $selector);
+}
 
+@mixin line-height($selector, $size-key) {
+  line-height: map-get(map-get($line-heights, $size-key), $selector);
+}
 
   //MEDIA QUERY MANAGER
   @mixin respond($breakpoint) {
@@ -81,7 +89,7 @@
     }
 
     @if $breakpoint==sm {
-      @media screen and (max-width: 767.9px) {
+      @media screen and (max-width: 768px) {
         @content;
       }
     }
