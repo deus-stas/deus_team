@@ -1,0 +1,51 @@
+$font-sizes: (
+        'xxxl': (
+                'h1': 3.2rem,
+                'h2': 2.4rem,
+                'h3': 1.8rem,
+                'body-L': 1.8rem,
+                'body-M': 1.6rem,
+                'body-S': 1.4rem,
+                'body-XS': 1.2rem,
+                'menu': 1.6rem,
+                'btn': 1.6rem
+        ),
+        'sm': (
+                'h1': 2.4rem,
+                'h2': 2.0rem,
+                'h3': 1.6rem,
+                'body-L': 1.6rem,
+                'body-M': 1.4rem,
+                'body-S': 1.2rem,
+                'body-XS': 1.0rem,
+                'menu': 1.6rem,
+                'btn': 1.6rem
+        )
+);
+
+$line-heights: (
+        'xxxl': (
+                'h1': 120%,
+                'h2': 130%,
+                'h3': 150%,
+                'body-L-Med': 150%,
+                'body-L-Reg': 140%,
+                'body-M': 150%,
+                'body-S': 140%,
+                'body-XS': auto,
+                'menu': 140%,
+                'btn': 140%
+        ),
+        'sm': (
+                'h1': 120%,
+                'h2': 130%,
+                'h3': 150%,
+                'body-L-Med': 150%,
+                'body-L-Reg': 140%,
+                'body-M': 150%,
+                'body-S': 140%,
+                'body-XS': auto,
+                'menu': 140%,
+                'btn': 140%
+        )
+);
