@@ -5,6 +5,7 @@ const Clients = require("../../models/Clients");
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const {uploadFile} = require("./file");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -74,13 +75,10 @@ router.put("/clients/:id", upload.single('image'), async (req, res) => {
     }
 
     const { name } = req.body;
-    const image = req.file;
+    const image = req.file ? req.file : undefined;
 
-    // Если есть новое изображение в запросе, обновляем ссылку на него
-    if (image) {
-        fs.unlinkSync(`uploads/${clients.image.filename}`);
-        clients.image = image;
-    }
+
+    uploadFile(image,'image',clients,req,'image')
 
     // Обновляем остальные поля документа
     clients.name = name;

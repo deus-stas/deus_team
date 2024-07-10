@@ -5,6 +5,7 @@ const HeaderData = require("../../models/HeaderData");
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const {uploadFile} = require("./file");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -43,9 +44,9 @@ router.post('/headerData', upload.fields([
     const { phone, email, vk, telegram, behance } = req.body;
     console.log(req.file);
 
-    const presentation = req.files.image[0];
-    const headerPhoto = req.files.mainNewsImage[0];
-    const contactPhoto = req.files.mainNewsImage[0];
+    const presentation = req.files.presentation[0];
+    const headerPhoto = req.files.headerPhoto[0];
+    const contactPhoto = req.files.contactPhoto[0];
 
 
     
@@ -95,89 +96,10 @@ router.put("/headerData/:id", upload.fields([
       const presentation = req.files.presentation ? req.files.presentation[0] : undefined;
       const contactPhoto = req.files.contactPhoto ? req.files.contactPhoto[0] : undefined;
 
-        if (presentation) {
-            if (headerData.presentation) {
-                const path = `uploads/${headerData.presentation.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
 
-            }
-            headerData.presentation = presentation;
-        } else {
-            if (headerData.presentation && headerData.presentation.path && req.body.presentation !== 'true') {
-                const path = `uploads/${headerData.presentation.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
-
-                headerData.presentation = null;
-            }
-        }
-
-        if (headerPhoto) {
-            if (headerData.headerPhoto) {
-                const path = `uploads/${headerData.headerPhoto.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
-
-            }
-            headerData.headerPhoto = headerPhoto;
-        } else {
-            if (headerData.headerPhoto && headerData.headerPhoto.path && req.body.headerPhoto !== 'true') {
-                const path = `uploads/${headerData.headerPhoto.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
-
-                headerData.headerPhoto = null;
-            }
-        }
-
-        if (contactPhoto) {
-            if (headerData.contactPhoto) {
-                const path = `uploads/${headerData.contactPhoto.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
-
-            }
-            headerData.contactPhoto = contactPhoto;
-        } else {
-            if (headerData.contactPhoto && headerData.contactPhoto.path && req.body.contactPhoto !== 'true') {
-                const path = `uploads/${headerData.contactPhoto.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
-
-                headerData.contactPhoto = null;
-            }
-        }
+        uploadFile(presentation,'presentation',headerData,req,'presentation')
+        uploadFile(headerPhoto,'headerPhoto',headerData,req,'headerPhoto')
+        uploadFile(contactPhoto,'contactPhoto',headerData,req,'contactPhoto')
 
   
       // Update the other fields of the document
