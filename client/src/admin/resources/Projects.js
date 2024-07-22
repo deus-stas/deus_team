@@ -89,6 +89,11 @@ export const ProjectsCreate = (props) => (
             />
             <TextInput
                 className="customWidth"
+                source="date"
+                label="Дата"
+            />
+            <TextInput
+                className="customWidth"
                 source="descrProject"
                 label="Краткое описание"
             />
@@ -546,6 +551,11 @@ export const ProjectsEdit = (props) => (
                 source="name"
                 label="Заголовок"
                 validate={[required()]}
+            />
+            <TextInput
+                className="customWidth"
+                source="date"
+                label="Дата"
             />
             <TextInput
                 className="customWidth"
