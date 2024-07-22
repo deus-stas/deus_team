@@ -3,8 +3,8 @@
 
 body {
     font-family: 'Graphik LC Web', sans-serif;
-    font-size: 1.6rem;
-    line-height: 1.5;
+    font-size: 1.2rem;
+    line-height: 1.2;
     color: #191B1D;
 }
 
@@ -36,6 +36,19 @@ body {
 
 }
 
+.heading-thirty {
+    font-weight: 400;
+    letter-spacing: -0.03rem;
+    @include respond(xxxl){
+        @include font-size('h3', 'xxxl');
+        @include line-height('h3', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('h3', 'sm');
+        @include line-height('h3', 'sm');
+    }
+}
+
 .heading-tertiary {
     font-weight: 500;
     font-size: 2.8rem;
@@ -44,6 +57,18 @@ body {
     @include respond(md) {
         font-size: 2.6rem;
         line-height: 3.1rem;
+    }
+}
+
+.l-textReg {
+    font-weight: 400;
+    @include respond(xxxl){
+        @include font-size('body-L', 'xxxl');
+        @include line-height('body-L-Reg', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('body-L', 'sm');
+        @include line-height('body-L-Reg', 'sm');
     }
 }
 
@@ -68,6 +93,18 @@ body {
     @include respond(sm){
         @include font-size('body-S', 'sm');
         @include line-height('body-S', 'sm');
+    }
+}
+
+.xs-text {
+    font-weight: 400;
+    @include respond(xxxl){
+        @include font-size('body-XS', 'xxxl');
+        @include line-height('body-XS', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('body-XS', 'sm');
+        @include line-height('body-XS', 'sm');
     }
 }
 
