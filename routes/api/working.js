@@ -5,6 +5,7 @@ const Working = require("../../models/Working");
 const {v4: uuidv4} = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const {uploadFile} = require("./file");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -37,13 +38,14 @@ router.get('/working', async (req, res) => {
 });
 
 router.post('/working', upload.single('file'), async (req, res) => {
-    const {name} = req.body;
+    const {name, descr} = req.body;
     console.log(req.file);
 
     const file = req.file;
 
     const working = new Working({
         name,
+        descr,
         file,
     });
 
@@ -74,23 +76,14 @@ router.put("/working/:id", upload.single('file'), async (req, res) => {
     }
 
 
-    const {name} = req.body;
+    const {name, descr} = req.body;
     const file = req.file;
 
-    // Если есть новое изображение в запросе, обновляем ссылку на него
-    if (file) {
-        if (!!working.file && working.file.filename) {
-            const path = `uploads/${working.file.filename}`
-            if (fs.existsSync(path)) {
-                fs.unlinkSync(path);
-            }
-        }
-
-        working.file = file;
-    }
+    uploadFile(file,'file',working, req,'file')
 
     // Обновляем остальные поля документа
     working.name = name;
+    working.descr = descr;
 
     // Сохраняем изменения
     await working.save();
