@@ -184,7 +184,6 @@ body {
 
 main {
     animation: fadeIn 0.3s ease 0.3s forwards;
-    background: #EEEEEE;
 }
 
 @keyframes fadeIn {
@@ -575,11 +574,16 @@ main {
     overflow: hidden;
     width: 3rem;
     height: 3rem;
+    @include respond(sm) {
+        height: 2rem;
+        width: 2rem;
+    }
 }
 
 .hover-flip-circle {
     width: 3rem;
     height: 3rem;
+
 }
 
 .hover-flip-arrow span, .hover-flip-circle span {
@@ -608,6 +612,11 @@ main {
     height: calc(100% + 5rem);
     top: calc(100% - 7rem);
     right: calc(100% - 3rem);
+    @include respond(sm){
+        width: calc(100% + 2rem);
+        top: calc(100% - 5.3rem);
+        right: calc(100% - 2rem);
+    }
 }
 
 .hover-circle {
@@ -622,5 +631,38 @@ main {
 
     @include respond(sm) {
         top: calc(100% - 8.4rem);
+    }
+}
+
+.borderBlock {
+    border-radius: 5rem;
+    @include respond(lg) {
+        border-radius: 4rem;
+    }
+    @include respond(sm) {
+        border-radius: 3rem;
+    }
+
+    @include respond(xs) {
+        border-radius: 2rem;
+    }
+}
+
+.padding {
+    padding: 4rem;
+    @include respond(lg) {
+        padding: 3rem;
+    }
+    @include respond(xs) {
+        padding: 2rem;
+    }
+}
+
+.breadcrumb {
+    font-size: 1.6rem;
+    color: #757677;
+    padding-bottom: 2rem;
+    @include respond(sm){
+        padding-bottom: 1rem;
     }
 }

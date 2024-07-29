@@ -60,6 +60,18 @@ body {
     }
 }
 
+.l-textMed {
+    font-weight: 550;
+    @include respond(xxxl){
+        @include font-size('body-L', 'xxxl');
+        @include line-height('body-L-Med', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('body-L', 'sm');
+        @include line-height('body-L-Med', 'sm');
+    }
+}
+
 .l-textReg {
     font-weight: 400;
     @include respond(xxxl){
@@ -106,36 +118,4 @@ body {
         @include font-size('body-XS', 'sm');
         @include line-height('body-XS', 'sm');
     }
-}
-
-.p-style {
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 3rem;
-
-    &-black {
-        color: #191B1D;
-        font-weight: 500;
-    }
-
-    &-white {
-        color: #FFFFFF;
-    }
-
-    &-grey {
-        color: #757677;
-    }
-
-    @include respond(sm) {
-        font-size: 1.8rem;
-        line-height: 3.3rem;
-    }
-
-    @include respond(xs) {
-        font-size: 2rem;
-        line-height: 3rem;
-
-    }
-
-
 }
