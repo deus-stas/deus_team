@@ -36,19 +36,20 @@ router.get('/form', async (req, res) => {
     res.json(form);
 });
 
-router.post('/form', upload.single('file'), async (req, res) => {
+router.post('/form', upload.fields([
+    { name: 'formFiles' }]), async (req, res) => {
     const { ctaServices, name, formName, company, link, phone, email, about, budget } = req.body;
-    console.log(req.body);
 
-    const file = req.file;
-
+    const formFiles = req.files.formFiles;
     const form = new Form({
-        formName, ctaServices, name, company, link, phone, email, about, budget, file
+        formName, ctaServices, name, company, link, phone, email, about, budget, formFiles
     });
 
     await form.save();
 
     res.json(form);
+
+
 });
 
 router.get('/form/:id', async (req, res) => {
@@ -69,11 +70,18 @@ router.delete("/form/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Form not found" });
     }
 
-    const { file } = form;
+    const { formFiles } = form;
 
-    if (file) {
-        fs.unlinkSync(`uploads/${file.filename}`);
-    }
+    const multiImages = [
+        formFiles
+    ]
+    multiImages.forEach(files => {
+        if (files) {
+            files.forEach((file) => {
+                fs.unlinkSync(`uploads/${file.filename}`);
+            });
+        }
+    })
 
     res.json({ success: true });
 });
