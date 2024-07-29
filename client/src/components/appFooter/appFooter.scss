@@ -3,7 +3,6 @@
 .footer {
     margin: 7rem 0 4rem;
     background: #121212;
-    border-radius: 5rem;
     color: #FFFFFF;
     opacity: 1;
     transition: opacity 0.1s;
@@ -11,15 +10,11 @@
     position: relative;
 
     @include respond(lg) {
-        border-radius: 4rem;
-    }
-
-    @include respond(md) {
-        border-radius: 3rem;
+        margin: 6rem 0 2rem;
     }
 
     @include respond(sm) {
-        border-radius: 2rem;
+        margin: 3rem 0 2rem;
     }
 
     .container {

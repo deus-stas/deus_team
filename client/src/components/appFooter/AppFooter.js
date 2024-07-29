@@ -68,7 +68,7 @@ const AppFooter = (props) => {
 
     return (
         <section className="container">
-            <footer className="footer whiteHeader ">
+            <footer className="footer borderBlock whiteHeader ">
                 <div className="footer-frame">
                     <div
                         className={`footer-grid ${text === sizeLarge || text === size1024 ? 'heading-primary' : 'heading-secondary'}`}>
