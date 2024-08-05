@@ -8,8 +8,6 @@ import {Icon} from "../icon/Icon";
 import DelayedLink, {DelayedNavLink} from "./DelayedLink";
 import {setIsLoadingMainPageEvent} from "../../axios";
 import {gotoAnchor} from "../anchors";
-import {isVisible} from "@testing-library/user-event/dist/utils";
-
 
 const apiUrl = ''
 
@@ -168,11 +166,11 @@ const AppHeader = (props) => {
                                 <DelayedLink to="/" className='header__logo'>
                                     <Icon icon="headerLogo" viewBox="0"/>
                                 </DelayedLink>
-                                <nav className={`header__nav ${visible ? '' : 'hidden'}`}>
+                                <nav className={`header__nav m-text ${visible ? '' : 'hidden'}`}>
                                     <ul className="header__nav-list">
                                         <li className="header__nav-item hover-flip hidden-mobile">
-                                            <DelayedNavLink to="/projects">
-                                                <span data-hover="Проекты">Проекты</span>
+                                            <DelayedNavLink to="/agency">
+                                                <span data-hover="Агентство">Агентство</span>
                                             </DelayedNavLink>
                                         </li>
                                         <li className="header__nav-item hover-flip hidden-mobile">
@@ -181,8 +179,13 @@ const AppHeader = (props) => {
                                             </DelayedNavLink>
                                         </li>
                                         <li className="header__nav-item hover-flip hidden-mobile">
-                                            <DelayedNavLink to="/agency">
-                                                <span data-hover="Агентство">Агентство</span>
+                                            <DelayedNavLink to="/projects">
+                                                <span data-hover="Проекты">Проекты</span>
+                                            </DelayedNavLink>
+                                        </li>
+                                        <li className="header__nav-item hover-flip hidden-mobile">
+                                            <DelayedNavLink to="/news">
+                                                <span data-hover="Блог">Блог</span>
                                             </DelayedNavLink>
                                         </li>
                                         <li className="header__nav-item hover-flip hidden-mobile">
@@ -193,41 +196,16 @@ const AppHeader = (props) => {
                                     </ul>
                                 </nav>
 
-                                {headerData && headerData.phone ?
-                                    (
-                                        <div
-                                            className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
-                                            <Link to={`tel:${headerData.phone}`}
-                                                  className="header__contacts-link">
-                                                <span data-hover={headerData.phone}> {headerData.phone}</span>
-                                            </Link>
-                                        </div>
-                                    ) :
-                                    (
-                                        <div
-                                            className={`header__contacts hover-flip hidden-mobile ${visible ? '' : 'hidden'}`}>
-                                            <Link to="tel:+74951034351" className="header__contacts-link">
-                                                <span data-hover="+7 (495) 103—4351 ">+7 (495) 103—4351 </span></Link>
-                                        </div>
-                                    )
-                                }
-
                                 <DelayedLink to="/contacts" className="header__discuss hidden-mobile"
                                              datahash="contactUs"
                                              onClick={(e) => gotoAnchor(e)}>
-                                    {
-                                        headerData.headerPhoto ?
-                                            (
+                                    {!!headerData.headerPhoto &&
                                                 <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
                                                             src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
                                                             alt="Обсудить проект" className="header__discuss-img"/>
-                                            ) : (
-                                                <img datahash="contactUs" onClick={(e) => gotoAnchor(e)} src={btn}
-                                                     alt="Обсудить проект" className="header__discuss-img"/>
-                                            )
                                     }
                                     <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                         className="header__discuss-text">Обсудить проект
+                                         className="header__discuss-text m-text">Обсудить проект
                                     </div>
                                 </DelayedLink>
 

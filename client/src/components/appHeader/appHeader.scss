@@ -201,7 +201,7 @@
 
 
 .header {
-    padding-top: 2rem;
+    padding-top: 3rem;
     width: 100%;
     background: transparent;
     position: fixed;
@@ -213,11 +213,8 @@
     &__wrap {
         display: grid;
         align-items: center;
-        grid-template-columns: 0.35fr auto auto 0.45fr;;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 4rem;
-        padding: .8rem 0;
-
-
         @include respond(md) {
             display: flex;
             justify-content: space-between;
@@ -231,6 +228,8 @@
     &__logo {
         transition: all 0.15s linear;
         margin-right: auto;
+        width: 6.6rem;
+        height: 2.8rem;
         @include respond(sm) {
            margin-right: auto;
         }
@@ -240,8 +239,8 @@
         }
 
         .icon {
-            width: 11.3rem;
-            height: 4.6rem;
+            width: 6.644rem;
+            height: 2.6rem;
 
             @include respond(sm) {
                 width: 8rem;
@@ -255,16 +254,13 @@
         opacity: 1;
         transition: all 0.15s linear;
         position: relative;
+        padding: .99rem 0 1.21rem;
+        margin-right: auto;
 
         &-list {
             display: flex;
             align-items: center;
             font-weight: 500;
-            font-size: 2rem;
-            line-height: 2.6rem;
-            //@include respond(md) {
-            //    font-size: 2rem;
-            //}
         }
 
         &-item {
@@ -282,10 +278,10 @@
             }
 
             &:not(:last-child) {
-                margin-right: 5.4rem;
+                margin-right: 5.5rem;
 
-                @include respond(sm) {
-                    margin-right: 0;
+                @include respond(lg) {
+                    margin-right: 3rem;
                 }
             }
 
@@ -338,18 +334,13 @@
         width: max-content;
         display: flex;
         align-items: center;
-        font-size: 2rem;
-        line-height: 2.6rem;
-        background: transparent;
+        background: rgba(5, 5, 5, 1);
         border: 1px solid #000000;
         backdrop-filter: blur(3px);
         border-radius: 46px;
         margin: 0;
-        padding: .7rem 1.6rem .7rem 1rem;
+        padding: 1rem 1.6rem;
         transition: all 0.3s linear;
-        @include respond(md) {
-            padding: 1rem 1.6rem 1rem 1rem;
-        }
 
     &:hover {
         background: #121212;
@@ -357,26 +348,17 @@
         }
 
         &-img {
-            flex: 0 0 4.5rem;
-            width: 4.5rem;
-            height: 4.5rem;
-            margin-right: 2rem;
+            width: 2.4rem;
+            height: 2.4rem;
+            margin-right: 1rem;
             border-radius: 50%;
-            @include respond(sm) {
-                margin-right: 1.5rem;
-                flex: none;
-                width: 3rem;
-                height: 3rem;
-            }
         }
 
         &-text {
+            color: #FFFFFF;
             transition: opacity .5s;
             white-space: nowrap;
             cursor: pointer;
-            @include respond(sm) {
-                font-size: 1.6rem;
-            }
         }
     }
 
