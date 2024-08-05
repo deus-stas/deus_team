@@ -6,10 +6,8 @@ const vacanciesSchema = new Schema({
         type: String,
         required: true
     },
-    lvl: {
-        type: String
-    },
-    time: {
+
+    type: {
         type: String
     },
     place: {

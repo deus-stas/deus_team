@@ -5,8 +5,7 @@ export const VacanciesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Название вакансии" validate={[required()]} />
-            <TextInput className="customWidth" source="lvl" label="Уровень" />
-            <TextInput className="customWidth" source="time" label="График" />
+            <TextInput className="customWidth" source="type" label="Оформление" />
             <TextInput className="customWidth" source="place" label="Место работы" />
             <TextInput className="customWidth" source="link" label="Ссылка на вакансию" />
         </SimpleForm>
@@ -17,8 +16,7 @@ export const VacanciesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Название вакансии" validate={[required()]} />
-            <TextInput className="customWidth" source="lvl" label="Уровень" />
-            <TextInput className="customWidth" source="time" label="График" />
+            <TextInput className="customWidth" source="type" label="Оформление" />
             <TextInput className="customWidth" source="place" label="Место работы" />
             <TextInput className="customWidth" source="link" label="Ссылка на вакансию" />
         </SimpleForm>
