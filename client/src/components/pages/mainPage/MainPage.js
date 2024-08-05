@@ -268,12 +268,25 @@ const MainPage = (props) => {
         return columns;
     };
 
+    const sizeLarge = 'Мы создаём продукты и услуги, которые<br/>  помогают нашим клиентам быть заметнее<br/> 🤩 в цифровом пространстве'
+    const sizeSmall = 'Мы создаём продукты и услуги, которые помогают нашим клиентам быть заметнее 🤩 в цифровом пространстве'
+    const sizeXSmall = 'Мы создаём продукты<br/>  и услуги, которые помогают нашим клиентам быть заметнее 🤩 в цифровом пространстве'
+
     const matches1440 = useMediaQuery('(min-width:1025px)');
     const matches1024 = useMediaQuery('(min-width:940px)');
     const matches768 = useMediaQuery('(min-width:420px)');
     const matches360 = useMediaQuery('(min-width:0px)');
     const projectSizeLabel = matches768 ? "m-text" : matches360 ? "s-text" : "m-text"
     const experts = matches1440? 'heading-thirty' : matches1024 ? 'heading-thirty' : matches768 ? 'l-textReg' : 'm-text'
+
+    let text
+    if (matches1440){
+        text = sizeLarge
+    } else if (matches768) {
+        text = sizeSmall
+    } else {
+        text = sizeXSmall
+    }
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>;
 
@@ -318,13 +331,7 @@ const MainPage = (props) => {
                     <div className="main-banner__wrap">
                         <div className="main-banner__content">
                             <h4 className="heading-fourth">Привет — это DEUS 👋</h4>
-                            <h1 className="heading-primary">
-                                <span>Мы создаём продукты и услуги, которые </span>
-                                <span> помогают нашим клиентам быть заметнее  </span>
-                                <span className="last-grid">
-                        🤩 в цифровом пространстве
-                      </span>
-                            </h1>
+                            <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: text}}/>
                             <DelayedLink
                                 to={`/contacts`}
                                 className="btn --black hidden-desktop"

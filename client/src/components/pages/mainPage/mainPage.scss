@@ -3,7 +3,6 @@
 .main {
   &-banner {
     padding: 13.4rem 0 2rem;
-    color: #fff;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -48,78 +47,6 @@
 
       @include respond(sm) {
         padding-right: 0;
-      }
-
-      .heading-fourth {
-        font-weight: 400;
-        font-size: clamp(1.4rem, 5vw, 1.6rem);
-        color: #757677;
-        margin-bottom: 2rem;
-      }
-
-      .heading-primary {
-        display: flex;
-        flex-direction: column;
-        color: rgba(0, 0, 0, 0.82);
-
-        .last-grid {
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          gap: 3rem;
-
-          @include respond(md) {
-            width: 100%;
-          }
-
-          @include respond(sm) {
-            display: inline-block;
-            white-space: nowrap;
-          }
-        }
-
-        .p-style {
-          font-weight: 400;
-          font-size: clamp(1.6rem, 2vw, 2rem);
-          color: #757677;
-          display: block;
-          flex-wrap: nowrap;
-          flex-direction: row;
-          align-items: center;
-          line-height: 2.24rem;
-          margin-top: 2rem;
-          @include respond(sm) {
-            margin: 2rem 0;
-          }
-        }
-
-        //@include respond(sm) {
-        //    font-size: 4.5rem;
-        //    line-height: 6rem;
-        //
-        //    .p-style {
-        //        font-size: 1.8rem;
-        //        line-height: 2.3rem;
-        //    }
-        //
-        //    .wh-30 {
-        //        width: 40%;
-        //    }
-        //}
-        //
-        //@include respond(xs) {
-        //    font-size: 3.5rem;
-        //    line-height: 4rem;
-        //
-        //    .p-style {
-        //        font-size: 1.4rem;
-        //        line-height: 1.5rem;
-        //    }
-        //
-        //    .wh-30 {
-        //        width: 40%;
-        //    }
-        //}
       }
 
       .btn {
