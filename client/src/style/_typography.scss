@@ -2,10 +2,10 @@
 @import './_constants.scss';
 
 body {
-    font-family: 'Graphik LC Web', sans-serif;
+    font-family: "Graphik LC Web Regular", sans-serif;
     font-size: 1.2rem;
     line-height: 1.2;
-    color: #191B1D;
+    color: #050505;
 }
 
 .heading-primary {
@@ -61,7 +61,7 @@ body {
 }
 
 .l-textMed {
-    font-weight: 550;
+    font-family: "Graphik LC Web Medium", sans-serif;
     @include respond(xxxl){
         @include font-size('body-L', 'xxxl');
         @include line-height('body-L-Med', 'xxxl');
