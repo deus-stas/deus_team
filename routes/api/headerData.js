@@ -5,6 +5,7 @@ const HeaderData = require("../../models/HeaderData");
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const {uploadFile} = require("./file");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -43,21 +44,10 @@ router.post('/headerData', upload.fields([
     const { phone, email, vk, telegram, behance } = req.body;
     console.log(req.file);
 
-    // const presentation = req.file;
-    let presentation, headerPhoto, contactPhoto;
+    const presentation = req.files.presentation[0];
+    const headerPhoto = req.files.headerPhoto[0];
+    const contactPhoto = req.files.contactPhoto[0];
 
-    if (req.files.presentation) {
-        presentation = req.files.presentation[0];
-    }
-
-    if (req.files.headerPhoto) {
-        headerPhoto = req.files.headerPhoto[0];
-    }
-
-    if (req.files.contactPhoto) {
-        contactPhoto = req.files.contactPhoto[0];
-    }
-    
 
     
     const headerData = new HeaderData({
@@ -102,74 +92,14 @@ router.put("/headerData/:id", upload.fields([
       }
   
       const { email, phone, vk, telegram, behance } = req.body;
-    //   const presentation = req.file;
-  
-    //   if (presentation) {
-    //     fs.unlinkSync(`uploads/${headerData.presentation.filename}`);
-    //     headerData.presentation = presentation;
-    //     console.log("pres", presentation)
-    // }
+      const headerPhoto = req.files.headerPhoto ? req.files.headerPhoto[0] : undefined;
+      const presentation = req.files.presentation ? req.files.presentation[0] : undefined;
+      const contactPhoto = req.files.contactPhoto ? req.files.contactPhoto[0] : undefined;
 
-    if (req.files.presentation) {
-        if (headerData.presentation) {
-            fs.unlink(headerData.presentation.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-        }
-        headerData.presentation = req.files.presentation[0];
-    } else {
-        if (headerData.presentation && headerData.presentation.path && req.body.presentation !== 'true') {
-            fs.unlink(headerData.presentation.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            headerData.presentation = null;
-        }
-    }
+        uploadFile(presentation, 'presentation', headerData, req, 'presentation')
+        uploadFile(headerPhoto, 'headerPhoto', headerData, req, 'headerPhoto')
+        uploadFile(contactPhoto, 'contactPhoto', headerData, req, 'contactPhoto')
 
-    if (req.files.headerPhoto) {
-        if (headerData.headerPhoto) {
-            fs.unlink(headerData.headerPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-        }
-        headerData.headerPhoto = req.files.headerPhoto[0];
-    } else {
-        if (headerData.headerPhoto && headerData.headerPhoto.path && req.body.headerPhoto !== 'true') {
-            fs.unlink(headerData.headerPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            headerData.headerPhoto = null;
-        }
-    }
-
-    if (req.files.contactPhoto) {
-        if (headerData.contactPhoto) {
-            fs.unlink(headerData.contactPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-        }
-        headerData.contactPhoto = req.files.contactPhoto[0];
-    } else {
-        if (headerData.contactPhoto && headerData.contactPhoto.path && req.body.contactPhoto !== 'true') {
-            fs.unlink(headerData.contactPhoto.path, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-            headerData.contactPhoto = null;
-        }
-    }
-  
       // Update the other fields of the document
       headerData.email = email;
       headerData.phone = phone;

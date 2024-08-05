@@ -20,7 +20,7 @@ import React from 'react';
 import {Link, NavLink, useNavigate} from 'react-router-dom';
 import {setIsLoadingMainPageEvent} from "../../axios";
 
-const DelayedLink = (props) => {
+const DelayedLink = React.forwardRef((props) => {
     const {to, children, onClick, timeout = 1000, isNav, disabled} = props
 
     const navigate = useNavigate()
@@ -53,7 +53,7 @@ const DelayedLink = (props) => {
         }
 
     </>;
-}
+})
 
 export default DelayedLink;
 

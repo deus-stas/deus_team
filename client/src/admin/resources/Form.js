@@ -15,16 +15,20 @@ const Services = ({ record }) => {
 };
 
 const LinkFile = ({ record }) => {
-    return record.file ? (
-        <a href={`${apiUrl}/uploads/${record.file.filename}`} style={{ color: "#FF4D01" }} target="_blank" rel="noreferrer">Файл</a>
+    return record.formFiles && record.formFiles.length ? (
+        record.formFiles.map((file, index) => (
+            <a key={index} href={`${apiUrl}/uploads/${file.filename}`} style={{ color: "#FF4D01" }} target="_blank" rel="noreferrer">
+                Файл {index + 1}
+            </a>
+        ))
     ) : null;
 };
 
-const LinkPortfolio = ({ record }) => {
-    return record.link ? (
-        <a href={`${record.link}`} style={{ color: "#FF4D01", }} target="_blank" rel="noreferrer">Ссылка</a>
-    ) : null;
-};
+// const LinkPortfolio = ({ record }) => {
+//     return record.link ? (
+//         <a href={`${record.link}`} style={{ color: "#FF4D01", }} target="_blank" rel="noreferrer">Ссылка</a>
+//     ) : null;
+// };
 
 export const FormList = (props) => (
     <List {...props}>
@@ -38,12 +42,12 @@ export const FormList = (props) => (
             />
             <TextField source="name" label="Имя" />
             <TextField source="company" label="Компания" />
-            <FunctionField
-                label="Портфолио"
-                render={(record) => (
-                    <LinkPortfolio record={record} />
-                )}
-            />
+            {/*<FunctionField*/}
+            {/*    label="Портфолио"*/}
+            {/*    render={(record) => (*/}
+            {/*        <LinkPortfolio record={record} />*/}
+            {/*    )}*/}
+            {/*/>*/}
             <TextField source="phone" label="Телефон" />
             <TextField source="email" label="Почта" />
             <TextField source="about" label="Текст" />

@@ -22,9 +22,9 @@ router.get('/vacancies', async (req, res) => {
 
 router.post('/vacancies', async (req, res) => {
     console.log(req.body.name);
-    const { name, lvl, time, place, link } = req.body;
+    const { name, type, place, link } = req.body;
     const vacancies = new Vacancies({
-        name, lvl, time, place, link
+        name, type, place, link
     });
 
     await vacancies.save();

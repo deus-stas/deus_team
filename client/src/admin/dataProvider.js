@@ -2,7 +2,7 @@ import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
 const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'http://188.120.232.38/api'
+  ? ''
   : `${process.env.REACT_APP_LOCALHOST_URI}/api`;
 
 const httpClient = fetchUtils.fetchJson;
@@ -90,7 +90,7 @@ const dataProvider = {
       'headerPhoto',
       'contactPhoto',
     ];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'photoSlider' ]
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'photoSlider', 'formFiles' ]
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false;
@@ -136,7 +136,7 @@ const dataProvider = {
   update: (resource, params) => {
     const formData = new FormData();
     const images = ['image', 'imageMob', 'mainNewsImage',"file", "descrImg", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'mainMobVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'photoSlider']
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'photoSlider', 'formFiles']
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса

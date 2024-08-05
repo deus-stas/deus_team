@@ -1,33 +1,10 @@
 import React from 'react';
 import {List, Datagrid, TextField, EditButton, ReferenceInput} from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, ArrayInput, SimpleFormIterator, SelectArrayInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, ArrayInput, SimpleFormIterator, SelectArrayInput } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 
 const apiUrl = ''
-
-
-const FilenameField = props => {
-    return (
-        <FunctionField
-            {...props}
-            render={record => {
-                console.log(record);
-                if (record.filename) {
-                    if (record.mimetype.indexOf('mp4') !== -1) {
-                        return (
-                            <video autoPlay loop playsInline><source src="/static/media/webhands.397582827e1e32109804.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
-                        )
-                    } else {
-                        return <img src={`${apiUrl}/uploads/${record.filename}`} alt={record.filename} title="image" />;
-                    }
-                } else {
-                    return <img src={`${record.src}`} alt={record.src} title="image" />;
-                }
-            }}
-        />
-    )
-}
 
 export const ServicesList = (props) => (
     <List {...props}>
@@ -75,11 +52,6 @@ export const ServicesCreate = (props) => (
             <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
                 <SelectArrayInput className="customWidth" optionText="name" label="Услуги" />
             </ReferenceArrayInput>
-            <ImageInput className="fileInput" placeholder="+" source="descrImg" label="Фотография"
-                        accept="image/*">
-                <FilenameField source="src" title="title"/>
-            </ImageInput>
-
             <ArrayInput
                 source="work"
                 label="Как проходит работа"
@@ -160,11 +132,6 @@ export const ServicesEdit = (props) => (
             <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
                 <SelectArrayInput className="customWidth" optionText="name" label="Элементы блока" />
             </ReferenceArrayInput>
-            <ImageInput className="fileInput" placeholder="+" source="descrImg" label="Фотография"
-                        accept="image/*">
-                <FilenameField source="src" title="title"/>
-            </ImageInput>
-
             <ArrayInput
                 source="work"
                 label="Как проходит работа"

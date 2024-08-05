@@ -1,55 +1,51 @@
 @import './_mixins.scss';
+@import './_constants.scss';
 
 body {
-    font-family: 'Stapel', Helvetica, sans-serif;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    color: #191B1D;
+    font-family: "Graphik LC Web Regular", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    color: #050505;
 }
 
 .heading-primary {
-    color: #121212;
-    font-weight: 500;
-    font-size: clamp(3.2rem, 4vw, 8rem);
-    line-height: clamp(3.5rem, 5vw, 8.8rem);
-
-    //@include respond(md) {
-    //    font-size: 6.4rem;
-    //    line-height: 7rem;
-    //}
-    //
-    //@include respond(sm) {
-    //    font-size: 4.5rem;
-    //    line-height: 6rem;
-    //}
-    //
-    //@include respond(xs) {
-    //    font-size: 3.5rem;
-    //    line-height: 4rem;
-    //}
+    //color: #121212;
+    font-weight: 400;
+    letter-spacing: -0.03rem;
+    @include respond(xxxl){
+        @include font-size('h1', 'xxxl');
+        @include line-height('h1', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('h1', 'sm');
+        @include line-height('h1', 'sm');
+    }
 }
 
 .heading-secondary {
-    font-weight: 500;
-    font-size: 3.6rem;
-    line-height: 4.6rem;
-
-    @include respond(md) {
-        font-size: 2.8rem;
-        line-height: 3.8rem;
+    font-weight: 400;
+    letter-spacing: -0.03rem;
+    @include respond(xxxl){
+        @include font-size('h2', 'xxxl');
+        @include line-height('h2', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('h2', 'sm');
+        @include line-height('h2', 'sm');
     }
 
-    @include respond(xs) {
-        font-size: 2.4rem;
-        line-height: 3.3rem;
+}
 
+.heading-thirty {
+    font-weight: 400;
+    letter-spacing: -0.03rem;
+    @include respond(xxxl){
+        @include font-size('h3', 'xxxl');
+        @include line-height('h3', 'xxxl');
     }
-
-    @include respond(xsx) {
-        font-size: 2.2rem;
-        line-height: 3.3rem;
-
+    @include respond(sm){
+        @include font-size('h3', 'sm');
+        @include line-height('h3', 'sm');
     }
 }
 
@@ -64,34 +60,62 @@ body {
     }
 }
 
-.p-style {
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 3rem;
-
-    &-black {
-        color: #191B1D;
-        font-weight: 500;
+.l-textMed {
+    font-family: "Graphik LC Web Medium", sans-serif;
+    @include respond(xxxl){
+        @include font-size('body-L', 'xxxl');
+        @include line-height('body-L-Med', 'xxxl');
     }
-
-    &-white {
-        color: #FFFFFF;
+    @include respond(sm){
+        @include font-size('body-L', 'sm');
+        @include line-height('body-L-Med', 'sm');
     }
+}
 
-    &-grey {
-        color: #757677;
+.l-textReg {
+    font-weight: 400;
+    @include respond(xxxl){
+        @include font-size('body-L', 'xxxl');
+        @include line-height('body-L-Reg', 'xxxl');
     }
-
-    @include respond(sm) {
-        font-size: 1.8rem;
-        line-height: 3.3rem;
+    @include respond(sm){
+        @include font-size('body-L', 'sm');
+        @include line-height('body-L-Reg', 'sm');
     }
+}
 
-    @include respond(xs) {
-        font-size: 2rem;
-        line-height: 3rem;
-
+.m-text {
+    font-weight: 400;
+    @include respond(xxxl){
+        @include font-size('body-M', 'xxxl');
+        @include line-height('body-M', 'xxxl');
     }
+    @include respond(sm){
+        @include font-size('body-M', 'sm');
+        @include line-height('body-M', 'sm');
+    }
+}
 
+.s-text {
+    font-weight: 400;
+    @include respond(xxxl){
+        @include font-size('body-S', 'xxxl');
+        @include line-height('body-S', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('body-S', 'sm');
+        @include line-height('body-S', 'sm');
+    }
+}
 
+.xs-text {
+    font-weight: 400;
+    @include respond(xxxl){
+        @include font-size('body-XS', 'xxxl');
+        @include line-height('body-XS', 'xxxl');
+    }
+    @include respond(sm){
+        @include font-size('body-XS', 'sm');
+        @include line-height('body-XS', 'sm');
+    }
 }

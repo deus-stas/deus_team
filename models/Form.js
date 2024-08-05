@@ -11,7 +11,7 @@ const FormSchema = new Schema({
     email: { type: String },
     about: { type: String },
     budget: { type: String },
-    file: { type: Object },
+    formFiles: { type: Array },
 });
 
 FormSchema.set('toJSON', { virtuals: true });

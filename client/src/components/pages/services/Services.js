@@ -8,7 +8,6 @@ import './services.scss'
 
 import RetryImage from "../../../helpers/RetryImage";
 import {connect, useSelector} from "react-redux";
-import agencyBanner from "../../../img/agency-main.mp4";
 import pentagon from "../../../img/pentagon.png"
 import octagon from "../../../img/octagon.png"
 import elipse from "../../../img/elipse.png"
@@ -17,6 +16,7 @@ import includes from "validator/es/lib/util/includes";
 import {gotoAnchor} from "../../anchors";
 import MarqueeComponent from "../../MarqueeComponent";
 import DelayedLink from "../../appHeader/DelayedLink";
+import {useMediaQuery} from "@material-ui/core";
 
 const apiUrl = '';
 
@@ -25,7 +25,6 @@ const Services = (props) => {
     // const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [openImage, setOpenImage] = useState(null);
-    const [openList, setOpenList] = useState([])
 
     // useEffect(() => {
     //     axios.get(`${apiUrl}/api/reviews/`)
@@ -79,198 +78,127 @@ const Services = (props) => {
         };
     }, []);
 
-    const handleImageClick = (filename) => {
-        setOpenImage(filename);
-    };
 
-    const handleItemClick = (index) => {
-        setOpenList(index === openList ? -1 : index);
-    };
+    const sizeLarge = 'Объединяем аналитику, маркетинг, дизайн, разработку<br/> и интеграции в единую систему для получения<br/> максимальной эффективности для вашего бизнеса'
+    const sizeSmall = 'Объединяем аналитику, маркетинг, дизайн,<br/> разработку и интеграции в единую систему<br/> для получения максимальной эффективности<br/> для вашего бизнеса'
+    const sizeXSmall = 'Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса'
 
+    const matches1440 = useMediaQuery('(min-width:1025px)');
+    const matches1024 = useMediaQuery('(min-width:940px)');
+    const matches768 = useMediaQuery('(min-width:420px)');
+    const matches360 = useMediaQuery('(min-width:0px)');
 
-    const handleCloseImage = () => {
-        setOpenImage(null);
-    };
+    let text
+    if (matches1440 || matches1024 ){
+        text = sizeLarge
+    } else if (matches768) {
+        text = sizeSmall
+    } else if (matches360){
+        text = sizeXSmall
+    }
+
     const {headerData, services, team, projects} = props;
 
     return (
         <>
             {!isLoading &&
-                <main className="services" style={{padding: "inherit"}}>
-
-                    <section className="services-s whiteHeader">
-                        <div className="services-s__video">
-                            <video autoPlay playsInline muted loop>
-                                <source src={agencyBanner} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                            </video>
-                        </div>
-                        <div className="container">
-                            <h1 className="heading-primary hidden-mobile">Персональные решения для <br/>эффективного результата</h1>
-                            <h1 className="heading-primary hidden-desktop">Персональные решения<br/>для эффективного результата</h1>
-                        </div>
-                    </section>
-                    <section className="services-about">
-                        <div className="container">
-                            <h2 className="heading-secondary">Работая с нами, вы получите...</h2>
+                <main className="services">
+                    <div className="container">
+                        <section className="services-s">
+                         <span className="services-s__text">
+                                <p className="breadcrumb">Услуги</p>
+                                <h1 className="heading-primary">Отвечаем за качество <br/> своих услуг</h1>
+                         </span>
+                        </section>
+                        <section className="services-about borderBlock padding">
                             <div className="services-about__wrap">
-                                <div className="services-about__descr">максимальную эффективность вашего бизнеса
-                                    за счет объединения инструментов аналитики, маркетинга, дизайна и современных
-                                    методов разработки
-                                </div>
-                                <div className="services-about__adv hidden-mobile">
+                                <span>
+                                   <h2 className="heading-secondary">Почему стоит заказать<br/> разработку сайта в DEUS?</h2>
+                                <div className="services-about__descr s-text" dangerouslySetInnerHTML={{__html: text}}/>
+                                </span>
+                                <div className="services-about__adv">
                                     <div className="services-about__adv-item">
                                         <Icon icon="star"></Icon>
-                                        Работаем<br/> с 2016 года
+                                        <p className="m-text">Работаем<br/> с 2016 года</p>
                                     </div>
                                     <div className="services-about__adv-item">
                                         <Icon icon="star"></Icon>
-                                        Входим в ТОП-40<br/> креативности студий
+                                        <p className="m-text"> Входим в ТОП-40<br/> креативности студий</p>
                                     </div>
                                     <div className="services-about__adv-item">
                                         <Icon icon="star"></Icon>
-                                        Комплексные решения<br/> для различных индустрий
-                                    </div>
-                                </div>
-
-                                <div className="services-about__adv hidden-desktop">
-                                    <div className="services-about__adv-item">
-                                        <Icon icon="star"></Icon>
-                                        Работаем с 2016 года
-                                    </div>
-                                    <div className="services-about__adv-item">
-                                        <Icon icon="star"></Icon>
-                                        Входим в ТОП-40<br/> креативности студий
-                                    </div>
-                                    <div className="services-about__adv-item">
-                                        <Icon icon="star"></Icon>
-                                        Комплексные решения для<br/> различных индустрий
+                                        <p className="m-text">Комплексные решения<br/> для различных индустрий</p>
                                     </div>
                                 </div>
 
                             </div>
-                        </div>
 
-                    </section>
+                        </section>
 
-                    <section className="services-list">
-                        <div className="services-list__wrapp">
+                        <section className="services-list">
+                            <div className="services-list__wrapp borderBlock padding">
+                                {
+                                    !!services && services.filter((service) => service.isInvisible).map((service, index) => {
+                                        return (
+                                            <div className="services-list__wrapp-item">
+                                                <div className="describe">
+                                                    <h2 to={`/services/${service.path}`}
+                                                         className="heading-secondary"
+                                                         key={service.id}
+                                                    >
+                                                        <DelayedLink to={`/projects?type=${service.types}`}
+                                                                     disabled={!service.types || service.types.length === 0}
+                                                                     datahash="projectNav"
+                                                                     onClick={(e) => gotoAnchor(e)}>
+                                                            <div className="services-s__name">{service.name}</div>
+                                                        </DelayedLink>
 
-                            {
-                                !!services && services.filter((service) => service.isInvisible).map((service, index) => {
-                                    return (
-                                        <div className={`${index === openList ? 'active' : ''}`}>
-                                            <div className="container">
-                                                <div to={`/services/${service.path}`}
-                                                     className="services-list__wrapp-item "
-                                                     key={service.id}
-                                                     onClick={() => {
-                                                         handleItemClick(index);
-                                                     }}>
-                                                    <div className="services-s__name">{service.name}</div>
-                                                    <Icon icon="plus"/>
-                                                </div>
-                                            </div>
-
-                                            <div className="describe">
-                                                {!!service.descrImg &&
-                                                    <img src={`${apiUrl}/uploads/${service.descrImg.filename}`} alt=""/>}
-                                                <div className="container">
-                                                    <p className="describe-title">{service.blockTitle}</p>
-                                                    {/*<Marquee speed="50">*/}
-                                                    <MarqueeComponent >
-                                                        <div className="describe-services ">
-                                                                    {!!service.tariffs && service.tariffs.map((tariffs, index) => (
-                                                                        <React.Fragment key={index}>
-                                                                            {tariffs.tariffsCategory && (
-                                                                                <>
-                                                                                    <p>{tariffs.tariffsCategory}</p>
-                                                                                    <p className="dot">•</p>
-                                                                                </>
-                                                                            )}
-                                                                        </React.Fragment>
-                                                                    ))}
-
-                                                        </div>
-                                            </MarqueeComponent>
-                                                    {/*</Marquee>*/}
-
+                                                    </h2>
                                                     <div className="describe__wrapp ">
-                                                        <div className="describe__wrapp-btn hidden-mobile ">
-                                                            <DelayedLink to={`/projects?type=${service.types}`}
-                                                                         disabled={!service.types || service.types.length === 0}
-                                                                         className="btn --b-white " datahash="projectNav"
-                                                                         onClick={(e) => gotoAnchor(e)}>
-                                                                Посмотреть кейсы
-                                                            </DelayedLink>
-
-                                                            <DelayedLink to="/contacts" className="btn --white"
-                                                                         datahash="contactUs"
-                                                                         onClick={(e) => gotoAnchor(e)}>Обсудить
-                                                                проект</DelayedLink>
-                                                        </div>
                                                         <div>
-                                                            <h3 className="heading-tertiary">
+                                                            <p className="s-text">
                                                                 {service.descr}
-                                                            </h3>
-                                                            <div className="describe__wrapp-benefits">
-                                                                {!!service.tariffs && service.tariffs.map(tariffs => {
-                                                                    return (
-                                                                        <div className="tariffs">
-                                                                            {tariffs.tariffsCategory}
-                                                                            {tariffs.tariffsItems.map(tariffsItem => {
-                                                                                    return (
-                                                                                        <p className="p-style-grey">
-                                                                                            {tariffsItem.tariffPrice} &nbsp;/&nbsp; {tariffsItem.tariffDeadline}
-
-                                                                                        </p>
-                                                                                    )
-                                                                                }
-                                                                            )}
-                                                                        </div>
-                                                                    )
-                                                                })}
-                                                            </div>
-
-                                                        </div>
-                                                        <div className="describe__wrapp-btn__mob hidden-desktop ">
-
-                                                            <DelayedLink to={`/projects?type=${service.id}`}
-                                                                         className="btn --b-white " datahash="projectNav"
-                                                                         onClick={(e) => gotoAnchor(e)}>Посмотреть
-                                                                кейсы</DelayedLink>
-
-
-                                                            <DelayedLink to="/contacts" className="btn --white"
-                                                                         datahash="contactUs"
-                                                                         onClick={(e) => gotoAnchor(e)}>Обсудить
-                                                                проект</DelayedLink>
+                                                            </p>
                                                         </div>
 
                                                     </div>
                                                 </div>
+                                                <div className="describe__wrapp-benefits">
+                                                    {!!service.tariffs && service.tariffs.map(tariffs => {
+                                                        return (
+                                                            <div className="tariffs">
+                                                                {tariffs.tariffsCategory}
+                                                                {tariffs.tariffsItems.map(tariffsItem => {
+                                                                        return (
+                                                                            <p className="p-style-grey">
+                                                                                {tariffsItem.tariffPrice} &nbsp;/&nbsp; {tariffsItem.tariffDeadline}
 
+                                                                            </p>
+                                                                        )
+                                                                    }
+                                                                )}
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
                                             </div>
+                                        )
+                                    })
+                                }
 
-                                        </div>
-                                    )
-                                })
-                            }
+                            </div>
+                        </section>
 
-                        </div>
-                    </section>
-
-                    <section className="services-principle whiteHeader">
-                        <div className="container">
+                        <section className="services-principle borderBlock padding whiteHeader">
                             <h2 className="heading-secondary">Как мы работаем</h2>
                             <div className="services-principle__wrap">
                                 <div className="services-principle__wrap-item">
                                     <img src={pentagon} alt=""/>
                                     <div>
-                                        <h3 className="heading-tertiary">Прозрачность</h3>
-                                        <p className="p-style-white">
-                                            Подробно и простым языком рассказываем о результатах каждого этапа работы.
-                                            Делаем фокус на результат, а не на чек, поэтому предлагаем только те услуги,
-                                            которые приведут к достижению цели.
+                                        <p className="l-textMed">Прозрачность</p>
+                                        <p className="s-text">
+                                            Подробно и понятно рассказываем, что клиент получает по итогам каждого этапа
+                                            — держим фокус и не отклоняемся от стратегической цели проекта
 
                                         </p>
                                     </div>
@@ -278,160 +206,81 @@ const Services = (props) => {
                                 <div className="services-principle__wrap-item">
                                     <img src={octagon} alt=""/>
                                     <div>
-                                        <h3 className="heading-tertiary">Индивидуальность</h3>
-                                        <p className="p-style-white">
-                                            Разрабатываем уникальные проекты, соответствующие индивидуальности бренда и
-                                            вашим интересам.
-                                            Не останавливаемся на достигнутом и постоянно подбираем идеи для улучшения
-                                            результата,
-                                            опираясь на глубокую экспертизу и опыт.
+                                        <p className="l-textMed">Индивидуальность</p>
+                                        <p className="s-text">
+                                            Всесторонне изучаем рынок и бизнес клиента, предлагаем уникальные решения, шиюко подбираем команду, условия работы и оплаты на основе интересов клиента
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="services-principle__wrap-item">
+                                        <img src={elipse} alt=""/>
+                                        <div>
+                                            <p className="l-textMed">Персональный подход</p>
+                                            <p className="s-text">
+                                                Проактивность — ключ к достойному результату. В ходе проекта мы постоянно предлагаем улучшения и идеи, опираясь на глубокую экспертизу и многолетний опыт</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </section>
+
+                        <section className="services-team borderBlock padding">
+                                <div className="services-team__wrap">
+                                    <div>
+                                        <h2 className="heading-secondary">
+                                            Как мы работаем?
+                                        </h2>
+                                        <p className="s-text">Предлагаем форматы работы с учётом особенностей проекта.
+                                            Если разработка требует большей гибкости, миксуем подходы.
+
                                         </p>
                                     </div>
-                                </div>
-                                <div className="services-principle__wrap-item">
-                                    <img src={elipse} alt=""/>
                                     <div>
-                                        <h3 className="heading-tertiary">Персональный подход</h3>
-                                        <p className="p-style-white">
-                                            Предлагаем персональные решения на основе детального изучения вашего бизнеса
-                                            и рынка.
-                                            Выделяем проектные команды, условия работы и оплаты на основе ваших
-                                            интересов. </p>
-                                    </div>
-                                </div>
-                                {/*<div className="services-principle__wrap-item">*/}
-                                {/*    <img src={elipse} alt=""/>*/}
-                                {/*    <div>*/}
-                                {/*        <h3 className="heading-tertiary">Вектор в вашу пользу</h3>*/}
-                                {/*        <p className="p-style-white">*/}
-                                {/*            Предложим несколько форматов работы с учетом особенностей вашего проекта, найдем гибкий подход для достижения результата.*/}
-                                {/*        </p>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-                            </div>
-                        </div>
-
-                    </section>
-
-                    <section className="services-team">
-                        <div className="container">
-                            <div className="services-team__wrap">
-                                <div>
-                                    <h2 className="heading-secondary">
-                                        Вектор в вашу пользу
-                                    </h2>
-                                    <p className="p-style-black">Предложим несколько форматов работы с учетом особенностей вашего проекта,
-                                        найдем гибкий подход для достижения результата.
-
-                                    </p>
-                                </div>
-                                <div></div>
-                                <div>
-                                    <h2 className="heading-secondary">Команда</h2>
-                                    <div className="services-team__wrapper">
-                                        {team.filter(team => team.serviceControl).map((team, index) => {
-                                            return (
-                                                <div className="worker">
-
-                                                    <img className="worker-img"
-                                                         src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null}
-                                                         alt=""/>
-                                                    <span>
-                                                      <div className="worker-name heading-tertiary">{team.name}</div>
-                                                    <p className="worker-descr">{team.post}</p>
-                                                    <p className="worker-descr">{team.sign}</p>
+                                        <h2 className="heading-secondary">Команда</h2>
+                                        <div className="services-team__wrapper">
+                                            {team.filter(team => team.serviceControl).map((team, index) => {
+                                                return (
+                                                    <div className="worker">
+                                                        <img className="worker-img"
+                                                             src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null}
+                                                             alt=""/>
+                                                        <span>
+                                                      <p className="m-text">{team.name}</p>
+                                                    <p className="s-text">{team.post}</p>
                                                     </span>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                    <div className="services-team__table">
-                                        <div className="item">
-                                            <h3 className="heading-tertiary">Менеджмент</h3>
-                                            <p>4 человека</p>
+                                                    </div>
+                                                )
+                                            })}
                                         </div>
-                                        <div className="item">
-                                            <h3 className="heading-tertiary">Дизайн</h3>
-                                            <p>6 человека</p>
-                                        </div>
-                                        <div className="item">
-                                            <h3 className="heading-tertiary">Верстка и разработка</h3>
-                                            <p>8 человека</p>
-                                        </div>
-                                        <div className="item">
-                                            <h3 className="heading-tertiary">SEO</h3>
-                                            <p>2 человека</p>
-                                        </div>
-                                        <div className="item">
-                                            <h3 className="heading-tertiary">Редакция</h3>
-                                            <p>4 человека</p>
+                                        <div className="services-team__table">
+                                            <div className="item">
+                                                <p className="m-text">Менеджмент</p>
+                                                <p className="s-text">4 человека</p>
+                                            </div>
+                                            <div className="item">
+                                                <p className="m-text">Дизайн</p>
+                                                <p className="s-text">6 человека</p>
+                                            </div>
+                                            <div className="item">
+                                                <p className="m-text">Верстка и разработка</p>
+                                                <p className="s-text">8 человека</p>
+                                            </div>
+                                            <div className="item">
+                                                <p className="m-text">SEO</p>
+                                                <p className="s-text">2 человека</p>
+                                            </div>
+                                            <div className="item">
+                                                <p className="m-text">Редакция</p>
+                                                <p className="s-text">4 человека</p>
+                                            </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
-                            </div>
-                        </div>
 
-                    </section>
-
-                    {/*<section className="services-reviews wow fadeIn"*/}
-                    {/*         data-wow-offset="100"*/}
-                    {/*         data-wow-duration="0.5s"*/}
-                    {/*         data-wow-delay="0.1s">*/}
-                    {/*    <div className="container">*/}
-                    {/*        <h2 className="heading-secondary">Отзывы</h2>*/}
-                    {/*        <div className="services-reviews__wrap">*/}
-                    {/*            {reviews ? reviews.map(review => {*/}
-                    {/*                const fileName = !!review.reviewFile ? review.reviewFile.mimetype : "";*/}
-                    {/*                const extension = fileName.split('/').pop().toLowerCase();*/}
-
-                    {/*                return (*/}
-                    {/*                    <div to="/" className="services-reviews__item"*/}
-                    {/*                         onClick={() => handleImageClick(review.reviewFile.filename)}*/}
-                    {/*                         key={review.id}>*/}
-                    {/*                        <div className="services-reviews__name">{review.name}</div>*/}
-                    {/*                        <div className="services-reviews__s">{review.service}</div>*/}
-                    {/*                        <div className="services-reviews__type">{review.type}</div>*/}
-                    {/*                        {*/}
-                    {/*                            review.reviewFile ? (*/}
-                    {/*                                <>*/}
-                    {/*                                    <div className="services-reviews__file"> {extension} </div>*/}
-                    {/*                                    <iframe*/}
-                    {/*                                        src={`${apiUrl}/uploads/${review.reviewFile.filename}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}*/}
-                    {/*                                        scrolling="no"*/}
-                    {/*                                        alt={review.name}*/}
-                    {/*                                        className="iframe-height services-reviews__r "*/}
-                    {/*                                    />*/}
-                    {/*                                </>*/}
-                    {/*                            ) : null*/}
-                    {/*                        }*/}
-
-                    {/*                    </div>*/}
-                    {/*                )*/}
-                    {/*            }) : null}*/}
-
-                    {/*            {openImage && (*/}
-                    {/*                <div className="modal">*/}
-                    {/*                    <div className="modal-content">*/}
-                    {/*                        <iframe*/}
-                    {/*                            src={`${apiUrl}/uploads/${openImage}#view=Fit&toolbar=0&statusbar=0&messages=0&navpanes=0&scrollbar=0`}*/}
-                    {/*                            alt="Отзыв"*/}
-                    {/*                            scrolling="no"*/}
-                    {/*                            className="iframe-modal-size"/>*/}
-                    {/*                        <button onClick={handleCloseImage}>*/}
-                    {/*                            <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 24 24">*/}
-                    {/*                                <path*/}
-                    {/*                                    d="M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z"></path>*/}
-                    {/*                            </svg>*/}
-                    {/*                        </button>*/}
-                    {/*                    </div>*/}
-                    {/*                </div>*/}
-                    {/*            )}*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</section>*/}
-
+                        </section>
+                    </div>
                 </main>
             }
         </>
