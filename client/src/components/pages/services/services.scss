@@ -2,45 +2,16 @@
 
 .services {
     &-s {
+        padding: 13.4rem 0 4rem;
+        color: #050505;
         position: relative;
-        padding: 41.7rem 0 5rem;
-        height: 69rem;
+        overflow: hidden;
 
-        @include respond(sm) {
-            padding-top: 4.5rem;
-            height:  36rem;
-
-            .container{
-                padding: 0 2rem;
-            }
+        @include respond(sm){
+            padding: 11.4rem 0 3rem;
         }
 
-        .heading-primary {
-            position: relative;
-            margin-bottom: 6rem;
-            color: #FFFFFF;
-            z-index: 100;
-            font-weight: 500;
-
-            @include respond(sm) {
-                margin-top: 14rem;
-            }
-        }
-
-        &__video {
-
-            video {
-                width: 100%;
-                position: absolute;
-                height: 69rem;
-                top: 0;
-                object-fit: cover;
-
-                @include respond(sm) {
-                    height: 100%;
-                    max-height:  36rem;
-                }
-            }
+        &__text{
         }
 
         &__wrap {
@@ -152,36 +123,13 @@
                 top: 1rem;
             }
         }
-
-        &__name {
-            font-weight: 500;
-            font-size: 3.6rem;
-            line-height: 4.68rem;
-            transition: all 0.3s ease;
-
-            @include respond(sm) {
-                font-size: 2.4rem;
-                line-height: 3.1rem;
-            }
-
-            .icon {
-                width: 3.2rem;
-                height: 3.2rem;
-            }
-
-        }
-
-        &__descr {
-            line-height: 1.8rem;
-            font-size: 1.8rem;
-        }
     }
 
     &-about {
         position: relative;
         padding: 10rem 0;
         overflow: hidden;
-
+        background-color: #FFFFFF;
         .container {
             padding: 0 2rem;
         }
@@ -190,59 +138,17 @@
             padding: 4rem 0;
         }
 
-        .heading-secondary {
-            margin-bottom: 3.2rem;
-
-            @include respond(sm) {
-                margin-bottom: 1rem;
-            }
-        }
-
         &__wrap {
             display: grid;
-            grid-template-columns: .5fr .5fr ;
-            grid-gap: 25.6rem;
-
-            @include respond(sm) {
-                grid-template-columns: 100%;
-                grid-gap: 3rem;
-                padding: 0;
+            grid-template-columns: 1fr 1fr;
+            @include respond(xs){
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
-
-            .btn {
-                justify-self: end;
-
-                @include respond(sm) {
-                    justify-self: start;
-
-                    &.--circle {
-                        width: auto;
-                        height: auto;
-                        padding: 1rem 2rem;
-                        background: #121212;
-                        border-radius: 45px;
-
-                        &::after {
-                            content: none;
-                        }
-                    }
-                }
-            }
-
-
-
         }
 
         &__descr {
-            font-size: 1.6rem;
-            line-height: 2.24rem;
-            font-weight: 400;
-
-            @include respond(sm) {
-                max-width: none;
-                font-size: 1.6rem;
-                line-height: normal;
-            }
+            color: #757677;
         }
 
         &__adv {
@@ -268,12 +174,11 @@
 
                 .icon {
                     width: 5rem;
-                    flex: 0 0 5rem;
                     height: 5rem;
-                    margin-right: 2rem;
+                    margin-right: 1.5rem;
 
                     @include respond(sm) {
-                        margin-right: 2rem;
+                        margin-right: 1rem;
                     }
                 }
             }
@@ -281,285 +186,44 @@
     }
 
     &-list {
-        padding-bottom: 8rem;
+        padding: 7rem 0 ;
         position: relative;
-
+        color: #FFFFFF;
         @include respond(sm) {
             padding-bottom: 4rem;
         }
 
         &__wrapp {
-            transition: all 0.5s;
-
-            img {
-                display: none;
-                opacity: 0;
-            }
-
-            .describe {
-                max-height: 0;
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.5s;
-            }
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            background: #050505;
 
             &-item {
-                align-items: center;
-                padding: 4rem 0;
-                border-bottom: 1px solid #D9D9D9;
-                cursor: pointer;
+                border-bottom: 1px solid #757677;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                padding-bottom: 4rem;
+
+            .describe {
                 display: flex;
-                position: relative;
-                z-index: 1000;
+                flex-direction: column;
+                gap: 3rem;
 
-                @include respond(sm) {
-                    padding: 2rem 0 2rem;
-                }
-            }
-
-            .icon {
-                transition: all .3s;
-                width: 3.2rem;
-                height: 3.2rem;
-                margin-left: auto;
-
-                @include respond(sm) {
-                    margin-left: auto;
-                }
-            }
-
-
-            &-btn {
-                display: flex;
-                align-items: center;
-                font-weight: 500;
-                font-size: 2.8rem;
-                line-height: 3.4rem;
-                transition: color .3s;
-                cursor: pointer;
-                border-bottom: 1px solid rgba(18, 18, 18, 0.2);
-                padding: 0 0 1.5rem 0;
-
-                @include respond(sm) {
-                    font-size: 2.6rem;
-                    line-height: 3.1rem;
-                    white-space: nowrap;
-                }
-
-                &:hover,
-                &.active {
-                    color: rgba(86, 86, 86, 0.8);
-                }
-
-
-
-                img {
-                    display: inline-block;
-                    width: 5rem;
-                    height: 5rem;
-                    flex: 0 0 4rem;
-                    margin-right: 2rem;
-
-                    @include respond(sm) {
-                        margin-right: 1.3rem;
-                    }
-                }
-
-                &:not(:first-child) {
-                    padding: 1.5rem 0;
-
-                    @include respond(sm) {
-                        padding: 1.5rem 0;
-                    }
-                }
-            }
-
-            .active {
-                position: relative;
-                color: white;
-                transition: all 0.5s;
-                background: #121212;
-
-                .services-list__wrapp-item {
-                    @include respond(sm) {
-                        padding: 4.7rem 0 2rem !important;
-                    }
-                }
-
-                .describe {
-                    padding: 5rem 0 9.5rem;
-                    color: #FFFFFF;
-                    max-height: 120rem;
-                    height: 100%;
-                    background: #121212;
-                    opacity: 1;
-                    visibility: visible;
-
-                    @include respond(sm) {
-                        .container {
-                            padding: 0 2rem;
-                        }
-                        padding: 4rem 0;
-                    }
-
-                    &-title {
-                        font-size: 1.6rem;
-                        position: relative;
-                        display: table;
-                        margin: auto auto auto auto;
-                        @include respond(sm) {
-                            font-size: 1.6rem;
-                            display: block;
-                            margin: auto;
-                        }
-                    }
-
-                    .overlay {
-
-                        &::before,
-                        &::after {
-                            content: none;
-                        }
-                    }
-
-                    .rfm-marquee {
-                        --duration: 76.39625244140625s;
-                    }
-
-                    &-services {
-                        position: relative;
-                        display: flex;
-                        flex-wrap: nowrap;
-                        white-space: nowrap;
-                        //overflow-x: auto;
-                        gap: 6rem;
-                        font-size: 6.4rem;
-                        padding-top: 3rem;
-                        padding-bottom: 8rem;
-
-                        @include respond(sm) {
-                            font-size: 3.2rem;
-                            padding: 1.5rem 0 3rem;
-                        }
-                        &::-webkit-scrollbar {
-                            display: none;
-                        }
-
-                        .dot {
-                            &:last-child {
-                                margin-right: 6rem;
-                            }
-                        }
-
-                        .overlay {
-
-                            &::before,
-                            &::after {
-                                content: none;
-                            }
-                        }
-
-
-                    }
-
-                    &__wrapp {
+                &__wrapp {
+                    max-width: 70%;
+                    width: 100%;
+                    &-benefits {
                         position: relative;
                         display: grid;
-                        grid-template-columns: repeat(2, 0.5fr);
+                        grid-template-columns: 1fr;
                         grid-gap: 2rem;
-                        padding-top: 3rem;
 
-                        @include respond(sm) {
-                            gap: 3rem;
-                            grid-template-columns: 100%;
-                            padding-top: 0;
-
-
-                            .heading-tertiary {
-                                opacity: .8;
-                                font-size: 1.6rem;
-                                font-weight: 400;
-                                line-height: normal;
-                            }
-                        }
-
-                        &-btn {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 2rem;
-                            margin: auto auto 0 0;
-                            &__mob {
-                                @include respond(sm) {
-                                    display: flex !important;
-                                    flex-direction: column;
-                                    gap: 1.5rem;
-                                    margin: inherit;
-                                }
-                            }
-
-                        }
-
-                        .btn {
-                            padding: 1.2rem 4.0rem;
-                            font-size: 2rem;
-                            @include respond(sm) {
-                                padding: 1.5rem 3rem;
-                               font-size: 1.6rem;
-                                text-align: center;
-                            }
-                        }
-
-                        &-benefits {
-                            padding: 4rem 0 0 0;
-                            position: relative;
-                            display: grid;
-                            grid-template-columns: repeat(2, 0.5fr);
-                            grid-gap: 3.5rem 16.6rem;
-
-                            @include respond(sm) {
-                                padding: 3rem 0 0 0;
-                                grid-template-columns: 100%;
-                            }
-
-                            .tariffs {
-                                font-size: 2.8rem;
-
-                                @include respond(sm) {
-                                    font-size: 2rem;
-                                    line-height: 2.8rem;
-                                }
-
-                                .p-style-grey {
-                                    font-size: 1.6rem;
-                                    @include respond(sm) {
-                                        padding: 0.1rem 0;
-                                        font-size: 1.6rem;
-                                        line-height: normal;
-                                    }
-                                }
-                            }
-                        }
                     }
-
                 }
 
-                img {
-                    opacity: 1;
-                    display: block;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
+            }
 
-                    transition: all 0.3s ease-in-out;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                .icon {
-                    transform: rotate(45deg);
-                }
             }
 
         }
@@ -567,33 +231,21 @@
 
     &-principle {
         position: relative;
-        background: #121212;
+        background: #050505;
         color: white;
-        padding: 10rem 0 9.5rem;
+         margin: 7rem 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
 
         @include respond(sm) {
             padding: 4rem 1rem;
         }
 
-        .heading-secondary {
-            padding-bottom: 5.6rem;
-            @include respond(sm) {
-               max-width: 90%;
-                padding-bottom: 4rem;
-            }
-        }
-
-        .heading-tertiary {
-            padding: 4rem 0 2rem;
-            @include respond(sm) {
-                padding: 3rem 0 1.5rem;
-            }
-        }
 
         &__wrap {
             display: grid;
-            grid-template-columns: repeat(3, 0.34fr);
-            grid-gap: 13.4rem;
+            grid-template-columns: 1fr;
+            grid-gap: 3rem;
             position: relative;
 
             @include respond(sm) {
@@ -602,26 +254,22 @@
             }
 
             &-item {
-
-
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                gap: 4rem;
 
                 img {
-                    width: 18rem;
-                    height: 18rem;
+                    width: 10rem;
+                    height: 10rem;
                     @include respond(sm) {
-                        width: 10rem;
-                        height: 10rem;
+                        width: 7rem;
+                        height: 7rem;
                     }
-                }
 
-                p {
-                    font-weight: 400;
-                    font-size: 1.6rem;
-                    line-height: 2.24rem;
-                    opacity: 0.7;
-                    @include respond(sm) {
-                        font-size: 1.6rem;
-                        line-height: normal;
+                    @include respond(xs) {
+                        width: 5rem;
+                        height: 5rem;
                     }
                 }
             }
@@ -630,7 +278,8 @@
 
     &-team {
         position: relative;
-        padding: 10rem 0 7.5rem;
+        padding: 7rem 0 7.5rem;
+        background-color: white;
         @include respond(sm) {
             padding: 4rem 0;
 
@@ -641,40 +290,18 @@
 
         &__wrap {
             display: grid;
-            grid-template-columns: 0.30fr 0.20fr 0.5fr;
+            grid-template-columns: repeat(2, 1fr);
 
             @include respond(sm) {
                 grid-template-columns: 100%;
             }
 
-            .heading-secondary {
-                margin-bottom: 2rem;
-
-                @include respond(sm) {
-                    .heading-secondary {
-                        font-size: 2.4rem;
-                    }
-                }
-            }
-
-            p {
-                font-weight: 400;
-                font-size: 1.6rem;
-                line-height: 2.24rem;
-                @include respond(sm) {
-                    font-size: 1.6rem;
-                    line-height: 2.1rem;
-                    padding-bottom: 2rem;
-                }
-            }
         }
 
         &__wrapper {
             display: grid;
             grid-template-columns: repeat(2, 0.5fr);
-            grid-gap:  3rem 6.6rem;
-            padding: 5.6rem 0 6rem;
-
+            grid-gap: 2rem 0 ;
             @include respond(sm) {
                 grid-template-columns: 100%;
                 padding: 1rem 0;
@@ -695,12 +322,12 @@
                 &-img {
                     border: 1px solid #FFFFFF;
                     border-radius: 50%;
-                    width: 10rem;
-                    height: 10rem;
+                    width: 5rem;
+                    height: 5rem;
 
-                    @include respond(sm) {
-                        width: 7rem;
-                        height: 7rem;
+                    @include respond(lg) {
+                        width: 4rem;
+                        height: 4rem;
                     }
 
                 }
@@ -723,24 +350,11 @@
                 display: grid;
                 grid-template-columns: repeat(2, 0.5fr);
                 grid-gap:  3rem 6.6rem;
-                padding: 2rem 0;
+                padding: 1.5rem 0;
                 border-bottom: 1px solid #D9D9D9;
                 @include respond(sm) {
                     padding: 1.5rem 0;
                    grid-gap:0 ;
-                }
-                .heading-tertiary {
-                    @include respond(sm) {
-                        font-size: 2rem ;
-                    }
-                }
-
-                p {
-                    font-size: 1.6rem;
-                    @include respond(sm) {
-                        margin-left: auto;
-                        font-size: 1.6rem;
-                    }
                 }
             }
         }
