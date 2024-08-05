@@ -2,7 +2,7 @@ import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
 const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'http://188.120.232.38/api'
+  ? ''
   : `${process.env.REACT_APP_LOCALHOST_URI}/api`;
 
 const httpClient = fetchUtils.fetchJson;
