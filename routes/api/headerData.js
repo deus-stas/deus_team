@@ -96,12 +96,10 @@ router.put("/headerData/:id", upload.fields([
       const presentation = req.files.presentation ? req.files.presentation[0] : undefined;
       const contactPhoto = req.files.contactPhoto ? req.files.contactPhoto[0] : undefined;
 
+        uploadFile(presentation, 'presentation', headerData, req, 'presentation')
+        uploadFile(headerPhoto, 'headerPhoto', headerData, req, 'headerPhoto')
+        uploadFile(contactPhoto, 'contactPhoto', headerData, req, 'contactPhoto')
 
-        uploadFile(presentation,'presentation',headerData,req,'presentation')
-        uploadFile(headerPhoto,'headerPhoto',headerData,req,'headerPhoto')
-        uploadFile(contactPhoto,'contactPhoto',headerData,req,'contactPhoto')
-
-  
       // Update the other fields of the document
       headerData.email = email;
       headerData.phone = phone;
