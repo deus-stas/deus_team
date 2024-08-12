@@ -144,48 +144,48 @@ const Services = (props) => {
                                                 <div className="describe">
                                                     <h2 to={`/services/${service.path}`}
                                                          className="heading-secondary"
-                                                         key={service.id}
-                                                    >
+                                                         key={service.id}>
                                                         <DelayedLink to={`/projects?type=${service.types}`}
                                                                      disabled={!service.types || service.types.length === 0}
                                                                      datahash="projectNav"
                                                                      onClick={(e) => gotoAnchor(e)}>
                                                             <div className="services-s__name">{service.name}</div>
                                                         </DelayedLink>
-
                                                     </h2>
                                                     <div className="describe__wrapp ">
-                                                        <div>
-                                                            <p className="s-text">
-                                                                {service.descr}
-                                                            </p>
-                                                        </div>
-
+                                                        <p className="s-text">
+                                                            {service.descr}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div className="describe__wrapp-benefits">
-                                                    {!!service.tariffs && service.tariffs.map(tariffs => {
+                                                    {!!service.tariffs && service.tariffs.map((tariffs, index) => {
+                                                        const num = (index + 1).toString().padStart(2, '0');
                                                         return (
-                                                            <div className="tariffs">
-                                                                {tariffs.tariffsCategory}
-                                                                {tariffs.tariffsItems.map(tariffsItem => {
-                                                                        return (
-                                                                            <p className="p-style-grey">
-                                                                                {tariffsItem.tariffPrice} &nbsp;/&nbsp; {tariffsItem.tariffDeadline}
+                                                            <div className="describe__wrapp-benefits__item">
+                                                                <p className="num m-text">{num}</p>
+                                                                <div className="tariffs">
+                                                                    <span className="tariffs__span">
 
+                                                                        <p className="m-text">{tariffs.tariffsCategory}</p>
+                                                                    </span>
+
+                                                                    {tariffs.tariffsItems.map(tariffsItem => {
+                                                                        return (
+                                                                            <p className="price s-text">
+                                                                                {tariffsItem.tariffPrice} &nbsp;/&nbsp; {tariffsItem.tariffDeadline}
                                                                             </p>
                                                                         )
-                                                                    }
-                                                                )}
+                                                                    })}
+                                                                </div>
                                                             </div>
+
                                                         )
                                                     })}
                                                 </div>
                                             </div>
                                         )
-                                    })
-                                }
-
+                                    })}
                             </div>
                         </section>
 

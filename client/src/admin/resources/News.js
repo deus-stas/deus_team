@@ -94,59 +94,80 @@ export const NewsList = (props) => (
 export const NewsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
-            {/*<TextInput*/}
-            {/*    className="customWidth"*/}
-            {/*    source="urlName"*/}
-            {/*    label="URL" fullWidth  />*/}
-            <FileInput className="fileInput edit-page" placeholder="+" source="image" label="Превью" validate={[required()]} accept="image/*,video/*">
-                <FileField source="src" title="title" />
-            </FileInput>
-            <FileInput className="fileInput edit-page" placeholder="+" source="mainNewsImage" label="Баннер" validate={[required()]} accept="image/*,video/*">
-                <FileField source="src" title="title" />
-            </FileInput>
-            <BooleanInput
-                source="mainControl"
-                label="Главная страница Превью/Видео"/>
-            <BooleanInput
-                source="detailControl"
-                label="Деталка Превью/Видео"/>
+                <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]}/>
+            <p className="baseFlexWrap">
+                <FileInput className="fileInput edit-page" placeholder="+" source="image" label="Превью"
+                           validate={[required()]} accept="image/*,video/*">
+                    <FileField source="image" title="title"/>
+                </FileInput>
+                <FileInput className="fileInput edit-page" placeholder="+" source="mainNewsImage" label="Баннер"
+                           validate={[required()]} accept="image/*,video/*">
+                    <FileField source="image" title="title"/>
+                </FileInput>
+            </p>
+            <p className="baseFlexWrap">
+                <BooleanInput
+                    source="mainControl"
+                    label="Главная страница Превью/Видео"/>
+                <BooleanInput
+                    source="detailControl"
+                    label="Деталка Превью/Видео"/>
+            </p>
+
+
             <ReferenceArrayInput source="newsTags" reference="newsTags" label="Рубрики" validate={[required()]}>
-                <SelectInput className="customWidth" optionText="name" />
+                <SelectInput className="customWidth" label="Рубрики" optionText="name"/>
             </ReferenceArrayInput>
             <TextInput
                 className="customWidth"
                 source="aboutClient"
-                label="О клиенте"  />
-            <RichTextInput className="customWidth" source="body" fullWidth/>
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body" fullWidth/>
+
+            <FileInput
+                source="bannerSecond"
+                className="fileInput"
+                placeholder="+"
+                label="Баннер">
+                <FilenameField
+                    source="src"
+                    title="title"/>
+            </FileInput>
+            <TextInput
+                className="customWidth"
+                source="aboutImg"
+                label="Подпись"/>
+
+            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth/>
+
+            <TextInput
+                className="customWidth"
+                source="aboutClient2"
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body3" fullWidth/>
 
             <ArrayInput
                 label="Фотогалерея"
                 source="photoSlider"
             >
                 <SimpleFormIterator>
-                            <FileInput
-                                source="imageI"
-                                label="Фото">
-                                <FilenameField
-                                    source="src"
-                                    title="title"/>
-                            </FileInput>
-                            <FunctionFieldForArrayItem/>
+                    <FileInput
+                        source="imageI"
+                        label="Фото">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                    <FunctionFieldForArrayItem/>
+
                 </SimpleFormIterator>
             </ArrayInput>
 
             <TextInput
                 className="customWidth"
-                source="aboutClient2"
-                label="О клиенте"  />
-            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth  />
-
-            <RichTextInput
-                className="customWidth"
-                source="workStepsItem"
-                label="Список"
-            />
+                source="aboutClient3"
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body4" fullWidth/>
         </SimpleForm>
     </Create>
 );
@@ -155,59 +176,80 @@ export const NewsEdit = (props) => {
     return (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]} />
-            <TextInput
-                className="customWidth"
-                source="urlName"
-                label="URL" fullWidth  />
-            <FileInput className="fileInput edit-page" placeholder="+" source="image" label="Превью" validate={[required()]} accept="image/*,video/*">
-                <FileField source="image" title="title" />
-            </FileInput>
-            <FileInput className="fileInput edit-page" placeholder="+" source="mainNewsImage" label="Баннер" validate={[required()]} accept="image/*,video/*">
-                <FileField source="image" title="title" />
-            </FileInput>
-            <BooleanInput
-                source="mainControl"
-                label="Главная страница Превью/Видео"/>
-            <BooleanInput
-                source="detailControl"
-                label="Деталка Превью/Видео"/>
+            <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]}/>
+            <p className="baseFlexWrap">
+                <FileInput className="fileInput edit-page" placeholder="+" source="image" label="Превью"
+                           validate={[required()]} accept="image/*,video/*">
+                    <FileField source="image" title="title"/>
+                </FileInput>
+                <FileInput className="fileInput edit-page" placeholder="+" source="mainNewsImage" label="Баннер"
+                           validate={[required()]} accept="image/*,video/*">
+                    <FileField source="image" title="title"/>
+                </FileInput>
+            </p>
+            <p className="baseFlexWrap">
+                <BooleanInput
+                    source="mainControl"
+                    label="Главная страница Превью/Видео"/>
+                <BooleanInput
+                    source="detailControl"
+                    label="Деталка Превью/Видео"/>
+            </p>
+
 
             <ReferenceArrayInput source="newsTags" reference="newsTags" label="Рубрики" validate={[required()]}>
-                <SelectInput className="customWidth" label="Рубрики" optionText="name" />
+                <SelectInput className="customWidth" label="Рубрики" optionText="name"/>
             </ReferenceArrayInput>
             <TextInput
                 className="customWidth"
                 source="aboutClient"
-                label="О клиенте"  />
-            <RichTextInput className="customWidth" label="Текст" source="body" fullWidth />
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body" fullWidth/>
+
+            <FileInput
+                source="bannerSecond"
+                className="fileInput"
+                placeholder="+"
+                label="Баннер">
+                <FilenameField
+                    source="src"
+                    title="title"/>
+            </FileInput>
+            <TextInput
+                className="customWidth"
+                source="aboutImg"
+                label="Подпись"/>
+
+            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth/>
+
+            <TextInput
+                className="customWidth"
+                source="aboutClient2"
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body3" fullWidth/>
+
             <ArrayInput
                 label="Фотогалерея"
                 source="photoSlider"
             >
                 <SimpleFormIterator>
-                            <FileInput
-                                source="imageI"
-                                label="Фото">
-                                <FilenameField
-                                    source="src"
-                                    title="title"/>
-                            </FileInput>
-                            <FunctionFieldForArrayItem/>
+                    <FileInput
+                        source="imageI"
+                        label="Фото">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                    <FunctionFieldForArrayItem/>
 
                 </SimpleFormIterator>
             </ArrayInput>
+
             <TextInput
                 className="customWidth"
-                source="aboutClient2"
-                label="О клиенте"  />
-            <RichTextInput className="customWidth" label="Текст" source="body2" fullWidth />
-
-            <RichTextInput
-                className="customWidth"
-                source="workStepsItem"
-                label="Список"
-            />
+                source="aboutClient3"
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body4" fullWidth/>
         </SimpleForm>
     </Edit>
 );

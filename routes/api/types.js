@@ -22,9 +22,10 @@ router.get('/types', async (req, res) => {
 
 router.post('/types', async (req, res) => {
     console.log(req.body.name);
-    const { name } = req.body;
+    const { name, key } = req.body;
     const types = new Types({
-        name
+        name,
+        key
     });
 
     await types.save();

@@ -73,17 +73,17 @@ export const ServicesCreate = (props) => (
                         label="Тариф"
                     >
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <TextInput className="customWidth" source="tariffName" label="Название" />
+                            {/*<TextInput className="customWidth" source="tariffName" label="Название" />*/}
                             <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
                             <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
-                            <ArrayInput
-                                source="tariffList"
-                                label="Что входит в тариф"
-                            >
-                                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                                    <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />
-                                </SimpleFormIterator>
-                            </ArrayInput>
+                            {/*<ArrayInput*/}
+                            {/*    source="tariffList"*/}
+                            {/*    label="Что входит в тариф"*/}
+                            {/*>*/}
+                            {/*    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>*/}
+                            {/*        <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />*/}
+                            {/*    </SimpleFormIterator>*/}
+                            {/*</ArrayInput>*/}
                         </SimpleFormIterator>
                     </ArrayInput>
                 </SimpleFormIterator>
@@ -153,17 +153,17 @@ export const ServicesEdit = (props) => (
                         label="Тариф"
                     >
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <TextInput className="customWidth" source="tariffName" label="Название" />
+                            {/*<TextInput className="customWidth" source="tariffName" label="Название" />*/}
                             <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
                             <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
-                            <ArrayInput
-                                source="tariffList"
-                                label="Что входит в тариф"
-                            >
-                                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                                    <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />
-                                </SimpleFormIterator>
-                            </ArrayInput>
+                            {/*<ArrayInput*/}
+                            {/*    source="tariffList"*/}
+                            {/*    label="Что входит в тариф"*/}
+                            {/*>*/}
+                            {/*    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>*/}
+                            {/*        <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />*/}
+                            {/*    </SimpleFormIterator>*/}
+                            {/*</ArrayInput>*/}
                         </SimpleFormIterator>
                     </ArrayInput>
                 </SimpleFormIterator>
