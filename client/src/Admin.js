@@ -3,7 +3,7 @@ import { Admin, Resource, UserMenu, AppBar, Layout } from 'react-admin';
 import { NewsList, NewsCreate, NewsEdit } from './admin/resources/News';
 import { MainPageList, MainPageCreate, MainPageEdit } from './admin/resources/MainPage';
 import { WorkingList, WorkingCreate, WorkingEdit } from './admin/resources/Working';
-import { TagsList, TagsEdit, TagsCreate } from './admin/resources/Tags';
+
 import { StackList, StackEdit, StackCreate } from './admin/resources/Stack';
 import { SeoList, SeoEdit, SeoCreate } from './admin/resources/SEO';
 import { ThemesList, ThemesEdit, ThemesCreate } from './admin/resources/Themes';
@@ -19,7 +19,6 @@ import { TeamList, TeamEdit, TeamCreate } from './admin/resources/Team';
 import { VacanciesList, VacanciesEdit, VacanciesCreate } from './admin/resources/Vacancies';
 import { ShowreelsList, ShowreelsEdit, ShowreelsCreate } from './admin/resources/Showreels';
 import { ServicesList, ServicesEdit, ServicesCreate } from './admin/resources/Services';
-import { SubServicesList, SubServicesEdit, SubServicesCreate } from './admin/resources/SubServices';
 import { ReviewsList, ReviewsEdit, ReviewsCreate } from './admin/resources/Reviews';
 import { UsersList,UsersCreate} from './admin/resources/Users';
 import { HeaderDataList, HeaderDataEdit, HeaderDataCreate } from './admin/resources/HeaderData';
@@ -31,16 +30,14 @@ import MyLogoutButton from '../src/components/appHeader/MyLogoutButton';
 import { DiplomasList, DiplomasEdit, DiplomasCreate } from './admin/resources/Diplomas';
 import { ContactsList, ContactsEdit, ContactsCreate } from './admin/resources/Contacts';
 import {NewsTagsCreate, NewsTagsEdit, NewsTagsList} from "./admin/resources/NewsTags";
+import {SubServicesCreate, SubServicesEdit, SubServicesList} from "./admin/resources/SubServices";
+import {TagsCreate, TagsEdit, TagsList} from "./admin/resources/Tags";
 
 const MyUserMenu = () => <UserMenu><MyLogoutButton /></UserMenu>;
 
 const MyAppBar = () => <AppBar userMenu={<MyUserMenu />} />;
 
 const MyLayout = (props) => <Layout {...props} appBar={MyAppBar} />;
-
-//todo убрать везде
-{/*<Resource name="tags" list={TagsList} create={TagsCreate} edit={TagsEdit} options={{ label: 'Теги' }} />*/}
-// <Resource name="subServices" list={SubServicesList} create={SubServicesCreate} edit={SubServicesEdit} options={{ label: 'Услуги(для деталки)' }} />
 
 
 const AdminPage = () => (
@@ -66,9 +63,12 @@ const AdminPage = () => (
     <Resource name="team" list={TeamList} create={TeamCreate} edit={TeamEdit} options={{ label: 'Команда' }} />
     <Resource name="vacancies" list={VacanciesList} create={VacanciesCreate} edit={VacanciesEdit} options={{ label: 'Вакансии' }} />
     <Resource name="showreels" list={ShowreelsList} create={ShowreelsCreate} edit={ShowreelsEdit} options={{ label: 'Шоурилы' }} />
-    <Resource name="services" list={ServicesList} create={ServicesCreate} edit={ServicesEdit} options={{ label: 'Услуги' }} />
+      <Resource name="subServices" list={SubServicesList} create={SubServicesCreate} edit={SubServicesEdit} options={{ label: 'Услуги(для деталки)' }} />
+
+      <Resource name="services" list={ServicesList} create={ServicesCreate} edit={ServicesEdit} options={{ label: 'Услуги' }} />
     <Resource name="reviews" list={ReviewsList} create={ReviewsCreate} edit={ReviewsEdit} options={{ label: 'Отзывы' }} />
     <Resource name="form" list={FormList} options={{ label: 'Форма' }} />
+      <Resource name="tags" list={TagsList} create={TagsCreate} edit={TagsEdit} options={{ label: 'Теги' }} />
     {
       localStorage.getItem('jwtToken').slice(-2) === 'ad' ? (
         <Resource name="users" list={UsersList} create={UsersCreate} options={{ label: 'Пользователи' }} />
