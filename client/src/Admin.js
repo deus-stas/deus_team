@@ -1,7 +1,6 @@
 import React from 'react';
 import { Admin, Resource, UserMenu, AppBar, Layout } from 'react-admin';
 import { NewsList, NewsCreate, NewsEdit } from './admin/resources/News';
-import {TestList, TestCreate, TestEdit, TestShow} from './admin/resources/Test';
 import { MainPageList, MainPageCreate, MainPageEdit } from './admin/resources/MainPage';
 import { WorkingList, WorkingCreate, WorkingEdit } from './admin/resources/Working';
 import { TagsList, TagsEdit, TagsCreate } from './admin/resources/Tags';
@@ -39,9 +38,13 @@ const MyAppBar = () => <AppBar userMenu={<MyUserMenu />} />;
 
 const MyLayout = (props) => <Layout {...props} appBar={MyAppBar} />;
 
+//todo убрать везде
+{/*<Resource name="tags" list={TagsList} create={TagsCreate} edit={TagsEdit} options={{ label: 'Теги' }} />*/}
+// <Resource name="subServices" list={SubServicesList} create={SubServicesCreate} edit={SubServicesEdit} options={{ label: 'Услуги(для деталки)' }} />
+
+
 const AdminPage = () => (
   <Admin layout={MyLayout} dataProvider={dataProvider} authProvider={authProvider} basename="/admin" theme={theme}>
-      {/*<Resource name="test" list={TestList} create={TestCreate} edit={TestEdit} options={{ label: 'Тест' }} />*/}
       <Resource name="projects" list={ProjectsList} create={ProjectsCreate} edit={ProjectsEdit} options={{ label: 'Проекты' }} />
 
       <Resource name="stack" list={StackList} create={StackCreate} edit={StackEdit} options={{ label: 'Стек технологий' }} />
