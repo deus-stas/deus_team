@@ -1,42 +1,66 @@
 @import '../../../../style/mixins';
 
 .project-next {
-    padding: 5rem 0;
-
-    @include respond(sm) {
-        padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    @include respond(lg){
+        gap: 3rem;
     }
+    @include respond(sm){
+        gap: 2rem;
+    }
+    &__wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        gap: 4rem;
+        @include respond(lg){
+            gap: 2rem;
+        }
+        @include respond(xs) {
+           display: flex;
+            width: 100vw;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            margin-left: -2rem;
+            padding:  0 2rem;
+
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+
     &__img {
         width: 100%;
         height: 100%;
-
+        overflow: hidden;
     }
 
+
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        @include respond(xs){
+            flex-shrink: 0;
+            min-width: 32rem;
+        }
+
+    }
     video {
         cursor: url('../../../../img/videoCursor.svg'), default !important;
         width: 100%;
         height: 100%;
     }
 
-    &__item {
-        display: grid;
-        grid-template-columns: .5fr .5fr;
-        grid-gap: 4rem;
-        justify-content: space-between;
-        color: #fff;
-
-        @include respond(sm) {
-            grid-template-columns: 100%;
-            grid-gap: 0rem;
-        }
-    }
-
     &__text {
-        padding: 7rem;
-
-        @include respond(sm) {
-            padding: 2rem;
-        }
     }
 
     &__subtitle {

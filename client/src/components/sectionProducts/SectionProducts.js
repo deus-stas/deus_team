@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
-import productVideo from '../../img/webhands.mp4';
-
 import './sectionProducts.scss'
 
 const apiUrl = ''

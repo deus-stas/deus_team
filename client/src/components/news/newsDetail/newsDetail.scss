@@ -1,243 +1,112 @@
 @import '../../../style/mixins';
 
 .news-detail {
-    padding: 0;
+    padding: 13.4rem 0 4rem;
+    color: #050505;
+    @include respond(lg){
+        padding: 13.4rem 0 3rem;
+    }
 
+    @include respond(sm){
+        padding: 12.4rem 0 2rem;
+    }
     &__main {
-        height: 92rem;
-        padding-top: 57.7rem;
+        background-color: #FFFFFF;
         position: relative;
-
-        @include respond(sm) {
-            height: auto;
-            padding: 7.6rem 0 6rem;
-        }
-
-        &::after {
-            content: '';
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(159.78deg, #000000 5.2%, rgba(0, 0, 0, 0) 86.54%);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 2;
-        }
-
-        &-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        &-content,
-        .breadcrumbs {
-            position: relative;
-            z-index: 3;
-            color: #FFFFFF;
-        }
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
 
         &-content {
-            //padding-top: 12rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
 
-            @include respond(sm) {
-                padding-top: 10rem;
+            .telegram {
+                margin-top: auto;
+                color: rgba(3, 155, 229, 1);
+                display: flex;
+                gap: 1rem;
             }
 
-            .heading-primary {
-                max-width: 70%;
+            .icon{
+                width: 2.4rem;
+                height: 2.4rem;
             }
         }
 
         &-tag {
-            margin-bottom: 4rem;
-            font-size: 2rem;
-            line-height: 2.6rem;
-            color: #ffffff;
-
-            @include respond(sm) {
-                margin-bottom: 2rem;
-            }
+            color: #757677;
         }
 
-        .heading-primary {
-            color: #FFFFFF;
-        }
     }
 
     &__article {
-        padding: 8rem 0 10rem;
+        padding: 4rem 0;
 
         @include respond(sm) {
-            padding: 6rem 0;
+            padding: 3rem 0;
         }
 
         &-content {
-            max-width: 90rem;
-            margin: 0 auto;
-
-            h1 {
-                margin-bottom: 4rem;
-                font-weight: 500;
-                font-size: 6.4rem;
-                line-height: 7rem;
-
-                @include respond(sm) {
-                    margin-bottom: 2rem;
-                    font-size: 3.6rem;
-                    line-height: 4rem;
-                }
-            }
-
-            h2 {
-                margin-bottom: 4rem;
-                font-weight: 500;
-                font-size: 3.6rem;
-                line-height: 4.3rem;
-
-                @include respond(sm) {
-                    margin-bottom: 2rem;
-                    font-size: 3.2rem;
-                    line-height: 3.8rem;
-                }
-            }
-
-            h3 {
-                margin-bottom: 2rem;
-                font-weight: 500;
-                font-size: 2.8rem;
-                line-height: 3.4rem;
-
-                @include respond(sm) {
-                    margin-bottom: 1rem;
-                    font-size: 2.6rem;
-                    line-height: 3.1rem;
-                }
-            }
-
-            h4 {
-                margin-bottom: 2rem;
-                font-weight: 500;
-                font-size: 2.6rem;
-                line-height: 3rem;
-
-                @include respond(sm) {
-                    margin-bottom: 1rem;
-                    font-size: 2rem;
-                    line-height: 2.4rem;
-                }
-            }
+            margin: 0 34.8rem;
 
             p {
-                font-size: 2rem;
-                line-height: 3rem;
-
-                @include respond(sm) {
-                    font-size: 2rem;
-                    line-height: 2.6rem;
-                }
-
                 &:not(:last-child) {
-                    margin-bottom: 3rem;
-
-                    @include respond(sm) {
-                        margin-bottom: 2rem;
-                    }
-                }
-            }
-
-            img {
-                margin-bottom: 4rem;
-                width: 100%;
-
-                @include respond(sm) {
                     margin-bottom: 2rem;
                 }
             }
 
             ul {
+                list-style-type: disc;
                 &:not(:last-child) {
-                    margin-bottom: 4rem;
-
-                    @include respond(sm) {
-                        margin-bottom: 2rem;
-                    }
+                    margin-bottom: 1rem;
                 }
 
                 li {
                     display: flex;
                     align-items: flex-start;
-                    font-size: 2.4rem;
-                    line-height: 3.4rem;
+                    list-style-type: auto;
 
-                    @include respond(sm) {
-                        font-size: 2rem;
-                        line-height: 2.6rem;
-                    }
+                    //&:not(:last-child) {
+                    //    margin-bottom: .5rem;
+                    //}
 
                     &::before {
-                        content: "✓";
-                        color: #000000;
-                        min-width: 1rem;
-                        margin-right: 1rem;
-                        //background: url('../../../img/icon-task.svg')no-repeat center/cover;
-                        border-radius: 50%;
-                    }
+                        content: '•';
+                        font-size: 2.5rem;
+                        margin: 0 1rem;
+                        //background: url('../../../../img/icon-task.svg')no-repeat center/contain;
 
-                    &:not(:last-child) {
-                        margin-bottom: 2.5rem;
+                        @include respond(sm){
+                            font-size: 2rem;
+                        }
                     }
                 }
             }
 
             ol {
-                counter-reset: counter;
+                padding-left: 2rem;
 
                 &:not(:last-child) {
-                    margin-bottom: 4rem;
-
-                    @include respond(sm) {
-                        margin-bottom: 2rem;
-                    }
+                    margin-bottom: 1rem;
                 }
 
                 li {
-                    display: flex;
-                    align-items: flex-start;
-                    font-size: 2.4rem;
-                    line-height: 3.4rem;
-                    counter-increment: counter;
-
-                    @include respond(sm) {
-                        font-size: 2rem;
-                        line-height: 2.6rem;
-                    }
-
-                    &::before {
-                        content: counter(counter) ". ";
-                        //content: "✓";
-                        color: #000000;
-                        min-width: 1.5rem;
-                        margin-right: 1.5rem;
-                    }
+                    list-style-type: auto;
 
                     &:not(:last-child) {
-                        margin-bottom: 1rem;
+                        margin-bottom: 0.5rem;
                     }
                 }
             }
         }
 
         &-steps {
-            padding: 0 0 3rem 0;
+            padding: 2rem 0;
 
         }
         &-about {
-            padding: 0 0 3rem 0;
+            padding: 2rem 0;
 
         }
 

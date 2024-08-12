@@ -1,9 +1,11 @@
 import React from 'react';
 import { Admin, Resource, UserMenu, AppBar, Layout } from 'react-admin';
 import { NewsList, NewsCreate, NewsEdit } from './admin/resources/News';
+import {TestList, TestCreate, TestEdit, TestShow} from './admin/resources/Test';
 import { MainPageList, MainPageCreate, MainPageEdit } from './admin/resources/MainPage';
 import { WorkingList, WorkingCreate, WorkingEdit } from './admin/resources/Working';
 import { TagsList, TagsEdit, TagsCreate } from './admin/resources/Tags';
+import { StackList, StackEdit, StackCreate } from './admin/resources/Stack';
 import { SeoList, SeoEdit, SeoCreate } from './admin/resources/SEO';
 import { ThemesList, ThemesEdit, ThemesCreate } from './admin/resources/Themes';
 import { ProjectsList, ProjectsEdit, ProjectsCreate } from './admin/resources/Projects';
@@ -39,15 +41,19 @@ const MyLayout = (props) => <Layout {...props} appBar={MyAppBar} />;
 
 const AdminPage = () => (
   <Admin layout={MyLayout} dataProvider={dataProvider} authProvider={authProvider} basename="/admin" theme={theme}>
-    <Resource name="projects" list={ProjectsList} create={ProjectsCreate} edit={ProjectsEdit} options={{ label: 'Проекты' }} />
-    <Resource name="news" list={NewsList} create={NewsCreate} edit={NewsEdit} options={{ label: 'Новости' }} />
+      {/*<Resource name="test" list={TestList} create={TestCreate} edit={TestEdit} options={{ label: 'Тест' }} />*/}
+      <Resource name="projects" list={ProjectsList} create={ProjectsCreate} edit={ProjectsEdit} options={{ label: 'Проекты' }} />
+
+      <Resource name="stack" list={StackList} create={StackCreate} edit={StackEdit} options={{ label: 'Стек технологий' }} />
+
+      <Resource name="themes" list={ThemesList} create={ThemesCreate} edit={ThemesEdit} options={{ label: 'Темы' }} />
+      <Resource name="types" list={TypesList} create={TypesCreate} edit={TypesEdit} options={{ label: 'Тип проекта' }} />
+
+      <Resource name="news" list={NewsList} create={NewsCreate} edit={NewsEdit} options={{ label: 'Новости' }} />
+      <Resource name="newsTags" list={NewsTagsList} create={NewsTagsCreate} edit={NewsTagsEdit} options={{ label: 'Рубрики' }} />
     <Resource name="mainPage" list={MainPageList} create={MainPageCreate} edit={MainPageEdit} options={{ label: 'Главная страница' }} />
     <Resource name="working" list={WorkingList} create={WorkingCreate} edit={WorkingEdit} options={{ label: 'В работе' }} />
-    <Resource name="tags" list={TagsList} create={TagsCreate} edit={TagsEdit} options={{ label: 'Теги' }} />
-    <Resource name="newsTags" list={NewsTagsList} create={NewsTagsCreate} edit={NewsTagsEdit} options={{ label: 'Рубрики' }} />
     <Resource name="seo" list={SeoList} create={SeoCreate} edit={SeoEdit} options={{ label: 'SEO' }} />
-    <Resource name="themes" list={ThemesList} create={ThemesCreate} edit={ThemesEdit} options={{ label: 'Темы' }} />
-    <Resource name="types" list={TypesList} create={TypesCreate} edit={TypesEdit} options={{ label: 'Тип проекта' }} />
     <Resource name="persons" list={PersonsList} create={PersonsCreate} edit={PersonsEdit} options={{ label: 'Сотрудники' }} />
     <Resource name="social" list={SocialList} create={SocialCreate} edit={SocialEdit} options={{ label: 'Соц сети' }} />
     <Resource name="products" list={ProductsList} create={ProductsCreate} edit={ProductsEdit} options={{ label: 'Продукты' }} />
@@ -58,7 +64,6 @@ const AdminPage = () => (
     <Resource name="vacancies" list={VacanciesList} create={VacanciesCreate} edit={VacanciesEdit} options={{ label: 'Вакансии' }} />
     <Resource name="showreels" list={ShowreelsList} create={ShowreelsCreate} edit={ShowreelsEdit} options={{ label: 'Шоурилы' }} />
     <Resource name="services" list={ServicesList} create={ServicesCreate} edit={ServicesEdit} options={{ label: 'Услуги' }} />
-    <Resource name="subServices" list={SubServicesList} create={SubServicesCreate} edit={SubServicesEdit} options={{ label: 'Услуги(для деталки)' }} />
     <Resource name="reviews" list={ReviewsList} create={ReviewsCreate} edit={ReviewsEdit} options={{ label: 'Отзывы' }} />
     <Resource name="form" list={FormList} options={{ label: 'Форма' }} />
     {

@@ -6,6 +6,7 @@ const path = require('path');
 const { transliterate } = require('transliteration');
 const fs = require('fs');
 const News = require("../../models/News");
+const {uploadFile} = require("./file");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -42,7 +43,7 @@ router.post('/news', upload.fields([
   { name: 'mainNewsImage' },
   { name: 'photoSlider' }])
     , async (req, res) => {
-  const { name, newsTags, mainControl, detailControl, aboutClient, aboutClient2, body, workStepsItem, body2 } = req.body;
+  const { name, newsTags, bannerSecond, mainControl, aboutImg, detailControl, aboutClient, aboutClient2, aboutClient3, body, workStepsItem, body2, body3, body4 } = req.body;
 
   function generateUrl(name) {
     const transliteratedName = transliterate(name);
@@ -65,14 +66,19 @@ router.post('/news', upload.fields([
     name,
     image,
     mainNewsImage,
+    bannerSecond,
     body,
     body2,
+    body3,
+    body4,
     photoSlider,
+    aboutImg,
     workStepsItem,
     urlName,
     newsTags,
     aboutClient,
     aboutClient2,
+    aboutClient3,
     mainControl,
     detailControl,
   });
@@ -113,6 +119,7 @@ router.get('/news/url/:url', async (req, res) => {
 router.put("/news/:id", upload.fields([
   { name: 'image' },
   { name: 'mainNewsImage' },
+  { name: 'bannerSecond' },
   { name: 'photoSlider' }]),
     async (req, res) => {
   const { id } = req.params;
@@ -123,10 +130,13 @@ router.put("/news/:id", upload.fields([
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, newsTags, urlName, mainControl, aboutClient, aboutClient2,  detailControl, workStepsItem,  body, body2 } = req.body;
+  const { name, newsTags, urlName, mainControl, aboutClient, aboutClient2,  aboutClient3,  detailControl, workStepsItem, aboutImg,  body, body2, body3, body4 } = req.body;
   const image = req.files.image ? req.files.image[0] : undefined;
   const mainNewsImage = req.files.mainNewsImage ? req.files.mainNewsImage[0] : undefined;
+  const bannerSecond = req.files.bannerSecond ? req.files.bannerSecond[0] : undefined;
   const photoSliderNames = JSON.parse(req.body.photoSliderNames);
+
+  uploadFile(bannerSecond,'bannerSecond',news, req,'bannerSecond')
 
      console.log(image, mainNewsImage)
       if (image) {
@@ -221,12 +231,16 @@ router.put("/news/:id", upload.fields([
   news.name = name;
   news.newsTags = newsTags;
   news.urlName = urlName;
+  news.aboutImg = aboutImg;
   news.mainControl = mainControl;
   news.detailControl = detailControl;
   news.aboutClient = aboutClient;
   news.aboutClient2 = aboutClient2;
+  news.aboutClient3 = aboutClient3;
   news.body = body;
   news.body2 = body2;
+  news.body3 = body3;
+  news.body4 = body4;
   news.workStepsItem = workStepsItem;
 
   // Сохраняем изменения

@@ -1,65 +1,59 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useParams } from "react-router-dom";
 
-import './projectNext.scss'
+import './projectNext.scss';
 import RetryImage from "../../../../helpers/RetryImage";
 import {gotoAnchor} from "../../../anchors";
 import DelayedLink from "../../../appHeader/DelayedLink";
 
-const apiUrl = ''
+const apiUrl = '';
 
-const ProjectNext = (props) => {
-    const { id } = useParams();
-
-    const [project, setProject] = useState([]);
+const ProjectNext = ({ props, detail }) => {
+    const { id, category } = useParams();
+    const [relatedProjects, setRelatedProjects] = useState([]);
+    const [allProjects, setAllProjects] = useState([]);
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/`)
-        .then((response) => {
-            let pr = null;
-        
-            response.data.some((item, index) => {
-                if (id === item.nameInEng) {
-                    pr = response.data[index + 1];
-                    return true; // Break the loop
+            .then((response) => {
+                const projects = response.data;
+                projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                setAllProjects(projects);
+
+                const relatedProjectsByType = projects.filter((project) => project.projectType === detail.projectType);
+                if (relatedProjectsByType.length >= 2) {
+                    setRelatedProjects(relatedProjectsByType.slice(0, 2));
                 } else {
-                    pr = response.data[index];
+                    setRelatedProjects(projects.slice(0, 2));
                 }
-                return false;
+            })
+            .catch((error) => {
+                console.log(error);
             });
-            if (pr && pr !== undefined) {
-                setProject(pr);
-            } else {
-                setProject(response.data[0]);
-            }
-           
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-        
-    }, [id]);
+    }, [id, detail.type]);
 
-
-    return project ? (
+    return (
         <section className="project-next">
-            <div className="container">
-                <div className="project-next__item" style={{ background: project.color && project.color !== undefined && project.color !== 'undefined' ? project.color : '#000'}}>
-                    <div className="project-next__text">
-                        <div className="project-next__subtitle">
-                            {props.last ? 'Последний созданный проект' : 'Следующий проект'}
+            <h1 className="heading-primary">Ещё проекты</h1>
+            <div className="project-next__wrap">
+                {relatedProjects.map((project, index) => (
+                    <DelayedLink key={index} to={`/projects/${project.nameInEng}`} datahash="toUp"
+                                 onClick={(e) => gotoAnchor(e)}>
+                        <div className="project-next__item">
+                            <RetryImage src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null}
+                                        className="projects__item"/>
+                            <span className="projects-decription m-text">
+                                <p style={{color: "rgba(117, 118, 119, 1)"}}>{project.date} • {project.name}</p>
+                                 <p className="heading-secondary">{project.descrProject}</p>
+                            </span>
                         </div>
-                        <div className="project-next__name" dangerouslySetInnerHTML={{ __html: project.name }}></div>
-                        <DelayedLink to={`/projects/${project.nameInEng}`} datahash="toUp" onClick={(e) => gotoAnchor(e)} className="btn --white">Перейти к проекту</DelayedLink>
-                    </div>
-                    <RetryImage src={project.image ? `${apiUrl}/uploads/${project.image.filename}` : null} alt="Academy профессионального образовательного ресурса" className="project-next__img" />
-
-                </div>
+                    </DelayedLink>
+                ))}
             </div>
         </section>
-    ) : null;
-}
+    )
+};
 
 export default ProjectNext;

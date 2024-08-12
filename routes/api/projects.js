@@ -86,8 +86,10 @@ router.post(
         { name: 'mainVideoFile' }]),
     addCustomId,
     async (req, res) => {
-    const { name , date, descrProject, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility, seoTitle, seoKeywords, seoDescription  } = req.body;
+    const { name , date, duration, metric, descrProject, mainVideo, color, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility, seoTitle, seoKeywords, seoDescription  } = req.body;
     const tasksList = !!req.body.tasksList && req.body.tasksList !=='undefined' ? JSON.parse(req.body.tasksList): [];
+    const metrics = !!req.body.metrics && req.body.metrics !=='undefined' ? JSON.parse(req.body.metrics): [];
+    const stack = !!req.body.stack && req.body.stack !=='undefined' ? JSON.parse(req.body.stack): [];
     const workSteps = !!req.body.workSteps && req.body.workSteps !=='undefined'? JSON.parse(req.body.workSteps) : [];
     const approachList = !!req.body.approachList && req.body.approachList !=='undefined'? JSON.parse(req.body.approachList) : [];
     const approachListSecond = !!req.body.approachListSecond && req.body.approachListSecond !=='undefined'? JSON.parse(req.body.approachListSecond) : [];
@@ -105,7 +107,7 @@ router.post(
 
 
     // console.log(tasksList);
-    // console.log('workSteps', workSteps);
+    console.log('workSteps', workSteps);
     // console.log(req.files);
     // console.log(req.body);
     let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2;
@@ -178,9 +180,13 @@ router.post(
     const image = req.files.image[0];
     const imageMob = req.files.image[0];
 
+
+
     const projects = new Projects({
         name,
         date,
+        duration,
+        metric,
         descrProject,
         image,
         imageMob,
@@ -206,7 +212,14 @@ router.post(
         bannerFifths,
         task,
         taskDescr,
+        heading,
+        workStepsIntroText,
+        tasksItem,
+        workIntroText,
+        stack,
+        taskDo,
         tasksList,
+        metrics,
         approach,
         body,
         result,
@@ -220,6 +233,7 @@ router.post(
         bannerText,
         controlURL,
         projectURL,
+        awardsURL,
         projectSite,
         mainVideoFile,
         mainMobVideoFile,
@@ -245,6 +259,8 @@ router.post(
         seoKeywords,
         seoDescription
     });
+
+
 
     await projects.save();
 
@@ -316,13 +332,17 @@ router.put("/projects/:id",
     console.log(req.body);
     console.log(req.files);
 
-    const { name, date, descrProject, mainVideo, color, about, task, taskDescr, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader, resultPersonsText,resultTextColor, technologies, visibility,  seoTitle, seoKeywords, seoDescription} = req.body;
+    const { name, date, duration, metric, descrProject, mainVideo, color, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader, resultPersonsText,resultTextColor, technologies, visibility,  seoTitle, seoKeywords, seoDescription} = req.body;
+        const stack = !!req.body.stack && req.body.stack !=='undefined' ? JSON.parse(req.body.stack): [];
 
     const tasksList = JSON.parse(req.body.tasksList);
+    const metrics = JSON.parse(req.body.metrics);
     const workSteps = JSON.parse(req.body.workSteps);
     const approachList = JSON.parse(req.body.approachList);
     const approachListSecond = JSON.parse(req.body.approachListSecond);
     const approachListThird = JSON.parse(req.body.approachListThird);
+
+        console.log('workSteps', workSteps);
 
     const image = req.files.image ? req.files.image[0] : undefined;
     const imageMob = req.files.imageMob ? req.files.imageMob[0] : undefined;
@@ -699,6 +719,8 @@ router.put("/projects/:id",
     project.name = name;
     project.descrProject = descrProject;
     project.date = date;
+    project.duration = duration;
+    project.metric = metric;
     // var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"A","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
 
     // const editedName = name.split('').map(function (char) {
@@ -717,7 +739,14 @@ router.put("/projects/:id",
     project.bannerFourthVideo = bannerFourthVideo;
     project.bannerFifthVideo = bannerFifthVideo;
     project.taskDescr = taskDescr;
+    project.heading = heading;
+    project.workStepsIntroText = workStepsIntroText;
+    project.tasksItem = tasksItem;
+    project.workIntroText = workIntroText;
+    project.stack = stack;
+    project.taskDo = taskDo;
     project.tasksList = tasksList;
+    project.metrics = metrics;
     project.approach = approach;
     project.body = body;
     project.result = result;
@@ -730,6 +759,7 @@ router.put("/projects/:id",
     project.bannerText = bannerText,
     project.controlURL = controlURL,
     project.projectURL = projectURL,
+    project.awardsURL = awardsURL,
     project.projectSite = projectSite,
     project.workSteps = workSteps,
     project.aimColor = aimColor,

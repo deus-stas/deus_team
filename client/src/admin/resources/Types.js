@@ -5,6 +5,7 @@ export const TypesCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Тип проекта" validate={[required()]} />
+            <TextInput className="customWidth" source="key" label="Ключ для отрисовки компонента" validate={[required()]} />
         </SimpleForm>
     </Create>
 )
@@ -13,6 +14,7 @@ export const TypesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Тип проекта" validate={[required()]} />
+            <TextInput className="customWidth" source="key" label="Ключ для отрисовки компонента" validate={[required()]} />
         </SimpleForm>
     </Edit>
 );
