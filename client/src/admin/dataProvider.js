@@ -1,9 +1,7 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = process.env.NODE_ENV === 'production'
-  ? ''
-  : `${process.env.REACT_APP_LOCALHOST_URI}/api`;
+const apiUrl =`${process.env.REACT_APP_LOCALHOST_URI}/api`;
 
 const httpClient = fetchUtils.fetchJson;
 
@@ -22,10 +20,13 @@ const dataProvider = {
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-    return httpClient(url).then(({ headers, json }) => ({
-      data: json,
-      total: parseInt(headers.get("content-range").split("/").pop(), 10),
-    }));
+    return httpClient(url).then(({headers, json}) => {
+      console.log(headers.get("content-range"))
+      return {
+        data: json,
+        total: parseInt(headers.get("content-range").split("/").pop(), 10)
+      }
+    });
   },
 
   getOne: (resource, params) =>

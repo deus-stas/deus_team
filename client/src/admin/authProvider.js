@@ -1,8 +1,6 @@
 import { AUTH_LOGIN } from 'react-admin';
 
-const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'http://188.120.232.38/api'
-    : `${process.env.REACT_APP_LOCALHOST_URI}/api`;
+const apiUrl = `${process.env.REACT_APP_LOCALHOST_URI}/api`;
 
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
