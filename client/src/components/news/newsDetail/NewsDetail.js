@@ -10,15 +10,36 @@ import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 import './newsDetail.scss'
 import DelayedLink from "../../appHeader/DelayedLink";
 import {Icon} from "../../icon/Icon";
+import {useMobile} from "../../pages/projects/projectDetail/ProjectDetail";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Navigation} from "swiper";
 
 const apiUrl = ''
 
 const NewsDetail = () => {
 
+    const isMobile = useMobile();
+
     const [news, setNews] = useState([]);
     const [detail, setDetail] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [slidesPerView, setSlidesPerView] = useState(1.5);
     const {id} = useParams();
+
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [touchStart, setTouchStart] = useState(0);
+
+    const newsSlides = news.filter((item) => item.id !== detail.id).slice(-6);
+
+    const prevSlide = () => setCurrentSlide((currentSlide - 1 + newsSlides.length) % newsSlides.length);
+
+    const nextSlide = () => setCurrentSlide((currentSlide + 1) % newsSlides.length);
+
+    const handleTouchStart = (event) => setTouchStart(event.touches[0].clientX);
+
+
+    const handleTouchEnd = ({ changedTouches: [{ clientX }] }) =>
+        (clientX - touchStart < 0) ? nextSlide() : prevSlide();
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/news/url/${id}`)
@@ -81,7 +102,21 @@ const NewsDetail = () => {
         };
     }, []);
 
-    const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 500) { // adjust the breakpoint as needed
+                setSlidesPerView(1.1);
+            } else {
+                setSlidesPerView(1.5);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize(); // initial call
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
 
     const fileUrl = detail.mainNewsImage ? `${apiUrl}/uploads/${detail.mainNewsImage.filename}` : null;
     const isVideo = detail.mainNewsImage ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.mainNewsImage.filename) : false;
@@ -94,8 +129,8 @@ const NewsDetail = () => {
             {!isLoading &&
                 <main className="news-detail">
                     <div className="container">
-                        <section className="news-detail__main borderBlock">
-                            <div className="news-detail__main-content padding">
+                        <section className="news-detail__main">
+                            <div className="news-detail__main-content">
                                 <div className="news-detail__main-tag m-text">
                                     {`${detail.newsTags}`}
                                 </div>
@@ -129,7 +164,7 @@ const NewsDetail = () => {
                                     {detail.bannerSecond ? (
                                         <>
                                             <BannerComponent banner={detail.bannerSecond} detail={detail}/>
-                                            <p>{detail.aboutImg}</p>
+                                            <p style={{textAlign:'center', margin:'1rem 0', color:'rgba(117, 118, 119, 1)'}}>{detail.aboutImg}</p>
                                         </>
 
                                     ) : null}
@@ -147,17 +182,30 @@ const NewsDetail = () => {
                                 </div>
                             }
 
-                            {detail.photoSlider && detail.photoSlider.length > 0 &&
-                                <div className="news-detail__article-photos">
-                                    {detail.photoSlider ? (
-                                        <>
-                                            {detail.photoSlider.filter(val => !!val).map((banner, index) => (
-                                                <BannerComponent key={index} banner={banner} detail={detail}/>
-                                            ))}
-                                        </>
-                                    ) : null}
-                                </div>
-                            }
+                            {!!detail.photoSlider && detail.photoSlider.length > 0 && (
+                                <section
+                                    style={{ backgroundColor: "black" }}
+                                    className="news-detail__slider borderBlock"
+                                >
+                                    <Swiper
+                                        spaceBetween={50}
+                                        slidesPerView={slidesPerView}
+                                        centeredSlides={true}
+                                        navigation={true}
+                                        modules={[Navigation]}
+                                    >
+                                        {detail.photoSlider.filter(val => !!val).map((banner, index) => (
+                                            <SwiperSlide key={index}>
+                                                <img
+                                                    className="borderBlock"
+                                                    src={`${apiUrl}/uploads/${banner.filename}`}
+                                                    alt={banner.name}
+                                                />
+                                            </SwiperSlide>
+                                        ))}
+                                    </Swiper>
+                                </section>
+                            )}
 
                             {detail.body4 && detail.body4 !== 'undefined' && detail.body4 !== 'null' &&
                                 <div className="news-detail__article-content">
@@ -172,55 +220,85 @@ const NewsDetail = () => {
 
                         <section className="news-detail__more">
                             <div className="news-detail__more-content">
-                                <h2 className="heading-secondary">Ещё статьи</h2>
-                                <div className="news-detail__more-wrap">
+                                <div className="news-detail__more-content__info">
+                                    <h2 className="heading-secondary">Ещё статьи</h2>
+                                    {!isMobile && (
+                                        <span className="slide-arrow">
+                                        <span className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
+                                              onClick={currentSlide > 0 ? prevSlide : null}>
+                                            <Icon icon="slider" viewBox="0 0 40 40"/>
+                                        </span>
+                                        <span
+                                            className={`next ${currentSlide >= newsSlides.length - 1 ? 'disabled' : ''}`}
+                                            onClick={currentSlide < newsSlides.length - 1 ? nextSlide : null}>
+                                            <Icon icon="slider" viewBox="0 0 40 40"/>
+                                        </span>
 
-                                    {news.map((item) => {
-                                        if (item.id === detail.id) return null;
-                                        const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
-                                        const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
-                                        const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
+                                    </span>
+                                    )}
 
-
-                                        return (
-                                            <DelayedLink to={`/news/${item.urlName}`} className="news__item"
-                                                         key={item.id}>
-                                                <div className="news__img-wrap">
-
-                                                    {isVideo && <video autoPlay={shouldAutoPlay} muted playsInline
-                                                                       src={fileUrl} alt={item.name}
-                                                                       className="news__img-wrap"
-                                                                       loop
-                                                    />}
-                                                    {isImage && <img src={fileUrl} alt={item.name}
-                                                                     className="news__img-wrap"/>}
-
-                                                </div>
-
-                                                <div className="news__text">
-                                                    <div className="tag">#{item.newsTags}</div>
-                                                </div>
-                                                <div className="news__descr">
-                                                    <div className="name">{item.name}</div>
-                                                </div>
-                                                <div className="news__arrow">
-                                                    <div className="hover-flip-circle">
-                                                    <span>
-                                                        <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                                        <div className="hover-circle">
-                                                            {double}
-                                                        </div>
-                                                    </span>
-                                                    </div>
-                                                </div>
-
-
-                                            </DelayedLink>
-                                        )
-                                    }).slice(0, 3)}
                                 </div>
-                            </div>
 
+                                <div className="news-detail__more-wrap">
+                                    {news
+                                        .filter((item) => item.id !== detail.id)
+                                        .slice(-5)
+                                        .map((item, index) => {
+                                            const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
+                                            const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
+                                            const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
+
+                                                return (
+                                                    <div className={`flex-wrap ${index === currentSlide ? 'active' : ''}`}
+                                                        key={item.id}
+                                                         style={{transform: `translateX(-${currentSlide * 100}%)`, transition: 'transform 0.3s ease-out'}}
+                                                    >
+                                                        <DelayedLink to={`/news/${item.urlName}`}
+                                                                     className="news__item  slider">
+                                                                {isVideo && (
+                                                                    <video
+                                                                        autoPlay={shouldAutoPlay}
+                                                                        muted
+                                                                        playsInline
+                                                                        src={fileUrl}
+                                                                        loop
+                                                                    />
+                                                                )}
+                                                                {isImage && (
+                                                                    <img
+                                                                        src={fileUrl}
+                                                                        alt={item.name}
+                                                                    />
+                                                                )}
+                                                        </DelayedLink>
+                                                        <span>
+                                                          <p className="news-main__text s-text">{item.newsTags}</p>
+                                                          <p className="news-main__descr m-text">{item.name}</p>
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+                                    <div
+                                        className="slider-touch-area"
+                                        onTouchStart={handleTouchStart}
+                                        onTouchEnd={handleTouchEnd}
+                                    />
+                                </div>
+                                {isMobile && (
+                                    <span className="slide-arrow">
+                                        <span className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
+                                              onClick={currentSlide > 0 ? prevSlide : null}>
+                                            <Icon icon="slider" viewBox="0 0 40 40"/>
+                                        </span>
+                                        <span
+                                            className={`next ${currentSlide >= newsSlides.length - 1 ? 'disabled' : ''}`}
+                                            onClick={currentSlide < newsSlides.length - 1 ? nextSlide : null}>
+                                            <Icon icon="slider" viewBox="0 0 40 40"/>
+                                        </span>
+
+                                    </span>
+                                )}
+                            </div>
                         </section>
                     </div>
                 </main>
