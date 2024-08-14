@@ -34,6 +34,7 @@ import DelayedLink from "../../appHeader/DelayedLink";
 import FadeInOnScroll from "../../animation/fadeInOnScroll";
 import {Box, useMediaQuery} from "@material-ui/core";
 import {maxLength} from "react-admin";
+import {useMobile} from "../projects/projectDetail/ProjectDetail";
 
 SwiperCore.use([Autoplay]);
 
@@ -80,21 +81,25 @@ const MainPage = (props) => {
     const [clients, setClients] = useState([]);
     const [swipped, setSwipped] = useState([-1]);
 
-    const nextSlide = () => {
-        setSwipped(prevSlides => {
-            const nextIndex = (prevSlides[prevSlides.length - 1] + 1) % working.length;
-            if (nextIndex === working.length) {
-                return prevSlides;
-            }
-            return [...prevSlides, nextIndex];
-        });
-    };
+    const isMobile = useMobile();
 
-    const prevSlide = () => {
-        setSwipped(prevSlides => {
-            if (prevSlides.length === 1) return prevSlides;
-            return prevSlides.slice(0, prevSlides.length - 1);
-        });
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [touchStart, setTouchStart] = useState(0);
+
+    const prevSlide = () => setCurrentSlide((currentSlide - 1 + working.length) % working.length);
+
+    const nextSlide = () => setCurrentSlide((currentSlide + 1) % working.length);
+
+    const handleTouchStart = (event) => setTouchStart(event.touches[0].clientX);
+
+    const handleTouchEnd = (event) => {
+        const touchEnd = event.changedTouches[0].clientX;
+        const diff = touchStart - touchEnd;
+        if (diff > 500) {
+            nextSlide();
+        } else if (diff < -500) {
+            prevSlide();
+        }
     };
 
     useEffect(() => {
@@ -258,15 +263,6 @@ const MainPage = (props) => {
         videoRefs.current.push(ref);
     };
 
-    const sortColumns = (...elements) => {
-        const columns = elements.reduce((acc, element, index) => {
-            const columnIndex = index % 3;
-            acc[columnIndex].push(element);
-            return acc;
-        }, [[], [], []]);
-
-        return columns;
-    };
 
     const sizeLarge = 'Мы создаём продукты и услуги, которые<br/>  помогают нашим клиентам быть заметнее<br/> 🤩 в цифровом пространстве'
     const sizeSmall = 'Мы создаём продукты и услуги, которые помогают нашим клиентам быть заметнее 🤩 в цифровом пространстве'
@@ -297,31 +293,6 @@ const MainPage = (props) => {
 
     const mainBannerRef = useRef(null);
     const videoModal = useRef(null);
-
-    // useEffect(() => {
-    //   const handler = () => {
-    //     if (mainBannerRef.current) {
-    //       mainBannerRef.current.style.top = -window.scrollY / 2 + "px";
-    //       const OpacityTransition = 2
-    //       const BlurTransition = 7
-    //       // Вычисляем новое значение прозрачности на основе прокрутки
-    //       let newOpacity = 1 - (window.scrollY * OpacityTransition ) / window.innerHeight; // Умножаем scrollY на 2
-    //       newOpacity = newOpacity < 0 ? 0 : newOpacity; // Убедимся, что прозрачность не уходит ниже 0
-    //
-    //       // Вычисляем новое значение размытия на основе прокрутки
-    //       let newBlur = (window.scrollY * BlurTransition) / window.innerHeight; // Умножаем scrollY на 2
-    //       newBlur = newBlur > 50 ? 50 : newBlur; // Убедимся, что размытие не превышает 50
-    //
-    //
-    //       mainBannerRef.current.style.opacity = newOpacity;
-    //       mainBannerRef.current.style.filter = `blur(${newBlur}px)`;
-    //     }
-    //   }
-    //   document.addEventListener("scroll", handler);
-    //
-    //   return () => document.removeEventListener("scroll", handler);
-    // }, []);
-
 
     return (<>
         {!isLoading && (<main className="main">
@@ -380,7 +351,8 @@ const MainPage = (props) => {
 
                             const allServices = index == 1 && props.services
                                 .filter((service, index) => service.isInvisible)
-                                .map((service, index) => (<DelayedLink to={`/services/${service.path}`}>
+                                .map((service, index) => (
+                                    <DelayedLink to={`/services/`}>
                                     <div className="main-agency__item-link p-style">
                                         <p>{service.name}</p>
                                         <div className="hover-flip-arrow">
@@ -493,23 +465,38 @@ const MainPage = (props) => {
             <section className="main-working whiteHeader">
                 <div className="container">
                     <div className="main-working__wrap">
-                        <div>
-                            <p className="heading-secondary">В работе 12 активных проектов</p>
-                            <span className="wrapp-circle">
-                                <button onClick={prevSlide}>Previous</button>
-                                <button onClick={nextSlide}>Next</button>
-                            </span>
+                        <div className="main-working__wrap-info">
+                            <p className="heading-secondary">В работе {working.length} активных<br/> проектов</p>
+                            {!isMobile && (
+                                <div className="slide-arrow">
+                                    <div className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
+                                         onClick={currentSlide > 0 ? prevSlide : null}>
+                                        <Icon icon="slider" viewBox="0 0 40 40"/>
+                                    </div>
+                                    <div
+                                        className={`next ${currentSlide >= working.length - 1 ? 'disabled' : ''}`}
+                                        onClick={currentSlide < working.length - 1 ? nextSlide : null}>
+                                        <Icon icon="slider" viewBox="0 0 40 40"/>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div className="main-working__wrapperSlide">
                             {working.map((item, index) => (
-                                <div
+                                <div className="padding-slider" style={{transform: `translateX(-${currentSlide * 100}%)`, transition: 'transform 0.3s ease-out'}}>
+                                    <div
                                     className={`main-working__wrapperSlide-item ${swipped.includes(index) ? 'swipped' : ''}`}
-                                    key={index}>
+                                    key={index}
+
+                                >
                                     <div className="wrapp">
-                                        <span><div></div><p>{item.name}</p></span>
+                                        <div className="greenBall">
+                                            <Icon icon="greenBall" viewBox='0 0 16 16'/>
+                                            <p>{item.name}</p>
+                                        </div>
                                         <p className="m-text">{item.descr}</p>
                                     </div>
-                                    <span className="wrapp-circle">
+                                    <div className="wrapp-circle">
                                         <img
                                             src={deus}
                                             alt=""
@@ -518,127 +505,33 @@ const MainPage = (props) => {
                                             src={`${apiUrl}/uploads/${item.file.filename}`}
                                             alt=""
                                             className="circle"/>
-                                    </span>
+                                    </div>
+                                </div>
                                 </div>
                             ))}
+                            <div
+                                className="slider-touch-area"
+                                onTouchStart={handleTouchStart}
+                                onTouchEnd={handleTouchEnd}
+                            />
                         </div>
+                        {isMobile && (
+                            <div className="slide-arrow">
+                                <div className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
+                                     onClick={currentSlide > 0 ? prevSlide : null}>
+                                    <Icon icon="slider" viewBox="0 0 40 40"/>
+                                </div>
+                                <div
+                                    className={`next ${currentSlide >= working.length - 1 ? 'disabled' : ''}`}
+                                    onClick={currentSlide < working.length - 1 ? nextSlide : null}>
+                                    <Icon icon="slider" viewBox="0 0 40 40"/>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>)
             }
-
-            {/*{working ? (*/}
-            {/*    <section className="main-working whiteHeader">*/}
-            {/*        <div className="container">*/}
-            {/*            <h3 className="heading-secondary">Работаем сейчас над</h3>*/}
-            {/*            <div className="main-working__wrap">*/}
-            {/*                {working.map((item, index) => (*/}
-            {/*                    <div*/}
-            {/*                        className={`main-working__item ${index === activeStoryIndex ? 'active' : ''}`}*/}
-            {/*                        key={item.id} onClick={() => {*/}
-            {/*                        setShowModal(true);*/}
-            {/*                        setActiveStoryIndex(index);*/}
-            {/*                    }}>*/}
-            {/*                        <div className="main-working__img-wrap">*/}
-            {/*                            {stories[index].isVideo && (*/}
-            {/*                                <video*/}
-            {/*                                    // autoPlay*/}
-            {/*                                    muted*/}
-            {/*                                    playsInline*/}
-            {/*                                    src={stories[index].fileUrl}*/}
-            {/*                                    alt={item.name}*/}
-            {/*                                    className="main-working__img"*/}
-            {/*                                    //loop*/}
-            {/*                                />*/}
-            {/*                            )}*/}
-            {/*                            {stories[index].isImage &&*/}
-            {/*                                <img src={stories[index].fileUrl} alt={item.name}*/}
-            {/*                                     className="main-working__img"/>}*/}
-            {/*                        </div>*/}
-            {/*                        <p className="main-working__name">{item.name}</p>*/}
-            {/*                    </div>*/}
-            {/*                ))}*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-
-            {/*    </section>*/}
-            {/*) : null}*/}
-            {/*{showModal && <StoryModal stories={stories}*/}
-            {/*                          activeStoryIndex={activeStoryIndex}*/}
-            {/*                          setActiveStoryIndex={setActiveStoryIndex}*/}
-            {/*                          onClose={() => setShowModal(false)}/>}*/}
-
-
-            {/*<section className="main-news">*/}
-            {/*    <div className="container">*/}
-            {/*        <div className="main-news__wrap">*/}
-            {/*            <div className="main-news__info">*/}
-            {/*                <div>*/}
-            {/*                    <h2 className="heading-secondary sticky-h2 hover-flip">*/}
-            {/*                        <DelayedLink to={`/news`}>*/}
-            {/*                            <span data-hover="Журнал">Журнал</span>*/}
-            {/*                        </DelayedLink>*/}
-            {/*                    </h2>*/}
-            {/*                </div>*/}
-            {/*                <div className="main-news__info-wrap">*/}
-            {/*                    {[...allNewsTags].map((tag, i) => (*/}
-            {/*                        <DelayedLink to={`/news?newsTags=${tag}`}*/}
-            {/*                                     className="main-news__info-item " key={i}>*/}
-            {/*                            <p className="p-style-black">#{tag}</p>*/}
-            {/*                            <div className="hover-flip-arrow">*/}
-            {/*                  <span>*/}
-            {/*                    {" "}*/}
-            {/*                      <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
-            {/*                    <div className="hover-double">{double}</div>*/}
-            {/*                  </span>*/}
-            {/*                            </div>*/}
-            {/*                        </DelayedLink>))}*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*            <div className="main-news__content">*/}
-            {/*                {news*/}
-            {/*                    .map((item) => {*/}
-            {/*                        const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;*/}
-            {/*                        const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;*/}
-            {/*                        const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;*/}
-            {/*                        const shouldAutoPlay = item.mainControl;*/}
-
-            {/*                        return (<DelayedLink to={`/news/${item.urlName}`}*/}
-            {/*                                             className="main-news__item" key={item.id}>*/}
-            {/*                            <div className="main-news__img-wrap gradient">*/}
-            {/*                                {isVideo && (<video*/}
-            {/*                                    //autoPlay={shouldAutoPlay}*/}
-            {/*                                    muted*/}
-            {/*                                    playsInline*/}
-            {/*                                    src={fileUrl}*/}
-            {/*                                    // alt={item.name}*/}
-            {/*                                    className="main-news__img"*/}
-            {/*                                    //loop*/}
-            {/*                                />)}*/}
-            {/*                                {isImage && <img src={fileUrl} alt={item.name}*/}
-            {/*                                                 className="main-news__img"/>}*/}
-            {/*                            </div>*/}
-            {/*                            <div className="main-news__text">*/}
-            {/*                                <div className="main-news__tag">#{item.newsTags}</div>*/}
-            {/*                            </div>*/}
-            {/*                            <div className="main-news__descr">*/}
-            {/*                                <div className="main-news__name">{item.name}</div>*/}
-            {/*                            </div>*/}
-            {/*                            <div className="main-agency__item-arrow">*/}
-            {/*                                <div className="hover-flip-circle">*/}
-            {/*                      <span>*/}
-            {/*                        <Icon icon="arrowGo" viewBox="0 0 30 31"/>*/}
-            {/*                        <div className="hover-circle">{double}</div>*/}
-            {/*                      </span>*/}
-            {/*                                </div>*/}
-            {/*                            </div>*/}
-            {/*                        </DelayedLink>);*/}
-            {/*                    })*/}
-            {/*                    .slice(1, 3)}*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
 
         </main>)}
     </>);
@@ -647,84 +540,3 @@ const MainPage = (props) => {
 export default connect((state) => ({
     headerData: state.app.headerData, services: state.app.services, team: state.app.team,
 }))(MainPage);
-
-// const StoryModal = ({stories, activeStoryIndex, setActiveStoryIndex, onClose, double}) => {
-//     const [windowWidth, setWindowWidth] = useState(0);
-//     const [activeStoryWidth, setActiveStoryWidth] = useState(0);
-//     const videoRef = useRef(null);
-//
-//     const handleNext = () => {
-//         setActiveStoryIndex((prevIndex) => (prevIndex + 1) % stories.length);
-//     };
-//
-//     const handlePrev = () => {
-//         setActiveStoryIndex((prevIndex) => (prevIndex - 1 + stories.length) % stories.length);
-//     };
-//
-//     let storyGap = 16
-//     let nextStories = (activeStoryIndex * activeStoryWidth + (storyGap * activeStoryIndex))
-//     const moveStory = activeStoryIndex > 0 ? windowWidth - (activeStoryWidth + nextStories) : windowWidth - activeStoryWidth
-//
-//     useEffect(() => {
-//         let findActiveStory = document.querySelector('.activeInd');
-//         setWindowWidth((window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) / 2);
-//         setActiveStoryWidth(findActiveStory.offsetWidth / 2);
-//     }, [activeStoryIndex]);
-//
-//     useEffect(() => {
-//         if (videoRef.current) {
-//             if (activeStoryIndex) {
-//                 videoRef.current.play();
-//             } else {
-//                 videoRef.current.pause();
-//                 videoRef.current.currentTime = 0;
-//             }
-//         }
-//     }, [activeStoryIndex]);
-//
-//     return (<section className="story-modal">
-//         <div className="">
-//             <div className="story-modal-cont">
-//                 <div style={{
-//                     transition: 'transform 0.3s ease-in-out', transform: `translate3d(${moveStory}px, 0, 0)`
-//                 }}
-//                      className="story-modal__wrap">
-//                     {stories.map((story, index) => {
-//                         const {fileUrl, isVideo, isImage} = story;
-//                         const isActive = index === activeStoryIndex;
-//                         const maxLength = stories.length - 1
-//                         // const approve = isActive? true : false
-//
-//                         return (<div className={`story-modal__wrap-item ${isActive ? 'activeInd' : ''}`}>
-//                             {isVideo && (<video
-//                                 ref={videoRef}
-//                                 // autoPlay={approve}
-//                                 key={'story-modal' + fileUrl}
-//                                 playsInline
-//                                 src={fileUrl}
-//                                 className="story-modal__video"
-//                             />)}
-//                             {isImage && <img key={'story-modal' + fileUrl} src={fileUrl}
-//                                              className={`story-modal__img ${isActive ? 'activeInd' : ''}`}
-//                                              alt=''/>}
-//                             {isActive && (<>
-//                                 {activeStoryIndex > 0 &&
-//                                     <input className="btn btn-prev" type="button" onClick={handlePrev}
-//                                            value={'back'}></input>}
-//                                 {activeStoryIndex < maxLength &&
-//                                     <input className="btn btn-next" type="button" onClick={handleNext}
-//                                            value={'next'}></input>}
-//
-//                             </>)}
-//
-//                         </div>);
-//                     })}
-//
-//                 </div>
-//                 <input className="btn btn-close" type="button" onClick={onClose} value={'Закрыть'}></input>
-//             </div>
-//
-//
-//         </div>
-//     </section>);
-// };

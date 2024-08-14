@@ -150,6 +150,12 @@
     </defs>
   </svg>
 
+  <svg xmlns="http://www.w3.org/2000/svg" id="icon-greenBall" width="16" height="17" viewBox="0 0 16 17" fill="none">
+    <circle opacity="0.1" cx="8" cy="8.5" r="8" fill="#10C12C"/>
+    <circle opacity="0.2" cx="8" cy="8.5" r="6" fill="#10C12C"/>
+    <circle cx="8" cy="8.5" r="4" fill="#10C12C"/>
+  </svg>
+
   <svg xmlns="http://www.w3.org/2000/svg" id='icon-vacancies' width="17" height="16" viewBox="0 0 17 16" fill="none">
     <circle opacity="0.1" cx="8.9751" cy="8" r="8" fill="#C11010"/>
     <circle opacity="0.2" cx="8.9751" cy="8" r="6" fill="#C11010"/>
