@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 const awardsSchema = new Schema({
     name: { type: String, required: true },
-    controlVisibility: {type: Boolean, default: true ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? true : v},
+    blogUrl: { type: String, required: true },
     image: { type: Object },
-    awardProject: { type: Array }
 });
 
 awardsSchema.set('toJSON', { virtuals: true });

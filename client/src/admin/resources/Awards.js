@@ -37,9 +37,11 @@ export const AwardsCreate = (props) => (
                 source="name" 
                 label="Название" 
                 validate={[required()]} />
-            <BooleanInput 
-                source="controlVisibility" 
-                label="Скрыть/Показать"/>
+            <TextInput
+                className="customWidth"
+                source="blogUrl"
+                label="Ссылка на блог"
+                validate={[required()]} />
             <ImageInput
                 className="fileInput"
                  placeholder="+" 
@@ -51,36 +53,7 @@ export const AwardsCreate = (props) => (
                     source="src" 
                     title="title" />
             </ImageInput>
-            <ArrayInput
-                source="awardProject"
-                label="Номинант"
-                validate={[required()]}
-            >
-                <SimpleFormIterator 
-                    inline 
-                    getItemLabel={index => `#${index + 1}`}>
-                    <TextInput
-                        className="customWidth" 
-                        source="awardName" 
-                        label="Название проекта" />
-                    <TextInput
-                        className="customWidth" 
-                        source="awardPlace" 
-                        label="Какое место и какая номинация" />
-                    <TextInput
-                        className="customWidth" 
-                        source="awardYear" 
-                        label="Год" />
-                    <SelectInput 
-                        className="customWidth"
-                        source="awardControlVisibility" 
-                        label="Скрыть/Показать" 
-                        choices={[
-                            { id: true, name: 'Показать' },
-                            { id: false, name: 'Скрыть' },
-                        ]} />
-                </SimpleFormIterator>
-            </ArrayInput>
+
         </SimpleForm>
     </Create>
 );
@@ -93,9 +66,12 @@ export const AwardsEdit = (props) => (
                 source="name" 
                 label="Название" 
                 validate={[required()]} />
-            <BooleanInput 
-                source="controlVisibility" 
-                label="Скрыть/Показать"/>
+            <TextInput
+                className="customWidth"
+                source="blogUrl"
+                placeholder={"awwwards"}
+                label='Ссылка на блог(указываем после : /news/... ) '
+                validate={[required()]} />
             <ImageInput
                 className="fileInput"
                  placeholder="+" 
@@ -107,36 +83,7 @@ export const AwardsEdit = (props) => (
                     source="image" 
                     title="title" />
             </ImageInput>
-            <ArrayInput
-                source="awardProject"
-                label="Номинант"
-                validate={[required()]}
-            >
-                <SimpleFormIterator 
-                    inline 
-                    getItemLabel={index => `#${index + 1}`}>
-                    <TextInput
-                        className="customWidth" 
-                        source="awardName" 
-                        label="Название проекта" />
-                    <TextInput
-                        className="customWidth" 
-                        source="awardPlace" 
-                        label="Какое место и какая номинация" />
-                    <TextInput
-                        className="customWidth" 
-                        source="awardYear" 
-                        label="Год" />
-                    <SelectInput 
-                        className="customWidth"
-                        source="awardControlVisibility" 
-                        label="Скрыть/Показать" 
-                        choices={[
-                            { id: true, name: 'Показать' },
-                            { id: false, name: 'Скрыть' },
-                        ]} />
-                </SimpleFormIterator>
-            </ArrayInput>
+
         </SimpleForm>
     </Edit>
 );
