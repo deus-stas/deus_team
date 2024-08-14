@@ -738,6 +738,7 @@
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        width: 100%;
       }
 
       &-info {
@@ -758,6 +759,10 @@
         display: none;
       }
 
+      @include respond(xs){
+        width: 100vw;
+      }
+
       .padding-slider {
         display: flex;
         padding-right: 4rem;
@@ -766,6 +771,7 @@
         }
         @include respond(xs){
           padding-right: 1rem;
+
         }
       }
 
