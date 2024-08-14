@@ -301,16 +301,8 @@ const MainPage = (props) => {
                 <div className="container">
                     <div className="main-banner__wrap">
                         <div className="main-banner__content">
-                            <h4 className="heading-fourth">Привет — это DEUS 👋</h4>
+                            <p className="breadcrumb">Привет — это DEUS 👋</p>
                             <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: text}}/>
-                            <DelayedLink
-                                to={`/contacts`}
-                                className="btn --black hidden-desktop"
-                                datahash="contactUs"
-                                onClick={(e) => gotoAnchor(e)}
-                            >
-                                Стать клиентом
-                            </DelayedLink>
                         </div>
                     </div>
                 </div>

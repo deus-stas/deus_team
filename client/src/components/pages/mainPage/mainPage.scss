@@ -38,15 +38,15 @@
     }
 
     &__content {
-      padding-right: 6.4rem;
-
-      @include respond(sm) {
-        padding-right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      @include respond(sm){
+        gap: 1rem;
       }
 
-      .btn {
-        margin: 0;
-        font-weight: 400;
+      p{
+        color: #757677;
       }
     }
 
