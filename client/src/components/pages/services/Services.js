@@ -169,14 +169,9 @@ const Services = (props) => {
 
                                                                         <p className="m-text">{tariffs.tariffsCategory}</p>
                                                                     </span>
-
-                                                                    {tariffs.tariffsItems.map(tariffsItem => {
-                                                                        return (
-                                                                            <p className="price s-text">
-                                                                                {tariffsItem.tariffPrice} &nbsp;/&nbsp; {tariffsItem.tariffDeadline}
-                                                                            </p>
-                                                                        )
-                                                                    })}
+                                                                    <p className="price s-text">
+                                                                        {tariffs.tariffPrice} &nbsp;/&nbsp; {tariffs.tariffDeadline}
+                                                                    </p>
                                                                 </div>
                                                             </div>
 

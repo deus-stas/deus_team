@@ -68,24 +68,8 @@ export const ServicesCreate = (props) => (
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
-                    <ArrayInput
-                        source="tariffsItems"
-                        label="Тариф"
-                    >
-                        <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            {/*<TextInput className="customWidth" source="tariffName" label="Название" />*/}
-                            <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
-                            <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
-                            {/*<ArrayInput*/}
-                            {/*    source="tariffList"*/}
-                            {/*    label="Что входит в тариф"*/}
-                            {/*>*/}
-                            {/*    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>*/}
-                            {/*        <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />*/}
-                            {/*    </SimpleFormIterator>*/}
-                            {/*</ArrayInput>*/}
-                        </SimpleFormIterator>
-                    </ArrayInput>
+                    <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
+                    <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
                 </SimpleFormIterator>
             </ArrayInput>
             <TextInput className="customWidth" source="seoTitle" label="TITLE" />
@@ -148,29 +132,17 @@ export const ServicesEdit = (props) => (
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
-                    <ArrayInput
-                        source="tariffsItems"
-                        label="Тариф"
-                    >
-                        <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            {/*<TextInput className="customWidth" source="tariffName" label="Название" />*/}
-                            <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
-                            <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
-                            {/*<ArrayInput*/}
-                            {/*    source="tariffList"*/}
-                            {/*    label="Что входит в тариф"*/}
-                            {/*>*/}
-                            {/*    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>*/}
-                            {/*        <TextInput className="customWidth" source="tariffWork" label="Услуга тарифа" />*/}
-                            {/*    </SimpleFormIterator>*/}
-                            {/*</ArrayInput>*/}
-                        </SimpleFormIterator>
-                    </ArrayInput>
+                    <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
+                    <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
                 </SimpleFormIterator>
             </ArrayInput>
-            <TextInput className="customWidth" source="seoTitle" label="TITLE" />
-            <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
-            <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
+
+            <p>SEO</p>
+            <p className="baseFlexWrap">
+                <TextInput className="customWidth" source="seoTitle" label="TITLE" />
+                <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
+                <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
+            </p>
         </SimpleForm>
     </Edit>
 );
