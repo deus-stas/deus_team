@@ -96,22 +96,28 @@ const AppFooter = (props) => {
                                 <div className="footer__wrap">
                                     <>
                                         <div className="footer__item m-text">
+                                            <div className="flex-icon">
+                                                <Icon icon="map" viewBox="0 0 18 18"/>
+                                                <p className="footer__list-item"
+                                                   dangerouslySetInnerHTML={{__html: adress}}></p>
+                                            </div>
 
-                                            <p className="footer__list-item"
-                                               dangerouslySetInnerHTML={{__html: adress}}></p>
 
                                             <div className="contacts">
-                                                <Link to="tel:+74951034351">
-                                                    <p className="hover-flip"><span data-hover="+7 (495) 103—4351">+7 (495) 103—4351</span>
-                                                    </p>
-                                                </Link>
-
-                                                <Link to="mailto:hello@de-us.ru">
-                                                    <p className="hover-flip"><span
-                                                        data-hover="hello@de-us.ru">hello@de-us.ru</span></p>
-                                                </Link>
-
-
+                                                <div className="flex-icon">
+                                                    <Icon icon="telephone" viewBox="0 0 18 18"/>
+                                                    <Link to="tel:+74951034351">
+                                                        <p className="hover-flip"><span data-hover="+7 (495) 103—4351">+7 (495) 103—4351</span>
+                                                        </p>
+                                                    </Link>
+                                                </div>
+                                                <div className="flex-icon">
+                                                    <Icon icon="mail" viewBox="0 0 18 18"/>
+                                                    <Link to="mailto:hello@de-us.ru">
+                                                        <p className="hover-flip"><span
+                                                            data-hover="hello@de-us.ru">hello@de-us.ru</span></p>
+                                                    </Link>
+                                                </div>
                                             </div>
 
                                             <div className="footer__contacts">

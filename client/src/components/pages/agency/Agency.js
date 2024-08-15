@@ -14,6 +14,7 @@ import './agency.scss';
 import {connect} from "react-redux";
 import TruncatedSentence from "./TruncatedSentence";
 import {useMediaQuery} from "@material-ui/core";
+import DelayedLink from "../../appHeader/DelayedLink";
 
 
 
@@ -236,16 +237,37 @@ const Agency = (props) => {
                             <p className="m-text">50% клиентов приходят<br/> к нам по рекомендаци</p>
                         </div>
                     </div>
-                    {awards && (awards[0] ? awards[0].controlVisibility : null) ?
+                    {awards &&
                         <div className="agency-about__wrapp">
-                        {awards.map(award => {
-                            return (<div className="agency-about__wrapp-btn" key={award.id}>
-                                <img src={award.image ? `/uploads/${award.image.filename}` : null}
-                                     alt={award.name}/>
-                                <p>{award.name}</p>
-                            </div>);
-                        })}
-                    </div> : null}
+                            {awards.map(award => {
+                                const getAwardIcon = (awardName) => {
+                                    const iconMap = {
+                                        awwwads: <Icon icon="awwwards" viewBox="0 0 40 40"/>,
+                                        ratingruneta: <Icon icon="rating" viewBox="0 0 40 40"/>,
+                                        'css design awards': <Icon icon="cssAwards" viewBox="0 0 40 40"/>,
+                                    };
+
+                                    const iconName = Object.keys(iconMap).find(key => awardName.toLowerCase().includes(key.toLowerCase()));
+                                    if (iconName) {
+                                        return iconMap[iconName];
+                                    }
+                                    return null;
+                                };
+
+                                return (
+                                    <DelayedLink to={`/news/${award.blogUrl}`} className="agency-about__wrapp-btn"
+                                                 key={award.id}>
+                                        <img src={award.image ? `/uploads/${award.image.filename}` : null}
+                                             alt={award.name}/>
+                                        <span className="content">
+                                            {getAwardIcon(award.name)}
+                                             <p className="name m-text">{award.name}</p>
+                                        </span>
+
+                                    </DelayedLink>
+                                );
+                            })}
+                        </div>}
 
                 </section>
 
@@ -344,22 +366,21 @@ const Agency = (props) => {
                             {vacancies.map((item) => {
                                 return (
                                     <Link target="_blank" to={item.link} className="agency-vacancy__wrapper-item">
-                                        <div className="flex-sb">
-                                            <p className="p-style-black">{item.place}</p>
-                                        </div>
-                                        <h3 className="heading-tertiary">
-                                            {item.name}
-                                        </h3>
-                                        <div className="flex-sb">
-                                            <p className="p-style-black">{item.type}</p>
-                                        </div>
-
+                                       <span className="place">
+                                           <Icon icon="vacancies" viewBox="0 0 16 16"/>
+                                           <p className="where s-text">{item.place}</p>
+                                       </span>
+                                        <h3 className="l-textReg">{item.name}</h3>
+                                        <p className="s-text type">{item.type}</p>
                                     </Link>
                                 )
                             })}
                             <Link className="agency-vacancy__wrapper-item" target="_blank" to={"https://hh.ru/employer/2174085"}>
-                                <img src={hh} alt="hh"/>
-                                <p>Больше вакансий на hh.ru</p>
+                                <span className="hh">
+                                 <Icon icon="hh" viewBox="0 0 48 49"/>
+                                <p className=" m-text">Больше вакансий на hh.ru</p>
+                                </span>
+
                             </Link>
                         </div>
 

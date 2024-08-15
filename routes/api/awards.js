@@ -5,6 +5,7 @@ const Awards = require("../../models/Awards");
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const {uploadFile} = require("./file");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -37,16 +38,16 @@ router.get('/awards', async (req, res) => {
 });
 
 router.post('/awards', upload.single('image'), async (req, res) => {
-  const { name, awardProject,controlVisibility } = req.body;
+  const { name, blogUrl} = req.body;
   console.log(req.file);
 
-  const image = req.file;
+  const image = req.file
 
   const awards = new Awards({
     name,
+    blogUrl,
     image,
-    awardProject,
-    controlVisibility
+
   });
 
   await awards.save();
@@ -75,19 +76,14 @@ router.put("/awards/:id", upload.single('image'), async (req, res) => {
     return res.status(404).json({ error: 'Awards not found' });
   }
 
-  const { name, awardProject, controlVisibility } = req.body;
+  const { name, blogUrl } = req.body;
   const image = req.file;
 
-  // Если есть новое изображение в запросе, обновляем ссылку на него
-  if (image) {
-    fs.unlinkSync(`uploads/${awards.image.filename}`);
-    awards.image = image;
-  }
+  uploadFile(image,'image',  awards, req, 'image')
 
   // Обновляем остальные поля документа
   awards.name = name;
-  awards.awardProject = awardProject;
-  awards.controlVisibility = controlVisibility;
+  awards.blogUrl = blogUrl;
 
   // Сохраняем изменения
   await awards.save();

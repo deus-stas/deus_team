@@ -6,11 +6,6 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
-    //top: 0;
-    //left: 0;
-    //right: 0;
-    //opacity: 1;
-    //filter: blur(0);
 
     @include respond(sm) {
       padding: 9rem 0 2.6rem;
@@ -43,15 +38,11 @@
     }
 
     &__content {
-      padding-right: 6.4rem;
+      display: flex;
+      flex-direction: column;
 
-      @include respond(sm) {
-        padding-right: 0;
-      }
-
-      .btn {
-        margin: 0;
-        font-weight: 400;
+      p{
+        color: #757677;
       }
     }
 
@@ -733,44 +724,85 @@
 
     &__wrap {
       display: grid;
-      grid-template-columns: 26.2rem auto;
-      grid-gap: 8.8rem;
+      grid-template-columns: 0.25fr 0.75fr;
+      width: 100vw;
 
-      @include respond(lg) {
-        grid-gap: 2rem;
-        grid-template-columns: 22.6rem auto;
+      @include respond(sm) {
+        grid-template-columns: 1fr 2fr;
+      }
+      @include respond(xs) {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+      }
+
+      &-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
     }
 
     &__wrapperSlide {
-      width: 100vw;
       display: flex;
+      flex-direction: row;
       flex-wrap: nowrap;
-      //gap: 4rem;
-      //@include respond(lg) {
-      //  gap: 2rem;
-      //}
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      @include respond(xs){
+        width: 100vw;
+      }
+
+      .padding-slider {
+        display: flex;
+        padding-right: 4rem;
+        @include respond(lg){
+          padding-right: 2rem;
+        }
+        @include respond(xs){
+          padding-right: 1rem;
+
+        }
+      }
 
       &-item {
         display: flex;
         flex-direction: column;
+        gap: 2rem;
         justify-content: space-between;
         color: #121212;
         background: #FFFFFF;
         padding: 4rem;
         border-radius: 5rem;
         min-width: 40.9rem;
-        min-height: 31.4rem;
+        width: 100%;
         opacity: 1;
         visibility: visible;
         transition: all 0.4s ease-out;
-        margin-right: 4rem;
+
+        .greenBall {
+          display: flex;
+          gap: 1rem;
+        }
+
         @include respond(lg) {
-          margin-right: 2rem;
           padding:  3rem;
           min-width: 34rem;
           min-height: 31.4rem;
         }
+
+        @include respond(sm) {
+          padding:  3rem;
+          min-width: 28rem;
+          min-height: 34rem;
+        }
+
 
         .wrapp {
           display: flex;
@@ -1261,118 +1293,31 @@
   }
 }
 
-//.gradient::before {
-//    content: '';
-//    z-index: 1;
-//    width: 100%;
-//    height: 100%;
-//    display: block;
-//    position: absolute;
-//    background:
-//            linear-gradient(0deg, rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
-//            linear-gradient(90deg,rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
-//            linear-gradient(180deg,rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
-//            linear-gradient(270deg, rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0)  98%),
-//
-//}
+.slide-arrow {
+  margin-top: auto;
+  display: flex;
+  gap: 2rem;
+  @include respond(xs){
+    margin: auto;
+  }
+  .prev, .next {
+    display: inline-block;
+    .icon {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+  .prev .icon {
+    transform: rotate(180deg);
+  }
+}
 
-.story-modal {
-  width: 100%;
-  z-index: 9999;
-  overflow-y: auto;
-  scrollbar-width: none;
-  backdrop-filter: blur(10px);
-  padding: 20rem 0;
-  display: table;
+.disabled {
+  opacity: 0.5;
+}
 
+.slider-touch-area{
   &::-webkit-scrollbar {
     display: none;
-  }
-
-  position: fixed;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  transition: all .4s, opacity .7s;
-
-  &-cont {
-    display: table-cell;
-    vertical-align: middle;
-    width: 100%;
-    height: 100%;
-  }
-
-  .btn {
-    position: absolute;
-    z-index: 1000;
-    display: inline-block;
-    &-next {
-      top: 50%;
-      margin: 0 auto;
-      right: 1rem;
-      left: auto;
-    }
-
-    &-prev {
-      top: 50%;
-      margin: 0 auto;
-      right: auto;
-      left: 1rem;
-    }
-
-    &-close {
-      top: 15rem;
-      left: auto;
-      right: 0;
-    }
-
-  }
-
-  &__wrap {
-    z-index: 900;
-    position: relative;
-    display: flex;
-    gap: 4rem;
-    align-items: center;
-
-    &-item {
-      position: relative;
-      z-index: 100;
-      display: inline-block;
-      object-fit: contain;
-      //width: 25vh;
-      width: 25rem;
-      height: 45rem;
-      opacity: 1;
-      flex: 0 0 auto;
-      transition: transform 0.3s ease-in-out;
-      transform: translateY(0%);
-
-      img {
-        width: 110%;
-        height: 100%;
-      }
-
-      video {
-        width: 110%;
-        height: 100%;
-
-      }
-
-
-    }
-    .activeInd {
-      display: flex;
-      width: 55rem !important;
-      height: 65rem !important;
-
-      img,video {
-        width: 70% !important;
-        height: 100% !important;
-        margin: 0 auto;
-      }
-    }
-
   }
 }

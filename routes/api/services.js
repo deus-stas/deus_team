@@ -62,8 +62,10 @@ router.post('/services', addPosition, upload.single('descrImg'), async (req, res
 
     const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' ? JSON.parse(req.body.benefits) : [];
     const work = !!req.body.work && req.body.work !== 'undefined' ? JSON.parse(req.body.work) : [];
-    const tariffs = !!req.body.tariffs && req.body.tariffs !== 'undefined' ? JSON.parse(req.body.tariffs) : [];
-    const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' ? JSON.parse(req.body.subProjects) : [];
+    const tariffs = req.body.tariffs && typeof req.body.tariffs === 'object'
+        ? req.body.tariffs
+        : [];
+     const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' ? JSON.parse(req.body.subProjects) : [];
 
     const {
         name,
@@ -234,8 +236,8 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
             ? JSON.parse(req.body.work)
             : [];
 
-        const tariffs = !!req.body.tariffs && req.body.tariffs !== 'undefined' && typeof req.body.tariffs === 'string'
-            ? JSON.parse(req.body.tariffs)
+        const tariffs = req.body.tariffs && typeof req.body.tariffs === 'object'
+            ? req.body.tariffs
             : [];
 
         const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' && typeof req.body.subProjects === 'string'

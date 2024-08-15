@@ -1,31 +1,76 @@
 @import '../../../style/mixins';
 
 .news-detail {
-    padding: 13.4rem 0 4rem;
+    overflow: hidden;
+    padding: 13.4rem 0 0 0;
     color: #050505;
     @include respond(lg){
-        padding: 13.4rem 0 3rem;
+        padding: 13.4rem 0 0 0;
     }
 
     @include respond(sm){
-        padding: 12.4rem 0 2rem;
+        padding: 12.4rem 0 0 0;
     }
     &__main {
         background-color: #FFFFFF;
         position: relative;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
+        border-radius: 5rem;
+
+        @include respond(sm){
+            border-radius: 3rem;
+        }
+        @include respond(xs){
+           display: flex;
+            flex-direction: column-reverse;
+            border-radius: 2rem;
+            padding: 2rem;
+        }
+
+        img{
+            border-radius: 5rem;
+            max-width: 67.9rem;
+            min-height: 45.5rem;
+            width: 100%;
+            height: 100%;
+            @include respond(lg){
+                min-width: 52.6rem;
+                min-height: 37.3rem;
+            }
+            @include respond(sm){
+                min-width: 34.1rem;
+                border-radius: 3rem;
+            }
+            @include respond(xs){
+                min-width: 0;
+                min-height: 18.9rem;
+                border-radius: 1rem;
+                margin-bottom: 2rem;
+            }
+        }
 
         &-content {
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            padding: 4rem;
+            @include respond(lg){
+                padding: 3rem;
+            }
+            @include respond(sm){
+                padding: 3rem;
+            }
+            @include respond(xs){
+                padding: 0;
+            }
 
             .telegram {
                 margin-top: auto;
                 color: rgba(3, 155, 229, 1);
                 display: flex;
                 gap: 1rem;
+                align-items: center;
             }
 
             .icon{
@@ -40,15 +85,43 @@
 
     }
 
+    &__slider{
+        margin: 2rem 0 4rem;
+    }
+
     &__article {
         padding: 4rem 0;
-
-        @include respond(sm) {
+        @include respond(lg) {
             padding: 3rem 0;
+        }
+        @include respond(xs){
+            padding: 2rem 0;
         }
 
         &-content {
-            margin: 0 34.8rem;
+            margin: 0 auto;
+            max-width: 66rem;
+            width: 100%;
+
+            @include respond(sm){
+                max-width: 72.8rem;
+            }
+
+            @include respond(xsx){
+                max-width: 32rem;
+
+                .heading-secondary{
+                    padding: 0 2rem;
+                }
+                .news-detail__article-about{
+                    padding: 2rem;
+                }
+
+            }
+
+            img{
+                border-radius: 2rem;
+            }
 
             p {
                 &:not(:last-child) {
@@ -86,16 +159,43 @@
 
             ol {
                 padding-left: 2rem;
-
+                counter-reset: list-item;
+                @supports (-webkit-touch-callout: none) {
+                    counter-reset: list-item 1;
+                }
                 &:not(:last-child) {
                     margin-bottom: 1rem;
                 }
 
+
                 li {
-                    list-style-type: auto;
+                    list-style-type: none;
+                    position: relative;
+                    counter-increment: list-item;
 
                     &:not(:last-child) {
                         margin-bottom: 0.5rem;
+                    }
+
+                    &::before {
+                        content: counter(list-item, decimal-leading-zero);
+                        display: inline-block;
+                        width: 3.2rem;
+                        height: 3.2rem;
+                        border-radius: 50%;
+                        background-color: #050505;
+                        color: #fff;
+                        text-align: center;
+                        font-size: 1.4rem;
+                        line-height: 3.4rem;
+                        margin-right: 0.5rem;
+                        position: absolute;
+                        left: -2rem;
+                    }
+
+
+                    p {
+                        margin-left: 3rem;
                     }
                 }
             }
@@ -180,50 +280,90 @@
 
         &-content {
             display: grid;
-            grid-template-columns: .25fr .75fr;
-            grid-gap: 4rem;
-            padding: 10rem 0 5rem;
+            grid-template-columns: 0.25fr 0.75fr;
+            padding: 4rem 0 2.6rem;
             border-top: 1px solid rgba(25, 27, 29, 0.3);
 
-            @include respond(sm) {
+            @include respond(lg){
+                width: 100vw;
+            }
+
+            @include respond(xs) {
                 padding: 6rem 0 3rem;
                 grid-template-columns: 100%;
                 grid-gap: 3rem;
+                width: 100%;
+            }
+
+            &__info {
+                display: flex;
+                flex-direction: column;
             }
         }
 
         &-wrap {
-            display: grid;
-            grid-template-columns: repeat(3, .33334fr);
-            grid-gap: 4rem;
-
-            @include respond(sm) {
-                grid-template-columns: 1fr;
-                grid-gap: 1rem 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+                display: none;
             }
 
-            .news__item:nth-child(10n+10),
-            .news__item:first-child {
-                grid-column: auto;
+            @include respond(xs) {
+                display: flex;
+                flex-wrap: nowrap;
+                margin-left: -2rem;
+                padding: 0 2rem;
+                width: 100vw;
+            }
 
-                &::after {
-                    content: none;
+            .flex-wrap {
+                display: flex;
+                flex-direction: column;
+                padding-right: 4rem;
+
+                @include respond(lg){
+                    padding-right: 3rem;
                 }
 
-                .news__img-wrap {
-                    margin-bottom: 3rem;
-
-                    @include respond(sm) {
-                        margin-bottom: 2rem;
-                    }
+                @include respond(sm){
+                    padding-right: 2rem;
                 }
 
-                //.news__text {
-                //    max-width: none;
-                //    position: static;
-                //    color: #191B1D;
-                //}
+                &:nth-last-child(1) {
+                    padding-right: 0;
+                }
+            }
 
+            .news__item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 2rem;
+                max-height: 20.6rem;
+                min-width: 31rem;
+                height: 100%;
+                width: 100%;
+                white-space: nowrap;
+                margin-bottom: 2rem;
+
+                @include respond(lg){
+                    min-width: 30rem;
+                    max-height: 19.875rem;
+                }
+
+                @include respond(sm){
+                    min-width: 32rem;
+                    max-height: 21.2rem;
+                }
+
+                img, video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
         }
     }
@@ -234,5 +374,34 @@
         @include respond(sm) {
             padding-bottom: 6rem;
         }
+    }
+}
+
+.slide-arrow {
+    margin-top: auto;
+    display: flex;
+    gap: 2rem;
+    @include respond(xs){
+        margin: auto;
+    }
+    .prev, .next {
+        display: inline-block;
+        .icon {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+    .prev .icon {
+        transform: rotate(180deg);
+    }
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.slider-touch-area{
+    &::-webkit-scrollbar {
+        display: none;
     }
 }

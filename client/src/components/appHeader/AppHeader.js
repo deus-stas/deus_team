@@ -22,31 +22,6 @@ const AppHeader = (props) => {
     const location = useLocation()
 
     useEffect(() => {
-        const defaultColor = [
-            /^\/$/,
-            /^\/contacts$/,
-            /^\/news$/,
-            /^\/login$/,
-            /^\/services\/.*$/,
-            /^\/projects\/.*$/
-        ];
-        let header = document.querySelector('.header')
-        let headerMob = document.querySelector('.headerMob')
-
-        if (!!header) {
-            if (defaultColor.some(pattern => pattern.test(location.pathname))) {
-                header.classList.remove('white');
-
-            } else {
-                header.classList.add('white');
-
-            }
-        }
-
-    }, [isLoading, location])
-
-
-    useEffect(() => {
         let header = document.querySelector(".header");
         let headerMob = document.querySelector(".headerMob");
         let menu = document.querySelector(".activeMenu");

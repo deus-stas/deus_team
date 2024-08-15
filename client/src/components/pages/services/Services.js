@@ -22,47 +22,7 @@ const apiUrl = '';
 
 const Services = (props) => {
 
-    // const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [openImage, setOpenImage] = useState(null);
-
-    // useEffect(() => {
-    //     axios.get(`${apiUrl}/api/reviews/`)
-    //         .then((response) => {
-    //             const reviews = response.data;
-    //             const projectIds = reviews.map((review) => review.reviewProject);
-    //             const serviceIds = reviews.map((review) => review.reviewService);
-    //
-    //             Promise.all([
-    //                 axios.get(`${apiUrl}/api/projects/?ids=${projectIds.join(',')}`),
-    //                 axios.get(`${apiUrl}/api/services/?ids=${serviceIds.join(',')}`)
-    //             ])
-    //                 .then((results) => {
-    //                     const projects = results[0].data;
-    //                     const services = results[1].data;
-    //
-    //                     const updatedReviews = reviews.map((review) => {
-    //                         const project = projects.find((p) => p.id === review.reviewProject);
-    //                         const service = services.find((s) => s.id === review.reviewService);
-    //
-    //                         return {
-    //                             ...review,
-    //                             reviewProject: project,
-    //                             reviewService: service
-    //                         };
-    //                     });
-    //
-    //                     setReviews(updatedReviews);
-    //                     console.log(updatedReviews);
-    //                 })
-    //                 .catch((error) => {
-    //                     console.log(error);
-    //                 });
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }, []);
 
     useEffect(() => {
         setIsLoadingMainPageEvent(true)
@@ -112,9 +72,9 @@ const Services = (props) => {
                         </section>
                         <section className="services-about borderBlock padding">
                             <div className="services-about__wrap">
-                                <span>
+                                <span className="info">
                                    <h2 className="heading-secondary">Почему стоит заказать<br/> разработку сайта в DEUS?</h2>
-                                <div className="services-about__descr s-text" dangerouslySetInnerHTML={{__html: text}}/>
+                                <div className="descr s-text" dangerouslySetInnerHTML={{__html: text}}/>
                                 </span>
                                 <div className="services-about__adv">
                                     <div className="services-about__adv-item">
@@ -169,14 +129,9 @@ const Services = (props) => {
 
                                                                         <p className="m-text">{tariffs.tariffsCategory}</p>
                                                                     </span>
-
-                                                                    {tariffs.tariffsItems.map(tariffsItem => {
-                                                                        return (
-                                                                            <p className="price s-text">
-                                                                                {tariffsItem.tariffPrice} &nbsp;/&nbsp; {tariffsItem.tariffDeadline}
-                                                                            </p>
-                                                                        )
-                                                                    })}
+                                                                    <p className="price s-text">
+                                                                        {tariffs.tariffPrice} &nbsp;/&nbsp; {tariffs.tariffDeadline}
+                                                                    </p>
                                                                 </div>
                                                             </div>
 
@@ -226,11 +181,11 @@ const Services = (props) => {
 
                         <section className="services-team borderBlock padding">
                                 <div className="services-team__wrap">
-                                    <div>
+                                    <div className="info">
                                         <h2 className="heading-secondary">
                                             Как мы работаем?
                                         </h2>
-                                        <p className="s-text">Предлагаем форматы работы с учётом особенностей проекта.
+                                        <p className="intro s-text">Предлагаем форматы работы с учётом особенностей проекта.
                                             Если разработка требует большей гибкости, миксуем подходы.
 
                                         </p>
@@ -245,9 +200,9 @@ const Services = (props) => {
                                                              src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null}
                                                              alt=""/>
                                                         <span>
-                                                      <p className="m-text">{team.name}</p>
-                                                    <p className="s-text">{team.post}</p>
-                                                    </span>
+                                                            <p className="m-text">{team.name}</p>
+                                                            <p className="s-text">{team.post}</p>
+                                                        </span>
                                                     </div>
                                                 )
                                             })}

@@ -49,6 +49,7 @@
                 flex-wrap: wrap;
 
                 img {
+                    border-radius: 50%;
                     width: 2.4rem;
                     height: 2.4rem;
                 }
@@ -118,6 +119,17 @@
         gap: 3rem;
         .btn {
             margin-top: 1.9rem;
+        }
+
+
+        .flex-icon {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .icon {
+            width: 1.8rem;
+            height: 1.8rem;
         }
 
         @include respond(sm) {

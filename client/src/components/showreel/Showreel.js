@@ -28,75 +28,22 @@ const Showreel = (props) => {
 
 
 
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll);
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, []);
-
-
-    // useEffect(() => {
-    //     if (!!hasPlayedOnce || !!isMain) {
-    //         if (!!videoRef && !!videoRef.current && prevIsInViewport !== isInViewport) {
-    //             if (!isInViewport) {
-    //                 if(!videoRef.current.paused || !hasPlayedOnce){
-    //                     setCurrentTime(videoRef.current.currentTime);
-    //                     videoRef.current.pause()
-    //                     videoRef.current.currentTime = 4;
-    //                 }
-    //             } else {
-    //                 videoRef.current.currentTime = currentTime;
-    //                 videoRef.current.play();
-    //                 setHasPlayedOnce(true)
-    //             }
-    //
-    //         }
-    //     }
-    // }, [isInViewport])
-
-    useEffect(()=> {
-
-    },[])
-
-    // const handleScroll = () => {
-    //     const videoElement = videoRef.current;
-    //     if (videoElement) {
-    //         const videoRect = videoElement.getBoundingClientRect();
-    //         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    //         const videoHeight = videoRect.height;
-    //         const scrollOffset = 0.5 * videoHeight;
-    //         const isInViewport = (
-    //             (videoRect.top >= -scrollOffset && videoRect.top <= windowHeight - scrollOffset) ||
-    //             (videoRect.bottom >= scrollOffset && videoRect.bottom <= windowHeight + scrollOffset)
-    //         );
-    //         setIsInViewport(isInViewport);
-    //     }
-    // };
-
     const handlePlay = () => {
         const header = document.querySelector('.header')
         const footer = document.querySelector('.footer')
         const isTrue = videoRef.current.paused
         // videoRef.current.currentTime = currentTime
 
-        videoRef.current.style.transition = 'all 0.3s ease-in-out';
-        videoRef.current.style.transform = isTrue ? 'translateY(-30.4vw)' : 'translateY(0)';
-        videoRef.current.style.position = isTrue ? 'fixed' : 'relative';
-        videoRef.current.style.height = isTrue ? '110vh' : '';
-        header.style.opacity = isTrue ? '0' : '1';
-        footer.style.opacity = isTrue ? '0' : '1';
-        videoRef.current.style.zIndex = isTrue ? 8001 : 'auto';
+        // videoRef.current.style.transition = 'all 0.3s ease-in-out';
+        // videoRef.current.style.transform = isTrue ? 'translateY(-30.4vw)' : 'translateY(0)';
+        // videoRef.current.style.position = isTrue ? 'fixed' : 'relative';
+        // videoRef.current.style.height = isTrue ? '110vh' : '';
+        // header.style.opacity = isTrue ? '0' : '1';
+        // footer.style.opacity = isTrue ? '0' : '1';
+        // videoRef.current.style.zIndex = isTrue ? 8001 : 'auto';
 
         isTrue ? videoRef.current.play() : videoRef.current.pause();
     };
-
-    // useEffect(() => {
-    //     if (videoRef.current) {
-    //         videoRef.current.currentTime = 4;
-    //     }
-    // }, []);
-
 
     return (
         <div className="showreel">
