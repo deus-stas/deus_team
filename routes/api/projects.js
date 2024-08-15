@@ -86,7 +86,7 @@ router.post(
         { name: 'mainVideoFile' }]),
     addCustomId,
     async (req, res) => {
-    const { name , date, duration, metric, descrProject, mainVideo, color, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2, resultsColor,customId, workStepsHeader,resultPersonsText, resultTextColor, technologies, visibility, seoTitle, seoKeywords, seoDescription  } = req.body;
+    const { name , date, duration, metric, descrProject, mainVideo, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, visibilityTitle1, visibilityTitle2, customId, workStepsHeader,resultPersonsText, technologies, visibility, seoTitle, seoKeywords, seoDescription  } = req.body;
     const tasksList = !!req.body.tasksList && req.body.tasksList !=='undefined' ? JSON.parse(req.body.tasksList): [];
     const metrics = !!req.body.metrics && req.body.metrics !=='undefined' ? JSON.parse(req.body.metrics): [];
     const stack = !!req.body.stack && req.body.stack !=='undefined' ? JSON.parse(req.body.stack): [];
@@ -191,7 +191,6 @@ router.post(
         image,
         imageMob,
         mainVideo,
-        color,
         about,
         bannerFirstVideo,
         bannerSecondVideo,
@@ -238,18 +237,14 @@ router.post(
         mainVideoFile,
         mainMobVideoFile,
         workSteps,
-        aimColor,
-        workStepsColor,
         visibilityTitle1,
         visibilityTitle2,
         visibilityImg1,
         visibilityImg2,
-        resultsColor,
         customId,
         nameInEng,
         workStepsHeader,
         resultPersonsText,
-        resultTextColor,
         technologies,
         visibility,
         approachList,
@@ -332,7 +327,7 @@ router.put("/projects/:id",
     console.log(req.body);
     console.log(req.files);
 
-    const { name, date, duration, metric, descrProject, mainVideo, color, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, aimColor, workStepsColor, visibilityTitle1, visibilityTitle2,resultsColor,customId, nameInEng, workStepsHeader, resultPersonsText,resultTextColor, technologies, visibility,  seoTitle, seoKeywords, seoDescription} = req.body;
+    const { name, date, duration, metric, descrProject, mainVideo, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, visibilityTitle1, visibilityTitle2,customId, nameInEng, workStepsHeader, resultPersonsText, technologies, visibility,  seoTitle, seoKeywords, seoDescription} = req.body;
         const stack = !!req.body.stack && req.body.stack !=='undefined' ? JSON.parse(req.body.stack): [];
 
     const tasksList = JSON.parse(req.body.tasksList);
@@ -730,7 +725,6 @@ router.put("/projects/:id",
     // var editedWithLine = rmPercent.split(' ').join('-');
     project.nameInEng = nameInEng;
     project.mainVideo = mainVideo;
-    project.color = color;
     project.about = about;
     project.task = task;
     project.bannerFirstVideo = bannerFirstVideo;
@@ -762,15 +756,11 @@ router.put("/projects/:id",
     project.awardsURL = awardsURL,
     project.projectSite = projectSite,
     project.workSteps = workSteps,
-    project.aimColor = aimColor,
-    project.workStepsColor = workStepsColor,
     project.visibilityTitle1 = visibilityTitle1,
     project.visibilityTitle2 = visibilityTitle2,
-    project.resultsColor = resultsColor,
     project.customId = customId,
     project.workStepsHeader = workStepsHeader,
     project.resultPersonsText = resultPersonsText,
-    project.resultTextColor = resultTextColor,
     project.technologies = technologies,
     project.visibility = visibility,
     project.approachList = approachList,
