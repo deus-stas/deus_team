@@ -55,7 +55,10 @@ const TechSupport = ({detail}) => {
 
                         <div className="project-stack__content">
                             {filteredStack.map((stack) => (
-                                <img src={`${apiUrl}/uploads/${stack.image.filename}`} alt={stack.name} />
+                                <div className="project-stack__content-item">
+                                    <img src={`${apiUrl}/uploads/${stack.image.filename}`} alt={stack.name}/>
+                                </div>
+
                             ))}
                         </div>
                     </div>
