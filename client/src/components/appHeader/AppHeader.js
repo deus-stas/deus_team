@@ -21,6 +21,7 @@ const AppHeader = (props) => {
     const [visibleMob, setVisibleMob] = useState(true);
     const location = useLocation()
 
+
     useEffect(() => {
         let header = document.querySelector(".header");
         let headerMob = document.querySelector(".headerMob");
@@ -129,7 +130,7 @@ const AppHeader = (props) => {
     };
 
 
-    const {headerData} = props;
+    const {headerData, services} = props;
 
     return (
         <>
@@ -148,11 +149,15 @@ const AppHeader = (props) => {
                                                 <span data-hover="Агентство">Агентство</span>
                                             </DelayedNavLink>
                                         </li>
-                                        <li className="header__nav-item hover-flip hidden-mobile">
-                                            <DelayedNavLink to="/services">
-                                                <span data-hover="Услуги">Услуги</span>
-                                            </DelayedNavLink>
-                                        </li>
+                                        <div style={{position:"relative"}}>
+                                            <li className="header__nav-item hover-flip hidden-mobile">
+                                                <DelayedNavLink to="/services">
+                                                    <span data-hover="Услуги">Услуги</span>
+                                                </DelayedNavLink>
+                                            </li>
+                                            <div className="xs-text services-count" >{services.length}</div>
+                                        </div>
+
                                         <li className="header__nav-item hover-flip hidden-mobile">
                                             <DelayedNavLink to="/projects">
                                                 <span data-hover="Проекты">Проекты</span>
@@ -170,19 +175,33 @@ const AppHeader = (props) => {
                                         </li>
                                     </ul>
                                 </nav>
-
-                                <DelayedLink to="/contacts" className="header__discuss hidden-mobile"
-                                             datahash="contactUs"
-                                             onClick={(e) => gotoAnchor(e)}>
-                                    {!!headerData.headerPhoto &&
-                                                <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                            src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
-                                                            alt="Обсудить проект" className="header__discuss-img"/>
+                                <span className="header-nav" style={{display:"flex", gap:"10px", justifyContent:"flex-end"}}>
+                                    {
+                                        headerData && headerData.phone &&
+                                            (
+                                                <div className="menu-contacts">
+                                                    <a href={`tel:${headerData.phone}`} className="menu-contacts-link">
+                                                        <Icon icon="telephone" viewBox="0 0 18 18"/>
+                                                    </a>
+                                                </div>
+                                            )
                                     }
-                                    <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                         className="header__discuss-text m-text">Обсудить проект
-                                    </div>
-                                </DelayedLink>
+
+                                    <DelayedLink to="/contacts" className="header__discuss hidden-mobile"
+                                                 datahash="contactUs"
+                                                 onClick={(e) => gotoAnchor(e)}>
+                                        {!!headerData.headerPhoto &&
+                                            <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                                        src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
+                                                        alt="Обсудить проект" className="header__discuss-img"/>
+                                        }
+                                        <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                             className="header__discuss-text m-text">Обсудить проект
+                                        </div>
+                                    </DelayedLink>
+                                </span>
+
+
 
                                 <div className={`header__burger hidden-desktop  ${menu ? 'activeMenu active' : ''}`}
                                      onClick={() =>{
@@ -223,18 +242,12 @@ const AppHeader = (props) => {
                                             </div>
                                         </nav>
                                         {
-                                            headerData && headerData.phone ?
+                                            headerData && headerData.phone &&
                                                 (
                                                     <div className="menu-contacts">
-                                                        <DelayedLink to={`tel:${headerData.phone}`}
-                                                                     className="menu-contacts-link">{headerData.phone}</DelayedLink>
-                                                    </div>
-                                                ) : (
-                                                    <div className="menu-contacts">
-                                                        <DelayedLink to="tel:+74951034351"
-                                                                     className="menu-contacts-link">+7
-                                                            (495)
-                                                            103—4351</DelayedLink>
+                                                        <DelayedLink to={`tel:${headerData.phone}`} className="menu-contacts-link">
+                                                            <Icon icon="telephone" viewBox="0 0 18 18"/>
+                                                        </DelayedLink>
                                                     </div>
                                                 )
                                         }
@@ -293,5 +306,5 @@ const AppHeader = (props) => {
 }
 
 export default connect(
-    (state) => ({headerData: state.app.headerData})
+    (state) => ({ headerData: state.app.headerData, services: state.app.services,})
 )(AppHeader)

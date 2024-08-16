@@ -95,8 +95,8 @@
     </g>
   </svg>
 
-  <svg fill="currentColor" id="icon-arrowGo" xmlns="http://www.w3.org/2000/svg"  width="46" height="46">
-      <path d="M25 5V25M25 25H5M25 25L5 5" stroke="#E0FD60" stroke-width="2"/>
+  <svg fill="currentColor" id="icon-arrowGo" xmlns="http://www.w3.org/2000/svg"  width="30" height="30">
+      <path d="M25 5V25M25 25H5M25 25L5 5" stroke="#E0FD60" stroke-width="1"/>
   </svg>
 
   <svg fill="none" id="icon-pdf" xmlns="http://www.w3.org/2000/svg"  width="46" height="46">

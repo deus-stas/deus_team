@@ -132,13 +132,7 @@
                         line-height: 3.4rem;
 
                         &-link {
-                            display: block;
-                            font-size: 2rem;
-                            margin-bottom: 2rem;
 
-                            &:not(:last-child) {
-                                margin-bottom: 1rem;
-                            }
                         }
                     }
                 }
@@ -449,6 +443,20 @@
     }
 }
 
+.menu-contacts {
+    display: block;
+    width: 5rem;
+    height: 4.4rem;
+    background-color: #E0FD60;
+    border-radius: 3.9rem;
+    text-align: center;
+    line-height: 5.4rem;
+    .icon{
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+}
+
 .myHeader {
     display: flex;
     justify-content: space-between;
@@ -486,4 +494,20 @@
     transition: all .25s ;
     visibility: visible;
     opacity: 1;
+}
+
+.services-count {
+    position: absolute;
+    text-align: center;
+    width: 1.8rem;
+    height: 1.9rem;
+    top: -.8rem;
+    left: 5.1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: #E0FD60;
+
+    @include respond(sm) {
+        display: none;
+    }
 }
