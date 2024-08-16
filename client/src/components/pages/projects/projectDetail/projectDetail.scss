@@ -562,12 +562,12 @@
         }
 
         &__text {
-            color: white;
 
-            
+
             p {
+                color: white !important;
                  &:first-child{
-                     color: #E0FD60;
+                     color: #E0FD60 !important;
                  }
 
                 &:not(:last-child) {
@@ -576,6 +576,10 @@
                     @include respond(sm){
                         margin-bottom: 1rem;
                     }
+                }
+
+                span {
+                    color: inherit!important;
                 }
             }
 

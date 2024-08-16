@@ -336,7 +336,7 @@
 
       &-img {
         width: 100%;
-        height: 31rem;;
+        height: 100%;
         object-fit: cover;
       }
 
@@ -347,12 +347,10 @@
         gap: 2rem;
         color: #ffffff;
         position: absolute;
-        top: 3.5rem;
-        left: 4rem;
+        top: 0;
+        padding: 4rem;
         z-index: 3;
         &__num {
-          -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -360,44 +358,44 @@
           border: 1px solid #757677;
           color: #757677;
           border-radius: 3.9rem;
-          padding: 0.6rem 1rem 0.5rem;
-          height: 2.3rem;
+          padding: 0.6rem 1.3rem 0.5rem;
+          height: 2.6rem;
           @include respond(sm) {
-            height: 2.1rem;
           }
 
         }
 
         &__text {
-          line-height: 4.7rem !important;
-          height: 4.68rem;
-          @include respond(sm) {
-            height: 3.1rem;
-            line-height: 3.12rem !important;
-          }
+
         }
 
-        @include respond(sm) {
-          left: 2rem;
-          align-items: flex-end;
+        @include respond(lg) {
+          padding: 3rem;
         }
       }
 
       &-service {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 4rem;
         color: #ffffff;
         position: absolute;
-        gap: 1.5rem;
-        bottom: 0;
-        padding: 6rem 4rem;
+        top: 9.1rem;
+        padding: 0 4rem;
         z-index: 3;
         left: 0;
         right: 0;
 
+        @include respond(lg) {
+          top: 7.65rem;
+          padding: 0 3rem;
+          gap: 0 2rem;
+        }
+
         @include respond(sm) {
-          padding: 3rem;
+          top: 6.3rem;
           gap: 0;
+          grid-template-columns: 1fr;
         }
       }
 
@@ -406,26 +404,40 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        //gap: 5.2rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 1.5rem 0;
+        padding: 1rem 0;
         align-items: center;
         justify-content: space-between;
         transition: all 0.3s ease-in-out;
 
+
+
+        @include respond(lg) {
+          padding: .85rem 0 .75rem;
+        }
+
         @include respond(sm) {
           padding: 1rem 0;
+          padding: .45rem 0 .35rem;
         }
 
         p {
-          font-size: 2.4rem;
           opacity: 1;
           transition: opacity 0.3s;
+          @include respond(sm) {
+
+            padding: .45rem 0 ;
+          }
         }
 
         .icon {
           width: 3rem;
           height: 3rem;
+
+          @include respond(sm){
+            width: 2rem;
+            height: 2rem;
+          }
         }
 
         &:hover {
@@ -441,26 +453,28 @@
           }
 
           p {
-            opacity: 0.5;
+            color: #E0FD60;;
           }
         }
+
       }
 
       &-arrow {
-        color: white;
+        width: 5rem;
+        height: 5rem;
+        color: #E0FD60;
         display: inline-flex;
         padding: 2rem;
         justify-content: center;
         align-items: center;
         overflow: hidden;
         border-radius: 43px;
-        border: 1px solid white;
+        border: 1px solid #E0FD60;
         background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(17px);
         z-index: 5;
-
         position: absolute;
-        bottom: 5rem;
+        bottom: 4rem;
         right: 4rem;
         transition: transform 0.3s ease-in-out;
 
@@ -469,32 +483,30 @@
         }
 
         .icon {
-          width: 3rem;
-          height: 3rem;
+          width: 2.5rem;
+          height: 2.8rem;
         }
       }
 
       &__descr {
         max-width: 50rem;
         color: #ffffff;
-
         position: absolute;
-        bottom: 4.6rem;
+        bottom: 0;
         left: 0;
         right: 0;
         z-index: 3;
-        padding: 0 4rem;
+        padding: 4rem;
 
         &:nth-child(1) {
-          bottom: 8rem;
+          padding: 3rem;
         }
-
-        @include respond(sm) {
-          bottom: 8rem;
+        @include respond(lg) {
+            padding: 3rem;
         }
 
         @include respond(xs) {
-          bottom: 10rem;
+          padding: 2rem;
         }
 
         &-flex {
@@ -503,8 +515,27 @@
           align-items: center;
           gap: 3rem;
 
+          @include respond(lg){
+            gap: 2rem;
+          }
+
+          &-ind1 {
+            max-width: 37rem;
+            width: 100%;
+
+            @include respond(lg) {
+              max-width: 23.2rem;
+            }
+
+            @include respond(sm) {
+              margin: 0;
+              max-width: 24.1rem;
+            }
+          }
+
           @include respond(sm) {
             font-size: 1.6rem;
+            margin-top: 1rem;
           }
 
           &__item {
@@ -515,28 +546,56 @@
 
             &:nth-child(1) {
               font-weight: 500;
-              font-size: 8rem;
-              //padding-top: 1rem;
+              font-size: 4.8rem;
 
               @include respond(sm) {
-                font-size: 6rem;
+                font-size: 4.2rem;
                 padding-top: 0;
               }
 
-              @include respond(xs) {
-                font-size: 6rem;
+            }
+            &:nth-child(2) {
+              max-width: 17rem;
+              font-size: 1.6rem;
+              width: 100%;
+
+              @include respond(sm) {
+                font-size: 1.4rem;
+                max-width: 15rem;
               }
+
             }
           }
         }
       }
 
       &__descr1 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0;
         color: #ffffff;
         position: absolute;
-        bottom: 8rem;
-        padding: 4rem;
+        top: 10.3rem;
+        padding: 0 4rem;
         z-index: 3;
+        font-size: 1.6rem;
+
+        @include respond(lg) {
+          top: 9.1rem;
+          padding: 0 3rem;
+        }
+
+        @include respond(sm) {
+          top: 9rem;
+          flex-wrap: wrap;
+          font-size: 1.4rem;
+        }
+
+        @include respond(xs) {
+          top: 13.197rem;
+          padding: 0 2rem 3rem;
+        }
 
         .person {
           @include respond(sm) {
@@ -546,14 +605,26 @@
           &-img {
             width: 7rem;
             height: 7rem;
+            flex: 0 0 7rem;
             border-radius: 50%;
-            margin-bottom: 1rem;
             border: 2px solid rgba(255, 255, 255, 0.3);
+
+            @include respond(lg) {
+              width: 6rem;
+              height: 6rem;
+              flex: 0 0 6rem;
+            }
 
             @include respond(sm) {
               width: 5rem;
               height: 5rem;
-              flex: 0 0 6rem;
+              flex: 0 0 5rem;
+              margin-right: 2rem;
+            }
+            @include respond(xs) {
+              width: 4rem;
+              height: 4rem;
+              flex: 0 0 4rem;
               margin-right: 2rem;
             }
 
@@ -572,14 +643,12 @@
             &:nth-child(3) {
               position: relative;
               z-index: 3;
-              margin-right: -3rem;
+              margin-right: 3rem;
             }
           }
         }
 
-        @include respond(sm) {
-          padding: 3rem;
-        }
+
       }
 
       &:nth-child(3) {
@@ -852,408 +921,6 @@
     }
   }
 
-  &-services {
-    padding: 10rem 0;
-    background: #191b1d;
-    color: #fff;
-    overflow: hidden;
-
-    @include respond(sm) {
-      padding: 6rem 0;
-    }
-
-    &__wrap {
-      display: grid;
-      grid-template-columns: 43.2% 49%;
-      justify-content: space-between;
-
-      @include respond(md) {
-        grid-template-columns: 40% 56%;
-      }
-
-      @include respond(sm) {
-        grid-template-columns: 100%;
-        grid-gap: 4rem;
-      }
-    }
-
-    &__info {
-      .heading-secondary {
-        margin-bottom: 10.5rem;
-
-        @include respond(sm) {
-          margin-bottom: 3rem;
-        }
-      }
-
-      .showreel__s iframe {
-        aspect-ratio: 1/0.562;
-      }
-    }
-
-    &__item {
-      padding-bottom: 3rem;
-      border-bottom: 1px solid #3b3d3f;
-      margin-bottom: 3rem;
-
-      @include respond(sm) {
-        padding-bottom: 1.5rem;
-      }
-
-      &:not(:last-child) {
-        margin-bottom: 3rem;
-
-        @include respond(sm) {
-          margin-bottom: 1.5rem;
-        }
-      }
-
-      &.active {
-        .main-services__btn {
-          transform: rotate(180deg);
-          background: #fff;
-        }
-
-        .main-services__acc {
-          opacity: 1;
-          margin-top: 2rem;
-          max-height: 100rem;
-          visibility: visible;
-        }
-      }
-    }
-
-    &__head {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    &__num {
-      margin-right: 2rem;
-      line-height: 1.8rem;
-      opacity: 0.4;
-    }
-
-    &__name {
-      margin-right: auto;
-      font-weight: 500;
-      font-size: 2.8rem;
-      line-height: 3.4rem;
-
-      @include respond(sm) {
-        font-size: 2.6rem;
-        line-height: 3.1rem;
-      }
-    }
-
-    &__btn {
-      width: 5rem;
-      flex: 0 0 5rem;
-      margin-left: 1rem;
-      height: 5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #3b3d3f;
-      border-radius: 38px;
-      color: #191b1d;
-      transition: all 0.5s;
-
-      @include respond(sm) {
-        width: 4rem;
-        height: 4rem;
-        flex: 0 0 4rem;
-      }
-
-      .icon {
-        width: 1.6rem;
-        height: 1.6rem;
-      }
-    }
-
-    &__acc {
-      max-height: 0;
-      opacity: 0;
-      margin-top: 0;
-      visibility: hidden;
-      transition: all 0.1s;
-    }
-
-    &__descr {
-      margin-bottom: 3rem;
-      font-size: 2rem;
-      line-height: 2.6rem;
-      opacity: 0.6;
-    }
-
-    &__bot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      row-gap: 2rem;
-    }
-
-    &__gallery {
-      display: flex;
-      align-items: center;
-
-      @include respond(sm) {
-        display: flex;
-        width: 100vw;
-        margin-left: -2rem;
-        padding: 0 2rem;
-        overflow-x: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
-    }
-
-    &__img {
-      display: block;
-      height: 4.8rem;
-
-      &:not(:last-child) {
-        margin-right: 6rem;
-
-        @include respond(sm) {
-          margin-right: 3rem;
-        }
-      }
-    }
-  }
-
-  &-news {
-    padding: 10rem 0;
-    @include respond(sm) {
-      padding: 4rem 0;
-    }
-
-    .heading-secondary {
-      margin-bottom: 6rem;
-      padding: 0 1rem;
-
-      @include respond(sm) {
-        margin-bottom: 1rem;
-      }
-    }
-
-    &__wrap {
-      display: grid;
-      grid-template-columns: repeat(4, 0.25fr);
-      grid-gap: 4rem;
-      justify-content: space-between;
-
-      .main-news__content {
-        grid-column: span 3;
-        @include respond(sm) {
-          grid-column: inherit;
-        }
-      }
-
-      @include respond(sm) {
-        grid-template-columns: 1fr;
-        grid-gap: 0;
-      }
-    }
-
-    &__info {
-      display: grid;
-      @include respond(sm) {
-        padding: 0 0 3rem 0;
-      }
-
-      &-wrap {
-        padding: 0 1rem;
-        margin-top: auto;
-      }
-
-      &-item {
-        display: flex;
-        flex-direction: row;
-        padding: 1.5rem 0;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 2.4rem;
-        line-height: 2.6rem;
-        color: #000000;
-        border-bottom: 1px solid rgba(65, 66, 66, 0.15);
-        transition: opacity 0.4s;
-
-        @include respond(sm) {
-          font-size: 2rem;
-          line-height: 2.8rem;
-          padding: 1rem 0;
-        }
-
-        p {
-          transition: opacity 0.4s;
-          max-width: 85%;
-        }
-
-        p:hover {
-          opacity: 0.5;
-        }
-
-        .icon {
-          width: 3rem;
-          height: 3rem;
-        }
-
-        &:hover {
-          p {
-            opacity: 0.5;
-          }
-
-          .hover-flip-arrow span {
-            transition: all 0.3s ease-in-out;
-          }
-          .hover-flip-arrow span {
-            transform: translatex(100%) translatey(100%);
-          }
-
-          .hover-flip-arrow div {
-            transform: translatex(0) translatey(0);
-          }
-        }
-
-        &:not(:last-child) {
-          margin-bottom: 2rem;
-
-          @include respond(sm) {
-            margin: 0;
-          }
-        }
-      }
-    }
-
-    &__content {
-      display: grid;
-      grid-template-columns: repeat(3, 0.34fr);
-      grid-gap: 4rem;
-
-      @include respond(sm) {
-        grid-template-columns: 1fr;
-        grid-gap: 1rem;
-      }
-    }
-
-    &__item {
-      background: black;
-      position: relative;
-      display: grid;
-      height: 73rem;
-      grid-gap: 1rem;
-      transition: all 0.3s ease-in-out;
-      will-change: transform;
-      @include respond(sm) {
-        grid-column: auto;
-        height: 46rem;
-        &:nth-child(1) {
-          grid-column: auto;
-        }
-      }
-
-      &:nth-child(1) {
-        grid-column: span 2;
-        @include respond(sm) {
-          grid-column: inherit;
-        }
-      }
-
-      &:nth-child(even) {
-        .main-news__img-wrap {
-          display: grid;
-          align-items: stretch;
-        }
-
-        .main-news__descr {
-          max-width: 36rem;
-          color: #fff;
-          position: absolute;
-          top: 12rem;
-          left: 3rem;
-          right: 3rem;
-          z-index: 3;
-        }
-      }
-    }
-
-    &__img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-      will-change: transform;
-
-      &-wrap {
-        overflow: hidden;
-        color: #ffffff;
-      }
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-
-    &__text {
-      max-width: 36rem;
-      color: #fff;
-      border: 1px solid rgb(255, 254, 254);
-      border-radius: 45px;
-      z-index: 100;
-      position: absolute;
-      top: 5rem;
-      left: 3rem;
-      transition: all 0.3s ease-in-out;
-    }
-
-    &__descr {
-      max-width: 36rem;
-      color: #fff;
-
-      position: absolute;
-      bottom: 5rem;
-      left: 3rem;
-      right: 3rem;
-      z-index: 100;
-
-      @include respond(sm) {
-        bottom: 0;
-        top: 12rem;
-      }
-    }
-
-    &__tag {
-      padding: 0.6rem 1.3rem 0.5rem;
-      font-size: 1.6rem;
-      z-index: 100;
-
-      @include respond(sm) {
-        font-size: 1.4rem;
-        line-height: normal;
-      }
-    }
-
-    &__name {
-      font-weight: 500;
-      font-size: 2.8rem;
-      line-height: 3.9rem;
-      color: #ffffff;
-      z-index: 100;
-      transition: all 0.3s ease-in-out;
-
-      @include respond(sm) {
-        font-size: 2rem;
-        line-height: 3.1rem;
-      }
-    }
-  }
 }
 
 .rollCircleMain {

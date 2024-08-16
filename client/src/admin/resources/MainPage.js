@@ -4,24 +4,42 @@ import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, 
 
 const apiUrl = ''
 
-const VideoOrImageField = ({ file }) => {
+const VideoOrImageField = props => {
+    return (
+        <FunctionField
+            {...props}
+            render={record => {
+                if (record.filename) {
+                    const fileUrl = `${apiUrl}/uploads/${record.filename}`;
+                    const isVideo = /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(record.filename);
+                    const isImage = /\.(jpeg|jpg|gif|png)$/i.test(record.filename);
 
-    const isVideo = (funcFile) => {
-        return funcFile && funcFile.filename && funcFile.mimetype.indexOf('mp4') !== -1;
-    };
+                    if (isVideo) {
+                        return (
+                            <video className="customWidth" src={fileUrl}
+                                   type={record.mimetype}>
+                            </video>
+                        );
+                    } else if (isImage) {
 
-    if (!!file) {
-        if (isVideo(file)) {
-            return (
-                <video style={{ width: '300px' }} autoPlay loop playsInline>
-                    <source src={`${apiUrl}/uploads/${file.filename}`} type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" />
-                </video>
-            );
-        } else {
-            return <img style={{ width: '300px' }} src={`${apiUrl}/uploads/${file.filename}`} alt={file.filename} title="image" />;
-        }
-    }
-    return null; // Return null if file is not available
+                        return <img  src={fileUrl} alt={record.filename}/>;
+                    }
+                } else {
+                    const isVideo = /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(record.title);
+                    const isImage = /\.(jpeg|jpg|gif|png)$/i.test(record.title);
+
+                    if (isVideo) {
+                        return (
+                            <video autoPlay loop muted playsInline>
+                                <source   src={`${record.src}`} alt={record.src} title="video"/>
+                            </video>
+                        );
+                    } else if (isImage) {
+                        return <img  src={`${record.src}`} alt={record.src} title="image"/>;
+                    }
+                }
+            }}
+        />)
 };
 
 const FunctionFieldForArrayItem = (props) => (
@@ -29,15 +47,15 @@ const FunctionFieldForArrayItem = (props) => (
         const splitter = source.split(".");
         const field = splitter[0];
         const index = splitter[1];
-        console.log(record, source)
-        if(!!record[field] && !!record[field][index]){
+        if (!!record[field] && !!record[field][index]) {
             const file = record[field][index];
             return (
-                <VideoOrImageField file={file}/>
+                <VideoOrImageField record={file}/>
             )
         }
 
     }}/>
+
 );
 
 
@@ -46,7 +64,7 @@ const FilenameField = props => {
         <FunctionField
             {...props}
             render={record => {
-                return (<VideoOrImageField file={record} />)
+                return (<VideoOrImageField record={record} />)
             }}
         />
     )
@@ -70,8 +88,12 @@ export const MainPageCreate = (props) => (
             <TextInput className="customWidth" source="pageURL" label="Ссылка на страницу" placeholder="/название страницы"/>
             <FileInput
                 source="mainVideoFile"
-                label="Баннер видео">
-                <FileField source="src" title="title" />
+                className="fileInput"
+                placeholder="+"
+                label="Баннер">
+                <FilenameField
+                    source="src"
+                    title="title"/>
             </FileInput>
             <ArrayInput
                 source="textList"
@@ -95,8 +117,12 @@ export const MainPageEdit = (props) => (
             <TextInput className="customWidth" source="pageURL" label="Ссылка на страницу" placeholder="/название страницы"/>
             <FileInput
                 source="mainVideoFile"
-                label="Баннер видео">
-                <FileField source="src" title="title" />
+                className="fileInput"
+                placeholder="+"
+                label="Баннер">
+                <FilenameField
+                    source="src"
+                    title="title"/>
             </FileInput>
             <ArrayInput
                 source="textList"

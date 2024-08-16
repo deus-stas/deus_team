@@ -26,21 +26,26 @@ const TechSupport = ({detail}) => {
         <>
             {detail.taskDescr && detail.taskDescr !== 'undefined' && detail.taskDescr !== '' ?
 
-                <section style={{backgroundColor:"white"}} className="project-results padding borderBlock">
-                        <div className="project-results__wrap">
+                <section style={{backgroundColor:"white", color:'#050505'}} className="project-target padding borderBlock">
+                        <div className="project-target__wrap">
                             <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.heading}}/>
-                            <div className="project-results__content">
-                                <div dangerouslySetInnerHTML={{__html: detail.taskDescr}}/>
+                            <div>
+                                {detail.taskDescr && (
+                                    <div className="project-target__content l-textReg">
+                                        <div dangerouslySetInnerHTML={{__html: detail.taskDescr}}/>
+                                    </div>
+                                )}
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.tasksItem}}/>
+                                </div>
                             </div>
-                            <div className="project-results__content">
-                                <div dangerouslySetInnerHTML={{__html: detail.tasksItem}}/>
-                            </div>
-                    </div>
+
+                        </div>
                 </section> : null}
 
-            {detail.stack && detail.stack !== 'undefined' && detail.stack !== '' ?
+            {detail.workIntroText && detail.workIntroText !== 'undefined' && detail.workIntroText !== '' ?
 
-                <section style={{backgroundColor:"black"}} className="project-stack padding borderBlock">
+                <section style={{backgroundColor: "black"}} className="project-stack padding borderBlock">
                     <div className="project-stack__wrap">
                         <span>
                            <h2 className="heading-secondary">Стек технолгий</h2>

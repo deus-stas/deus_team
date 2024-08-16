@@ -284,7 +284,7 @@ const MainPage = (props) => {
         text = sizeXSmall
     }
 
-    const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>;
+    const double = <Icon icon="arrowGo" viewBox="0 0 30 30"/>;
 
     const mainShowreel = showreels.find((showreel) => showreel.mainShowreel === true);
 
@@ -325,32 +325,34 @@ const MainPage = (props) => {
             <section className="main-agency">
                 <div className="container">
 
-                    <div className="main-agency__wrap whiteHeader">
+                    <div className="main-agency__wrap">
                         {mainPage ? mainPage.map((item, index) => {
+                            const fileUrl = item.mainVideoFile ? `${apiUrl}/uploads/${item.mainVideoFile.filename}` : null;
+                            const isVideo = item.mainVideoFile ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.mainVideoFile.filename) : false;
+
                             const arrow = index !== 1;
-                            const workers = index == 0 && (<>
-                                {team
-                                    .filter((item) => item.mainControl)
-                                    .map((item) => {
+
+                            const workers = index === 0 && (
+                                <>
+                                    {team.filter((item) => item.mainControl).map((item) => {
                                         return (<img
                                             src={`${apiUrl}/uploads/${item.mainImg.filename}`}
                                             alt=""
                                             className="person-img"
                                         />);
-                                    })
-                                    .slice(0, 3)}
-                            </>);
+                                    }).slice(0, 3)}
+                                </>
+                            );
 
-                            const allServices = index == 1 && props.services
+                            const allServices = index === 1 && props.services
                                 .filter((service, index) => service.isInvisible)
                                 .map((service, index) => (
                                     <DelayedLink to={`/services/`}>
-                                    <div className="main-agency__item-link p-style">
+                                    <div className="main-agency__item-link l-textReg">
                                         <p>{service.name}</p>
                                         <div className="hover-flip-arrow">
                                       <span>
-                                        {" "}
-                                          <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+                                          <Icon icon="arrowGo" viewBox="0 0 30 30"/>
                                         <div className="hover-double">{double}</div>
                                       </span>
                                         </div>
@@ -358,51 +360,50 @@ const MainPage = (props) => {
                                 </DelayedLink>));
                             const num = index < 9 ? "0" + (index + 1) : index + 1;
                             const name = item.name;
-                            const descr = index == 1 ? (
+                            const descr = index === 1 ? (
                                 <div className="main-agency__item-service">{allServices}</div>) : (<div
-                                className={`main-agency__item__descr${index == 0 ? "1" : ""}`}>
+                                className={`main-agency__item__descr${index === 0 ? "1" : ""}`}>
                                 {workers}
                                 {item.textList !== "undefined" && item.textList && (
                                     <div className="main-agency__item__descr-flex">
-                                        {item.textList.map((item, ind) => (<div
-                                            className={index == 2 ? "main-agency__item__descr-flex__item" : ""}>
+                                        {item.textList.map((item, ind) => (
+                                            <div
+                                            className={index === 2 ? "main-agency__item__descr-flex__item" : index === 0 ? "main-agency__item__descr-flex-ind1 m-text" : ""}>
                                             {item.textItem}
-                                        </div>))}
+                                            </div>))
+                                        }
                                     </div>)}
                             </div>);
-                            return (<div className="main-agency__item">
-                                <a href={`${item.pageURL}`} target="_blank" rel="noreferrer">
-                                    {/*<img src={`${apiUrl}/uploads/${item.image.filename}`} alt="Дизайн"*/}
-                                    {/*     className="main-agency__item-img"/>*/}
-                                    {item.mainVideoFile && item.mainVideoFile !== "undefined" && item.mainVideoFile !== "null" && (
-                                        <video className="main-agency__item-img"
-                                            //autoPlay
-                                            //loop
-                                               muted playsInline>
-                                            <source
-                                                src={`${apiUrl}/uploads/${item.mainVideoFile.filename}`}
-                                                type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-                                            />
-                                        </video>)}
+                            return (
+                                <div className="main-agency__item">
+                                    <a href={`${item.pageURL}`} target="_blank" rel="noreferrer">
 
-                                    <div className="main-agency__item-header">
-                                  <span className="main-agency__item-header__num">
-                                    <div className="num_flex">{num}</div>
-                                  </span>
-                                        <div
-                                            className="main-agency__item-header__text heading-secondary">{name}</div>
-                                    </div>
-                                    {descr}
-                                    {!!arrow && (<span className="main-agency__item-arrow">
-                                    <div className="hover-flip-circle">
-                                      <span>
-                                        <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                        <div className="hover-circle">{double}</div>
-                                      </span>
-                                    </div>
-                                  </span>)}
-                                </a>
-                            </div>);
+                                        {isVideo && (
+                                            <video className="main-agency__item-img" muted
+                                                   playsInline autoPlay loop
+                                                   src={fileUrl}/>
+                                        )}
+                                        {!isVideo && (
+                                            <img src={fileUrl} alt={item.name} className="main-agency__item-img"/>
+                                        )}
+
+                                        <div className="main-agency__item-header">
+                                            <div className="main-agency__item-header__num s-text">
+                                                <div className="num_flex">{num}</div>
+                                            </div>
+                                            <div className="main-agency__item-header__text heading-secondary">{name}</div>
+                                        </div>
+                                        {descr}
+                                        {!!arrow && (<div className="main-agency__item-arrow">
+                                            <div className="hover-flip-circle">
+                                                <span>
+                                                    <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                                    <div className="hover-circle">{double}</div>
+                                                </span>
+                                            </div>
+                                        </div>)}
+                                    </a>
+                                </div>);
                         }) : null}
                     </div>
 
@@ -444,7 +445,7 @@ const MainPage = (props) => {
 
                 </div>
             </section>
-            <section className="main-showreel whiteHeader">
+            <section className="main-showreel">
                 <div className="container">
                     <div className="main-showreel__wrap">
                         {mainShowreel && <Showreel data={mainShowreel} isMain={true}/>}
@@ -454,7 +455,7 @@ const MainPage = (props) => {
             </section>
 
             {!!working && working.length > 0 && (
-            <section className="main-working whiteHeader">
+            <section className="main-working">
                 <div className="container">
                     <div className="main-working__wrap">
                         <div className="main-working__wrap-info">
