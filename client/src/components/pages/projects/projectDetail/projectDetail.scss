@@ -471,6 +471,31 @@
             }@include respond(xs){
                 gap: .851rem;
             }
+
+            &-item {
+                border: 0.5px solid #E0FD60;
+                border-radius: 2rem;
+                display: flex;
+                justify-content: stretch;
+                align-items: center;
+                min-height: 8.034rem;
+                height: 100%;
+
+                @include respond(lg){
+                    min-height: 6.6rem;
+                }
+                @include respond(sm){
+                    min-height: 5.6rem;
+                }
+                @include respond(xs){
+                    min-height: 4.681rem;
+                    border-radius: .851rem;
+                }
+
+                img {
+                    margin: auto;
+                }
+            }
         }
 
     }
