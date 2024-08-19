@@ -154,6 +154,9 @@
       backdrop-filter: blur(3px);
       height: 100%;
       z-index: 1000;
+      @include respond(sm){
+        width: 2rem;
+      }
     }
 
     &__mutedR{
@@ -164,6 +167,9 @@
       backdrop-filter: blur(3px);
       height: 100%;
       z-index: 1000;
+      @include respond(sm){
+        width: 2rem;
+      }
     }
 
 
@@ -196,19 +202,38 @@
     }
 
     .rfm-marquee {
-      //height: 7.5rem;
+      max-height: 7.5rem;
+      height: 100%;
+      @include respond(xs){
+        max-height: 6rem;
+      }
     }
 
     .rfm-child {
-      width: 18.75rem;
+      max-width: 18.75rem;
+      height: 100%;
+      @include respond(xs){
+        max-width: 15rem;
+      }
+    }
+
+    .rfm-initial-child-container {
+      gap: 7rem;
+      @include respond(lg) {
+        gap: 4rem;
+      }
+      @include respond(sm) {
+        gap: 3rem;
+      }
+      @include respond(xs) {
+        gap: 1rem;
+      }
     }
 
     &__img {
       width: 100%;
-      margin-right: 3rem;
       @include respond(sm) {
         height: 100%;
-        margin-right: 0;
       }
     }
 
