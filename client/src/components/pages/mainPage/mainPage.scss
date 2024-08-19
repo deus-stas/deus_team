@@ -230,10 +230,27 @@
       }
     }
 
-    &__img {
-      width: 100%;
+    .marquee {
+      gap: 7rem;
+      @include respond(lg) {
+        gap: 4rem;
+      }
       @include respond(sm) {
-        height: 100%;
+        gap: 3rem;
+      }
+      @include respond(xs) {
+        gap: 1rem;
+      }
+    }
+
+    &__img {
+      max-width: 18.75rem;
+      height: 100%;
+      max-height: 7.5rem;
+      width: 100%;
+      @include respond(xs){
+        max-width: 15rem;
+        max-height: 6rem;
       }
     }
 
