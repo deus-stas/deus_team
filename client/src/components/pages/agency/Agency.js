@@ -238,7 +238,7 @@ const Agency = (props) => {
                         </div>
                     </div>
                     {awards &&
-                        <div className="agency-about__wrapp">
+                        <div className="agency-about__wrapp whiteHeader">
                             {awards.map(award => {
                                 const getAwardIcon = (awardName) => {
                                     const iconMap = {
@@ -310,7 +310,7 @@ const Agency = (props) => {
 
             </section>
             {
-                clients ? <section className="agency-clients whiteHeader"
+                clients ? <section className="agency-clients"
                                    id="clients">
                         <div className="agency-clients__head">
                             <h2 className="heading-secondary">Работаем с разными<br/> клиентами по всему миру</h2>
