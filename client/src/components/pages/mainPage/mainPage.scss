@@ -255,9 +255,7 @@
     }
 
     .marquee-container {
-      &:not(:last-child) {
-        margin-bottom: 6rem;
-      }
+     margin: 0;
     }
 
     &__slider {

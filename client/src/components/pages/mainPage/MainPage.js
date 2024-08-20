@@ -325,7 +325,7 @@ const MainPage = (props) => {
             <section className="main-agency">
                 <div className="container">
 
-                    <div className="main-agency__wrap">
+                    <div className="main-agency__wrap whiteHeader">
                         {mainPage ? mainPage.map((item, index) => {
                             const fileUrl = item.mainVideoFile ? `${apiUrl}/uploads/${item.mainVideoFile.filename}` : null;
                             const isVideo = item.mainVideoFile ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.mainVideoFile.filename) : false;
@@ -380,7 +380,7 @@ const MainPage = (props) => {
 
                                         {isVideo && (
                                             <video className="main-agency__item-img" muted
-                                                   playsInline autoPlay loop
+                                                   // playsInline autoPlay loop
                                                    src={fileUrl}/>
                                         )}
                                         {!isVideo && (
@@ -445,7 +445,7 @@ const MainPage = (props) => {
 
                 </div>
             </section>
-            <section className="main-showreel">
+            <section className="main-showreel whiteHeader">
                 <div className="container">
                     <div className="main-showreel__wrap">
                         {mainShowreel && <Showreel data={mainShowreel} isMain={true}/>}
