@@ -285,25 +285,30 @@ export default ProjectDetail;
     );
 };
 
- export const useMobile = () => {
-     const MOBILE_SIZE = 575;
-     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-     const [isMobile, setIsMobile] = useState(windowWidth <= MOBILE_SIZE);
+export const useMobile = () => {
+    const MOBILE_SIZE = 575;
+    const LAPTOP_SIZE = 768;
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [isMobile, setIsMobile] = useState(windowWidth <= MOBILE_SIZE);
+    const [isLaptop, setIsLaptop] = useState(windowWidth <= LAPTOP_SIZE);
+    const [isDesktop, setIsDesktop] = useState(windowWidth > LAPTOP_SIZE);
 
-     useEffect(() => {
-         window.addEventListener("resize", onResizeEvent);
-         return () => window.removeEventListener("resize", onResizeEvent);
-     }, []);
+    useEffect(() => {
+        window.addEventListener("resize", onResizeEvent);
+        return () => window.removeEventListener("resize", onResizeEvent);
+    }, []);
 
-     useEffect(() => {
-         setIsMobile(windowWidth <= MOBILE_SIZE);
-     }, [windowWidth]);
+    useEffect(() => {
+        setIsMobile(windowWidth <= MOBILE_SIZE);
+        setIsLaptop(windowWidth <= LAPTOP_SIZE);
+        setIsDesktop(windowWidth > LAPTOP_SIZE);
+    }, [windowWidth]);
 
-     const onResizeEvent = () => {
-         debouncedResize();
-     };
+    const onResizeEvent = () => {
+        debouncedResize();
+    };
 
-     const debouncedResize = debounce(() => setWindowWidth(window.innerWidth), 100);
+    const debouncedResize = debounce(() => setWindowWidth(window.innerWidth), 100);
 
-     return isMobile;
- };
+    return { isMobile, isLaptop, isDesktop };
+};
