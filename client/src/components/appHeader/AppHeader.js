@@ -22,7 +22,7 @@ const AppHeader = (props) => {
     // const [visibleMob, setVisibleMob] = useState(true);
     const location = useLocation()
 
-    const {isLaptop, isDesktop} = useMobile();
+    const {isLaptop, isDesktop, isMobile} = useMobile();
 
     const handleHeaderColor = (header, headerMob, menu) => {
         [header, headerMob, menu].filter(Boolean).forEach((el) => {
@@ -30,6 +30,7 @@ const AppHeader = (props) => {
             const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
             isWhite ? el.classList.add("white") : el.classList.remove("white");
             el.style.pointerEvents = "";
+            console.log(isWhite)
         });
     };
 
@@ -52,22 +53,35 @@ const AppHeader = (props) => {
     }, [menu]);
 
     useEffect(() => {
+        const styles = {
+            wide: { width: '100%' },
+            narrowly: { width: '64vw' },
+            up: { transform: 'translateY(-30rem)' },
+            down: { transform: 'translateY(0)' }
+        };
+
         const handleScroll = () => {
             const scrolled = window.scrollY;
             const header = document.querySelector('.header');
             const headerWrap = document.querySelector('.header__wrap');
 
             if (!!header || !!headerWrap) {
-                if (scrolled === 0) {
-                    header.style.transform = 'translateY(0)';
-                    headerWrap.style.width = '100%';
-                } else if (scrolled < prevScroll) {
-                    header.style.transform = 'translateY(0)';
-                } else if (scrolled > 500) {
-                    header.style.transform = 'translateY(-30rem)';
-                } else if (scrolled > 0 && scrolled < 500) {
-                    headerWrap.style.width = '64vw';
+                if (!!menu) { // если меню открыто
+                    headerWrap.style.width = styles.wide.width;
+                    header.style.transform = styles.down.transform;
+                } else { // если меню закрыто
+                    if (scrolled === 0) {
+                        headerWrap.style.width = styles.wide.width;
+                        header.style.transform = styles.down.transform;
+                    } else if (scrolled < prevScroll) {
+                        header.style.transform = styles.down.transform;
+                    } else if (scrolled > 500) {
+                        header.style.transform = styles.up.transform;
+                    } else if (scrolled > 0 && scrolled < 500) {
+                        headerWrap.style.width = styles.narrowly.width;
+                    }
                 }
+
                 setPrevScroll(scrolled);
             }
         };
@@ -76,25 +90,8 @@ const AppHeader = (props) => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [prevScroll]);
+    }, [menu, prevScroll]);
 
-    // useEffect(()=>{
-    //     const hiddenHeader = () => {
-    //         const scrollMob = window.scrollY;
-    //         if (window.innerWidth <= 767) {
-    //             if (scrollMob < 10 && !menu ) {
-    //                 setVisibleMob(true);
-    //             } else {
-    //                 setVisibleMob(false);
-    //             }
-    //         }
-    //     }
-    //
-    //     window.addEventListener('scroll', hiddenHeader);
-    //     return () => {
-    //         window.removeEventListener('scroll', hiddenHeader);
-    //     };
-    // },)
 
     useEffect(() => {
         setIsLoadingMainPageEvent(true)
@@ -166,6 +163,7 @@ const AppHeader = (props) => {
                                           justifyContent: "flex-end",
                                           alignItems: 'center'
                                       }}>
+                                    {isMobile ? null : <>
                                     {
                                         headerData && headerData.phone &&
                                         (
@@ -189,6 +187,7 @@ const AppHeader = (props) => {
                                              className="header__discuss-text m-text">Обсудить проект
                                         </div>
                                     </DelayedLink>
+                                    </>}
                                     <div className={`header__burger hidden-desktop  ${menu ? 'activeMenu' : ''}`}
                                          onClick={() => {
                                              setMenu(!menu)
