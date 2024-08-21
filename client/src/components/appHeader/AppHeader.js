@@ -30,7 +30,6 @@ const AppHeader = (props) => {
             const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
             isWhite ? el.classList.add("white") : el.classList.remove("white");
             el.style.pointerEvents = "";
-            console.log(isWhite)
         });
     };
 
