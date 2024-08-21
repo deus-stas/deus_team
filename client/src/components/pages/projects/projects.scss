@@ -252,6 +252,11 @@
     background: rgba(224, 253, 96, 1) !important;
     color: #050505 !important;;
 }
+.activeTheme {
+    transition: all .3s ease-out;
+    color: rgba(224, 253, 96, 1) !important;
+    border-radius: 2rem;
+}
 
 .translateY {
     transform: translateY(-18.1rem);
