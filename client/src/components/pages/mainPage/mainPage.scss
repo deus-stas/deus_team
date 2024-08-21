@@ -244,13 +244,18 @@
     }
 
     &__img {
-      max-width: 18.75rem;
       height: 100%;
-      max-height: 7.5rem;
       width: 100%;
+      padding: 1rem 0;
+      max-height: 7.5rem;
+      min-height: 7.5rem;
+      max-width: 18.75rem;
+      min-width: 18.75rem;
       @include respond(xs){
         max-width: 15rem;
+        min-width: 15rem;
         max-height: 6rem;
+        min-height: 6rem;
       }
     }
 

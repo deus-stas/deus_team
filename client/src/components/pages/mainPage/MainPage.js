@@ -380,7 +380,7 @@ const MainPage = (props) => {
 
                                         {isVideo && (
                                             <video className="main-agency__item-img" muted
-                                                   // playsInline autoPlay loop
+                                                   playsInline autoPlay loop
                                                    src={fileUrl}/>
                                         )}
                                         {!isVideo && (

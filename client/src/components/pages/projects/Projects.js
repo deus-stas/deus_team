@@ -1,18 +1,13 @@
 import {Link, useLocation, useSearchParams} from 'react-router-dom';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../../axios'
-import Select from 'react-select';
-
-import Cta from '../../cta/Cta';
 
 import './projects.scss'
-import TypeWriterText from "../../typeWriterText";
-import {connect} from "react-redux";
-import projectBanner from "../../../img/project-main.mp4";
 import {Icon} from "../../icon/Icon";
 import {gotoAnchor} from "../../anchors";
 import DelayedLink from "../../appHeader/DelayedLink";
 import {debounce, useMediaQuery} from "@material-ui/core";
+import {useMobile} from "./projectDetail/ProjectDetail";
 
 const apiUrl = ''
 
@@ -27,6 +22,7 @@ const Projects = () => {
     const [selectedTheme, setSelectedTheme] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
     const [checked, setChecked] = useState(selectedTheme);
+    const [checkedType, setCheckedType] = useState(selectedType);
     const [menuTheme, setMenuTheme] = useState(true);
     const [menuType, setMenuType] = useState(false);
     const [select, setSelect] = useState(false);
@@ -103,6 +99,10 @@ const Projects = () => {
     useEffect(() => {
         setChecked(selectedTheme);
     }, [selectedTheme]);
+
+    useEffect(() => {
+        setCheckedType(selectedType);
+    }, [selectedType]);
 
     const updateOptionsType = (projectOptionsType) => {
         if (searchParams.has(TYPE_KEY)) {
@@ -300,7 +300,7 @@ const Projects = () => {
                                         <Link to={`/projects?type=${project.value}`}>
                                             <div className="main-projects__item-flex__inner m-text">
                                                 <div>
-                                                    <p className='hover'>{project.label}</p>
+                                                    <p className={`hover ${checkedType && checkedType.value === project.value && 'activeTheme'}`}>{project.label}</p>
                                                 </div>
                                             </div>
                                         </Link>
