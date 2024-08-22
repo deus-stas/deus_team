@@ -55,7 +55,7 @@ const Cta = (props) => {
     const [worker, setWorker] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const double =  <Icon icon="arrowGo" viewBox="0 0 30 31"/>
+    const double =  <Icon icon="arrowGo" viewBox="0 0 30 30"/>
 
     useEffect(() => {
         contacts.map((item, index) => (
@@ -122,11 +122,12 @@ const Cta = (props) => {
                                 const disabled = !service.brief || service.brief.length === 0
                                 const children = <div className="item l-textReg"><p>{service.name}</p>
                                     <div className="hover-flip-arrow">
-                                                      <span> <Icon icon="arrowGo" viewBox="0 0 30 31"/>
-                                                       <div className="hover-double">
-                                                            {double}
-                                                        </div>
-                                                      </span>
+                                        <span>
+                                            <div className="hover-double">
+                                                {double}
+                                            </div>
+                                            <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                        </span>
                                     </div>
                                 </div>
                                 return (

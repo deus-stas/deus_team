@@ -70,19 +70,17 @@
                 }
 
                 &:hover {
+
                     p {
                         transition: opacity 0.4s;
                         color: #E0FD60
                     }
 
-                    .hover-flip-arrow span{
-                        transition: all 0.3s ease-in-out;
-                    }
-                    .hover-flip-arrow span{
-                        transform: translatex(100%) translatey(100%) ;
+                    .hover-flip-arrow span {
+                        transform: translatex(0%) translatey(0%);
                     }
 
-                    .hover-flip-arrow div{
+                    .hover-flip-arrow div {
                         transform: translatex(0) translatey(0);
                     }
 

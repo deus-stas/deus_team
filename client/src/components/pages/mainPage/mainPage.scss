@@ -244,18 +244,11 @@
     }
 
     &__img {
-      height: 100%;
-      width: 100%;
-      padding: 1rem 0;
       max-height: 7.5rem;
-      min-height: 7.5rem;
       max-width: 18.75rem;
-      min-width: 18.75rem;
       @include respond(xs){
         max-width: 15rem;
-        min-width: 15rem;
         max-height: 6rem;
-        min-height: 6rem;
       }
     }
 
@@ -487,10 +480,7 @@
 
         &:hover {
           .hover-flip-arrow span {
-            transition: all 0.3s ease-in-out;
-          }
-          .hover-flip-arrow span {
-            transform: translatex(100%) translatey(100%);
+            transform: translatex(0%) translatey(0%);
           }
 
           .hover-flip-arrow div {
