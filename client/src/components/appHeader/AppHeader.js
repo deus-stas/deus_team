@@ -111,7 +111,7 @@ const AppHeader = (props) => {
     const navLink = (
         <nav className={`header__nav m-text ${visible ? '' : 'hidden'}`}>
             <ul className={`header__nav-list ${isDesktop ? 'm-text' : isLaptop && 'heading-secondary'}`}>
-                <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
+                <li className={`header__nav-item hover-flip ${isDesktop ? 'hover-flip' : ''}`}>
                     <DelayedNavLink to="/agency">
                         <span data-hover="Агентство">Агентство</span>
                     </DelayedNavLink>

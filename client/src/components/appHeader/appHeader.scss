@@ -272,14 +272,12 @@
             cursor: pointer;
             position: relative;
             transition: opacity .5s;
-
             &:hover {
                 opacity: 0.5;
             }
 
             a {
                 display: block;
-
             }
 
             &:not(:last-child) {
@@ -289,8 +287,6 @@
                     margin-right: 3rem;
                 }
             }
-
-
 
             &:before {
                 content: '';
@@ -403,6 +399,7 @@
 }
 
 .menu-contacts {
+    transition: all .3s ease-in-out;
     display: block;
     width: 5rem;
     height: 4.4rem;
@@ -411,6 +408,12 @@
     color: #050505;
     text-align: center;
     line-height: 5.4rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #050505;
+        color: #E0FD60;
+    }
 
     @include respond(sm){
         &__menuSize {
