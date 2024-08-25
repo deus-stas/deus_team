@@ -519,25 +519,23 @@ export const DefaultFields = () => {
                     label="Скрыть/Показать проекта проекта"/>
                 <p>Обложка проекта</p>
                 <span className="baseFlexWrap">
-                    <ImageInput
+                    <FileInput
                         className="fileInput"
                         placeholder="+"
                         source="image"
                         label="Большая"
                         validate={[required()]}
-                        accept="image/*"
                     >
                     <FilenameField source="src" title="title"/>
-                </ImageInput>
-                <ImageInput
+                </FileInput>
+                <FileInput
                     className="fileInput"
                     placeholder="+"
                     source="imageMob"
                     label="Маленькая"
-                    accept="image/*"
                 >
                     <FilenameField source="src" title="title"/>
-                </ImageInput>
+                </FileInput>
                 </span>
                 <TextInput
                     className="customWidth"
