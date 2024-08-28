@@ -40,28 +40,6 @@ SwiperCore.use([Autoplay]);
 
 const apiUrl = "";
 
-const colourStyles = {
-    control: (styles) => ({}),
-    valueContainer: (styles) => ({}),
-    placeholder: (styles) => ({}),
-    indicatorSeparator: (styles) => ({display: "none"}),
-    indicatorsContainer: (styles) => ({}),
-    menu: (styles) => ({}),
-    menuList: (styles) => ({}),
-    option: (styles, state) => ({
-        color: state.isSelected ? "#FF4D01" : "inherit",
-    }),
-};
-
-const classes = {
-    control: (state) => (state.menuIsOpen ? "select active" : "select"),
-    valueContainer: () => "select__value",
-    indicatorsContainer: () => "select__icon",
-    menu: () => "select__dropdown",
-    option: () => "select__item",
-    input: () => "select__search",
-};
-
 const MainPage = (props) => {
     const [isActive, setIsActive] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -80,6 +58,11 @@ const MainPage = (props) => {
     const [activeStoryIndex, setActiveStoryIndex] = useState(0);
     const [clients, setClients] = useState([]);
     const [swipped, setSwipped] = useState([-1]);
+    const [isFullScreen, setIsFullScreen] = useState(false);
+
+    const handleVideoClick = () => {
+        setIsFullScreen(!isFullScreen);
+    };
 
     const isMobile = useMobile();
 
@@ -233,36 +216,13 @@ const MainPage = (props) => {
         };
     }, []);
 
-    const handleThemeChange = (selectedOption) => {
-        setSelectedTheme(selectedOption);
-    };
+    useEffect(() => {
+        const elements = document.querySelectorAll('.header, .footer');
 
-    const handleTypeChange = (selectedOption) => {
-        setSelectedType(selectedOption);
-    };
-
-    const filteredProjects = allProjects
-        .filter((project) => {
-            return ((selectedTheme ? project.projectTheme === selectedTheme.value : true) && (selectedType ? project.projectType === selectedType.value : true) && project.visibility);
-        })
-        .slice(0, 3);
-
-    const videoRefs = useRef([]);
-
-    const handleMouseEnter = (index) => {
-        videoRefs.current[index].play();
-    };
-
-    const handleMouseLeave = (index) => {
-        const video = videoRefs.current[index];
-        video.pause();
-        video.currentTime = 0; // Rewind the video to the beginning
-    };
-
-    const addVideoRef = (ref) => {
-        videoRefs.current.push(ref);
-    };
-
+        elements.forEach((el) => {
+            el.style.opacity = isFullScreen ? '0' : '1';
+        });
+    }, [isFullScreen]);
 
     const sizeLarge = 'Мы создаём продукты и услуги, которые<br/>  помогают нашим клиентам быть заметнее<br/> 🤩 в цифровом пространстве'
     const sizeSmall = 'Мы создаём продукты и услуги, которые помогают нашим клиентам быть заметнее 🤩 в цифровом пространстве'
@@ -380,7 +340,7 @@ const MainPage = (props) => {
 
                                         {isVideo && (
                                             <video className="main-agency__item-img" muted
-                                                   playsInline autoPlay loop
+                                                   // playsInline autoPlay loop
                                                    src={fileUrl}/>
                                         )}
                                         {!isVideo && (
@@ -447,8 +407,8 @@ const MainPage = (props) => {
             </section>
             <section className="main-showreel whiteHeader">
                 <div className="container">
-                    <div className="main-showreel__wrap">
-                        {mainShowreel && <Showreel data={mainShowreel} isMain={true}/>}
+                    <div  onClick={handleVideoClick} className={`main-showreel__wrap ${isFullScreen ? 'full-screen' : ''}`}>
+                        {mainShowreel && <Showreel  data={mainShowreel} isMain={true}/>}
                     </div>
                 </div>
 
@@ -484,7 +444,9 @@ const MainPage = (props) => {
                                 >
                                     <div className="wrapp">
                                         <div className="greenBall">
-                                            <Icon icon="greenBall" viewBox='0 0 16 16'/>
+                                            <div className="animateBall">
+                                                <Icon icon="greenBall" viewBox='0 0 16 16'/>
+                                            </div>
                                             <p>{item.name}</p>
                                         </div>
                                         <p className="m-text">{item.descr}</p>

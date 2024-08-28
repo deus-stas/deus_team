@@ -316,30 +316,26 @@ const Projects = () => {
     const renderProject = (b) => <>{limitProjects ? limitProjects
             .filter((project, index, array) => !!b ? index % 2 === 0 : index % 2 !== 0)
             .map((project, index, array) => {
-                const numProject = index < 9 ? "0" + (index + 1) : (index + 1)
-                const isLastItem = index + 1 === array.length
-                const imgSize = isMob && project.imageMob ? `${apiUrl}/uploads/${project.imageMob.filename}` : project.image ? `${apiUrl}/uploads/${project.image.filename}` : null;
-                const videoSize = isMob && project.mainMobVideoFile ? `${apiUrl}/uploads/${project.mainMobVideoFile.filename}` : project.mainVideoFile ? `${apiUrl}/uploads/${project.mainVideoFile.filename}` : null;
-            return (
-                <div style={{display: "flex", flexDirection: "column", gap: '2rem'}}>
-                    <DelayedLink to={`/projects/${project.nameInEng}`}
-                                 className="projects__item"
-                                 key={project.id}>
-                        <div className="projects__item-img-wrap">
+                const numProject = index < 9 ? "0" + (index + 1) : (index + 1);
+                const isLastItem = index + 1 === array.length;
+                const imgSize = isMob ? `${apiUrl}/uploads/${project.imageMob.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
+                const isVideo = project.imageMob && project.imageMob.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
 
-                            {project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null' ?
-                                <VideoComponent project={project} isMob={isMob}
-                                                videoSize={videoSize} apiUrl={apiUrl}/> :
-                                <img ref={(ref) => addVideoRef(ref)}
-                                     src={project.image ? imgSize : null}
-                                     alt={project.name} className="main-projects__img"/>}
-                        </div>
-                    </DelayedLink>
-                    <span className="projects-decription m-text">
-                        <p  style={{color:"rgba(117, 118, 119, 1)"}}>{project.date} • {project.name}</p>
-                        <p className="heading-secondary">{project.descrProject}</p>
-                    </span>
-                </div>
+                return (
+                    <div style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
+                        <DelayedLink to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id}>
+                            <div className="projects__item-img-wrap">
+                                {isVideo ?
+                                    <VideoComponent project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} /> :
+                                    <img ref={(ref) => addVideoRef(ref)} src={imgSize} alt={project.name} className="main-projects__img" />
+                                }
+                            </div>
+                        </DelayedLink>
+                        <span className="projects-decription m-text">
+                  <p style={{ color: "rgba(117, 118, 119, 1)" }}>{project.date} • {project.name}</p>
+                  <p className="heading-secondary">{project.descrProject}</p>
+                </span>
+                    </div>
 
             )
         })
@@ -429,7 +425,6 @@ const VideoComponent = ({project, apiUrl, videoSize}) => {
                 src={videoSize}
                 type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"
             />
-            {console.log("mainMobVideoFile:", project.mainMobVideoFile)}
         </video>
 
     );

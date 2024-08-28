@@ -6,7 +6,7 @@
     color: #FFFFFF;
     opacity: 1;
     transition: opacity 0.1s;
-    z-index: 8000;
+    z-index: 10;
     position: relative;
 
     @include respond(lg) {

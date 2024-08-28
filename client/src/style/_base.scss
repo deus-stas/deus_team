@@ -539,15 +539,15 @@ main {
     height: 100%;
     display: inline-block;
     position: absolute;
-    top: 100%;
+    top: 120%;
     content: attr(data-hover);
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
 
 .hover-flip:hover span {
-    -webkit-transform: translateY(-0%);
-    transform: translateY(-0%);
+    -webkit-transform: translateY(-120%);
+    transform: translateY(-120%);
 }
 
 //arrow
@@ -559,13 +559,10 @@ main {
     height: 100%;
     position: relative;
     -webkit-transition: -webkit-transform 0.3s;
-    transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
     transition: transform 0.3s, -webkit-transform 0.3s;
 }
 
 .hover-flip-arrow + .hover-double {
-    transform: translate(0);
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
@@ -574,15 +571,15 @@ main {
     overflow: hidden;
     width: 3rem;
     height: 3rem;
-    @include respond(sm) {
-        height: 2rem;
-        width: 2rem;
+    @include respond(xs) {
+        height: 2.1rem;
+        width: 2.1rem;
     }
 }
 
 .hover-flip-circle {
-    width: 3rem;
-    height: 3rem;
+    width: 2.143rem;
+    height: 2.143rem;
 
 }
 
@@ -591,12 +588,25 @@ main {
     display: block;
     position: relative;
     transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.hover-flip-arrow span{
     transform: translatex(-100%) translateY(-100%);
 }
 
-.hover-flip-arrow:hover span,
-.hover-flip-circle:hover span{
+.hover-flip-circle span {
+    transform: translatex(-115%) translateY(-115%);
+}
+
+
+
+
+
+.hover-flip-arrow:hover span {
     transform: translatex(0%) translatey(0%) ;
+}
+.hover-flip-circle:hover span{
+    transform: translatex(15%) translatey(15%) ;
 }
 
 .hover-double {
@@ -607,23 +617,17 @@ main {
     top: 100%;
     left: 100%;
     @include respond(sm) {
-        width: 2rem;
-        height: 2rem;
+        width: 2.1rem;
+        height: 2.1rem;
     }
 }
 
 .hover-circle {
-    transform: translate(0, 0);
+    transform: translate(15%, 15%);
     transition: transform 0.3s, -webkit-transform 0.3s;
     position: absolute;
-    width: calc(100% + 3rem);
-    height: calc(100% + 3rem);
-    top: calc(100% - 8rem);
-    right: calc(100% - 3rem);
-
-    @include respond(sm) {
-        top: calc(100% - 8.4rem);
-    }
+    top: 100%;
+    left: 100%;
 }
 
 .borderBlock {
