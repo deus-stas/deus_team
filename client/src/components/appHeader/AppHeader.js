@@ -177,7 +177,7 @@ const AppHeader = (props) => {
                                     <DelayedLink to="/contacts" className={`header__discuss ${menu ? 'hidden' : ''}`}
                                                  datahash="contactUs"
                                                  onClick={(e) => gotoAnchor(e)}>
-                                        {!!headerData.headerPhoto &&
+                                        {!!headerData?.headerPhoto &&
                                             <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
                                                         src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
                                                         alt="Обсудить проект" className="header__discuss-img"/>

@@ -42,5 +42,5 @@ jobs:
             cd /var/www/www-root/data/www/deus_team
             git pull origin master
             npm run client:build
-            mv ./client/build/* ../v2.deus.team/
+#            mv ./client/build/* /var/www/www-root/data/www/v2.deus.team
 #            pm2 restart npm -- start

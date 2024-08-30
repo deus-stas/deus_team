@@ -78,7 +78,7 @@ const AppFooter = (props) => {
                                          datahash="contactUs"
                                          onClick={(e) => gotoAnchor(e)}>
                                 <span className="footer-frame__discuss-flex">
-                                   {!!headerData.headerPhoto &&
+                                   {!!headerData?.headerPhoto &&
                                        <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
                                                    src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
                                                    alt="Обсудить проект" className="img"/>
