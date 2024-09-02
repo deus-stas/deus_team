@@ -264,25 +264,14 @@ router.post(
 
 router.get('/projects/:id', async (req, res) => {
     const { id } = req.params;
-    if (id.includes("-")) {
-        const projects = await Projects.findOne({ nameInEng: id });
-
-        if (!projects) {
-            return res.status(404).json({ error: 'projects not found' });
-        }
-
-        res.json(projects);
-    } else {
-        const projects = await Projects.findById(id);
-
-        if (!projects) {
-            return res.status(404).json({ error: 'projects not found' });
-        }
-
-        res.json(projects);
+    let projects = await Projects.findOne({ nameInEng: id });
+    if (!projects) {
+        projects = await Projects.findById(id);
     }
-    // const projects = await Projects.findById(nameInEng);
-
+    if (!projects) {
+        return res.status(404).json({ error: 'projects not found' });
+    }
+    res.json(projects);
 });
 router.get('/projects/:id', async (req, res) => {
     const { id } = req.params;
