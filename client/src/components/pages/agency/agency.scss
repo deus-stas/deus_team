@@ -583,6 +583,44 @@
             }
         }
 
+        .rfm-marquee {
+            max-height: 7.5rem;
+            height: 100%;
+            gap: 7rem;
+            @include respond(lg) {
+                gap: 4rem;
+            }
+            @include respond(sm) {
+                gap: 3rem;
+            }
+            @include respond(xs){
+                gap: 1rem;
+                max-height: 6rem;
+            }
+
+        }
+
+        .rfm-child {
+            max-width: 18.75rem;
+            height: 100%;
+            @include respond(xs){
+                max-width: 15rem;
+            }
+        }
+
+        .rfm-initial-child-container {
+            gap: 7rem;
+            @include respond(lg) {
+                gap: 4rem;
+            }
+            @include respond(sm) {
+                gap: 3rem;
+            }
+            @include respond(xs) {
+                gap: 1rem;
+            }
+        }
+
         .marquee {
             gap: 7rem;
             @include respond(lg) {
