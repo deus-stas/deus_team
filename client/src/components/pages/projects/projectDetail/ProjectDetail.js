@@ -193,7 +193,7 @@ const ProjectDetail = () => {
                                         <div className="project-main__info">
                                             <div className="project-main__info-wrap">
                                                 <p className="s-text">Клиент</p>
-                                                <p className="m-text" dangerouslySetInnerHTML={{__html: detail.name}}/>
+                                                <p className="m-text" dangerouslySetInnerHTML={{__html: detail.projectSite}}/>
                                             </div>
                                             <div className="project-main__info-wrap">
                                                 <p className="s-text">Отрасль</p>
