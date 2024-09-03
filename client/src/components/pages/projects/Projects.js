@@ -247,7 +247,7 @@ const Projects = () => {
         <div className="projects-category">
             <div className="projects-start__filters m-text">
                 <span style={{position:'relative'}} className="flex-sb">
-                    <div className="switcher" style={{transform: menuTheme ? 'translateX(1%)' : 'translateX(88%)'}}/>
+                    <div className="switcher" style={{transform: menuTheme ? 'translateX(0%)' : 'translateX(100%)'}}/>
                     <div className="item" onClick={() => {
                         setMenuTheme(true)
                         setMenuType(false)
@@ -299,8 +299,8 @@ const Projects = () => {
                                     return (
                                         <Link to={`/projects?type=${project.value}`}>
                                             <div className="main-projects__item-flex__inner m-text">
-                                                <div>
-                                                    <p className={`hover ${checkedType && checkedType.value === project.value && 'activeTheme'}`}>{project.label}</p>
+                                                <div className="">
+                                                    <p className={`main-projects__item-btn ${checkedType && checkedType.value === project.value && 'activeTheme'}`}>{project.label}</p>
                                                 </div>
                                             </div>
                                         </Link>
