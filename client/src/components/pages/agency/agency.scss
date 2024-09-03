@@ -681,224 +681,109 @@
 
     &-team {
         position: relative;
-        padding: 10rem 0;
+        margin: 7rem 0;
+        background-color: #050505;
+        color: #FFFFFF;
+        height: 54rem;
+        overflow: hidden;
+
+        @include respond(lg) {
+            margin: 6rem 0;
+            height: 39rem;
+        }
 
         @include respond(sm) {
-            padding: 6rem 0;
+            height: 100%;
+            margin: 4rem 0;
+        }
+
+        @include respond(xs) {
+
+            margin: 3rem 0;
         }
 
         &__wrap {
             display: grid;
-            grid-template-columns: repeat(2, .5fr);
-            grid-gap: 4rem;
+            grid-template-columns: repeat(2, 1fr);
 
-            @include respond(sm) {
+            @include respond(sm){
+                padding: 3rem;
+            }
+
+            @include respond(xs) {
                 grid-template-columns: 100%;
-            }
-        }
-
-        .heading-secondary {
-            margin-bottom: 6rem;
-
-            @include respond(sm) {
-                margin-bottom: 3rem;
-            }
-        }
-
-        &__subtitle {
-            margin-bottom: 6rem;
-            font-weight: 500;
-            font-size: 2.8rem;
-            line-height: 3.4rem;
-        }
-
-        &__t {
-            &-item {
-                display: grid;
-                grid-template-columns: repeat(2, .5fr);
-                grid-gap: 4rem;
-                align-items: center;
-                padding-bottom: 2rem;
-                border-bottom: 1px solid rgba(25, 27, 29, 0.3);
-                position: relative;
-
-                @include respond(sm) {
-                    grid-template-columns: 8.6rem auto;
-                    grid-gap: 0;
-                    padding-bottom: 1rem;
-                }
-
-                &:hover {
-
-                    .agency-team__t-post,
-                    .agency-team__t-name {
-                        transform: translateX(4rem);
-
-                        @include respond(sm) {
-                            transform: none;
-                        }
-                    }
-
-                    .agency-team__t-img {
-                        opacity: 1;
-                        transform: translate(-50%, -50%) scale(1);
-                        transition: all .6s cubic-bezier(.25, 1.75, .75, .9);
-
-                        @include respond(sm) {
-                            transform: none;
-                        }
-                    }
-                }
-
-                &:not(:last-child) {
-                    margin-bottom: 2rem;
-
-                    @include respond(sm) {
-                        margin-bottom: 1rem;
-                    }
-                }
+                padding: 0rem;
             }
 
-            &-name {
-                font-weight: 500;
-                font-size: 2.8rem;
-                line-height: 3.4rem;
-                transition: transform .6s cubic-bezier(.25, 1.75, .75, .9);
-
-                @include respond(sm) {
-                    font-size: 2.6rem;
-                    line-height: 3.1rem;
-                    grid-column: 2/3;
-                    grid-row: 2/3;
-                }
-            }
-
-            &-post {
-                font-size: 2rem;
-                line-height: 2.6rem;
-                opacity: 0.6;
-                transition: transform .6s cubic-bezier(.25, 1.75, .75, .9);
-
-                @include respond(sm) {
-                    grid-row: 3/4;
-                    grid-column: 2/3;
-                }
-            }
-
-            &-img {
-                width: 19rem;
-                position: absolute;
-                top: 50%;
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 0;
-                left: 42%;
-                transition: all .4s cubic-bezier(.25, 1, .75, .9);
-
-                @include respond(sm) {
-                    width: 8.6rem;
-                    height: 8.6rem;
-                    position: static;
-                    transform: none;
-                    opacity: 1;
-                    grid-column: 1/2;
-                    grid-row: 1/5;
-                }
-            }
-        }
-
-        &__talent {
-            &-wrap {
-                display: grid;
-                grid-template-columns: repeat(2, .5fr);
-                grid-gap: 2rem;
-                margin-bottom: 6.2rem;
-
-                @include respond(sm) {
-                    display: flex;
-                    grid-gap: 0;
-                    margin-bottom: 3rem;
-                    width: 100vw;
-                    margin-left: -2rem;
-                    padding: 0 2rem;
-                    overflow-x: auto;
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-
-                    &::-webkit-scrollbar {
-                        display: none;
-                    }
-                }
-            }
-
-            &-item {
-                padding: 4rem;
-                background: #F3F4F4;
-                transition: all .5s;
-                position: relative;
-
-                @include respond(sm) {
-                    padding: 3rem;
-                    flex: 0 0 33.5rem;
-
-                    &:not(:last-child) {
-                        margin-right: 1rem;
-                    }
-                }
-
-                &:hover {
-                    background: #FF4D01;
-                    color: #fff;
-
-                    .agency-team__talent-icon {
-                        opacity: 1;
-                        transform: scale(1);
-                    }
-                }
-            }
-
-            &-name {
-                padding-right: 4rem;
-                margin-bottom: .9rem;
-                font-weight: 500;
-                font-size: 2.8rem;
-                line-height: 3.4rem;
-
-                @include respond(sm) {
-                    margin-bottom: 0.9rem;
-                    padding-right: 3rem;
-                    font-size: 2.6rem;
-                    line-height: 3.1rem;
-                }
-            }
-
-            &-descr {
-                line-height: 1.8rem;
-            }
-
-            &-icon {
-                width: 5rem;
-                height: 5rem;
+            .intro {
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                background: #FFFFFF;
-                position: absolute;
-                right: 2rem;
-                top: 2rem;
-                opacity: 0;
-                transform: scale(0);
-                transition: transform 0.5s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+                flex-direction: column;
+                gap: 2rem;
+                padding: 4rem 0 4rem 4rem;
+                width: 45vw;
+                @include respond(lg){
+                    padding: 3rem 0 3rem 3rem;
+                }
+                @include respond(sm){
+                    gap: 1rem;
+                    padding: 0;
+                }
+                @include respond(xs){
+                    gap: 1rem;
+                    padding: 2rem;
+                    width: 100%;
+                }
 
-                @include respond(sm) {
-                    width: 4rem;
-                    height: 4rem;
+                .heading {
+                    max-width: 51.1rem;
+                }
+                .descr {
+                   color: #757677;
+                    max-width: 44rem;
                 }
             }
 
-            .btn {
-                margin: 0 auto;
-                display: block;
+            &-imgWrap{
+                display: flex;
+                flex-direction: row;
+               justify-content: space-between;
+                padding: 0 3rem 0 0;
+                .gap-\[1rem\] {
+                   gap: 15.5rem;
+                    @include respond(sm){
+                        gap: 12rem;
+                    }
+                    @include respond(sm){
+                        gap: 5rem;
+                    }
+                    @include respond(xs){
+                        gap: 2rem;
+                    }
+                }
+                .image{
+                    width: 10rem;
+                    height: 15rem;
+                    border-radius: 21rem;
+                    @include respond(lg) {
+                        width: 7rem;
+                       height: 10.5rem;
+                    }
+                }
+
+                @include respond(lg) {
+                    justify-content: space-between;
+                    gap: 0;
+                }
+
+                @include respond(sm){
+                    flex-wrap: wrap;
+                    padding: 0;
+                    gap: .3rem;
+                }
+                @include respond(xs){
+                    padding-bottom: 2rem;
+                }
+
             }
         }
     }
@@ -919,3 +804,57 @@
     }
 }
 
+@keyframes marquee-down {
+
+    from {
+        transform: translateY(calc(-100% - 15.5rem));
+    }
+    to {
+        transform: translateY(0);
+    }
+    @include respond(lg){
+        from {
+            transform: translateY(calc(-100% - 12rem));
+        }
+    }
+    @include respond(sm){
+        from {
+            transform: translateY(calc(-100% - 5rem));
+        }
+    }
+    @include respond(xs){
+        from {
+            transform: translateY(calc(-100% - 2rem));
+        }
+    }
+}
+
+.animate-marquee-down {
+    .animate-marquee-up {
+        animation: marquee-down var(--duration) linear infinite;
+    }
+    .gap-\[1rem\] {
+        gap: 15.5rem;
+        @include respond(lg){
+            gap: 12rem;
+        }
+        @include respond(sm){
+            gap: 5rem;
+        }
+        @include respond(xs){
+            gap: 2rem;
+        }
+    }
+}
+
+.agency-team__wrap-imgWrap {
+    @for $i from 1 through 5 {
+        > div:nth-child(#{$i}) {
+            @if $i % 2 == 1 {
+                --duration: 55s;
+            } @else {
+                --duration: 85s;
+            }
+        }
+    }
+}
