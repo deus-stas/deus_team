@@ -15,7 +15,9 @@ import {connect} from "react-redux";
 import TruncatedSentence from "./TruncatedSentence";
 import {useMediaQuery} from "@material-ui/core";
 import DelayedLink from "../../appHeader/DelayedLink";
-
+import { Marquee as MarqueeTeam} from "@devnomic/marquee";
+import "@devnomic/marquee/dist/index.css";
+import {useMobile} from "../projects/projectDetail/ProjectDetail";
 
 
 const Agency = (props) => {
@@ -33,6 +35,7 @@ const Agency = (props) => {
     const [endSlider, setEndSlider] = useState(false);
     const [currentPerson, setCurrentPerson] = useState(0);
     const [reviews, setReviews] = useState([]);
+    const {isLaptop} = useMobile()
 
     useEffect(() => {
         axios.get(`/api/awards/`)
@@ -350,16 +353,54 @@ const Agency = (props) => {
                 </section> : null
             }
 
-            {vacancies && (
-                <section id="agency" className="agency-vacancy">
-                    <div className="agency-vacancy__wrap">
-                        <div className="agency-vacancy__info sticky-h2">
-                            <h2 className="heading-secondary">Мы находимся<br/> в постоянном поиске<br/> лучших специалистов.</h2>
-                            <span>
+            {team && (
+                <section id="agency" className="agency-team borderBlock">
+                    <div className="agency-team__wrap">
+                        <div className="intro">
+                            <p className="heading heading-secondary">Мы уверены, что проекты делают {isLaptop? '' :<br/>} не компании, а люди.
+                                Поэтому особое внимание уделяем формированию команды.</p>
+                            <p className="descr m-text">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в
+                                единую систему для получения максимальной эффективности для вашего бизнеса</p>
+                        </div>
+                        <div className="agency-team__wrap-imgWrap">
+                            {
+                                Array.from({ length: 5 }, (_, columnIndex) => (
+                                    <MarqueeTeam
+                                        key={columnIndex}
+                                        className={isLaptop? "animate-marquee-left" : "animate-marquee-up"}
+                                        direction={isLaptop? "left" : "up"}
+                                        fade={false}
+                                        reverse={columnIndex % 2 === 0}
+                                    >
+                                        {
+                                            team.map((item, index) => (
+                                                <img
+                                                    className="image"
+                                                    src={`/uploads/${item.mainImg?.filename}`}
+                                                    alt={''}
+                                                />
+                                            ))
+                                        }
+                                    </MarqueeTeam>
+                                ))
+                            }
+                        </div>
+
+                    </div>
+                </section>
+            )}
+
+                {vacancies && (
+                    <section id="agency" className="agency-vacancy">
+                        <div className="agency-vacancy__wrap">
+                            <div className="agency-vacancy__info sticky-h2">
+                                <h2 className="heading-secondary">Мы находимся<br/> в постоянном поиске<br/> лучших
+                                    специалистов.</h2>
+                                <span>
                                 <p className="m-text">Не нашли подходящую вакансию?</p>
                                 <p className="m-text">Пришлите нам на почту</p>
                             </span>
-                            <p className="m-text"><Link className="hoverMail"
+                                <p className="m-text"><Link className="hoverMail"
                                                         to="mailto:job@de-us.ru">job@de-us.ru</Link></p>
                         </div>
                         <div className="agency-vacancy__wrapper">
