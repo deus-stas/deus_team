@@ -64,7 +64,7 @@ const MainPage = (props) => {
         setIsFullScreen(!isFullScreen);
     };
 
-    const isMobile = useMobile();
+    const {isMobile, isDesktop} = useMobile();
 
     const [currentSlide, setCurrentSlide] = useState(0);
     const [touchStart, setTouchStart] = useState(0);
@@ -354,14 +354,16 @@ const MainPage = (props) => {
                                             <div className="main-agency__item-header__text heading-secondary">{name}</div>
                                         </div>
                                         {descr}
-                                        {!!arrow && (<div className="main-agency__item-arrow">
-                                            <div className="hover-flip-circle">
-                                                <span>
-                                                    <Icon icon="arrowGo" viewBox="0 0 30 30"/>
-                                                    <div className="hover-circle">{double}</div>
-                                                </span>
+                                        {!!arrow && !isMobile && !!isDesktop && (
+                                            <div className="main-agency__item-arrow">
+                                                <div className="hover-flip-circle">
+                                                      <span>
+                                                        <Icon icon="arrowGo" viewBox="0 0 30 30"/>
+                                                        <div className="hover-circle">{double}</div>
+                                                      </span>
+                                                </div>
                                             </div>
-                                        </div>)}
+                                        )}
                                     </a>
                                 </div>);
                         }) : null}
