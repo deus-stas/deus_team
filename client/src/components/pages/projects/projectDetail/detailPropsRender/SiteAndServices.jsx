@@ -34,7 +34,7 @@ const SiteAndServices = ({detail}) => {
         <>
             {!!detail.bannerSeconds && detail.bannerSeconds.length > 0 && (
                 <section
-                    style={{ backgroundColor: "black" }}
+                    style={{ backgroundColor: "black", overflow:"hidden" }}
                     className="borderBlock"
                 >
                     <Swiper
@@ -80,26 +80,46 @@ const SiteAndServices = ({detail}) => {
                 <BannerComponent banner={detail.bannerSecond} detail={detail}/>
                 : null}
 
-            {detail.heading && detail.heading !== 'undefined' && detail.heading !== '' ?
 
-                <section style={{backgroundColor: "white"}} className="project-steps padding borderBlock">
-                    <div className="project-steps__wrap">
-                        <span>
-                            <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.heading}}/>
-                            <p className="project-steps__intro l-textReg">{detail.workStepsIntroText}</p>
-                        </span>
-                        <div>
-                            {detail.workSteps.length > 0 && detail.workSteps.map((item, index) => (
 
-                                <div key={index} className="project-steps__s">
-                                    <div className="project-steps__subtitle l-textReg">{item.workStepsTitle}</div>
-                                    <div className="project-steps__text m-text"
-                                         dangerouslySetInnerHTML={{__html: item.workStepsItem}}/>
+            {detail.workSteps.length > 0 ?
+                detail.workSteps.map((val, index) => {
+                    {console.log('imageI:', val.imageI)}
+                    return (
+                        <>
+                            <section style={{backgroundColor: "white"}} className="project-steps padding borderBlock">
+                                <div className="project-steps__wrap">
+                                    <div>
+                                        <h2 className="heading-secondary"
+                                            dangerouslySetInnerHTML={{__html: val.heading}}/>
+                                        {val.workStepsIntroText ? (
+                                            <p className="project-steps__intro l-textReg">{val.workStepsIntroText}</p>
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <div key={index} className="project-steps__s">
+                                            {val.workStepsTitle ? (
+                                                <div
+                                                    className="project-steps__subtitle l-textReg">{val.workStepsTitle}</div>
+                                            ) : null}
+                                            <div className="project-steps__text m-text"
+                                                 dangerouslySetInnerHTML={{__html: val.workStepsItem}}/>
+                                        </div>
+                                    </div>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                </section> : null}
+
+                            </section>
+                            <section className="project-banner borderBlock">
+                                {val.imageI ? (
+                                    <img src={val.imageI.src} alt={''}/>
+                                ) : null}
+                            </section>
+
+                        </>
+
+                    )
+                })
+                : null}
 
 
             {detail.bannerThird ?

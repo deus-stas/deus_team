@@ -340,7 +340,7 @@ const MainPage = (props) => {
 
                                         {isVideo && (
                                             <video className="main-agency__item-img" muted
-                                                   // playsInline autoPlay loop
+                                                   playsInline autoPlay loop
                                                    src={fileUrl}/>
                                         )}
                                         {!isVideo && (
@@ -370,7 +370,7 @@ const MainPage = (props) => {
 
                     <div className="main-projects__wrap">
                     <span className="main-projects__item">
-                      <h2 className="heading-secondary sticky-h2">Экспертиза</h2>
+                      <h2 className="heading-secondary">Экспертиза</h2>
                     </span>
                         <div className="main-projects__item">
                             <p className={`${experts}`}>

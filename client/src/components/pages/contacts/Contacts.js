@@ -112,7 +112,7 @@ const Contacts = (props) => {
                             <div className="contacts-general__wrap borderBlock padding">
                                 <div className="chat">
                                     <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: text}}/>
-                                    <div onClick={() => window.open('https://t.me/deusagency', )} className="btnTg hidden-mob">
+                                    <div onClick={() => window.open('https://t.me/agencydeus', )} className="btnTg hidden-mob">
                                         <p>Написать сообщение</p>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@ const Contacts = (props) => {
                                             </div>
                                         )
                                     })}
-                                    <div onClick={() => window.open('https://t.me/deusagency', '_blank')} className="btnTg hidden-desk"><p>Написать сообщение</p></div>
+                                    <div onClick={() => window.open('https://t.me/agencydeus', '_blank')} className="btnTg hidden-desk"><p>Написать сообщение</p></div>
                                 </div>
                             </div>
                     </section>

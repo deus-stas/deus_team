@@ -1,4 +1,4 @@
-import {useEffect, useState,} from 'react';
+import React, {useEffect, useState,} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {connect} from "react-redux";
 import './appHeader.scss';
@@ -174,18 +174,23 @@ const AppHeader = (props) => {
                                         )
                                     }
 
-                                    <DelayedLink to="/contacts" className={`header__discuss ${menu ? 'hidden' : ''}`}
-                                                 datahash="contactUs"
-                                                 onClick={(e) => gotoAnchor(e)}>
-                                        {!!headerData?.headerPhoto &&
-                                            <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                        src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
-                                                        alt="Обсудить проект" className="header__discuss-img"/>
-                                        }
-                                        <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                             className="header__discuss-text m-text">Обсудить проект
-                                        </div>
-                                    </DelayedLink>
+                                        <DelayedLink to="/contacts"
+                                                     className={`header__discuss ${menu ? 'hidden' : ''}`}
+                                                     datahash="contactUs"
+                                                     onClick={(e) => gotoAnchor(e)}>
+                                            <span className="header__discuss-flex">
+                                              {!!headerData?.headerPhoto &&
+                                                  <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                                              src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
+                                                              alt="Обсудить проект" className="img"/>
+                                              }
+                                                <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                                     className="m-text text">Обсудить проект
+                                                <Icon icon="arrowRight" viewBox="0 0 24 24"/>
+                                            </div>
+                                            </span>
+
+                                        </DelayedLink>
                                     </>}
                                     <div className={`header__burger hidden-desktop  ${menu ? 'activeMenu' : ''}`}
                                          onClick={() => {
