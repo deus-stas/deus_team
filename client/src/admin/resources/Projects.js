@@ -254,29 +254,37 @@ export const SaitAndServiceRender = () => {
 
         <p>Блок Этапы работ</p>
         <div className="baseFlexWrap">
-        <TextInput
-            className="customWidth"
-            source="heading"
-            label="Заголовок слева"/>
-        <TextInput
-            className="customWidth"
-            label="Описание работ"
-            placeholder="Одной из задач стал брендинг агентства..."
-            source="workStepsIntroText"/>
+
         </div>
         <ArrayInput
             label=""
             source="workSteps">
             <SimpleFormIterator>
                 <TextInput
+                    className="customWidth"
+                    source="heading"
+                    label="Заголовок слева/или № этапа"/>
+                <TextInput
+                    className="customWidth"
+                    label="Описание работ"
+                    placeholder="Одной из задач стал брендинг агентства..."
+                    source="workStepsIntroText"/>
+                <TextInput
                     label="Заголовок работ"
                     placeholder="Этап 1. Разработка семантического ядра"
                     className="customWidth"
                     source="workStepsTitle"/>
-             <RichTextInput
-                 label="Результаты"
-                 className="customWidth"
-                 source="workStepsItem"/>
+                <RichTextInput
+                    label="Результаты"
+                    className="customWidth"
+                    source="workStepsItem"/>
+                <FileInput
+                    source="imageI"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
 
             </SimpleFormIterator>
         </ArrayInput>
