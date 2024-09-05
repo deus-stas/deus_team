@@ -123,7 +123,7 @@ const Contacts = (props) => {
                                         return (
                                             <div className="worker">
                                                 <img className="worker-img"
-                                                     src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null}
+                                                     src={team.mainImg ? `${apiUrl}/uploads/${team.image.filename}` : null}
                                                      alt=""/>
                                                 <span>
                                                       <p className="m-text">{team.name}</p>

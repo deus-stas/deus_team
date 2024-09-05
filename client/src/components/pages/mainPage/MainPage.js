@@ -296,7 +296,7 @@ const MainPage = (props) => {
                                 <>
                                     {team.filter((item) => item.mainControl).map((item) => {
                                         return (<img
-                                            src={`${apiUrl}/uploads/${item.mainImg.filename}`}
+                                            src={`${apiUrl}/uploads/${item.image?.filename}`}
                                             alt=""
                                             className="person-img"
                                         />);

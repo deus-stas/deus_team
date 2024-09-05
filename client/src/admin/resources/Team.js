@@ -66,20 +66,21 @@ export const TeamCreate = (props) => {
                             accept="image/*">
                     <FilenameField source="src" title="title"/>
                 </ImageInput>
+
+                <ImageInput className="fileInput" placeholder="+" source="image" label="Фото для круга"
+                            accept="image/*">
+                    <FilenameField source="src" title="title"/>
+                </ImageInput>
+
                 <BooleanInput
                     source="mainControl"
                     label="Показывать на главной"/>
                 <BooleanInput
                     source="serviceControl"
                     label="Показывать в услугах"/>
-                <BooleanInput
-                    source="agencyControl"
-                    label="Показывать в агенстве"/>
-
-                <ImageInput className="fileInput" placeholder="+" source="image" label="Emoji"
-                            accept="image/*">
-                    <FilenameField source="src" title="title"/>
-                </ImageInput>
+                {/*<BooleanInput*/}
+                {/*    source="agencyControl"*/}
+                {/*    label="Показывать в агенстве"/>*/}
 
             </SimpleForm>
         </Create>
@@ -121,19 +122,20 @@ export const TeamEdit = (props) => {
                             accept="image/*">
                     <FilenameField source="src" title="title"/>
                 </ImageInput>
+
+                <ImageInput className="fileInput" placeholder="+" source="image" label="Фото для круга" accept="image/*">
+                    <FilenameField source="src" title="title"/>
+                </ImageInput>
+
                 <BooleanInput
                     source="mainControl"
                     label="Показывать на главной"/>
                 <BooleanInput
                     source="serviceControl"
                     label="Показывать в услугах"/>
-                <BooleanInput
-                    source="agencyControl"
-                    label="Показывать в агенстве"/>
-
-                <ImageInput className="fileInput" placeholder="+" source="image" label="Emoji" accept="image/*">
-                    <FilenameField source="src" title="title"/>
-                </ImageInput>
+                {/*<BooleanInput*/}
+                {/*    source="agencyControl"*/}
+                {/*    label="Показывать в агенстве"/>*/}
             </SimpleForm>
         </Edit>
     )
