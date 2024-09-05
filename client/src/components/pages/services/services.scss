@@ -401,6 +401,15 @@
                     gap: 2rem;
                 }
 
+                p:nth-child(2){
+                    color: #757677;
+                    margin-top: 1rem;
+
+                    @include respond(xs){
+                        margin-top: .5rem;
+                    }
+                }
+
                 img {
                     width: 10rem;
                     height: 10rem;
