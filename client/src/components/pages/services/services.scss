@@ -466,7 +466,7 @@
             display: grid;
             grid-template-columns: repeat(2, 0.5fr);
             grid-gap: 2rem 0 ;
-            padding-bottom: 2rem;
+            padding: 3rem 0 2rem;
             @include respond(sm) {
                 grid-template-columns: 100%;
                 padding: 2rem 0;
@@ -480,6 +480,12 @@
                 display: flex;
                 align-items: center;
                 gap: 1.5rem;
+
+                span {
+                    p:nth-child(2){
+                        color: #757677;
+                    }
+                }
 
                 &-name {
 
@@ -514,12 +520,21 @@
             .item {
                 display: grid;
                 grid-template-columns: repeat(2, 0.5fr);
-                grid-gap:  3rem 6.6rem;
+                grid-gap: 2rem 0 ;
                 padding: 1.5rem 0;
                 border-bottom: 1px solid #D9D9D9;
                 @include respond(sm) {
+                    grid-template-columns: 3fr 1fr;
                     padding: 1rem 0;
                    grid-gap:0 ;
+                } @include respond(xs) {
+                    grid-template-columns: 1fr;
+                    padding: 1rem 0;
+                   grid-gap:0 ;
+                }
+
+                p:nth-child(2){
+                    color: #757677;
                 }
             }
         }
