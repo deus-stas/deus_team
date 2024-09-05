@@ -229,8 +229,6 @@ const Cta = (props) => {
                                                 <Checkbox name="ctaServices" value="Сайты и сервисы" text="Сайты и сервисы" />
                                                 <Checkbox name="ctaServices" value="Контент-маркетинг" text="Контент-маркетинг" />
                                                 <Checkbox name="ctaServices" value="SEO-продвижение" text="SEO-продвижение" />
-                                                <Checkbox name="ctaServices" value="Лидогенерация" text="Лидогенерация" />
-                                                <Checkbox name="ctaServices" value="Поддержка и развитие" text="Поддержка и развитие" />
                                             </div>
                                             <div className="form__error check-error ">{errors.ctaServices && touched.ctaServices && errors.ctaServices}</div>
                                         </div>
@@ -356,32 +354,6 @@ const Cta = (props) => {
                                                     <div className="form__checks-c">
                                                         <div className="form__checks-text">
                                                             от 1 млн ₽
-                                                        </div>
-                                                    </div>
-                                                </label>
-                                                <label className="form__checks-label">
-                                                    <input
-                                                        type="radio"
-                                                        name="budget"
-                                                        checked={values.budget === "Лидогенерация"}
-                                                        onChange={() => setFieldValue("budget", "Лидогенерация")}
-                                                    />
-                                                    <div className="form__checks-c">
-                                                        <div className="form__checks-text">
-                                                            Лидогенерация
-                                                        </div>
-                                                    </div>
-                                                </label>
-                                                <label className="form__checks-label">
-                                                    <input
-                                                        type="radio"
-                                                        name="budget"
-                                                        checked={values.budget === "Поддержка и развитие"}
-                                                        onChange={() => setFieldValue("budget", "Поддержка и развитие")}
-                                                    />
-                                                    <div className="form__checks-c">
-                                                        <div className="form__checks-text">
-                                                            Поддержка и развитие
                                                         </div>
                                                     </div>
                                                 </label>
