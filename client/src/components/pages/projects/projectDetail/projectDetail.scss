@@ -238,6 +238,17 @@
         @include respond(sm){
             margin: 2rem 0;
         }
+        &-header {
+            background-color: #050505;
+            color: #FFFFFF;
+            margin-top:4rem;
+            @include respond(lg){
+                margin-top: 3rem;
+            }
+            @include respond(sm){
+                margin-top: 2rem;
+            }
+        }
         &__wrap {
             display: grid;
             grid-template-columns: repeat(2, 1fr);

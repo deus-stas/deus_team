@@ -10,6 +10,7 @@ const projectsSchema = new Schema({
   heading: defaultString,
   stack: defaultArray,
   date: defaultString,
+  stageName: defaultString,
   tasksItem: defaultString,
   duration: defaultString,
   descrProject: defaultString,
