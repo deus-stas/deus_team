@@ -277,7 +277,7 @@ const Agency = (props) => {
             <section id='principle' className="agency-principle">
                     <div className="agency-principle__wrap">
                         <h2 className="heading-secondary">
-                           <p className="sticky-h2">
+                           <p className="">
                                Принципы, которых мы<br/> придерживаемся в работе
                            </p>
                         </h2>
