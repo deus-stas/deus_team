@@ -85,7 +85,9 @@ const AppFooter = (props) => {
                                    }
                                     <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
                                          className="m-text text">Обсудить проект
-                                </div>
+                                        <Icon icon="arrowRight" viewBox="0 0 24 24"/>
+                                    </div>
+
                                 </span>
 
                             </DelayedLink>

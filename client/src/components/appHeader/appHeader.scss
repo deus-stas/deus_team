@@ -337,7 +337,8 @@
     }
 
     &__discuss {
-        justify-self: end;
+        overflow: hidden;
+        //justify-self: end;
         width: max-content;
         display: flex;
         align-items: center;
@@ -347,29 +348,62 @@
         margin: 0;
         padding: 1rem 1.6rem;
         transition: all 0.3s linear;
-        @include respond(xs){
+        @include respond(xs) {
 
         }
+        &-flex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
 
-    &:hover {
-        background: #121212;
-        color: #FFFFFF;
-        }
+            img {
+                border-radius: 50%;
+                width: 2.4rem;
+                height: 2.4rem;
+                transition: all 0.3s;
+                transform: scale(1) translateX(0);
+                opacity: 1;
+            }
 
-        &-img {
-            width: 2.4rem;
-            height: 2.4rem;
-            margin-right: 1rem;
-            border-radius: 50%;
-        }
+            .text {
+                position: relative;
+                margin: 0 1rem;
+                transition: all 0.4s;
+                color: #FFFFFF;
 
-        &-text {
-            color: #FFFFFF;
-            transition: opacity .5s;
-            white-space: nowrap;
-            cursor: pointer;
+                .icon {
+                    position: absolute;
+                    top: -.5rem;
+                    left: auto;
+                    right: -3.6rem;
+                    width: 2.4rem;
+                    height: 2.4rem;
+                    transition: all 0.4s;
+                    transform: scale(0);
+                }
+            }
+
+            &:hover {
+                img {
+                    transform: scale(0) translateX(-2.4rem);
+                    opacity: 0;
+
+                }
+
+                .text {
+                    transform: translateX(-2.4rem);
+
+                    .icon {
+                        top: 0;
+                        transform: scale(1);
+                    }
+                }
+
+
+            }
         }
     }
+
 
     &__burger {
         transition: all .1s;

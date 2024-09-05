@@ -33,6 +33,7 @@
         }
 
         &__discuss {
+            overflow: hidden;
             margin-top: 3rem;
            display: inline-block;
             padding: 1rem 2rem;
@@ -47,16 +48,53 @@
             &-flex {
                 display: flex;
                 flex-wrap: wrap;
+                align-items: flex-end;
 
                 img {
                     border-radius: 50%;
                     width: 2.4rem;
                     height: 2.4rem;
+                    transition: all 0.3s;
+                    transform: scale(1) translateX(0);
+                    opacity: 1;
                 }
 
                 .text {
+                    position: relative;
                     margin: 0 1rem;
+                    transition: all 0.4s;
+
+                    .icon {
+                        position: absolute;
+                        top: -.5rem;
+                        left: auto;
+                        right: -3.6rem;
+                        width: 2.4rem;
+                        height: 2.4rem;
+                        transition: all 0.4s;
+                        transform: scale(0);
+                    }
                 }
+
+
+            }
+
+            &:hover {
+                img {
+                    transform: scale(0) translateX(-2.4rem);
+                    opacity: 0;
+
+                }
+
+                .text {
+                    transform: translateX(-2.4rem);
+                    .icon {
+                        top: 0;
+                        transform: scale(1);
+                    }
+                }
+
+
             }
         }
     }
