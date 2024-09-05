@@ -145,7 +145,7 @@ const Services = (props) => {
                         </section>
 
                         <section className="services-principle borderBlock padding whiteHeader">
-                            <h2 className="heading-secondary">Как мы работаем</h2>
+                            <h2 className="heading-secondary">Принципы управления<br/> проектами</h2>
                             <div className="services-principle__wrap">
                                 <div className="services-principle__wrap-item">
                                     <img src={pentagon} alt=""/>
@@ -197,7 +197,7 @@ const Services = (props) => {
                                                 return (
                                                     <div className="worker">
                                                         <img className="worker-img"
-                                                             src={team.mainImg ? `${apiUrl}/uploads/${team.mainImg.filename}` : null}
+                                                             src={team.image ? `${apiUrl}/uploads/${team.image?.filename}` : null}
                                                              alt=""/>
                                                         <span>
                                                             <p className="m-text">{team.name}</p>

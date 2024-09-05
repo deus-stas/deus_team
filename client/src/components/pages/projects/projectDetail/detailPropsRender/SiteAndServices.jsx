@@ -82,44 +82,42 @@ const SiteAndServices = ({detail}) => {
 
 
 
-            {detail.workSteps.length > 0 ?
-                detail.workSteps.map((val, index) => {
-                    {console.log('imageI:', val.imageI)}
-                    return (
-                        <>
-                            <section style={{backgroundColor: "white"}} className="project-steps padding borderBlock">
-                                <div className="project-steps__wrap">
-                                    <div>
-                                        <h2 className="heading-secondary"
-                                            dangerouslySetInnerHTML={{__html: val.heading}}/>
-                                        {val.workStepsIntroText ? (
-                                            <p className="project-steps__intro l-textReg">{val.workStepsIntroText}</p>
-                                        ) : null}
-                                    </div>
-                                    <div>
-                                        <div key={index} className="project-steps__s">
-                                            {val.workStepsTitle ? (
-                                                <div
-                                                    className="project-steps__subtitle l-textReg">{val.workStepsTitle}</div>
+            {detail.workSteps.length > 0 ? (
+                <>
+                    <section className="project-steps-header padding borderBlock heading-secondary" dangerouslySetInnerHTML={{ __html: detail.stageName }}/>
+                    {detail.workSteps.map((val, index) => {
+                        console.log('imageI:', val.imageI);
+                        return (
+                            <>
+                                <section style={{ backgroundColor: "white" }} className="project-steps padding borderBlock">
+                                    <div className="project-steps__wrap">
+                                        <div>
+                                            <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: val.heading }} />
+                                            {val.workStepsIntroText ? (
+                                                <p className="project-steps__intro l-textReg">{val.workStepsIntroText}</p>
                                             ) : null}
-                                            <div className="project-steps__text m-text"
-                                                 dangerouslySetInnerHTML={{__html: val.workStepsItem}}/>
+                                        </div>
+                                        <div>
+                                            <div key={index} className="project-steps__s">
+                                                {val.workStepsTitle ? (
+                                                    <div className="project-steps__subtitle l-textReg">{val.workStepsTitle}</div>
+                                                ) : null}
+                                                <div className="project-steps__text m-text" dangerouslySetInnerHTML={{ __html: val.workStepsItem }} />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                            </section>
-                            <section className="project-banner borderBlock">
+                                </section>
                                 {val.imageI ? (
-                                    <img src={val.imageI.src} alt={''}/>
+                                    <section className="project-banner borderBlock">
+                                        <img src={val.imageI.src} alt="" />
+                                    </section>
                                 ) : null}
-                            </section>
+                            </>
+                        );
+                    })}
+                </>
 
-                        </>
-
-                    )
-                })
-                : null}
+            ) : null}
 
 
             {detail.bannerThird ?

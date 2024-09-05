@@ -254,7 +254,10 @@ export const SaitAndServiceRender = () => {
 
         <p>Блок Этапы работ</p>
         <div className="baseFlexWrap">
-
+            <TextInput
+                className="customWidth"
+                source="stageName"
+                label="Заголовок этапов работ"/>
         </div>
         <ArrayInput
             label=""
