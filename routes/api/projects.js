@@ -334,7 +334,7 @@ router.put("/projects/:id",
     const imageMob = req.files.imageMob ? req.files.imageMob[0] : undefined;
 
     workSteps = workSteps.map(workStep =>{
-        const image = req.files.workStepsImages.find(i => i.originalname === workStep.imageI.path)
+        const image = req.files.workStepsImages?.find(i => i.originalname === workStep.imageI.path)
         const projectWorkStep = project.workSteps.find(w => w?.workStepsItem === workStep?.workStepsItem)
         if (image) {
             if (projectWorkStep && projectWorkStep.imageI) {
