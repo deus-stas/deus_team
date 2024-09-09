@@ -923,6 +923,10 @@
           align-items: flex-start;
           gap: 1rem;
 
+          p {
+            color: #757677;
+          }
+
           .animateBall{
               display: flex;
             //animation: pulser 2s infinite;
