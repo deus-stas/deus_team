@@ -109,7 +109,7 @@ const SiteAndServices = ({detail}) => {
                                 </section>
                                 {val.imageI ? (
                                     <section className="project-banner borderBlock">
-                                        <img src={val.imageI.src} alt="" />
+                                        <img src={`/uploads/${val.imageI.filename}`} alt="" />
                                     </section>
                                 ) : null}
                             </>

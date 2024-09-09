@@ -111,6 +111,13 @@ const dataProvider = {
           formData.append(key, image);
         });
         //свойства в которых объект нужно отдельно переводить в JSON
+      } else if (key ==='workSteps' && value) {
+        const newValue = value.map(workStep => {
+          workStep.imageI = workStep.imageI.rawFile ? workStep.imageI.rawFile : true
+          return workStep
+        });
+        formData.append(key,  JSON.stringify(newValue));
+        //свойства в которых объект нужно отдельно переводить в JSON
       } else if (jsonKeys.includes(key) && !!value){
         formData.append(key, JSON.stringify(value));
       } else if (arrayApproachKeys.includes(key) && value) {
@@ -142,6 +149,7 @@ const dataProvider = {
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'metrics', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
+    const workStepsImages = []
 
     for (const [key, value] of Object.entries(params.data)) {
       console.log('put',key, value);
@@ -172,6 +180,18 @@ const dataProvider = {
               formData.append(`raitingProject[${index}][${itemKey}]`, item[itemKey]);
             });
           });
+        } else if (key === 'workSteps' && value) {
+          hasImage = true;
+          const newValue = value.map(workStep => {
+            workStep.imageI = workStep.imageI?.rawFile ? workStep.imageI?.rawFile : true
+            if (!!workStep.imageI.path) {
+              workStepsImages.push(workStep.imageI)
+            }
+
+            return workStep
+          });
+          formData.append(key, JSON.stringify(newValue));
+          //свойства в которых объект нужно отдельно переводить в JSON
         } else if (arrayImages.includes(key) && value) {
           const images = !!value
             ? value.map((image) => (!!image.imageI ? image.imageI.rawFile : null )).filter(v1 =>!!v1)
@@ -205,13 +225,20 @@ const dataProvider = {
       }
     }
 
+    // добавляем картинки из arrayImages в formData
+    workStepsImages.forEach((image, index) => {
+      if (image !== undefined) {
+        formData.append('workStepsImages', image);
+      }
+    });
+
     const url = `${apiUrl}/${resource}/${params.id}`;
 
     const options = {
       method: "PUT",
       body: hasImage ? formData : JSON.stringify(params.data),
     };
-
+    console.log(params.data)
     return httpClient(url, options).then(({ json }) => ({ data: json }));
   },
 

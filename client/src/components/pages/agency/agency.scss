@@ -156,6 +156,8 @@
 
                     @include respond(sm) {
                         margin-right: 2rem;
+                        width: 4rem;
+                        height: 4rem;
                     }
                 }
             }

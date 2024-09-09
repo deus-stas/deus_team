@@ -296,6 +296,7 @@ router.put("/projects/:id",
         { name: 'approachListFiles' },
         { name: 'approachListSecondFiles' },
         { name: 'approachListThirdFiles' },
+        { name: 'workStepsImages' },
         { name: 'bannerThird' },
         { name: 'bannerThirds' },
         { name: 'bannerFourth' },
@@ -322,15 +323,55 @@ router.put("/projects/:id",
 
     const tasksList = JSON.parse(req.body.tasksList);
     const metrics = JSON.parse(req.body.metrics);
-    const workSteps = JSON.parse(req.body.workSteps);
+    let workSteps = JSON.parse(req.body.workSteps);
     const approachList = JSON.parse(req.body.approachList);
     const approachListSecond = JSON.parse(req.body.approachListSecond);
     const approachListThird = JSON.parse(req.body.approachListThird);
 
-        console.log('workSteps', workSteps);
+    console.log('workSteps', workSteps,req.files.workStepsImages);
 
     const image = req.files.image ? req.files.image[0] : undefined;
     const imageMob = req.files.imageMob ? req.files.imageMob[0] : undefined;
+
+    workSteps = workSteps.map(workStep =>{
+        const image = req.files.workStepsImages.find(i => i.originalname === workStep.imageI.path)
+        const projectWorkStep = project.workSteps.find(w => w?.workStepsItem === workStep?.workStepsItem)
+        if (image) {
+            if (projectWorkStep && projectWorkStep.imageI) {
+                const path = `uploads/${projectWorkStep.imageI.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+            }
+            workStep.imageI = image;
+        } else {
+            console.log('projectWorkStep',projectWorkStep,workStep,workStep.imageI !== true)
+            if (projectWorkStep && projectWorkStep.imageI && projectWorkStep.imageI.path && workStep.imageI !== true) {
+                const path = `uploads/${projectWorkStep.imageI.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+                workStep.imageI = null;
+            } else {
+                if (projectWorkStep && projectWorkStep.imageI) {
+                    workStep.imageI = projectWorkStep.imageI;
+                }
+
+            }
+        }
+        return workStep
+    })
+    project.workSteps = workSteps
 
     if (image) {
         if (project.image) {

@@ -279,6 +279,8 @@ export const SaitAndServiceRender = () => {
                     source="workStepsTitle"/>
                 <RichTextInput
                     label="Результаты"
+                    isRequired
+                    validate={[required()]}
                     className="customWidth"
                     source="workStepsItem"/>
                 <FileInput
