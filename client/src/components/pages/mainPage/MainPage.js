@@ -4,7 +4,6 @@ import axios, {setIsLoadingMainPageEvent} from "./../../../axios";
 import {Link} from "react-router-dom";
 import Select from "react-select";
 import SwiperCore, {Grid, Autoplay} from "swiper";
-import Marquee from "react-fast-marquee";
 import {Icon} from "../../icon/Icon";
 import SectionProducts from "../../sectionProducts/SectionProducts";
 import SectionSocial from "../../sectionSocial/SectionSocial";
@@ -14,18 +13,9 @@ import "swiper/css";
 import "swiper/css/grid";
 import "./mainPage.scss";
 
-import arrorLink from "../../../img/icon/arrow-link.svg";
+
 import deus from "../../../img/deus-circle.png";
-import arrorGo from "../../../img/icon/arrow-go.svg";
-import arrorGo2 from "../../../img/icon/arrow-go2.svg";
-import mainBannerLine from "../../../img/main-banner-line.svg";
-import mainBannerLineMob from "../../../img/main-banner-line-mob.svg";
-import TypeWriterText from "../../typeWriterText";
 import {connect} from "react-redux";
-import {useInView} from "react-intersection-observer";
-import RoundButton from "../../animation/roundButton";
-import ScrollUp from "../../animation/scrollUp";
-import {isVisible} from "@testing-library/user-event/dist/utils";
 import RetryImage from "../../../helpers/RetryImage";
 import manager from "../../../img/manager.png";
 import * as ReactDom from "react-dom/server";
@@ -35,6 +25,7 @@ import FadeInOnScroll from "../../animation/fadeInOnScroll";
 import {Box, useMediaQuery} from "@material-ui/core";
 import {maxLength} from "react-admin";
 import {useMobile} from "../projects/projectDetail/ProjectDetail";
+import {Marquee} from "@devnomic/marquee";
 
 SwiperCore.use([Autoplay]);
 
@@ -270,7 +261,9 @@ const MainPage = (props) => {
 
             {!!clients && <section className="main-clients">
                 <div className="main-clients__marquee">
-                    <Marquee speed="40">
+                    <Marquee
+                        direction="left"
+                    >
                         {clients.map((client, i) => {
                             return (<RetryImage className='main-clients__img'
                                                 src={client.image ? `/uploads/${client.image.filename}` : null}

@@ -218,17 +218,26 @@ const AppHeader = (props) => {
 
                                         <div className="flex-wrap">
                                             <DelayedLink to="/contacts" className="header__discuss" datahash="contactUs"
-                                                         onClick={(e) => gotoAnchor(e)}>
+                                                         onClick={(e) => {
+                                                             setMenu(false)
+                                                             gotoAnchor(e)
+                                                         }}>
                                                 {
                                                     headerData.headerPhoto ?
                                                         (
                                                             <RetryImage datahash="contactUs"
-                                                                        onClick={(e) => gotoAnchor(e)}
+                                                                        onClick={(e) => {
+                                                                            setMenu(false)
+                                                                            gotoAnchor(e)
+                                                                        }}
                                                                         src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
                                                                         alt="Обсудить проект"
                                                                         className="header__discuss-img"/>
                                                         ) : (
-                                                            <img datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                                            <img datahash="contactUs" onClick={(e) => {
+                                                                setMenu(false)
+                                                                gotoAnchor(e)
+                                                            }}
                                                                  src={btn}
                                                                  alt="Обсудить проект" className="header__discuss-img"/>
                                                         )
