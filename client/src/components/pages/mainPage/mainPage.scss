@@ -1079,3 +1079,49 @@
     display: none;
   }
 }
+
+@keyframes marquee-left {
+
+  from {
+    transform: translateY(calc(-100% - 7rem));
+  }
+  to {
+    transform: translateY(0);
+  }
+  @include respond(lg){
+    from {
+      transform: translateY(calc(-100% - 7rem));
+    }
+  }
+  @include respond(sm){
+    from {
+      transform: translateY(calc(-100% - 3rem));
+    }
+  }
+  @include respond(xs){
+    from {
+      transform: translateY(calc(-100% - 3rem));
+    }
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-down var(--duration) linear infinite;
+}
+
+.main-clients__marquee {
+  --duration: 150s;
+
+  .gap-\[1rem\] {
+    gap: 7rem;
+    @include respond(lg) {
+      gap: 7rem;
+    }
+    @include respond(sm) {
+      gap: 3rem;
+    }
+    @include respond(xs) {
+      gap: 3rem;
+    }
+  }
+}
