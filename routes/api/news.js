@@ -43,7 +43,7 @@ router.post('/news', upload.fields([
   { name: 'mainNewsImage' },
   { name: 'photoSlider' }])
     , async (req, res) => {
-  const { name, newsTags, bannerSecond, mainControl, aboutImg, detailControl, aboutClient, aboutClient2, aboutClient3, body, workStepsItem, body2, body3, body4 } = req.body;
+  const { name, newsTags, bannerSecond, mainControl, description, aboutImg, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, body, workStepsItem, body2, body3, body4 } = req.body;
 
   function generateUrl(name) {
     const transliteratedName = transliterate(name);
@@ -66,7 +66,9 @@ router.post('/news', upload.fields([
     name,
     image,
     mainNewsImage,
+    underAboutClient,
     bannerSecond,
+    description,
     body,
     body2,
     body3,
@@ -130,7 +132,7 @@ router.put("/news/:id", upload.fields([
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, newsTags, urlName, mainControl, aboutClient, aboutClient2,  aboutClient3,  detailControl, workStepsItem, aboutImg,  body, body2, body3, body4 } = req.body;
+  const { name, newsTags, urlName, mainControl, description, aboutClient, aboutClient2,  aboutClient3,  detailControl, underAboutClient, workStepsItem, aboutImg,  body, body2, body3, body4 } = req.body;
   const image = req.files.image ? req.files.image[0] : undefined;
   const mainNewsImage = req.files.mainNewsImage ? req.files.mainNewsImage[0] : undefined;
   const bannerSecond = req.files.bannerSecond ? req.files.bannerSecond[0] : undefined;
@@ -233,6 +235,8 @@ router.put("/news/:id", upload.fields([
   news.urlName = urlName;
   news.aboutImg = aboutImg;
   news.mainControl = mainControl;
+  news.description = description;
+  news.underAboutClient = underAboutClient;
   news.detailControl = detailControl;
   news.aboutClient = aboutClient;
   news.aboutClient2 = aboutClient2;

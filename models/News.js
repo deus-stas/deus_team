@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 const newsSchema = new Schema({
   name: { type: String, required: true },
   urlName: {type: String},
+  description: {type: String},
+  underAboutClient: {type: String},
   image: { type: Object },
   mainNewsImage: { type: Object },
   bannerSecond: { type: Object },

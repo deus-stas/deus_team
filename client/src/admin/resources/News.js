@@ -95,6 +95,10 @@ export const NewsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
                 <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]}/>
+                 <TextInput
+                    className="customWidth"
+                    source="description"
+                    label="небольшое описание"/>
             <p className="baseFlexWrap">
                 <FileInput className="fileInput edit-page" placeholder="+" source="image" label="Превью"
                            validate={[required()]} accept="image/*,video/*">
@@ -122,6 +126,10 @@ export const NewsCreate = (props) => (
                 className="customWidth"
                 source="aboutClient"
                 label="Заголовок"/>
+            <TextInput
+                className="customWidth"
+                source="underAboutClient"
+                label="Подзаголовок"/>
             <RichTextInput className="customWidth" label="Текст" source="body" fullWidth/>
 
             <FileInput
@@ -177,6 +185,10 @@ export const NewsEdit = (props) => {
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]}/>
+            <TextInput
+                className="customWidth"
+                source="description"
+                label="небольшое описание"/>
             <p className="baseFlexWrap">
                 <FileInput className="fileInput edit-page" placeholder="+" source="image" label="Превью"
                            validate={[required()]} accept="image/*,video/*">
@@ -204,6 +216,10 @@ export const NewsEdit = (props) => {
                 className="customWidth"
                 source="aboutClient"
                 label="Заголовок"/>
+            <TextInput
+                className="customWidth"
+                source="underAboutClient"
+                label="Подзаголовок"/>
             <RichTextInput className="customWidth" label="Текст" source="body" fullWidth/>
 
             <FileInput
