@@ -364,25 +364,33 @@ const Agency = (props) => {
                         </div>
                         <div className="agency-team__wrap-imgWrap">
                             {
-                                Array.from({ length: 5 }, (_, columnIndex) => (
-                                    <MarqueeTeam
+                                Array.from({ length: 5 }, (_, columnIndex) => {
+                                    let count = 0;
+                                    return (<MarqueeTeam
                                         key={columnIndex}
-                                        className={isLaptop? "animate-marquee-left" : "animate-marquee-up"}
-                                        direction={isLaptop? "left" : "up"}
+                                        className={isLaptop ? "animate-marquee-left" : "animate-marquee-up"}
+                                        direction={isLaptop ? "left" : "up"}
                                         fade={false}
                                         reverse={columnIndex % 2 === 0}
                                     >
-                                        {
-                                            team.map((item, index) => (
+                                        {team.filter((value, index) => {
+                                            if (index === (columnIndex + count * 5)) {
+                                                count++;
+                                                return true
+                                            }
+                                            return false
+                                        })
+                                            .map((item, index, array) => (
                                                 <img
                                                     className="image"
                                                     src={`/uploads/${item.mainImg?.filename}`}
                                                     alt={''}
                                                 />
+
                                             ))
                                         }
-                                    </MarqueeTeam>
-                                ))
+                                    </MarqueeTeam>)
+                                })
                             }
                         </div>
 
