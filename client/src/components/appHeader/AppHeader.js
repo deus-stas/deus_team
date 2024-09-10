@@ -166,11 +166,11 @@ const AppHeader = (props) => {
                                     {
                                         headerData && headerData.phone &&
                                         (
-                                            <div className={`menu-contacts ${menu ? 'hidden' : ''}`}>
-                                                <a href={`tel:${headerData.phone}`} className="menu-contacts-link">
+                                            <a className={`menu-contacts ${menu ? 'hidden' : ''}`} href={`tel:${headerData.phone}`}>
+                                                <div >
                                                     <Icon icon="telephone" viewBox="0 0 18 18"/>
-                                                </a>
-                                            </div>
+                                                </div>
+                                            </a>
                                         )
                                     }
 
@@ -250,11 +250,11 @@ const AppHeader = (props) => {
                                             {
                                                 headerData && headerData.phone &&
                                                 (
-                                                    <div className="menu-contacts menu-contacts__menuSize">
-                                                        <DelayedLink to={`tel:${headerData.phone}`} className="menu-contacts-link">
+                                                    <a className="menu-contacts menu-contacts__menuSize" href={`tel:${headerData.phone}`}>
+                                                        <div>
                                                             <Icon icon="telephone" viewBox="0 0 18 18"/>
-                                                        </DelayedLink>
-                                                    </div>
+                                                        </div>
+                                                    </a>
                                                 )
                                             }
 

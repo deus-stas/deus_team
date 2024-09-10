@@ -169,8 +169,9 @@ const Agency = (props) => {
         }
     }
 
-    const rows = 6;
-    const clientsPerRow = Math.ceil(clients.length / rows);
+
+    const clientsPerRow = 7;
+    const rows = Math.ceil(clients.length / clientsPerRow);
 
     const double =  <Icon icon="arrowGo" viewBox="0 0 30 30"/>
 
@@ -320,18 +321,27 @@ const Agency = (props) => {
                             <div className="agency-clients__pag hidden-desktop">
                             </div>
                         </div>
-                    <div className="agency-clients__marquee hidden-mobile">
-                        {[...Array(rows)].map((_, rowIndex) => (
-                            <Marquee key={rowIndex} speed={rowIndex % 3 === 2 ? 20 : 40} direction={rowIndex % 2 === 0 ? 'left' : 'right'}>
-                                {
-                                    clients.slice(rowIndex * clientsPerRow, (rowIndex + 1) * clientsPerRow).map(client => (
-                                        <img className='agency-clients__img'
-                                             src={client.image ? `/uploads/${client.image.filename}` : null}
-                                             alt={client.name} key={client.id}/>
-                                    ))
-                                }
-                            </Marquee>
-                        ))}
+                    <div className="main-clients__marquee hidden-mobile">
+                        {[...Array(rows)].map((_, rowIndex) => {
+                            const endIndex = (rowIndex + 1) * clientsPerRow
+                            const slicedClients = clients.slice(rowIndex * clientsPerRow, (rowIndex + 1) * clientsPerRow)
+                            if (clients.length - endIndex < clientsPerRow) {
+                                slicedClients.push(clients.slice(endIndex))
+                            }
+                            if (slicedClients.length < clientsPerRow) {
+                                return <></>
+                            }
+                            return (
+                                <MarqueeTeam key={rowIndex} direction={'left'} reverse={rowIndex % 2 !== 0}>
+                                    {slicedClients.map(client => (
+                                            <img className='agency-clients__img'
+                                                 src={client.image ? `/uploads/${client.image.filename}` : null}
+                                                 alt={client.name} key={client.id}/>
+                                        ))
+                                    }
+                                </MarqueeTeam>
+                            )
+                        })}
                     </div>
                     <Swiper
                         slidesPerView={2}
@@ -421,21 +431,28 @@ const Agency = (props) => {
                                        </span>
                                         <h3 className="l-textReg">{item.name}</h3>
                                         <p className="s-text type">{item.type}</p>
+                                        <div className="arrow">
+                                            <Icon  icon="arrowVac" viewBox="0 0 24 24"/>
+                                        </div>
+
                                     </Link>
                                 )
                             })}
-                            <Link className="agency-vacancy__wrapper-item" target="_blank" to={"https://hh.ru/employer/2174085"}>
+                            <Link className="agency-vacancy__wrapper-item" target="_blank"
+                                  to={"https://hh.ru/employer/2174085"}>
                                 <span className="hh">
                                  <Icon icon="hh" viewBox="0 0 48 49"/>
                                 <p className=" m-text">Больше вакансий на hh.ru</p>
                                 </span>
-
+                                <div className="arrow">
+                                    <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                                </div>
                             </Link>
                         </div>
 
-                    </div>
-                </section>
-            )}
+                        </div>
+                    </section>
+                )}
             </div>
         </main>
             }
