@@ -332,8 +332,11 @@ router.put("/projects/:id",
 
     const image = req.files.image ? req.files.image[0] : undefined;
     const imageMob = req.files.imageMob ? req.files.imageMob[0] : undefined;
+    const bannerThirdsNames = JSON.parse(req.body.bannerThirdsNames);
+    const bannerFourthsNames = JSON.parse(req.body.bannerFourthsNames);
 
-    workSteps = workSteps.map(workStep =>{
+
+        workSteps = workSteps.map(workStep =>{
         const image = req.files.workStepsImages?.find(i => i.originalname === workStep.imageI.path)
         const projectWorkStep = project.workSteps.find(w => w?.workStepsItem === workStep?.workStepsItem)
         if (image) {
@@ -592,7 +595,7 @@ router.put("/projects/:id",
 
         if (req.files.bannerThirds) {
             if (project.bannerThirds && project.bannerThirds.length > 0) {
-                project.bannerThirds.forEach((image) => {
+                project.bannerThirds.filter(image=> !bannerThirdsNames.includes(image.filename)).forEach((image) => {
                     fs.unlink(image.path, (err) => {
                         if (err) {
                             console.error(err);
@@ -600,23 +603,29 @@ router.put("/projects/:id",
                     });
                 });
             }
-            project.bannerThirds = req.files.bannerThirds;
+            project.bannerThirds = [
+                ...(project.bannerThirds ? project.bannerThirds.filter(image => bannerThirdsNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.bannerThirds : [])
+            ];
+            console.log()
         } else {
             if (project.bannerThirds && project.bannerThirds.length > 0) {
-                project.bannerThirds.forEach((image) => {
+                project.bannerThirds.filter(image=> !bannerThirdsNames.includes(image.filename)).forEach((image) => {
                     fs.unlink(image.path, (err) => {
                         if (err) {
                             console.error(err);
                         }
                     });
                 });
-                project.bannerThirds = null;
+                project.bannerThirds = [
+                    ...(project.bannerThirds ? project.bannerThirds.filter(image => bannerThirdsNames.includes(image.filename)) : [])
+                ];
             }
         }
 
         if (req.files.bannerFourths) {
             if (project.bannerFourths && project.bannerFourths.length > 0) {
-                project.bannerFourths.forEach((image) => {
+                project.bannerFourths.filter(image=> !bannerFourthsNames.includes(image.filename)).forEach((image) => {
                     fs.unlink(image.path, (err) => {
                         if (err) {
                             console.error(err);
@@ -624,17 +633,23 @@ router.put("/projects/:id",
                     });
                 });
             }
-            project.bannerFourths = req.files.bannerFourths;
+            project.bannerFourths = [
+                ...(project.bannerFourths ? project.bannerFourths.filter(image => bannerFourthsNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.bannerFourths : [])
+            ];
+            console.log()
         } else {
             if (project.bannerFourths && project.bannerFourths.length > 0) {
-                project.bannerFourths.forEach((image) => {
+                project.bannerFourths.filter(image=> !bannerFourthsNames.includes(image.filename)).forEach((image) => {
                     fs.unlink(image.path, (err) => {
                         if (err) {
                             console.error(err);
                         }
                     });
                 });
-                project.bannerFourths = null;
+                project.bannerFourths = [
+                    ...(project.bannerFourths ? project.bannerFourths.filter(image => bannerFourthsNames.includes(image.filename)) : [])
+                ];
             }
         }
 
