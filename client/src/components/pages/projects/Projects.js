@@ -318,8 +318,8 @@ const Projects = () => {
             .map((project, index, array) => {
                 const numProject = index < 9 ? "0" + (index + 1) : (index + 1);
                 const isLastItem = index + 1 === array.length;
-                const imgSize = isMob ? `${apiUrl}/uploads/${project.imageMob.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
-                const isVideo = project.imageMob && project.imageMob.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
+                const imgSize = isMob ? `${apiUrl}/uploads/${project.imageMob?.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
+                const isVideo = project.imageMob && project.imageMob?.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
 
                 return (
                     <div style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>

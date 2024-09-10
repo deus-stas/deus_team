@@ -32,6 +32,7 @@ const SiteAndServices = ({detail}) => {
 
     return (
         <>
+
             {!!detail.bannerSeconds && detail.bannerSeconds.length > 0 && (
                 <section
                     style={{ backgroundColor: "black", overflow:"hidden" }}
@@ -76,9 +77,12 @@ const SiteAndServices = ({detail}) => {
                     </div>
                 </section> : null}
 
-            {detail.bannerSecond ?
-                <BannerComponent banner={detail.bannerSecond} detail={detail}/>
-                : null}
+            {detail.bannerFourths ?
+                detail.bannerFourths.filter(val => !!val).map((banner, index) =>
+                    <BannerComponent banner={banner} detail={detail}/>
+                )
+                : null
+            }
 
 
 

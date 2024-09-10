@@ -1090,7 +1090,7 @@
   }
   @include respond(lg){
     from {
-      transform: translateY(calc(-100% - 7rem));
+      transform: translateY(calc(-100% - 4rem));
     }
   }
   @include respond(sm){
@@ -1100,7 +1100,7 @@
   }
   @include respond(xs){
     from {
-      transform: translateY(calc(-100% - 3rem));
+      transform: translateY(calc(-100% - 1rem));
     }
   }
 }
@@ -1115,13 +1115,13 @@
   .gap-\[1rem\] {
     gap: 7rem;
     @include respond(lg) {
-      gap: 7rem;
+      gap: 4rem;
     }
     @include respond(sm) {
       gap: 3rem;
     }
     @include respond(xs) {
-      gap: 3rem;
+      gap: 1rem;
     }
   }
 }

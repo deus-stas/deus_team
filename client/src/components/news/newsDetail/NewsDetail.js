@@ -136,7 +136,7 @@ const NewsDetail = () => {
                                 </div>
                                 <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: detail.name}}></h1>
                                 {detail.body && detail.body !== 'undefined' && detail.body !== 'null' &&
-                                    <p className="m-text" dangerouslySetInnerHTML={{__html: detail.aboutClient}}/>}
+                                    <p style={{color:"#757677"}} className="m-text" dangerouslySetInnerHTML={{__html: detail.description}}/>}
                                 <a className="m-text telegram"
                                    href="https://t.me/deusagency"
                                    target="_blank"
@@ -157,8 +157,10 @@ const NewsDetail = () => {
 
                             {detail.body && detail.body !== 'undefined' && detail.body !== 'null' &&
                                 <div className="news-detail__article-content">
-                                    <h2 className="heading-secondary"
+                                    <h2 style={{marginBottom:"2rem"}} className="heading-secondary"
                                         dangerouslySetInnerHTML={{__html: detail.aboutClient}}/>
+                                    <h2 className="heading-secondary"
+                                        dangerouslySetInnerHTML={{__html: detail.underAboutClient}}/>
                                     <div className="news-detail__article-about m-text"
                                          dangerouslySetInnerHTML={{__html: detail.body}}/>
                                     {detail.bannerSecond ? (

@@ -241,16 +241,24 @@ export const SaitAndServiceRender = () => {
             label="Задача"
             source="tasksItem"/>
 
-        <p>Второй баннер</p>
-        <FileInput
-            source="bannerSecond"
-            className="fileInput"
-            placeholder="+"
-            label="Баннер">
-            <FilenameField
-                source="src"
-                title="title"/>
-        </FileInput>
+        <p>Второй баннер/список</p>
+        <ArrayInput
+            label={""}
+            source={"bannerFourths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
 
         <p>Блок Этапы работ</p>
         <div className="baseFlexWrap">
@@ -580,16 +588,24 @@ export const DefaultFields = () => {
                     placeholder="2,5 месяца"
                     label="Продолжительность"/>
                 </span>
-                <p>Главный баннер</p>
-                <FileInput
-                    source="bannerFirst"
-                    className="fileInput"
-                    placeholder="+"
-                    label="Видео или фото">
-                    <FilenameField
-                        source="src"
-                        title="title"/>
-                </FileInput>
+                <p>Главный баннер/список</p>
+                <ArrayInput
+                    label={""}
+                    source={"bannerThirds"}
+                >
+                    <SimpleFormIterator>
+                        <FileInput
+                            source="imageI"
+                            className="fileInput"
+                            placeholder="+"
+                            label="Баннер">
+                            <FilenameField
+                                source="src"
+                                title="title"/>
+                        </FileInput>
+                        <FunctionFieldForArrayItem/>
+                    </SimpleFormIterator>
+                </ArrayInput>
 
             </div>
 

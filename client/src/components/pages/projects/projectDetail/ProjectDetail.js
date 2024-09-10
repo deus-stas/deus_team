@@ -209,10 +209,10 @@ const ProjectDetail = () => {
                                 </div> : null}
 
                         </section>
-                        {detail.bannerFirst ?
-                            <section className="project-banner">
-                                <BannerComponent banner={detail.bannerFirst} detail={detail}/>
-                                </section>
+                        {detail.bannerThirds ?
+                            detail.bannerThirds.filter(val => !!val).map((banner, index) =>
+                                <BannerComponent banner={banner} detail={detail}/>
+                            )
                             : null
                         }
 
