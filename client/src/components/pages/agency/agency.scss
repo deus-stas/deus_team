@@ -625,62 +625,7 @@
             }
         }
 
-        &__pag {
-            @include respond(sm) {
-                &.hidden-desktop {
-                    display: flex !important;
-                }
-
-                align-items: center;
-                margin-left: 1rem;
-                line-height: 1.8rem;
-                white-space: nowrap;
-            }
-
-            &-sep {
-                margin: 0 1rem;
-            }
-        }
-
-        .rfm-marquee {
-            max-height: 7.5rem;
-            height: 100%;
-            gap: 7rem;
-            @include respond(lg) {
-                gap: 4rem;
-            }
-            @include respond(sm) {
-                gap: 3rem;
-            }
-            @include respond(xs){
-                gap: 1rem;
-                max-height: 6rem;
-            }
-
-        }
-
-        .rfm-child {
-            max-width: 18.75rem;
-            height: 100%;
-            @include respond(xs){
-                max-width: 15rem;
-            }
-        }
-
-        .rfm-initial-child-container {
-            gap: 7rem;
-            @include respond(lg) {
-                gap: 4rem;
-            }
-            @include respond(sm) {
-                gap: 3rem;
-            }
-            @include respond(xs) {
-                gap: 1rem;
-            }
-        }
-
-        .marquee {
+        &__marquee {
             gap: 7rem;
             @include respond(lg) {
                 gap: 4rem;
@@ -864,7 +809,6 @@
 }
 
 @keyframes marquee-down {
-
     from {
         transform: translateY(calc(-100% - 15.5rem));
     }
