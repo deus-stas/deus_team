@@ -421,21 +421,28 @@ const Agency = (props) => {
                                        </span>
                                         <h3 className="l-textReg">{item.name}</h3>
                                         <p className="s-text type">{item.type}</p>
+                                        <div className="arrow">
+                                            <Icon  icon="arrowVac" viewBox="0 0 24 24"/>
+                                        </div>
+
                                     </Link>
                                 )
                             })}
-                            <Link className="agency-vacancy__wrapper-item" target="_blank" to={"https://hh.ru/employer/2174085"}>
+                            <Link className="agency-vacancy__wrapper-item" target="_blank"
+                                  to={"https://hh.ru/employer/2174085"}>
                                 <span className="hh">
                                  <Icon icon="hh" viewBox="0 0 48 49"/>
                                 <p className=" m-text">Больше вакансий на hh.ru</p>
                                 </span>
-
+                                <div className="arrow">
+                                    <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                                </div>
                             </Link>
                         </div>
 
-                    </div>
-                </section>
-            )}
+                        </div>
+                    </section>
+                )}
             </div>
         </main>
             }

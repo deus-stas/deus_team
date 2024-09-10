@@ -311,16 +311,24 @@
                 color: rgba(5, 5, 5, 1);
                 display: flex;
                 flex-direction: column;
+                position: relative;
                 @include respond(lg) {
                     padding: 3rem;
                 }
 
-                .place{
+                .place {
                     display: flex;
                     align-items: stretch;
                     gap: .5rem;
                     margin-bottom: 1rem;
+                    transition: all .3s ease-out;
+                    p {
+                        transition: all .35s ease-out;
+                        transform: translateX(0%);
+                    }
                     .icon {
+                        transition: all .3s ease-out;
+                        opacity: 1;
                         width: 1.6rem;
                         height: 1.6rem;
                     }
@@ -342,20 +350,61 @@
                     gap: 1rem;
                 }
 
-                &:last-child{
+                &:last-child {
                     background: red;
                     color: #FFFFFF;
                     display: block;
+                    &:hover {
+                        .icon {
+                            transform: scale(1.1);
+                        }
+                    }
+
                 }
 
+
                 .icon {
+                    transition: all .3s ease-out;
                     width: 4.8rem;
                     height: 4.9rem;
                 }
+
+
+                .arrow {
+                    transition: all .3s ease-out;
+                    transform: translateX(-50%);
+                    position: absolute;
+                    top: 5.8rem;
+                    left: auto;
+                    right: 4rem;
+                    opacity: 0;
+
+                    .icon {
+                        width: 2.4rem;
+                        height: 2.4rem;
+                    }
+                }
+
+                &:hover {
+                    .arrow {
+                        opacity: 1;
+                        top: 4rem;
+                        transform: translate(0);
+                    }
+
+                    .place {
+                        p {
+                            transform: translateX(-50%);
+                        }
+                        .icon {
+                            opacity: 0;
+                        }
+                    }
+
+
+                }
+
             }
-
-
-
         }
 
     }

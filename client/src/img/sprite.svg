@@ -99,6 +99,10 @@
     <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#050505" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 
+  <svg xmlns="http://www.w3.org/2000/svg" id="icon-arrowVac" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path xmlns="http://www.w3.org/2000/svg" d="M18.3646 5.63672H11.2939M18.3646 5.63672L18.3643 12.7078M18.3646 5.63672L5.63672 18.3646" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
   <svg fill="currentColor" id="icon-arrowGo" xmlns="http://www.w3.org/2000/svg"  width="30" height="30">
       <path d="M25 5V25M25 25H5M25 25L5 5" stroke="#E0FD60" stroke-width="1"/>
   </svg>
