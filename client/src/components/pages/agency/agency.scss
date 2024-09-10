@@ -70,13 +70,12 @@
             }
 
             @include respond(xs) {
-                display: flex;
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                grid-template-rows: initial;
                 gap: 1rem;
             }
 
             &-item {
-
                 @include respond(sm) {
                     padding: 0;
                 }
@@ -115,6 +114,7 @@
 
                 @include respond(xs) {
                     border-radius: 2rem;
+                        height: 21.8rem;
                 }
 
                 .content {
@@ -137,9 +137,17 @@
 
                 img {
                     display: block;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
+                    width: 70%;
+                   position: absolute;
+                    bottom: 0;
+                    left: auto;
+                    right: 0;
+                    @include respond(lg){
+                        width: 80%;
+                    }
+                    @include respond(xs) {
+                        width: 60%;
+                    }
                 }
             }
 
