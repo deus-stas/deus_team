@@ -16,7 +16,7 @@ import TruncatedSentence from "./TruncatedSentence";
 import {useMediaQuery} from "@material-ui/core";
 import DelayedLink from "../../appHeader/DelayedLink";
 import { Marquee as MarqueeTeam} from "@devnomic/marquee";
-import "@devnomic/marquee/dist/index.css";
+import "./marquee.scss";
 import {useMobile} from "../projects/projectDetail/ProjectDetail";
 
 
