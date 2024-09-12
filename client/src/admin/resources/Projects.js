@@ -461,6 +461,9 @@ export const CorporateIdentityRender = () => {
             label="Задача"
             source="tasksItem"/>
         <p>Список баннеров</p>
+        <BooleanInput
+            source="control1"
+            label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
             source={"bannerSeconds"}
@@ -489,6 +492,9 @@ export const CorporateIdentityRender = () => {
             placeholder="Мы разработали..."
             label="Описание блока Цветовая палитра"/>
         <p>Список баннеров</p>
+        <BooleanInput
+            source="control2"
+            label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
             source={"bannerFourths"}
@@ -519,6 +525,9 @@ export const CorporateIdentityRender = () => {
             label="Описание блока Шрифт и детали"/>
 
         <p>Список баннеров</p>
+        <BooleanInput
+            source="control3"
+            label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
             source={"bannerFifths"}
@@ -548,6 +557,9 @@ export const CorporateIdentityRender = () => {
             placeholder="Мы разработали..."
             label="Описание блока Паттерн"/>
         <p>Список баннеров</p>
+        <BooleanInput
+            source="control4"
+            label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
             source={"bannerSixths"}

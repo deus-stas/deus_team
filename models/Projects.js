@@ -77,6 +77,10 @@ const projectsSchema = new Schema({
   approachList: defaultArray,
   approachListSecond: defaultArray,
   approachListThird: defaultArray,
+  control1: Boolean,
+  control2: Boolean,
+  control3: Boolean,
+  control4: Boolean,
 });
 
 projectsSchema.set('toJSON', { virtuals: true });

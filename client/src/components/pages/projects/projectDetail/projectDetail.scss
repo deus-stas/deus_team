@@ -976,9 +976,9 @@
 
     span {
         display: grid;
-       &:nth-child(1), &:nth-child(4n){
-           grid-column: span 2;
-       }
+        &:not(:nth-child(2)):not(:nth-child(3)) {
+        grid-column: span 2;
+        }
     }
 }
 
