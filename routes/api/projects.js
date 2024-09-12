@@ -87,7 +87,7 @@ router.post(
         { name: 'mainVideoFile' }]),
     addCustomId,
     async (req, res) => {
-    const { name , date, duration,  metric, descrProject, mainVideo, about, stageName, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, visibilityTitle1, visibilityTitle2, customId, workStepsHeader,resultPersonsText, technologies, visibility, seoTitle, seoKeywords, seoDescription  } = req.body;
+    const { name , date, duration,  metric, descrProject, mainVideo, about, stageName, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, visibilityTitle1, visibilityTitle2, customId, workStepsHeader,resultPersonsText, technologies, visibility, seoTitle, seoKeywords, seoDescription, control1, control2, control3, control4  } = req.body;
     const tasksList = !!req.body.tasksList && req.body.tasksList !=='undefined' ? JSON.parse(req.body.tasksList): [];
     const metrics = !!req.body.metrics && req.body.metrics !=='undefined' ? JSON.parse(req.body.metrics): [];
     const stack = !!req.body.stack && req.body.stack !=='undefined' ? JSON.parse(req.body.stack): [];
@@ -258,7 +258,11 @@ router.post(
         approachListThird,
         seoTitle,
         seoKeywords,
-        seoDescription
+        seoDescription,
+        control1,
+        control2,
+        control3,
+        control4
     });
 
 
@@ -324,7 +328,7 @@ router.put("/projects/:id",
     console.log(req.body);
     console.log(req.files);
 
-    const { name, date, duration, stageName, metric, descrProject, mainVideo, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, visibilityTitle1, visibilityTitle2,customId, nameInEng, workStepsHeader, resultPersonsText, technologies, visibility,  seoTitle, seoKeywords, seoDescription} = req.body;
+    const { name, date, duration, stageName, metric, descrProject, mainVideo, about, task, taskDescr, workStepsIntroText, heading, tasksItem, workIntroText, taskDo, approach, body, result, taskPersons, approachPersons, resultPersons, main, projectTheme, projectType, bannerFirstVideo, bannerSecondVideo, bannerThirdVideo, bannerFourthVideo, bannerFifthVideo, bannerText, controlURL, projectURL, awardsURL, projectSite, visibilityTitle1, visibilityTitle2,customId, nameInEng, workStepsHeader, resultPersonsText, technologies, visibility,  seoTitle, seoKeywords, seoDescription, control1, control2, control3, control4} = req.body;
         const stack = !!req.body.stack && req.body.stack !=='undefined' ? JSON.parse(req.body.stack): [];
 
     const tasksList = JSON.parse(req.body.tasksList);
@@ -862,6 +866,10 @@ router.put("/projects/:id",
     project.seoDescription = seoDescription,
     project.seoKeywords = seoKeywords,
     project.seoTitle = seoTitle,
+    project.control1 = control1,
+    project.control2 = control2,
+    project.control3 = control3,
+    project.control4 = control4,
 
     await project.save();
 

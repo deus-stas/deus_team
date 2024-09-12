@@ -3,6 +3,8 @@ import {BannerComponent, ProjectResults, useMobile} from "../ProjectDetail";
 
 const CorporateIdentity = ({detail}) => {
     const isMobile = useMobile();
+
+
     return (
         <>
 
@@ -26,11 +28,13 @@ const CorporateIdentity = ({detail}) => {
                 </section> : null}
 
             {detail.bannerSeconds ?
-                <div className="banner-list">
+                <div className={
+                    detail.bannerSeconds.length > 2 && !!detail.control1 ? "banner-grid" : "banner-list"
+                }>
                     {detail.bannerSeconds.filter(val => !!val).map((banner, index) =>
-                        <div className="project-banner borderBlock">
+                        <span className="project-banner borderBlock">
                             <BannerComponent banner={banner} detail={detail}/>
-                        </div>
+                        </span>
                     )}
                 </div>
                 : null
@@ -52,11 +56,13 @@ const CorporateIdentity = ({detail}) => {
                 </section> : null}
 
             {detail.bannerFourths ?
-                <div className="banner-list">
+                <div className={
+                    detail.bannerFourths.length > 2 && !!detail.control2 ? "banner-grid" : "banner-list"
+                }>
                     {detail.bannerFourths.filter(val => !!val).map((banner, index) =>
-                        <div className="project-banner borderBlock">
+                        <span className="project-banner borderBlock">
                             <BannerComponent banner={banner} detail={detail}/>
-                        </div>
+                        </span>
                     )}
                 </div>
                 : null
@@ -78,7 +84,9 @@ const CorporateIdentity = ({detail}) => {
                 : null}
 
             {detail.bannerFifths ? (
-                    <div className={detail.bannerFifths.length > 2 ? "banner-grid" : ""}>
+                    <div className={
+                        detail.bannerFifths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
+                    }>
                         {detail.bannerFifths.filter(val => !!val).map((banner, index) => (
                             <span  className="project-banner borderBlock">
                                  <BannerComponent banner={banner} detail={detail} key={index}/>
@@ -105,11 +113,13 @@ const CorporateIdentity = ({detail}) => {
                 </section> : null}
 
             {detail.bannerSixths ?
-                <div className="banner-list">
+                <div className={
+                    detail.bannerSixths.length > 2 && !!detail.control4 ? "banner-grid" : "banner-list"
+                }>
                     {detail.bannerSixths.filter(val => !!val).map((banner, index) =>
-                        <div className="project-banner borderBlock">
+                        <span className="project-banner borderBlock">
                             <BannerComponent banner={banner} detail={detail}/>
-                        </div>
+                        </span>
                     )}
                 </div>
                 : null
