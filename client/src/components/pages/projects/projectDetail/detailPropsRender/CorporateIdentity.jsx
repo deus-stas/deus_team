@@ -10,11 +10,41 @@ const CorporateIdentity = ({detail}) => {
 
                 <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
                     <div className="project-target__wrap">
-                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.heading}}/>
+                        <h2 className="heading-secondary">Цели и задачи</h2>
                         <div>
                             {detail.taskDescr &&
-                                <div className="project-target__item m-text">
+                                <div className="project-target__content l-textReg">
                                     <div dangerouslySetInnerHTML={{__html: detail.taskDescr}}/>
+                                </div>
+                            }
+                            <div className="project-target__item m-text">
+                                <div dangerouslySetInnerHTML={{__html: detail.tasksItem}}/>
+                            </div>
+                        </div>
+
+                    </div>
+                </section> : null}
+
+            {detail.bannerSeconds ?
+                <div className="banner-list">
+                    {detail.bannerSeconds.filter(val => !!val).map((banner, index) =>
+                        <div className="project-banner borderBlock">
+                            <BannerComponent banner={banner} detail={detail}/>
+                        </div>
+                    )}
+                </div>
+                : null
+            }
+
+            {detail.workIntroText && detail.workIntroText !== 'undefined' && detail.workIntroText !== '' ?
+
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.heading}}/>
+                        <div>
+                            {detail.workIntroText &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.workIntroText}}/>
                                 </div>
                             }
                         </div>
