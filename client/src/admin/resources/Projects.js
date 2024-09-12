@@ -450,6 +450,34 @@ export const VideoRender = () => {
 
 export const CorporateIdentityRender = () => {
     return(<>
+        <p>Блок цели и задачи</p>
+        <TextInput
+            className="customWidth"
+            source="taskDescr"
+            placeholder="Клиент обратился к нам..."
+            label="Описание блока цели и задачи"/>
+        <RichTextInput
+            className="customWidth"
+            label="Задача"
+            source="tasksItem"/>
+        <p>Список баннеров</p>
+        <ArrayInput
+            label={""}
+            source={"bannerSeconds"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
         <p>Цветовая палитра</p>
         <TextInput
             className="customWidth"
@@ -457,7 +485,7 @@ export const CorporateIdentityRender = () => {
             label="Заголовок слева"/>
         <TextInput
             className="customWidth"
-            source="taskDescr"
+            source="workIntroText"
             placeholder="Мы разработали..."
             label="Описание блока Цветовая палитра"/>
         <p>Список баннеров</p>
