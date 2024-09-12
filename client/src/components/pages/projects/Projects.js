@@ -268,7 +268,7 @@ const Projects = () => {
                             <>
                                 {optionsTheme ? optionsTheme.map((project, index) => {
                                     const filterProjects = projects.filter(item => item.projectTheme === project.value && item.visibility);
-                                    const totalSum = filterProjects.length < 10 ? "0" + filterProjects.length : filterProjects.length;
+                                    const totalSum = filterProjects.length.toString().padStart(2, '0');
                                     return (
                                         <Link onClick={(e) => gotoAnchor(e, 'start', false)}
                                               to={`/projects?theme=${project.value}`}>
@@ -298,8 +298,8 @@ const Projects = () => {
                                 {optionsType ? optionsType.map((project, index) => {
                                     return (
                                         <Link to={`/projects?type=${project.value}`}>
-                                            <div className="main-projects__item-flex__inner m-text">
-                                                <div className="">
+                                            <div className="main-projects__item-flex__inner">
+                                                <div className={`${projectSizeLabel}`}>
                                                     <p className={`main-projects__item-btn ${checkedType && checkedType.value === project.value && 'activeTheme'}`}>{project.label}</p>
                                                 </div>
                                             </div>

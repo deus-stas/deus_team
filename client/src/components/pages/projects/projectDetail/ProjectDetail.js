@@ -11,6 +11,7 @@ import SEO from "./detailPropsRender/SEO";
 import { Icon } from "../../../icon/Icon";
 import {debounce} from "@material-ui/core";
 import ProjectNext from "../projectNext/ProjectNext";
+import CorporateIdentity from "./detailPropsRender/CorporateIdentity";
 
 const apiUrl = ''
 
@@ -152,6 +153,7 @@ const ProjectDetail = () => {
                 'site-and-services': (<SiteAndServices  detail={detail} />),
                 'tech-support': (<TechSupport  detail={detail} />),
                 'video-production': (<VideoProduction  detail={detail}/>),
+                'corporate-identity': (<CorporateIdentity  detail={detail}/>),
             };
             return fieldsMap[findType?.key] || <SiteAndServices  detail={detail} />;
         }
@@ -210,14 +212,18 @@ const ProjectDetail = () => {
 
                         </section>
                         {detail.bannerThirds ?
-                            detail.bannerThirds.filter(val => !!val).map((banner, index) =>
-                                <BannerComponent banner={banner} detail={detail}/>
-                            )
+                            <div className="banner-list">
+                                {detail.bannerThirds.filter(val => !!val).map((banner, index) =>
+                                    <div className="project-banner borderBlock">
+                                        <BannerComponent banner={banner} detail={detail}/>
+                                    </div>
+                                )}
+                            </div>
                             : null
                         }
 
                         <RenderFields detail={detail}/>
-                         <ProjectNext detail={detail}/>
+                        <ProjectNext detail={detail}/>
                     </div>
                 </main>
             }
@@ -229,20 +235,20 @@ const ProjectDetail = () => {
 
 export default ProjectDetail;
 
- export const BannerComponent = ({banner, detail, stackItem}) => {
+export const BannerComponent = ({banner, detail, stackItem}) => {
     const fileUrl = `${apiUrl}/uploads/${banner.filename}`;
     const isVideo = /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(banner.filename);
     const isImage = /\.(jpeg|jpg|gif|png)$/i.test(banner.filename);
 
     return (
-        <section className="project-banner borderBlock">
+        <>
             {isVideo && (
                 <video autoPlay loop muted playsInline src={fileUrl}/>
             )}
             {isImage && (
                 <img src={fileUrl} alt={detail.name} />
             )}
-        </section>
+        </>
     );
 }
 
@@ -255,7 +261,7 @@ export default ProjectDetail;
             <div className="project-results__wrap">
                 <div className="project-results__wrapper">
                     <h2 className="heading-secondary">Результаты</h2>
-                    {!isMobile && (
+                    {!isMobile && !!awardsURL && (
                         <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                             <p className="project-results__wrapper-url l-textReg">
                                 <Icon icon="cssAwards" viewBox="0 0 40 40"/>
@@ -272,7 +278,7 @@ export default ProjectDetail;
                     </div>
                 </div>
 
-                {isMobile && (
+                {isMobile && !!awardsURL &&(
                     <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                         <p className="project-results__wrapper-url s-text">
                             <Icon icon="cssAwards" viewBox="0 0 40 40"/>

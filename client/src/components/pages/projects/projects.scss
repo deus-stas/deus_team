@@ -36,6 +36,10 @@
                 margin-bottom: 2.9rem;
                 padding: .1rem;
             }
+            @include respond(xs){
+                margin-bottom: 2rem;
+                padding: .1rem;
+            }
 
             .switcher {
                 position: absolute;
