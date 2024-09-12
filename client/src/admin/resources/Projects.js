@@ -4,6 +4,7 @@ import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, SearchInpu
 import { RichTextInput } from 'ra-input-rich-text';
 import {useWatch} from "react-hook-form";
 import axios from "../../axios";
+import CorporateIdentity from "../../components/pages/projects/projectDetail/detailPropsRender/CorporateIdentity";
 
 const apiUrl = ''
 
@@ -106,6 +107,7 @@ export const ProjectsList = (props) => {
         'site-and-services': "сайты и сервисы",
         'tech-support': "Техническая поддержка",
         'video-production': "Видеопродакшн",
+        'corporate-identity': "Создание фирменного стиля",
     };
 
     const getTypeName = (id) => {
@@ -184,6 +186,7 @@ const RenderFields = () => {
         'site-and-services': (<SaitAndServiceRender/>),
         'tech-support': (<TechSupportRender/>),
         'video-production': (<VideoRender/>),
+        'corporate-identity': (<CorporateIdentityRender/>),
     };
     return  fieldsMap[findType?.key] || (<><SaitAndServiceRender/></>);
 };
@@ -442,6 +445,109 @@ export const VideoRender = () => {
                 source="src"
                 title="title"/>
         </FileInput>
+    </>)
+}
+
+export const CorporateIdentityRender = () => {
+    return(<>
+        <p>Цветовая палитра</p>
+        <TextInput
+            className="customWidth"
+            source="heading"
+            label="Заголовок слева"/>
+        <TextInput
+            className="customWidth"
+            source="taskDescr"
+            placeholder="Мы разработали..."
+            label="Описание блока Цветовая палитра"/>
+        <p>Список баннеров</p>
+        <ArrayInput
+            label={""}
+            source={"bannerFourths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>блок Шрифт и детали</p>
+        <TextInput
+            className="customWidth"
+            source="task"
+            label="Заголовок слева"/>
+        <TextInput
+            className="customWidth"
+            source="taskDo"
+            placeholder="Мы разработали..."
+            label="Описание блока Шрифт и детали"/>
+
+        <p>Список баннеров</p>
+        <ArrayInput
+            label={""}
+            source={"bannerFifths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>блок Паттерн</p>
+        <TextInput
+            className="customWidth"
+            source="stageName"
+            label="Заголовок слева"/>
+        <TextInput
+            className="customWidth"
+            source="approach"
+            placeholder="Мы разработали..."
+            label="Описание блока Паттерн"/>
+        <p>Список баннеров</p>
+        <ArrayInput
+            label={""}
+            source={"bannerSixths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+        <p>Блок результаты</p>
+        <TextInput
+            className="customWidth"
+            source="awardsURL"
+            placeholder="https://www.cssdesignawards.com/"
+            label="Css design awards"/>
+        <RichTextInput
+            className="customWidth"
+            source="result"
+            label="результат"/>
+
     </>)
 }
 

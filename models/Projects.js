@@ -45,6 +45,7 @@ const projectsSchema = new Schema({
   approachListThirdFiles: defaultArray,
   bannerFourths: defaultArray,
   bannerFifths: defaultArray,
+  bannerSixths: defaultArray,
   approach: defaultString,
   workIntroText: defaultString,
   approachPersons: defaultString,

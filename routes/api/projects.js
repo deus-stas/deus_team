@@ -81,6 +81,7 @@ router.post(
         { name: 'bannerFourths' },
         { name: 'bannerFifth' },
         { name: 'bannerFifths' },
+        { name: 'bannerSixths' },
         { name: 'imagesExtra' },
         { name: 'mainMobVideoFile' },
         { name: 'mainVideoFile' }]),
@@ -110,7 +111,7 @@ router.post(
     console.log('workSteps', workSteps);
     // console.log(req.files);
     // console.log(req.body);
-    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2;
+    let bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, bannerSixths, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2;
 
     if (req.files.bannerFirst) {
         bannerFirst = req.files.bannerFirst[0];
@@ -161,6 +162,9 @@ router.post(
     if (req.files.bannerFifths) {
         bannerFifths = req.files.bannerFifths;
     }
+    if (req.files.bannerSixths) {
+        bannerSixths = req.files.bannerSixths;
+    }
 
     if (req.files.mainVideoFile) {
         mainVideoFile = req.files.mainVideoFile[0];
@@ -210,6 +214,7 @@ router.post(
         bannerFourths,
         bannerFifth,
         bannerFifths,
+        bannerSixths,
         task,
         taskDescr,
         heading,
@@ -303,6 +308,7 @@ router.put("/projects/:id",
         { name: 'bannerFourths' },
         { name: 'bannerFifth' },
         { name: 'bannerFifths' },
+        { name: 'bannerSixths' },
         { name: 'imagesExtra' },
         { name: 'mainVideoFile' },
         { name: 'mainMobVideoFile' },
@@ -334,6 +340,8 @@ router.put("/projects/:id",
     const imageMob = req.files.imageMob ? req.files.imageMob[0] : undefined;
     const bannerThirdsNames = JSON.parse(req.body.bannerThirdsNames);
     const bannerFourthsNames = JSON.parse(req.body.bannerFourthsNames);
+    const bannerFifthsNames = JSON.parse(req.body.bannerFifthsNames);
+    const bannerSixthsNames = JSON.parse(req.body.bannerSixthsNames);
 
 
         workSteps = workSteps.map(workStep =>{
@@ -653,9 +661,10 @@ router.put("/projects/:id",
             }
         }
 
+
         if (req.files.bannerFifths) {
             if (project.bannerFifths && project.bannerFifths.length > 0) {
-                project.bannerFifths.forEach((image) => {
+                project.bannerFifths.filter(image=> !bannerFifthsNames.includes(image.filename)).forEach((image) => {
                     fs.unlink(image.path, (err) => {
                         if (err) {
                             console.error(err);
@@ -663,19 +672,56 @@ router.put("/projects/:id",
                     });
                 });
             }
-            project.bannerFifths = req.files.bannerFifths;
+            project.bannerFifths = [
+                ...(project.bannerFifths ? project.bannerFifths.filter(image => bannerFifthsNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.bannerFifths : [])
+            ];
+            console.log()
         } else {
             if (project.bannerFifths && project.bannerFifths.length > 0) {
-                project.bannerFifths.forEach((image) => {
+                project.bannerFifths.filter(image=> !bannerFifthsNames.includes(image.filename)).forEach((image) => {
                     fs.unlink(image.path, (err) => {
                         if (err) {
                             console.error(err);
                         }
                     });
                 });
-                project.bannerFifths = null;
+                project.bannerFifths = [
+                    ...(project.bannerFifths ? project.bannerFifths.filter(image => bannerFifthsNames.includes(image.filename)) : [])
+                ];
             }
         }
+
+        if (req.files.bannerSixths) {
+            if (project.bannerSixths && project.bannerSixths.length > 0) {
+                project.bannerSixths.filter(image=> !bannerSixthsNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerSixths = [
+                ...(project.bannerSixths ? project.bannerSixths.filter(image => bannerSixthsNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.bannerSixths : [])
+            ];
+            console.log()
+        } else {
+            if (project.bannerSixths && project.bannerSixths.length > 0) {
+                project.bannerSixths.filter(image=> !bannerSixthsNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerSixths = [
+                    ...(project.bannerSixths ? project.bannerSixths.filter(image => bannerSixthsNames.includes(image.filename)) : [])
+                ];
+            }
+        }
+
 
     if (req.files.mainVideoFile) {
         if (project.mainVideoFile) {
@@ -829,7 +875,7 @@ router.delete("/projects/:id", async (req, res) => {
         return res.status(404).json({ success: false, message: "Project not found" });
     }
 
-    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2 } = project;
+    const { image, bannerFirst, bannerSecond, bannerSeconds,approachListFiles, approachListSecondFiles, approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths, bannerSixths, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2 } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
     const singleImage = [ image,bannerFirst,bannerSecond,bannerThird,bannerFourth,bannerFifth, mainVideoFile, mainMobVideoFile, visibilityImg1, visibilityImg2 ]
@@ -847,7 +893,8 @@ router.delete("/projects/:id", async (req, res) => {
         approachListThirdFiles,
         bannerThirds,
         bannerFourths,
-        bannerFifths
+        bannerFifths,
+        bannerSixths,
     ]
     multiImages.forEach(files => {
         if (files) {
