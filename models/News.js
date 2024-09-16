@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const newsSchema = new Schema({
   name: { type: String, required: true },
   urlName: {type: String},
-  description: {type: String},
-  underAboutClient: {type: String},
+  description: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
+  underAboutClient: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   image: { type: Object },
   mainNewsImage: { type: Object },
   bannerSecond: { type: Object },
