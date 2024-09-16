@@ -673,6 +673,7 @@ export const DefaultFields = () => {
                     <TextInput
                         className="customWidth"
                         source="nameInEng"
+                        disabled={true}
                         placeholder="генерируется автоматически"
                         label="URL проекта" fullWidth/>
                 </span>
