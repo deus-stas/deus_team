@@ -57,8 +57,11 @@ const ProjectNext = ({ props, detail }) => {
                                      onClick={(e) => gotoAnchor(e)}>
                             <div className="project-next__item">
                                 {isVideo ?
-                                    <VideoComponent ref={(ref) => addVideoRef(ref)}  project={project} isMob={isMob} videoSize={imgSize}
-                                                    apiUrl={apiUrl} /> :
+                                    <span className="projects__item">
+                                         <VideoComponent className="projects__item" ref={(ref) => addVideoRef(ref)}  project={project} isMob={isMob} videoSize={imgSize}
+                                                         apiUrl={apiUrl} />
+                                    </span>
+                                    :
                                     <img src={imgSize} alt={project.name}
                                          className="projects__item"/>
                                 }
