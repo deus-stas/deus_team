@@ -8,7 +8,7 @@ const CorporateIdentity = ({detail}) => {
     return (
         <>
 
-            {detail.taskDescr && detail.taskDescr !== 'undefined' && detail.taskDescr !== '' ?
+            {detail.tasksItem && detail.tasksItem !== 'undefined' && detail.tasksItem !== '' ?
 
                 <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
                     <div className="project-target__wrap">
