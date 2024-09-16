@@ -215,6 +215,17 @@ export const ProjectsEdit = (props) => {
 
 export const SaitAndServiceRender = () => {
     return(<>
+        <p>Блок цели и задачи</p>
+        <TextInput
+            className="customWidth"
+            source="taskDescr"
+            placeholder="Клиент обратился к нам..."
+            label="Описание блока цели и задачи"/>
+        <RichTextInput
+            className="customWidth"
+            label="Задача"
+            source="tasksItem"/>
+
         <p>Фотогалерея</p>
         <ArrayInput
             label={""}
@@ -233,16 +244,6 @@ export const SaitAndServiceRender = () => {
                 <FunctionFieldForArrayItem/>
             </SimpleFormIterator>
         </ArrayInput>
-        <p>Блок цели и задачи</p>
-        <TextInput
-            className="customWidth"
-            source="taskDescr"
-            placeholder="Клиент обратился к нам..."
-            label="Описание блока цели и задачи"/>
-        <RichTextInput
-            className="customWidth"
-            label="Задача"
-            source="tasksItem"/>
 
         <p>Второй баннер/список</p>
         <ArrayInput
