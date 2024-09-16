@@ -32,6 +32,24 @@ const SiteAndServices = ({detail}) => {
 
     return (
         <>
+            {detail.taskDescr && detail.taskDescr !== 'undefined' && detail.taskDescr !== '' ?
+
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary">Цели и задачи</h2>
+                        <div>
+                            {detail.taskDescr &&
+                                <div className="project-target__content l-textReg">
+                                    <div dangerouslySetInnerHTML={{__html: detail.taskDescr}}/>
+                                </div>
+                            }
+                            <div className="project-target__item m-text">
+                                <div dangerouslySetInnerHTML={{__html: detail.tasksItem}}/>
+                            </div>
+                        </div>
+
+                    </div>
+                </section> : null}
 
             {!!detail.bannerSeconds && detail.bannerSeconds.length > 0 && (
                 <section
@@ -57,25 +75,6 @@ const SiteAndServices = ({detail}) => {
                     </Swiper>
                 </section>
             )}
-
-            {detail.taskDescr && detail.taskDescr !== 'undefined' && detail.taskDescr !== '' ?
-
-                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
-                    <div className="project-target__wrap">
-                        <h2 className="heading-secondary">Цели и задачи</h2>
-                        <div>
-                            {detail.taskDescr &&
-                                <div className="project-target__content l-textReg">
-                                    <div dangerouslySetInnerHTML={{__html: detail.taskDescr}}/>
-                                </div>
-                            }
-                            <div className="project-target__item m-text">
-                                <div dangerouslySetInnerHTML={{__html: detail.tasksItem}}/>
-                            </div>
-                        </div>
-
-                    </div>
-                </section> : null}
 
             {detail.bannerFourths ?
                 detail.bannerFourths.filter(val => !!val).map((banner, index) =>
