@@ -326,8 +326,8 @@ const Projects = () => {
                         <DelayedLink to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id}>
                             <div className="projects__item-img-wrap">
                                 {isVideo ?
-                                    <VideoComponent project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} /> :
-                                    <img ref={(ref) => addVideoRef(ref)} src={imgSize} alt={project.name} className="main-projects__img" />
+                                    <VideoComponent ref={(ref) => addVideoRef(ref)} project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} /> :
+                                    <img  src={imgSize} alt={project.name} className="main-projects__img" />
                                 }
                             </div>
                         </DelayedLink>
@@ -387,7 +387,7 @@ const Projects = () => {
 
 }
 
-const VideoComponent = ({project, apiUrl, videoSize}) => {
+export const VideoComponent = ({project, apiUrl, videoSize}) => {
     const videoRef = useRef();
 
     useEffect(() => {
