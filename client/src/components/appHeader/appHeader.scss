@@ -287,7 +287,7 @@
             }
 
             &:not(:last-child) {
-                margin-right: 5.5rem;
+                margin-right: 5rem;
 
                 @include respond(lg) {
                     margin-right: 3rem;
