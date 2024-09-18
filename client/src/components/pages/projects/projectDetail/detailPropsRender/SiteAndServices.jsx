@@ -162,6 +162,66 @@ const SiteAndServices = ({detail}) => {
                 : null
             }
 
+            {detail.taskDo2 && detail.taskDo2 !== 'undefined' && detail.taskDo2 !== '' ?
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.task2}}/>
+                        <div>
+                            {detail.taskDo2 &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.taskDo2}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerSevenths ? (
+                <div className={
+                    detail.bannerSevenths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerSevenths.filter(val => !!val).map((banner, index) => (
+                        <span className="project-banner borderBlock">
+                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                            </span>
+
+                    ))}
+                </div>
+
+            ) : null}
+
+            {detail.taskDo3 && detail.taskDo3 !== 'undefined' && detail.taskDo3 !== '' ?
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.task3}}/>
+                        <div>
+                            {detail.taskDo3 &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.taskDo3}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerEighths ? (
+                <div className={
+                    detail.bannerEighths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerEighths.filter(val => !!val).map((banner, index) => (
+                        <span className="project-banner borderBlock">
+                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                            </span>
+
+                    ))}
+                </div>
+
+            ) : null}
+
+
+
             {!!detail.result &&
                 <ProjectResults
                     result={detail.result}
