@@ -181,7 +181,7 @@ const AppHeader = (props) => {
                                             <span className="header__discuss-flex">
                                               {!!headerData?.headerPhoto &&
                                                   <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                              src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
+                                                              src={`${apiUrl}/uploads/${headerData.headerPhoto?.filename}`}
                                                               alt="Обсудить проект" className="img"/>
                                               }
                                                 <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
@@ -222,35 +222,24 @@ const AppHeader = (props) => {
                                                              setMenu(false)
                                                              gotoAnchor(e)
                                                          }}>
-                                                {
-                                                    headerData.headerPhoto ?
-                                                        (
-                                                            <RetryImage datahash="contactUs"
-                                                                        onClick={(e) => {
-                                                                            setMenu(false)
-                                                                            gotoAnchor(e)
-                                                                        }}
-                                                                        src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
-                                                                        alt="Обсудить проект"
-                                                                        className="header__discuss-img"/>
-                                                        ) : (
-                                                            <img datahash="contactUs" onClick={(e) => {
-                                                                setMenu(false)
-                                                                gotoAnchor(e)
-                                                            }}
-                                                                 src={btn}
-                                                                 alt="Обсудить проект" className="header__discuss-img"/>
-                                                        )
-                                                }
-                                                <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                     className="header__discuss-text">Обсудить проект
-                                                </div>
+                                                <span className="header__discuss-flex">
+                                              {!!headerData?.headerPhoto &&
+                                                  <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                                              src={`${apiUrl}/uploads/${headerData.headerPhoto?.filename}`}
+                                                              alt="Обсудить проект" className="img"/>
+                                              }
+                                                    <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
+                                                         className="m-text text">Обсудить проект
+                                                <Icon icon="arrowRight" viewBox="0 0 24 24"/>
+                                            </div>
+                                            </span>
                                             </DelayedLink>
 
                                             {
                                                 headerData && headerData.phone &&
                                                 (
-                                                    <a className="menu-contacts menu-contacts__menuSize" href={`tel:${headerData.phone}`}>
+                                                    <a className="menu-contacts menu-contacts__menuSize"
+                                                       href={`tel:${headerData.phone}`}>
                                                         <div>
                                                             <Icon icon="telephone" viewBox="0 0 18 18"/>
                                                         </div>
