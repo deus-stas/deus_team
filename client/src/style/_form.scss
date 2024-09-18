@@ -52,6 +52,8 @@
 
     &__input,
     &__textarea {
+        overflow: hidden;
+        transition: all .5s ease-out;
         font-family: 'Graphik LC Web', sans-serif;
         padding: 1.5rem 2rem;
         border-radius: 1rem;
@@ -60,7 +62,7 @@
         background: rgba(23, 23, 23, 1);
         color: #FFFFFF;
         resize: none;
-        border: none;
+        border: transparent 1px solid;
         cursor: pointer;
         @include respond(lg){
             padding: .8rem 1.5rem;
@@ -75,6 +77,9 @@
         }
 
         &:focus{
+            border: rgba(255, 255, 255, 1) 1px solid;
+        }
+        &:hover{
             border: rgba(255, 255, 255, 1) 1px solid;
         }
     }
@@ -105,6 +110,7 @@
 
 
     &__file {
+        transition: all .5s ease-out;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
@@ -114,6 +120,13 @@
         border-radius: 1rem;
         cursor: pointer;
         color: #A4A4A4;
+        border: transparent 1px solid;
+        &:focus{
+            border: rgba(255, 255, 255, 1) 1px solid;
+        }
+        &:hover{
+            border: rgba(255, 255, 255, 1) 1px solid;
+        }
         @include respond(lg){
             padding: 1rem 1.5rem;
         }

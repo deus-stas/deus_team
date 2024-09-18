@@ -193,7 +193,9 @@
 }
 
 .btnTg {
+    overflow: hidden;
     cursor: pointer;
+    position: relative;
     font-size: 1.6rem;
     padding: 1.1rem 2rem;
     border-radius: 9.4rem;
@@ -203,6 +205,33 @@
     }
     @include respond(xs){
         padding: 1.1rem 2rem;
+    }
+
+    p{
+        margin-right: 2rem;
+    }
+
+    .icon {
+        transition: all .3s ease-out;
+        width: 2.4rem;
+        height: 2.4rem;
+        right: 1rem;
+        left: auto;
+        position: absolute;
+        top: 0;
+        opacity: 0;
+        transform: scale(0);
+        transform: translateX(1rem);
+
+    }
+
+    &:hover {
+        .icon {
+            top: .7rem;
+            opacity: 1;
+            transform: scale(1);
+            transform: translateX(0);
+        }
     }
 
 }

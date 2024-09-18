@@ -355,7 +355,7 @@
 
       @include respond(md) {
         margin-bottom: 4rem;
-        grid-template-rows: 29.6rem 29.6rem;
+        grid-template-rows: 29.6rem 33rem;
         grid-gap: 1rem;
       }
 
@@ -845,8 +845,20 @@
   }
 
   &-working {
-    padding: 7rem 0;
+    padding-top: 7rem;
     overflow: hidden;
+    @include respond(lg){
+      padding-top: 5.9rem;
+    }
+
+    @include respond(md) {
+      padding-top: 4rem;
+    }
+
+    @include respond(xs) {
+      padding-top: 3rem;
+    }
+
 
     &__wrap {
       display: grid;
