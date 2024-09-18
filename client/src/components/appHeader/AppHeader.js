@@ -108,17 +108,23 @@ const AppHeader = (props) => {
 
     const {headerData, services} = props;
 
+    const closeMenu = (e) => {
+        if (!isDesktop) {
+            setMenu(!menu);
+        }
+    };
+
     const navLink = (
         <nav className={`header__nav m-text ${visible ? '' : 'hidden'}`}>
             <ul className={`header__nav-list ${isDesktop ? 'm-text' : isLaptop && 'heading-secondary'}`}>
                 <li className={`header__nav-item hover-flip ${isDesktop ? 'hover-flip' : ''}`}>
-                    <DelayedNavLink to="/agency">
+                    <DelayedNavLink onClick={closeMenu}  to="/agency">
                         <span data-hover="Агентство">Агентство</span>
                     </DelayedNavLink>
                 </li>
                 <div style={{position: "relative"}}>
                     <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                        <DelayedNavLink to="/services">
+                        <DelayedNavLink onClick={closeMenu} to="/services">
                             <span data-hover="Услуги">Услуги</span>
                         </DelayedNavLink>
                     </li>
@@ -126,17 +132,17 @@ const AppHeader = (props) => {
                 </div>
 
                 <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                    <DelayedNavLink to="/projects">
+                    <DelayedNavLink onClick={closeMenu} to="/projects">
                         <span data-hover="Проекты">Проекты</span>
                     </DelayedNavLink>
                 </li>
                 <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                    <DelayedNavLink to="/news">
+                    <DelayedNavLink onClick={closeMenu} to="/news">
                         <span data-hover="Блог">Блог</span>
                     </DelayedNavLink>
                 </li>
                 <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                    <DelayedNavLink to="/contacts">
+                    <DelayedNavLink onClick={closeMenu} to="/contacts">
                         <span data-hover="Контакты">Контакты</span>
                     </DelayedNavLink>
                 </li>
