@@ -269,7 +269,9 @@ const Projects = () => {
                                 {optionsTheme ? optionsTheme.map((project, index) => {
                                     const filterProjects = projects.filter(item => item.projectTheme === project.value && item.visibility);
                                     const totalSum = filterProjects.length.toString().padStart(2, '0');
+                                    if (totalSum < 1) return null;
                                     return (
+
                                         <Link onClick={(e) => gotoAnchor(e, 'start', false)}
                                               to={`/projects?theme=${project.value}`}>
                                             <div className="main-projects__item-flex__inner" onClick={() => {
@@ -296,12 +298,22 @@ const Projects = () => {
                         menuType && (
                             <>
                                 {optionsType ? optionsType.map((project, index) => {
+                                    const filterProjects = projects.filter(item => item.projectType === project.value && item.visibility);
+                                    const totalSum = filterProjects.length.toString().padStart(2, '0');
+                                    if (totalSum < 1) return null;
                                     return (
-                                        <Link to={`/projects?type=${project.value}`}>
+                                        <Link onClick={(e) => gotoAnchor(e, 'start', false)} to={`/projects?type=${project.value}`}>
                                             <div className="main-projects__item-flex__inner">
-                                                <div className={`${projectSizeLabel}`}>
-                                                    <p className={`main-projects__item-btn ${checkedType && checkedType.value === project.value && 'activeTheme'}`}>{project.label}</p>
-                                                </div>
+                                                <span className={`main-projects__item-btn ${checkedType && checkedType.value === project.value && 'activeItem'}`}>
+                                                    <span className={`${projectSizeLabel}`}>
+                                                        <p className="hover custom-cursor-link" datahash="projectNav">
+                                                            {project.label}
+                                                        </p>
+                                                    </span>
+                                                    <div className={`main-agency__item-header__num xs-text ${checkedType && checkedType.value === project.value && 'activeNum'}`}>
+                                                        {totalSum}
+                                                    </div>
+                                                </span>
                                             </div>
                                         </Link>
                                     );
