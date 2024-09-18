@@ -34,6 +34,8 @@ const projectsSchema = new Schema({
   projectType: defaultString,
   bannerFirst: Object,
   task: defaultString,
+  task2: defaultString,
+  task3: defaultString,
   taskDescr: defaultString,
   taskPersons: defaultString,
   tasksList: defaultArray,
@@ -46,6 +48,8 @@ const projectsSchema = new Schema({
   bannerFourths: defaultArray,
   bannerFifths: defaultArray,
   bannerSixths: defaultArray,
+  bannerSevenths: defaultArray,
+  bannerEighths: defaultArray,
   approach: defaultString,
   workIntroText: defaultString,
   approachPersons: defaultString,
@@ -54,6 +58,8 @@ const projectsSchema = new Schema({
   bannerFourth: Object,
   result: defaultString,
   taskDo: defaultString,
+  taskDo2: defaultString,
+  taskDo3: defaultString,
   resultPersons: { type: String, default: '#ffffff' },
   resultPersonsText: defaultString,
   technologies: defaultString,
@@ -81,6 +87,8 @@ const projectsSchema = new Schema({
   control2: Boolean,
   control3: Boolean,
   control4: Boolean,
+  control5: Boolean,
+  control6: Boolean,
 });
 
 projectsSchema.set('toJSON', { virtuals: true });

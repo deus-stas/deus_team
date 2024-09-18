@@ -393,6 +393,76 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
+        <p>Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task2"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo2"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Четвертый баннер/ список</p>
+        <BooleanInput
+            source="control5"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerSevenths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task3"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo3"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Пятый баннер/ список</p>
+        <BooleanInput
+            source="control6"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerEighths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
         <p>Блок результаты</p>
         <TextInput
             className="customWidth"
