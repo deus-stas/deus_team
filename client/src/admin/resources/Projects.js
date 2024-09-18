@@ -245,10 +245,105 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
+        <p>Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="heading"
+                label="Заголовок этапов работ"/>
+            <TextInput
+                className="customWidth"
+                source="workIntroText"
+                label="Заголовок этапов работ"/>
+        </div>
+
         <p>Второй баннер/список</p>
+        <BooleanInput
+            source="control2"
+            label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
             source={"bannerFourths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        {/*<ArrayInput*/}
+        {/*    label=""*/}
+        {/*    source="workSteps">*/}
+        {/*    <SimpleFormIterator>*/}
+        {/*        <TextInput*/}
+        {/*            className="customWidth"*/}
+        {/*            source="heading"*/}
+        {/*            label="Заголовок слева/или № этапа"/>*/}
+        {/*        <TextInput*/}
+        {/*            className="customWidth"*/}
+        {/*            label="Описание работ"*/}
+        {/*            placeholder="Одной из задач стал брендинг агентства..."*/}
+        {/*            source="workStepsIntroText"/>*/}
+        {/*        <TextInput*/}
+        {/*            label="Заголовок работ"*/}
+        {/*            placeholder="Этап 1. Разработка семантического ядра"*/}
+        {/*            className="customWidth"*/}
+        {/*            source="workStepsTitle"/>*/}
+        {/*        <RichTextInput*/}
+        {/*            label="Результаты"*/}
+        {/*            isRequired*/}
+        {/*            validate={[required()]}*/}
+        {/*            className="customWidth"*/}
+        {/*            source="workStepsItem"/>*/}
+        {/*        <ArrayInput*/}
+        {/*            label={""}*/}
+        {/*            source={"bannerSixths"}*/}
+        {/*        >*/}
+        {/*            <SimpleFormIterator>*/}
+        {/*                <FileInput*/}
+        {/*                    source="imageI"*/}
+        {/*                    className="fileInput"*/}
+        {/*                    placeholder="+"*/}
+        {/*                    label="Баннер">*/}
+        {/*                    <FilenameField*/}
+        {/*                        source="src"*/}
+        {/*                        title="title"/>*/}
+        {/*                </FileInput>*/}
+        {/*                <FunctionFieldForArrayItem/>*/}
+        {/*            </SimpleFormIterator>*/}
+        {/*        </ArrayInput>*/}
+
+        {/*    </SimpleFormIterator>*/}
+        {/*</ArrayInput>*/}
+
+        <p>Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo"
+                placeholder="Мы разработали..."
+                label="Описание блока Паттерн"/>
+        </div>
+
+        <p>Третий баннер/ список</p>
+        <BooleanInput
+            source="control3"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerFifths"}
         >
             <SimpleFormIterator>
                 <FileInput
@@ -269,53 +364,34 @@ export const SaitAndServiceRender = () => {
             <TextInput
                 className="customWidth"
                 source="stageName"
-                label="Заголовок этапов работ"/>
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="approach"
+                placeholder="Мы разработали..."
+                label="Описание блока Паттерн"/>
         </div>
+        <p>Третий баннер/ список</p>
+        <BooleanInput
+            source="control4"
+            label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
-            label=""
-            source="workSteps">
+            label={""}
+            source={"bannerSixths"}
+        >
             <SimpleFormIterator>
-                <TextInput
-                    className="customWidth"
-                    source="heading"
-                    label="Заголовок слева/или № этапа"/>
-                <TextInput
-                    className="customWidth"
-                    label="Описание работ"
-                    placeholder="Одной из задач стал брендинг агентства..."
-                    source="workStepsIntroText"/>
-                <TextInput
-                    label="Заголовок работ"
-                    placeholder="Этап 1. Разработка семантического ядра"
-                    className="customWidth"
-                    source="workStepsTitle"/>
-                <RichTextInput
-                    label="Результаты"
-                    isRequired
-                    validate={[required()]}
-                    className="customWidth"
-                    source="workStepsItem"/>
                 <FileInput
                     source="imageI"
+                    className="fileInput"
+                    placeholder="+"
                     label="Баннер">
                     <FilenameField
                         source="src"
                         title="title"/>
                 </FileInput>
-
+                <FunctionFieldForArrayItem/>
             </SimpleFormIterator>
         </ArrayInput>
-
-        <p>Третий баннер</p>
-        <FileInput
-            source="bannerThird"
-            className="fileInput"
-            placeholder="+"
-            label="Баннер">
-            <FilenameField
-                source="src"
-                title="title"/>
-        </FileInput>
 
         <p>Блок результаты</p>
         <TextInput

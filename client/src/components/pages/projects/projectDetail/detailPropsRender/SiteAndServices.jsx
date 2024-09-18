@@ -53,7 +53,7 @@ const SiteAndServices = ({detail}) => {
 
             {!!detail.bannerSeconds && detail.bannerSeconds.length > 0 && (
                 <section
-                    style={{ backgroundColor: "black", overflow:"hidden" }}
+                    style={{backgroundColor: "black", overflow: "hidden"}}
                     className="borderBlock"
                 >
                     <Swiper
@@ -76,56 +76,91 @@ const SiteAndServices = ({detail}) => {
                 </section>
             )}
 
+            <section className="project-steps-header padding borderBlock heading-secondary">Этапы работ</section>
+
+            {detail.workIntroText && detail.workIntroText !== 'undefined' && detail.workIntroText !== '' ?
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.heading}}/>
+                        <div>
+                            {detail.workIntroText &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.workIntroText}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section> : null}
+
             {detail.bannerFourths ?
-                detail.bannerFourths.filter(val => !!val).map((banner, index) =>
-                    <BannerComponent banner={banner} detail={detail}/>
-                )
+                <div className={
+                    detail.bannerFourths.length > 2 && !!detail.control2 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerFourths.filter(val => !!val).map((banner, index) =>
+                        <span className="project-banner borderBlock">
+                            <BannerComponent banner={banner} detail={detail}/>
+                        </span>
+                    )}
+                </div>
                 : null
             }
 
+            {detail.taskDo && detail.taskDo !== 'undefined' && detail.taskDo !== '' ?
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.task}}/>
+                        <div>
+                            {detail.taskDo &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.taskDo}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                : null}
 
+            {detail.bannerFifths ? (
+                <div className={
+                    detail.bannerFifths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerFifths.filter(val => !!val).map((banner, index) => (
+                        <span className="project-banner borderBlock">
+                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                            </span>
 
-            {detail.workSteps.length > 0 ? (
-                <>
-                    <section className="project-steps-header padding borderBlock heading-secondary" dangerouslySetInnerHTML={{ __html: detail.stageName }}/>
-                    {detail.workSteps.map((val, index) => {
-                        console.log('imageI:', val.imageI);
-                        return (
-                            <>
-                                <section style={{ backgroundColor: "white" }} className="project-steps padding borderBlock">
-                                    <div className="project-steps__wrap">
-                                        <div>
-                                            <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: val.heading }} />
-                                            {val.workStepsIntroText ? (
-                                                <p className="project-steps__intro l-textReg">{val.workStepsIntroText}</p>
-                                            ) : null}
-                                        </div>
-                                        <div>
-                                            <div key={index} className="project-steps__s">
-                                                {val.workStepsTitle ? (
-                                                    <div className="project-steps__subtitle l-textReg">{val.workStepsTitle}</div>
-                                                ) : null}
-                                                <div className="project-steps__text m-text" dangerouslySetInnerHTML={{ __html: val.workStepsItem }} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                                {val.imageI ? (
-                                    <section className="project-banner borderBlock">
-                                        <img src={`/uploads/${val.imageI.filename}`} alt="" />
-                                    </section>
-                                ) : null}
-                            </>
-                        );
-                    })}
-                </>
+                    ))}
+                </div>
 
             ) : null}
 
+            {detail.approach && detail.approach !== 'undefined' && detail.approach !== '' ?
 
-            {detail.bannerThird ?
-                <BannerComponent banner={detail.bannerThird} detail={detail}/>
-                : null}
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.stageName}}/>
+                        <div>
+                            {detail.approach &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.approach}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section> : null}
+
+            {detail.bannerSixths ?
+                <div className={
+                    detail.bannerSixths.length > 2 && !!detail.control4 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerSixths.filter(val => !!val).map((banner, index) =>
+                        <span className="project-banner borderBlock">
+                            <BannerComponent banner={banner} detail={detail}/>
+                        </span>
+                    )}
+                </div>
+                : null
+            }
 
             {!!detail.result &&
                 <ProjectResults
