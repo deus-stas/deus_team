@@ -848,15 +848,30 @@
             gap: 2rem;
         }
     }
+
+
+}
+
+.\[--gap\:1rem\] {
+    --gap: 15.5rem !important;
+    @include respond(lg){
+        --gap: 12rem !important;;
+    }
+    @include respond(sm){
+        --gap: 5rem !important;;
+    }
+    @include respond(xs){
+        --gap: 2rem !important;;
+    }
 }
 
 .agency-team__wrap-imgWrap {
     @for $i from 1 through 5 {
         > div:nth-child(#{$i}) {
             @if $i % 2 == 1 {
-                --duration: 55s;
+                --duration: 15s;
             } @else {
-                --duration: 85s;
+                --duration: 45s;
             }
         }
     }
