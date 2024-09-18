@@ -265,13 +265,16 @@ const MainPage = (props) => {
                         direction="left"
                     >
                         {clients.map((client, i) => {
-                            return (<RetryImage className='main-clients__img'
-                                                src={client.image ? `/uploads/${client.image.filename}` : null}
-                                                alt={client.name} key={client.id}/>)
+                            return (
+                                <div className='main-clients__container'>
+                                    <RetryImage
+                                        src={client.image ? `/uploads/${client.image.filename}` : null}
+                                        alt={client.name} key={client.id}/>
+                                </div>
+
+                            )
                         })}
                     </Marquee>
-                    <div className="main-clients__mutedL"/>
-                    <div className="main-clients__mutedR"/>
                 </div>
             </section>}
 
@@ -377,6 +380,7 @@ const MainPage = (props) => {
                                 {optionsTheme ? optionsTheme.map((project, index) => {
                                     const filterProjects = allProjects.filter((item) => item.projectTheme === project.value && item.visibility);
                                     const totalSum = filterProjects.length < 10 ? "0" + filterProjects.length : filterProjects.length;
+                                    if (totalSum < 1) return null;
                                     return (<DelayedLink to={`/projects?theme=${project.value}`}
                                                          onClick={(e) => gotoAnchor(e)}>
                                         <div className="main-projects__item-flex__inner">
