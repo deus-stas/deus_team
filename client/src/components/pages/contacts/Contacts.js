@@ -12,6 +12,7 @@ import RoundButton from "../../animation/roundButton";
 import Popup from "reactjs-popup";
 import {Formik} from "formik";
 import {useMediaQuery} from "@material-ui/core";
+import {Icon} from "../../icon/Icon";
 
 const apiUrl = '';
 const Contacts = (props) => {
@@ -113,7 +114,8 @@ const Contacts = (props) => {
                                 <div className="chat">
                                     <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: text}}/>
                                     <div onClick={() => window.open('https://t.me/agencydeus', )} className="btnTg hidden-mob">
-                                        <p>Написать сообщение</p>
+                                        <p >Написать сообщение</p>
+                                        <Icon icon="arrowRight" viewBox="0 0 24 24"/>
                                     </div>
                                 </div>
                                 <div className="info">
@@ -132,7 +134,7 @@ const Contacts = (props) => {
                                             </div>
                                         )
                                     })}
-                                    <div onClick={() => window.open('https://t.me/agencydeus', '_blank')} className="btnTg hidden-desk"><p>Написать сообщение</p></div>
+                                    <div onClick={() => window.open('https://t.me/agencydeus', '_blank')} className="btnTg hidden-desk"><p>Написать сообщение<Icon icon="arrowRight" viewBox="0 0 24 24"/></p></div>
                                 </div>
                             </div>
                     </section>
