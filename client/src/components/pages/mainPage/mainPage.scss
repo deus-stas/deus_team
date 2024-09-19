@@ -894,6 +894,7 @@
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
+      overflow: hidden;
       scrollbar-width: none;
       -ms-overflow-style: none;
       &::-webkit-scrollbar {
@@ -902,6 +903,7 @@
 
       @include respond(xs){
         width: 100vw;
+        overflow: initial;
       }
 
       .padding-slider {
