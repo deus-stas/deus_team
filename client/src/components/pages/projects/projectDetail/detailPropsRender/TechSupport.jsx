@@ -24,7 +24,7 @@ const TechSupport = ({detail}) => {
 
     return (
         <>
-            {detail.taskDescr && detail.taskDescr !== 'undefined' && detail.taskDescr !== '' ?
+            {detail.tasksItem && detail.tasksItem !== 'undefined' && detail.tasksItem !== '' ?
 
                 <section style={{backgroundColor:"white", color:'#050505'}} className="project-target padding borderBlock">
                         <div className="project-target__wrap">

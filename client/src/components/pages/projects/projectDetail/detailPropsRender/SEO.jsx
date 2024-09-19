@@ -6,7 +6,7 @@ const Seo = ({detail}) => {
 
     return (
         <>
-            {detail.taskDescr && detail.taskDescr !== 'undefined' && detail.taskDescr !== '' ?
+            {detail.taskDo && detail.taskDo !== 'undefined' && detail.taskDo !== '' ?
 
                 <section style={{backgroundColor: "white"}} className="project-results padding borderBlock">
                     <div className="project-results__wrap">
