@@ -487,13 +487,13 @@ export const SEORender = () => {
             <RichTextInput
                 className="customWidth"
                 label="Задача"
-                source="taskDo"/>
+                source="tasksItem"/>
             <p>Блок Этапы работ</p>
             <TextInput
                 className="customWidth"
                 source="heading"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 label="Описание работ"
                 placeholder="Одной из задач стал брендинг агентства..."
