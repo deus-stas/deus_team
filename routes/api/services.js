@@ -5,6 +5,7 @@ const multer = require("multer");
 const path = require("path");
 const {v4: uuidv4} = require("uuid");
 const fs = require("fs");
+const {uploadFile} = require("./file");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -55,11 +56,10 @@ router.get('/services', async (req, res) => {
     res.json(services);
 });
 
-router.post('/services', addPosition, upload.single('descrImg'), async (req, res) => {
+router.post('/services', addPosition, upload.single('brief'), async (req, res) => {
     console.log(req.body);
 
-    const descrImg = req.file;
-
+    const brief = req.file;
     const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' ? JSON.parse(req.body.benefits) : [];
     const work = !!req.body.work && req.body.work !== 'undefined' ? JSON.parse(req.body.work) : [];
     const tariffs = req.body.tariffs && typeof req.body.tariffs === 'object'
@@ -70,7 +70,6 @@ router.post('/services', addPosition, upload.single('descrImg'), async (req, res
     const {
         name,
         types,
-        brief,
         descrTotal,
         descr,
         benefitsTitle,
@@ -166,7 +165,6 @@ router.post('/services', addPosition, upload.single('descrImg'), async (req, res
         brief,
         descrTotal,
         descr,
-        descrImg,
         benefitsTitle,
         benefits,
         servicesServices,
@@ -209,7 +207,7 @@ router.get('/services/:id', async (req, res) => {
     }
 });
 
-router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
+router.put("/services/:id", upload.single('brief'), async (req, res) => {
     try {
         const {id} = req.params;
 
@@ -217,7 +215,6 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
             position,
             name,
             types,
-            brief,
             descrTotal,
             descr,
             benefitsTitle,
@@ -250,35 +247,8 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
             return res.status(404).json({error: 'Service not found'});
         }
 
-        const descrImg = req.file;
-
-        if (descrImg) {
-            if (service.descrImg) {
-                const path = `uploads/${service.descrImg.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
-
-            }
-            service.descrImg = descrImg;
-        } else {
-            if (service.descrImg && service.descrImg.path && req.body.descrImg !== 'true') {
-                const path = `uploads/${service.descrImg.filename}`
-                if (fs.existsSync(path)) {
-                    fs.unlink(path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                }
-
-                service.descrImg = null;
-            }
-        }
+        const brief = req.file ? req.file : undefined;
+        uploadFile(brief, 'brief', service, req, 'brief')
 
         const oldServicesServices = service.servicesServices;
         service.servicesServices = []; // Clearing the field
@@ -311,9 +281,6 @@ router.put("/services/:id", upload.single('descrImg'), async (req, res) => {
         service.seoDescription = seoDescription;
         service.seoKeywords = seoKeywords;
         service.types = types;
-        service.brief = brief;
-
-
 
         await service.save();
 
@@ -351,10 +318,10 @@ router.delete("/services/:id", async (req, res) => {
         return res.status(404).json({success: false, message: "Services not found"});
     }
 
-    const {descrImg} = services;
+    const {brief} = services;
 
-    if (descrImg) {
-        fs.unlinkSync(`uploads/${descrImg.filename}`);
+    if (brief) {
+        fs.unlinkSync(`uploads/${brief.filename}`);
     }
 
     res.json({success: true});

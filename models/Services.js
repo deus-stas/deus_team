@@ -4,10 +4,9 @@ const Schema = mongoose.Schema;
 const servicesSchema = new Schema({
   name: { type: String, required: true },
   path: {type: String},
-  brief: {type:String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v},
+  brief: {type: Object},
   descrTotal: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   descr: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
-  descrImg : {type: Object},
   benefitsTitle: { type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   benefits: { type: Array },
   servicesServices: { type: Array },
