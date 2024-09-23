@@ -118,9 +118,9 @@ const NewsDetail = () => {
     }, []);
 
 
-    const fileUrl = detail.mainNewsImage ? `${apiUrl}/uploads/${detail.mainNewsImage.filename}` : null;
-    const isVideo = detail.mainNewsImage ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.mainNewsImage.filename) : false;
-    const isImage = detail.mainNewsImage ? /\.(jpeg|jpg|gif|png)$/i.test(detail.mainNewsImage.filename) : false;
+    const fileUrl = detail.mainNewsImage ? `${apiUrl}/uploads/${detail.mainNewsImage?.filename}` : null;
+    const isVideo = detail.mainNewsImage ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.mainNewsImage?.filename) : false;
+    const isImage = detail.mainNewsImage ? /\.(jpeg|jpg|gif|png)$/i.test(detail.mainNewsImage?.filename) : false;
     const shouldAutoPlay = detail.detailControl;
 
 

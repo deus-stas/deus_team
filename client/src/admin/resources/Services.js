@@ -1,10 +1,25 @@
 import React from 'react';
-import {List, Datagrid, TextField, EditButton, ReferenceInput} from 'react-admin';
+import {List, Datagrid, TextField, EditButton, ReferenceInput, ImageInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, ArrayInput, SimpleFormIterator, SelectArrayInput } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 import { ColorInput } from 'react-admin-color-picker';
 
 const apiUrl = ''
+
+const FilenameField = props => {
+    return (
+        <FunctionField
+            {...props}
+            render={record => {
+                if (record.filename) {
+                    return <iframe src={`${apiUrl}/uploads/${record.filename}`} />;
+                } else {
+                    return <iframe src={`${record.src}`}/>;
+                }
+            }}
+        />
+    )
+}
 
 export const ServicesList = (props) => (
     <List {...props}>
@@ -23,7 +38,11 @@ export const ServicesCreate = (props) => (
             <ReferenceArrayInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceArrayInput>
-            <TextInput className="customWidth" source="brief" label="Ссылка для брифа"/>
+            <ImageInput className="fileInput" placeholder="+" source="brief" label="Ссылка для брифа">
+                <FilenameField
+                    source="image"
+                    title="title" />
+            </ImageInput>
             {/* <TextInput className="customWidth" source="path" label="URL" /> */}
             <BooleanInput 
                 source="isInvisible" 
@@ -86,7 +105,11 @@ export const ServicesEdit = (props) => (
             <ReferenceInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceInput>
-            <TextInput className="customWidth" source="brief" label="Ссылка для брифа"/>
+            <ImageInput className="fileInput" placeholder="+" source="brief" label="Ссылка для брифа">
+                <FilenameField
+                    source="image"
+                    title="title" />
+            </ImageInput>
             <BooleanInput 
                 source="isInvisible" 
                 label="Показать/Скрыть"/>
