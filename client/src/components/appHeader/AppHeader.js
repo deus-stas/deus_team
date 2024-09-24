@@ -22,7 +22,7 @@ const AppHeader = (props) => {
     // const [visibleMob, setVisibleMob] = useState(true);
     const location = useLocation()
 
-    const {isLaptop, isDesktop, isMobile} = useMobile();
+    const {isTablet, isDesktop, isMobile, isLaptop} = useMobile();
 
     const handleHeaderColor = (header, headerMob, menu) => {
         [header, headerMob, menu].filter(Boolean).forEach((el) => {
@@ -54,9 +54,11 @@ const AppHeader = (props) => {
     useEffect(() => {
         const styles = {
             wide: { width: '100%' },
-            narrowly: { width: '64vw' },
+            narrowly: { width: `${window.innerWidth * 0.85 / 10}rem` },
             up: { transform: 'translateY(-30rem)' },
-            down: { transform: 'translateY(0)' }
+            down: { transform: 'translateY(0)' },
+            padding: { padding: '2rem 3rem' },
+            noPadding: { padding: '0' },
         };
 
         const handleScroll = () => {
@@ -67,10 +69,12 @@ const AppHeader = (props) => {
             if (!!header || !!headerWrap) {
                 if (!!menu) { // если меню открыто
                     headerWrap.style.width = styles.wide.width;
+                    headerWrap.style.padding = styles.noPadding.padding;
                     header.style.transform = styles.down.transform;
                 } else { // если меню закрыто
                     if (scrolled === 0) {
                         headerWrap.style.width = styles.wide.width;
+                        headerWrap.style.padding = styles.noPadding.padding;
                         header.style.transform = styles.down.transform;
                     } else if (scrolled < prevScroll) {
                         header.style.transform = styles.down.transform;
@@ -78,6 +82,7 @@ const AppHeader = (props) => {
                         header.style.transform = styles.up.transform;
                     } else if (scrolled > 0 && scrolled < 500) {
                         headerWrap.style.width = styles.narrowly.width;
+                        headerWrap.style.padding = styles.padding.padding;
                     }
                 }
 
@@ -116,7 +121,7 @@ const AppHeader = (props) => {
 
     const navLink = (
         <nav className={`header__nav m-text ${visible ? '' : 'hidden'}`}>
-            <ul className={`header__nav-list ${isDesktop ? 'm-text' : isLaptop && 'heading-secondary'}`}>
+            <ul className={`header__nav-list ${isDesktop ? 'm-text' : isTablet && 'heading-secondary'}`}>
                 <li className={`header__nav-item hover-flip ${isDesktop ? 'hover-flip' : ''}`}>
                     <DelayedNavLink onClick={closeMenu}  to="/agency">
                         <span data-hover="Агентство">Агентство</span>
@@ -220,7 +225,7 @@ const AppHeader = (props) => {
                                 <div className={`menu ${menu ? 'activeMenu' : ''}`}>
                                     <div className={`menu-wrap ${menu ? 'menu-wrap-active' : ''}`}>
 
-                                        {isLaptop && (<>{navLink}</>)}
+                                        {(isLaptop || isTablet || isMobile) && (<>{navLink}</>)}
 
                                         <div className="flex-wrap">
                                             <DelayedLink to="/contacts" className="header__discuss" datahash="contactUs"

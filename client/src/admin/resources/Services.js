@@ -12,9 +12,9 @@ const FilenameField = props => {
             {...props}
             render={record => {
                 if (record.filename) {
-                    return <iframe src={`${apiUrl}/uploads/${record.filename}`} />;
+                    return <iframe src={`${apiUrl}/uploads/${record.filename}`} sandbox="allow-same-origin allow-scripts"/>;
                 } else {
-                    return <iframe src={`${record.src}`}/>;
+                    return <iframe src={`${record.src}`} sandbox="allow-same-origin allow-scripts" />;
                 }
             }}
         />
@@ -38,11 +38,11 @@ export const ServicesCreate = (props) => (
             <ReferenceArrayInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceArrayInput>
-            <ImageInput className="fileInput" placeholder="+" source="brief" label="Ссылка для брифа">
+            <FileInput  className="fileInput" placeholder="+" source="brief" label="Ссылка для брифа">
                 <FilenameField
                     source="image"
                     title="title" />
-            </ImageInput>
+            </FileInput >
             {/* <TextInput className="customWidth" source="path" label="URL" /> */}
             <BooleanInput 
                 source="isInvisible" 
@@ -105,11 +105,11 @@ export const ServicesEdit = (props) => (
             <ReferenceInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceInput>
-            <ImageInput className="fileInput" placeholder="+" source="brief" label="Ссылка для брифа">
+            <FileInput  className="fileInput" placeholder="+" source="brief" label="Ссылка для брифа">
                 <FilenameField
                     source="image"
                     title="title" />
-            </ImageInput>
+            </FileInput >
             <BooleanInput 
                 source="isInvisible" 
                 label="Показать/Скрыть"/>

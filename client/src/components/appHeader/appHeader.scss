@@ -221,16 +221,23 @@
     &__wrap {
         display: flex;
         width: 100%;
-        justify-content: space-between;
+        gap: 7rem;
         margin: 0 auto;
         transition: all;
         transition-timing-function: cubic-bezier(.135,.9,.15,1);
         transition-duration: 1s;
-
-        backdrop-filter: blur(2px);
+        backdrop-filter: blur(10px);
         border-radius: 4.6rem;
         padding: 0;
-
+        @include respond(lg){
+            gap: 5rem;
+        }
+        @include respond(sm){
+            gap: 3rem;
+        }
+        @include respond(xs){
+            justify-content: space-between;
+        }
     }
 
 
