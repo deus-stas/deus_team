@@ -35,7 +35,7 @@ const Agency = (props) => {
     const [endSlider, setEndSlider] = useState(false);
     const [currentPerson, setCurrentPerson] = useState(0);
     const [reviews, setReviews] = useState([]);
-    const {isLaptop} = useMobile()
+    const {isTablet} = useMobile()
 
     useEffect(() => {
         axios.get(`/api/awards/`)
@@ -367,7 +367,7 @@ const Agency = (props) => {
                 <section id="agency" className="agency-team borderBlock">
                     <div className="agency-team__wrap">
                         <div className="intro">
-                            <p className="heading heading-secondary">Мы уверены, что проекты делают {isLaptop? '' :<br/>} не компании, а люди.
+                            <p className="heading heading-secondary">Мы уверены, что проекты делают {isTablet? '' :<br/>} не компании, а люди.
                                 Поэтому особое внимание уделяем формированию команды.</p>
                             <p className="descr m-text">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в
                                 единую систему для получения максимальной эффективности для вашего бизнеса</p>
@@ -378,8 +378,8 @@ const Agency = (props) => {
                                     let count = 0;
                                     return (<MarqueeTeam
                                         key={columnIndex}
-                                        className={isLaptop ? "animate-marquee-left" : "animate-marquee-up"}
-                                        direction={isLaptop ? "left" : "up"}
+                                        className={isTablet ? "animate-marquee-left" : "animate-marquee-up"}
+                                        direction={isTablet ? "left" : "up"}
                                         fade={false}
                                         reverse={columnIndex % 2 === 0}
                                     >
