@@ -66,7 +66,7 @@ const SiteAndServices = ({detail}) => {
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide key={index}>
                                 <img
-                                    className="borderBlock"
+                                    className="slider-img"
                                     src={`${apiUrl}/uploads/${banner.filename}`}
                                     alt={banner.name}
                                 />
