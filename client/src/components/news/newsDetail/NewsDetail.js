@@ -199,7 +199,7 @@ const NewsDetail = () => {
                                         {detail.photoSlider.filter(val => !!val).map((banner, index) => (
                                             <SwiperSlide key={index}>
                                                 <img
-                                                    className="borderBlock"
+                                                    className=""
                                                     src={`${apiUrl}/uploads/${banner.filename}`}
                                                     alt={banner.name}
                                                 />

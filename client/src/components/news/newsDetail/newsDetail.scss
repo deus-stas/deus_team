@@ -86,6 +86,19 @@
 
     &__slider{
         margin: 2rem 0 4rem;
+
+        img{
+            border-radius: 3rem;
+            @include respond(lg){
+                border-radius: 2.1rem;
+            }
+            @include respond(sm){
+                border-radius: 1.6rem;
+            }
+            @include respond(xs){
+                border-radius: 2rem;
+            }
+        }
     }
 
     &__article {
