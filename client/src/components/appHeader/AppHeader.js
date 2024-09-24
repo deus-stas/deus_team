@@ -54,9 +54,11 @@ const AppHeader = (props) => {
     useEffect(() => {
         const styles = {
             wide: { width: '100%' },
-            narrowly: { width: '64vw' },
+            narrowly: { width: `${window.innerWidth * 0.85 / 10}rem` },
             up: { transform: 'translateY(-30rem)' },
-            down: { transform: 'translateY(0)' }
+            down: { transform: 'translateY(0)' },
+            padding: { padding: '2rem 3rem' },
+            noPadding: { padding: '0' },
         };
 
         const handleScroll = () => {
@@ -67,10 +69,12 @@ const AppHeader = (props) => {
             if (!!header || !!headerWrap) {
                 if (!!menu) { // если меню открыто
                     headerWrap.style.width = styles.wide.width;
+                    headerWrap.style.padding = styles.noPadding.padding;
                     header.style.transform = styles.down.transform;
                 } else { // если меню закрыто
                     if (scrolled === 0) {
                         headerWrap.style.width = styles.wide.width;
+                        headerWrap.style.padding = styles.noPadding.padding;
                         header.style.transform = styles.down.transform;
                     } else if (scrolled < prevScroll) {
                         header.style.transform = styles.down.transform;
@@ -78,6 +82,7 @@ const AppHeader = (props) => {
                         header.style.transform = styles.up.transform;
                     } else if (scrolled > 0 && scrolled < 500) {
                         headerWrap.style.width = styles.narrowly.width;
+                        headerWrap.style.padding = styles.padding.padding;
                     }
                 }
 
