@@ -293,9 +293,11 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
 
 export const useMobile = () => {
     const MOBILE_SIZE = 575;
-    const LAPTOP_SIZE = 768;
+    const TABLET_SIZE = 768;
+    const LAPTOP_SIZE = 1024;
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isMobile, setIsMobile] = useState(windowWidth <= MOBILE_SIZE);
+    const [isTablet, setIsTablet] = useState(windowWidth <= TABLET_SIZE);
     const [isLaptop, setIsLaptop] = useState(windowWidth <= LAPTOP_SIZE);
     const [isDesktop, setIsDesktop] = useState(windowWidth > LAPTOP_SIZE);
 
@@ -306,7 +308,8 @@ export const useMobile = () => {
 
     useEffect(() => {
         setIsMobile(windowWidth <= MOBILE_SIZE);
-        setIsLaptop(windowWidth <= LAPTOP_SIZE);
+        setIsTablet(windowWidth <= TABLET_SIZE);
+        setIsLaptop(windowWidth > LAPTOP_SIZE);
         setIsDesktop(windowWidth > LAPTOP_SIZE);
     }, [windowWidth]);
 
@@ -316,5 +319,5 @@ export const useMobile = () => {
 
     const debouncedResize = debounce(() => setWindowWidth(window.innerWidth), 100);
 
-    return { isMobile, isLaptop, isDesktop };
+    return { isMobile,isTablet, isLaptop, isDesktop };
 };
