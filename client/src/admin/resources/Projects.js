@@ -245,7 +245,7 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
-        <p>Блок Этапы работ</p>
+        <p>1 Блок Этапы работ</p>
         <div className="baseFlexWrap">
             <TextInput
                 className="customWidth"
@@ -259,7 +259,7 @@ export const SaitAndServiceRender = () => {
 
         <p>Второй баннер/список</p>
         <BooleanInput
-            source="control2"
+            source="control1"
             label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
@@ -324,7 +324,7 @@ export const SaitAndServiceRender = () => {
         {/*    </SimpleFormIterator>*/}
         {/*</ArrayInput>*/}
 
-        <p>Блок Этапы работ</p>
+        <p>2 Блок Этапы работ</p>
         <div className="baseFlexWrap">
             <TextInput
                 className="customWidth"
@@ -339,7 +339,7 @@ export const SaitAndServiceRender = () => {
 
         <p>Третий баннер/ список</p>
         <BooleanInput
-            source="control3"
+            source="control2"
             label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
@@ -359,7 +359,7 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
-        <p>Блок Этапы работ</p>
+        <p>3 Блок Этапы работ</p>
         <div className="baseFlexWrap">
             <TextInput
                 className="customWidth"
@@ -373,7 +373,7 @@ export const SaitAndServiceRender = () => {
         </div>
         <p>Третий баннер/ список</p>
         <BooleanInput
-            source="control4"
+            source="control3"
             label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
@@ -393,7 +393,7 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
-        <p>Блок Этапы работ</p>
+        <p>4 Блок Этапы работ</p>
         <div className="baseFlexWrap">
             <TextInput
                 className="customWidth"
@@ -408,7 +408,7 @@ export const SaitAndServiceRender = () => {
 
         <p>Четвертый баннер/ список</p>
         <BooleanInput
-            source="control5"
+            source="control4"
             label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
@@ -428,7 +428,7 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
-        <p>Блок Этапы работ</p>
+        <p>5 Блок Этапы работ</p>
         <div className="baseFlexWrap">
             <TextInput
                 className="customWidth"
@@ -443,11 +443,116 @@ export const SaitAndServiceRender = () => {
 
         <p>Пятый баннер/ список</p>
         <BooleanInput
-            source="control6"
+            source="control5"
             label="по 1 в ряд/по 2 в ряд"/>
         <ArrayInput
             label={""}
             source={"bannerEighths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>6 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task4"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo4"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Шестой баннер/ список</p>
+        <BooleanInput
+            source="control6"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerNinths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>7 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task5"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo5"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Седьмой баннер/ список</p>
+        <BooleanInput
+            source="control7"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerTenth"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>8 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task6"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo6"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Восьмой баннер/ список</p>
+        <BooleanInput
+            source="control8"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerEleventh"}
         >
             <SimpleFormIterator>
                 <FileInput
