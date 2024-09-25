@@ -39,7 +39,7 @@ const VideoProduction = ({detail}) => {
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide key={index}>
                                 <video autoPlay={true} loop={true} muted
-                                    className="borderBlock"
+                                    className="slider-img"
                                     src={`${apiUrl}/uploads/${banner.filename}`}
                                 />
                             </SwiperSlide>

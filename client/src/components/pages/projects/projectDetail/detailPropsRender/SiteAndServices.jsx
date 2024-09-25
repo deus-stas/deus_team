@@ -66,7 +66,7 @@ const SiteAndServices = ({detail}) => {
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide key={index}>
                                 <img
-                                    className="borderBlock"
+                                    className="slider-img"
                                     src={`${apiUrl}/uploads/${banner.filename}`}
                                     alt={banner.name}
                                 />
@@ -94,7 +94,7 @@ const SiteAndServices = ({detail}) => {
 
             {detail.bannerFourths ?
                 <div className={
-                    detail.bannerFourths.length > 2 && !!detail.control2 ? "banner-grid" : "banner-list"
+                    detail.bannerFourths.length > 2 && !!detail.control1 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerFourths.filter(val => !!val).map((banner, index) =>
                         <span className="project-banner borderBlock">
@@ -122,7 +122,7 @@ const SiteAndServices = ({detail}) => {
 
             {detail.bannerFifths ? (
                 <div className={
-                    detail.bannerFifths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
+                    detail.bannerFifths.length > 2 && !!detail.control2 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerFifths.filter(val => !!val).map((banner, index) => (
                         <span className="project-banner borderBlock">
@@ -151,7 +151,7 @@ const SiteAndServices = ({detail}) => {
 
             {detail.bannerSixths ?
                 <div className={
-                    detail.bannerSixths.length > 2 && !!detail.control4 ? "banner-grid" : "banner-list"
+                    detail.bannerSixths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerSixths.filter(val => !!val).map((banner, index) =>
                         <span className="project-banner borderBlock">
@@ -179,7 +179,7 @@ const SiteAndServices = ({detail}) => {
 
             {detail.bannerSevenths ? (
                 <div className={
-                    detail.bannerSevenths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
+                    detail.bannerSevenths.length > 2 && !!detail.control4 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerSevenths.filter(val => !!val).map((banner, index) => (
                         <span className="project-banner borderBlock">
@@ -208,9 +208,96 @@ const SiteAndServices = ({detail}) => {
 
             {detail.bannerEighths ? (
                 <div className={
-                    detail.bannerEighths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
+                    detail.bannerEighths.length > 2 && !!detail.control5 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerEighths.filter(val => !!val).map((banner, index) => (
+                        <span className="project-banner borderBlock">
+                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                            </span>
+
+                    ))}
+                </div>
+
+            ) : null}
+
+            {detail.taskDo4 && detail.taskDo4 !== 'undefined' && detail.taskDo4 !== '' ?
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.task4}}/>
+                        <div>
+                            {detail.taskDo4 &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.taskDo4}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerNinths ? (
+                <div className={
+                    detail.bannerNinths.length > 2 && !!detail.control6 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerNinths.filter(val => !!val).map((banner, index) => (
+                        <span className="project-banner borderBlock">
+                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                            </span>
+
+                    ))}
+                </div>
+
+            ) : null}
+
+            {detail.taskDo5 && detail.taskDo5 !== 'undefined' && detail.taskDo5 !== '' ?
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.task5}}/>
+                        <div>
+                            {detail.taskDo5 &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.taskDo5}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerTenth ? (
+                <div className={
+                    detail.bannerTenth.length > 2 && !!detail.control7 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerTenth.filter(val => !!val).map((banner, index) => (
+                        <span className="project-banner borderBlock">
+                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                            </span>
+
+                    ))}
+                </div>
+
+            ) : null}
+
+            {detail.taskDo6 && detail.taskDo6 !== 'undefined' && detail.taskDo6 !== '' ?
+                <section style={{backgroundColor: "white"}} className="project-target padding borderBlock">
+                    <div className="project-target__wrap">
+                        <h2 className="heading-secondary" dangerouslySetInnerHTML={{__html: detail.task6}}/>
+                        <div>
+                            {detail.taskDo6 &&
+                                <div className="project-target__item m-text">
+                                    <div dangerouslySetInnerHTML={{__html: detail.taskDo6}}/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </section>
+                : null}
+
+            {detail.bannerEleventh ? (
+                <div className={
+                    detail.bannerEleventh.length > 2 && !!detail.control8 ? "banner-grid" : "banner-list"
+                }>
+                    {detail.bannerEleventh.filter(val => !!val).map((banner, index) => (
                         <span className="project-banner borderBlock">
                                  <BannerComponent banner={banner} detail={detail} key={index}/>
                             </span>
