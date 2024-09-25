@@ -59,7 +59,7 @@ const Seo = ({detail}) => {
                         {detail.metrics.map((metric, index) => (
                             <div className="project-metric__wrap-item" key={index}>
                                 <p className="l-textReg">{metric.metric}</p>
-                                <img className="project-banner borderBlock" src={metric.imageI.src} alt={''}/>
+                                <img className="project-banner borderBlock" src={metric.imageI.filename} alt={''}/>
                             </div>
                         ))}
                     </div>
