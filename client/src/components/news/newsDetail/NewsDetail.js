@@ -218,6 +218,23 @@ const NewsDetail = () => {
                                 </div>
                             }
 
+                            {detail.bannerThird ? (
+                                <>
+                                    <BannerComponent banner={detail.bannerThird} detail={detail}/>
+                                    <p style={{textAlign:'center', margin:'1rem 0', color:'rgba(117, 118, 119, 1)'}}>{detail.aboutImg2}</p>
+                                </>
+
+                            ) : null}
+
+                            {detail.body5 && detail.body5 !== 'undefined' && detail.body5 !== 'null' &&
+                                <div className="news-detail__article-content">
+                                    <h2 className="heading-secondary"
+                                        dangerouslySetInnerHTML={{__html: detail.aboutClient4}}/>
+                                    <div className="news-detail__article-about m-text"
+                                         dangerouslySetInnerHTML={{__html: detail.body5}}/>
+                                </div>
+                            }
+
                         </section>
 
                         <section className="news-detail__more">

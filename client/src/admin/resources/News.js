@@ -176,6 +176,26 @@ export const NewsCreate = (props) => (
                 source="aboutClient3"
                 label="Заголовок"/>
             <RichTextInput className="customWidth" label="Текст" source="body4" fullWidth/>
+
+            <FileInput
+                source="bannerThird"
+                className="fileInput"
+                placeholder="+"
+                label="Баннер">
+                <FilenameField
+                    source="src"
+                    title="title"/>
+            </FileInput>
+            <TextInput
+                className="customWidth"
+                source="aboutImg2"
+                label="Подпись"/>
+
+            <TextInput
+                className="customWidth"
+                source="aboutClient4"
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body5" fullWidth/>
         </SimpleForm>
     </Create>
 );
@@ -266,6 +286,27 @@ export const NewsEdit = (props) => {
                 source="aboutClient3"
                 label="Заголовок"/>
             <RichTextInput className="customWidth" label="Текст" source="body4" fullWidth/>
+
+            <FileInput
+                source="bannerThird"
+                className="fileInput"
+                placeholder="+"
+                label="Баннер">
+                <FilenameField
+                    source="src"
+                    title="title"/>
+            </FileInput>
+            <TextInput
+                className="customWidth"
+                source="aboutImg2"
+                label="Подпись"/>
+
+            <TextInput
+                className="customWidth"
+                source="aboutClient4"
+                label="Заголовок"/>
+            <RichTextInput className="customWidth" label="Текст" source="body5" fullWidth/>
+
         </SimpleForm>
     </Edit>
 );
