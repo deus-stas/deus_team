@@ -1,8 +1,9 @@
 import React from 'react';
-import {ProjectResults, useMobile} from "../ProjectDetail";
+import {BannerComponent, ProjectResults, useMobile} from "../ProjectDetail";
 
 const Seo = ({detail}) => {
     const isMobile = useMobile();
+    const apiUrl = ''
 
     return (
         <>
@@ -59,7 +60,7 @@ const Seo = ({detail}) => {
                         {detail.metrics.map((metric, index) => (
                             <div className="project-metric__wrap-item" key={index}>
                                 <p className="l-textReg">{metric.metric}</p>
-                                <img className="project-banner borderBlock" src={metric.imageI.filename} alt={''}/>
+                                <img className="project-banner borderBlock" src={`${apiUrl}/uploads/${metric.imageI.title}`} alt={''}/>
                             </div>
                         ))}
                     </div>

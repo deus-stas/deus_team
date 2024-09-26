@@ -43,7 +43,7 @@ router.post('/news', upload.fields([
   { name: 'mainNewsImage' },
   { name: 'photoSlider' }])
     , async (req, res) => {
-  const { name, newsTags, bannerSecond, mainControl, description, aboutImg, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, body, workStepsItem, body2, body3, body4 } = req.body;
+  const { name, newsTags, bannerSecond, bannerThird, mainControl, description, aboutImg, aboutImg2, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, aboutClient4, body, workStepsItem, body2, body3, body4 , body5 } = req.body;
 
   function generateUrl(name) {
     const transliteratedName = transliterate(name);
@@ -68,19 +68,23 @@ router.post('/news', upload.fields([
     mainNewsImage,
     underAboutClient,
     bannerSecond,
+    bannerThird,
     description,
     body,
     body2,
     body3,
     body4,
+    body5,
     photoSlider,
     aboutImg,
+    aboutImg2,
     workStepsItem,
     urlName,
     newsTags,
     aboutClient,
     aboutClient2,
     aboutClient3,
+    aboutClient4,
     mainControl,
     detailControl,
   });
@@ -122,6 +126,7 @@ router.put("/news/:id", upload.fields([
   { name: 'image' },
   { name: 'mainNewsImage' },
   { name: 'bannerSecond' },
+  { name: 'bannerThird' },
   { name: 'photoSlider' }]),
     async (req, res) => {
   const { id } = req.params;
@@ -132,13 +137,15 @@ router.put("/news/:id", upload.fields([
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, newsTags, urlName, mainControl, description, aboutClient, aboutClient2,  aboutClient3,  detailControl, underAboutClient, workStepsItem, aboutImg,  body, body2, body3, body4 } = req.body;
+  const { name, newsTags, urlName, mainControl, description, aboutClient, aboutClient2,  aboutClient3, aboutClient4,  detailControl, underAboutClient, workStepsItem, aboutImg, aboutImg2, body, body2, body3, body4, body5 } = req.body;
   const image = req.files.image ? req.files.image[0] : undefined;
   const mainNewsImage = req.files.mainNewsImage ? req.files.mainNewsImage[0] : undefined;
   const bannerSecond = req.files.bannerSecond ? req.files.bannerSecond[0] : undefined;
+  const bannerThird = req.files.bannerThird ? req.files.bannerThird[0] : undefined;
   const photoSliderNames = JSON.parse(req.body.photoSliderNames);
 
   uploadFile(bannerSecond,'bannerSecond',news, req,'bannerSecond')
+  uploadFile(bannerThird,'bannerThird',news, req,'bannerThird')
 
      console.log(image, mainNewsImage)
       if (image) {
@@ -234,6 +241,7 @@ router.put("/news/:id", upload.fields([
   news.newsTags = newsTags;
   news.urlName = urlName;
   news.aboutImg = aboutImg;
+  news.aboutImg2 = aboutImg2;
   news.mainControl = mainControl;
   news.description = description;
   news.underAboutClient = underAboutClient;
@@ -241,10 +249,12 @@ router.put("/news/:id", upload.fields([
   news.aboutClient = aboutClient;
   news.aboutClient2 = aboutClient2;
   news.aboutClient3 = aboutClient3;
+  news.aboutClient4 = aboutClient4;
   news.body = body;
   news.body2 = body2;
   news.body3 = body3;
   news.body4 = body4;
+  news.body5 = body5;
   news.workStepsItem = workStepsItem;
 
   // Сохраняем изменения
