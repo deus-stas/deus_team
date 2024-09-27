@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Icon } from "../../../../icon/Icon";
-import {Navigation} from "swiper";
 import React, {useEffect, useState} from "react";
 import {BannerComponent, ProjectResults, useMobile} from "../ProjectDetail";
 
@@ -60,8 +59,7 @@ const SiteAndServices = ({detail}) => {
                         spaceBetween={50}
                         slidesPerView={slidesPerView}
                         centeredSlides={true}
-                        navigation={true}
-                        modules={[Navigation]}
+                        navigation
                     >
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide key={index}>
