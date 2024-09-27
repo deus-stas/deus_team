@@ -98,7 +98,7 @@ router.delete("/clients/:id", async (req, res) => {
 
     const { image } = clients;
 
-    if (image) {
+    if (image && fs.existsSync(`uploads/${image.filename}`)) {
         fs.unlinkSync(`uploads/${image.filename}`);
     }
 

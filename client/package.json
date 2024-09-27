@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@devnomic/marquee": "^",
+    "@devnomic/marquee": "^1.0.2",
     "@material-ui/core": "^4.12.4",
     "@material-ui/styles": "^4.11.5",
     "@pbe/react-yandex-maps": "^1.2.2",
@@ -39,7 +39,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "server-test": "file:..",
-    "swiper": "^9.0.5",
+    "swiper": "^10.3.1",
     "use-react-router-breadcrumbs": "^4.0.1",
     "web-vitals": "^2.1.4"
   },

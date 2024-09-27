@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import { Link } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid } from "swiper";
 import { Icon } from '../../icon/Icon';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'reactjs-popup/dist/index.css';
-import "swiper/css";
-import "swiper/css/grid";
+import 'swiper/css';
+import 'swiper/css/grid';
+import 'swiper/css/pagination';
+import { Grid, Pagination } from 'swiper/modules';
 import hh from "../../../img/hh_icon.png"
 import './agency.scss';
 import {connect} from "react-redux";
@@ -35,7 +35,7 @@ const Agency = (props) => {
     const [endSlider, setEndSlider] = useState(false);
     const [currentPerson, setCurrentPerson] = useState(0);
     const [reviews, setReviews] = useState([]);
-    const {isTablet} = useMobile()
+    const {isTablet, isMobile} = useMobile()
 
     useEffect(() => {
         axios.get(`/api/awards/`)
@@ -321,7 +321,8 @@ const Agency = (props) => {
                             <div className="agency-clients__pag hidden-desktop">
                             </div>
                         </div>
-                    <div className="main-clients__marquee hidden-mobile">
+                    {!isMobile?
+                    <div className="agency-clients__marquee">
                         {[...Array(rows)].map((_, rowIndex) => {
                             const endIndex = (rowIndex + 1) * clientsPerRow
                             const slicedClients = clients.slice(rowIndex * clientsPerRow, (rowIndex + 1) * clientsPerRow)
@@ -333,33 +334,57 @@ const Agency = (props) => {
                             }
                             return (
                                 <MarqueeTeam key={rowIndex} direction={'left'} reverse={rowIndex % 2 !== 0}>
-                                    {slicedClients.map(client => (
-                                            <img className='agency-clients__img'
-                                                 src={client.image ? `/uploads/${client.image.filename}` : null}
-                                                 alt={client.name} key={client.id}/>
-                                        ))
+                                    {slicedClients.filter(client => !!client.image).map(client => (
+                                        <div className='agency-clients__img'>
+                                            <div className='container-img'>
+                                                <img
+                                                    src={client.image ? `/uploads/${client.image.filename}` : null}
+                                                    alt={client.name} key={client.id}/>
+                                            </div>
+
+                                        </div>
+
+                                    ))
                                     }
                                 </MarqueeTeam>
                             )
                         })}
                     </div>
-                    <Swiper
-                        slidesPerView={2}
-                        grid={{
-                            rows: 7,
-                        }}
-                        spaceBetween={10}
-                        modules={[Grid]}
-                        onSlideChange={(e) => slideChange(e)}
-                        className="agency-clients__slider">
-                        {
-                            clients.map(client => {
-                                return (
-                                    <SwiperSlide className="agency-clients__item" key={client.id}><img className='agency-clients__img' src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} /></SwiperSlide>
-                                )
-                            })
-                        }
-                    </Swiper>
+                        :
+                        <div className="agency-swiper">
+                        <Swiper
+                            slidesPerView={2}
+                            grid={{
+                                rows: 3,
+                            }}
+
+                            spaceBetween={10}
+                            modules={[Grid, Pagination]}
+                            pagination={{
+                                clickable: true,
+                                renderBullet: (index, className) => (
+                                    `<span class="${className} swiper-pagination-bullet-custom"></span>`
+                                ),
+                            }}
+                            onSlideChange={(e) => slideChange(e)}
+                            className="agency-clients__slider"
+                        >
+                            {
+                                clients.map(client => {
+                                    return (
+                                        <SwiperSlide className="agency-clients__item" key={client.id}>
+                                            <div>
+                                                <img className='agency-clients__img'
+                                                     src={client.image ? `/uploads/${client.image.filename}` : null}
+                                                     alt={client.name}/>
+                                            </div>
+                                        </SwiperSlide>
+                                    )
+                                })
+                            }
+                        </Swiper>
+                        </div>
+                    }
                 </section> : null
             }
 

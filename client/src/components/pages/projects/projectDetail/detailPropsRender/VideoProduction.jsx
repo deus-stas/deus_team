@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {BannerComponent, useMobile} from "../ProjectDetail";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Navigation} from "swiper";
 
 const VideoProduction = ({detail}) => {
     const apiUrl = '';
@@ -33,8 +32,7 @@ const VideoProduction = ({detail}) => {
                         spaceBetween={50}
                         slidesPerView={slidesPerView}
                         centeredSlides={true}
-                        navigation={true}
-                        modules={[Navigation]}
+                        navigation
                     >
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide key={index}>
