@@ -12,7 +12,6 @@ import DelayedLink from "../../appHeader/DelayedLink";
 import {Icon} from "../../icon/Icon";
 import {useMobile} from "../../pages/projects/projectDetail/ProjectDetail";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Navigation} from "swiper";
 
 const apiUrl = ''
 
@@ -194,7 +193,6 @@ const NewsDetail = () => {
                                         slidesPerView={slidesPerView}
                                         centeredSlides={true}
                                         navigation={true}
-                                        modules={[Navigation]}
                                     >
                                         {detail.photoSlider.filter(val => !!val).map((banner, index) => (
                                             <SwiperSlide key={index}>
