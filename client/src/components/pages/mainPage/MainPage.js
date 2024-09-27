@@ -3,7 +3,7 @@ import {useEffect, useState, useRef} from "react";
 import axios, {setIsLoadingMainPageEvent} from "./../../../axios";
 import {Link} from "react-router-dom";
 import Select from "react-select";
-import SwiperCore, {Grid, Autoplay} from "swiper";
+import SwiperCore from "swiper";
 import {Icon} from "../../icon/Icon";
 import SectionProducts from "../../sectionProducts/SectionProducts";
 import SectionSocial from "../../sectionSocial/SectionSocial";
@@ -26,8 +26,6 @@ import {Box, useMediaQuery} from "@material-ui/core";
 import {maxLength} from "react-admin";
 import {useMobile} from "../projects/projectDetail/ProjectDetail";
 import {Marquee} from "@devnomic/marquee";
-
-SwiperCore.use([Autoplay]);
 
 const apiUrl = "";
 
