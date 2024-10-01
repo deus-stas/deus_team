@@ -121,6 +121,9 @@
     <path d="M15 20H25M25 20L21 16M25 20L21 24" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 
+  <svg width="40" height="40" viewBox="0 0 40 40" id="icon-left-arrow" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.226036 3.8652C0.0307751 4.06046 0.0307751 4.37704 0.226036 4.5723L3.40802 7.75428C3.60328 7.94955 3.91986 7.94955 4.11512 7.75428C4.31039 7.55902 4.31039 7.24244 4.11512 7.04718L1.2867 4.21875L4.11512 1.39032C4.31039 1.19506 4.31039 0.878478 4.11512 0.683216C3.91986 0.487954 3.60328 0.487954 3.40802 0.683216L0.226036 3.8652ZM21.9844 3.71875L0.57959 3.71875V4.71875L21.9844 4.71875V3.71875Z" fill="#191B1D"/>
+  </svg>
 
   <svg xmlns="http://www.w3.org/2000/svg" id="icon-arrowRight" width="24" height="25" viewBox="0 0 24 25" fill="none">
     <path d="M7 12.75H17M17 12.75L13 8.75M17 12.75L13 16.75" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
