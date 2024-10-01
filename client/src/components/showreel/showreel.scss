@@ -31,11 +31,19 @@
     }
 
     &__s {
-        cursor: url('../../img/videoCursor.svg'), default !important;
         opacity: 1;
         //max-height: 83rem;
         height: 100%;
         position: relative;
+
+        &.pausing {
+            cursor: url('../../img/videoCursor.svg'), default !important;
+        }
+
+        &.playing {
+            cursor: url('../../img/videoPauseCursor.svg'), default !important;
+        }
+
         @include respond(sm) {
             //max-height: 42rem;
         }

@@ -16,6 +16,7 @@ const Showreel = (props) => {
     const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
     const [isFirstClickVideo, setisFirstClickVideo] = useState(true);
     // const [currentTime, setCurrentTime] = useState(4);
+    const [isPaused, setIsPaused] = useState(true);
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null)
@@ -42,14 +43,24 @@ const Showreel = (props) => {
         // footer.style.opacity = isTrue ? '0' : '1';
         // videoRef.current.style.zIndex = isTrue ? 8001 : 'auto';
 
-        isTrue ? videoRef.current.play() : videoRef.current.pause();
+        if (isTrue) {
+            videoRef.current.play();
+            setIsPaused(false);
+        } else {
+            videoRef.current.pause();
+            setIsPaused(true);
+        }
     };
 
     return (
         <div className="showreel">
             {
                 isMain ? (
-                    <div ref={showReelRef}  className="showreel__s" onClick={handlePlay} >
+                    <div 
+                        ref={showReelRef}  
+                        className={`showreel__s ${isPaused ? 'pausing' : 'playing'}`} 
+                        onClick={handlePlay} 
+                    >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
                             <video ref={videoRef}  poster={showPng} loop playsInline preload={'auto'}>

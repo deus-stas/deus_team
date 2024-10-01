@@ -59,6 +59,10 @@ const AppHeader = (props) => {
             down: { transform: 'translateY(0)' },
             padding: { padding: '2rem 3rem' },
             noPadding: { padding: '0' },
+            bgColor: {
+                background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01)), linear-gradient(0deg, rgba(5, 5, 5, 0.1), rgba(5, 5, 5, 0.1)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4))'                
+            },
+            transparentBg: { background: 'transparent' }
         };
 
         const handleScroll = () => {
@@ -76,6 +80,7 @@ const AppHeader = (props) => {
                         headerWrap.style.width = styles.wide.width;
                         headerWrap.style.padding = styles.noPadding.padding;
                         header.style.transform = styles.down.transform;
+                        headerWrap.style.background = styles.transparentBg.background;
                     } else if (scrolled < prevScroll) {
                         header.style.transform = styles.down.transform;
                     } else if (scrolled > 500) {
@@ -83,6 +88,7 @@ const AppHeader = (props) => {
                     } else if (scrolled > 0 && scrolled < 500) {
                         headerWrap.style.width = styles.narrowly.width;
                         headerWrap.style.padding = styles.padding.padding;
+                        headerWrap.style.background = styles.bgColor.background;
                     }
                 }
 

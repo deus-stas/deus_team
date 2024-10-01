@@ -48,6 +48,8 @@ const MainPage = (props) => {
     const [clients, setClients] = useState([]);
     const [swipped, setSwipped] = useState([-1]);
     const [isFullScreen, setIsFullScreen] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isPrevHovered, setIsPrevHovered] = useState(false);
 
     const handleVideoClick = () => {
         setIsFullScreen(!isFullScreen);
@@ -419,14 +421,21 @@ const MainPage = (props) => {
                             <p className="heading-secondary">В работе {working.length} активных<br/> проектов</p>
                             {!isMobile && (
                                 <div className="slide-arrow">
-                                    <div className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
-                                         onClick={currentSlide > 0 ? prevSlide : null}>
-                                        <Icon icon="slider" viewBox="0 0 40 40"/>
+                                    <div
+                                        className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
+                                        onClick={currentSlide > 0 ? prevSlide : null}
+                                        onMouseEnter={() => setIsPrevHovered(true)}   // Set hover to true
+                                        onMouseLeave={() => setIsPrevHovered(false)}  // Set hover to false
+                                    >
+                                        <Icon icon={isPrevHovered ? "slider-black" : "slider"} viewBox="0 0 40 40" />
                                     </div>
                                     <div
                                         className={`next ${currentSlide >= working.length - 1 ? 'disabled' : ''}`}
-                                        onClick={currentSlide < working.length - 1 ? nextSlide : null}>
-                                        <Icon icon="slider" viewBox="0 0 40 40"/>
+                                        onClick={currentSlide < working.length - 1 ? nextSlide : null}
+                                        onMouseEnter={() => setIsHovered(true)}   // Set hover to true
+                                        onMouseLeave={() => setIsHovered(false)}  // Set hover to false
+                                    >
+                                        <Icon icon={isHovered ? "slider-black" : "slider"} viewBox="0 0 40 40" />
                                     </div>
                                 </div>
                             )}
