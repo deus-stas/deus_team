@@ -5,6 +5,7 @@ import './showreel.scss';
 import {usePrevious} from "react-admin";
 import {current} from "@reduxjs/toolkit";
 import showPng from "./showreel.png"
+import temp from "../../img/videoPlayCursor.svg"
 
 const apiUrl = ''
 
@@ -68,6 +69,7 @@ const Showreel = (props) => {
                                         type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                             </video>
                         }
+                        <img src={temp} alt="showreel" />
                     </div>
                 ) : (
                     <>
