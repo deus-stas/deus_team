@@ -4,6 +4,24 @@
     padding: 15rem 0 0 0;
 }
 .project {
+    .slide-arrow {
+        position: absolute;
+        bottom: 70px;
+        left: calc(50% - 20px);
+        @include respond(xs){
+          margin: auto;
+        }
+        .prev, .next {
+          display: inline-block;
+          .icon {
+            width: 4rem;
+            height: 4rem;
+          }
+        }
+        .prev .icon {
+          transform: rotate(180deg);
+        }  
+    }
     &-main {
         padding: 13.4rem 0 4rem;
         color: #050505;
@@ -1011,7 +1029,7 @@
     }
 }
 
-.swiper-button-prev:after, {
+.swiper-button-prev:after {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none'%3E%3Ccircle opacity='1' cx='20' cy='20' r='20' fill='white'/%3E%3Cpath d='M25 20H15M15 20L19 24M15 20L19 16' stroke='%23050005' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;
     display: inline-block;
     width: 100%;

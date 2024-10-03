@@ -1,26 +1,58 @@
-import {useEffect, useRef, useState} from 'react'
+import { useEffect, useRef, useState } from 'react';
 import Popup from 'reactjs-popup';
-
 import './showreel.scss';
-import {usePrevious} from "react-admin";
-import {current} from "@reduxjs/toolkit";
-import showPng from "./showreel.png"
-import temp from "../../img/videoPlayCursor.svg"
+import { usePrevious } from "react-admin";
+import showPng from "./showreel.png";
+import playCursor from "../../img/videoPlayCursor.svg";
+import pauseCursor from "../../img/videoPauseCursor.svg";
 
-const apiUrl = ''
+const apiUrl = '';
+
+const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
+    const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });
+    
+    const handleMouseMove = (e) => {
+        const cursorWidth = 50; // Half of the custom cursor's width
+        const cursorHeight = 200; // Half of the custom cursor's height
+        setPosition({ x: e.clientX - cursorWidth, y: e.clientY - cursorHeight });
+    };
+
+    useEffect(() => {
+        if (isVisible) {
+            window.addEventListener('mousemove', handleMouseMove);
+        } else {
+            window.removeEventListener('mousemove', handleMouseMove);
+        }
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, [isVisible]);
+
+    if (!isVisible) return null;
+
+    return (
+        <div
+            className="custom-cursor"
+            style={{
+                left: `${position.x}px`,
+                top: `${position.y}px`,
+                backgroundImage: `url(${isPaused ? playCursor : pauseCursor})`,
+            }}
+        />
+    );
+};
+
 
 const Showreel = (props) => {
-    const {data, isMain} = props;
+    const { data, isMain } = props;
     const [open, setOpen] = useState(false);
-    const [isInViewport, setIsInViewport] = useState(false);
-    const prevIsInViewport = usePrevious({isInViewport, setIsInViewport});
-    const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
-    const [isFirstClickVideo, setisFirstClickVideo] = useState(true);
-    // const [currentTime, setCurrentTime] = useState(4);
     const [isPaused, setIsPaused] = useState(true);
-
+    const [isCursorVisible, setIsCursorVisible] = useState(false);
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    
     const videoRef = useRef(null);
-    const showReelRef = useRef(null)
+    const showReelRef = useRef(null);
 
     const closeModal = () => setOpen(false);
     const openModal = () => {
@@ -28,22 +60,8 @@ const Showreel = (props) => {
         videoRef.current.pause();
     };
 
-
-
     const handlePlay = () => {
-        const header = document.querySelector('.header')
-        const footer = document.querySelector('.footer')
-        const isTrue = videoRef.current.paused
-        // videoRef.current.currentTime = currentTime
-
-        // videoRef.current.style.transition = 'all 0.3s ease-in-out';
-        // videoRef.current.style.transform = isTrue ? 'translateY(-30.4vw)' : 'translateY(0)';
-        // videoRef.current.style.position = isTrue ? 'fixed' : 'relative';
-        // videoRef.current.style.height = isTrue ? '110vh' : '';
-        // header.style.opacity = isTrue ? '0' : '1';
-        // footer.style.opacity = isTrue ? '0' : '1';
-        // videoRef.current.style.zIndex = isTrue ? 8001 : 'auto';
-
+        const isTrue = videoRef.current.paused;
         if (isTrue) {
             videoRef.current.play();
             setIsPaused(false);
@@ -53,23 +71,36 @@ const Showreel = (props) => {
         }
     };
 
+    const handleMouseEnter = (e) => {
+        setIsCursorVisible(true);
+        setCursorPosition({ x: e.clientX, y: e.clientY });
+
+    };
+
+    const handleMouseLeave = () => {
+        setIsCursorVisible(false);
+    };
+
     return (
         <div className="showreel">
             {
                 isMain ? (
-                    <div 
-                        ref={showReelRef}  
-                        className={`showreel__s ${isPaused ? 'pausing' : 'playing'}`} 
-                        onClick={handlePlay} 
+                    <div
+                        ref={showReelRef}
+                        className={`showreel__s ${isPaused ? 'pausing' : 'playing'}`}
+                        onClick={handlePlay}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        style={{ cursor: isCursorVisible ? 'none' : 'auto' }} // Hide real cursor when custom cursor is visible
                     >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
-                            <video ref={videoRef}  poster={showPng} loop playsInline preload={'auto'}>
+                            <video ref={videoRef} poster={showPng} loop playsInline preload={'auto'}>
                                 <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                         type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                             </video>
                         }
-                        <img src={temp} alt="showreel" />
+                        <img src={playCursor} alt="showreel" />
                     </div>
                 ) : (
                     <>
@@ -78,7 +109,6 @@ const Showreel = (props) => {
                             {data.year && data.year.length > 0 && <span> — {data.year}</span>}
                         </div>
                         <div className="showreel__s playIcon" onClick={openModal}>
-
                             {
                                 data.video && data.video !== 'undefined' && data.video !== 'null' ?
                                     <video ref={videoRef} muted loop playsInline>
@@ -86,7 +116,7 @@ const Showreel = (props) => {
                                                 type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                                     </video> :
                                     data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
-                                        <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
+                                        <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
                                         <video muted loop playsInline>
                                             <source
                                                 src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
@@ -105,16 +135,19 @@ const Showreel = (props) => {
                     </div>
                     {
                         data.videoUrl && data.videoUrl !== 'undefined' && data.videoUrl !== 'null' ?
-                            <div dangerouslySetInnerHTML={{__html: data.videoUrl}}></div> :
+                            <div dangerouslySetInnerHTML={{ __html: data.videoUrl }}></div> :
                             <video muted controls playsInline loop autoPlay className="popup__video">
                                 <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}/>
                             </video>
                     }
                 </div>
             </Popup>
-        </div>
-    )
 
-}
+            {/* Include the custom cursor, visible only when in showreel */}
+            <CustomCursor isPaused={isPaused} isVisible={isCursorVisible} initialPosition={cursorPosition} />
+        </div>
+    );
+};
+
 
 export default Showreel;
