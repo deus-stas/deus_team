@@ -1,6 +1,5 @@
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
 import 'swiper/css/navigation';
 import { Icon } from "../../../../icon/Icon";
 import React, {useEffect, useState} from "react";
@@ -10,8 +9,11 @@ import {debounce} from "@material-ui/core";
 
 const SiteAndServices = ({detail}) => {
     const apiUrl = '';
-    const [slidesPerView, setSlidesPerView] = useState(1.5);
-
+    const [slidesPerView, setSlidesPerView] = useState(1.99);
+    const [swiperRef, setSwiperRef] = useState(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isPrevHovered, setIsPrevHovered] = useState(false);
+    
     const isMobile = useMobile();
 
     useEffect(() => {
@@ -19,7 +21,7 @@ const SiteAndServices = ({detail}) => {
             if (window.innerWidth < 500) { // adjust the breakpoint as needed
                 setSlidesPerView(1.1);
             } else {
-                setSlidesPerView(1.5);
+                setSlidesPerView(1.99);
             }
         };
         window.addEventListener('resize', handleResize);
@@ -28,6 +30,14 @@ const SiteAndServices = ({detail}) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    const prevHandler = () => {
+        swiperRef.slidePrev();
+    };
+    
+    const nextHandler = () => {
+        swiperRef.slideNext();
+    };
 
     return (
         <>
@@ -52,17 +62,38 @@ const SiteAndServices = ({detail}) => {
 
             {!!detail.bannerSeconds && detail.bannerSeconds.length > 0 && (
                 <section
-                    style={{backgroundColor: "black", overflow: "hidden"}}
+                    style={{backgroundColor: "black", overflow: "hidden", position: "relative"}}
                     className="borderBlock"
                 >
+                    <div className="slide-arrow">
+                        <div
+                            className='prev'
+                            onClick={prevHandler}
+                            onMouseEnter={() => setIsPrevHovered(true)}
+                            onMouseLeave={() => setIsPrevHovered(false)}
+                        >
+                            <Icon icon={isPrevHovered ? "slider-black" : "slider-white"} viewBox="0 0 40 40" />
+                        </div>
+                        <div
+                            className='next'
+                            onClick={nextHandler}
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            <Icon icon={isHovered ? "slider-black" : "slider-white"} viewBox="0 0 40 40" />
+                        </div>
+                    </div>
                     <Swiper
-                        spaceBetween={50}
+                        spaceBetween={80}
                         slidesPerView={slidesPerView}
                         centeredSlides={true}
-                        navigation
+                        loop={true}
+                        onSwiper={(swiper) => setSwiperRef(swiper)}                     
                     >
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide 
+                                key={index}
+                            >
                                 <img
                                     className="slider-img"
                                     src={`${apiUrl}/uploads/${banner.filename}`}

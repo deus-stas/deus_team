@@ -1,8 +1,22 @@
 @import '../../style/mixins';
 
 .showreel {
-  position: relative;
-  height: 100%;
+    position: relative;
+    height: 100%;
+    
+    .custom-cursor {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        pointer-events: none;
+        z-index: 1000;
+        background: url('../../img/videoPlayCursor.svg') no-repeat center center;
+        backdrop-filter: blur(12.5px);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
     &__title {
         display: flex;
         align-items: center;
@@ -35,14 +49,16 @@
         //max-height: 83rem;
         height: 100%;
         position: relative;
+        cursor: none;
+        
 
-        &.pausing {
-            cursor: url('../../img/videoCursor.svg'), default !important;
-        }
+        // &.pausing {
+        //     cursor: url('../../img/videoPlayCursor.svg'), default !important;
+        // }
 
-        &.playing {
-            cursor: url('../../img/videoPauseCursor.svg'), default !important;
-        }
+        // &.playing {
+        //     cursor: url('../../img/videoPauseCursor.svg'), default !important;
+        // }
 
         @include respond(sm) {
             //max-height: 42rem;
