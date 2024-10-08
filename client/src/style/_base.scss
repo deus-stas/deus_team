@@ -205,17 +205,20 @@ main {
 
 
 
-.custom-cursor {
-    opacity: 1;
-    background: #ffffff;
-    border-radius: 50%;
-    position: absolute;
+// .custom-cursor {
+//     opacity: 1;
+//     background: #ffffff;
+//     border-radius: 50%;
+//     position: absolute;
 
-    @include respond(sm) {
-        display: none;
-    }
-}
-
+//     @include respond(sm) {
+//         display: none;
+//     }
+// }
+// .custom-circle-cursor {
+//     background-color: #fff;
+//     border-radius: 50%;
+// }
 .showreel__s:hover{
 
     .custom-cursor {

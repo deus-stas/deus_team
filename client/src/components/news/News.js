@@ -102,7 +102,7 @@ const News = () => {
 
                                     return (
                                         <div className="flex-wrap">
-                                            <DelayedLink to={`/news/${item.urlName}`} className="news-main__item"
+                                            <DelayedLink to={`/news/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
                                                          key={item.id}>
                                                 {isVideo && <video autoPlay={shouldAutoPlay}
                                                                    muted

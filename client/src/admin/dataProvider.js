@@ -92,9 +92,9 @@ const dataProvider = {
       'headerPhoto',
       'contactPhoto',
     ];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSixths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'photoSlider', 'formFiles' ]
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSixths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'photoSlider', 'formFiles', 'metrics' ]
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
-    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'metrics', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
+    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false;
     console.log(params.data)
     for (const [key, value] of Object.entries(params.data)) {
@@ -145,9 +145,9 @@ const dataProvider = {
   update: (resource, params) => {
     const formData = new FormData();
     const images = ['image', 'imageMob', 'mainNewsImage',"file", "descrImg", "brief", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'mainMobVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerSixths', 'photoSlider', 'formFiles']
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerSixths', 'photoSlider', 'formFiles', 'metrics']
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
-    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'metrics', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
+    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
     const workStepsImages = []

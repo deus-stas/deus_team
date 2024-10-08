@@ -115,11 +115,37 @@ const AppWrapper = () => {
 
             {/*<ScrollToTop/>*/}
             <CustomCursor
-                targets={['.js-cursor-play']}
-                customClass='custom-cursor'
-                dimensions={8}
-                fill=''
-                opacity={1}
+                targets={[
+                    '.projects__item__1', 
+                    '.projects__item__2',
+                    '.projects__item__3', 
+                    '.projects__item__4', 
+                    '.projects__item__5', 
+                    '.projects__item__6', 
+                    '.projects__item__7', 
+                    '.projects__item__8', 
+                    '.projects__item__9', 
+                    '.projects__item__10', 
+                    '.news-main__1',
+                    '.news-main__2',
+                    '.news-main__3',
+                    '.news-main__4',
+                    '.news-main__5',
+                    '.news-main__6',
+                    '.news-main__7',
+                    '.news-main__8',
+                    '.news-main__9',
+                    '.news-main__10',
+                ]}
+                customClass='custom-circle-cursor'
+                dimensions={30}
+                fill='#E0FD60'
+                smoothness={{
+                    movement: 0.2,
+                    scale: 0.1,
+                    opacity: 0.2,
+                }}
+                targetOpacity={1}
             />
             <AxiosInterceptor>
                 {!shouldHideHeaderFooter && <AppHeader/>}

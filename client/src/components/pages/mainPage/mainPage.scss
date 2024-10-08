@@ -870,7 +870,7 @@
 
     &__wrap {
       display: grid;
-      grid-template-columns: 0.25fr 0.75fr;
+      grid-template-columns: 0.25fr 0.95fr;
       width: 100vw;
 
       @include respond(sm) {
@@ -932,6 +932,7 @@
         opacity: 1;
         visibility: visible;
         transition: all 0.3s ease-out;
+        // min-height: 302px;
 
         &:hover {
           img:nth-child(2){
@@ -1157,5 +1158,17 @@
   }
   @include respond(xs){
     --gap: 1rem;
+  }
+}
+
+.swiper_wrapper_mainp {
+  width: 100%;
+  margin-right: 0;
+  .swiper-slide {
+    height: 30.2rem !important;
+  }
+  .swiper-wrapper {
+    margin-bottom: 0;
+    margin-top: 0;
   }
 }
