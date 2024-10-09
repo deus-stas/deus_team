@@ -479,6 +479,7 @@ router.put("/projects/:id",
         {name: 'workStepsImages'},
         {name: 'bannerThird'},
         {name: 'bannerThirds'},
+        {name: 'metrics'},
         {name: 'bannerFourth'},
         {name: 'bannerFourths'},
         {name: 'bannerFifth'},
@@ -572,7 +573,6 @@ router.put("/projects/:id",
         const stack = !!req.body.stack && req.body.stack !== 'undefined' ? JSON.parse(req.body.stack) : [];
 
         const tasksList = JSON.parse(req.body.tasksList);
-        const metrics = JSON.parse(req.body.metrics);
         let workSteps = JSON.parse(req.body.workSteps);
         const approachList = JSON.parse(req.body.approachList);
         const approachListSecond = JSON.parse(req.body.approachListSecond);
@@ -591,6 +591,7 @@ router.put("/projects/:id",
         const bannerNinthsNames = JSON.parse(req.body.bannerNinthsNames);
         const bannerTenthNames = JSON.parse(req.body.bannerTenthNames);
         const bannerEleventhNames = JSON.parse(req.body.bannerEleventhNames);
+        const metricsNames = JSON.parse(req.body.metricsNames);
 
 
         workSteps = workSteps.map(workStep => {
@@ -849,6 +850,39 @@ router.put("/projects/:id",
         if (req.files.approachListThirdFiles) {
             project.approachListThirdFiles = req.files.approachListThirdFiles;
         }
+
+        if (req.files.metrics) {
+            if (project.metrics && project.metrics.length > 0) {
+                project.metrics.filter(image => !metricsNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.metrics = [
+                ...(project.metrics ? project.metrics.filter(image => metricsNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.metrics : [])
+            ];
+            console.log()
+        } else {
+            if (project.metrics && project.metrics.length > 0) {
+                project.metrics.filter(image => !metricsNames.includes(image.filename)).forEach((image) => {
+                    if (image.path) {
+                        fs.unlink(image.path, (err) => {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
+                    }
+                });
+                project.metrics = [
+                    ...(project.metrics ? project.metrics.filter(image => metricsNames.includes(image.filename)) : [])
+                ];
+            }
+        }
+
 
         if (req.files.bannerThirds) {
             if (project.bannerThirds && project.bannerThirds.length > 0) {
@@ -1242,7 +1276,7 @@ router.put("/projects/:id",
         project.taskDo5 = taskDo5;
         project.taskDo6 = taskDo6;
         project.tasksList = tasksList;
-        project.metrics = metrics;
+        // project.metrics = metrics;
         project.approach = approach;
         project.body = body;
         project.result = result;

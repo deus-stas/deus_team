@@ -622,14 +622,14 @@ export const SEORender = () => {
             <p>Блок метрика</p>
             <ArrayInput
                 label=""
-                source="metrics"
+                source={"metrics"}
             >
                 <SimpleFormIterator>
-                    <TextInput
+                    {/* <TextInput
                         className="customWidth"
                         label="Поисковая система"
                         placeholder="Яндекс"
-                        source="metric"/>
+                        source="metric"/> */}
                     <FileInput
                         className="fileInput"
                         placeholder="+"

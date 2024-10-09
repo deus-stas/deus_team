@@ -335,7 +335,11 @@ const Projects = () => {
 
                 return (
                     <div style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
-                        <DelayedLink to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id}>
+                        <DelayedLink 
+                            to={`/projects/${project.nameInEng}`} 
+                            className={`projects__item projects__item__${index + 1}`}
+                            key={project.id}
+                        >
                             <div className="projects__item-img-wrap">
                                 {isVideo ?
                                     <VideoComponent ref={(ref) => addVideoRef(ref)} project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} /> :

@@ -8,6 +8,7 @@ import {Icon} from "../../icon/Icon";
 import SectionProducts from "../../sectionProducts/SectionProducts";
 import SectionSocial from "../../sectionSocial/SectionSocial";
 import Showreel from "../../showreel/Showreel";
+import WorkingSlider from "./WorkingSlider";
 
 import "swiper/css";
 import "swiper/css/grid";
@@ -413,85 +414,8 @@ const MainPage = (props) => {
 
             </section>
 
-            {!!working && working.length > 0 && (
-            <section className="main-working">
-                <div className="container">
-                    <div className="main-working__wrap">
-                        <div className="main-working__wrap-info">
-                            <p className="heading-secondary">В работе {working.length} активных<br/> проектов</p>
-                            {!isMobile && (
-                                <div className="slide-arrow">
-                                    <div
-                                        className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
-                                        onClick={currentSlide > 0 ? prevSlide : null}
-                                        onMouseEnter={() => setIsPrevHovered(true)}   // Set hover to true
-                                        onMouseLeave={() => setIsPrevHovered(false)}  // Set hover to false
-                                    >
-                                        <Icon icon={isPrevHovered ? "slider-black" : "slider"} viewBox="0 0 40 40" />
-                                    </div>
-                                    <div
-                                        className={`next ${currentSlide >= working.length - 1 ? 'disabled' : ''}`}
-                                        onClick={currentSlide < working.length - 1 ? nextSlide : null}
-                                        onMouseEnter={() => setIsHovered(true)}   // Set hover to true
-                                        onMouseLeave={() => setIsHovered(false)}  // Set hover to false
-                                    >
-                                        <Icon icon={isHovered ? "slider-black" : "slider"} viewBox="0 0 40 40" />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                        <div className="main-working__wrapperSlide">
-                            {working.map((item, index) => (
-                                <div className="padding-slider" style={{transform: `translateX(-${currentSlide * 100}%)`, transition: 'transform 0.3s ease-out'}}>
-                                    <div
-                                    className={`main-working__wrapperSlide-item ${swipped.includes(index) ? 'swipped' : ''}`}
-                                    key={index}
-
-                                >
-                                    <div className="wrapp">
-                                        <div className="greenBall">
-                                            <div className="animateBall">
-                                                <Icon icon="greenBall" viewBox='0 0 16 16'/>
-                                            </div>
-                                            <p>{item.name}</p>
-                                        </div>
-                                        <p className="m-text">{item.descr}</p>
-                                    </div>
-                                    <div className="wrapp-circle">
-                                        <img
-                                            src={deus}
-                                            alt=""
-                                            className="circle"/>
-                                        <img
-                                            src={`${apiUrl}/uploads/${item.file.filename}`}
-                                            alt=""
-                                            className="circle"/>
-                                    </div>
-                                </div>
-                                </div>
-                            ))}
-                            <div
-                                className="slider-touch-area"
-                                onTouchStart={handleTouchStart}
-                                onTouchEnd={handleTouchEnd}
-                            />
-                        </div>
-                        {isMobile && (
-                            <div className="slide-arrow">
-                                <div className={`prev ${currentSlide === 0 ? 'disabled' : ''}`}
-                                     onClick={currentSlide > 0 ? prevSlide : null}>
-                                    <Icon icon="slider" viewBox="0 0 40 40"/>
-                                </div>
-                                <div
-                                    className={`next ${currentSlide >= working.length - 1 ? 'disabled' : ''}`}
-                                    onClick={currentSlide < working.length - 1 ? nextSlide : null}>
-                                    <Icon icon="slider" viewBox="0 0 40 40"/>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </section>)
+            {!!working && working.length > 0 && 
+             <WorkingSlider />
             }
 
         </main>)}
