@@ -206,6 +206,17 @@
     width: 30px;
     height: 30px;
     pointer-events: none;
-    z-index: 99999;
+    z-index: 11;
+    position: fixed;
+    transform: scale(2);
 }
 
+.cursor__block {
+    width: 120px;
+    height: 120px;
+    z-index: 10;
+    position: absolute;
+}
+.custom__cursor {
+    position: fixed;
+}
