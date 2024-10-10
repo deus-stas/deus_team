@@ -88,7 +88,8 @@ const SiteAndServices = ({detail}) => {
                         slidesPerView={slidesPerView}
                         centeredSlides={true}
                         loop={true}
-                        onSwiper={(swiper) => setSwiperRef(swiper)}                     
+                        onSwiper={(swiper) => setSwiperRef(swiper)}
+                        style={{ padding: '20px 0' }}                   
                     >
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide 
