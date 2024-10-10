@@ -59,6 +59,7 @@ const apiUrl = '';
 const AppWrapper = () => {
 
     const [dimensions, setDimensions] = useState(30)
+    const [handleHover, setHandleHover] = useState(false)
 
     const dispatch = useDispatch()
     const location = useLocation();
@@ -112,14 +113,15 @@ const AppWrapper = () => {
     }, [location])
 
 
+    // Listeners Func
     const addListeners = (element, funcAdd, funcRm) => {
         element.addEventListener("mouseenter" ,funcAdd)
         element.addEventListener("mouseleave", funcRm)
     }
 
     const rmListeners = (element, funcAdd, funcRm) => {
-        element.removeEventListener(funcAdd);
-        element.removeEventListener(funcRm)
+        element.removeEventListener("mouseenter", funcAdd);
+        element.removeEventListener("mouseleave", funcRm);
     }
 
     console.log(classArray)
@@ -134,8 +136,8 @@ const AppWrapper = () => {
             gsap.to(arrow, {
                 width: 0,
                 height: 0,
-                x: e.clientX - 45,
-                y: e.clientY - 30,
+                x: e.clientX - 40,
+                y: e.clientY - 27,
                 duration: 0.1,
             });
             gsap.to(bubble, {
@@ -146,8 +148,7 @@ const AppWrapper = () => {
         };
 
         const handleHoverMouse = (e) => {
-            handleHovered();
-            if (e.target.classList.contains('main-agency__item')) {
+            if (e.target.classList.contains('main-agency__item') && !handleHover) {
                 gsap.to(arrow, {
                     width: 54,
                     height: 54,
@@ -158,12 +159,13 @@ const AppWrapper = () => {
                     width: dimensions,
                     height: dimensions,
                 });
-                setDimensions(120)
+                setDimensions(120);
+                setHandleHover(true);
             }
         };
 
         const handleRemoveMouse = (e) => {
-            if (e.target.classList.contains('main-agency__item')) {
+            if (e.target.classList.contains('main-agency__item') && handleHover) {
                 setDimensions(30)
                 gsap.to(arrow, {
                     width: 0,
@@ -175,32 +177,31 @@ const AppWrapper = () => {
                     width: dimensions,
                     height: dimensions,
                 });
-                console.log(arrow)
+                console.log(arrow);
+                setHandleHover(false);
             }
         };
 
-
+        // Add Listener
+        document.addEventListener('scroll', handleMoveMouse);
         document.addEventListener('mousemove', handleMoveMouse);
         classArray.forEach((element) => {
             addListeners(element, handleHoverMouse, handleRemoveMouse)
         });
-
-        document.addEventListener('scroll', handleMoveMouse);
-
+        // Rm Listeners
         return () => {
             document.removeEventListener('mousemove', handleMoveMouse);
             document.removeEventListener('scroll', handleMoveMouse);
-            document.querySelectorAll('.main-agency__item').forEach((element) => {
-                element.removeEventListener('mouseenter', handleHoverMouse);
-                element.removeEventListener('mouseleave', handleRemoveMouse);
+            classArray.forEach((element) => {
+                rmListeners(element, handleHoverMouse, handleRemoveMouse)
             });
         };
     }, [classArray])
 
     const ArrowSVG = () => {
         return (
-            <div className="arrowBlock">
-                <svg ref={arrowRef} id="arrowGo" width="27" height="27" viewBox="0 0 35 65" fill="none"
+            <div ref={arrowRef} className="arrowBlock">
+                <svg  id="arrowGo" width="27" height="27" viewBox="0 0 35 65" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <g id="ic:round-arrow-outward">
                         <path d="M45 17V45M45 45H17M45 45L19 16" stroke="white" stroke-width="2.5"/>
@@ -248,7 +249,7 @@ const AppWrapper = () => {
                         targetOpacity={1}
                     />
                 </div>
-                <ArrowSVG />
+                <ArrowSVG className={'ArrowSVG'}/>
             </div>
         )
     }
