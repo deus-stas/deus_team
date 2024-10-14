@@ -134,12 +134,13 @@ const AppWrapper = () => {
             y: e.clientY - 27,
             duration: 0.4,
         });
-        gsap.to(bubbleRef.current, {
-            width: dimensions,
-            height: dimensions,
-            duration: 0.5,
-            ease: "power3.out"
-        })
+        // gsap.to(bubbleRef.current, {
+        //     // width: dimensions,
+        //     // height: dimensions,
+        //     duration: 0.5,
+        //     ease: "power3.out"
+        // })
+        console.log(document.querySelector('.custom-circle-cursor'))
     };
 
     const handleHoverMouse = (e) => {
@@ -147,59 +148,63 @@ const AppWrapper = () => {
             gsap.to(arrowRef.current, {
                 width: 54,
                 height: 54,
-                duration: 0.5
-            });
-            gsap.to(bubbleRef.current, {
-                width: dimensions,
-                height: dimensions,
                 duration: 0.5,
-                ease: "power3.out"
+                autoAlpha: 1
             });
-            setDimensions(120);
+            // gsap.to(bubbleRef.current, {
+            //     // width: dimensions,
+            //     // height: dimensions,
+            //     duration: 0.5,
+            //     ease: "power3.out"
+            // });
+            // setDimensions(120);
             setHandleHover(true);
+            document.querySelector('.custom-circle-cursor').classList.add('exclusion')
         }
     };
 
     const handleRemoveMouse = (e) => {
         if (e.target.classList.contains('main-agency__item') && handleHover) {
-            setDimensions(30)
+            // setDimensions(30)
             gsap.to(arrowRef.current, {
                 width: 0,
                 height: 0,
                 duration: 0.5
             });
-            gsap.to(bubbleRef.current, {
-                duration: 0.5,
-                width: dimensions,
-                height: dimensions,
-            });
+            // gsap.to(bubbleRef.current, {
+            //     // width: dimensions,
+            //     // height: dimensions,
+            //     duration: 0.5,
+            // });
             console.log(arrowRef.current);
             setHandleHover(false);
+
         }
     };
 
     // CursorWthArrow
-    useEffect(() => {
+    useLayoutEffect(() => {
         // Add Listener
-        document.addEventListener('scroll', handleMoveMouse);
         document.addEventListener('mousemove', handleMoveMouse);
-        classArray.forEach((element) => {
-            addListeners(element, handleHoverMouse, handleRemoveMouse)
-        });
+        document.addEventListener('scroll', handleMoveMouse);
         // Rm Listeners
         return () => {
             document.removeEventListener('mousemove', handleMoveMouse);
             document.removeEventListener('scroll', handleMoveMouse);
-            classArray.forEach((element) => {
-                rmListeners(element, handleHoverMouse, handleRemoveMouse)
-            });
         };
     }, [classArray]);
+
+    classArray.forEach((element) => {
+        addListeners(element, handleHoverMouse, handleRemoveMouse)
+    });
+    classArray.forEach((element) => {
+        rmListeners(element, handleHoverMouse, handleRemoveMouse)
+    });
 
     const ArrowSVG = () => {
         return (
             <div ref={arrowRef} className="arrowBlock">
-                <svg  id="arrowGo" width="27" height="27" viewBox="0 0 35 65" fill="none"
+                <svg id="arrowGo" width="27" height="27" viewBox="0 0 35 65" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <g id="ic:round-arrow-outward">
                         <path d="M45 17V45M45 45H17M45 45L19 16" stroke="white" stroke-width="2.5"/>
@@ -212,7 +217,7 @@ const AppWrapper = () => {
     const CursorBlock = () => {
         return (
             <div ref={bubbleRef} className={'cursor__block'}>
-                <div>
+                <ArrowSVG/>
                     <CustomCursor
                         targets={[
                             '.projects__item__1',
@@ -235,19 +240,20 @@ const AppWrapper = () => {
                             '.news-main__8',
                             '.news-main__9',
                             '.news-main__10',
+                            '.main-agency__item'
                         ]}
-                        customClass='custom-circle-cursor'
-                        dimensions={dimensions}
+                        customClass={'custom-circle-cursor'}
+                        dimensions={30}
                         fill='#050505'
                         smoothness={{
                             movement: 0.2,
                             scale: 0.1,
                             opacity: 0.2,
                         }}
+                        opacity={0.6}
                         targetOpacity={1}
+                        targetScale={4}
                     />
-                </div>
-                <ArrowSVG className={'ArrowSVG'}/>
             </div>
         )
     };
