@@ -202,21 +202,4 @@
     flex-wrap: wrap;
 }
 
-.arrowBlock {
-    width: 30px;
-    height: 30px;
-    pointer-events: none;
-    z-index: 555;
-    position: fixed;
-    transform: scale(2);
-}
 
-.cursor__block {
-    width: 120px;
-    height: 120px;
-    z-index: 10;
-    position: absolute;
-}
-.custom__cursor {
-    position: fixed;
-}
