@@ -904,6 +904,75 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="result"
             label="результат"/>
+         <p>Блок Этапы работ</p>
+            <div className="baseFlexWrap">
+                <TextInput
+                    className="customWidth"
+                    source="heading"
+                    label="Заголовок слева"/>
+                <TextInput
+                    className="customWidth"
+                    source="workIntroText"
+                    label="Заголовок этапов работ"/>
+            </div>    
+
+            <p>Второй баннер/список</p>
+            <BooleanInput
+                source="control1"
+                label="по 1 в ряд/по 2 в ряд"/>
+            <ArrayInput
+                label={""}
+                source={"bannerFourths"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        className="fileInput"
+                        placeholder="+"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                    <FunctionFieldForArrayItem/>
+                </SimpleFormIterator>
+            </ArrayInput>
+
+            <p>2 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo"
+                placeholder="Мы разработали..."
+                label="Описание блока Паттерн"/>
+        </div>
+
+            <p>Третий баннер/ список</p>
+            <BooleanInput
+                source="control2"
+                label="по 1 в ряд/по 2 в ряд"/>
+            <ArrayInput
+                label={""}
+                source={"bannerFifths"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        className="fileInput"
+                        placeholder="+"
+                        label="Баннер">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                    <FunctionFieldForArrayItem/>
+                </SimpleFormIterator>
+            </ArrayInput>
+        
 
     </>)
 }
