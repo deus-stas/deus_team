@@ -128,10 +128,8 @@ const AppWrapper = () => {
 
     const handleMoveMouse = (e) => {
         gsap.to(arrowRef.current, {
-            width: 0,
-            height: 0,
-            x: e.clientX - 40,
-            y: e.clientY - 27,
+            x: e.clientX - 11,
+            y: e.clientY - 10,
             duration: 0.4,
         });
         // gsap.to(bubbleRef.current, {
@@ -146,8 +144,6 @@ const AppWrapper = () => {
     const handleHoverMouse = (e) => {
         if (e.target.classList.contains('main-agency__item') && !handleHover) {
             gsap.to(arrowRef.current, {
-                width: 54,
-                height: 54,
                 duration: 0.5,
                 autoAlpha: 1
             });
@@ -159,7 +155,8 @@ const AppWrapper = () => {
             // });
             // setDimensions(120);
             setHandleHover(true);
-            document.querySelector('.custom-circle-cursor').classList.add('exclusion')
+            document.querySelector('.cursor__block').classList.add('exclusion')
+            console.log(document.querySelector('.cursor__block'))
         }
     };
 
@@ -178,7 +175,7 @@ const AppWrapper = () => {
             // });
             console.log(arrowRef.current);
             setHandleHover(false);
-
+            document.querySelector('.cursor__block').classList.remove('exclusion')
         }
     };
 
@@ -204,11 +201,8 @@ const AppWrapper = () => {
     const ArrowSVG = () => {
         return (
             <div ref={arrowRef} className="arrowBlock">
-                <svg id="arrowGo" width="27" height="27" viewBox="0 0 35 65" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <g id="ic:round-arrow-outward">
-                        <path d="M45 17V45M45 45H17M45 45L19 16" stroke="white" stroke-width="2.5"/>
-                    </g>
+                <svg className={"arrow-element"} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.999999 1L21 0.999999M21 0.999999L21 21M21 0.999999L1 21" stroke="#050505"/>
                 </svg>
             </div>
         )
@@ -216,8 +210,10 @@ const AppWrapper = () => {
     // TODO Стилизовать блок с курсором
     const CursorBlock = () => {
         return (
-            <div ref={bubbleRef} className={'cursor__block'}>
+            <>
                 <ArrowSVG/>
+            <div ref={bubbleRef} className={'cursor__block exclusion'}>
+                <div className={"block__for-exclusion"}>
                     <CustomCursor
                         targets={[
                             '.projects__item__1',
@@ -244,7 +240,7 @@ const AppWrapper = () => {
                         ]}
                         customClass={'custom-circle-cursor'}
                         dimensions={30}
-                        fill='#050505'
+                        fill='#E0FD60'
                         smoothness={{
                             movement: 0.2,
                             scale: 0.1,
@@ -254,7 +250,9 @@ const AppWrapper = () => {
                         targetOpacity={1}
                         targetScale={4}
                     />
+                </div>
             </div>
+            </>
         )
     };
 

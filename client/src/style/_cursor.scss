@@ -1,12 +1,16 @@
 .arrowBlock {
   pointer-events: none;
   position: fixed;
-  transform: scale(2);
-  z-index: 11;
+  z-index: 1001;
+}
+
+.arrow-element {
+  z-index: 1002;
 }
 
 .cursor__block {
   position: absolute;
+  z-index: 1000;
 }
 
 .custom-circle-cursor {
