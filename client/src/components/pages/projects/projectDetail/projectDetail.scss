@@ -6,8 +6,11 @@
 .project {
     .slide-arrow {
         position: absolute;
-        bottom: 70px;
+        bottom: 20px;
         left: calc(50% - 20px);
+        @media (width <= 768px) {
+            left: calc(50% - 50px);
+        }
         @include respond(xs){
           margin: auto;
         }
@@ -985,7 +988,7 @@
 }
 
 .swiper-slide {
-    height: 37.2rem!important;
+    // height: 37.2rem!important;
     object-fit: cover !important;
 
     @include respond(lg) {
