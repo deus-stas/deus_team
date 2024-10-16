@@ -5,8 +5,9 @@
 }
 .project {
     .slide-arrow {
-        position: absolute;
-        bottom: 20px;
+        // position: absolute;
+        justify-content: center;
+        margin-bottom: 20px !important;
         left: calc(50% - 20px);
         @media (width <= 768px) {
             left: calc(50% - 50px);

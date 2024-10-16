@@ -32,6 +32,7 @@ const SiteAndServices = ({detail}) => {
     }, []);
 
     const prevHandler = () => {
+        console.log(swiperRef);
         swiperRef.slidePrev();
     };
     
@@ -65,6 +66,26 @@ const SiteAndServices = ({detail}) => {
                     style={{backgroundColor: "black", overflow: "hidden", position: "relative"}}
                     className="borderBlock"
                 >
+                    <Swiper
+                        spaceBetween={80}
+                        slidesPerView={slidesPerView}
+                        centeredSlides={true}
+                        loop={true}
+                        onSwiper={(swiper) => setSwiperRef(swiper)}
+                        style={{ padding: '20px 0' }}                   
+                    >
+                        {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
+                            <SwiperSlide 
+                                key={banner.name}
+                            >
+                                <img
+                                    className="slider-img"
+                                    src={`${apiUrl}/uploads/${banner.filename}`}
+                                    alt={banner.name}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                     <div className="slide-arrow">
                         <div
                             className='prev'
@@ -83,26 +104,6 @@ const SiteAndServices = ({detail}) => {
                             <Icon icon={isHovered ? "slider-black" : "slider-white"} viewBox="0 0 40 40" />
                         </div>
                     </div>
-                    <Swiper
-                        spaceBetween={80}
-                        slidesPerView={slidesPerView}
-                        centeredSlides={true}
-                        loop={true}
-                        onSwiper={(swiper) => setSwiperRef(swiper)}
-                        style={{ padding: '20px 0' }}                   
-                    >
-                        {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
-                            <SwiperSlide 
-                                key={index}
-                            >
-                                <img
-                                    className="slider-img"
-                                    src={`${apiUrl}/uploads/${banner.filename}`}
-                                    alt={banner.name}
-                                />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
                 </section>
             )}
 
@@ -127,7 +128,7 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerFourths.length > 2 && !!detail.control1 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerFourths.filter(val => !!val).map((banner, index) =>
-                        <span className="project-banner borderBlock">
+                        <span className="project-banner borderBlock" key={banner.filename}>
                             <BannerComponent banner={banner} detail={detail}/>
                         </span>
                     )}
@@ -155,8 +156,8 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerFifths.length > 2 && !!detail.control2 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerFifths.filter(val => !!val).map((banner, index) => (
-                        <span className="project-banner borderBlock">
-                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                        <span className="project-banner borderBlock" key={banner.filename}>
+                                 <BannerComponent banner={banner} detail={detail}/>
                             </span>
 
                     ))}
@@ -184,7 +185,7 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerSixths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerSixths.filter(val => !!val).map((banner, index) =>
-                        <span className="project-banner borderBlock">
+                        <span className="project-banner borderBlock" key={banner.filename}>
                             <BannerComponent banner={banner} detail={detail}/>
                         </span>
                     )}
@@ -212,8 +213,8 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerSevenths.length > 2 && !!detail.control4 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerSevenths.filter(val => !!val).map((banner, index) => (
-                        <span className="project-banner borderBlock">
-                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                        <span className="project-banner borderBlock" key={banner.filename}>
+                                 <BannerComponent banner={banner} detail={detail}/>
                             </span>
 
                     ))}
@@ -241,8 +242,8 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerEighths.length > 2 && !!detail.control5 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerEighths.filter(val => !!val).map((banner, index) => (
-                        <span className="project-banner borderBlock">
-                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                        <span className="project-banner borderBlock" key={banner.filename}>
+                                 <BannerComponent banner={banner} detail={detail} />
                             </span>
 
                     ))}
@@ -270,8 +271,8 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerNinths.length > 2 && !!detail.control6 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerNinths.filter(val => !!val).map((banner, index) => (
-                        <span className="project-banner borderBlock">
-                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                        <span className="project-banner borderBlock" key={banner.filename}>
+                                 <BannerComponent banner={banner} detail={detail} />
                             </span>
 
                     ))}
@@ -299,8 +300,8 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerTenth.length > 2 && !!detail.control7 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerTenth.filter(val => !!val).map((banner, index) => (
-                        <span className="project-banner borderBlock">
-                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                        <span className="project-banner borderBlock" key={banner.filename}>
+                                 <BannerComponent banner={banner} detail={detail}/>
                             </span>
 
                     ))}
@@ -328,8 +329,8 @@ const SiteAndServices = ({detail}) => {
                     detail.bannerEleventh.length > 2 && !!detail.control8 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerEleventh.filter(val => !!val).map((banner, index) => (
-                        <span className="project-banner borderBlock">
-                                 <BannerComponent banner={banner} detail={detail} key={index}/>
+                        <span className="project-banner borderBlock" key={banner.filename}>
+                                 <BannerComponent banner={banner} detail={detail}/>
                             </span>
 
                     ))}

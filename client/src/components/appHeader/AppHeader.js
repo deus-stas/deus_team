@@ -65,6 +65,25 @@ const AppHeader = (props) => {
             transparentBg: { background: 'transparent' }
         };
 
+        const header = document.querySelector('.header');
+        const headerWrap = document.querySelector('.header__wrap');
+
+        if (menu) {
+            headerWrap.style.width = styles.wide.width;
+            headerWrap.style.padding = styles.noPadding.padding;
+            header.style.transform = styles.down.transform;
+
+            const burgerBtn = document.querySelector('.header__burger'); 
+            burgerBtn.addEventListener('click', () => {
+                if (window.scrollY > 0) {
+                    headerWrap.style.width = styles.narrowly.width;
+                    headerWrap.style.padding = styles.padding.padding;
+                    headerWrap.style.background = styles.bgColor.background;
+                }
+            })
+            
+        }
+
         const handleScroll = () => {
             const scrolled = window.scrollY;
             const header = document.querySelector('.header');
@@ -116,6 +135,18 @@ const AppHeader = (props) => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
     }, []);
+
+    useEffect(() => {
+        if (menu) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [menu]);
 
     const {headerData, services} = props;
 
