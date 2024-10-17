@@ -158,12 +158,14 @@ const AppWrapper = () => {
                     duration: 0.5,
                     cursor: "none"
                 });
+                e.target.classList.add('cursor__none')
             } else {
                 gsap.to(bubbleRef.current, {
                     opacity: 0.6,
                     mixBlendMode: 'normal',
                     duration: 0.5,
                 });
+                e.target.classList.remove('cursor__none')
             }
         };
         document.addEventListener('mouseover', handleCursorHover);
