@@ -62,7 +62,8 @@ const AppHeader = (props) => {
             bgColor: {
                 background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01)), linear-gradient(0deg, rgba(5, 5, 5, 0.1), rgba(5, 5, 5, 0.1)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4))'                
             },
-            transparentBg: { background: 'transparent' }
+            transparentBg: { background: 'transparent' },
+            transparentBgWithOpacity: { background: '#FFFFFFE5' }
         };
 
         const header = document.querySelector('.header');
@@ -72,6 +73,7 @@ const AppHeader = (props) => {
             headerWrap.style.width = styles.wide.width;
             headerWrap.style.padding = styles.noPadding.padding;
             header.style.transform = styles.down.transform;
+            headerWrap.style.background = styles.transparentBg.background;
 
             const burgerBtn = document.querySelector('.header__burger'); 
             burgerBtn.addEventListener('click', () => {

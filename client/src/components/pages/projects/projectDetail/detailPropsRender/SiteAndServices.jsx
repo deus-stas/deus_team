@@ -93,7 +93,7 @@ const SiteAndServices = ({detail}) => {
                             onMouseEnter={() => setIsPrevHovered(true)}
                             onMouseLeave={() => setIsPrevHovered(false)}
                         >
-                            <Icon icon={isPrevHovered ? "slider-black" : "slider-white"} viewBox="0 0 40 40" />
+                            <Icon icon={"slider-white"} viewBox="0 0 40 40" />
                         </div>
                         <div
                             className='next'
@@ -101,7 +101,7 @@ const SiteAndServices = ({detail}) => {
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
                         >
-                            <Icon icon={isHovered ? "slider-black" : "slider-white"} viewBox="0 0 40 40" />
+                            <Icon icon={"slider-white"} viewBox="0 0 40 40" />
                         </div>
                     </div>
                 </section>
