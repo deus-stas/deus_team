@@ -40,7 +40,7 @@ import WOW from "wowjs";
 // import AdminPage from './Admin';
 
 // import GSAP for GSAP animations
-import { gsap } from 'gsap'
+import { gsap } from 'gsap';
 
 if (localStorage.jwtToken) {
     const token = localStorage.jwtToken;
@@ -52,16 +52,16 @@ if (localStorage.jwtToken) {
         store.dispatch(logoutuser());
         window.location.href = "./login";
     }
-}
+};
 
 const apiUrl = '';
 
 const AppWrapper = () => {
 
-    const [dimensions, setDimensions] = useState(30)
-    const [handleHover, setHandleHover] = useState(false)
+    const [dimensions, setDimensions] = useState(30);
+    const [handleHover, setHandleHover] = useState(false);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const location = useLocation();
     const adminBasePath = "/admin/";
     const [seoInfo, setSeoInfo] = useState(null);
@@ -70,12 +70,33 @@ const AppWrapper = () => {
 
     const arrowRef = useRef(null);
     const bubbleRef = useRef(null);
-    const blockRef = useRef(null);
+
+    const targets = [
+        '.projects__item__1',
+        '.projects__item__2',
+        '.projects__item__3',
+        '.projects__item__4',
+        '.projects__item__5',
+        '.projects__item__6',
+        '.projects__item__7',
+        '.projects__item__8',
+        '.projects__item__9',
+        '.projects__item__10',
+        '.news-main__1',
+        '.news-main__2',
+        '.news-main__3',
+        '.news-main__4',
+        '.news-main__5',
+        '.news-main__6',
+        '.news-main__7',
+        '.news-main__8',
+        '.news-main__9',
+        '.news-main__10',
+        '.main-agency__item'
+    ]
 
 
     let footerKey = 'footer_' + Date.now();
-
-    console.log(arrowRef, bubbleRef, blockRef)
 
     // useEffect(() => {
     //     const wow = new WOW.WOW();
@@ -99,7 +120,7 @@ const AppWrapper = () => {
     // Check if the current route matches the hidden routes
     const shouldHideHeaderFooter = isOnAdminRoute && hiddenRoutes.some(route => location.pathname.startsWith(route));
 
-    const classArray = document.querySelectorAll('.main-agency__item')
+    const classArray = document.querySelectorAll('.main-agency__item');
  // Seo pages
     useEffect(() => {
         axios.get(`${apiUrl}/api/seo`)
@@ -110,149 +131,122 @@ const AppWrapper = () => {
             .catch((error) => {
                 console.log(error)
             })
-    }, [location])
+    }, [location]);
 
-
-    // Listeners Func
-    const addListeners = (element, funcAdd, funcRm) => {
-        element.addEventListener("mouseenter" ,funcAdd)
-        element.addEventListener("mouseleave", funcRm)
-    }
-
-    const rmListeners = (element, funcAdd, funcRm) => {
-        element.removeEventListener("mouseenter", funcAdd);
-        element.removeEventListener("mouseleave", funcRm);
-    }
-
-    console.log(classArray)
-
-    // CursorWthArrow
-    useEffect(() => {
-        const arrow = arrowRef.current;
-        const bubble = bubbleRef.current;
-        // const bubble = document.getElementById('#customCursor');
-
-        const handleMoveMouse = (e) => {
-            gsap.to(arrow, {
-                width: 0,
-                height: 0,
-                x: e.clientX - 40,
-                y: e.clientY - 27,
-                duration: 0.1,
-            });
-            gsap.to(bubble, {
-                duration: 0.5,
-                width: dimensions,
-                height: dimensions
-            })
-        };
-
-        const handleHoverMouse = (e) => {
-            if (e.target.classList.contains('main-agency__item') && !handleHover) {
-                gsap.to(arrow, {
-                    width: 54,
-                    height: 54,
-                    duration: 0.5
-                });
-                gsap.to(bubble, {
-                    duration: 0.5,
-                    width: dimensions,
-                    height: dimensions,
-                });
-                setDimensions(120);
-                setHandleHover(true);
-            }
-        };
-
-        const handleRemoveMouse = (e) => {
-            if (e.target.classList.contains('main-agency__item') && handleHover) {
-                setDimensions(30)
-                gsap.to(arrow, {
-                    width: 0,
-                    height: 0,
-                    duration: 0.5
-                });
-                gsap.to(bubble, {
-                    duration: 0.5,
-                    width: dimensions,
-                    height: dimensions,
-                });
-                console.log(arrow);
-                setHandleHover(false);
-            }
-        };
-
-        // Add Listener
-        document.addEventListener('scroll', handleMoveMouse);
-        document.addEventListener('mousemove', handleMoveMouse);
-        classArray.forEach((element) => {
-            addListeners(element, handleHoverMouse, handleRemoveMouse)
+    const handleMoveMouse = (e) => {
+        gsap.to(arrowRef.current, {
+            x: e.clientX - 11,
+            y: e.clientY - 10,
         });
-        // Rm Listeners
-        return () => {
-            document.removeEventListener('mousemove', handleMoveMouse);
-            document.removeEventListener('scroll', handleMoveMouse);
-            classArray.forEach((element) => {
-                rmListeners(element, handleHoverMouse, handleRemoveMouse)
-            });
+        console.log(document.querySelector('.custom-circle-cursor'))
+    };
+
+    // useEffect for moving
+    useEffect(() => {
+        // Add Listener
+        document.addEventListener('mousemove', handleMoveMouse);
+        document.addEventListener('scroll', handleMoveMouse);
+    }, []);
+
+    // useEffect for customCursor
+    useEffect(() => {
+        const handleCursorHover = (e) => {
+            if (e.target.closest(targets.join(','))) {
+                gsap.to(bubbleRef.current, {
+                    opacity: 1,
+                    mixBlendMode: 'difference',
+                    duration: 0.5,
+                    cursor: "none"
+                });
+                e.target.classList.add('cursor__none')
+            } else {
+                gsap.to(bubbleRef.current, {
+                    opacity: 0.6,
+                    mixBlendMode: 'normal',
+                    duration: 0.5,
+                });
+                e.target.classList.remove('cursor__none')
+            }
         };
-    }, [classArray])
+        document.addEventListener('mouseover', handleCursorHover);
+        return () => {
+            document.removeEventListener('mouseover', handleCursorHover);
+        };
+    }, [targets]);
+
+    // useEffect for arrow
+    useEffect(() => {
+        const handleArrowHover = (e) => {
+            if (e.target.closest(targets.join(','))) {
+                gsap.to(arrowRef.current, {
+                    autoAlpha: 1,
+                    scale: 1,
+                    duration: 0.5,
+                    rotation: 90
+                });
+            } else {
+                gsap.to(arrowRef.current, {
+                    autoAlpha: 0,
+                    scale: 0,
+                    duration: 0.5,
+                    rotation: 270
+                });
+            }
+        };
+
+        document.addEventListener('mouseover', handleArrowHover);
+        document.addEventListener('mouseout', handleArrowHover);
+
+        return () => {
+            document.removeEventListener('mouseover', handleArrowHover);
+            document.removeEventListener('mouseout', handleArrowHover);
+        };
+    }, [targets]);
 
     const ArrowSVG = () => {
         return (
             <div ref={arrowRef} className="arrowBlock">
-                <svg  id="arrowGo" width="27" height="27" viewBox="0 0 35 65" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <g id="ic:round-arrow-outward">
-                        <path d="M45 17V45M45 45H17M45 45L19 16" stroke="white" stroke-width="2.5"/>
-                    </g>
+                <svg
+                    className={"arrow-element"}
+                    width="22"
+                    height="22"
+                    viewBox="0 0 22 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M0.999999 1L21 0.999999M21 0.999999L21 21M21 0.999999L1 21"
+                        stroke="#050505"
+                    />
                 </svg>
             </div>
         )
-    }
-    // TODO Стилизовать блок с курсором
+    };
+
     const CursorBlock = () => {
         return (
+            <>
+            <ArrowSVG/>
             <div ref={bubbleRef} className={'cursor__block'}>
-                <div className={'custom-cursor'}>
-                    <CustomCursor id={'customCursor'}
-                        targets={[
-                            '.projects__item__1',
-                            '.projects__item__2',
-                            '.projects__item__3',
-                            '.projects__item__4',
-                            '.projects__item__5',
-                            '.projects__item__6',
-                            '.projects__item__7',
-                            '.projects__item__8',
-                            '.projects__item__9',
-                            '.projects__item__10',
-                            '.news-main__1',
-                            '.news-main__2',
-                            '.news-main__3',
-                            '.news-main__4',
-                            '.news-main__5',
-                            '.news-main__6',
-                            '.news-main__7',
-                            '.news-main__8',
-                            '.news-main__9',
-                            '.news-main__10',
-                        ]}
-                        customClass='custom-circle-cursor'
-                        dimensions={dimensions}
-                        fill='#050505'
+                <div className={"block__for-exclusion"}>
+                    <CustomCursor
+                        targets={targets}
+                        customClass={'custom-circle-cursor'}
+                        dimensions={30}
+                        fill='#E0FD60'
                         smoothness={{
                             movement: 0.2,
                             scale: 0.1,
                             opacity: 0.2,
                         }}
+                        opacity={0.6}
                         targetOpacity={1}
+                        targetScale={4}
                     />
                 </div>
-                <ArrowSVG className={'ArrowSVG'}/>
             </div>
+            </>
         )
-    }
+    };
 
 
     return (
@@ -269,7 +263,7 @@ const AppWrapper = () => {
             </div>
 
             {/*<ScrollToTop/>*/}
-            <CursorBlock className={"cursor__block"} ref={blockRef}/>
+            <CursorBlock className={"cursor__block"}/>
 
             <AxiosInterceptor>
                 {!shouldHideHeaderFooter && <AppHeader/>}
@@ -315,6 +309,6 @@ function App() {
         </Provider>
     )
 
-}
+};
 
 export default App;
