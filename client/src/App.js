@@ -135,17 +135,17 @@ const AppWrapper = () => {
                     '.news-main__7',
                     '.news-main__8',
                     '.news-main__9',
-                    '.news-main__10',
+                    '.news-main__10'                    
                 ]}
                 customClass='custom-circle-cursor'
                 dimensions={30}
-                fill='#E0FD60'
+                fill='#000'
                 smoothness={{
                     movement: 0.2,
                     scale: 0.1,
-                    opacity: 0.2,
+                    opacity: 0.1,
                 }}
-                targetOpacity={1}
+                targetOpacity={1} 
             />
             <AxiosInterceptor>
                 {!shouldHideHeaderFooter && <AppHeader/>}

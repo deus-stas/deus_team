@@ -5,9 +5,13 @@
 }
 .project {
     .slide-arrow {
-        position: absolute;
-        bottom: 70px;
+        // position: absolute;
+        justify-content: center;
+        margin-bottom: 20px !important;
         left: calc(50% - 20px);
+        @media (width <= 768px) {
+            left: calc(50% - 50px);
+        }
         @include respond(xs){
           margin: auto;
         }
@@ -969,7 +973,7 @@
 
 }
 .swiper-wrapper{
-    margin-bottom: 15rem;
+    margin-bottom: 40px;
     margin-top: 7rem;
     @include respond(lg){
         margin-bottom: 10.5rem;
@@ -985,7 +989,7 @@
 }
 
 .swiper-slide {
-    height: 37.2rem!important;
+    // height: 37.2rem!important;
     object-fit: cover !important;
 
     @include respond(lg) {

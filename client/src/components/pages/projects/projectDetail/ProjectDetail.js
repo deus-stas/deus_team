@@ -23,6 +23,20 @@ const ProjectDetail = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const {id} = useParams();
+
+    useEffect(() => {
+        setTimeout(() => {
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+    
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }, 1000);
+    }, []);
+
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/${id}`)
             .then((response) => {

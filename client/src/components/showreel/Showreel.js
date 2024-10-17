@@ -45,7 +45,7 @@ const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
 
 
 const Showreel = (props) => {
-    const { data, isMain } = props;
+    const { data, isMain, onVideoStatusChange } = props;
     const [open, setOpen] = useState(false);
     const [isPaused, setIsPaused] = useState(true);
     const [isCursorVisible, setIsCursorVisible] = useState(false);
@@ -54,20 +54,32 @@ const Showreel = (props) => {
     const videoRef = useRef(null);
     const showReelRef = useRef(null);
 
-    const closeModal = () => setOpen(false);
+    const closeModal = () => {
+        if (!videoRef.current.paused) {
+            setOpen(false);
+        }
+    }
+
     const openModal = () => {
-        setOpen(true);
-        videoRef.current.pause();
+        if (videoRef.current.paused) {
+            console.log('paused');
+            setOpen(true);
+            videoRef.current.pause();
+        }
     };
 
     const handlePlay = () => {
+        console.log('handlePlay', videoRef.current);
         const isTrue = videoRef.current.paused;
         if (isTrue) {
             videoRef.current.play();
+            videoRef.current.muted = false;
             setIsPaused(false);
+            onVideoStatusChange(false);  
         } else {
             videoRef.current.pause();
             setIsPaused(true);
+            onVideoStatusChange(true); 
         }
     };
 
@@ -81,10 +93,37 @@ const Showreel = (props) => {
         setIsCursorVisible(false);
     };
 
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && videoRef.current) {
+                    videoRef.current.muted = true;
+                    videoRef.current.play().catch(error => {
+                        console.error('Autoplay failed: ', error);
+                    });
+                    setIsPaused(false);
+                } else if (videoRef.current) {
+                    videoRef.current.pause();
+                    setIsPaused(true);
+                }
+            });
+        });
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                observer.unobserve(videoRef.current);
+            }
+        };
+    }, []);
+
     return (
         <div className="showreel">
             {
-                isMain ? (
+                isMain ? ( 
                     <div
                         ref={showReelRef}
                         className={`showreel__s ${isPaused ? 'pausing' : 'playing'}`}
