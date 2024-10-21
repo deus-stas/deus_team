@@ -3,7 +3,7 @@ import {
     Route,
     Routes,
     Navigate,
-    useLocation,
+    useLocation, useNavigate,
 } from 'react-router-dom';
 
 import jwt_decode from "jwt-decode";
@@ -12,8 +12,7 @@ import {setCurrentUser, logoutuser} from "./actions/authActions";
 import { headerData, services, contacts, fetchData  } from "./actions/appActions";
 import {Provider, useDispatch} from "react-redux";
 import store from "./store";
-import CustomCursor from 'custom-cursor-react';
-import 'custom-cursor-react/dist/index.css';
+import {Cursor} from './components/Cursor/Cursor'
 
 import ScrollToTop from "./helpers/ScrollToTop";
 import AppHeader from './components/appHeader/AppHeader';
@@ -41,6 +40,7 @@ import WOW from "wowjs";
 
 // import GSAP for GSAP animations
 import { gsap } from 'gsap';
+import {defaultInputTarget} from "concurrently/src/defaults";
 
 if (localStorage.jwtToken) {
     const token = localStorage.jwtToken;
@@ -58,18 +58,12 @@ const apiUrl = '';
 
 const AppWrapper = () => {
 
-    const [dimensions, setDimensions] = useState(30);
-    const [handleHover, setHandleHover] = useState(false);
-
     const dispatch = useDispatch();
     const location = useLocation();
     const adminBasePath = "/admin/";
     const [seoInfo, setSeoInfo] = useState(null);
     const currentId = location.pathname;
-    const [isLoading, setIsLoading] = useState(true);
-
-    const arrowRef = useRef(null);
-    const bubbleRef = useRef(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const targets = [
         '.projects__item__1',
@@ -92,9 +86,9 @@ const AppWrapper = () => {
         '.news-main__8',
         '.news-main__9',
         '.news-main__10',
-        '.main-agency__item'
+        '.main-agency__item',
+        '.agency-about__wrapp-btn'
     ]
-
 
     let footerKey = 'footer_' + Date.now();
 
@@ -133,122 +127,6 @@ const AppWrapper = () => {
             })
     }, [location]);
 
-    const handleMoveMouse = (e) => {
-        gsap.to(arrowRef.current, {
-            x: e.clientX - 11,
-            y: e.clientY - 10,
-        });
-        console.log(document.querySelector('.custom-circle-cursor'))
-    };
-
-    // useEffect for moving
-    useEffect(() => {
-        // Add Listener
-        document.addEventListener('mousemove', handleMoveMouse);
-        document.addEventListener('scroll', handleMoveMouse);
-    }, []);
-
-    // useEffect for customCursor
-    useEffect(() => {
-        const handleCursorHover = (e) => {
-            if (e.target.closest(targets.join(','))) {
-                gsap.to(bubbleRef.current, {
-                    opacity: 1,
-                    mixBlendMode: 'difference',
-                    duration: 0.5,
-                    cursor: "none"
-                });
-                e.target.classList.add('cursor__none')
-            } else {
-                gsap.to(bubbleRef.current, {
-                    opacity: 0.6,
-                    mixBlendMode: 'normal',
-                    duration: 0.5,
-                });
-                e.target.classList.remove('cursor__none')
-            }
-        };
-        document.addEventListener('mouseover', handleCursorHover);
-        return () => {
-            document.removeEventListener('mouseover', handleCursorHover);
-        };
-    }, [targets]);
-
-    // useEffect for arrow
-    useEffect(() => {
-        const handleArrowHover = (e) => {
-            if (e.target.closest(targets.join(','))) {
-                gsap.to(arrowRef.current, {
-                    autoAlpha: 1,
-                    scale: 1,
-                    duration: 0.5,
-                    rotation: 90
-                });
-            } else {
-                gsap.to(arrowRef.current, {
-                    autoAlpha: 0,
-                    scale: 0,
-                    duration: 0.5,
-                    rotation: 270
-                });
-            }
-        };
-
-        document.addEventListener('mouseover', handleArrowHover);
-        document.addEventListener('mouseout', handleArrowHover);
-
-        return () => {
-            document.removeEventListener('mouseover', handleArrowHover);
-            document.removeEventListener('mouseout', handleArrowHover);
-        };
-    }, [targets]);
-
-    const ArrowSVG = () => {
-        return (
-            <div ref={arrowRef} className="arrowBlock">
-                <svg
-                    className={"arrow-element"}
-                    width="22"
-                    height="22"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M0.999999 1L21 0.999999M21 0.999999L21 21M21 0.999999L1 21"
-                        stroke="#050505"
-                    />
-                </svg>
-            </div>
-        )
-    };
-
-    const CursorBlock = () => {
-        return (
-            <>
-            <ArrowSVG/>
-            <div ref={bubbleRef} className={'cursor__block'}>
-                <div className={"block__for-exclusion"}>
-                    <CustomCursor
-                        targets={targets}
-                        customClass={'custom-circle-cursor'}
-                        dimensions={30}
-                        fill='#E0FD60'
-                        smoothness={{
-                            movement: 0.2,
-                            scale: 0.1,
-                            opacity: 0.2,
-                        }}
-                        opacity={0.6}
-                        targetOpacity={1}
-                        targetScale={4}
-                    />
-                </div>
-            </div>
-            </>
-        )
-    };
-
-
     return (
         <>
             <div id="preloader" className="hide-preloader preloader-hidden">
@@ -263,8 +141,6 @@ const AppWrapper = () => {
             </div>
 
             {/*<ScrollToTop/>*/}
-            <CursorBlock className={"cursor__block"}/>
-
             <AxiosInterceptor>
                 {!shouldHideHeaderFooter && <AppHeader/>}
                 {!!seoInfo &&
@@ -273,7 +149,6 @@ const AppWrapper = () => {
                         pageTitle={seoInfo.seoTitle}
                         pageKeywords={seoInfo.seoKeywords}
                     />}
-
                 <Routes>
                     <Route exact path="/" element={<MainPage/>}/>
                     <Route exact path='/projects' element={<Projects/>}/>
@@ -290,7 +165,6 @@ const AppWrapper = () => {
                     <Route exact path='/login' element={<Login/>}/>
                     <Route path='*' element={<Navigate to="/"/>}/>
                 </Routes>
-
                 {!shouldHideHeaderFooter && <AppFooter key={footerKey}/>}
             </AxiosInterceptor>
         </>
@@ -309,6 +183,6 @@ function App() {
         </Provider>
     )
 
-};
+}
 
 export default App;

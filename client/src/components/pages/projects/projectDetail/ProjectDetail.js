@@ -12,6 +12,7 @@ import { Icon } from "../../../icon/Icon";
 import {debounce} from "@material-ui/core";
 import ProjectNext from "../projectNext/ProjectNext";
 import CorporateIdentity from "./detailPropsRender/CorporateIdentity";
+import {Cursor} from "../../../Cursor/Cursor";
 
 const apiUrl = ''
 
@@ -165,6 +166,7 @@ const ProjectDetail = () => {
         <>
             <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords}
                              pageDescription={detail.seoDescription}/>
+            <Cursor/>
             {!isLoading &&
 
                 <main id="toUp" className="project">
@@ -270,7 +272,6 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
                         </a>
                     )}
                 </div>
-
                 <div className="project-results__content">
                     <div
                         className='project-results__text m-text'

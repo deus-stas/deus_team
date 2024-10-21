@@ -8,6 +8,7 @@ import {gotoAnchor} from "../../anchors";
 import DelayedLink from "../../appHeader/DelayedLink";
 import {debounce, useMediaQuery} from "@material-ui/core";
 import {useMobile} from "./projectDetail/ProjectDetail";
+import {Cursor} from "../../Cursor/Cursor";
 
 const apiUrl = ''
 
@@ -335,8 +336,8 @@ const Projects = () => {
 
                 return (
                     <div style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
-                        <DelayedLink 
-                            to={`/projects/${project.nameInEng}`} 
+                        <DelayedLink
+                            to={`/projects/${project.nameInEng}`}
                             className={`projects__item projects__item__${index + 1}`}
                             key={project.id}
                         >
@@ -362,6 +363,7 @@ const Projects = () => {
 
     return (
         <>
+            <Cursor/>
             {!isLoading &&
                 <main className="projects">
                     <section className="projects-start">

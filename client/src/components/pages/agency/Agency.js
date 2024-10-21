@@ -18,6 +18,7 @@ import DelayedLink from "../../appHeader/DelayedLink";
 import { Marquee as MarqueeTeam} from "@devnomic/marquee";
 import "./marquee.scss";
 import {useMobile} from "../projects/projectDetail/ProjectDetail";
+import {Cursor} from "../../Cursor/Cursor";
 
 
 const Agency = (props) => {
@@ -212,6 +213,7 @@ const Agency = (props) => {
 
     return (
         <>
+            <Cursor/>
             {!isLoading &&
         <main className="agency">
             <div className="container">

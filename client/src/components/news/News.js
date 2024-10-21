@@ -6,6 +6,7 @@ import './news.scss';
 import {connect} from "react-redux";
 import DelayedLink from "../appHeader/DelayedLink";
 import {Icon} from "../icon/Icon";
+import {Cursor} from "../Cursor/Cursor";
 
 const News = () => {
     const location = useLocation()
@@ -81,6 +82,7 @@ const News = () => {
 
     return (
         <>
+            <Cursor/>
             {!isLoading &&
 
                 <main className="news">
