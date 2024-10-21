@@ -27,8 +27,8 @@ const AppHeader = (props) => {
     const handleHeaderColor = (header, headerMob, menu) => {
         [header, headerMob, menu].filter(Boolean).forEach((el) => {
             el.style.pointerEvents = "none";
-            const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
-            isWhite ? el.classList.add("white") : el.classList.remove("white");
+            // const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
+            // isWhite ? el.classList.add("white") : el.classList.remove("white");
             el.style.pointerEvents = "";
         });
     };
@@ -62,7 +62,7 @@ const AppHeader = (props) => {
             bgColor: {
                 background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01)), linear-gradient(0deg, rgba(5, 5, 5, 0.1), rgba(5, 5, 5, 0.1)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4))'                
             },
-            transparentBg: { background: 'transparent' },
+            transparentBg: { background: '' },
             transparentBgWithOpacity: { background: '#FFFFFFE5' }
         };
 
