@@ -17,6 +17,7 @@ import {gotoAnchor} from "../../anchors";
 import MarqueeComponent from "../../MarqueeComponent";
 import DelayedLink from "../../appHeader/DelayedLink";
 import {useMediaQuery} from "@material-ui/core";
+import {Cursor} from "../../Cursor/Cursor";
 
 const apiUrl = '';
 
@@ -61,6 +62,7 @@ const Services = (props) => {
 
     return (
         <>
+            <Cursor/>
             {!isLoading &&
                 <main className="services">
                     <div className="container">

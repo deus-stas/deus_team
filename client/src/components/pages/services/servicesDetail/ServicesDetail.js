@@ -1,5 +1,5 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios, {setIsLoadingMainPageEvent} from '../../../../axios'
 
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import './serviceDetail.scss'
 import HelmetComponent from "../../../helmetComponent";
 import RetryImage from "../../../../helpers/RetryImage";
+import {Cursor} from "../../../Cursor/Cursor";
 
 const onAcc = (e) => {
     let accItem = e.target.closest('.tab-parent');
@@ -189,6 +190,7 @@ const ServicesDetail = () => {
     return (
         <>
             <HelmetComponent pageKeywords={service.seoKeywords} pageTitle={service.seoTitle} pageDescription={service.seoDescription}/>
+            <Cursor/>
             {!isLoading &&
         <main className="service">
 
