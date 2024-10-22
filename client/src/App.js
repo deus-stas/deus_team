@@ -12,7 +12,6 @@ import {setCurrentUser, logoutuser} from "./actions/authActions";
 import { headerData, services, contacts, fetchData  } from "./actions/appActions";
 import {Provider, useDispatch} from "react-redux";
 import store from "./store";
-import {Cursor} from './components/Cursor/Cursor'
 
 import ScrollToTop from "./helpers/ScrollToTop";
 import AppHeader from './components/appHeader/AppHeader';

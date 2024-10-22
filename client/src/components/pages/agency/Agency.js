@@ -454,14 +454,19 @@ const Agency = (props) => {
                                     <Link target="_blank" to={item.link} className="agency-vacancy__wrapper-item">
                                        <span className="place">
                                            <Icon icon="vacancies" viewBox="0 0 16 16"/>
-                                           <p className="where s-text">{item.place}</p>
+                                           <p className=
+                                                  {item.place.length > 4
+                                                      ? "where s-text big-txt"
+                                                      : "where s-text small-txt"}
+                                           >
+                                               {item.place}
+                                           </p>
                                        </span>
                                         <h3 className="l-textReg">{item.name}</h3>
                                         <p className="s-text type">{item.type}</p>
                                         <div className="arrow">
-                                            <Icon  icon="arrowVac" viewBox="0 0 24 24"/>
+                                            <Icon icon="arrowVac" viewBox="0 0 24 24"/>
                                         </div>
-
                                     </Link>
                                 )
                             })}

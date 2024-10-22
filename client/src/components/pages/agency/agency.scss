@@ -408,9 +408,15 @@
                     }
 
                     .place {
-                        p {
-                            transform: translateX(-50%);
+                        .small-txt {
+                            transform: translateX(-53%);
                         }
+                        .big-txt {
+                            transform: translateX(-33%);
+                        }
+                        //p {
+                        //    transform: translateX(-50%);
+                        //}
                         .icon {
                             opacity: 0;
                         }
