@@ -10,7 +10,7 @@ const apiUrl = '';
 
 const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
     const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });
-    
+
     const handleMouseMove = (e) => {
         const cursorWidth = 50; // Half of the custom cursor's width
         const cursorHeight = 200; // Half of the custom cursor's height
@@ -50,7 +50,7 @@ const Showreel = (props) => {
     const [isPaused, setIsPaused] = useState(true);
     const [isCursorVisible, setIsCursorVisible] = useState(false);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-    
+
     const videoRef = useRef(null);
     const showReelRef = useRef(null);
 
@@ -64,10 +64,8 @@ const Showreel = (props) => {
         const isTrue = videoRef.current.paused;
         if (isTrue) {
             videoRef.current.play();
-            setIsPaused(false);
         } else {
             videoRef.current.pause();
-            setIsPaused(true);
         }
     };
 
