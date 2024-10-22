@@ -568,12 +568,34 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
-        <p>Блок результаты</p>
+        <p>Блок результаты spec</p>
         <TextInput
             className="customWidth"
             source="awardsURL"
             placeholder="https://www.cssdesignawards.com/"
-            label="Css design awards"/>
+            label="URL награды"/>
+        <TextInput
+            className="customWidth"
+            source="awardsTitle"
+            placeholder="css design awards"
+            label="Название награды"/>
+        <ArrayInput
+            label={""}
+            source={"awardsImage"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Лого награды (будет видно только первый)">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
         <RichTextInput
             className="customWidth"
             source="result"
@@ -712,7 +734,29 @@ export const SEORender = () => {
                 className="customWidth"
                 source="awardsURL"
                 placeholder="https://www.cssdesignawards.com/"
-                label="Css design awards"/>
+                label="URL награды"/>
+            <TextInput
+                className="customWidth"
+                source="awardsTitle"
+                placeholder="css design awards"
+                label="Название награды"/>
+            <ArrayInput
+                label={""}
+                source={"awardsImage"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        className="fileInput"
+                        placeholder="+"
+                        label="Лого награды (будет видно только первый)">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                    <FunctionFieldForArrayItem/>
+                </SimpleFormIterator>
+            </ArrayInput>
             <RichTextInput
                 className="customWidth"
                 source="result"
@@ -899,7 +943,29 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="awardsURL"
             placeholder="https://www.cssdesignawards.com/"
-            label="Css design awards"/>
+            label="URL награды"/>
+        <TextInput
+            className="customWidth"
+            source="awardsTitle"
+            placeholder="css design awards"
+            label="Название награды"/>
+        <ArrayInput
+            label={""}
+            source={"awardsImage"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Лого награды (будет видно только первый)">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
         <RichTextInput
             className="customWidth"
             source="result"
@@ -1018,7 +1084,31 @@ export const TechSupportRender = () => {
             className="customWidth"
             source="awardsURL"
             placeholder="https://www.cssdesignawards.com/"
-            label="Css design awards"/>
+            label="URL награды"/>
+        <TextInput
+            className="customWidth"
+            source="awardsTitle"
+            placeholder="css design awards"
+            label="Название награды"/>
+
+
+        <ArrayInput
+            label={""}
+            source={"awardsImage"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Лого награды (будет видно только первый)">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
         <RichTextInput
             className="customWidth"
             source="result"

@@ -129,6 +129,8 @@ const CorporateIdentity = ({detail}) => {
                 <ProjectResults
                     result={detail.result}
                     awardsURL={detail.awardsURL}
+                    awardsTitle={detail.awardsTitle}
+                    awardsImage={detail.awardsImage}
                     isMobile={isMobile}
                 />
             }

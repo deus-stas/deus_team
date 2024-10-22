@@ -90,7 +90,9 @@ router.post(
         {name: 'bannerEleventh'},
         {name: 'imagesExtra'},
         {name: 'mainMobVideoFile'},
-        {name: 'mainVideoFile'}]),
+        {name: 'mainVideoFile'},
+        {name: 'awardsImage'}
+    ]),
     addCustomId,
     async (req, res) => {
         const {
@@ -137,6 +139,7 @@ router.post(
             controlURL,
             projectURL,
             awardsURL,
+            awardsTitle,
             projectSite,
             visibilityTitle1,
             visibilityTitle2,
@@ -250,7 +253,11 @@ router.post(
         let bannerFirst, bannerSecond, bannerSeconds, approachListFiles, approachListSecondFiles,
             approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths,
             bannerSixths, bannerSevenths, bannerEighths, bannerNinths, bannerTenth, bannerEleventh, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1,
-            visibilityImg2;
+            visibilityImg2, awardsImage;
+
+        if (req.files.awardsImage) {
+            awardsImage = req.files.awardsImage[0];
+        }
 
         if (req.files.bannerFirst) {
             bannerFirst = req.files.bannerFirst[0];
@@ -407,6 +414,7 @@ router.post(
             controlURL,
             projectURL,
             awardsURL,
+            awardsTitle,
             projectSite,
             mainVideoFile,
             mainMobVideoFile,
@@ -435,6 +443,7 @@ router.post(
             control6,
             control7,
             control8,
+            awardsImage
         });
 
 
@@ -494,7 +503,8 @@ router.put("/projects/:id",
         {name: 'mainVideoFile'},
         {name: 'mainMobVideoFile'},
         {name: 'visibilityImg1'},
-        {name: 'visibilityImg2'}
+        {name: 'visibilityImg2'},
+        {name: 'awardsImage'}
     ]), async (req, res) => {
         const {id} = req.params;
         const project = await Projects.findById(id);
@@ -549,6 +559,7 @@ router.put("/projects/:id",
             controlURL,
             projectURL,
             awardsURL,
+            awardsTitle,
             projectSite,
             visibilityTitle1,
             visibilityTitle2,
@@ -592,7 +603,7 @@ router.put("/projects/:id",
         const bannerTenthNames = JSON.parse(req.body.bannerTenthNames);
         const bannerEleventhNames = JSON.parse(req.body.bannerEleventhNames);
         const metricsNames = JSON.parse(req.body.metricsNames);
-
+        const awardsImageNames = JSON.parse(req.body.awardsImageNames);
 
         workSteps = workSteps.map(workStep => {
             const image = req.files.workStepsImages?.find(i => i.originalname === workStep.imageI.path)
@@ -708,6 +719,36 @@ router.put("/projects/:id",
                     }
                 });
                 project.bannerFirst = null;
+            }
+        }
+
+        if (req.files.awardsImage) {
+            if (project.awardsImage && project.awardsImage.length > 0) {
+                project.awardsImage.filter(image => !awardsImageNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.awardsImage = [
+                ...(project.awardsImage ? project.awardsImage.filter(image => awardsImageNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.awardsImage : [])
+            ];
+            console.log()
+        } else {
+            if (project.awardsImage && project.awardsImage.length > 0) {
+                project.awardsImage.filter(image => !awardsImageNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.awardsImage = [
+                    ...(project.awardsImage ? project.awardsImage.filter(image => awardsImageNames.includes(image.filename)) : [])
+                ];
             }
         }
 
@@ -1290,6 +1331,7 @@ router.put("/projects/:id",
             project.controlURL = controlURL,
             project.projectURL = projectURL,
             project.awardsURL = awardsURL,
+            project.awardsTitle = awardsTitle,
             project.projectSite = projectSite,
             project.workSteps = workSteps,
             project.visibilityTitle1 = visibilityTitle1,
@@ -1349,7 +1391,8 @@ router.delete("/projects/:id", async (req, res) => {
         mainVideoFile,
         mainMobVideoFile,
         visibilityImg1,
-        visibilityImg2
+        visibilityImg2,
+        awardsImage
     } = project;
 
     // Проверяем каждое изображение и удаляем его, если оно существует
@@ -1375,6 +1418,7 @@ router.delete("/projects/:id", async (req, res) => {
         bannerNinths,
         bannerTenth,
         bannerEleventh,
+        awardsImage
     ]
     multiImages.forEach(files => {
         if (files) {

@@ -81,6 +81,7 @@ const projectsSchema = new Schema({
   workStepsIntroText: defaultString,
   projectURL: defaultString,
   awardsURL: defaultString,
+  awardsTitle: defaultString,
   workStepsHeader: { type: String, default: 'Этапы работ' },
   workSteps: defaultArray,
   metrics: defaultArray,
@@ -100,6 +101,7 @@ const projectsSchema = new Schema({
   control6: Boolean,
   control7: Boolean,
   control8: Boolean,
+  awardsImage: defaultArray,
 });
 
 projectsSchema.set('toJSON', { virtuals: true });

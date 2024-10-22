@@ -268,7 +268,7 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
     );
 }
 
- export const ProjectResults = ({ result, awardsURL, isMobile}) => {
+ export const ProjectResults = ({ result, awardsURL, awardsTitle, awardsImage, isMobile}) => {
     if (!result) return null;
 
 
@@ -280,8 +280,8 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
                     {!isMobile && !!awardsURL && (
                         <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                             <p className="project-results__wrapper-url l-textReg">
-                                <Icon icon="cssAwards" viewBox="0 0 40 40"/>
-                                css design awards
+                            <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0].filename}`} alt="awards"/>
+                                {awardsTitle}
                             </p>
                         </a>
                     )}
@@ -297,8 +297,8 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
                 {isMobile && !!awardsURL &&(
                     <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                         <p className="project-results__wrapper-url s-text">
-                            <Icon icon="cssAwards" viewBox="0 0 40 40"/>
-                            css design awards
+                        <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0].filename}`} alt="awards"/>
+                            {awardsTitle}
                         </p>
                     </a>
                 )}
