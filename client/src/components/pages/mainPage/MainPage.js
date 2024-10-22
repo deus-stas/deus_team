@@ -51,9 +51,18 @@ const MainPage = (props) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [isPrevHovered, setIsPrevHovered] = useState(false);
+    const [isVideoPaused, setIsVideoPaused] = useState(true); 
 
     const handleVideoClick = () => {
-        setIsFullScreen(!isFullScreen);
+        if (isVideoPaused) {
+            setIsFullScreen(!isFullScreen);
+        } else {
+            setIsFullScreen(false);
+        }
+    };
+
+    const handleVideoStatusChange = (paused) => {
+        setIsVideoPaused(paused);
     };
 
     const {isMobile, isDesktop} = useMobile();
@@ -408,7 +417,7 @@ const MainPage = (props) => {
             <section className="main-showreel whiteHeader">
                 <div className="container">
                     <div  onClick={handleVideoClick} className={`main-showreel__wrap ${isFullScreen ? 'full-screen' : ''}`}>
-                        {mainShowreel && <Showreel  data={mainShowreel} isMain={true}/>}
+                        {mainShowreel && <Showreel  data={mainShowreel} isMain={true} onVideoStatusChange={handleVideoStatusChange}/>}
                     </div>
                 </div>
 

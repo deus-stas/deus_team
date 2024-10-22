@@ -27,8 +27,8 @@ const AppHeader = (props) => {
     const handleHeaderColor = (header, headerMob, menu) => {
         [header, headerMob, menu].filter(Boolean).forEach((el) => {
             el.style.pointerEvents = "none";
-            const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
-            isWhite ? el.classList.add("white") : el.classList.remove("white");
+            // const isWhite = document.elementFromPoint(40, el.offsetTop + el.offsetHeight / 2).closest(".whiteHeader");
+            // isWhite ? el.classList.add("white") : el.classList.remove("white");
             el.style.pointerEvents = "";
         });
     };
@@ -62,8 +62,29 @@ const AppHeader = (props) => {
             bgColor: {
                 background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01)), linear-gradient(0deg, rgba(5, 5, 5, 0.1), rgba(5, 5, 5, 0.1)), linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4))'                
             },
-            transparentBg: { background: 'transparent' }
+            transparentBg: { background: '' },
+            transparentBgWithOpacity: { background: '#FFFFFFE5' }
         };
+
+        const header = document.querySelector('.header');
+        const headerWrap = document.querySelector('.header__wrap');
+
+        if (menu) {
+            headerWrap.style.width = styles.wide.width;
+            headerWrap.style.padding = styles.noPadding.padding;
+            header.style.transform = styles.down.transform;
+            headerWrap.style.background = styles.transparentBg.background;
+
+            const burgerBtn = document.querySelector('.header__burger'); 
+            burgerBtn.addEventListener('click', () => {
+                if (window.scrollY > 0) {
+                    headerWrap.style.width = styles.narrowly.width;
+                    headerWrap.style.padding = styles.padding.padding;
+                    headerWrap.style.background = styles.bgColor.background;
+                }
+            })
+            
+        }
 
         const handleScroll = () => {
             const scrolled = window.scrollY;
@@ -116,6 +137,18 @@ const AppHeader = (props) => {
             window.removeEventListener('isLoadingMainPage', handleLoad);
         };
     }, []);
+
+    useEffect(() => {
+        if (menu) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [menu]);
 
     const {headerData, services} = props;
 

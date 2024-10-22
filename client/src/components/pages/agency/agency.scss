@@ -271,6 +271,9 @@
 
     &-vacancy {
         position: relative;
+        @media (width <= 768px) {
+            margin-top: 30px;
+        } 
 
         &__info{
             display: flex;
@@ -380,7 +383,7 @@
 
                 .icon {
                     transition: all .3s ease-out;
-                    width: 4.8rem;
+                    width: 5.6rem;
                     height: 4.9rem;
                 }
 

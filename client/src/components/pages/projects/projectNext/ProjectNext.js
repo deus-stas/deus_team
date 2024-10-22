@@ -23,7 +23,8 @@ const ProjectNext = ({ props, detail }) => {
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
-                const projects = response.data;
+                const projects = response.data.filter((project) => project.nameInEng !== id);
+
                 projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setAllProjects(projects);
 

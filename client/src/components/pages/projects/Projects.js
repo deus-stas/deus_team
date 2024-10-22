@@ -334,7 +334,7 @@ const Projects = () => {
                 const isVideo = project.imageMob && project.imageMob?.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
 
                 return (
-                    <div style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
+                    <div key="project.id" style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
                         <DelayedLink 
                             to={`/projects/${project.nameInEng}`} 
                             className={`projects__item projects__item__${index + 1}`}
@@ -348,8 +348,13 @@ const Projects = () => {
                             </div>
                         </DelayedLink>
                         <span className="projects-decription m-text">
-                  <p style={{ color: "rgba(117, 118, 119, 1)" }}>{project.date} • {project.name}</p>
-                  <p className="heading-secondary">{project.descrProject}</p>
+                    <p style={{ color: "rgba(117, 118, 119, 1)" }}>{project.date} • {project.name}</p>
+                    <DelayedLink 
+                        to={`/projects/${project.nameInEng}`}
+                        className="heading-secondary"
+                    >
+                        {project.descrProject}
+                    </DelayedLink>
                 </span>
                     </div>
 
