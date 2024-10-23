@@ -46,7 +46,6 @@ const ProjectNext = ({ props, detail }) => {
     };
 
     const returnToTheTop = (e) => {
-        const header = document.querySelector('header');
         const elements = document.querySelectorAll('.project-next__item');
         elements.forEach((element) => {
             window.scroll(0, 0)
