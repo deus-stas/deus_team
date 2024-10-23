@@ -83,6 +83,20 @@ export const Cursor = () => {
         };
     }, [location]);
 
+    useEffect(() => {
+        const cursorHoverShowreel = (e) => {
+            const showreel = document.getElementById('mainVideo')
+            const circle = document.querySelector('.cursor__block');
+            if (e.target === showreel || document.querySelector('.showreel__s').classList.contains('playing')) {
+                circle.classList.add('cursor__block_hidden');
+            } else {
+                circle.classList.remove('cursor__block_hidden');
+                console.log(e.target)
+            }
+        }
+        document.addEventListener('mouseover', cursorHoverShowreel)
+    }, [targets])
+
     // useEffect for arrow
     useEffect(() => {
         const handleArrowHover = (e) => {
