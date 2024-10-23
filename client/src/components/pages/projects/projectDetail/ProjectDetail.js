@@ -12,6 +12,7 @@ import { Icon } from "../../../icon/Icon";
 import {debounce} from "@material-ui/core";
 import ProjectNext from "../projectNext/ProjectNext";
 import CorporateIdentity from "./detailPropsRender/CorporateIdentity";
+import {Cursor} from "../../../cursor/cursor";
 
 const apiUrl = ''
 
@@ -31,7 +32,7 @@ const ProjectDetail = () => {
                 left: 0,
                 behavior: 'smooth'
             });
-    
+
             document.documentElement.scrollTop = 0;
             document.body.scrollTop = 0;
         }, 1000);
@@ -177,6 +178,7 @@ const ProjectDetail = () => {
 
     return (
         <>
+            <Cursor/>
             <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords}
                              pageDescription={detail.seoDescription}/>
             {!isLoading &&

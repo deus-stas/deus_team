@@ -10,6 +10,7 @@ import DelayedLink from "../../../appHeader/DelayedLink";
 import {useMobile} from "../projectDetail/ProjectDetail";
 import {Icon} from "../../../icon/Icon";
 import {VideoComponent} from "../Projects";
+import {Cursor} from "../../../cursor/cursor";
 
 const apiUrl = '';
 
@@ -47,6 +48,8 @@ const ProjectNext = ({ props, detail }) => {
     };
 
     return (
+        <>
+            <Cursor/>
         <section className="project-next">
             <h1 className="heading-primary">Ещё проекты</h1>
             <div className="project-next__wrap">
@@ -76,7 +79,7 @@ const ProjectNext = ({ props, detail }) => {
                 })}
             </div>
         </section>
-    )
+    </>)
 };
 
 export default ProjectNext;

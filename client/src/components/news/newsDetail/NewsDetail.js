@@ -12,6 +12,7 @@ import DelayedLink from "../../appHeader/DelayedLink";
 import {Icon} from "../../icon/Icon";
 import {useMobile} from "../../pages/projects/projectDetail/ProjectDetail";
 import {Swiper, SwiperSlide} from "swiper/react";
+import {Cursor} from "../../cursor/cursor";
 
 const apiUrl = ''
 
@@ -125,6 +126,7 @@ const NewsDetail = () => {
 
     return (
         <>
+            <Cursor/>
             {!isLoading &&
                 <main className="news-detail">
                     <div className="container">

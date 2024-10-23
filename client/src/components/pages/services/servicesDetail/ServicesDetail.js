@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import './serviceDetail.scss'
 import HelmetComponent from "../../../helmetComponent";
 import RetryImage from "../../../../helpers/RetryImage";
+import {Cursor} from "../../../cursor/cursor";
 
 const onAcc = (e) => {
     let accItem = e.target.closest('.tab-parent');
@@ -188,6 +189,7 @@ const ServicesDetail = () => {
 
     return (
         <>
+            <Cursor/>
             <HelmetComponent pageKeywords={service.seoKeywords} pageTitle={service.seoTitle} pageDescription={service.seoDescription}/>
             {!isLoading &&
         <main className="service">

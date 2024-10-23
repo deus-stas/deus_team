@@ -18,8 +18,8 @@ const Login = (props) => {
     password: "",
     errors: {}
   });
-  
-  
+
+
 
   const { errors } = state;
 
@@ -54,7 +54,7 @@ const Login = (props) => {
   return (
     <main className="login">
         <div className="container authContainer" style={{ marginTop: "16rem", marginBottom: "16rem" }} >
-          <div >
+          <div>
             <div>
               <h4 className="heading-secondary">
                 <b>Login</b> below
@@ -63,12 +63,12 @@ const Login = (props) => {
             <form className="form" style={{marginTop:"40px"}} noValidate onSubmit={onSubmit}>
               <div className="form__wrap">
                   <div className="form__group">
-                      <input 
+                      <input
                         onChange={onChange}
                         value={state.email}
                         error={errors.email}
                         id="email"
-                        type="email" 
+                        type="email"
                         placeholder="E-mail"
                         className={`form__input ${classnames("", {
                           invalid: errors.email || errors.emailnotfound
@@ -78,11 +78,11 @@ const Login = (props) => {
                           {errors.emailnotfound}
                         </span>
                   </div>
-                  
+
               </div>
               <div className="form__wrap">
                   <div className="form__group">
-                      <input 
+                      <input
                          onChange={onChange}
                          value={state.password}
                          error={errors.password}
@@ -99,8 +99,8 @@ const Login = (props) => {
                         </span>
                   </div>
               </div>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className='btn --orange'>
                 Login
               </button>

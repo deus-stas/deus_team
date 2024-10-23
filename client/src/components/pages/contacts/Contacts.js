@@ -13,6 +13,7 @@ import Popup from "reactjs-popup";
 import {Formik} from "formik";
 import {useMediaQuery} from "@material-ui/core";
 import {Icon} from "../../icon/Icon";
+import {Cursor} from "../../cursor/cursor";
 
 const apiUrl = '';
 const Contacts = (props) => {
@@ -75,6 +76,7 @@ const Contacts = (props) => {
 
     return (
         <>
+            <Cursor/>
             {!isLoading &&
                 <main className="contacts">
                     <div className="container">
