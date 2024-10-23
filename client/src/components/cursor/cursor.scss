@@ -12,6 +12,9 @@
 .cursor__block {
   position: absolute;
   z-index: 1000;
+  opacity: 1;
+  visibility: visible;
+  display: block;
 }
 
 .custom-circle-cursor {
@@ -20,4 +23,10 @@
 
 .cursor__none {
   cursor: none;
+}
+
+.cursor__block_hidden {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
 }
