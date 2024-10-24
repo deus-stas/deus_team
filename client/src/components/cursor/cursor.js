@@ -2,7 +2,7 @@ import CustomCursor from 'custom-cursor-react';
 import 'custom-cursor-react/dist/index.css';
 import './cursor.scss'
 import { gsap } from 'gsap';
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useLocation} from "react-router-dom";
 
 export const Cursor = () => {
@@ -10,6 +10,8 @@ export const Cursor = () => {
     const arrowRef = useRef(null);
     const bubbleRef = useRef(null);
     const circleRef = useRef(null)
+
+    const [isDesktopCursor, setIsDesktopCursor] = useState(false);
 
     const location = useLocation();
 
@@ -42,6 +44,27 @@ export const Cursor = () => {
         document.addEventListener('mousemove', handleMoveMouse);
         document.addEventListener('scroll', handleMoveMouse);
     }, []);
+
+    useEffect(() => {
+        const mobileVersion = () => {
+            if (window.innerWidth > 768 ) {
+                setIsDesktopCursor(true);
+                console.log('Получилось')
+            }
+            else {
+                setIsDesktopCursor(false);
+                console.log('брал')
+            }
+        }
+        const cursorVisibility = () => {
+            arrowRef.current.style.opacity = '0'
+            bubbleRef.current.style.opacity = '0'
+        }
+        mobileVersion();
+        cursorVisibility();
+    }, [targets]);
+
+
 
     // useEffect for customCursor
     useEffect(() => {
