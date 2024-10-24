@@ -27,6 +27,7 @@ import {Box, useMediaQuery} from "@material-ui/core";
 import {maxLength} from "react-admin";
 import {useMobile} from "../projects/projectDetail/ProjectDetail";
 import {Marquee} from "@devnomic/marquee";
+import {Cursor} from "../../cursor/cursor";
 
 const apiUrl = "";
 
@@ -51,7 +52,7 @@ const MainPage = (props) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [isPrevHovered, setIsPrevHovered] = useState(false);
-    const [isVideoPaused, setIsVideoPaused] = useState(true); 
+    const [isVideoPaused, setIsVideoPaused] = useState(true);
 
     const handleVideoClick = () => {
         if (isVideoPaused) {
@@ -256,6 +257,7 @@ const MainPage = (props) => {
     const videoModal = useRef(null);
 
     return (<>
+        <Cursor/>
         {!isLoading && (<main className="main">
 
             <section className="main-banner" ref={mainBannerRef}>
@@ -423,7 +425,7 @@ const MainPage = (props) => {
 
             </section>
 
-            {!!working && working.length > 0 && 
+            {!!working && working.length > 0 &&
              <WorkingSlider />
             }
 

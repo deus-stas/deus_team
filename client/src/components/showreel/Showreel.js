@@ -64,7 +64,7 @@ const Showreel = (props) => {
         const isTrue = videoRef.current.paused;
         if (isTrue) {
             videoRef.current.play();
-            setIsPaused(false)
+            setIsPaused(false);
         } else {
             videoRef.current.pause();
             setIsPaused(true);
@@ -94,7 +94,7 @@ const Showreel = (props) => {
                     >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
-                            <video ref={videoRef} poster={showPng} loop playsInline preload={'auto'}>
+                            <video ref={videoRef} poster={showPng} id={"mainVideo"} loop playsInline preload={'auto'}>
                                 <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                         type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                             </video>

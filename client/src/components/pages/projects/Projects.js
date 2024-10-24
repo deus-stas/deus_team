@@ -8,6 +8,7 @@ import {gotoAnchor} from "../../anchors";
 import DelayedLink from "../../appHeader/DelayedLink";
 import {debounce, useMediaQuery} from "@material-ui/core";
 import {useMobile} from "./projectDetail/ProjectDetail";
+import {Cursor} from "../../cursor/cursor";
 
 const apiUrl = ''
 
@@ -335,8 +336,8 @@ const Projects = () => {
 
                 return (
                     <div key="project.id" style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
-                        <DelayedLink 
-                            to={`/projects/${project.nameInEng}`} 
+                        <DelayedLink
+                            to={`/projects/${project.nameInEng}`}
                             className={`projects__item projects__item__${index + 1}`}
                             key={project.id}
                         >
@@ -349,7 +350,7 @@ const Projects = () => {
                         </DelayedLink>
                         <span className="projects-decription m-text">
                     <p style={{ color: "rgba(117, 118, 119, 1)" }}>{project.date} • {project.name}</p>
-                    <DelayedLink 
+                    <DelayedLink
                         to={`/projects/${project.nameInEng}`}
                         className="heading-secondary"
                     >
@@ -367,6 +368,7 @@ const Projects = () => {
 
     return (
         <>
+            <Cursor/>
             {!isLoading &&
                 <main className="projects">
                     <section className="projects-start">
@@ -383,7 +385,7 @@ const Projects = () => {
                         <div className="container">
                             {!!isMobile && <>{category}</>}
                             <div className="projects__wrap">
-                                <span>
+                                <span className={"projects__wrap-span"}>
                                    <div className="projects__wrap-column">{odd}</div>
                                 </span>
                                 <span className="translateY">

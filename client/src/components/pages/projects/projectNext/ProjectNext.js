@@ -10,6 +10,7 @@ import DelayedLink from "../../../appHeader/DelayedLink";
 import {useMobile} from "../projectDetail/ProjectDetail";
 import {Icon} from "../../../icon/Icon";
 import {VideoComponent} from "../Projects";
+import {Cursor} from "../../../cursor/cursor";
 
 const apiUrl = '';
 
@@ -46,7 +47,16 @@ const ProjectNext = ({ props, detail }) => {
         videoRefs.current.push(ref);
     };
 
+    const returnToTheTop = (e) => {
+        const elements = document.querySelectorAll('.project-next__item');
+        elements.forEach((element) => {
+            window.scroll(0, 0)
+        })
+    }
+
     return (
+        <>
+            <Cursor/>
         <section className="project-next">
             <h1 className="heading-primary">Ещё проекты</h1>
             <div className="project-next__wrap">
@@ -55,7 +65,7 @@ const ProjectNext = ({ props, detail }) => {
                     const isVideo = project.imageMob && project.imageMob?.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
                     return (
                         <DelayedLink key={index} to={`/projects/${project.nameInEng}`} datahash="toUp"
-                                     onClick={(e) => gotoAnchor(e)}>
+                                     onClick={returnToTheTop}>
                             <div className="project-next__item">
                                 {isVideo ?
                                     <span className="projects__item">
@@ -76,7 +86,7 @@ const ProjectNext = ({ props, detail }) => {
                 })}
             </div>
         </section>
-    )
+    </>)
 };
 
 export default ProjectNext;
