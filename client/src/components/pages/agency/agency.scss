@@ -273,7 +273,7 @@
         position: relative;
         @media (width <= 768px) {
             margin-top: 30px;
-        } 
+        }
 
         &__info{
             display: flex;
@@ -411,9 +411,17 @@
                     }
 
                     .place {
-                        p {
-                            transform: translateX(-50%);
+                        .small-txt {
+                            transform: translateX(-53%);
                         }
+
+                        .big-txt {
+                            transform: translateX(-33%);
+                        }
+
+                        //p {
+                        //    transform: translateX(-50%);
+                        //}
                         .icon {
                             opacity: 0;
                         }
