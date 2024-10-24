@@ -568,12 +568,34 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
-        <p>Блок результаты</p>
+        <p>Блок результаты spec</p>
         <TextInput
             className="customWidth"
             source="awardsURL"
             placeholder="https://www.cssdesignawards.com/"
-            label="Css design awards"/>
+            label="URL награды"/>
+        <TextInput
+            className="customWidth"
+            source="awardsTitle"
+            placeholder="css design awards"
+            label="Название награды"/>
+        <ArrayInput
+            label={""}
+            source={"awardsImage"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Лого награды (будет видно только первый)">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
         <RichTextInput
             className="customWidth"
             source="result"
@@ -712,7 +734,29 @@ export const SEORender = () => {
                 className="customWidth"
                 source="awardsURL"
                 placeholder="https://www.cssdesignawards.com/"
-                label="Css design awards"/>
+                label="URL награды"/>
+            <TextInput
+                className="customWidth"
+                source="awardsTitle"
+                placeholder="css design awards"
+                label="Название награды"/>
+            <ArrayInput
+                label={""}
+                source={"awardsImage"}
+            >
+                <SimpleFormIterator>
+                    <FileInput
+                        source="imageI"
+                        className="fileInput"
+                        placeholder="+"
+                        label="Лого награды (будет видно только первый)">
+                        <FilenameField
+                            source="src"
+                            title="title"/>
+                    </FileInput>
+                    <FunctionFieldForArrayItem/>
+                </SimpleFormIterator>
+            </ArrayInput>
             <RichTextInput
                 className="customWidth"
                 source="result"
@@ -894,51 +938,40 @@ export const CorporateIdentityRender = () => {
                 <FunctionFieldForArrayItem/>
             </SimpleFormIterator>
         </ArrayInput>
-        <p>Блок результаты</p>
-        <TextInput
-            className="customWidth"
-            source="awardsURL"
-            placeholder="https://www.cssdesignawards.com/"
-            label="Css design awards"/>
-        <RichTextInput
-            className="customWidth"
-            source="result"
-            label="результат"/>
-         <p>Блок Этапы работ</p>
-            <div className="baseFlexWrap">
-                <TextInput
-                    className="customWidth"
-                    source="heading"
-                    label="Заголовок слева"/>
-                <TextInput
-                    className="customWidth"
-                    source="workIntroText"
-                    label="Заголовок этапов работ"/>
-            </div>    
+        <p>Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="heading"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="workIntroText"
+                label="Заголовок этапов работ"/>
+        </div>    
 
-            <p>Второй баннер/список</p>
-            <BooleanInput
-                source="control1"
-                label="по 1 в ряд/по 2 в ряд"/>
-            <ArrayInput
-                label={""}
-                source={"bannerFourths"}
-            >
-                <SimpleFormIterator>
-                    <FileInput
-                        source="imageI"
-                        className="fileInput"
-                        placeholder="+"
-                        label="Баннер">
-                        <FilenameField
-                            source="src"
-                            title="title"/>
-                    </FileInput>
-                    <FunctionFieldForArrayItem/>
-                </SimpleFormIterator>
-            </ArrayInput>
-
-            <p>2 Блок Этапы работ</p>
+        <p>Второй баннер/список</p>
+        <BooleanInput
+            source="control1"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerFourths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+        <p>2 Блок Этапы работ</p>
         <div className="baseFlexWrap">
             <TextInput
                 className="customWidth"
@@ -951,27 +984,341 @@ export const CorporateIdentityRender = () => {
                 label="Описание блока Паттерн"/>
         </div>
 
-            <p>Третий баннер/ список</p>
-            <BooleanInput
-                source="control2"
-                label="по 1 в ряд/по 2 в ряд"/>
-            <ArrayInput
-                label={""}
-                source={"bannerFifths"}
-            >
-                <SimpleFormIterator>
-                    <FileInput
-                        source="imageI"
-                        className="fileInput"
-                        placeholder="+"
-                        label="Баннер">
-                        <FilenameField
-                            source="src"
-                            title="title"/>
-                    </FileInput>
-                    <FunctionFieldForArrayItem/>
-                </SimpleFormIterator>
-            </ArrayInput>
+        <p>Второй баннер/ список</p>
+        <BooleanInput
+            source="control2"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerFifths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>3 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="stageName"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="approach"
+                placeholder="Мы разработали..."
+                label="Описание блока Паттерн"/>
+        </div>
+        <p>Третий баннер/ список</p>
+        <BooleanInput
+            source="control3"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerSixths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>4 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task2"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo2"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Четвертый баннер/ список</p>
+        <BooleanInput
+            source="control4"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerSevenths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>5 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task3"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo3"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Пятый баннер/ список</p>
+        <BooleanInput
+            source="control5"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerEighths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>6 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task4"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo4"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Шестой баннер/ список</p>
+        <BooleanInput
+            source="control6"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerNinths"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>7 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task5"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo5"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Седьмой баннер/ список</p>
+        <BooleanInput
+            source="control7"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerTenth"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>8 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task6"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo6"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Восьмой баннер/ список</p>
+        <BooleanInput
+            source="control8"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerEleventh"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+        <p>9 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task7"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo7"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Девятый баннер/ список</p>
+        <BooleanInput
+            source="control9"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerTwelfth"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+
+
+        <p>10 Блок Этапы работ</p>
+        <div className="baseFlexWrap">
+            <TextInput
+                className="customWidth"
+                source="task8"
+                label="Заголовок слева"/>
+            <TextInput
+                className="customWidth"
+                source="taskDo8"
+                placeholder="Мы разработали..."
+                label="Описание блока "/>
+        </div>
+
+        <p>Десятый баннер/ список</p>
+        <BooleanInput
+            source="control10"
+            label="по 1 в ряд/по 2 в ряд"/>
+        <ArrayInput
+            label={""}
+            source={"bannerThirteenth"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Баннер">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+        
+
+        <p>Блок результаты</p>
+        <TextInput
+            className="customWidth"
+            source="awardsURL"
+            placeholder="https://www.cssdesignawards.com/"
+            label="URL награды"/>
+        <TextInput
+            className="customWidth"
+            source="awardsTitle"
+            placeholder="css design awards"
+            label="Название награды"/>
+        <ArrayInput
+            label={""}
+            source={"awardsImage"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Лого награды (будет видно только первый)">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
+        <RichTextInput
+            className="customWidth"
+            source="result"
+            label="результат"/>
         
 
     </>)
@@ -1018,7 +1365,31 @@ export const TechSupportRender = () => {
             className="customWidth"
             source="awardsURL"
             placeholder="https://www.cssdesignawards.com/"
-            label="Css design awards"/>
+            label="URL награды"/>
+        <TextInput
+            className="customWidth"
+            source="awardsTitle"
+            placeholder="css design awards"
+            label="Название награды"/>
+
+
+        <ArrayInput
+            label={""}
+            source={"awardsImage"}
+        >
+            <SimpleFormIterator>
+                <FileInput
+                    source="imageI"
+                    className="fileInput"
+                    placeholder="+"
+                    label="Лого награды (будет видно только первый)">
+                    <FilenameField
+                        source="src"
+                        title="title"/>
+                </FileInput>
+                <FunctionFieldForArrayItem/>
+            </SimpleFormIterator>
+        </ArrayInput>
         <RichTextInput
             className="customWidth"
             source="result"
