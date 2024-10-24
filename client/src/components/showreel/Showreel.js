@@ -10,7 +10,7 @@ const apiUrl = '';
 
 const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
     const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });
-    
+
     const handleMouseMove = (e) => {
         const cursorWidth = 50; // Half of the custom cursor's width
         const cursorHeight = 200; // Half of the custom cursor's height
@@ -45,41 +45,29 @@ const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
 
 
 const Showreel = (props) => {
-    const { data, isMain, onVideoStatusChange } = props;
+    const { data, isMain } = props;
     const [open, setOpen] = useState(false);
     const [isPaused, setIsPaused] = useState(true);
     const [isCursorVisible, setIsCursorVisible] = useState(false);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-    
+
     const videoRef = useRef(null);
     const showReelRef = useRef(null);
 
-    const closeModal = () => {
-        if (!videoRef.current.paused) {
-            setOpen(false);
-        }
-    }
-
+    const closeModal = () => setOpen(false);
     const openModal = () => {
-        if (videoRef.current.paused) {
-            console.log('paused');
-            setOpen(true);
-            videoRef.current.pause();
-        }
+        setOpen(true);
+        videoRef.current.pause();
     };
 
     const handlePlay = () => {
-        console.log('handlePlay', videoRef.current);
         const isTrue = videoRef.current.paused;
         if (isTrue) {
             videoRef.current.play();
-            videoRef.current.muted = false;
             setIsPaused(false);
-            onVideoStatusChange(false);  
         } else {
             videoRef.current.pause();
             setIsPaused(true);
-            onVideoStatusChange(true); 
         }
     };
 
@@ -93,37 +81,10 @@ const Showreel = (props) => {
         setIsCursorVisible(false);
     };
 
-    useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && videoRef.current) {
-                    videoRef.current.muted = true;
-                    videoRef.current.play().catch(error => {
-                        console.error('Autoplay failed: ', error);
-                    });
-                    setIsPaused(false);
-                } else if (videoRef.current) {
-                    videoRef.current.pause();
-                    setIsPaused(true);
-                }
-            });
-        });
-
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
-        }
-
-        return () => {
-            if (videoRef.current) {
-                observer.unobserve(videoRef.current);
-            }
-        };
-    }, []);
-
     return (
         <div className="showreel">
             {
-                isMain ? ( 
+                isMain ? (
                     <div
                         ref={showReelRef}
                         className={`showreel__s ${isPaused ? 'pausing' : 'playing'}`}
@@ -134,7 +95,7 @@ const Showreel = (props) => {
                     >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
-                            <video ref={videoRef} poster={showPng} loop playsInline preload={'auto'}>
+                            <video ref={videoRef} poster={showPng} id={"mainVideo"} loop playsInline preload={'auto'}>
                                 <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                         type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                             </video>

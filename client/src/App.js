@@ -14,6 +14,8 @@ import {Provider, useDispatch} from "react-redux";
 import store from "./store";
 import CustomCursor from 'custom-cursor-react';
 import 'custom-cursor-react/dist/index.css';
+import {Cursor} from './components/cursor/cursor'
+import { gsap } from 'gsap';
 
 import ScrollToTop from "./helpers/ScrollToTop";
 import AppHeader from './components/appHeader/AppHeader';
@@ -114,39 +116,6 @@ const AppWrapper = () => {
             </div>
 
             {/*<ScrollToTop/>*/}
-            <CustomCursor
-                targets={[
-                    '.projects__item__1', 
-                    '.projects__item__2',
-                    '.projects__item__3', 
-                    '.projects__item__4', 
-                    '.projects__item__5', 
-                    '.projects__item__6', 
-                    '.projects__item__7', 
-                    '.projects__item__8', 
-                    '.projects__item__9', 
-                    '.projects__item__10', 
-                    '.news-main__1',
-                    '.news-main__2',
-                    '.news-main__3',
-                    '.news-main__4',
-                    '.news-main__5',
-                    '.news-main__6',
-                    '.news-main__7',
-                    '.news-main__8',
-                    '.news-main__9',
-                    '.news-main__10'                    
-                ]}
-                customClass='custom-circle-cursor'
-                dimensions={30}
-                fill='#000'
-                smoothness={{
-                    movement: 0.2,
-                    scale: 0.1,
-                    opacity: 0.1,
-                }}
-                targetOpacity={1} 
-            />
             <AxiosInterceptor>
                 {!shouldHideHeaderFooter && <AppHeader/>}
                 {!!seoInfo &&
