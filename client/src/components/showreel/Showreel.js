@@ -74,7 +74,6 @@ const Showreel = (props) => {
     const handleMouseEnter = (e) => {
         setIsCursorVisible(true);
         setCursorPosition({ x: e.clientX, y: e.clientY });
-
     };
 
     const handleMouseLeave = () => {
