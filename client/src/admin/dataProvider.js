@@ -92,7 +92,7 @@ const dataProvider = {
       'headerPhoto',
       'contactPhoto'
     ];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSixths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'photoSlider', 'formFiles', 'metrics', 'awardsImage' ]
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSixths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerTwelfth', 'bannerThirteenth', 'photoSlider', 'formFiles', 'metrics', 'awardsImage' ]
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false;
@@ -145,7 +145,7 @@ const dataProvider = {
   update: (resource, params) => {
     const formData = new FormData();
     const images = ['image', 'imageMob', 'mainNewsImage',"file", "descrImg", "brief", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'mainMobVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerSixths', 'photoSlider', 'formFiles', 'metrics', 'awardsImage']
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerTwelfth', 'bannerThirteenth', 'bannerSixths', 'photoSlider', 'formFiles', 'metrics', 'awardsImage']
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
     const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса

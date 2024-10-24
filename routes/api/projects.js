@@ -88,6 +88,8 @@ router.post(
         {name: 'bannerNinths'},
         {name: 'bannerTenth'},
         {name: 'bannerEleventh'},
+        {name: 'bannerTwelfth'},
+        {name: 'bannerThirteenth'},
         {name: 'imagesExtra'},
         {name: 'mainMobVideoFile'},
         {name: 'mainVideoFile'},
@@ -110,6 +112,8 @@ router.post(
             task4,
             task5,
             task6,
+            task7,
+            task8,
             taskDescr,
             workStepsIntroText,
             heading,
@@ -121,6 +125,8 @@ router.post(
             taskDo4,
             taskDo5,
             taskDo6,
+            taskDo7,
+            taskDo8,
             approach,
             body,
             result,
@@ -159,6 +165,8 @@ router.post(
             control6,
             control7,
             control8,
+            control9,
+            control10
         } = req.body;
         const tasksList = !!req.body.tasksList && req.body.tasksList !== 'undefined' ? JSON.parse(req.body.tasksList) : [];
         const metrics = !!req.body.metrics && req.body.metrics !== 'undefined' ? JSON.parse(req.body.metrics) : [];
@@ -252,7 +260,7 @@ router.post(
         // console.log(req.body);
         let bannerFirst, bannerSecond, bannerSeconds, approachListFiles, approachListSecondFiles,
             approachListThirdFiles, bannerThird, bannerThirds, bannerFourth, bannerFourths, bannerFifth, bannerFifths,
-            bannerSixths, bannerSevenths, bannerEighths, bannerNinths, bannerTenth, bannerEleventh, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1,
+            bannerSixths, bannerSevenths, bannerEighths, bannerNinths, bannerTenth, bannerEleventh, bannerTwelfth, bannerThirteenth, imagesExtra, mainVideoFile, mainMobVideoFile, visibilityImg1,
             visibilityImg2, awardsImage;
 
         if (req.files.awardsImage) {
@@ -325,7 +333,12 @@ router.post(
             bannerTenth = req.files.bannerTenth;
         }if (req.files.bannerEleventh) {
             bannerEleventh = req.files.bannerEleventh;
+        }if (req.files.bannerTwelfth) {
+            bannerTwelfth = req.files.bannerTwelfth;
+        }if (req.files.bannerThirteenth) {
+            bannerThirteenth = req.files.bannerThirteenth;
         }
+
 
         if (req.files.mainVideoFile) {
             mainVideoFile = req.files.mainVideoFile[0];
@@ -380,12 +393,16 @@ router.post(
             bannerNinths,
             bannerTenth,
             bannerEleventh,
+            bannerTwelfth,
+            bannerThirteenth,
             task,
             task2,
             task3,
             task4,
             task5,
             task6,
+            task7,
+            task8,
             taskDescr,
             heading,
             workStepsIntroText,
@@ -398,6 +415,8 @@ router.post(
             taskDo4,
             taskDo5,
             taskDo6,
+            taskDo7,
+            taskDo8,
             tasksList,
             metrics,
             approach,
@@ -443,6 +462,8 @@ router.post(
             control6,
             control7,
             control8,
+            control9,
+            control10,
             awardsImage
         });
 
@@ -499,6 +520,8 @@ router.put("/projects/:id",
         {name: 'bannerNinths'},
         {name: 'bannerTenth'},
         {name: 'bannerEleventh'},
+        {name: 'bannerTwelfth'},
+        {name: 'bannerThirteenth'},
         {name: 'imagesExtra'},
         {name: 'mainVideoFile'},
         {name: 'mainMobVideoFile'},
@@ -530,6 +553,8 @@ router.put("/projects/:id",
             task4,
             task5,
             task6,
+            task7,
+            task8,
             taskDescr,
             workStepsIntroText,
             heading,
@@ -541,6 +566,8 @@ router.put("/projects/:id",
             taskDo4,
             taskDo5,
             taskDo6,
+            taskDo7,
+            taskDo8,
             approach,
             body,
             result,
@@ -580,6 +607,8 @@ router.put("/projects/:id",
             control6,
             control7,
             control8,
+            control9,
+            control10,
         } = req.body;
         const stack = !!req.body.stack && req.body.stack !== 'undefined' ? JSON.parse(req.body.stack) : [];
 
@@ -602,6 +631,8 @@ router.put("/projects/:id",
         const bannerNinthsNames = JSON.parse(req.body.bannerNinthsNames);
         const bannerTenthNames = JSON.parse(req.body.bannerTenthNames);
         const bannerEleventhNames = JSON.parse(req.body.bannerEleventhNames);
+        const bannerTwelfthNames = JSON.parse(req.body.bannerTwelfthNames);
+        const bannerThirteenthNames = JSON.parse(req.body.bannerThirteenthNames);
         const metricsNames = JSON.parse(req.body.metricsNames);
         const awardsImageNames = JSON.parse(req.body.awardsImageNames);
 
@@ -1106,6 +1137,66 @@ router.put("/projects/:id",
             }
         }
 
+        if (req.files.bannerTwelfth) {
+            if (project.bannerTwelfth && project.bannerTwelfth.length > 0) {
+                project.bannerTwelfth.filter(image => !bannerTwelfthNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerTwelfth = [
+                ...(project.bannerTwelfth ? project.bannerTwelfth.filter(image => bannerTwelfthNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.bannerTwelfth : [])
+            ];
+            console.log()
+        } else {
+            if (project.bannerTwelfth && project.bannerTwelfth.length > 0) {
+                project.bannerTwelfth.filter(image => !bannerTwelfthNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerTwelfth = [
+                    ...(project.bannerTwelfth ? project.bannerTwelfth.filter(image => bannerTwelfthNames.includes(image.filename)) : [])
+                ];
+            }
+        }
+
+        if (req.files.bannerThirteenth) {
+            if (project.bannerThirteenth && project.bannerThirteenth.length > 0) {
+                project.bannerThirteenth.filter(image => !bannerThirteenthNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+            }
+            project.bannerThirteenth = [
+                ...(project.bannerThirteenth ? project.bannerThirteenth.filter(image => bannerThirteenthNames.includes(image.filename)) : []),
+                ...(!!req.files ? req.files.bannerThirteenth : [])
+            ];
+            console.log()
+        } else {
+            if (project.bannerThirteenth && project.bannerThirteenth.length > 0) {
+                project.bannerThirteenth.filter(image => !bannerThirteenthNames.includes(image.filename)).forEach((image) => {
+                    fs.unlink(image.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                });
+                project.bannerThirteenth = [
+                    ...(project.bannerThirteenth ? project.bannerThirteenth.filter(image => bannerThirteenthNames.includes(image.filename)) : [])
+                ];
+            }
+        }
+
         if (req.files.bannerSixths) {
             if (project.bannerSixths && project.bannerSixths.length > 0) {
                 project.bannerSixths.filter(image => !bannerSixthsNames.includes(image.filename)).forEach((image) => {
@@ -1299,6 +1390,8 @@ router.put("/projects/:id",
         project.task4 = task4;
         project.task5 = task5;
         project.task6 = task6;
+        project.task7 = task7;
+        project.task8 = task8;
         project.bannerFirstVideo = bannerFirstVideo;
         project.bannerSecondVideo = bannerSecondVideo;
         project.bannerThirdVideo = bannerThirdVideo;
@@ -1316,6 +1409,8 @@ router.put("/projects/:id",
         project.taskDo4 = taskDo4;
         project.taskDo5 = taskDo5;
         project.taskDo6 = taskDo6;
+        project.taskDo7 = taskDo7;
+        project.taskDo8 = taskDo8;
         project.tasksList = tasksList;
         // project.metrics = metrics;
         project.approach = approach;
@@ -1355,6 +1450,8 @@ router.put("/projects/:id",
             project.control6 = control6,
             project.control7 = control7,
             project.control8 = control8,
+            project.control9 = control9,
+            project.control10 = control10,
             await project.save();
 
         res.json(project);
@@ -1387,6 +1484,8 @@ router.delete("/projects/:id", async (req, res) => {
         bannerNinths,
         bannerTenth,
         bannerEleventh,
+        bannerTwelfth,
+        bannerThirteenth,
         imagesExtra,
         mainVideoFile,
         mainMobVideoFile,
@@ -1418,6 +1517,8 @@ router.delete("/projects/:id", async (req, res) => {
         bannerNinths,
         bannerTenth,
         bannerEleventh,
+        bannerTwelfth,
+        bannerThirteenth,
         awardsImage
     ]
     multiImages.forEach(files => {
