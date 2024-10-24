@@ -56,7 +56,6 @@ const ProjectNext = ({ props, detail }) => {
 
     return (
         <>
-            <Cursor/>
         <section className="project-next">
             <h1 className="heading-primary">Ещё проекты</h1>
             <div className="project-next__wrap">

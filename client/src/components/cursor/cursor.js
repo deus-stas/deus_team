@@ -87,7 +87,7 @@ export const Cursor = () => {
         const cursorHoverShowreel = (e) => {
             const showreel = document.getElementById('mainVideo')
             const circle = document.querySelector('.cursor__block');
-            if (e.target === showreel || document.querySelector('.showreel__s').classList.contains('playing')) {
+            if (e.target === showreel || e.target.classList.contains('playing')) {
                 circle.classList.add('cursor__block_hidden');
             } else {
                 circle.classList.remove('cursor__block_hidden');
