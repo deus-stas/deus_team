@@ -50,6 +50,7 @@ const Showreel = (props) => {
     const [isPaused, setIsPaused] = useState(true);
     const [isCursorVisible, setIsCursorVisible] = useState(false);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [isDesktopCursor, setIsDesktopCursor] = useState(false);
 
     const videoRef = useRef(null);
     const showReelRef = useRef(null);
@@ -74,12 +75,25 @@ const Showreel = (props) => {
     const handleMouseEnter = (e) => {
         setIsCursorVisible(true);
         setCursorPosition({ x: e.clientX, y: e.clientY });
-
     };
 
     const handleMouseLeave = () => {
         setIsCursorVisible(false);
     };
+
+    useEffect(() => {
+        const mobileVersion = () => {
+            if (window.innerWidth > 768 ) {
+                setIsDesktopCursor(true);
+                console.log('Получилось')
+            }
+            else {
+                setIsDesktopCursor(false);
+                console.log('брал')
+            }
+        }
+        mobileVersion();
+    }, []);
 
     return (
         <div className="showreel">
@@ -144,7 +158,7 @@ const Showreel = (props) => {
             </Popup>
 
             {/* Include the custom cursor, visible only when in showreel */}
-            <CustomCursor isPaused={isPaused} isVisible={isCursorVisible} initialPosition={cursorPosition} />
+            <CustomCursor isPaused={isPaused} isVisible={isCursorVisible && isDesktopCursor} initialPosition={cursorPosition} />
         </div>
     );
 };
