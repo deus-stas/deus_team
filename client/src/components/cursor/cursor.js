@@ -14,16 +14,6 @@ export const Cursor = () => {
     const location = useLocation();
 
     const targets = [
-        // '.projects__item__1',
-        // '.projects__item__2',
-        // '.projects__item__3',
-        // '.projects__item__4',
-        // '.projects__item__5',
-        // '.projects__item__6',
-        // '.projects__item__7',
-        // '.projects__item__8',
-        // '.projects__item__9',
-        // '.projects__item__10',
         '.news-main__1',
         '.news-main__2',
         '.news-main__3',
