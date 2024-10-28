@@ -31,6 +31,8 @@ export const Cursor = () => {
         '.agency-about__wrapp-btn'
     ]
 
+    const windowWidth = window.innerWidth;
+
     const handleMoveMouse = (e) => {
         gsap.to(arrowRef.current, {
             x: e.clientX - 12,
@@ -47,7 +49,7 @@ export const Cursor = () => {
 
     useEffect(() => {
         const mobileVersion = () => {
-            if (window.innerWidth > 768 ) {
+            if (windowWidth > 768 ) {
                 setIsDesktopCursor(true);
                 console.log('Получилось')
             }
@@ -69,7 +71,7 @@ export const Cursor = () => {
     // useEffect for customCursor
     useEffect(() => {
         const handleCursorHover = (e) => {
-            if (e.target.closest(targets.join(','))) {
+            if (e.target.closest(targets.join(',')) && windowWidth > 768) {
                 gsap.to(bubbleRef.current, {
                     opacity: 1,
                     mixBlendMode: 'difference',
@@ -113,7 +115,7 @@ export const Cursor = () => {
     // useEffect for arrow
     useEffect(() => {
         const handleArrowHover = (e) => {
-            if (e.target.closest(targets.join(','))) {
+            if (e.target.closest(targets.join(',')) && windowWidth > 768) {
                 gsap.to(arrowRef.current, {
                     autoAlpha: 1,
                     scale: 1,
