@@ -335,8 +335,8 @@ const Projects = () => {
 
                 return (
                     <div key="project.id" style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
-                        <DelayedLink 
-                            to={`/projects/${project.nameInEng}`} 
+                        <DelayedLink
+                            to={`/projects/${project.nameInEng}`}
                             className={`projects__item projects__item__${index + 1}`}
                             key={project.id}
                         >
@@ -349,7 +349,7 @@ const Projects = () => {
                         </DelayedLink>
                         <span className="projects-decription m-text">
                     <p style={{ color: "rgba(117, 118, 119, 1)" }}>{project.date} • {project.name}</p>
-                    <DelayedLink 
+                    <DelayedLink
                         to={`/projects/${project.nameInEng}`}
                         className="heading-secondary"
                     >
@@ -392,7 +392,7 @@ const Projects = () => {
                                 </span>
 
                             </div>
-                            <div className="flex-sb">
+                            <div className="flex-sb margin-for-button">
                                 {!allProjectsLoaded && (
                                     <div onClick={loadNewProject} className="m-text loadMore">Показать еще</div>
                                 )}
