@@ -13,7 +13,8 @@ import Popup from "reactjs-popup";
 import {Formik} from "formik";
 import {useMediaQuery} from "@material-ui/core";
 import {Icon} from "../../icon/Icon";
-import {Cursor} from "../../cursor/cursor";
+import 'custom-cursor-react/dist/index.css';
+import {Cursor} from '../../cursor/cursor'
 
 const apiUrl = '';
 const Contacts = (props) => {
@@ -91,7 +92,7 @@ const Contacts = (props) => {
                                 <div className="contacts-info__wrap-adress">
                                     <Link to="https://yandex.ru/maps/?rtext=~55.677636, 37.272125"
                                           target="_blank">
-                                        <h2 className="heading-secondary cursorTarget">г. Одинцово, ул. Молодежная,
+                                        <h2 className="heading-secondary sub-cursor-target">г. Одинцово, ул. Молодежная,
                                             д.46,<br/> строение 1 офис 24, 25</h2>
                                     </Link>
                                 </div>
