@@ -30,6 +30,7 @@ export const Cursor = () => {
         '.projects__item',
         '.agency-about__wrapp-btn',
         '.cursorTarget',
+        '.sub-cursor-target',
         '.next',
         '.prev'
     ]
@@ -79,6 +80,26 @@ export const Cursor = () => {
                     opacity: 1,
                     mixBlendMode: 'difference',
                     duration: 0.5,
+                    cursor: "none",
+                    width: 120,
+                    height: 120
+                });
+                e.target.classList.add('cursor__none')
+            } else {
+                gsap.to(bubbleRef.current, {
+                    opacity: 0.6,
+                    mixBlendMode: 'normal',
+                    duration: 0.5,
+                    width: 30,
+                    height: 30
+                });
+                e.target.classList.remove('cursor__none')
+            }
+            if (e.target.closest('.prev') || e.target.closest('.next') || e.target.closest('.sub-cursor-target')) {
+                gsap.to(bubbleRef.current, {
+                    opacity: 1,
+                    duration: 0.5,
+                    mixBlendMode: 'normal',
                     cursor: "none",
                     width: 120,
                     height: 120
