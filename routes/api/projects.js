@@ -364,7 +364,7 @@ router.post(
             date,
             duration,
             stageName,
-            metric,
+            metrics,
             descrProject,
             image,
             imageMob,
@@ -418,7 +418,7 @@ router.post(
             taskDo7,
             taskDo8,
             tasksList,
-            metrics,
+            metric,
             approach,
             body,
             result,
@@ -527,7 +527,8 @@ router.put("/projects/:id",
         {name: 'mainMobVideoFile'},
         {name: 'visibilityImg1'},
         {name: 'visibilityImg2'},
-        {name: 'awardsImage'}
+        {name: 'awardsImage'},
+        {name: 'metricsImages'}
     ]), async (req, res) => {
         const {id} = req.params;
         const project = await Projects.findById(id);
@@ -617,6 +618,7 @@ router.put("/projects/:id",
         const approachList = JSON.parse(req.body.approachList);
         const approachListSecond = JSON.parse(req.body.approachListSecond);
         const approachListThird = JSON.parse(req.body.approachListThird);
+        let metrics = JSON.parse(req.body.metrics);
 
         console.log('workSteps', workSteps, req.files.workStepsImages);
 
@@ -633,7 +635,7 @@ router.put("/projects/:id",
         const bannerEleventhNames = JSON.parse(req.body.bannerEleventhNames);
         const bannerTwelfthNames = JSON.parse(req.body.bannerTwelfthNames);
         const bannerThirteenthNames = JSON.parse(req.body.bannerThirteenthNames);
-        const metricsNames = JSON.parse(req.body.metricsNames);
+        // const metricsNames = JSON.parse(req.body.metricsNames);
         const awardsImageNames = JSON.parse(req.body.awardsImageNames);
 
         workSteps = workSteps.map(workStep => {
@@ -675,6 +677,47 @@ router.put("/projects/:id",
             return workStep
         })
         project.workSteps = workSteps
+
+
+        metrics = metrics.map(metric => {
+            const image = req.files.metricsImages?.find(i => i.originalname === metric.imageI.path)
+            const projectmetric = project.metrics.find(w => w?.metricsItem === metric?.metricsItem)
+            if (image) {
+                if (projectmetric && projectmetric.imageI) {
+                    const path = `uploads/${projectmetric.imageI.filename}`
+                    if (fs.existsSync(path)) {
+                        fs.unlink(path, (err) => {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
+                    }
+
+                }
+                metric.imageI = image;
+            } else {
+                console.log('projectmetric', projectmetric, metric, metric.imageI !== true)
+                if (projectmetric && projectmetric.imageI && projectmetric.imageI.path && metric.imageI !== true) {
+                    const path = `uploads/${projectmetric.imageI.filename}`
+                    if (fs.existsSync(path)) {
+                        fs.unlink(path, (err) => {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
+                    }
+
+                    metric.imageI = null;
+                } else {
+                    if (projectmetric && projectmetric.imageI) {
+                        metric.imageI = projectmetric.imageI;
+                    }
+
+                }
+            }
+            return metric
+        })
+        project.metrics = metrics
 
         if (image) {
             if (project.image) {
@@ -923,37 +966,37 @@ router.put("/projects/:id",
             project.approachListThirdFiles = req.files.approachListThirdFiles;
         }
 
-        if (req.files.metrics) {
-            if (project.metrics && project.metrics.length > 0) {
-                project.metrics.filter(image => !metricsNames.includes(image.filename)).forEach((image) => {
-                    fs.unlink(image.path, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                });
-            }
-            project.metrics = [
-                ...(project.metrics ? project.metrics.filter(image => metricsNames.includes(image.filename)) : []),
-                ...(!!req.files ? req.files.metrics : [])
-            ];
-            console.log()
-        } else {
-            if (project.metrics && project.metrics.length > 0) {
-                project.metrics.filter(image => !metricsNames.includes(image.filename)).forEach((image) => {
-                    if (image.path) {
-                        fs.unlink(image.path, (err) => {
-                            if (err) {
-                                console.error(err);
-                            }
-                        });
-                    }
-                });
-                project.metrics = [
-                    ...(project.metrics ? project.metrics.filter(image => metricsNames.includes(image.filename)) : [])
-                ];
-            }
-        }
+        // if (req.files.metrics) {
+        //     if (project.metrics && project.metrics.length > 0) {
+        //         project.metrics.filter(image => !metricsNames.includes(image.filename)).forEach((image) => {
+        //             fs.unlink(image.path, (err) => {
+        //                 if (err) {
+        //                     console.error(err);
+        //                 }
+        //             });
+        //         });
+        //     }
+        //     project.metrics = [
+        //         ...(project.metrics ? project.metrics.filter(image => metricsNames.includes(image.filename)) : []),
+        //         ...(!!req.files ? req.files.metrics : [])
+        //     ];
+        //     console.log()
+        // } else {
+        //     if (project.metrics && project.metrics.length > 0) {
+        //         project.metrics.filter(image => !metricsNames.includes(image.filename)).forEach((image) => {
+        //             if (image.path) {
+        //                 fs.unlink(image.path, (err) => {
+        //                     if (err) {
+        //                         console.error(err);
+        //                     }
+        //                 });
+        //             }
+        //         });
+        //         project.metrics = [
+        //             ...(project.metrics ? project.metrics.filter(image => metricsNames.includes(image.filename)) : [])
+        //         ];
+        //     }
+        // }
 
 
         if (req.files.bannerThirds) {
@@ -1429,6 +1472,7 @@ router.put("/projects/:id",
             project.awardsTitle = awardsTitle,
             project.projectSite = projectSite,
             project.workSteps = workSteps,
+            project.metrics = metrics,
             project.visibilityTitle1 = visibilityTitle1,
             project.visibilityTitle2 = visibilityTitle2,
             project.customId = customId,
