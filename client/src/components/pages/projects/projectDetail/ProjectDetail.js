@@ -277,7 +277,7 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
             <div className="project-results__wrap">
                 <div className="project-results__wrapper">
                     <h2 className="heading-secondary">Результаты</h2>
-                    {!isMobile && !!awardsURL && (
+                    {!isMobile && !!awardsURL && awardsImage && (
                         <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                             <p className="project-results__wrapper-url l-textReg">
                             <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0].filename}`} alt="awards"/>
@@ -294,7 +294,7 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
                     </div>
                 </div>
 
-                {isMobile && !!awardsURL &&(
+                {isMobile && !!awardsURL && awardsImage &&(
                     <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                         <p className="project-results__wrapper-url s-text">
                         <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0].filename}`} alt="awards"/>
