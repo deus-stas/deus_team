@@ -28,7 +28,10 @@ export const Cursor = () => {
         '.news-main__10',
         '.main-agency__item',
         '.projects__item',
-        '.agency-about__wrapp-btn'
+        '.agency-about__wrapp-btn',
+        '.cursorTarget',
+        '.next',
+        '.prev'
     ]
 
     const windowWidth = window.innerWidth;

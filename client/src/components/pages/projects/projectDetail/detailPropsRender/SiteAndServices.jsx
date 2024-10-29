@@ -13,7 +13,7 @@ const SiteAndServices = ({detail}) => {
     const [swiperRef, setSwiperRef] = useState(null);
     const [isHovered, setIsHovered] = useState(false);
     const [isPrevHovered, setIsPrevHovered] = useState(false);
-    
+
     const isMobile = useMobile();
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const SiteAndServices = ({detail}) => {
         console.log(swiperRef);
         swiperRef.slidePrev();
     };
-    
+
     const nextHandler = () => {
         swiperRef.slideNext();
     };
@@ -72,10 +72,10 @@ const SiteAndServices = ({detail}) => {
                         centeredSlides={true}
                         loop={true}
                         onSwiper={(swiper) => setSwiperRef(swiper)}
-                        style={{ padding: '20px 0' }}                   
+                        style={{ padding: '20px 0' }}
                     >
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
-                            <SwiperSlide 
+                            <SwiperSlide
                                 key={banner.name}
                             >
                                 <img
@@ -88,7 +88,7 @@ const SiteAndServices = ({detail}) => {
                     </Swiper>
                     <div className="slide-arrow">
                         <div
-                            className='prev'
+                            className='prev cursorTarget'
                             onClick={prevHandler}
                             onMouseEnter={() => setIsPrevHovered(true)}
                             onMouseLeave={() => setIsPrevHovered(false)}
@@ -96,7 +96,7 @@ const SiteAndServices = ({detail}) => {
                             <Icon icon={"slider-white"} viewBox="0 0 40 40" />
                         </div>
                         <div
-                            className='next'
+                            className='next cursorTarget'
                             onClick={nextHandler}
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
