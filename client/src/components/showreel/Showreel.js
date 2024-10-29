@@ -8,7 +8,7 @@ import pauseCursor from "../../img/videoPauseCursor.svg";
 
 const apiUrl = '';
 
-const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
+const CustomCursor = ({ isPaused, isVisible, initialPosition, isFullScreen }) => {
     const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });
 
     const handleMouseMove = (e) => {
@@ -37,7 +37,7 @@ const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
             style={{
                 left: `${position.x}px`,
                 top: `${position.y}px`,
-                backgroundImage: `url(${isPaused ? playCursor : pauseCursor})`,
+                backgroundImage: `url(${!isFullScreen ? playCursor : pauseCursor})`,
             }}
         />
     );
@@ -45,7 +45,7 @@ const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
 
 
 const Showreel = (props) => {
-    const { data, isMain } = props;
+    const { data, isMain, onVideoStatusChange, isFullScreen } = props;
     const [open, setOpen] = useState(false);
     const [isPaused, setIsPaused] = useState(true);
     const [isCursorVisible, setIsCursorVisible] = useState(false);
@@ -58,19 +58,48 @@ const Showreel = (props) => {
     const closeModal = () => setOpen(false);
     const openModal = () => {
         setOpen(true);
-        videoRef.current.pause();
     };
 
     const handlePlay = () => {
         const isTrue = videoRef.current.paused;
         if (isTrue) {
-            videoRef.current.play();
-            setIsPaused(false);
+            // videoRef.current.play();
+            videoRef.current.muted = false
+            // setIsPaused(false);
+            onVideoStatusChange(false);
         } else {
-            videoRef.current.pause();
-            setIsPaused(true);
+            // videoRef.current.pause();
+            // setIsPaused(true);
+            onVideoStatusChange(true);
         }
     };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && videoRef.current) {
+                    videoRef.current.muted = true;
+                    videoRef.current.play().catch(error => {
+                        console.error('Autoplay failed: ', error);
+                    });
+                    setIsPaused(false);
+                } else if (videoRef.current) {
+                    videoRef.current.pause();
+                    setIsPaused(true);
+                }
+            });
+        });
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                observer.unobserve(videoRef.current);
+            }
+        };
+    }, []);
 
     const handleMouseEnter = (e) => {
         setIsCursorVisible(true);
@@ -158,7 +187,7 @@ const Showreel = (props) => {
             </Popup>
 
             {/* Include the custom cursor, visible only when in showreel */}
-            <CustomCursor isPaused={isPaused} isVisible={isCursorVisible && isDesktopCursor} initialPosition={cursorPosition} />
+            <CustomCursor isPaused={isPaused} isFullScreen={isFullScreen} isVisible={isCursorVisible && isDesktopCursor} initialPosition={cursorPosition} />
         </div>
     );
 };

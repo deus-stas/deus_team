@@ -55,10 +55,10 @@ const MainPage = (props) => {
     const [isVideoPaused, setIsVideoPaused] = useState(true);
 
     const handleVideoClick = () => {
-        if (isVideoPaused) {
-            setIsFullScreen(!isFullScreen);
-        } else {
+        if (isFullScreen) {
             setIsFullScreen(false);
+        } else {
+            setIsFullScreen(true);
         }
     };
 
@@ -249,6 +249,7 @@ const MainPage = (props) => {
     const double = <Icon icon="arrowGo" viewBox="0 0 30 30"/>;
 
     const mainShowreel = showreels.find((showreel) => showreel.mainShowreel === true);
+    const subShowreel = showreels.find((showreel) => showreel.mainShowreel === false)
 
     const {services, headerData, team} = props;
     services.sort((a, b) => a.position - b.position);
@@ -256,15 +257,44 @@ const MainPage = (props) => {
     const mainBannerRef = useRef(null);
     const videoModal = useRef(null);
 
+    const fullScreenVideo = () => {
+        if (isFullScreen) {
+            console.log(mainShowreel);
+            return (
+                mainShowreel &&
+                <Showreel
+                    isFullScreen={isFullScreen}
+                    data={mainShowreel}
+                    isMain={true}
+                    onVideoStatusChange={handleVideoStatusChange}
+                />
+            )
+        } else {
+            console.log(subShowreel);
+            return (
+                    subShowreel &&
+                    <Showreel
+                        isFullScreen={isFullScreen}
+                        data={subShowreel}
+                        isMain={true}
+                        onVideoStatusChange={handleVideoStatusChange}
+                    />
+            )
+        }
+    }
+
+    // useEffect(() => {
+    //     fullScreenVideo();
+    // }, [setIsFullScreen]);
+
     return (<>
         <Cursor/>
         {!isLoading && (<main className="main">
-
             <section className="main-banner" ref={mainBannerRef}>
                 <div className="container">
                     <div className="main-banner__wrap">
                         <div className="main-banner__content">
-                            <p className="breadcrumb">Привет — это DEUS 👋</p>
+                        <p className="breadcrumb">Привет — это DEUS 👋</p>
                             <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: text}}/>
                         </div>
                     </div>
@@ -413,13 +443,14 @@ const MainPage = (props) => {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
             <section className="main-showreel whiteHeader">
                 <div className="container">
-                    <div  onClick={handleVideoClick} className={`main-showreel__wrap ${isFullScreen ? 'full-screen' : ''}`}>
-                        {mainShowreel && <Showreel  data={mainShowreel} isMain={true} onVideoStatusChange={handleVideoStatusChange}/>}
+                    <div onClick={handleVideoClick} className={`main-showreel__wrap ${isFullScreen ? 'full-screen' : ''}`}>
+                        {
+                            fullScreenVideo()
+                        }
                     </div>
                 </div>
 
