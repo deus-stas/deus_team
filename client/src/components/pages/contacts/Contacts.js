@@ -13,7 +13,9 @@ import Popup from "reactjs-popup";
 import {Formik} from "formik";
 import {useMediaQuery} from "@material-ui/core";
 import {Icon} from "../../icon/Icon";
-import {Cursor} from "../../cursor/cursor";
+import CustomCursor from 'custom-cursor-react'
+import 'custom-cursor-react/dist/index.css';
+import {Cursor} from './contactsCursor'
 
 const apiUrl = '';
 const Contacts = (props) => {
