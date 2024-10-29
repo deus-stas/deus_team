@@ -828,7 +828,13 @@
 .flex-sb {
     display: flex;
     justify-content: space-between;
+}
+
+.margin-for-button {
     margin-top: -150px;
+    @media (max-width: 768px) {
+        margin: 0;
+    }
 }
 
 .sticky-h2 {

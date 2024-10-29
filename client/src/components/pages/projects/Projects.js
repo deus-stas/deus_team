@@ -394,7 +394,7 @@ const Projects = () => {
                                 </span>
 
                             </div>
-                            <div className="flex-sb">
+                            <div className="flex-sb margin-for-button">
                                 {!allProjectsLoaded && (
                                     <div onClick={loadNewProject} className="m-text loadMore">Показать еще</div>
                                 )}
