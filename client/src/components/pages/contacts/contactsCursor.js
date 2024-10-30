@@ -4,53 +4,26 @@ import './cursor.scss'
 import { gsap } from 'gsap';
 import {useEffect, useRef, useState} from "react";
 import {useLocation} from "react-router-dom";
-
 export const Cursor = () => {
-
     const arrowRef = useRef(null);
     const bubbleRef = useRef(null);
     const circleRef = useRef(null)
-
     const [isDesktopCursor, setIsDesktopCursor] = useState(false);
-
     const location = useLocation();
-
-    const targets = [
-        '.news-main__1',
-        '.news-main__2',
-        '.news-main__3',
-        '.news-main__4',
-        '.news-main__5',
-        '.news-main__6',
-        '.news-main__7',
-        '.news-main__8',
-        '.news-main__9',
-        '.news-main__10',
-        '.main-agency__item',
-        '.projects__item',
-        '.agency-about__wrapp-btn',
-        '.cursorTarget',
-        '.sub-cursor-target',
-        '.next',
-        '.prev'
-    ]
-
+    const targets = [".cursorTarget"]
     const windowWidth = window.innerWidth;
-
     const handleMoveMouse = (e) => {
         gsap.to(arrowRef.current, {
             x: e.clientX - 12,
             y: e.clientY - 12,
         });
     };
-
     // useEffect for moving
     useEffect(() => {
         // Add Listener
         document.addEventListener('mousemove', handleMoveMouse);
         document.addEventListener('scroll', handleMoveMouse);
     }, []);
-
     useEffect(() => {
         const mobileVersion = () => {
             if (windowWidth > 768 ) {
@@ -69,16 +42,12 @@ export const Cursor = () => {
         mobileVersion();
         cursorVisibility();
     }, [targets]);
-
-
-
     // useEffect for customCursor
     useEffect(() => {
         const handleCursorHover = (e) => {
             if (e.target.closest(targets.join(',')) && windowWidth > 768) {
                 gsap.to(bubbleRef.current, {
                     opacity: 1,
-                    mixBlendMode: 'difference',
                     duration: 0.5,
                     cursor: "none",
                     width: 120,
@@ -88,7 +57,6 @@ export const Cursor = () => {
             } else {
                 gsap.to(bubbleRef.current, {
                     opacity: 0.6,
-                    mixBlendMode: 'normal',
                     duration: 0.5,
                     width: 30,
                     height: 30
@@ -101,7 +69,6 @@ export const Cursor = () => {
             document.removeEventListener('mouseover', handleCursorHover);
         };
     }, [location]);
-
     useEffect(() => {
         const cursorHoverShowreel = (e) => {
             const showreel = document.getElementById('mainVideo')
@@ -115,7 +82,6 @@ export const Cursor = () => {
         }
         document.addEventListener('mouseover', cursorHoverShowreel)
     }, [targets])
-
     // useEffect for arrow
     useEffect(() => {
         const handleArrowHover = (e) => {
@@ -135,18 +101,13 @@ export const Cursor = () => {
                 });
             }
         };
-
         document.addEventListener('mouseover', handleArrowHover);
         document.addEventListener('mouseout', handleArrowHover);
-
         return () => {
             document.removeEventListener('mouseover', handleArrowHover);
             document.removeEventListener('mouseout', handleArrowHover);
         };
     }, [location]);
-
-
-
     const ArrowSVG = () => {
         return (
             <div ref={arrowRef} className="arrowBlock">
@@ -165,7 +126,6 @@ export const Cursor = () => {
             </div>
         )
     };
-
     const Cursor = () => {
         return (
             <div className={'cursor__block'} ref={bubbleRef}>
@@ -189,7 +149,6 @@ export const Cursor = () => {
             </div>
         )
     }
-
     const CursorBlock = () => {
         return (
             <>
@@ -198,6 +157,5 @@ export const Cursor = () => {
             </>
         )
     };
-
     return CursorBlock()
 }
