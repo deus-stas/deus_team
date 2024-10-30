@@ -712,11 +712,12 @@ export const SEORender = () => {
                 source={"metrics"}
             >
                 <SimpleFormIterator>
-                    {/* <TextInput
+                    <TextInput
                         className="customWidth"
                         label="Поисковая система"
                         placeholder="Яндекс"
-                        source="metric"/> */}
+                        source="metricName"
+                    />
                     <FileInput
                         className="fileInput"
                         placeholder="+"

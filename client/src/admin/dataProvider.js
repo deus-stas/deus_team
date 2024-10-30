@@ -92,9 +92,9 @@ const dataProvider = {
       'headerPhoto',
       'contactPhoto'
     ];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSixths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerTwelfth', 'bannerThirteenth', 'photoSlider', 'formFiles', 'metrics', 'awardsImage' ]
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSixths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerTwelfth', 'bannerThirteenth', 'photoSlider', 'formFiles', 'awardsImage' ]
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
-    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
+    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects', 'metrics']
     let hasImage = false;
     console.log(params.data)
     for (const [key, value] of Object.entries(params.data)) {
@@ -116,6 +116,13 @@ const dataProvider = {
         const newValue = value.map(workStep => {
           workStep.imageI = workStep.imageI.rawFile ? workStep.imageI.rawFile : true
           return workStep
+        });
+        formData.append(key,  JSON.stringify(newValue));
+        //свойства в которых объект нужно отдельно переводить в JSON
+      } else if (key ==='metrics' && value) {
+        const newValue = value.map(metric => {
+          metric.imageI = metric.imageI.rawFile ? metric.imageI.rawFile : true
+          return metric
         });
         formData.append(key,  JSON.stringify(newValue));
         //свойства в которых объект нужно отдельно переводить в JSON
@@ -145,12 +152,13 @@ const dataProvider = {
   update: (resource, params) => {
     const formData = new FormData();
     const images = ['image', 'imageMob', 'mainNewsImage',"file", "descrImg", "brief", 'mainImg', 'bannerFirst', 'bannerSecond', 'bannerThird', 'bannerFourth', 'bannerFifth', 'video', 'reviewFile', 'reviewImage', 'reviewBg', 'mainVideoFile', 'mainMobVideoFile', 'presentation', 'img', 'visibilityImg1', 'visibilityImg2', 'headerPhoto', 'contactPhoto'];
-    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerTwelfth', 'bannerThirteenth', 'bannerSixths', 'photoSlider', 'formFiles', 'metrics', 'awardsImage']
+    const arrayImages = ['imagesExtra', 'bannerSeconds', 'bannerThirds', 'bannerFourths' , 'bannerFifths', 'bannerSevenths', 'bannerEighths', 'bannerNinths', 'bannerTenth', 'bannerEleventh', 'bannerTwelfth', 'bannerThirteenth', 'bannerSixths', 'photoSlider', 'formFiles',  'awardsImage']
     const arrayApproachKeys = ['approachList', 'approachListSecond', 'approachListThird']
-    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects']
+    const jsonKeys = ['tasksList', 'textList', 'reviewProject', 'stack', 'reviewService', 'workSteps','tariffs','work','benefits','subProjects', 'metrics']
     let hasImage = false; // флаг, указывающий на наличие картинки в параметрах запроса
     console.log(params.data);
     const workStepsImages = []
+    const metricsImages = []
 
     for (const [key, value] of Object.entries(params.data)) {
       console.log('put',key, value);
@@ -193,6 +201,18 @@ const dataProvider = {
           });
           formData.append(key, JSON.stringify(newValue));
           //свойства в которых объект нужно отдельно переводить в JSON
+        } else if (key === 'metrics' && value) {
+          hasImage = true;
+          const newValue = value.map(metric => {
+            metric.imageI = metric.imageI?.rawFile ? metric.imageI?.rawFile : true
+            if (!!metric.imageI.path) {
+              metricsImages.push(metric.imageI)
+            }
+
+            return metric
+          });
+          formData.append(key, JSON.stringify(newValue));
+          //свойства в которых объект нужно отдельно переводить в JSON
         } else if (arrayImages.includes(key) && value) {
           const images = !!value
             ? value.map((image) => (!!image.imageI ? image.imageI.rawFile : null )).filter(v1 =>!!v1)
@@ -230,6 +250,12 @@ const dataProvider = {
     workStepsImages.forEach((image, index) => {
       if (image !== undefined) {
         formData.append('workStepsImages', image);
+      }
+    });
+
+    metricsImages.forEach((image, index) => {
+      if (image !== undefined) {
+        formData.append('metricsImages', image);
       }
     });
 
