@@ -36,17 +36,26 @@ export const Cursor = () => {
     const windowWidth = window.innerWidth;
 
     const handleMoveMouse = (e) => {
-        gsap.to(arrowRef.current, {
-            x: e.clientX - 12,
-            y: e.clientY - 12,
-        });
+        // Проверяем, находится ли курсор над элементом, соответствующим одному из селекторов (targets), и ширина окна больше 768 пикселей
+        if (e.target.closest(targets.join(',')) && windowWidth > 768) {
+            // Если да, то перемещаем стрелку в соответствии с положением курсора
+            gsap.to(arrowRef.current, {
+                x: e.clientX - 12,
+                y: e.clientY - 12,
+            });
+        } else {
+            // Если нет, то скрываем стрелку
+            gsap.to(arrowRef.current, {
+                autoAlpha: 0,
+            });
+        }
     };
 
     // useEffect for moving
     useEffect(() => {
         // Add Listener
         document.addEventListener('mousemove', handleMoveMouse);
-        document.addEventListener('scroll', handleMoveMouse);
+        // document.addEventListener('scroll', handleMoveMouse);
     }, []);
 
     useEffect(() => {
@@ -95,8 +104,12 @@ export const Cursor = () => {
             }
         };
         document.addEventListener('mouseover', handleCursorHover);
+        document.addEventListener('mouseout', handleCursorHover);
+        // document.addEventListener('scroll', handleCursorHover);
         return () => {
             document.removeEventListener('mouseover', handleCursorHover);
+            // document.removeEventListener('scroll', handleCursorHover);
+            document.removeEventListener('mouseout', handleCursorHover);
         };
     }, [location]);
 
@@ -112,6 +125,7 @@ export const Cursor = () => {
             }
         }
         document.addEventListener('mouseover', cursorHoverShowreel)
+        // document.addEventListener('scroll', cursorHoverShowreel)
     }, [targets])
 
     // useEffect for arrow
@@ -136,10 +150,12 @@ export const Cursor = () => {
 
         document.addEventListener('mouseover', handleArrowHover);
         document.addEventListener('mouseout', handleArrowHover);
+        // document.addEventListener('scroll', handleArrowHover)
 
         return () => {
             document.removeEventListener('mouseover', handleArrowHover);
             document.removeEventListener('mouseout', handleArrowHover);
+            // document.removeEventListener('scroll', handleArrowHover)
         };
     }, [location]);
 
