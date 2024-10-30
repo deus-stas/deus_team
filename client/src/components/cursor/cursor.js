@@ -31,8 +31,6 @@ export const Cursor = () => {
         '.agency-about__wrapp-btn',
         '.cursorTarget',
         '.sub-cursor-target',
-        '.next',
-        '.prev'
     ]
 
     const windowWidth = window.innerWidth;
