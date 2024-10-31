@@ -62,11 +62,11 @@ export const Cursor = () => {
         const mobileVersion = () => {
             if (windowWidth > 768 ) {
                 setIsDesktopCursor(true);
-                console.log('Получилось')
+                // console.log('Получилось')
             }
             else {
                 setIsDesktopCursor(false);
-                console.log('брал')
+                // console.log('брал')
             }
         }
         const cursorVisibility = () => {
@@ -121,7 +121,7 @@ export const Cursor = () => {
                 circle.classList.add('cursor__block_hidden');
             } else {
                 circle.classList.remove('cursor__block_hidden');
-                console.log(e.target)
+                // console.log(e.target)
             }
         }
         document.addEventListener('mouseover', cursorHoverShowreel)

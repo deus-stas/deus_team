@@ -280,7 +280,7 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
                     {!isMobile && !!awardsURL && awardsImage && (
                         <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                             <p className="project-results__wrapper-url l-textReg">
-                            <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0].filename}`} alt="awards"/>
+                            <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0]?.filename}`} alt="awards"/>
                                 {awardsTitle}
                             </p>
                         </a>
@@ -297,7 +297,7 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
                 {isMobile && !!awardsURL && awardsImage &&(
                     <a href={awardsURL} target="_blank" rel="noopener noreferrer">
                         <p className="project-results__wrapper-url s-text">
-                        <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0].filename}`} alt="awards"/>
+                        <img className='awards-image' src={`${apiUrl}/uploads/${awardsImage[0]?.filename}`} alt="awards"/>
                             {awardsTitle}
                         </p>
                     </a>

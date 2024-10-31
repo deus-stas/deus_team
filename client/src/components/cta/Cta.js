@@ -134,7 +134,8 @@ const Cta = (props) => {
                                     <>
                                         {disabled ? <div> {children}</div> : <Link
                                             target="_blank" isExternal
-                                            to={`${apiUrl}/uploads/${service.brief.filename}`}>
+                                            to={`${apiUrl}/uploads/${service.brief.filename}`}
+                                            download={service.brief.originalname}>
                                             {children}
                                         </Link>}
                                     </>

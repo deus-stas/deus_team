@@ -48,7 +48,7 @@ const TechSupport = ({detail}) => {
                 <section style={{backgroundColor: "black"}} className="project-stack padding borderBlock">
                     <div className="project-stack__wrap">
                         <span>
-                           <h2 className="heading-secondary">Стек технолгий</h2>
+                           <h2 className="heading-secondary">Стек технологий</h2>
                            <p className="project-steps__intro m-text"
                               dangerouslySetInnerHTML={{__html: detail.workIntroText}}/>
                         </span>
