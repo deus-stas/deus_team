@@ -14,7 +14,6 @@ import "swiper/css";
 import "swiper/css/grid";
 import "./mainPage.scss";
 
-
 import deus from "../../../img/deus-circle.png";
 import {connect} from "react-redux";
 import RetryImage from "../../../helpers/RetryImage";

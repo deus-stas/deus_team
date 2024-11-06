@@ -1,6 +1,6 @@
 import './preloader.scss'
 
-const Preloader = () => {
+export const Preloader = () => {
     return (
         <div className={'preloader'}>
 
