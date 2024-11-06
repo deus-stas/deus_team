@@ -88,7 +88,7 @@ const SiteAndServices = ({detail}) => {
                     </Swiper>
                     <div className="slide-arrow">
                         <div
-                            className='prev cursorTarget'
+                            className='prev'
                             onClick={prevHandler}
                             onMouseEnter={() => setIsPrevHovered(true)}
                             onMouseLeave={() => setIsPrevHovered(false)}
@@ -96,7 +96,7 @@ const SiteAndServices = ({detail}) => {
                             <Icon icon={"slider-white"} viewBox="0 0 40 40" />
                         </div>
                         <div
-                            className='next cursorTarget'
+                            className='next'
                             onClick={nextHandler}
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
