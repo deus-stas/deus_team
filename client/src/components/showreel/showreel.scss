@@ -131,3 +131,24 @@
     height: auto;
     aspect-ratio: 1/0.5625;
 }
+
+.rotate {
+    display: none;
+}
+@media (max-width: 768px) {
+    .rotate {
+        display: block;
+        position: absolute;
+        z-index: 99;
+        left: 50%;
+        transform: translate(-50%, 0);
+        bottom: 30px;
+
+        &.playing {
+            display: none;
+        }
+        &.pausing {
+            display: block;
+        }
+    }   
+}
