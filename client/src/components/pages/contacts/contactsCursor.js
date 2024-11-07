@@ -4,26 +4,42 @@ import './cursor.scss'
 import { gsap } from 'gsap';
 import {useEffect, useRef, useState} from "react";
 import {useLocation} from "react-router-dom";
+
 export const Cursor = () => {
+
     const arrowRef = useRef(null);
     const bubbleRef = useRef(null);
     const circleRef = useRef(null)
+
     const [isDesktopCursor, setIsDesktopCursor] = useState(false);
+
     const location = useLocation();
+
     const targets = [".cursorTarget"]
+
     const windowWidth = window.innerWidth;
+
     const handleMoveMouse = (e) => {
-        gsap.to(arrowRef.current, {
-            x: e.clientX - 12,
-            y: e.clientY - 12,
-        });
+        // Проверяем, находится ли курсор над элементом, соответствующим одному из селекторов (targets), и ширина окна больше 768 пикселей
+        if (e.target.closest(targets.join(',')) && windowWidth > 768) {
+            // Если да, то перемещаем стрелку в соответствии с положением курсора
+            gsap.to(arrowRef.current, {
+                x: e.clientX - 12,
+                y: e.clientY - 12,
+            });
+        } else {
+            // Если нет, то скрываем стрелку
+            gsap.to(arrowRef.current, {
+                autoAlpha: 0,
+            });
+        }
     };
     // useEffect for moving
     useEffect(() => {
         // Add Listener
         document.addEventListener('mousemove', handleMoveMouse);
-        document.addEventListener('scroll', handleMoveMouse);
     }, []);
+
     useEffect(() => {
         const mobileVersion = () => {
             if (windowWidth > 768 ) {
@@ -42,6 +58,7 @@ export const Cursor = () => {
         mobileVersion();
         cursorVisibility();
     }, [targets]);
+
     // useEffect for customCursor
     useEffect(() => {
         const handleCursorHover = (e) => {
@@ -69,6 +86,7 @@ export const Cursor = () => {
             document.removeEventListener('mouseover', handleCursorHover);
         };
     }, [location]);
+
     useEffect(() => {
         const cursorHoverShowreel = (e) => {
             const showreel = document.getElementById('mainVideo')
@@ -81,7 +99,8 @@ export const Cursor = () => {
             }
         }
         document.addEventListener('mouseover', cursorHoverShowreel)
-    }, [targets])
+    }, [targets]);
+
     // useEffect for arrow
     useEffect(() => {
         const handleArrowHover = (e) => {
@@ -108,6 +127,7 @@ export const Cursor = () => {
             document.removeEventListener('mouseout', handleArrowHover);
         };
     }, [location]);
+
     const ArrowSVG = () => {
         return (
             <div ref={arrowRef} className="arrowBlock">
@@ -126,6 +146,7 @@ export const Cursor = () => {
             </div>
         )
     };
+
     const Cursor = () => {
         return (
             <div className={'cursor__block'} ref={bubbleRef}>
@@ -148,7 +169,8 @@ export const Cursor = () => {
                 </div>
             </div>
         )
-    }
+    };
+
     const CursorBlock = () => {
         return (
             <>
@@ -157,5 +179,6 @@ export const Cursor = () => {
             </>
         )
     };
+
     return CursorBlock()
 }

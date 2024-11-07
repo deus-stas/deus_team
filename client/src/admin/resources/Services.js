@@ -102,7 +102,7 @@ export const ServicesEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
-            <ReferenceInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
+            <ReferenceInput source="types" reference="types" label="Тип проекта">
                 <SelectInput className="customWidth" optionText="name" />
             </ReferenceInput>
             <FileInput  className="fileInput" placeholder="+" source="brief" label="Ссылка для брифа">
