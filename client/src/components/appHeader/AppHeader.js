@@ -54,7 +54,14 @@ const AppHeader = (props) => {
     useEffect(() => {
         const styles = {
             wide: { width: '100%' },
-            narrowly: { width: `${window.innerWidth * 0.85 / 15}rem` },
+            // narrowly: { width: `${window.innerWidth * 0.85 / 10}rem` },
+            narrowly: { 
+                width:
+                    window.innerWidth > 1120
+                    ? '1120px'
+                    : `${(window.innerWidth * 0.85) / 10}rem`,
+            },
+
             up: { transform: 'translateY(-30rem)' },
             down: { transform: 'translateY(0)' },
             padding: { padding: '2rem 3rem' },
