@@ -9,7 +9,6 @@ import DelayedLink from "../../appHeader/DelayedLink";
 import {debounce, useMediaQuery} from "@material-ui/core";
 import {useMobile} from "./projectDetail/ProjectDetail";
 import {Cursor} from "../../cursor/cursor";
-import {Preloader} from "./preloader/preloader";
 
 const apiUrl = ''
 
@@ -273,6 +272,7 @@ const Projects = () => {
                                     const totalSum = filterProjects.length.toString().padStart(2, '0');
                                     if (totalSum < 1) return null;
                                     return (
+
                                         <Link onClick={(e) => gotoAnchor(e, 'start', false)}
                                               to={`/projects?theme=${project.value}`}>
                                             <div className="main-projects__item-flex__inner" onClick={() => {
@@ -336,21 +336,19 @@ const Projects = () => {
 
                 return (
                     <div key="project.id" style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
-                        {
-                            projects ? <DelayedLink
-                                to={`/projects/${project.nameInEng}`}
-                                className={`projects__item projects__item__${index + 1}`}
-                                key={project.id}
-                            >
-                                <div className="projects__item-img-wrap">
-                                    {   isVideo ?
-                                        <VideoComponent ref={(ref) => addVideoRef(ref)} project={project}
-                                                        isMob={isMob} videoSize={imgSize} apiUrl={apiUrl}/> :
-                                        <img src={imgSize} alt={project.name} className="main-projects__img"/>
-                                    }
-                                </div>
-                            </DelayedLink> : <Preloader/>
-                        }
+                        <DelayedLink
+                            to={`/projects/${project.nameInEng}`}
+                            className={`projects__item projects__item__${index + 1}`}
+                            key={project.id}
+                        >
+                            <div className="projects__item-img-wrap">
+                                {isVideo ?
+                                    <VideoComponent ref={(ref) => addVideoRef(ref)} project={project}
+                                                    isMob={isMob} videoSize={imgSize} apiUrl={apiUrl}/> :
+                                    <img src={imgSize} alt={project.name} className="main-projects__img"/>
+                                }
+                            </div>
+                        </DelayedLink>
                         <span className="projects-decription m-text">
                     <p style={{color: "rgba(117, 118, 119, 1)"}}>{project.date} • {project.name}</p>
                     <DelayedLink
@@ -362,8 +360,8 @@ const Projects = () => {
                 </span>
                     </div>
 
-            )
-        })
+                )
+            })
         : null}</>
 
     const odd = renderProject(true)
@@ -446,7 +444,7 @@ export const VideoComponent = ({project, apiUrl, videoSize}) => {
     }, [videoSize]);
 
     return (
-        <video className={"video-target"} key={'videoSize_' + videoSize} ref={videoRef} muted loop playsInline>
+        <video key={'videoSize_' + videoSize} ref={videoRef} muted loop playsInline>
             <source
                 src={videoSize}
                 type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"

@@ -27,7 +27,6 @@ import {maxLength} from "react-admin";
 import {useMobile} from "../projects/projectDetail/ProjectDetail";
 import {Marquee} from "@devnomic/marquee";
 import {Cursor} from "../../cursor/cursor";
-import {Preloader} from "../../preloader/preloader";
 
 const apiUrl = "";
 
@@ -416,7 +415,6 @@ const MainPage = (props) => {
 
                 </div>
             </section>
-            { !showreels ?
             <section className="main-showreel whiteHeader">
                 <div className="container">
                     <div  onClick={handleVideoClick} className={`main-showreel__wrap ${isFullScreen ? 'full-screen' : ''}`}>
@@ -424,7 +422,7 @@ const MainPage = (props) => {
                     </div>
                 </div>
 
-            </section> : <Preloader/>}
+            </section>
 
             {!!working && working.length > 0 &&
              <WorkingSlider />
