@@ -61,6 +61,7 @@ const AppHeader = (props) => {
                     ? '1120px'
                     : `${(window.innerWidth * 0.85) / 10}rem`,
             },
+
             up: { transform: 'translateY(-30rem)' },
             down: { transform: 'translateY(0)' },
             padding: { padding: '2rem 3rem' },
