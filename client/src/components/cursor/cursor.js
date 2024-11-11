@@ -44,7 +44,6 @@ export const Cursor = () => {
             gsap.to(arrowRef.current, {
                 x: e.clientX - 12,
                 y: e.clientY - 12,
-
             });
         } else {
             // Если нет, то скрываем стрелку
@@ -52,11 +51,16 @@ export const Cursor = () => {
                 autoAlpha: 0,
             });
         }
-        if (windowWidth >= 1800 ) {
+        if (windowWidth === 1920) {
             gsap.to(arrowRef.current, {
-                x: e.clientX - 40,
-                y: e.clientX - 40
+                x: e.clientX - 50,
             })
+        }
+        if (windowWidth === 2560) {
+            gsap.to(arrowRef.current, {
+                x: e.clientX - 100
+            })
+
         }
     };
 
