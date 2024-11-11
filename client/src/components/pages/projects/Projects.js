@@ -369,9 +369,9 @@ const Projects = () => {
 
     return (
         <>
-            <Cursor/>
             {!isLoading &&
                 <main className="projects">
+                    <Cursor/>
                     <section className="projects-start">
                         <div className="container">
                             <span className="projects-start__text">
