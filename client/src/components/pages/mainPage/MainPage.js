@@ -256,9 +256,8 @@ const MainPage = (props) => {
     const videoModal = useRef(null);
 
     return (<>
-        <Cursor/>
         {!isLoading && (<main className="main">
-
+            <Cursor/>
             <section className="main-banner" ref={mainBannerRef}>
                 <div className="container">
                     <div className="main-banner__wrap">

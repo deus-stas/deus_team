@@ -213,9 +213,9 @@ const Agency = (props) => {
 
     return (
         <>
-            <Cursor/>
             {!isLoading &&
         <main className="agency">
+            <Cursor/>
             <div className="container">
             <section className="agency-start">
                      <span className="agency-start__text">
