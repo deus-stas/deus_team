@@ -33,6 +33,12 @@ export const Cursor = () => {
                 autoAlpha: 0,
             });
         }
+        if (windowWidth >= 1800 ) {
+            gsap.to(arrowRef.current, {
+                x: e.clientX - 40,
+                y: e.clientX - 40
+            })
+        }
     };
     // useEffect for moving
     useEffect(() => {

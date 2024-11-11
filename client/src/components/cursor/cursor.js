@@ -26,7 +26,7 @@ export const Cursor = () => {
         '.news-main__8',
         '.news-main__9',
         '.news-main__10',
-        // '.projects__item',
+        '.projects__item',
         '.agency-about__wrapp-btn',
         '.cursorTarget',
         '.sub-cursor-target',
@@ -44,12 +44,19 @@ export const Cursor = () => {
             gsap.to(arrowRef.current, {
                 x: e.clientX - 12,
                 y: e.clientY - 12,
+
             });
         } else {
             // Если нет, то скрываем стрелку
             gsap.to(arrowRef.current, {
                 autoAlpha: 0,
             });
+        }
+        if (windowWidth >= 1800 ) {
+            gsap.to(arrowRef.current, {
+                x: e.clientX - 40,
+                y: e.clientX - 40
+            })
         }
     };
 
