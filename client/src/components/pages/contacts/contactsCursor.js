@@ -33,16 +33,10 @@ export const Cursor = () => {
                 autoAlpha: 0,
             });
         }
-        if (windowWidth === 1920) {
+        if ((windowWidth <= 1920) && (windowWidth > 1800)) {
             gsap.to(arrowRef.current, {
-                x: e.clientX - 50,
+                x: e.clientX - 65,
             })
-        }
-        if (windowWidth === 2560) {
-            gsap.to(arrowRef.current, {
-                x: e.clientX - 100
-            })
-
         }
     };
     // useEffect for moving
