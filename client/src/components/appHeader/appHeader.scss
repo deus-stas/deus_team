@@ -221,6 +221,7 @@
     &__wrap {
         display: flex;
         width: 100%;
+        max-width: 1840px;
         gap: 7rem;
         margin: 0 auto;
         transition: all;

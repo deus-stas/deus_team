@@ -872,6 +872,7 @@
       display: grid;
       grid-template-columns: 0.25fr 0.95fr;
       width: 100vw;
+      position: relative;
 
       @media (width <= 870px) {
         grid-template-columns: 1fr;
@@ -879,6 +880,19 @@
 
       @media (width <= 574px) {
         display: block;
+      }
+
+      .faded {
+        height: 302px;
+        position: absolute;
+        width: 70px;
+        background: linear-gradient(270deg, #EEEEEE 0%, rgba(238, 238, 238, 0) 100%);
+        left: 1690px;
+        z-index: 10;
+        display: none;
+        @media (width >= 1900px) {
+          display: block;
+        }
       }
 
       // @include respond(sm) {
