@@ -131,6 +131,10 @@ input {
 html {
     font-size: 10px;
     scroll-behavior: smooth;
+
+    @media (width >= 2000px) {
+        font-size: 16px;
+    }
     //@include respond(xxxl) {
     //    font-size: 10px;
     //}
