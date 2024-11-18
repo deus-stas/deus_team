@@ -427,7 +427,7 @@ const MainPage = (props) => {
 
             {!!working && working.length > 0 &&
              <WorkingSlider />
-            }
+            }   
 
         </main>)}
     </>);

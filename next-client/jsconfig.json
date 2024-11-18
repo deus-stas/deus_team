@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Устанавливает целевую версию JavaScript
+    "module": "ESNext", // Использует модульный формат ESNext
+    "jsx": "react-jsx", // Поддержка JSX с использованием react-jsx runtime
+    "baseUrl": ".", // Указывает базовую директорию для путей
+    "paths": {
+      "@/*": ["./*"] // Настройка алиасов для сокращенных путей
+    },
+    "moduleResolution": "Node", // Использует node-резолюцию модулей
+    "strict": true, // Включает строгий режим TypeScript
+    "esModuleInterop": true, // Поддержка импортов ES-модулей
+    "skipLibCheck": true, // Пропускает проверку типов библиотек
+    "forceConsistentCasingInFileNames": true // Следит за регистром в именах файлов
+  }
+}
