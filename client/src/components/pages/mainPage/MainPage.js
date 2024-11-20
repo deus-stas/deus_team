@@ -14,6 +14,7 @@ import "swiper/css";
 import "swiper/css/grid";
 import "./mainPage.scss";
 
+
 import deus from "../../../img/deus-circle.png";
 import {connect} from "react-redux";
 import RetryImage from "../../../helpers/RetryImage";
@@ -256,8 +257,9 @@ const MainPage = (props) => {
     const videoModal = useRef(null);
 
     return (<>
+        <Cursor/>
         {!isLoading && (<main className="main">
-            <Cursor/>
+
             <section className="main-banner" ref={mainBannerRef}>
                 <div className="container">
                     <div className="main-banner__wrap">

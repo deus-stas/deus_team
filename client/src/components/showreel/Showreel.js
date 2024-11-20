@@ -3,7 +3,6 @@ import Popup from 'reactjs-popup';
 import './showreel.scss';
 import { usePrevious } from "react-admin";
 import showPng from "./showreel.png";
-import rotate from "./rotate.svg";
 import playCursor from "../../img/videoPlayCursor.svg";
 import pauseCursor from "../../img/videoPauseCursor.svg";
 
@@ -110,15 +109,11 @@ const Showreel = (props) => {
                     >
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
-                            <>
-                                <video ref={videoRef} poster={showPng} id={"mainVideo"} loop playsInline preload={'auto'}>
-                                    <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
-                                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                                </video>
-                                <img src={rotate} alt="rotate" className={`rotate ${isPaused ? 'pausing' : 'playing'}`}/>
-                            </>
+                            <video ref={videoRef} poster={showPng} id={"mainVideo"} loop playsInline preload={'auto'}>
+                                <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
+                                        type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
+                            </video>
                         }
-
                         <img src={playCursor} alt="showreel" />
                     </div>
                 ) : (

@@ -68,12 +68,12 @@ const ProjectNext = ({ props, detail }) => {
                             <div className="project-next__item">
                                 {isVideo ?
                                     <span className="projects__item">
-                                         <VideoComponent className="projects__item next__project_img" ref={(ref) => addVideoRef(ref)}  project={project} isMob={isMob} videoSize={imgSize}
+                                         <VideoComponent className="projects__item" ref={(ref) => addVideoRef(ref)}  project={project} isMob={isMob} videoSize={imgSize}
                                                          apiUrl={apiUrl} />
                                     </span>
                                     :
                                     <img src={imgSize} alt={project.name}
-                                         className="projects__item next__project_img"/>
+                                         className="projects__item"/>
                                 }
                                 <span className="projects-decription m-text">
                                       <p style={{color: "rgba(117, 118, 119, 1)"}}>{project.date} • {project.name}</p>

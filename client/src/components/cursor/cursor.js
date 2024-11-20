@@ -29,28 +29,18 @@ export const Cursor = () => {
         '.projects__item',
         '.agency-about__wrapp-btn',
         '.cursorTarget',
-        '.sub-cursor-target',
-        '.video-target',
-        '.main-projects__img',
-        '.next__project_img'
     ]
 
     const windowWidth = window.innerWidth;
 
     const handleMoveMouse = (e) => {
-
         // Проверяем, находится ли курсор над элементом, соответствующим одному из селекторов (targets), и ширина окна больше 768 пикселей
-        if (e.target.closest(targets.join(',')) && windowWidth <= 1800) {
+        if (e.target.closest(targets.join(',')) && windowWidth > 768) {
             // Если да, то перемещаем стрелку в соответствии с положением курсора
             gsap.to(arrowRef.current, {
                 x: e.clientX - 12,
                 y: e.clientY - 12,
             });
-        } else if (e.target.closest(targets.join(',')) && windowWidth >= 1800) {
-            gsap.to(arrowRef.current, {
-                x: e.clientX - 67,
-                y: e.clientY - 12,
-            })
         } else {
             // Если нет, то скрываем стрелку
             gsap.to(arrowRef.current, {

@@ -1,0 +1,361 @@
+.form {
+    overflow: hidden;
+
+    &__title {
+        margin-bottom: 3rem;
+        @include respond(sm) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__wrap {
+        display: flex;
+
+        @include respond(sm) {
+            display: block;
+        }
+
+        &:not(:first-child) {
+            margin-top: 1.5rem;
+            @include respond(lg){
+                margin-top: 1.4rem;
+            }
+
+        }
+    }
+
+    &__group {
+        flex: 1;
+        position: relative;
+        background: rgba(23, 23, 23, 1);
+        color: #FFFFFF;
+        border-radius: 1rem;
+        border: 1px solid rgb(67, 67, 67);
+
+        &:not(:last-child) {
+            margin-right: 1.5rem;
+
+            @include respond(sm) {
+                margin-right: 0;
+                margin-bottom: 1.4rem;
+            }
+        }
+
+        .h-230 {
+            height: 23rem;
+            @include respond(lg){
+                height: 11rem;
+            }
+        }
+
+    }
+
+    &__input,
+    &__textarea {
+        overflow: hidden;
+        transition: all .5s ease-out;
+        font-family: 'Graphik LC Web', sans-serif;
+        padding: 1.5rem 2rem;
+        border-radius: 1rem;
+        display: block;
+        width: 100%;
+        background: rgba(23, 23, 23, 1);
+        color: #FFFFFF;
+        resize: none;
+        border: transparent 1px solid;
+        cursor: pointer;
+        @include respond(lg){
+            padding: .8rem 1.5rem;
+        }
+        @include respond(sm) {
+            padding: .8rem 1.5rem;
+            font-size: 1.6rem;
+        }
+
+        &::placeholder {
+            color: #A4A4A4;
+        }
+
+        &:focus{
+            border: rgba(255, 255, 255, 1) 1px solid;
+        }
+        &:hover{
+            border: rgba(255, 255, 255, 1) 1px solid;
+        }
+    }
+
+    &__error {
+        color: red;
+        position: absolute;
+        top: -1rem;
+        right: 0;
+        font-size: 1.5rem;
+
+        @include respond(sm) {
+            bottom: -2.5rem;
+        }
+
+    }
+
+    &__label {
+        color: #757677;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-left: 2rem;
+        @include respond(sm) {
+            bottom: -2.5rem;
+        }
+    }
+
+
+    &__file {
+        transition: all .5s ease-out;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Graphik LC Web', sans-serif;
+        padding: 1.5rem 2rem;
+        border-radius: 1rem;
+        cursor: pointer;
+        color: #A4A4A4;
+        border: transparent 1px solid;
+        &:focus{
+            border: rgba(255, 255, 255, 1) 1px solid;
+        }
+        &:hover{
+            border: rgba(255, 255, 255, 1) 1px solid;
+        }
+        @include respond(lg){
+            padding: 1rem 1.5rem;
+        }
+        &-label {
+            display: block;
+            font-size: 1.6rem;
+            @include respond(sm) {
+                font-size: 1.6rem;
+            }
+        }
+
+        &-btn {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: #F3F4F4;
+            cursor: pointer;
+            border-radius: 38px;
+            font-size: 2rem;
+            line-height: 2.6rem;
+            transition: all .3s;
+
+            @include respond(sm) {
+                padding: 1rem 2rem;
+                font-size: 1.6rem;
+                line-height: 1.8rem;
+            }
+
+            &:hover {
+                background: #FF4D01;
+                color: #fff;
+
+                @include respond(sm) {
+                    background: #F3F4F4;
+                    color: inherit;
+                }
+            }
+        }
+
+        &-f {
+            max-width: 90%;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            position: relative;
+
+            @include respond(sm) {
+                margin-top: 1rem;
+            }
+
+            &__wrapp{
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: stretch;
+                .fileItem{
+                    position: relative;
+                    margin: 0 1rem 0 .5rem;
+
+                }
+
+                .icon {
+                    width: 2.4rem;
+                    height: 2.4rem;
+                }
+            }
+
+
+        }
+
+
+
+        input {
+            display: none;
+        }
+
+        &-arrow {
+            cursor: pointer;
+            color: #E0FD60;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+
+            .icon {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+
+            &:hover {
+                transition: all 0.3s cubic-bezier(0.25, 1.75, 0.75, 0.9);
+            }
+        }
+    }
+
+    .btn {
+        display: block;
+        font-size: 1.6rem;
+        padding: 1.3rem 3rem;
+
+        @include respond(sm) {
+            grid-column: span 2;
+        }
+    }
+
+    &__check {
+        margin-top: 2.1rem;
+        line-height: 2rem;
+        font-size: 1.6rem;
+
+    }
+
+    &__checks {
+        margin: 3rem 0;
+        position: relative;
+        @include respond(lg) {
+            margin: 2rem 0;
+        }
+        @include respond(sm) {
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        &-title {
+            margin-bottom: 1.5rem;
+            @include respond(lg) {
+                margin-bottom: 1.4rem;
+            }
+        }
+
+        &-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1rem;
+            color: rgb(164, 164, 164);
+
+            @include respond(xs) {
+                align-items: flex-start;
+                overflow: auto;
+                flex-wrap: nowrap;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        input {
+            display: none;
+        }
+
+        input:checked~&-c {
+            background: #E0FD60;
+            color: #050505;
+        }
+
+        &-c {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid hsla(0,0%,100%,.2);
+            border-radius: 52px;
+            cursor: pointer;
+            transition: all .3s;
+
+            @include respond(sm) {
+                padding: 1rem 2rem;
+                flex: 0 0 1rem;
+                white-space: nowrap;
+            }
+
+            &:hover {
+                background: #E0FD60;
+                color: #050505;
+
+            }
+        }
+    }
+
+    &__sent {
+        background-color: rgb(224, 253, 96);
+        border-radius: 9.4rem;
+        padding: 1.1rem 2rem;
+        cursor: pointer;
+        color: #050505;
+        border: none;
+    }
+
+    &__success {
+        text-align: center;
+
+        &-title {
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+        }
+
+        &-descr {
+            font-size: 2.4rem;
+            line-height: 3.4rem;
+        }
+    }
+}
+.underline {
+    text-decoration: underline;
+}
+.pointer {
+    cursor: pointer;
+}
+.authContainer {
+    width: 30%;
+    
+    @include respond(lg) {
+        width: 60%;
+    }
+
+    @include respond(sm) {
+        width: 100%;
+    }
+}
+
+.error {
+    border-bottom: 1px solid #fa0202 !important;
+    border-left: 1px solid #fa0202 !important;
+}
+
+.check-error {
+    .form__checks-c {
+        border-color: #fa0202 !important;
+    }
+
+}

@@ -1,6 +1,6 @@
 .arrowBlock {
   pointer-events: none;
-  opacity: 1;
+  opacity: 0;
   position: fixed;
   z-index: 1001;
 }
@@ -30,8 +30,4 @@
   opacity: 0;
   visibility: hidden;
   display: none;
-}
-
-@media (min-width: 1800px) {
-
 }
