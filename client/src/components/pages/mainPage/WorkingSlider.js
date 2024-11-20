@@ -129,6 +129,7 @@ const WorkingSlider = () => {
                         </SwiperSlide>
                         ))}
                 </Swiper>
+                <div className="faded"/>
                 <div className="slide-arrow mobile">
                     <div
                         className={`prev ${currentSlide === 0 ? "disabled" : ""}`}
