@@ -1,48 +1,80 @@
-import {Link} from 'react-router-dom';
-import React, {useEffect, useRef, useState} from 'react';
-import axios, {setIsLoadingMainPageEvent} from '../../../axios'
-import 'wowjs/css/libs/animate.css';
-import {Icon} from '../../icon/Icon'
+'use client'; // Если вы используете Next.js с папкой `app`
 
+import React from 'react';
+import {useEffect, useRef, useState} from 'react';
+import axios, {setIsLoadingMainPageEvent} from '../../axios'
+import 'wowjs/css/libs/animate.css';
+import {Icon} from '../../components/icon/Icon'
+import Image from 'next/image';
 import './services.scss'
 
-import RetryImage from "../../../helpers/RetryImage";
-import {connect, useSelector} from "react-redux";
-import pentagon from "../../../img/pentagon.png"
-import octagon from "../../../img/octagon.png"
-import elipse from "../../../img/elipse.png"
-import spiral from "../../../img/spiral.png"
-import includes from "validator/es/lib/util/includes";
-import {gotoAnchor} from "../../anchors";
-import MarqueeComponent from "../../MarqueeComponent";
-import DelayedLink from "../../appHeader/DelayedLink";
+// import RetryImage from "../../helpers/RetryImage";
+// import {connect, useSelector} from "react-redux";
+import pentagon from "../../public/img/pentagon.png"
+import octagon from "../../public/img/octagon.png"
+import elipse from "../../public/img/elipse.png"
+// import spiral from "../../public/img/spiral.png"
+// import includes from "validator/es/lib/util/includes";
+import {gotoAnchor} from "../../components/anchors";
+// import MarqueeComponent from "../../MarqueeComponent";
+import Link from 'next/link'; // Используем Link из Next.js для навигации
 import {useMediaQuery} from "@material-ui/core";
-import {Cursor} from "../../cursor/cursor";
+import {Cursor} from "../../components/cursor/cursor";
+import {fetchData } from "../../actions/appActions";
+import {connect, useDispatch, useSelector } from 'react-redux';
 
 const apiUrl = '';
 
-const Services = (props) => {
+const Services = () => {
 
+    // const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        setIsLoadingMainPageEvent(true)
-        const handleLoad = (e) => {
-            if (e.detail.isLoading !== isLoading) {
-                setIsLoading(e.detail.isLoading);
-            }
-        };
+    // useEffect(() => {
+    //     setIsLoadingMainPageEvent(true)
+    //     const handleLoad = (e) => {
+    //         if (e.detail.isLoading !== isLoading) {
+    //             setIsLoading(e.detail.isLoading);
+    //         }
+    //     };
 
+    //     window.addEventListener('isLoadingMainPage', handleLoad);
+    //     return () => {
+    //         window.removeEventListener('isLoadingMainPage', handleLoad);
+    //     };
+    // }, []);
+    // const { headerData, services, contacts, team } = useSelector((state) => ({
+    //         headerData: state.app.headerData,
+    //         services: state.app.services,
+    //         projects: state.app.projects,
+    //         team: state.app.team,
+    //   }));
+
+    // useEffect(() => {
+    //     dispatch(fetchData());
+    //   }, [dispatch]);
+    
+
+    useEffect(() => {
+        const handleLoad = (e) => {
+          if (e.detail.isLoading !== isLoading) {
+            setIsLoading(e.detail.isLoading);
+          }
+        };
+        console.log('isLoading',isLoading)  
         window.addEventListener('isLoadingMainPage', handleLoad);
         return () => {
-            window.removeEventListener('isLoadingMainPage', handleLoad);
+          window.removeEventListener('isLoadingMainPage', handleLoad);
         };
-    }, []);
+      
+      }, [isLoading]);
+
 
 
     const sizeLarge = 'Объединяем аналитику, маркетинг, дизайн, разработку<br/> и интеграции в единую систему для получения<br/> максимальной эффективности для вашего бизнеса'
     const sizeSmall = 'Объединяем аналитику, маркетинг, дизайн,<br/> разработку и интеграции в единую систему<br/> для получения максимальной эффективности<br/> для вашего бизнеса'
     const sizeXSmall = 'Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса'
+
 
     const matches1440 = useMediaQuery('(min-width:1025px)');
     const matches1024 = useMediaQuery('(min-width:940px)');
@@ -58,12 +90,13 @@ const Services = (props) => {
         text = sizeXSmall
     }
 
-    const {headerData, services, team, projects} = props;
+    // const {headerData, services, team, projects} = props;
 
     return (
         <>
             <Cursor/>
-            {!isLoading &&
+            {/* {!isLoading && */}
+            {true &&
                 <main className="services">
                     <div className="container">
                         <section className="services-s">
@@ -97,22 +130,22 @@ const Services = (props) => {
 
                         </section>
 
-                        <section className="services-list">
+                        {/* <section className="services-list">
                             <div className="services-list__wrapp borderBlock padding">
                                 {
                                     !!services && services.filter((service) => service.isInvisible).map((service, index) => {
                                         return (
                                             <div className="services-list__wrapp-item">
                                                 <div className="describe">
-                                                    <h2 to={`/services/${service.path}`}
+                                                    <h2 href={`/services/${service.path}`}
                                                          className="heading-secondary"
                                                          key={service.id}>
-                                                        <DelayedLink to={`/projects?type=${service.types}`}
+                                                        <Link href={`/projects?type=${service.types}`}
                                                                      disabled={!service.types || service.types.length === 0}
                                                                      datahash="projectNav"
                                                                      onClick={(e) => gotoAnchor(e)}>
                                                             <div className="services-s__name">{service.name}</div>
-                                                        </DelayedLink>
+                                                        </Link>
                                                     </h2>
                                                     <div className="describe__wrapp ">
                                                         <p className="s-text">
@@ -144,8 +177,8 @@ const Services = (props) => {
                                         )
                                     })}
                             </div>
-                        </section>
-
+                        </section> */}
+{/* 
                         <section className="services-principle borderBlock padding whiteHeader">
                             <h2 className="heading-secondary">Принципы управления<br/> проектами</h2>
                             <div className="services-principle__wrap">
@@ -179,8 +212,8 @@ const Services = (props) => {
                                     </div>
                                 </div>
 
-                        </section>
-
+                        </section> */}
+{/* 
                         <section className="services-team borderBlock padding">
                                 <div className="services-team__wrap">
                                     <div className="info">
@@ -236,7 +269,7 @@ const Services = (props) => {
                                     </div>
                                 </div>
 
-                        </section>
+                        </section> */}
                     </div>
                 </main>
             }
@@ -244,13 +277,14 @@ const Services = (props) => {
     )
 }
 
-export default connect(
-    (state) => (
-        {
-            headerData: state.app.headerData,
-            services: state.app.services,
-            projects: state.app.projects,
-            team: state.app.team,
-        }
-    )
-)(Services)
+export default Services
+// export default connect(
+//     (state) => (
+//         {
+//             headerData: state.app.headerData,
+//             services: state.app.services,
+//             projects: state.app.projects,
+//             team: state.app.team,
+//         }
+//     )
+// )(Services)

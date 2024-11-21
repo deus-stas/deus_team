@@ -1,3 +1,5 @@
+"use client"; // Обязательно для Next.js компонентов клиента
+
 import axios from 'axios';
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'

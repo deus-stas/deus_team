@@ -11,7 +11,10 @@ const nextConfig = {
       },
     ];
   },
-
+  webpack: (config) => {
+    config.resolve.alias['@uploads'] = path.join(__dirname, 'uploads');
+    return config;
+  },
   images: {
     domains: ['example.com', 'localhost'], // Разрешенные домены для изображений
   },
@@ -22,3 +25,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+

@@ -1176,6 +1176,7 @@
 
 .swiper_wrapper_mainp {
   width: 100%;
+  // max-width: 100vw;
   margin-right: 0;
   .swiper-slide {
     height: 30.2rem !important;
@@ -1186,6 +1187,7 @@
   .swiper-wrapper {
     margin-bottom: 0;
     margin-top: 0;
+    max-width: 1400px;
     @media (width <= 1345px) {
       margin-bottom: 20px;
     }

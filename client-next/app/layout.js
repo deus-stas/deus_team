@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react"; // Добавлен импорт хуков React
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { store } from '../store';
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -8,10 +8,11 @@ import setAuthToken  from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/authActions";
 import jwtDecode from "jwt-decode";
 import Head from 'next/head';
+import {Provider} from "react-redux";
 
 import AppHeader from '../components/appHeader/AppHeader';
 import HeadComponent from '../components/Head/Head';
-// import AppFooter from "../components/appFooter/AppFooter";
+import AppFooter from "../components/appFooter/AppFooter";
 import CustomCursor from "custom-cursor-react";
 // import ScrollToTop from "../helpers/ScrollToTop";
 import "custom-cursor-react/dist/index.css";
@@ -20,7 +21,7 @@ import '../style/style.scss'
 
 export default function RootLayout({ children }) {
 
-
+  // const dispatch = useDispatch()
   const pathname = usePathname();
   const adminBasePath = "/admin/";
   const hiddenRoutes = [adminBasePath];
@@ -85,6 +86,8 @@ export default function RootLayout({ children }) {
     fetchSeoData();
   }, [pathname]);
 
+
+
   return (
     <html lang="ru">  
      <head>
@@ -126,7 +129,7 @@ export default function RootLayout({ children }) {
           </main>
 
           {/* Футер */}
-          {/* {!shouldHideHeaderFooter && <AppFooter />} */}
+          {!shouldHideHeaderFooter && <AppFooter />}
         </Provider>
       </body>
     </html>

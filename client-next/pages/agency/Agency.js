@@ -1,24 +1,25 @@
+'use client'; // Если вы используете Next.js с папкой `app`
+
 import React, { useEffect, useState } from 'react';
-import axios, {setIsLoadingMainPageEvent} from '../../../axios'
-import { Link } from 'react-router-dom';
-import Marquee from "react-fast-marquee";
-import { Icon } from '../../icon/Icon';
+import axios, {setIsLoadingMainPageEvent} from '../../axios'
+import Link from 'next/link'; // Используем Link из Next.js для навигации
+// import Marquee from "react-fast-marquee";
+import { Icon } from '../../components/icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'reactjs-popup/dist/index.css';
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import { Grid, Pagination } from 'swiper/modules';
-import hh from "../../../img/hh_icon.png"
+// import hh from "../../../img/hh_icon.png"
 import './agency.scss';
 import {connect} from "react-redux";
-import TruncatedSentence from "./TruncatedSentence";
+// import TruncatedSentence from "./TruncatedSentence";
 import {useMediaQuery} from "@material-ui/core";
-import DelayedLink from "../../appHeader/DelayedLink";
 import { Marquee as MarqueeTeam} from "@devnomic/marquee";
 import "./marquee.scss";
-import {useMobile} from "../projects/projectDetail/ProjectDetail";
-import {Cursor} from "../../cursor/cursor";
+import useMobile from "../../components/useMobile";
+import {Cursor} from "../../components/cursor/cursor";
 
 
 const Agency = (props) => {
@@ -224,58 +225,58 @@ const Agency = (props) => {
                      </span>
             </section>
 
-                <section id='agency' className="agency-about">
-                    <div className="agency-about__wrap">
-                        <div className="agency-about__adv-item m-text">
-                            <Icon icon="star"></Icon>
-                            <p className="m-text">Работаем<br/> с 2016 года</p>
-                        </div>
-                        <div className="agency-about__adv-item  m-text">
-                            <Icon icon="star"></Icon>
-                            <p className="m-text">Входим в ТОП-40<br/> креативности студий</p>
-                        </div>
-                        <div className="agency-about__adv-item  m-text">
-                            <Icon icon="star"></Icon>
-                            <p className="m-text">Комплексные решения<br/> для различных индустрий</p>
-                        </div>
-                        <div className="agency-about__adv-item  m-text">
-                            <Icon icon="star"></Icon>
-                            <p className="m-text">50% клиентов приходят<br/> к нам по рекомендации</p>
-                        </div>
+            <section id='agency' className="agency-about">
+                <div className="agency-about__wrap">
+                    <div className="agency-about__adv-item m-text">
+                        <Icon icon="star"></Icon>
+                        <p className="m-text">Работаем<br/> с 2016 года</p>
                     </div>
-                    {awards &&
-                        <div className="agency-about__wrapp whiteHeader">
-                            {awards.map(award => {
-                                const getAwardIcon = (awardName) => {
-                                    const iconMap = {
-                                        awwwads: <Icon icon="awwwards" viewBox="0 0 40 40"/>,
-                                        ratingruneta: <Icon icon="rating" viewBox="0 0 40 40"/>,
-                                        'css design awards': <Icon icon="cssAwards" viewBox="0 0 40 40"/>,
-                                    };
-
-                                    const iconName = Object.keys(iconMap).find(key => awardName.toLowerCase().includes(key.toLowerCase()));
-                                    if (iconName) {
-                                        return iconMap[iconName];
-                                    }
-                                    return null;
+                    <div className="agency-about__adv-item  m-text">
+                        <Icon icon="star"></Icon>
+                        <p className="m-text">Входим в ТОП-40<br/> креативности студий</p>
+                    </div>
+                    <div className="agency-about__adv-item  m-text">
+                        <Icon icon="star"></Icon>
+                        <p className="m-text">Комплексные решения<br/> для различных индустрий</p>
+                    </div>
+                    <div className="agency-about__adv-item  m-text">
+                        <Icon icon="star"></Icon>
+                        <p className="m-text">50% клиентов приходят<br/> к нам по рекомендации</p>
+                    </div>
+                </div>
+                {awards &&
+                    <div className="agency-about__wrapp whiteHeader">
+                        {awards.map(award => {
+                            const getAwardIcon = (awardName) => {
+                                const iconMap = {
+                                    awwwads: <Icon icon="awwwards" viewBox="0 0 40 40"/>,
+                                    ratingruneta: <Icon icon="rating" viewBox="0 0 40 40"/>,
+                                    'css design awards': <Icon icon="cssAwards" viewBox="0 0 40 40"/>,
                                 };
 
-                                return (
-                                    <DelayedLink to={`/news/${award.blogUrl}`} className="agency-about__wrapp-btn"
-                                                 key={award.id}>
-                                        <img src={award.image ? `/uploads/${award.image.filename}` : null}
-                                             alt={award.name}/>
-                                        <span className="content">
-                                            {getAwardIcon(award.name)}
-                                             <p className="name m-text">{award.name}</p>
-                                        </span>
+                                const iconName = Object.keys(iconMap).find(key => awardName.toLowerCase().includes(key.toLowerCase()));
+                                if (iconName) {
+                                    return iconMap[iconName];
+                                }
+                                return null;
+                            };
 
-                                    </DelayedLink>
-                                );
-                            })}
-                        </div>}
+                            return (
+                                <Link href={`/news/${award.blogUrl}`} className="agency-about__wrapp-btn"
+                                                key={award.id}>
+                                    <img src={award.image ? `/uploads/${award.image.filename}` : null}
+                                            alt={award.name}/>
+                                    <span className="content">
+                                        {getAwardIcon(award.name)}
+                                            <p className="name m-text">{award.name}</p>
+                                    </span>
 
-                </section>
+                                </Link>
+                            );
+                        })}
+                    </div>}
+
+            </section>
 
             <section id='principle' className="agency-principle">
                     <div className="agency-principle__wrap">
@@ -323,7 +324,7 @@ const Agency = (props) => {
                             <div className="agency-clients__pag hidden-desktop">
                             </div>
                         </div>
-                    {!isMobile?
+                    {/* {!isMobile?
                     <div className="agency-clients__marquee">
                         {[...Array(rows)].map((_, rowIndex) => {
                             const endIndex = (rowIndex + 1) * clientsPerRow
@@ -335,9 +336,9 @@ const Agency = (props) => {
                                 return <></>
                             }
                             return (
-                                <MarqueeTeam key={rowIndex} direction={'left'} reverse={rowIndex % 2 !== 0}>
+                                <MarqueeTeam key={rowIndex} direction={'left'} reverse={rowIndex % 2 !== 0} >
                                     {slicedClients.filter(client => !!client.image).map(client => (
-                                        <div className='agency-clients__img'>
+                                        <div className='agency-clients__img' key={`marquee-${rowIndex}`}>
                                             <div className='container-img'>
                                                 <img
                                                     src={client.image ? `/uploads/${client.image.filename}` : null}
@@ -386,11 +387,12 @@ const Agency = (props) => {
                             }
                         </Swiper>
                         </div>
-                    }
+                    } */}
+                    
                 </section> : null
             }
 
-            {team && (
+            {/* {team && (
                 <section id="agency" className="agency-team borderBlock">
                     <div className="agency-team__wrap">
                         <div className="intro">
@@ -433,61 +435,61 @@ const Agency = (props) => {
 
                     </div>
                 </section>
-            )}
+            )} */}
 
-                {vacancies && (
-                    <section id="agency" className="agency-vacancy">
-                        <div className="agency-vacancy__wrap">
-                            <div className="agency-vacancy__info sticky-h2">
-                                <h2 className="heading-secondary">Мы находимся<br/> в постоянном поиске<br/> лучших
-                                    специалистов.</h2>
-                                <span>
-                                <p className="m-text">Не нашли подходящую вакансию?</p>
-                                <p className="m-text">Пришлите нам на почту</p>
+            {vacancies && (
+                <section id="agency" className="agency-vacancy">
+                    <div className="agency-vacancy__wrap">
+                        <div className="agency-vacancy__info sticky-h2">
+                            <h2 className="heading-secondary">Мы находимся<br/> в постоянном поиске<br/> лучших
+                                специалистов.</h2>
+                            <span>
+                            <p className="m-text">Не нашли подходящую вакансию?</p>
+                            <p className="m-text">Пришлите нам на почту</p>
+                        </span>
+                            <p className="m-text"><Link className="hoverMail"
+                                                    href="mailto:job@de-us.ru">job@de-us.ru</Link></p>
+                    </div>
+                    <div className="agency-vacancy__wrapper">
+                        {vacancies.map((item, i) => {
+                            return (
+                                <Link target="_blank" href={item.link} className="agency-vacancy__wrapper-item" key={i}>
+                                    <span className="place">
+                                        <Icon icon="vacancies" viewBox="0 0 16 16"/>
+                                        <p className =
+                                                {
+                                            item.place.length > 4
+                                                ? "where s-text big-txt"
+                                                : "where s-text small-txt"
+                                        }
+                                        >
+                                            {item.place}
+                                        </p>
+                                    </span>
+                                    <h3 className="l-textReg">{item.name}</h3>
+                                    <p className="s-text type">{item.type}</p>
+                                    <div className="arrow">
+                                        <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                                    </div>
+
+                                </Link>
+                            )
+                        })}
+                        <Link className="agency-vacancy__wrapper-item" target="_blank"
+                                href={"https://hh.ru/employer/2174085"}>
+                            <span className="hh">
+                                <Icon icon="hh" viewBox="0 0 48 49"/>
+                            <p className=" m-text">Больше вакансий на hh.ru</p>
                             </span>
-                                <p className="m-text"><Link className="hoverMail"
-                                                        to="mailto:job@de-us.ru">job@de-us.ru</Link></p>
-                        </div>
-                        <div className="agency-vacancy__wrapper">
-                            {vacancies.map((item) => {
-                                return (
-                                    <Link target="_blank" to={item.link} className="agency-vacancy__wrapper-item">
-                                       <span className="place">
-                                           <Icon icon="vacancies" viewBox="0 0 16 16"/>
-                                           <p className =
-                                                  {
-                                               item.place.length > 4
-                                                   ? "where s-text big-txt"
-                                                   : "where s-text small-txt"
-                                           }
-                                           >
-                                               {item.place}
-                                           </p>
-                                       </span>
-                                        <h3 className="l-textReg">{item.name}</h3>
-                                        <p className="s-text type">{item.type}</p>
-                                        <div className="arrow">
-                                            <Icon icon="arrowVac" viewBox="0 0 24 24"/>
-                                        </div>
+                            <div className="arrow">
+                                <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                            </div>
+                        </Link>
+                    </div>
 
-                                    </Link>
-                                )
-                            })}
-                            <Link className="agency-vacancy__wrapper-item" target="_blank"
-                                  to={"https://hh.ru/employer/2174085"}>
-                                <span className="hh">
-                                 <Icon icon="hh" viewBox="0 0 48 49"/>
-                                <p className=" m-text">Больше вакансий на hh.ru</p>
-                                </span>
-                                <div className="arrow">
-                                    <Icon icon="arrowVac" viewBox="0 0 24 24"/>
-                                </div>
-                            </Link>
-                        </div>
-
-                        </div>
-                    </section>
-                )}
+                    </div>
+                </section>
+            )}
             </div>
         </main>
             }

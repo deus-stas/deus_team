@@ -19,7 +19,7 @@ import "swiper/css/grid";
 import "./mainPage.scss";
 
 // import deus from "../../../img/deus-circle.png";
-import {connect} from "react-redux";
+// import {connect} from "react-redux";
 import RetryImage from "../../helpers/RetryImage";
 // import manager from "../../../img/manager.png";
 // import * as ReactDom from "react-dom/server";
@@ -31,6 +31,9 @@ import {Box, useMediaQuery} from "@material-ui/core";
 import useMobile from "../../components/useMobile";
 // import {Marquee} from "@devnomic/marquee";
 import {Cursor} from "../../components/cursor/cursor";
+import {connect, useDispatch, useSelector } from 'react-redux';
+import {fetchData } from "../../actions/appActions";
+
 
 const Marquee = dynamic(() =>
     import("@devnomic/marquee").then((mod) => mod.Marquee) // Убедитесь, что `Marquee` — экспортируемый компонент
@@ -257,8 +260,19 @@ const MainPage = (props) => {
     const double = <Icon icon="arrowGo" viewBox="0 0 30 30"/>;
 
     const mainShowreel = showreels.find((showreel) => showreel.mainShowreel === true);
+    const dispatch = useDispatch();
+    // const {services, headerData, team} = props;
+    const { headerData, services, contacts, team } = useSelector((state) => ({
+            headerData: state.app.headerData,
+            services: state.app.services,
+            projects: state.app.projects,
+            team: state.app.team,
+      }));
 
-    const {services, headerData, team} = props;
+    useEffect(() => {
+        dispatch(fetchData());
+      }, [dispatch]);
+
     services.sort((a, b) => a.position - b.position);
 
     const mainBannerRef = useRef(null);
@@ -317,116 +331,116 @@ const MainPage = (props) => {
             <section className="main-agency">
                 <div className="container">
 
-                    <div className="main-agency__wrap whiteHeader">
-                        {mainPage
-                            ? mainPage.map((item, index) => {
-                                const fileUrl = item.mainVideoFile ? `${apiUrl}/uploads/${item.mainVideoFile.filename}` : null;
-                                const isVideo = item.mainVideoFile ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.mainVideoFile.filename) : false;
+                        <div className="main-agency__wrap whiteHeader">
+                            {mainPage
+                                ? mainPage.map((item, index) => {
+                                    const fileUrl = item.mainVideoFile ? `${apiUrl}/uploads/${item.mainVideoFile.filename}` : null;
+                                    const isVideo = item.mainVideoFile ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.mainVideoFile.filename) : false;
 
-                                const arrow = index !== 1;
+                                    const arrow = index !== 1;
 
-                                const workers = index === 0 && (
-                                    <div key={`workers-${index}`}>
-                                        {team
-                                            .filter((teamMember) => teamMember.mainControl)
-                                            .slice(0, 3)
-                                            .map((teamMember, i) => (
-                                                <img
-                                                    src={`${apiUrl}/uploads/${teamMember.image?.filename}`}
-                                                    alt=""
-                                                    className="person-img"
-                                                    key={teamMember.id || i}
-                                                />
-                                            ))}
-                                    </div>
-                                );
-
-                                const allServices = index === 1 &&
-                                    props.services
-                                        .filter((service) => service.isInvisible)
-                                        .map((service, serviceIndex) => (
-                                            <Link href={`/services/`} key={`service-${serviceIndex}`}>
-                                                <div className="main-agency__item-link l-textReg">
-                                                    <p>{service.name}</p>
-                                                    <div className="hover-flip-arrow">
-                                                        <span>
-                                                            <Icon icon="arrowGo" viewBox="0 0 30 30" />
-                                                            <div className="hover-double">{double}</div>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        ));
-
-                                const num = index < 9 ? "0" + (index + 1) : index + 1;
-                                const name = item.name;
-                                const descr =
-                                    index === 1 ? (
-                                        <div className="main-agency__item-service">{allServices}</div>
-                                    ) : (
-                                        <div className={`main-agency__item__descr${index === 0 ? "1" : ""}`}>
-                                            {workers}
-                                            {item.textList && (
-                                                <div className="main-agency__item__descr-flex">
-                                                    {item.textList.map((textItem, ind) => (
-                                                        <div
-                                                            key={`textItem-${ind}`}
-                                                            className={
-                                                                index === 2
-                                                                    ? "main-agency__item__descr-flex__item"
-                                                                    : index === 0
-                                                                    ? "main-agency__item__descr-flex-ind1 m-text"
-                                                                    : ""
-                                                            }
-                                                        >
-                                                            {textItem.textItem}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            )}
+                                    const workers = index === 0 && (
+                                        <div key={`workers-${index}`}>
+                                            {team
+                                                .filter((teamMember) => teamMember.mainControl)
+                                                .slice(0, 3)
+                                                .map((teamMember, i) => (
+                                                    <img
+                                                        src={`${apiUrl}/uploads/${teamMember.image?.filename}`}
+                                                        alt=""
+                                                        className="person-img"
+                                                        key={teamMember.id || i}
+                                                    />
+                                                ))}
                                         </div>
                                     );
 
-                                return (
-                                    <div className="main-agency__item" key={`mainItem-${index}`}>
-                                        <Link href={`${item.pageURL}`} target="_blank" rel="noreferrer">
-                                            {isVideo ? (
-                                                <video
-                                                    className="main-agency__item-img"
-                                                    muted
-                                                    playsInline
-                                                    autoPlay
-                                                    loop
-                                                    controls={false}
-                                                    src={fileUrl}
-                                                />
-                                            ) : (
-                                                <img src={fileUrl} alt={item.name} className="main-agency__item-img" />
-                                            )}
-
-                                            <div className="main-agency__item-header">
-                                                <div className="main-agency__item-header__num s-text">
-                                                    <div className="num_flex">{num}</div>
-                                                </div>
-                                                <div className="main-agency__item-header__text heading-secondary">{name}</div>
-                                            </div>
-                                            {descr}
-                                            {!!arrow && !isMobile && !!isDesktop && (
-                                                <div className="main-agency__item-arrow">
-                                                    <div className="hover-flip-circle">
-                                                        <span>
-                                                            <Icon icon="arrowGo" viewBox="0 0 30 30" />
-                                                            <div className="hover-circle">{double}</div>
-                                                        </span>
+                                    const allServices = index === 1 &&
+                                        services
+                                            .filter((service) => service.isInvisible)
+                                            .map((service, serviceIndex) => (
+                                                <Link href={`/services/`} key={`service-${serviceIndex}`}>
+                                                    <div className="main-agency__item-link l-textReg">
+                                                        <p>{service.name}</p>
+                                                        <div className="hover-flip-arrow">
+                                                            <span>
+                                                                <Icon icon="arrowGo" viewBox="0 0 30 30" />
+                                                                <div className="hover-double">{double}</div>
+                                                            </span>
+                                                        </div>
                                                     </div>
+                                                </Link>
+                                            ));
+
+                                    const num = index < 9 ? "0" + (index + 1) : index + 1;
+                                    const name = item.name;
+                                    const descr =
+                                        index === 1 ? (
+                                            <div className="main-agency__item-service">{allServices}</div>
+                                        ) : (
+                                            <div className={`main-agency__item__descr${index === 0 ? "1" : ""}`}>
+                                                {workers}
+                                                {item.textList && (
+                                                    <div className="main-agency__item__descr-flex">
+                                                        {item.textList.map((textItem, ind) => (
+                                                            <div
+                                                                key={`textItem-${ind}`}
+                                                                className={
+                                                                    index === 2
+                                                                        ? "main-agency__item__descr-flex__item"
+                                                                        : index === 0
+                                                                        ? "main-agency__item__descr-flex-ind1 m-text"
+                                                                        : ""
+                                                                }
+                                                            >
+                                                                {textItem.textItem}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+
+                                    return (
+                                        <div className="main-agency__item" key={`mainItem-${index}`}>
+                                                {isVideo ? (
+                                                    <video
+                                                        className="main-agency__item-img"
+                                                        muted
+                                                        playsInline
+                                                        autoPlay
+                                                        loop
+                                                        controls={false}
+                                                        src={fileUrl}
+                                                    />
+                                                ) : (
+                                                    <img src={fileUrl} alt={item.name} className="main-agency__item-img" />
+                                                )}
+
+                                                <div className="main-agency__item-header">
+                                                    <div className="main-agency__item-header__num s-text">
+                                                        <div className="num_flex">{num}</div>
+                                                    </div>
+                                                    <div className="main-agency__item-header__text heading-secondary">{name}</div>
                                                 </div>
-                                            )}
-                                        </Link>
-                                    </div>
-                                );
-                            })
-                            : null}
-                    </div>
+                                                {descr}
+                                                {!!arrow && !isMobile && !!isDesktop && (
+                                                    <div className="main-agency__item-arrow">
+                                                        <div className="hover-flip-circle">
+                                                            <span>
+                                                                <Icon icon="arrowGo" viewBox="0 0 30 30" />
+                                                                <div className="hover-circle">{double}</div>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            {/* <Link href={`${item.pageURL}`} target="_blank" rel="noreferrer">
+                                            </Link> */}
+                                        </div>
+                                    );
+                                })
+                                : null}
+                        </div>
 
 
                     <div className="main-projects__wrap">
@@ -487,7 +501,10 @@ const MainPage = (props) => {
     </>);
 };
 
-export default connect((state) => ({
-    headerData: state.app.headerData, services: state.app.services, team: state.app.team,
-}))(MainPage);
+export default MainPage;
+// export default connect((state) => ({
+//     headerData: state.app.headerData, 
+//     services: state.app.services, 
+//     team: state.app.team,
+// }))(MainPage);
 

@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {Link, NavLink} from 'react-router-dom';
+'use client'; // Если вы используете Next.js с папкой `app`
+
+import React from 'react';
+import {useEffect, useState} from 'react';
+import Link from 'next/link'; // Используем Link из Next.js для навигации
 import './appFooter.scss';
 import {Icon} from '../icon/Icon';
 import {connect} from "react-redux";
 import {useMediaQuery} from "@material-ui/core";
 import {gotoAnchor} from "../anchors";
-import DelayedLink from "../appHeader/DelayedLink";
 import Popup from "reactjs-popup";
 import RetryImage from "../../helpers/RetryImage";
 
@@ -16,17 +18,28 @@ const AppFooter = (props) => {
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>
 
+    // useEffect(() => {
+    //     const handleLoad = (e) => {
+    //         setIsLoading(e.detail.isLoading);
+    //     };
+
+    //     window.addEventListener('isLoadingMainPage', handleLoad);
+
+    //     return () => {
+    //         window.removeEventListener('isLoadingMainPage', handleLoad);
+    //         setIsLoading(true)
+    //     };
+    // }, []);
+
     useEffect(() => {
-        const handleLoad = (e) => {
-            setIsLoading(e.detail.isLoading);
-        };
-
-        window.addEventListener('isLoadingMainPage', handleLoad);
-
-        return () => {
-            window.removeEventListener('isLoadingMainPage', handleLoad);
-            setIsLoading(true)
-        };
+        if (typeof window !== 'undefined') {
+            const handleLoad = (e) => setIsLoading(e.detail.isLoading);
+            window.addEventListener('isLoadingMainPage', handleLoad);
+            return () => {
+                window.removeEventListener('isLoadingMainPage', ()=> handleLoad);
+                setIsLoading(true);
+            }
+        }
     }, []);
 
     const handleButtonClick = () => {
@@ -36,8 +49,8 @@ const AppFooter = (props) => {
         });
     };
 
-    const getCurrentYear = () => new Date().getFullYear();
-
+    // const getCurrentYear = () => new Date().getFullYear();
+    const getCurrentYear = () => new Date().getUTCFullYear();
 
     const {headerData, services} = props;
 
@@ -74,7 +87,7 @@ const AppFooter = (props) => {
                         className={`footer-grid ${text === sizeLarge || text === size1024 ? 'heading-primary' : 'heading-secondary'}`}>
                         <span>
                             <p dangerouslySetInnerHTML={{__html: text}}/>
-                            <DelayedLink to="/contacts" className="footer-frame__discuss"
+                            <Link href="/contacts" className="footer-frame__discuss"
                                          datahash="contactUs"
                                          onClick={(e) => gotoAnchor(e)}>
                                 <span className="footer-frame__discuss-flex">
@@ -90,7 +103,7 @@ const AppFooter = (props) => {
 
                                 </span>
 
-                            </DelayedLink>
+                            </Link>
                         </span>
 
                         {headerData &&
@@ -108,14 +121,14 @@ const AppFooter = (props) => {
                                             <div className="contacts">
                                                 <div className="flex-icon">
                                                     <Icon icon="telephone" viewBox="0 0 18 18"/>
-                                                    <Link to="tel:+74951034351">
+                                                    <Link href="tel:+74951034351">
                                                         <p className="hover-flip"><span data-hover="+7 (495) 103—4351">+7 (495) 103—4351</span>
                                                         </p>
                                                     </Link>
                                                 </div>
                                                 <div className="flex-icon">
                                                     <Icon icon="mail" viewBox="0 0 18 18"/>
-                                                    <Link to="mailto:hello@de-us.ru">
+                                                    <Link href="mailto:hello@de-us.ru">
                                                         <p className="hover-flip"><span
                                                             data-hover="hello@de-us.ru">hello@de-us.ru</span></p>
                                                     </Link>
@@ -127,19 +140,19 @@ const AppFooter = (props) => {
                                                     headerData && headerData.behance ?
                                                         <div className="footer__social">
                                                             <Link className="footer__social-item hover-flip"
-                                                                  to={`${headerData.dprofile}`}> <span
+                                                                  href={`${headerData.dprofile}`}> <span
                                                                 data-hover="Dprofile">Dprofile</span></Link>
                                                             <Link className="footer__social-item hover-flip"
-                                                                  to={`${headerData.behance}`}><span
+                                                                  href={`${headerData.behance}`}><span
                                                                 data-hover="Behance">Behance</span></Link>
 
                                                         </div> :
                                                         <div className="footer__social">
                                                             <Link className="footer__social-item hover-flip"
-                                                                  to="/"><span
+                                                                  href="/"><span
                                                                 data-hover="Dprofile">Dprofile</span></Link>
                                                             <Link className="footer__social-item hover-flip"
-                                                                  to="/"><span
+                                                                  href="/"><span
                                                                 data-hover="Behance">Behance</span></Link>
                                                         </div>
                                                 }
@@ -148,21 +161,21 @@ const AppFooter = (props) => {
 
                                         <ul className="footer__pages m-text">
                                             <li className="footer__pages-item hover-flip">
-                                                <NavLink to="/agency"> <span
-                                                    data-hover="Агентство">Агентство</span></NavLink>
+                                                <Link href="/agency"> <span
+                                                    data-hover="Агентство">Агентство</span></Link>
                                             </li>
                                             <li className="footer__pages-item hover-flip ">
-                                                <NavLink to="/projects"><span
-                                                    data-hover="Услуги">Услуги</span></NavLink>
+                                                <Link href="/projects"><span
+                                                    data-hover="Услуги">Услуги</span></Link>
                                             </li>
                                             <li className="footer__pages-item hover-flip">
-                                                <NavLink to="/services"><span
-                                                    data-hover="Проекты">Проекты</span></NavLink>
+                                                <Link href="/services"><span
+                                                    data-hover="Проекты">Проекты</span></Link>
                                             </li>
 
                                             <li className="footer__pages-item hover-flip">
-                                                <NavLink to="/contacts"><span
-                                                    data-hover="Контакты">Контакты</span></NavLink>
+                                                <Link href="/contacts"><span
+                                                    data-hover="Контакты">Контакты</span></Link>
                                             </li>
                                         </ul>
 
@@ -350,6 +363,7 @@ const AppFooter = (props) => {
                                         не предусмотрено федеральным законом.
                                         <br/><p className='toCenter'>6. Цели обработки персональных данных</p><br/>
                                         <table>
+                                            <tbody>
                                             <tr>
                                                 <td>Цель обработки</td>
                                                 <td>Информирование Пользователя посредством отправки электронных писем
@@ -375,6 +389,7 @@ const AppFooter = (props) => {
                                                 <td></td>
                                                 <td>Отправка информационных писем на адрес электронной почты</td>
                                             </tr>
+                                            </tbody>
                                         </table>
                                         <br/><p className='toCenter'>7. Условия обработки персональных данных</p><br/>
                                         7.1. Обработка персональных данных осуществляется с согласия субъекта

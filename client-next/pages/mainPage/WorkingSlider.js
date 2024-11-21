@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+'use client';
+
+import React from "react";
+import { useState, useEffect } from "react";
 import { Icon } from "../../components/icon/Icon";
 import deus from "../../public/img/deus-circle.png";
 import axios from "../../axios";
@@ -7,33 +10,42 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 // import "./workingSlider.scss";
 
+import useResponsiveSlides from "./useResponsiveSlides";
+
 const WorkingSlider = () => {
   const [working, setWorking] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isPrevHovered, setIsPrevHovered] = useState(false);
   const [swipped, setSwipped] = useState([-1]);
-  const [slidesPerView, setSlidesPerView] = useState(1);
 
-  useEffect(() => {
-    const updateSlidesPerView = () => {
-      const width = window.innerWidth;
-      if (width > 1345) {
-        setSlidesPerView(3);
-      } else if (width >= 576) {
-        setSlidesPerView(2);
-      } else {
-        setSlidesPerView(1.2);
-      }
-    };
+  const slidesPerView = useResponsiveSlides();
+//   const [slidesPerView, setSlidesPerView] = useState(1);
 
-    updateSlidesPerView(); // Set the initial value
-    window.addEventListener('resize', updateSlidesPerView);
+//   useEffect(() => {
+//     // Проверяем, есть ли доступ к window
+//     const isClient = typeof window !== "undefined";
 
-    return () => {
-      window.removeEventListener('resize', updateSlidesPerView);
-    };
-  }, []);
+//     if (!isClient) return; // Не выполняем код на сервере
+
+//     const updateSlidesPerView = () => {
+//       const width = window.innerWidth;
+//       if (width > 1345) {
+//         setSlidesPerView(3);
+//       } else if (width >= 576) {
+//         setSlidesPerView(2);
+//       } else {
+//         setSlidesPerView(1.2);
+//       }
+//     };
+
+//     updateSlidesPerView(); // Set the initial value
+//     window.addEventListener('resize', updateSlidesPerView);
+
+//     return () => {
+//       window.removeEventListener('resize', updateSlidesPerView);
+//     };
+//   }, []);
 
   useEffect(() => {
     axios
@@ -91,11 +103,16 @@ const WorkingSlider = () => {
                 </p>
                 <Swiper
                     className="swiper_wrapper_mainp main-working__wrapperSlide"
-                    spaceBetween={0}
+                    spaceBetween={20}
                     slidesPerView={slidesPerView}
                     loop={true}
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
+                    breakpoints={{
+                        576: { slidesPerView: 2 },
+                        1345: { slidesPerView: 3 },
+                        0: { slidesPerView: 1.2 },
+                      }}
                 >
                     {working.map((item, index) => (
                         <SwiperSlide

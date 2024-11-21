@@ -40,7 +40,13 @@ export const fetchData = () => async (dispatch) => {
         dispatch(setTeam(teamResponse.data));
         dispatch(setHeaderData(headerResponse.data[0]));
 
+        console.log('Services:', servicesResponse.data);
+        console.log('Contacts:', contactResponse.data);
+        console.log('Team:', teamResponse.data);
+        console.log('Header Data:', headerResponse.data);
+
     } catch (error) {
         console.log(error);
     }
 };
+
