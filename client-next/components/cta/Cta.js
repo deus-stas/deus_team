@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { Formik, Field } from 'formik';
 // import InputMask from "react-input-mask";
-import InputMask from 'react-input-mask-next';
+// import InputMask from 'react-input-mask-next';
 import React, {useState, useEffect} from 'react';
 // import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 import './cta.scss'
-
+import dynamic from 'next/dynamic';
 // import manager from '../../public/img/manager.png';
 import axios, {setIsLoadingMainPageEvent} from './../../axios'
 // import RetryImage from "../../helpers/RetryImage";
@@ -16,11 +16,13 @@ import axios, {setIsLoadingMainPageEvent} from './../../axios'
 import {connect, useSelector} from "react-redux";
 // import RoundButton from "../animation/roundButton";
 import {Icon} from "../icon/Icon";
+import PhoneInput from "./PhoneInput";
 // import arrorGo from '../../img/icon/arrow-go.svg'
 // import DelayedLink from "../appHeader/DelayedLink";
 
 const apiUrl = ''
 
+// const InputMask = dynamic(() => import('react-input-mask'), { ssr: false });
 
 function Checkbox(props) {
     return (
@@ -57,6 +59,27 @@ const Cta = (props) => {
 
     const [worker, setWorker] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [phone, setPhone] = useState('');
+
+    const handleInput = (e) => {
+            console.log(e.target.value)
+        let value = e.target.value.replace(/\D/g, ''); // Удаляем все символы, кроме цифр
+        if (value.length > 11) value = value.slice(0, 11); // Ограничиваем длину
+
+        // Применяем маску
+        const formattedValue = `+7 (${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 8)}-${value.slice(8, 10)}`;
+        setPhone(formattedValue);
+    };
+    const handleKeyDown = (e) => {
+        const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'];
+        if (allowedKeys.includes(e.key)) return;
+
+        // Блокируем ввод нецифровых символов
+        if (!/\d/.test(e.key)) {
+            e.preventDefault();
+        }
+    };
+
 
     const double =  <Icon icon="arrowGo" viewBox="0 0 30 30"/>
 
@@ -259,7 +282,7 @@ const Cta = (props) => {
                                         <div className="form__wrap m-text">
                                             <div className={`form__group ${errors.phone && touched.phone ? 'error' : ''}`}>
                                                 {values.phone && <label htmlFor="phone" className="form__label xs-text">Номер телефона</label>}
-                                                <input type="text" name="phone" className="form__input m-text" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
+                                                    <PhoneInput type="text" name="phone" className="form__input m-text" onInput={handleInput}  onKeyDown={handleKeyDown} onChange={handleChange} value={phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
                                                 {/* <InputMask type="text" name="phone" className="form__input m-text" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" /> */}
                                                 {/* <InputMask
                                                     mask="+7 (999) 999-99-99"

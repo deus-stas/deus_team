@@ -275,6 +275,7 @@ const MainPage = (props) => {
       }, [dispatch]);
 
     services.sort((a, b) => a.position - b.position);
+    const sortedServices = [...services].sort((a, b) => a.position - b.position);
 
     const mainBannerRef = useRef(null);
     const videoModal = useRef(null);
@@ -315,16 +316,26 @@ const MainPage = (props) => {
             {!!clients && (
             <section className="main-clients">
                 <div className="main-clients__marquee">
-                <div className="marquee-container">
-                    {clients.map((client, i) => (
-                    <div className="main-clients__container" key={client.id || i}>
-                        <RetryImage
-                        src={client.image ? `/uploads/${client.image.filename}` : null}
-                        alt={client.name}
-                        />
+                    <div className="marquee-container">
+                        {clients.map((client, i) => (
+                            <div className="main-clients__container" key={client.id || i}>
+                                <RetryImage
+                                src={client.image ? `/uploads/${client.image.filename}` : null}
+                                alt={client.name}
+                                />
+                            </div>
+                        ))}
                     </div>
-                    ))}
-                </div>
+                    <div className="marquee-container">
+                        {clients.map((client, i) => (
+                        <div className="main-clients__container" key={client.id || i}>
+                            <RetryImage
+                            src={client.image ? `/uploads/${client.image.filename}` : null}
+                            alt={client.name}
+                            />
+                        </div>
+                        ))}
+                    </div>
                 </div>
             </section>
             )}
@@ -357,7 +368,7 @@ const MainPage = (props) => {
                                     );
 
                                     const allServices = index === 1 &&
-                                        services
+                                        sortedServices
                                             .filter((service) => service.isInvisible)
                                             .map((service, serviceIndex) => (
                                                 <Link href={`/services/`} key={`service-${serviceIndex}`}>

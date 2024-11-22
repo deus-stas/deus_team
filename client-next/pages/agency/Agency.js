@@ -14,16 +14,15 @@ import 'swiper/css/pagination';
 import { Grid, Pagination } from 'swiper/modules';
 // import hh from "../../../img/hh_icon.png"
 import './agency.scss';
-import {connect} from "react-redux";
 // import TruncatedSentence from "./TruncatedSentence";
 import {useMediaQuery} from "@material-ui/core";
-// import { Marquee as MarqueeTeam} from "@devnomic/marquee";
-import CustomMarquee from "../../components/сustomMarquee/CustomMarquee";
+import Marquee from 'react-fast-marquee';
 import "./marquee.scss";
 import useMobile from "../../components/useMobile";
 import {Cursor} from "../../components/cursor/cursor";
 import Image from 'next/image';
-
+import {useDispatch, useSelector } from 'react-redux';
+import {fetchData } from "../../actions/appActions";
 
 const Agency = (props) => {
 
@@ -41,6 +40,21 @@ const Agency = (props) => {
     const [currentPerson, setCurrentPerson] = useState(0);
     const [reviews, setReviews] = useState([]);
     const {isTablet, isMobile} = useMobile()
+
+
+    const { headerData, services, conacts, team } = useSelector((state) => ({
+        headerData: state.app.headerData,
+        services: state.app.services,
+        projects: state.app.projects,
+        team: state.app.team,
+  }));
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(fetchData());
+  }, [dispatch]);
+
 
     useEffect(() => {
         axios.get(`/api/awards/`)
@@ -174,6 +188,18 @@ const Agency = (props) => {
         }
     }
 
+    function splitArrayIntoChunks(array, numChunks) {
+        const chunkSize = Math.floor(array.length / numChunks); // Определяем размер каждой части
+        const totalItems = chunkSize * numChunks; // Определяем общее количество элементов, которое нужно использовать
+        const trimmedArray = array.slice(0, totalItems); // Обрезаем массив до нужного размера
+      
+        const chunks = Array.from({ length: numChunks }, (_, i) =>
+          trimmedArray.slice(i * chunkSize, (i + 1) * chunkSize)
+        );
+        console.log(chunks);
+        return chunks;
+      }
+
 
 
     const clientsPerRow = 7;
@@ -194,7 +220,6 @@ const Agency = (props) => {
             console.error(error);
         }
     };
-    const {headerData, team } = props;
     const agencyControlTeam = team.filter((item) => !!item.agencyControl)
 
     const sizeLarge = 'Объединяем аналитику, маркетинг, дизайн,<br/> разработку и интеграции в единую<br/> систему для получения максимальной,<br/> эффективности для вашего бизнеса';
@@ -236,299 +261,312 @@ const Agency = (props) => {
     return (
         <>
             {!isLoading &&
-        <main className="agency">
-            <Cursor/>
-            <div className="container">
-            <section className="agency-start">
-                     <span className="agency-start__text">
-                    <p className="breadcrumb">О компании</p>
-                    <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: text}}/>
-                     </span>
-            </section>
+            <main className="agency">
+                <Cursor/>
+                <div className="container">
+                <section className="agency-start">
+                        <span className="agency-start__text">
+                        <p className="breadcrumb">О компании</p>
+                        <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: text}}/>
+                        </span>
+                </section>
 
-            <section id='agency' className="agency-about">
-                <div className="agency-about__wrap">
-                    <div className="agency-about__adv-item m-text">
-                        <Icon icon="star"></Icon>
-                        <p className="m-text">Работаем<br/> с 2016 года</p>
+                <section id='agency' className="agency-about">
+                    <div className="agency-about__wrap">
+                        <div className="agency-about__adv-item m-text">
+                            <Icon icon="star"></Icon>
+                            <p className="m-text">Работаем<br/> с 2016 года</p>
+                        </div>
+                        <div className="agency-about__adv-item  m-text">
+                            <Icon icon="star"></Icon>
+                            <p className="m-text">Входим в ТОП-40<br/> креативности студий</p>
+                        </div>
+                        <div className="agency-about__adv-item  m-text">
+                            <Icon icon="star"></Icon>
+                            <p className="m-text">Комплексные решения<br/> для различных индустрий</p>
+                        </div>
+                        <div className="agency-about__adv-item  m-text">
+                            <Icon icon="star"></Icon>
+                            <p className="m-text">50% клиентов приходят<br/> к нам по рекомендации</p>
+                        </div>
                     </div>
-                    <div className="agency-about__adv-item  m-text">
-                        <Icon icon="star"></Icon>
-                        <p className="m-text">Входим в ТОП-40<br/> креативности студий</p>
-                    </div>
-                    <div className="agency-about__adv-item  m-text">
-                        <Icon icon="star"></Icon>
-                        <p className="m-text">Комплексные решения<br/> для различных индустрий</p>
-                    </div>
-                    <div className="agency-about__adv-item  m-text">
-                        <Icon icon="star"></Icon>
-                        <p className="m-text">50% клиентов приходят<br/> к нам по рекомендации</p>
-                    </div>
-                </div>
-                {awards &&
-                    <div className="agency-about__wrapp whiteHeader">
-                        {awards.map(award => {
-                            const getAwardIcon = (awardName) => {
-                                const iconMap = {
-                                    awwwads: <Icon icon="awwwards" viewBox="0 0 40 40"/>,
-                                    ratingruneta: <Icon icon="rating" viewBox="0 0 40 40"/>,
-                                    'css design awards': <Icon icon="cssAwards" viewBox="0 0 40 40"/>,
+                    {awards &&
+                        <div className="agency-about__wrapp whiteHeader">
+                            {awards.map(award => {
+                                const getAwardIcon = (awardName) => {
+                                    const iconMap = {
+                                        awwwads: <Icon icon="awwwards" viewBox="0 0 40 40"/>,
+                                        ratingruneta: <Icon icon="rating" viewBox="0 0 40 40"/>,
+                                        'css design awards': <Icon icon="cssAwards" viewBox="0 0 40 40"/>,
+                                    };
+
+                                    const iconName = Object.keys(iconMap).find(key => awardName.toLowerCase().includes(key.toLowerCase()));
+                                    if (iconName) {
+                                        return iconMap[iconName];
+                                    }
+                                    return null;
                                 };
 
-                                const iconName = Object.keys(iconMap).find(key => awardName.toLowerCase().includes(key.toLowerCase()));
-                                if (iconName) {
-                                    return iconMap[iconName];
-                                }
-                                return null;
-                            };
+                                return (
+                                    <Link href={`/news/${award.blogUrl}`} className="agency-about__wrapp-btn"
+                                                    key={award.id}>
+                                        <img src={award.image ? `/uploads/${award.image.filename}` : null}
+                                                alt={award.name}/>
+                                        <span className="content">
+                                            {getAwardIcon(award.name)}
+                                                <p className="name m-text">{award.name}</p>
+                                        </span>
 
-                            return (
-                                <Link href={`/news/${award.blogUrl}`} className="agency-about__wrapp-btn"
-                                                key={award.id}>
-                                    <img src={award.image ? `/uploads/${award.image.filename}` : null}
-                                            alt={award.name}/>
-                                    <span className="content">
-                                        {getAwardIcon(award.name)}
-                                            <p className="name m-text">{award.name}</p>
-                                    </span>
+                                    </Link>
+                                );
+                            })}
+                        </div>}
 
-                                </Link>
-                            );
-                        })}
-                    </div>}
-
-            </section>
-
-            <section id='principle' className="agency-principle">
-                    <div className="agency-principle__wrap">
-                        <h2 className="heading-secondary">
-                           <p className="">
-                               Принципы, которых мы<br/> придерживаемся в работе
-                           </p>
-                        </h2>
-                        <div className="agency-principle__wrapp">
-                            <div className="agency-principle__wrap-item">
-                                <p className="num">01</p>
-                                <span className="flex-wrap">
-                                    <p className="text l-textMed">Цена слова</p>
-                                     <p className={principleText}>Верим в силу рукопожатия. Форма договоренности не имеет значения —
-                                    мы выполняем свои обещания. Всегда.</p>
-                                </span>
-                            </div>
-                            <div className="agency-principle__wrap-item">
-                                <p className="num">02</p>
-                                <span className="flex-wrap">
-                                   <p className="text l-textMed">Доверие и ответственность</p>
-                                    <p className={principleText}>Основа наших отношений с клиентами — взаимное доверие. Мы всегда
-                                    берем на себя ответственность за результат.</p>
-                                </span>
-
-                            </div>
-                            <div className="agency-principle__wrap-item">
-                                <p className="num">03</p>
-                                <span className="flex-wrap">
-                                    <p className="text l-textMed">Процесс имеет значение</p>
-                                    <p className={principleText}>Для нас результаты, достигнутые путем нарушения этических норм,
-                                    недопустимы.</p>
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-
-            </section>
-            {
-                clients ? <section className="agency-clients" id="clients">
-                        <div className="agency-clients__head">
-                            <h2 className="heading-secondary">Работаем с разными<br/> клиентами по всему миру</h2>
-                            <div className="agency-clients__pag hidden-desktop">
-                            </div>
-                        </div>
-                        {/* {!isMobileNew ? 
-                            <div className="agency-clients__marquee">
-                            {[...Array(5)].map((_, rowIndex) => (
-                                <div key={`marquee-team-${rowIndex}-${Date.now()}`}>test</div>
-                            ))}
-                            </div>
-                            : 
-                            <div className="agency-swiper">
-                            </div>
-                        } */}
-                    {!isMobileNew?
-                    <div className="agency-clients__marquee">
-                        {[...Array(rows)].map((_, rowIndex) => {
-                            // const endIndex = (rowIndex + 1) * clientsPerRow
-                            const slicedClients = clients.slice(rowIndex * clientsPerRow, (rowIndex + 1) * clientsPerRow)
-                            // if (clients.length - endIndex < clientsPerRow) {
-                            //     slicedClients.push(clients.slice(endIndex))
-                            // }
-                            // if (slicedClients.length < clientsPerRow) {
-                            //     return <></>
-                            // }
-                            return (
-                                // <div key={`marquee-team-${rowIndex}`}> test </div>
-                                  <CustomMarquee 
-                                      key={`marquee-team-${rowIndex}`}
-                                      direction="left"
-                                      reverse={rowIndex % 2 !== 0}
-                                      speed={30} 
-                                      
-                                  >
-                                      {slicedClients.filter(client => !!client.image).map((client, count) => (
-                                          <div className='agency-clients__img' key={`marquee-${client.id}-${count}`}>
-                                              <div className='container-img'>
-                                                  <img
-                                                      src={client.image ? `/uploads/${client.image.filename}` : null}
-                                                      alt={client.name} key={client.id}/>
-                                              </div>
-
-                                          </div>
-
-                                      ))
-                                      }
-                                  </CustomMarquee>  
-                            )
-                        })}
-                    </div>
-                        :
-                        <div className="agency-swiper">
-                        <Swiper
-                            slidesPerView={2}
-                            grid={{
-                                rows: 3,
-                            }}
-
-                            spaceBetween={10}
-                            modules={[Grid, Pagination]}
-                            pagination={{
-                                clickable: true,
-                                renderBullet: (index, className) => (
-                                    `<span class="${className} swiper-pagination-bullet-custom"></span>`
-                                ),
-                            }}
-                            onSlideChange={(e) => slideChange(e)}
-                            className="agency-clients__slider"
-                        >
-                            {
-                                clients.map(client => {
-                                    return (
-                                        <SwiperSlide className="agency-clients__item" key={client.id}>
-                                            <div>
-                                                <img className='agency-clients__img'
-                                                     src={client.image ? `/uploads/${client.image.filename}` : null}
-                                                     alt={client.name}/>
-                                            </div>
-                                        </SwiperSlide>
-                                    )
-                                })
-                            }
-                        </Swiper>
-                        </div>
-                    }
-                    
-                </section> : null
-            }
-
-            {/* {team && (
-                <section id="agency" className="agency-team borderBlock">
-                    <div className="agency-team__wrap">
-                        <div className="intro">
-                            <p className="heading heading-secondary">Мы уверены, что проекты делают {isTablet? '' :<br/>} не компании, а люди.
-                                Поэтому особое внимание уделяем формированию команды.</p>
-                            <p className="descr m-text">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в
-                                единую систему для получения максимальной эффективности для вашего бизнеса</p>
-                        </div>
-                        <div className="agency-team__wrap-imgWrap">
-                            {
-                                Array.from({ length: 5 }, (_, columnIndex) => {
-                                    let count = 0;
-                                    return (<MarqueeTeam
-                                        key={columnIndex}
-                                        className={isTablet ? "animate-marquee-left" : "animate-marquee-up"}
-                                        direction={isTablet ? "left" : "up"}
-                                        fade={false}
-                                        reverse={columnIndex % 2 === 0}
-                                    >
-                                        {team.filter((value, index) => {
-                                            if (index === (columnIndex + count * 5)) {
-                                                count++;
-                                                return true
-                                            }
-                                            return false
-                                        })
-                                            .map((item, index, array) => (
-                                                <img
-                                                    className="image"
-                                                    src={`/uploads/${item.mainImg?.filename}`}
-                                                    alt={''}
-                                                />
-
-                                            ))
-                                        }
-                                    </MarqueeTeam>)
-                                })
-                            }
-                        </div>
-
-                    </div>
                 </section>
-            )} */}
 
-            {vacancies && (
-                <section id="agency" className="agency-vacancy">
-                    <div className="agency-vacancy__wrap">
-                        <div className="agency-vacancy__info sticky-h2">
-                            <h2 className="heading-secondary">Мы находимся<br/> в постоянном поиске<br/> лучших
-                                специалистов.</h2>
-                            <span>
-                            <p className="m-text">Не нашли подходящую вакансию?</p>
-                            <p className="m-text">Пришлите нам на почту</p>
-                        </span>
-                            <p className="m-text"><Link className="hoverMail"
-                                                    href="mailto:job@de-us.ru">job@de-us.ru</Link></p>
-                    </div>
-                    <div className="agency-vacancy__wrapper">
-                        {vacancies.map((item, i) => {
-                            return (
-                                <Link target="_blank" href={item.link} className="agency-vacancy__wrapper-item" key={i}>
-                                    <span className="place">
-                                        <Icon icon="vacancies" viewBox="0 0 16 16"/>
-                                        <p className =
-                                                {
-                                            item.place.length > 4
-                                                ? "where s-text big-txt"
-                                                : "where s-text small-txt"
-                                        }
-                                        >
-                                            {item.place}
-                                        </p>
+                <section id='principle' className="agency-principle">
+                        <div className="agency-principle__wrap">
+                            <h2 className="heading-secondary">
+                            <p className="">
+                                Принципы, которых мы<br/> придерживаемся в работе
+                            </p>
+                            </h2>
+                            <div className="agency-principle__wrapp">
+                                <div className="agency-principle__wrap-item">
+                                    <p className="num">01</p>
+                                    <span className="flex-wrap">
+                                        <p className="text l-textMed">Цена слова</p>
+                                        <p className={principleText}>Верим в силу рукопожатия. Форма договоренности не имеет значения —
+                                        мы выполняем свои обещания. Всегда.</p>
                                     </span>
-                                    <h3 className="l-textReg">{item.name}</h3>
-                                    <p className="s-text type">{item.type}</p>
-                                    <div className="arrow">
-                                        <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                                </div>
+                                <div className="agency-principle__wrap-item">
+                                    <p className="num">02</p>
+                                    <span className="flex-wrap">
+                                    <p className="text l-textMed">Доверие и ответственность</p>
+                                        <p className={principleText}>Основа наших отношений с клиентами — взаимное доверие. Мы всегда
+                                        берем на себя ответственность за результат.</p>
+                                    </span>
+
+                                </div>
+                                <div className="agency-principle__wrap-item">
+                                    <p className="num">03</p>
+                                    <span className="flex-wrap">
+                                        <p className="text l-textMed">Процесс имеет значение</p>
+                                        <p className={principleText}>Для нас результаты, достигнутые путем нарушения этических норм,
+                                        недопустимы.</p>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                </section>
+                {
+                    clients ? <section className="agency-clients" id="clients">
+                            <div className="agency-clients__head">
+                                <h2 className="heading-secondary">Работаем с разными<br/> клиентами по всему миру</h2>
+                                <div className="agency-clients__pag hidden-desktop">
+                                </div>
+                            </div>
+                        
+                        {!isMobileNew?
+    
+                        <section className="main-clients">
+                            
+                            {clients && splitArrayIntoChunks(clients,  3).map((row, count) => {
+                                return (
+                                    <div className={`main-clients__marquee-agency`} key={`row-${count}`}>
+                                        <div className="marquee-container-agency">
+                                            <Marquee speed={40} loop={0} gradient={false} direction={count % 2 === 0 ? "right" : 'left'}>
+                                                {row.map((client, i) => (
+                                                    <div className='agency-clients__img marquee-item' key={client.id || i}>
+                                                        <div className='container-img'>
+                                                            <img
+                                                                src={client.image ? `/uploads/${client.image.filename}` : null}
+                                                                alt={client.name} key={client.id}/>
+                                                        </div>
+            
+                                                    </div>
+                                                ))}
+                                            </Marquee>
+                                        </div>
+                      
+        
                                     </div>
+                                )
+                            })}
+                        </section>
 
-                                </Link>
-                            )
-                        })}
-                        <Link className="agency-vacancy__wrapper-item" target="_blank"
-                                href={"https://hh.ru/employer/2174085"}>
-                            <span className="hh">
-                                <Icon icon="hh" viewBox="0 0 48 49"/>
-                            <p className=" m-text">Больше вакансий на hh.ru</p>
-                            </span>
-                            <div className="arrow">
-                                <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                            :
+                            <div className="agency-swiper">
+                            <Swiper
+                                slidesPerView={2}
+                                grid={{
+                                    rows: 3,
+                                }}
+
+                                spaceBetween={10}
+                                modules={[Grid, Pagination]}
+                                pagination={{
+                                    clickable: true,
+                                    renderBullet: (index, className) => (
+                                        `<span class="${className} swiper-pagination-bullet-custom"></span>`
+                                    ),
+                                }}
+                                onSlideChange={(e) => slideChange(e)}
+                                className="agency-clients__slider"
+                            >
+                                {
+                                    clients.map(client => {
+                                        return (
+                                            <SwiperSlide className="agency-clients__item" key={client.id}>
+                                                <div>
+                                                    <img className='agency-clients__img'
+                                                        src={client.image ? `/uploads/${client.image.filename}` : null}
+                                                        alt={client.name}/>
+                                                </div>
+                                            </SwiperSlide>
+                                        )
+                                    })
+                                }
+                            </Swiper>
                             </div>
-                        </Link>
-                    </div>
+                        }
+                        
+                    </section> : null
+                }
 
-                    </div>
-                </section>
-            )}
-            </div>
-        </main>
+                {team && (
+                    <section id="agency" className="agency-team borderBlock">
+                        <div className="agency-team__wrap">
+                            <div className="intro">
+                                <p className="heading heading-secondary">Мы уверены, что проекты делают {isTablet? '' :<br/>} не компании, а люди.
+                                    Поэтому особое внимание уделяем формированию команды.</p>
+                                <p className="descr m-text">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в
+                                    единую систему для получения максимальной эффективности для вашего бизнеса</p>
+                            </div>
+                            <div className="agency-team__wrap-imgWrap">
+                                {team && splitArrayIntoChunks(team,  4).map((row, count) => {
+                                    return (
+                                        <div className={`main-clients__marquee-agency`} key={`row-pepol-${count}`}>
+                                            <div className="marquee-container-agency">
+                                                <Marquee 
+                                                    speed={40}
+                                                    loop={0}
+                                                    gradient={false}
+                                                    direction={count % 2 === 0 ? "up" : 'down'}
+                                                    >
+                                                    {row.map((item, i) => (
+                                                        <img
+                                                            key={`img-${i}-${count}`}
+                                                            className="image"
+                                                            src={`/uploads/${item.mainImg?.filename}`}
+                                                            alt={''}
+                                                            />
+                                                    ))}
+                                                </Marquee>
+                                            </div>
+                        
+            
+                                        </div>
+                                    )
+                                })}
+                                {/* {
+                                    Array.from({ length: 5 }, (_, columnIndex) => {
+                                        let count = 0;
+                                        return (
+                                        <MarqueeTeam
+                                            key={`col-${columnIndex}`}
+                                            className={isTablet ? "animate-marquee-left" : "animate-marquee-up"}
+                                            direction={isTablet ? "left" : "up"}
+                                            fade={false}
+                                            reverse={columnIndex % 2 === 0}
+                                        >
+                                            {team.filter((value, index) => {
+                                                if (index === (columnIndex + count * 5)) {
+                                                    count++;
+                                                    return true
+                                                }
+                                                return false
+                                            })
+                                                .map((item, index, array) => (
+                                                    <img
+                                                        key={`img-${item}`}
+                                                        className="image"
+                                                        src={`/uploads/${item.mainImg?.filename}`}
+                                                        alt={''}
+                                                    />
+
+                                                ))
+                                            }
+                                        </MarqueeTeam>
+                                        )
+                                    })
+                                } */}
+
+                                
+                            </div>
+
+                        </div>
+                    </section>
+                )}
+
+                {vacancies && (
+                    <section id="agency" className="agency-vacancy">
+                        <div className="agency-vacancy__wrap">
+                            <div className="agency-vacancy__info sticky-h2">
+                                <h2 className="heading-secondary">Мы находимся<br/> в постоянном поиске<br/> лучших
+                                    специалистов.</h2>
+                                <span>
+                                <p className="m-text">Не нашли подходящую вакансию?</p>
+                                <p className="m-text">Пришлите нам на почту</p>
+                            </span>
+                                <p className="m-text"><Link className="hoverMail"
+                                                        href="mailto:job@de-us.ru">job@de-us.ru</Link></p>
+                        </div>
+                        <div className="agency-vacancy__wrapper">
+                            {vacancies.map((item, i) => {
+                                return (
+                                    <Link target="_blank" href={item.link} className="agency-vacancy__wrapper-item" key={i}>
+                                        <span className="place">
+                                            <Icon icon="vacancies" viewBox="0 0 16 16"/>
+                                            <p className =
+                                                    {
+                                                item.place.length > 4
+                                                    ? "where s-text big-txt"
+                                                    : "where s-text small-txt"
+                                            }
+                                            >
+                                                {item.place}
+                                            </p>
+                                        </span>
+                                        <h3 className="l-textReg">{item.name}</h3>
+                                        <p className="s-text type">{item.type}</p>
+                                        <div className="arrow">
+                                            <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                                        </div>
+
+                                    </Link>
+                                )
+                            })}
+                            <Link className="agency-vacancy__wrapper-item" target="_blank"
+                                    href={"https://hh.ru/employer/2174085"}>
+                                <span className="hh">
+                                    <Icon icon="hh" viewBox="0 0 48 49"/>
+                                <p className=" m-text">Больше вакансий на hh.ru</p>
+                                </span>
+                                <div className="arrow">
+                                    <Icon icon="arrowVac" viewBox="0 0 24 24"/>
+                                </div>
+                            </Link>
+                        </div>
+
+                        </div>
+                    </section>
+                )}
+                </div>
+            </main>
             }
         </>
     )
@@ -536,11 +574,5 @@ const Agency = (props) => {
 }
 
 
-export default connect(
-    (state) => (
-        {
-            headerData: state.app.headerData,
-            team: state.app.team,
-        }
-    )
-)(Agency)
+export default Agency;
+

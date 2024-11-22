@@ -674,23 +674,43 @@ main {
 .main-clients__marquee {
     overflow: hidden; /* Скрываем содержимое за пределами контейнера */
     position: relative;
-  
+    display: flex;
+    
     .marquee-container {
-      display: flex;
+        display: flex;
       gap: 20px; /* Расстояние между элементами */
-      animation: marquee 15s linear infinite; /* Анимация */
+      animation: marquee 60s linear infinite; /* Анимация */
+      will-change: transform; /* Оптимизация анимации */
+    }
+    .marquee-container-reverse {
+        display: flex;
+      gap: 20px; /* Расстояние между элементами */
+      animation: marquee-reverse 60s linear infinite; /* Анимация */
+      will-change: transform; /* Оптимизация анимации */
     }
   
     .main-clients__container {
       flex: 0 0 auto; /* Предотвращаем сжатие */
     }
   
+
+  
     @keyframes marquee {
       from {
-        transform: translateX(100%); /* Начинаем за пределами экрана справа */
+        transform: translateX(0%); /* Начинаем с начального положения */
       }
       to {
-        transform: translateX(-100%); /* Двигаемся за пределы экрана слева */
+        transform: translateX(-100%); /* Двигаемся влево на ширину содержимого */
       }
     }
+  
+    @keyframes marquee-reverse {
+      from {
+        transform: translateX(-100%); /* Начинаем за пределами экрана слева */
+      }
+      to {
+        transform: translateX(0%); /* Двигаемся к правому краю */
+      }
+    }
+  
   }

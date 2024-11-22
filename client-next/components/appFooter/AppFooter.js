@@ -4,14 +4,17 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 import Link from 'next/link'; // Используем Link из Next.js для навигации
 import './appFooter.scss';
+import './popup.scss';
+import './cta.scss';
 import {Icon} from '../icon/Icon';
 import {useMediaQuery} from "@material-ui/core";
 import {gotoAnchor} from "../anchors";
-import Popup from "reactjs-popup";
+// import Popup from "reactjs-popup";
 import RetryImage from "../../helpers/RetryImage";
 import {useDispatch, useSelector } from 'react-redux';
 import {fetchData } from "../../actions/appActions";
-
+import dynamic from 'next/dynamic';
+const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
 const apiUrl = ''
 
 const AppFooter = (props) => {
@@ -199,7 +202,7 @@ const AppFooter = (props) => {
 
                     <div className="footer-info__wrap footer__copyright s-text">
                         <p>© 2016–{getCurrentYear()} DEUS agency</p>
-                        {/* <Popup
+                        <Popup
                             trigger={
                                 <p className="hover-flip"><span data-hover="Политика конфиденциальности">Политика конфиденциальности</span>
                                 </p>
@@ -512,7 +515,7 @@ const AppFooter = (props) => {
                                     </div>
                                 </div>
                             )}
-                        </Popup> */}
+                        </Popup>
                     </div>
                 </div>
             </footer>
