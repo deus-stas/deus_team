@@ -77,9 +77,9 @@ const Contacts = (props) => {
 
     return (
         <>
-            <Cursor/>
             {!isLoading &&
                 <main className="contacts">
+                    <Cursor/>
                     <div className="container">
                     <section className="contacts-main">
                             <span className="agency-maint__text">

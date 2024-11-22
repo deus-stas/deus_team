@@ -13,6 +13,7 @@ import {Icon} from "../../icon/Icon";
 import {useMobile} from "../../pages/projects/projectDetail/ProjectDetail";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Cursor} from "../../cursor/cursor";
+import Image from 'next/image';
 
 const apiUrl = ''
 

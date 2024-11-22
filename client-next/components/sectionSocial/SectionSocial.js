@@ -5,6 +5,7 @@ import axios from '../../axios'
 import './sectionSocial.scss'
 import TrailOn from "../animation/trailOn";
 import ScrollUp from "../animation/scrollUp";
+import Image from 'next/image';
 
 const apiUrl = ''
 

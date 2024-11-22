@@ -1,0 +1,33 @@
+.custom-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    // display: flex; /* Гарантирует, что элементы выстроены в строку */
+  }
+  .marquee-content {
+  }
+  .marquee-content {
+    display: inline-flex; /* Для правильного отображения элементов */
+    white-space: nowrap;
+    animation: marquee-left 10s linear infinite;
+
+  }
+  
+  @keyframes marquee-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  @keyframes marquee-right {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  

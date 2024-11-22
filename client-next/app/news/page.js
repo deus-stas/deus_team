@@ -1,10 +1,10 @@
-// import News from "../../pages/News/News";
+import News from "../../pages/news/News";
 
 
 export default function Home() {
     return (
         <>
-          {/* <News/> */}
+          <News/>
         </>
     );
   }

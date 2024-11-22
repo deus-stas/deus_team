@@ -1,9 +1,10 @@
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/navigation';
-import { Icon } from "../../../../icon/Icon";
+import { Icon } from "../../../../components/icon/Icon";
 import React, {useEffect, useState} from "react";
 import {BannerComponent, ProjectResults, useMobile} from "../ProjectDetail";
+import Image from 'next/image';
 
 import {debounce} from "@material-ui/core";
 
@@ -76,7 +77,7 @@ const SiteAndServices = ({detail}) => {
                     >
                         {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide
-                                key={banner.name}
+                                key={`${banner.name}-${index}`}
                             >
                                 <img
                                     className="slider-img"

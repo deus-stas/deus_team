@@ -1,10 +1,10 @@
-// import Contacts from "../../pages/contacts/Contacts";
+import Contacts from "../../pages/contacts/Contacts";
 
 
 export default function Home() {
     return (
       <main>
-        {/* <Contacts/> */}
+        <Contacts/>
       </main>
     );
   }

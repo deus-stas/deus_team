@@ -343,13 +343,14 @@ const Projects = () => {
                         >
                             <div className="projects__item-img-wrap">
                                 {isVideo ?
-                                    <VideoComponent ref={(ref) => addVideoRef(ref)} project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} /> :
-                                    <img  src={imgSize} alt={project.name} className="main-projects__img" />
+                                    <VideoComponent ref={(ref) => addVideoRef(ref)} project={project}
+                                                    isMob={isMob} videoSize={imgSize} apiUrl={apiUrl}/> :
+                                    <img src={imgSize} alt={project.name} className="main-projects__img"/>
                                 }
                             </div>
                         </DelayedLink>
                         <span className="projects-decription m-text">
-                    <p style={{ color: "rgba(117, 118, 119, 1)" }}>{project.date} • {project.name}</p>
+                    <p style={{color: "rgba(117, 118, 119, 1)"}}>{project.date} • {project.name}</p>
                     <DelayedLink
                         to={`/projects/${project.nameInEng}`}
                         className="heading-secondary"
@@ -359,8 +360,8 @@ const Projects = () => {
                 </span>
                     </div>
 
-            )
-        })
+                )
+            })
         : null}</>
 
     const odd = renderProject(true)
@@ -368,9 +369,9 @@ const Projects = () => {
 
     return (
         <>
-            <Cursor/>
             {!isLoading &&
                 <main className="projects">
+                    <Cursor/>
                     <section className="projects-start">
                         <div className="container">
                             <span className="projects-start__text">

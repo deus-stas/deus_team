@@ -5,11 +5,12 @@ import {useEffect, useState} from 'react';
 import Link from 'next/link'; // Используем Link из Next.js для навигации
 import './appFooter.scss';
 import {Icon} from '../icon/Icon';
-import {connect} from "react-redux";
 import {useMediaQuery} from "@material-ui/core";
 import {gotoAnchor} from "../anchors";
 import Popup from "reactjs-popup";
 import RetryImage from "../../helpers/RetryImage";
+import {useDispatch, useSelector } from 'react-redux';
+import {fetchData } from "../../actions/appActions";
 
 const apiUrl = ''
 
@@ -18,6 +19,15 @@ const AppFooter = (props) => {
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>
 
+    const dispatch = useDispatch();
+    // const {services, headerData, team} = props;
+
+    const { headerData, services, conacts, team } = useSelector((state) => ({
+            headerData: state.app.headerData,
+            services: state.app.services,
+            projects: state.app.projects,
+            team: state.app.team,
+      }));
     // useEffect(() => {
     //     const handleLoad = (e) => {
     //         setIsLoading(e.detail.isLoading);
@@ -52,7 +62,7 @@ const AppFooter = (props) => {
     // const getCurrentYear = () => new Date().getFullYear();
     const getCurrentYear = () => new Date().getUTCFullYear();
 
-    const {headerData, services} = props;
+    // const {headerData, services} = props;
 
     const sizeLarge = 'Расскажите нам<br/>о своем проекте, подумаем<br/>над ним вместе';
     const size1024 = 'Расскажите нам о своем<br/> проекте, подумаем над<br/> ним вместе';
@@ -189,7 +199,7 @@ const AppFooter = (props) => {
 
                     <div className="footer-info__wrap footer__copyright s-text">
                         <p>© 2016–{getCurrentYear()} DEUS agency</p>
-                        <Popup
+                        {/* <Popup
                             trigger={
                                 <p className="hover-flip"><span data-hover="Политика конфиденциальности">Политика конфиденциальности</span>
                                 </p>
@@ -502,7 +512,7 @@ const AppFooter = (props) => {
                                     </div>
                                 </div>
                             )}
-                        </Popup>
+                        </Popup> */}
                     </div>
                 </div>
             </footer>
@@ -511,9 +521,4 @@ const AppFooter = (props) => {
 
 }
 
-export default connect(
-    (state) => ({
-        headerData: state.app.headerData,
-        services: state.app.services
-    })
-)(AppFooter)
+export default AppFooter;

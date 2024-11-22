@@ -17,6 +17,7 @@ import WorkingSlider from "./WorkingSlider";
 import "swiper/css";
 import "swiper/css/grid";
 import "./mainPage.scss";
+import Image from 'next/image';
 
 // import deus from "../../../img/deus-circle.png";
 // import {connect} from "react-redux";
@@ -262,7 +263,7 @@ const MainPage = (props) => {
     const mainShowreel = showreels.find((showreel) => showreel.mainShowreel === true);
     const dispatch = useDispatch();
     // const {services, headerData, team} = props;
-    const { headerData, services, contacts, team } = useSelector((state) => ({
+    const { headerData, services, conacts, team } = useSelector((state) => ({
             headerData: state.app.headerData,
             services: state.app.services,
             projects: state.app.projects,

@@ -213,9 +213,9 @@ const Agency = (props) => {
 
     return (
         <>
-            <Cursor/>
             {!isLoading &&
         <main className="agency">
+            <Cursor/>
             <div className="container">
             <section className="agency-start">
                      <span className="agency-start__text">
@@ -240,7 +240,7 @@ const Agency = (props) => {
                         </div>
                         <div className="agency-about__adv-item  m-text">
                             <Icon icon="star"></Icon>
-                            <p className="m-text">50% клиентов приходят<br/> к нам по рекомендаци</p>
+                            <p className="m-text">50% клиентов приходят<br/> к нам по рекомендации</p>
                         </div>
                     </div>
                     {awards &&

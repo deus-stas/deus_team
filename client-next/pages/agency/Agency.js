@@ -6,6 +6,7 @@ import Link from 'next/link'; // Используем Link из Next.js для �
 // import Marquee from "react-fast-marquee";
 import { Icon } from '../../components/icon/Icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
 import 'reactjs-popup/dist/index.css';
 import 'swiper/css';
 import 'swiper/css/grid';
@@ -16,10 +17,12 @@ import './agency.scss';
 import {connect} from "react-redux";
 // import TruncatedSentence from "./TruncatedSentence";
 import {useMediaQuery} from "@material-ui/core";
-import { Marquee as MarqueeTeam} from "@devnomic/marquee";
+// import { Marquee as MarqueeTeam} from "@devnomic/marquee";
+import CustomMarquee from "../../components/сustomMarquee/CustomMarquee";
 import "./marquee.scss";
 import useMobile from "../../components/useMobile";
 import {Cursor} from "../../components/cursor/cursor";
+import Image from 'next/image';
 
 
 const Agency = (props) => {
@@ -172,6 +175,7 @@ const Agency = (props) => {
     }
 
 
+
     const clientsPerRow = 7;
     const rows = Math.ceil(clients.length / clientsPerRow);
 
@@ -211,6 +215,23 @@ const Agency = (props) => {
     } else if (matches360) {
         text = size360;
     }
+
+    const [isMobileNew, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        // Определяем размер окна только на клиенте
+        const checkIfMobile = () => {
+          setIsMobile(window.innerWidth <= 768);
+        };
+    
+        checkIfMobile(); // При монтировании компонента проверим размер экрана
+        window.addEventListener('resize', checkIfMobile);  // Добавляем слушатель события resize
+    
+        return () => {
+          window.removeEventListener('resize', checkIfMobile); // Очищаем слушатель при размонтировании
+        };
+      }, []); // Этот useEffect будет вызван только один раз после первого рендера на клиенте
+    
 
     return (
         <>
@@ -317,39 +338,55 @@ const Agency = (props) => {
 
             </section>
             {
-                clients ? <section className="agency-clients"
-                                   id="clients">
+                clients ? <section className="agency-clients" id="clients">
                         <div className="agency-clients__head">
                             <h2 className="heading-secondary">Работаем с разными<br/> клиентами по всему миру</h2>
                             <div className="agency-clients__pag hidden-desktop">
                             </div>
                         </div>
-                    {/* {!isMobile?
+                        {/* {!isMobileNew ? 
+                            <div className="agency-clients__marquee">
+                            {[...Array(5)].map((_, rowIndex) => (
+                                <div key={`marquee-team-${rowIndex}-${Date.now()}`}>test</div>
+                            ))}
+                            </div>
+                            : 
+                            <div className="agency-swiper">
+                            </div>
+                        } */}
+                    {!isMobileNew?
                     <div className="agency-clients__marquee">
                         {[...Array(rows)].map((_, rowIndex) => {
-                            const endIndex = (rowIndex + 1) * clientsPerRow
+                            // const endIndex = (rowIndex + 1) * clientsPerRow
                             const slicedClients = clients.slice(rowIndex * clientsPerRow, (rowIndex + 1) * clientsPerRow)
-                            if (clients.length - endIndex < clientsPerRow) {
-                                slicedClients.push(clients.slice(endIndex))
-                            }
-                            if (slicedClients.length < clientsPerRow) {
-                                return <></>
-                            }
+                            // if (clients.length - endIndex < clientsPerRow) {
+                            //     slicedClients.push(clients.slice(endIndex))
+                            // }
+                            // if (slicedClients.length < clientsPerRow) {
+                            //     return <></>
+                            // }
                             return (
-                                <MarqueeTeam key={rowIndex} direction={'left'} reverse={rowIndex % 2 !== 0} >
-                                    {slicedClients.filter(client => !!client.image).map(client => (
-                                        <div className='agency-clients__img' key={`marquee-${rowIndex}`}>
-                                            <div className='container-img'>
-                                                <img
-                                                    src={client.image ? `/uploads/${client.image.filename}` : null}
-                                                    alt={client.name} key={client.id}/>
-                                            </div>
+                                // <div key={`marquee-team-${rowIndex}`}> test </div>
+                                  <CustomMarquee 
+                                      key={`marquee-team-${rowIndex}`}
+                                      direction="left"
+                                      reverse={rowIndex % 2 !== 0}
+                                      speed={30} 
+                                      
+                                  >
+                                      {slicedClients.filter(client => !!client.image).map((client, count) => (
+                                          <div className='agency-clients__img' key={`marquee-${client.id}-${count}`}>
+                                              <div className='container-img'>
+                                                  <img
+                                                      src={client.image ? `/uploads/${client.image.filename}` : null}
+                                                      alt={client.name} key={client.id}/>
+                                              </div>
 
-                                        </div>
+                                          </div>
 
-                                    ))
-                                    }
-                                </MarqueeTeam>
+                                      ))
+                                      }
+                                  </CustomMarquee>  
                             )
                         })}
                     </div>
@@ -387,7 +424,7 @@ const Agency = (props) => {
                             }
                         </Swiper>
                         </div>
-                    } */}
+                    }
                     
                 </section> : null
             }

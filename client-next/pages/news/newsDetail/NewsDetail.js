@@ -1,18 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import axios, {setIsLoadingMainPageEvent} from '../../../axios'
-import {useParams} from "react-router-dom";
-import {Link} from 'react-router-dom';
+'use client'; // Если вы используете Next.js с папкой `app`
 
-import Breadcrumbs from "../../breadcrubms/Breadcrumbs";
-import SectionSocial from '../../sectionSocial/SectionSocial';
-import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
+import React from 'react';
+import {useEffect, useState} from 'react';
+import axios, {setIsLoadingMainPageEvent} from '../../../axios'
+// import {useParams} from "react-router-dom";
+// import {Link} from 'react-router-dom';
+import Link from 'next/link'; // Используем Link из Next.js для навигации
+
+
+// import Breadcrumbs from "../../breadcrubms/Breadcrumbs";
+// import SectionSocial from '../../sectionSocial/SectionSocial';
+// import ProjectNext from '../../pages/projects/projectNext/ProjectNext';
 
 import './newsDetail.scss'
-import DelayedLink from "../../appHeader/DelayedLink";
-import {Icon} from "../../icon/Icon";
-import {useMobile} from "../../pages/projects/projectDetail/ProjectDetail";
+// import DelayedLink from "../../appHeader/DelayedLink";
+import {Icon} from "../../../components/icon/Icon";
+// import {useMobile} from "../../../components/useMobile";
+import {useMobile} from "../../projects/projectDetail/ProjectDetail";
+
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Cursor} from "../../cursor/cursor";
+import {Cursor} from "../../../components/cursor/cursor";
+import { useParams } from 'next/navigation';
+import {fetchData } from "../../../actions/appActions";
+import {useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image';
+
 
 const apiUrl = ''
 
@@ -40,6 +52,20 @@ const NewsDetail = () => {
 
     const handleTouchEnd = ({ changedTouches: [{ clientX }] }) =>
         (clientX - touchStart < 0) ? nextSlide() : prevSlide();
+
+
+    const dispatch = useDispatch();
+    const { headerData, services, contacts, team } = useSelector((state) => ({
+        headerData: state.app.headerData,
+        services: state.app.services,
+        projects: state.app.projects,
+        team: state.app.team,
+    }));
+
+    useEffect(() => {
+        dispatch(fetchData());
+    }, [dispatch]);
+
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/news/url/${id}`)
@@ -272,7 +298,7 @@ const NewsDetail = () => {
                                                         key={item.id}
                                                          style={{transform: `translateX(-${currentSlide * 100}%)`, transition: 'transform 0.3s ease-out'}}
                                                     >
-                                                        <DelayedLink to={`/news/${item.urlName}`}
+                                                        <Link href={`/news/${item.urlName}`}
                                                                      className="news__item  slider">
                                                                 {isVideo && (
                                                                     <video
@@ -289,7 +315,7 @@ const NewsDetail = () => {
                                                                         alt={item.name}
                                                                     />
                                                                 )}
-                                                        </DelayedLink>
+                                                        </Link>
                                                         <span>
                                                           <p className="news-main__text s-text">{item.newsTags}</p>
                                                           <p className="news-main__descr m-text">{item.name}</p>

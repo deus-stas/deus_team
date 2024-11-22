@@ -1619,7 +1619,7 @@ body {
 
 /* Остальные стили для полосы прокрутки */
 ::-webkit-scrollbar {
-  width: var(--scrollbar-width);
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {

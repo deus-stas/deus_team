@@ -1,4 +1,6 @@
 import React, {useMemo, useState} from 'react';
+import Image from 'next/image';
+
 const RetryImage = (props) => {
     const { src, alt,className } = props;
     const [imageLoadError, setImageLoadError] = useState(false);

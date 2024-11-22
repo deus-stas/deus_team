@@ -1,18 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import axios, {setIsLoadingMainPageEvent} from '../../../../axios'
-import {useParams} from "react-router-dom";
+'use client'; // Если вы используете Next.js с папкой `app`
+
+import React from 'react';
+import { useEffect, useState } from 'react';
+import axios, {setIsLoadingMainPageEvent} from '../../../axios'
+// import {useParams} from "react-router-dom";
 
 import './projectDetail.scss'
-import HelmetComponent from "../../../helmetComponent";
+// import HelmetComponent from "../../../components/helmetComponent";
 import SiteAndServices from "./detailPropsRender/SiteAndServices";
 import VideoProduction from "./detailPropsRender/VideoProduction";
 import TechSupport from "./detailPropsRender/TechSupport";
 import SEO from "./detailPropsRender/SEO";
-import { Icon } from "../../../icon/Icon";
+import { Icon } from "../../../components/icon/Icon";
 import {debounce} from "@material-ui/core";
 import ProjectNext from "../projectNext/ProjectNext";
 import CorporateIdentity from "./detailPropsRender/CorporateIdentity";
-import {Cursor} from "../../../cursor/cursor";
+import {Cursor} from "../../../components/cursor/cursor";
+import {fetchData } from "../../../actions/appActions";
+import {connect, useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 const apiUrl = ''
 
@@ -23,8 +30,26 @@ const ProjectDetail = () => {
     const [theme, setTheme] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const {id} = useParams();
+    const dispatch = useDispatch();
+    const { headerData, services, contacts, team } = useSelector((state) => ({
+        headerData: state.app.headerData,
+        services: state.app.services,
+        projects: state.app.projects,
+        team: state.app.team,
+    }));
 
+    useEffect(() => {
+        dispatch(fetchData());
+    }, [dispatch]);
+
+    const { id } = useParams(); // Получаем 'gazprom-groznii'
+    // const router = useRouter();
+  
+    // if (!router.isReady) {
+    //     return <p>Loading...</p>; // Убедитесь, что маршрутизатор готов
+    // }
+    // const { id } = router.query; // Здесь вы получите id
+    // const id = 'gazprom-groznii'// Здесь вы получите id
     useEffect(() => {
         setTimeout(() => {
             window.scroll({
@@ -179,8 +204,8 @@ const ProjectDetail = () => {
     return (
         <>
             <Cursor/>
-            <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords}
-                             pageDescription={detail.seoDescription}/>
+            {/* <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords}
+                             pageDescription={detail.seoDescription}/> */}
             {!isLoading &&
 
                 <main id="toUp" className="project">
@@ -230,7 +255,7 @@ const ProjectDetail = () => {
                         {detail.bannerThirds ?
                             <div className="banner-list">
                                 {detail.bannerThirds.filter(val => !!val).map((banner, index) =>
-                                    <div className="project-banner borderBlock">
+                                    <div className="project-banner borderBlock" key={`project-banner-${index}`}>
                                         <BannerComponent banner={banner} detail={detail}/>
                                     </div>
                                 )}

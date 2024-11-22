@@ -1,5 +1,6 @@
 import React from 'react';
 import {BannerComponent, ProjectResults, useMobile} from "../ProjectDetail";
+import Image from 'next/image';
 
 const Seo = ({detail}) => {
     const isMobile = useMobile();

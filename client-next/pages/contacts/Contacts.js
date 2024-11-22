@@ -11,7 +11,9 @@ import { Cursor } from "./contactsCursor";
 
 import "./contacts.scss";
 import Link from "next/link";
-import { connect } from "react-redux";
+import {fetchData } from "../../actions/appActions";
+import {useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image';
 
 const apiUrl = "";
 
@@ -19,6 +21,20 @@ const Contacts = (props) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(false);
+
+
+  const dispatch = useDispatch();
+  const { team } = useSelector((state) => ({
+      headerData: state.app.headerData,
+      services: state.app.services,
+      projects: state.app.projects,
+      team: state.app.team,
+  }));
+
+  useEffect(() => {
+      dispatch(fetchData());
+  }, [dispatch]);
+
 
   useEffect(() => {
     const event = new CustomEvent("isLoadingMainPage", { detail: { isLoading: true } });
@@ -76,7 +92,6 @@ const Contacts = (props) => {
     descr = descrSmall;
   }
 
-  const { team } = props;
 
   return (
     <>
@@ -149,7 +164,7 @@ const Contacts = (props) => {
                   {team
                     .filter((team) => team.name === "Вячеслав Брижань")
                     .map((team, index) => (
-                      <div className="worker" key={index}>
+                      <div className="worker" key={`worker-kk-${index}`}>
                         <img
                           className="worker-img"
                           src={
@@ -184,6 +199,4 @@ const Contacts = (props) => {
   );
 };
 
-export default connect((state) => ({
-  team: state.app.team,
-}))(Contacts);
+export default Contacts;

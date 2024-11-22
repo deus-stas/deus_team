@@ -1,16 +1,17 @@
-import { Link } from 'react-router-dom';
 import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import Link from 'next/link'; // Используем Link из Next.js для навигации
 
 import './projectNext.scss';
-import RetryImage from "../../../../helpers/RetryImage";
-import {gotoAnchor} from "../../../anchors";
-import DelayedLink from "../../../appHeader/DelayedLink";
+// import RetryImage from "../../../helpers/RetryImage";
+// import {gotoAnchor} from "../../../components/anchors";
+// import DelayedLink from "../../../appHeader/DelayedLink";
 import {useMobile} from "../projectDetail/ProjectDetail";
-import {Icon} from "../../../icon/Icon";
+// import {Icon} from "../../../icon/Icon";
 import {VideoComponent} from "../Projects";
-import {Cursor} from "../../../cursor/cursor";
+// import {Cursor} from "../../../cursor/cursor";
+import Image from 'next/image';
 
 const apiUrl = '';
 
@@ -63,7 +64,7 @@ const ProjectNext = ({ props, detail }) => {
                     const imgSize = isMob ? `${apiUrl}/uploads/${project.imageMob?.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
                     const isVideo = project.imageMob && project.imageMob?.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
                     return (
-                        <DelayedLink key={index} to={`/projects/${project.nameInEng}`} datahash="toUp"
+                        <Link key={index} href={`/projects/${project.nameInEng}`} datahash="toUp"
                                      onClick={returnToTheTop}>
                             <div className="project-next__item">
                                 {isVideo ?
@@ -80,7 +81,7 @@ const ProjectNext = ({ props, detail }) => {
                                       <p className="heading-secondary">{project.descrProject}</p>
                                 </span>
                             </div>
-                        </DelayedLink>
+                        </Link>
                     );
                 })}
             </div>

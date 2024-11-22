@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
+import Image from 'next/image';
 
 import './sectionProducts.scss'
 

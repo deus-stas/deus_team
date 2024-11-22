@@ -27,32 +27,34 @@ const apiUrl = '';
 
 const Services = () => {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
 
-    // useEffect(() => {
-    //     setIsLoadingMainPageEvent(true)
-    //     const handleLoad = (e) => {
-    //         if (e.detail.isLoading !== isLoading) {
-    //             setIsLoading(e.detail.isLoading);
-    //         }
-    //     };
+    useEffect(() => {
+        setIsLoadingMainPageEvent(true)
+        const handleLoad = (e) => {
+            if (e.detail.isLoading !== isLoading) {
+                setIsLoading(e.detail.isLoading);
+            }
+        };
 
-    //     window.addEventListener('isLoadingMainPage', handleLoad);
-    //     return () => {
-    //         window.removeEventListener('isLoadingMainPage', handleLoad);
-    //     };
-    // }, []);
-    // const { headerData, services, contacts, team } = useSelector((state) => ({
-    //         headerData: state.app.headerData,
-    //         services: state.app.services,
-    //         projects: state.app.projects,
-    //         team: state.app.team,
-    //   }));
+        window.addEventListener('isLoadingMainPage', handleLoad);
+        setIsLoading(false)
+        return () => {
+            window.removeEventListener('isLoadingMainPage', handleLoad);
+        };
+    }, []);
 
-    // useEffect(() => {
-    //     dispatch(fetchData());
-    //   }, [dispatch]);
+    const { headerData, services, contacts, team } = useSelector((state) => ({
+            headerData: state.app.headerData,
+            services: state.app.services,
+            projects: state.app.projects,
+            team: state.app.team,
+      }));
+
+    useEffect(() => {
+        dispatch(fetchData());
+      }, [dispatch]);
     
 
     useEffect(() => {
@@ -95,8 +97,8 @@ const Services = () => {
     return (
         <>
             <Cursor/>
-            {/* {!isLoading && */}
-            {true &&
+            {!isLoading &&
+            // {true &&
                 <main className="services">
                     <div className="container">
                         <section className="services-s">
@@ -130,12 +132,12 @@ const Services = () => {
 
                         </section>
 
-                        {/* <section className="services-list">
+                        <section className="services-list">
                             <div className="services-list__wrapp borderBlock padding">
                                 {
                                     !!services && services.filter((service) => service.isInvisible).map((service, index) => {
                                         return (
-                                            <div className="services-list__wrapp-item">
+                                            <div className="services-list__wrapp-item" key={`$services-list-${index}`}>
                                                 <div className="describe">
                                                     <h2 href={`/services/${service.path}`}
                                                          className="heading-secondary"
@@ -157,7 +159,7 @@ const Services = () => {
                                                     {!!service.tariffs && service.tariffs.map((tariffs, index) => {
                                                         const num = (index + 1).toString().padStart(2, '0');
                                                         return (
-                                                            <div className="describe__wrapp-benefits__item">
+                                                            <div className="describe__wrapp-benefits__item"  key={`$describe__wrapp-benefits-key-${index}`}>
                                                                 <p className="num m-text">{num}</p>
                                                                 <div className="tariffs">
                                                                     <span className="tariffs__span">
@@ -177,8 +179,8 @@ const Services = () => {
                                         )
                                     })}
                             </div>
-                        </section> */}
-{/* 
+                        </section>
+
                         <section className="services-principle borderBlock padding whiteHeader">
                             <h2 className="heading-secondary">Принципы управления<br/> проектами</h2>
                             <div className="services-principle__wrap">
@@ -212,8 +214,8 @@ const Services = () => {
                                     </div>
                                 </div>
 
-                        </section> */}
-{/* 
+                        </section>
+
                         <section className="services-team borderBlock padding">
                                 <div className="services-team__wrap">
                                     <div className="info">
@@ -230,7 +232,7 @@ const Services = () => {
                                         <div className="services-team__wrapper">
                                             {team.filter(team => team.serviceControl).map((team, index) => {
                                                 return (
-                                                    <div className="worker">
+                                                    <div className="worker" key={`worker-key-${index}`}>
                                                         <img className="worker-img"
                                                              src={team.image ? `${apiUrl}/uploads/${team.image?.filename}` : null}
                                                              alt=""/>
@@ -269,7 +271,7 @@ const Services = () => {
                                     </div>
                                 </div>
 
-                        </section> */}
+                        </section>
                     </div>
                 </main>
             }

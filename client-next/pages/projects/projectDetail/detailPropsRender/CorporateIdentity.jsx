@@ -32,7 +32,7 @@ const CorporateIdentity = ({detail}) => {
                     detail.bannerSeconds.length > 2 && !!detail.control1 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerSeconds.filter(val => !!val).map((banner, index) =>
-                        <span className="project-banner borderBlock">
+                        <span className="project-banner borderBlock"  key={`index-key-6-${index}`}>
                             <BannerComponent banner={banner} detail={detail}/>
                         </span>
                     )}
@@ -60,7 +60,7 @@ const CorporateIdentity = ({detail}) => {
                     detail.bannerFourths.length > 2 && !!detail.control2 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerFourths.filter(val => !!val).map((banner, index) =>
-                        <span className="project-banner borderBlock">
+                        <span className="project-banner borderBlock" key={`project-banner---${index}`}>
                             <BannerComponent banner={banner} detail={detail}/>
                         </span>
                     )}
@@ -88,7 +88,7 @@ const CorporateIdentity = ({detail}) => {
                         detail.bannerFifths.length > 2 && !!detail.control3 ? "banner-grid" : "banner-list"
                     }>
                         {detail.bannerFifths.filter(val => !!val).map((banner, index) => (
-                            <span  className="project-banner borderBlock">
+                            <span  className="project-banner borderBlock" key={`index-key--${index}`}>
                                  <BannerComponent banner={banner} detail={detail} key={index}/>
                             </span>
 
@@ -117,7 +117,7 @@ const CorporateIdentity = ({detail}) => {
                     detail.bannerSixths.length > 2 && !!detail.control4 ? "banner-grid" : "banner-list"
                 }>
                     {detail.bannerSixths.filter(val => !!val).map((banner, index) =>
-                        <span className="project-banner borderBlock">
+                        <span className="project-banner borderBlock"  key={`index-key-2-${index}`}>
                             <BannerComponent banner={banner} detail={detail}/>
                         </span>
                     )}
@@ -145,7 +145,7 @@ const CorporateIdentity = ({detail}) => {
                         detail.bannerSevenths.length > 2 && !!detail.control4 ? "banner-grid" : "banner-list"
                     }>
                         {detail.bannerSevenths.filter(val => !!val).map((banner, index) => (
-                            <span  className="project-banner borderBlock">
+                            <span  className="project-banner borderBlock"  key={`index-key-3-${index}`}>
                                  <BannerComponent banner={banner} detail={detail} key={index}/>
                             </span>
 
@@ -174,7 +174,7 @@ const CorporateIdentity = ({detail}) => {
                         detail.bannerEighths.length > 2 && !!detail.control5 ? "banner-grid" : "banner-list"
                     }>
                         {detail.bannerEighths.filter(val => !!val).map((banner, index) => (
-                            <span  className="project-banner borderBlock">
+                            <span  className="project-banner borderBlock"   key={`index-key-4-${index}`}>
                                  <BannerComponent banner={banner} detail={detail} key={index}/>
                             </span>
 
@@ -203,7 +203,7 @@ const CorporateIdentity = ({detail}) => {
                         detail.bannerNinths.length > 2 && !!detail.control6 ? "banner-grid" : "banner-list"
                     }>
                         {detail.bannerNinths.filter(val => !!val).map((banner, index) => (
-                            <span  className="project-banner borderBlock">
+                            <span  className="project-banner borderBlock"  key={`index-key-5-${index}`}>
                                  <BannerComponent banner={banner} detail={detail} key={index}/>
                             </span>
 

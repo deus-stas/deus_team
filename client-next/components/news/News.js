@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../axios'
 import {Link, useLocation} from 'react-router-dom';
+import Image from 'next/image';
 
 import './news.scss';
 import {connect} from "react-redux";

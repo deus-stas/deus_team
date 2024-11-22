@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"pages\\\\mainPage\\\\MainPage.js -> @devnomic/marquee\":{\"id\":\"pages\\\\mainPage\\\\MainPage.js -> @devnomic/marquee\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_devnomic_marquee_dist_index_js.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST="{}"

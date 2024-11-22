@@ -9,8 +9,9 @@ import "./mainPage.scss";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 // import "./workingSlider.scss";
-
+import Image from 'next/image';
 import useResponsiveSlides from "./useResponsiveSlides";
+
 
 const WorkingSlider = () => {
   const [working, setWorking] = useState([]);
@@ -139,7 +140,7 @@ const WorkingSlider = () => {
                                 <p className="m-text">{item.descr}</p>
                             </div>
                             <div className="wrapp-circle">
-                                <img src={deus} alt="" className="circle" />
+                                <Image src={deus} alt="" className="circle" />
                                 <img src={`/uploads/${item.file.filename}`} alt="" className="circle" />
                             </div>
                             </div>

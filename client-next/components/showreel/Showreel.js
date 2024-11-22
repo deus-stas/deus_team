@@ -6,6 +6,8 @@ import showPng from "./showreel.png";
 import rotate from "./rotate.svg";
 import playCursor from "../../public/img/videoPlayCursor.svg"
 import pauseCursor from "../../public/img/videoPauseCursor.svg";
+import Image from 'next/image';
+
 
 const apiUrl = '';
 
@@ -95,7 +97,7 @@ const Showreel = (props) => {
         }
         mobileVersion();
     }, []);
-
+    console.log('sddcsfsdds', data);
     return (
         <div className="showreel">
             {
@@ -111,7 +113,7 @@ const Showreel = (props) => {
                         {
                             data.video && data.video !== 'undefined' && data.video !== 'null' &&
                             <>
-                                <video ref={videoRef} poster={showPng} id={"mainVideo"} loop playsInline preload={'auto'}>
+                                <video ref={videoRef} poster='showreel.png' id={"mainVideo"} loop playsInline preload={'auto'}>
                                     <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                             type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                                 </video>

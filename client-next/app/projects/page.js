@@ -1,10 +1,10 @@
-// import Projects from "../../pages/projects/Projects";
+import Projects from "../../pages/projects/Projects";
 
 
 export default function Home() {
     return (
       <main>
-        {/* <Projects/> */}
+        <Projects/>
       </main>
     );
   }

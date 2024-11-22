@@ -103,7 +103,7 @@ const AppWrapper = () => {
 
 
     return (
-        <>
+        <div className="wrapper"> 
             <div id="preloader" className="hide-preloader preloader-hidden">
                 {/*<svg width="290" height="115" viewBox="0 0 290 115" fill="none"*/}
                 {/*     xmlns="http://www.w3.org/2000/svg">*/}
@@ -144,7 +144,7 @@ const AppWrapper = () => {
 
                 {!shouldHideHeaderFooter && <AppFooter key={footerKey}/>}
             </AxiosInterceptor>
-        </>
+        </div>
     );
 
 }

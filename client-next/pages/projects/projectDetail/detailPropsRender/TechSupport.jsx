@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import "../projectDetail.scss"
-import axios from "../../../../../axios";
+import axios from "../../../../axios";
 import {BannerComponent, ProjectResults, useMobile} from "../ProjectDetail";
+import Image from 'next/image';
 
 const TechSupport = ({detail}) => {
     const apiUrl = '';

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { Formik, Field } from 'formik';
 // import InputMask from "react-input-mask";
-// import InputMask from 'react-input-mask-next';
+import InputMask from 'react-input-mask-next';
 import React, {useState, useEffect} from 'react';
 // import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -134,14 +134,15 @@ const Cta = (props) => {
                                     </div>
                                 </div>
                                 return (
-                                    <>
+                                    <div key={`cta--${index}`}>  
                                         {disabled ? <div> {children}</div> : <Link
-                                            target="_blank" isExternal
+                                            target="_blank" 
+                                            // isExternal
                                             href={`${apiUrl}/uploads/${service.brief.filename}`}
                                             download={service.brief.originalname}>
                                             {children}
                                         </Link>}
-                                    </>
+                                    </div>
 
                                 );
 
@@ -258,7 +259,16 @@ const Cta = (props) => {
                                         <div className="form__wrap m-text">
                                             <div className={`form__group ${errors.phone && touched.phone ? 'error' : ''}`}>
                                                 {values.phone && <label htmlFor="phone" className="form__label xs-text">Номер телефона</label>}
+                                                <input type="text" name="phone" className="form__input m-text" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
                                                 {/* <InputMask type="text" name="phone" className="form__input m-text" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" /> */}
+                                                {/* <InputMask
+                                                    mask="+7 (999) 999-99-99"
+                                                    value={values.phone}
+                                                    onChange={handleChange}
+                                                    alwaysShowMask={false} // Убедитесь, что props корректные
+                                                >
+                                                    {() => <input type="text" placeholder="Ваш телефон" name="phone" className="form__input m-text" />}
+                                                </InputMask> */}
                                                 <div className="form__error">{errors.phone && touched.phone && errors.phone}</div>
                                             </div>
                                             <div className={`form__group ${errors.email && touched.email ? 'error' : ''}`}>
