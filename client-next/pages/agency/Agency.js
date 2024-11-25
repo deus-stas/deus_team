@@ -437,7 +437,7 @@ const Agency = (props) => {
                     </section> : null
                 }
 
-                {team && (
+                {/* {team && (
                     <section id="agency" className="agency-team borderBlock">
                         <div className="agency-team__wrap">
                             <div className="intro">
@@ -449,7 +449,11 @@ const Agency = (props) => {
                             <div className="agency-team__wrap-imgWrap">
                                 {team && splitArrayIntoChunks(team,  4).map((row, count) => {
                                     return (
-                                        <div className={`main-clients__marquee-agency`} key={`row-pepol-${count}`}>
+                                        <div 
+                                            className={`main-clients__marquee-agency`}
+                                            key={`row-pepol-${count}`}
+                                            style={{ wi: '124px' }}
+                                        >
                                             <div className="marquee-container-agency">
                                                 <Marquee 
                                                     speed={40}
@@ -467,50 +471,14 @@ const Agency = (props) => {
                                                     ))}
                                                 </Marquee>
                                             </div>
-                        
-            
                                         </div>
                                     )
                                 })}
-                                {/* {
-                                    Array.from({ length: 5 }, (_, columnIndex) => {
-                                        let count = 0;
-                                        return (
-                                        <MarqueeTeam
-                                            key={`col-${columnIndex}`}
-                                            className={isTablet ? "animate-marquee-left" : "animate-marquee-up"}
-                                            direction={isTablet ? "left" : "up"}
-                                            fade={false}
-                                            reverse={columnIndex % 2 === 0}
-                                        >
-                                            {team.filter((value, index) => {
-                                                if (index === (columnIndex + count * 5)) {
-                                                    count++;
-                                                    return true
-                                                }
-                                                return false
-                                            })
-                                                .map((item, index, array) => (
-                                                    <img
-                                                        key={`img-${item}`}
-                                                        className="image"
-                                                        src={`/uploads/${item.mainImg?.filename}`}
-                                                        alt={''}
-                                                    />
-
-                                                ))
-                                            }
-                                        </MarqueeTeam>
-                                        )
-                                    })
-                                } */}
-
-                                
                             </div>
 
                         </div>
                     </section>
-                )}
+                )} */}
 
                 {vacancies && (
                     <section id="agency" className="agency-vacancy">

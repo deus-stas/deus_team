@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST="{\"components\\\\appFooter\\\\AppFooter.js -> reactjs-popup\":{\"id\":\"components\\\\appFooter\\\\AppFooter.js -> reactjs-popup\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_reactjs-popup_dist_reactjs-popup_esm_js.js\"]}}"
