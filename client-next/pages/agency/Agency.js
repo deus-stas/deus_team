@@ -437,7 +437,7 @@ const Agency = (props) => {
                     </section> : null
                 }
 
-                {/* {team && (
+                {team && (
                     <section id="agency" className="agency-team borderBlock">
                         <div className="agency-team__wrap">
                             <div className="intro">
@@ -446,39 +446,49 @@ const Agency = (props) => {
                                 <p className="descr m-text">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в
                                     единую систему для получения максимальной эффективности для вашего бизнеса</p>
                             </div>
-                            <div className="agency-team__wrap-imgWrap">
+                            <div 
+                                className="agency-team__wrap-imgWrap" 
+                                style={{ maxWidth: '860px', width: '100%', height: "539px", flexDirection: 'column',}}>
                                 {team && splitArrayIntoChunks(team,  4).map((row, count) => {
                                     return (
-                                        <div 
-                                            className={`main-clients__marquee-agency`}
-                                            key={`row-pepol-${count}`}
-                                            style={{ wi: '124px' }}
-                                        >
-                                            <div className="marquee-container-agency">
-                                                <Marquee 
-                                                    speed={40}
-                                                    loop={0}
-                                                    gradient={false}
-                                                    direction={count % 2 === 0 ? "up" : 'down'}
-                                                    >
-                                                    {row.map((item, i) => (
-                                                        <img
-                                                            key={`img-${i}-${count}`}
-                                                            className="image"
-                                                            src={`/uploads/${item.mainImg?.filename}`}
-                                                            alt={''}
-                                                            />
-                                                    ))}
-                                                </Marquee>
-                                            </div>
-                                        </div>
+                                            <Marquee 
+                                                key={`row-pepol-${count}`}
+                                                speed={40}
+                                                loop={0}
+                                                gradient={false}
+                                                direction={count % 2 === 0 ? "right" : 'left'}
+                                                // direction={count % 2 === 0 ? "up" : 'down'}
+                                                style={{margin: '0 25px'}}      
+
+                                                >
+                                                {row.map((item, i) => (
+                                                    <img
+                                                        key={`img-${i}-${count}`}
+                                                        className="image"
+                                                        style={{margin: '0 25px'}}      
+                                                        src={`/uploads/${item.mainImg?.filename}`}
+                                                        alt={''}
+                                                        />
+                                                ))}
+                                            </Marquee>
+                              
+
+                                    //     <div 
+                                    //         className={`main-clients__marquee-agency`}
+                                    //         key={`row-pepol-${count}`}
+                                    //         style={{ width: '124px' }}
+                                    //     >
+                                    //         <div className="marquee-container-agency">
+                                                
+                                    //         </div>
+                                    //     </div>
                                     )
                                 })}
                             </div>
 
                         </div>
                     </section>
-                )} */}
+                )}
 
                 {vacancies && (
                     <section id="agency" className="agency-vacancy">
