@@ -1,0 +1,204 @@
+@import '../../style/mixins';
+
+.cta {
+    padding: 4rem 5.1rem 4rem 3.2rem;
+    background: #050505;
+    @include respond(lg) {
+        padding: 3rem 3rem 3.6rem 3rem;
+    }
+
+    @include respond(sm){
+        padding: 3rem;
+    }
+    @include respond(xs){
+        padding: 2rem;
+    }
+
+    &__wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        color: #FFFFFF;
+
+        @include respond(lg){
+            grid-template-columns: 1fr 1.7fr;
+        }
+
+        @include respond(sm) {
+            border-bottom: none;
+            padding-bottom: 0;
+            grid-template-columns: inherit;
+            grid-gap: 0;
+            display: flex;
+            gap: 4rem;
+            flex-direction: column;
+        }
+
+        &-wrapper {
+            padding: 3rem 0;
+            margin-right: 22.1rem;
+            @include respond(lg){
+                margin-right: 8rem;
+            }
+            @include respond(sm) {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0 3.1rem ;
+                padding: 2rem 0;
+                margin-right: 0;
+
+            }
+
+            @include respond(xs){
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .item {
+                align-items: center;
+                border-bottom: 1px solid hsla(0,0%,100%,.2);
+                cursor: pointer;
+                display: flex;
+                padding: .95rem 0;
+                transition: opacity 0.4s;
+
+                @include respond(lg){
+                    padding: .75rem;
+                }
+
+                :nth-child(1) {
+                    margin-right: auto;
+                }
+
+                &:hover {
+
+                    p {
+                        transition: opacity 0.4s;
+                        color: #E0FD60
+                    }
+
+                    .hover-flip-arrow span {
+                        transform: translatex(0%) translatey(0%);
+                    }
+
+                    .hover-flip-arrow div {
+                        transform: translatex(0) translatey(0);
+                    }
+
+
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .icon {
+                height: 3rem;
+                margin-left: auto;
+                width: 3rem;
+                @include respond(sm) {
+                    height: 2rem;
+                    width: 2rem;
+                }
+            }
+        }
+
+        .pb-20 {
+            padding-bottom: 1rem;
+        }
+
+        .p-style-grey {
+            @include respond(sm) {
+                font-size: 1.6rem;
+            }
+        }
+
+        .heading-tertiary{
+            @include respond(sm) {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    &__person {
+        @include respond(sm) {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        &-img {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            margin-bottom: 4rem;
+
+            @include respond(sm) {
+                width: 6rem;
+                height: 6rem;
+                flex: 0 0 6rem;
+                margin-right: 2rem;
+                margin-bottom: 0;
+            }
+        }
+
+        &-descr {
+            font-weight: 500;
+            font-size: 2.8rem;
+            line-height: 3.4rem;
+
+            @include respond(sm) {
+                font-size: 2.2rem;
+                line-height: 2.6rem;
+            }
+        }
+    }
+    
+}
+.modalAgree {
+    font-size: 12px;
+    padding: 20px 40px;
+}
+.modalHeader {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+}
+.modalContent {
+    width: 100%;
+    padding: 10px 5px;
+    height: 80vh;
+    overflow-y: auto;
+}
+.modalContent table, .modalContent table tr, .modalContent table tr td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.modalClose {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+}
+.form__check .span {
+    color: #757677;
+    cursor: pointer;
+}
+.toCenter {
+    text-align: center;
+    font-weight: 600;
+}
+
+.sticky-h2 {
+    position: sticky;
+    top: 15rem;
+}

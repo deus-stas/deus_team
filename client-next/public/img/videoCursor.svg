@@ -1,0 +1,9 @@
+<svg width="100" height="100" viewBox="0 0 90 85" fill="black" fill-opacity="0.5" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="blurFilter" x="-5%" y="-5%" width="110%" height="110%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+        </filter>
+    </defs>
+    <circle cx="44" cy="44" r="43"  stroke="white" stroke-width="1.5"  fill="black" fill-opacity="0.5"/>
+<path d="M39 53V36L51 44.5L39 53Z" stroke="white" stroke-width="1"  fill="black" fill-opacity="0.1" />
+</svg>
