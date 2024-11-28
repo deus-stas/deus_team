@@ -1,0 +1,95 @@
+.main-clients__marquee {
+  overflow: hidden; /* Скрываем содержимое за пределами контейнера */
+  position: relative;
+  display: flex;
+  
+  .marquee-container {
+    // display: flex;
+    // animation: marquee-reverse 60s linear infinite; /* Анимация */
+    gap: 20px; /* Расстояние между элементами */
+    will-change: transform; /* Оптимизация анимации */
+  }
+
+  .main-clients__container {
+    flex: 0 0 auto; /* Предотвращаем сжатие */
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0%); /* Начинаем с начального положения */
+    }
+    to {
+      transform: translateX(-100%); /* Двигаемся влево на ширину содержимого */
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-100%); /* Начинаем за пределами экрана слева */
+    }
+    to {
+      transform: translateX(0%); /* Двигаемся к правому краю */
+    }
+  }
+
+
+  /* Горизонтальная прокрутка влево */
+  .marquee-left {
+    flex-direction: row;
+    animation: marquee-left linear infinite;
+  }
+
+  @keyframes marquee-left {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Горизонтальная прокрутка вправо */
+  .marquee-right {
+    flex-direction: row;
+    animation: marquee-right linear infinite;
+  }
+
+  @keyframes marquee-right {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+
+  /* Вертикальная прокрутка вверх */
+  .marquee-up {
+    flex-direction: column;
+    animation: marquee-up linear infinite;
+  }
+
+  @keyframes marquee-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  /* Вертикальная прокрутка вниз */
+  .marquee-down {
+    flex-direction: column;
+    animation: marquee-down linear infinite;
+  }
+
+  @keyframes marquee-down {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+}

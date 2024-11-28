@@ -57,9 +57,11 @@ const AppHeader = (props) => {
             // narrowly: { width: `${window.innerWidth * 0.85 / 10}rem` },
             narrowly: { 
                 width:
-                    window.innerWidth > 1120
+                    window.innerWidth > 2000
+                    ? `${(window.innerWidth * 0.85) / 10}rem`
+                    : window.innerWidth > 1120
                     ? '1120px'
-                    : `${(window.innerWidth * 0.85) / 10}rem`,
+                    : `${(window.innerWidth * 0.85) / 10}rem`
             },
 
             up: { transform: 'translateY(-30rem)' },

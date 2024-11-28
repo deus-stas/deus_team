@@ -311,6 +311,13 @@
         height: 32rem;
       }
 
+      .playing {
+        video {
+          @media (width <= 870px) {
+            margin-top: 150px;
+          }
+        }
+      }
       video {
         width: 100%;
         object-fit: cover;
@@ -327,6 +334,9 @@
         height: 100%;
         z-index: 10000;
         border-radius: 0;
+        @media (width <= 870px) {
+          background-color: #000000;
+        }
       }
     }
   }
@@ -872,6 +882,7 @@
       display: grid;
       grid-template-columns: 0.25fr 0.95fr;
       width: 100vw;
+      position: relative;
 
       @media (width <= 870px) {
         grid-template-columns: 1fr;
@@ -879,6 +890,24 @@
 
       @media (width <= 574px) {
         display: block;
+      }
+
+      .faded {
+        height: 302px;
+        position: absolute;
+        width: 70px;
+        background: linear-gradient(270deg, #EEEEEE 0%, rgba(238, 238, 238, 0) 100%);
+        left: 1690px;
+        z-index: 10;
+        display: none;
+        @media (width >= 1900px) {
+          display: block;
+        }
+        @media (width >= 2000px) {
+          display: block;
+          height: 483px;
+          left: 1670px;
+        }
       }
 
       // @include respond(sm) {

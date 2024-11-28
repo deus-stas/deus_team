@@ -18,25 +18,27 @@ export const Cursor = () => {
     const targets = [".cursorTarget"]
 
     const windowWidth = window.innerWidth;
+    let step;
 
     const handleMoveMouse = (e) => {
+
         // Проверяем, находится ли курсор над элементом, соответствующим одному из селекторов (targets), и ширина окна больше 768 пикселей
-        if (e.target.closest(targets.join(',')) && windowWidth > 768) {
+        if (e.target.closest(targets.join(',')) && windowWidth <= 1800) {
             // Если да, то перемещаем стрелку в соответствии с положением курсора
             gsap.to(arrowRef.current, {
                 x: e.clientX - 12,
                 y: e.clientY - 12,
             });
+        } else if (e.target.closest(targets.join(',')) && windowWidth >= 1800) {
+        gsap.to(arrowRef.current, {
+            x: e.clientX - 65,
+            y: e.clientY - 12,
+        })
         } else {
             // Если нет, то скрываем стрелку
             gsap.to(arrowRef.current, {
                 autoAlpha: 0,
             });
-        }
-        if ((windowWidth <= 1920) && (windowWidth > 1800)) {
-            gsap.to(arrowRef.current, {
-                x: e.clientX - 65,
-            })
         }
     };
     // useEffect for moving
