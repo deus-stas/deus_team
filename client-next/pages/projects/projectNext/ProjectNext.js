@@ -7,7 +7,8 @@ import './projectNext.scss';
 // import RetryImage from "../../../helpers/RetryImage";
 // import {gotoAnchor} from "../../../components/anchors";
 // import DelayedLink from "../../../appHeader/DelayedLink";
-import {useMobile} from "../projectDetail/ProjectDetail";
+import  useMobile from "../../../components/useMobile";
+
 // import {Icon} from "../../../icon/Icon";
 import {VideoComponent} from "../Projects";
 // import {Cursor} from "../../../cursor/cursor";
@@ -16,11 +17,21 @@ import Image from 'next/image';
 const apiUrl = '';
 
 const ProjectNext = ({ props, detail }) => {
-    const { id, category } = useParams();
+    // const { id, category } = useParams();
     const [relatedProjects, setRelatedProjects] = useState([]);
     const [allProjects, setAllProjects] = useState([]);
+    const [id, setId] = useState(null);
 
-    const isMob = useMobile()
+    const isMobile = useMobile()
+
+    const params = useParams();
+    // Получение ID из параметров маршрута
+    useEffect(() => {
+        if (params?.id) {
+            setId(params.id);
+        }
+    }, []);
+
 
     useEffect(() => {
         axios.get(`${apiUrl}/api/projects/`)
@@ -30,7 +41,7 @@ const ProjectNext = ({ props, detail }) => {
                 projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setAllProjects(projects);
 
-                const relatedProjectsByType = projects.filter((project) => project.projectType === detail.projectType);
+                const relatedProjectsByType = projects.filter((project) => project.projectType === detail?.projectType);
                 if (relatedProjectsByType.length >= 2) {
                     setRelatedProjects(relatedProjectsByType.slice(0, 2));
                 } else {
@@ -40,7 +51,7 @@ const ProjectNext = ({ props, detail }) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, [id, detail.type]);
+    }, [id, detail?.type]);
 
     const videoRefs = useRef([]);
 
@@ -61,7 +72,7 @@ const ProjectNext = ({ props, detail }) => {
             <h1 className="heading-primary">Ещё проекты</h1>
             <div className="project-next__wrap">
                 {relatedProjects.map((project, index) => {
-                    const imgSize = isMob ? `${apiUrl}/uploads/${project.imageMob?.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
+                    const imgSize = isMobile ? `${apiUrl}/uploads/${project.imageMob?.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
                     const isVideo = project.imageMob && project.imageMob?.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
                     return (
                         <Link key={index} href={`/projects/${project.nameInEng}`} datahash="toUp"
@@ -69,7 +80,7 @@ const ProjectNext = ({ props, detail }) => {
                             <div className="project-next__item">
                                 {isVideo ?
                                     <span className="projects__item">
-                                         <VideoComponent className="projects__item next__project_img" ref={(ref) => addVideoRef(ref)}  project={project} isMob={isMob} videoSize={imgSize}
+                                         <VideoComponent className="projects__item next__project_img" ref={(ref) => addVideoRef(ref)}  project={project} isMobile={isMobile} videoSize={imgSize}
                                                          apiUrl={apiUrl} />
                                     </span>
                                     :

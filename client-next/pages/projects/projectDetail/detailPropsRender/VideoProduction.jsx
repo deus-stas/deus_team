@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {BannerComponent, useMobile} from "../ProjectDetail";
+import {BannerComponent} from "../ProjectDetail";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 const VideoProduction = ({detail}) => {
@@ -23,7 +23,7 @@ const VideoProduction = ({detail}) => {
 
     return (
         <div className="project-videoProduction">
-            {!!detail.bannerSeconds && detail.bannerSeconds.length > 0 && (
+            {!!detail?.bannerSeconds && detail?.bannerSeconds.length > 0 && (
                 <section
                     style={{ backgroundColor: "black" }}
                     className="borderBlock"
@@ -34,7 +34,7 @@ const VideoProduction = ({detail}) => {
                         centeredSlides={true}
                         navigation
                     >
-                        {detail.bannerSeconds.filter(val => !!val).map((banner, index) => (
+                        {detail?.bannerSeconds.filter(val => !!val).map((banner, index) => (
                             <SwiperSlide key={index}>
                                 <video autoPlay={true} loop={true} muted
                                     className="slider-img"
@@ -46,11 +46,11 @@ const VideoProduction = ({detail}) => {
                 </section>
             )}
 
-            {detail.bannerSecond ?
-                <BannerComponent  banner={detail.bannerSecond} detail={detail}/>
+            {detail?.bannerSecond ?
+                <BannerComponent  banner={detail?.bannerSecond} detail={detail}/>
                 : null}
-            {detail.bannerThird ?
-                <BannerComponent banner={detail.bannerThird} detail={detail}/>
+            {detail?.bannerThird ?
+                <BannerComponent banner={detail?.bannerThird} detail={detail}/>
                 : null}
         </div>
     );

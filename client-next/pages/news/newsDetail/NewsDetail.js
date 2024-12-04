@@ -16,13 +16,13 @@ import './newsDetail.scss'
 // import DelayedLink from "../../appHeader/DelayedLink";
 import {Icon} from "../../../components/icon/Icon";
 // import {useMobile} from "../../../components/useMobile";
-import {useMobile} from "../../projects/projectDetail/ProjectDetail";
+import useMobile from "../../../components/useMobile";
 
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Cursor} from "../../../components/cursor/cursor";
 import { useParams } from 'next/navigation';
-import {fetchData } from "../../../actions/appActions";
-import {useDispatch, useSelector } from 'react-redux';
+// import {fetchData } from "../../../actions/appActions";
+// import {useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 
 
@@ -30,13 +30,20 @@ const apiUrl = ''
 
 const NewsDetail = () => {
 
-    const isMobile = useMobile();
-
+    const { isMobile } = useMobile();
+    const params = useParams(); // Хук вызывается на верхнем уровне
     const [news, setNews] = useState([]);
     const [detail, setDetail] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [slidesPerView, setSlidesPerView] = useState(1.5);
-    const {id} = useParams();
+    const [id, setId] = useState(null);
+
+    // Получение ID из параметров маршрута
+    useEffect(() => {
+        if (params?.id) {
+            setId(params.id);
+        }
+    }, []);
 
     const [currentSlide, setCurrentSlide] = useState(0);
     const [touchStart, setTouchStart] = useState(0);
@@ -54,37 +61,26 @@ const NewsDetail = () => {
         (clientX - touchStart < 0) ? nextSlide() : prevSlide();
 
 
-    const dispatch = useDispatch();
-    const { headerData, services, contacts, team } = useSelector((state) => ({
-        headerData: state.app.headerData,
-        services: state.app.services,
-        projects: state.app.projects,
-        team: state.app.team,
-    }));
-
     useEffect(() => {
-        dispatch(fetchData());
-    }, [dispatch]);
-
-
-    useEffect(() => {
-        axios.get(`${apiUrl}/api/news/url/${id}`)
-            .then((response) => {
-
-                const dataDetail = response.data;
-                axios.get(`${apiUrl}/api/newsTags/${response.data.newsTags}`)
-                    .then((response) => {
-                        dataDetail.newsTags = response.data.name;
-                        setDetail(dataDetail);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        if(id) {
+            axios.get(`${apiUrl}/api/news/url/${id}`)
+                .then((response) => {
+    
+                    const dataDetail = response.data;
+                    axios.get(`${apiUrl}/api/newsTags/${response.data.newsTags}`)
+                        .then((response) => {
+                            dataDetail.newsTags = response.data.name;
+                            setDetail(dataDetail);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+    
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     }, [id]);
 
     useEffect(() => {
@@ -114,33 +110,38 @@ const NewsDetail = () => {
     }, []);
 
     useEffect(() => {
-        setIsLoadingMainPageEvent(true)
-
-        const handleLoad = (e) => {
-            if (e.detail.isLoading !== isLoading) {
-                setIsLoading(e.detail.isLoading);
-            }
-        };
-
-        window.addEventListener('isLoadingMainPage', handleLoad);
-        return () => {
-            window.removeEventListener('isLoadingMainPage', handleLoad);
-        };
+        if (typeof window !== 'undefined') {
+            setIsLoadingMainPageEvent(true)
+    
+            const handleLoad = (e) => {
+                if (e.detail.isLoading !== isLoading) {
+                    setIsLoading(e.detail.isLoading);
+                }
+            };
+    
+            window.addEventListener('isLoadingMainPage', handleLoad);
+            return () => {
+                window.removeEventListener('isLoadingMainPage', handleLoad);
+            };
+        }
     }, []);
 
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 500) { // adjust the breakpoint as needed
-                setSlidesPerView(1.1);
-            } else {
-                setSlidesPerView(1.5);
-            }
-        };
-        window.addEventListener('resize', handleResize);
-        handleResize(); // initial call
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+        if (typeof window !== 'undefined') {
+
+            const handleResize = () => {
+                if (window.innerWidth < 500) { // adjust the breakpoint as needed
+                    setSlidesPerView(1.1);
+                } else {
+                    setSlidesPerView(1.5);
+                }
+            };
+            window.addEventListener('resize', handleResize);
+            handleResize(); // initial call
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
+        }
     }, []);
 
 
