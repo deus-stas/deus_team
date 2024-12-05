@@ -10,6 +10,8 @@
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
     "client:next": "npm run dev --prefix client-next",
+    "client:next:build": "npm run build --prefix client-next",
+    "client:next:start": "npm run start --prefix client-next",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
   "license": "ISC",
