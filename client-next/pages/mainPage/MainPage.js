@@ -27,18 +27,18 @@ import RetryImage from "../../helpers/RetryImage";
 import {goProjects, gotoAnchor} from "../../components/anchors";
 // import DelayedLink from "../../appHeader/DelayedLink";
 // import FadeInOnScroll from "../../animation/fadeInOnScroll";
-import {Box, useMediaQuery} from "@material-ui/core";
+// import {Box, useMediaQuery} from "@material-ui/core";
 // import {maxLength} from "react-admin";
 import useMobile from "../../components/useMobile";
 // import {Marquee} from "@devnomic/marquee";
 import {Cursor} from "../../components/cursor/cursor";
-import {connect, useDispatch, useSelector } from 'react-redux';
-import {fetchData } from "../../actions/appActions";
+// import {useDispatch, useSelector } from 'react-redux';
+// import {fetchData } from "../../actions/appActions";
 
 
-const Marquee = dynamic(() =>
-    import("@devnomic/marquee").then((mod) => mod.Marquee) // Убедитесь, что `Marquee` — экспортируемый компонент
-);
+// const Marquee = dynamic(() =>
+//     import("@devnomic/marquee").then((mod) => mod.Marquee) // Убедитесь, что `Marquee` — экспортируемый компонент
+// );
 const apiUrl = "";
 
 const MainPage = (props) => {
@@ -63,9 +63,39 @@ const MainPage = (props) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isPrevHovered, setIsPrevHovered] = useState(false);
     const [isVideoPaused, setIsVideoPaused] = useState(true);
+    const [team, setTeam] = useState([]);
+    const [services, setservices] = useState([]);
+    
 
     const router = useRouter();
 
+    
+    // const { services, team } = useSelector((state) => ({
+    //     services: state.app.services,
+    //     team: state.app.team,
+    // }));
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/api/services/`)
+            .then((response) => {
+                setservices(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/api/team/`)
+            .then((response) => {
+                setTeam(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    
     const handleVideoClick = () => {
         if (isVideoPaused) {
             setIsFullScreen(!isFullScreen);
@@ -242,40 +272,38 @@ const MainPage = (props) => {
     const sizeSmall = 'Мы создаём продукты и услуги, которые помогают нашим клиентам быть заметнее 🤩 в цифровом пространстве'
     const sizeXSmall = 'Мы создаём продукты<br/>  и услуги, которые помогают нашим клиентам быть заметнее 🤩 в цифровом пространстве'
 
-    const matches1440 = useMediaQuery('(min-width:1025px)');
-    const matches1024 = useMediaQuery('(min-width:940px)');
-    const matches768 = useMediaQuery('(min-width:420px)');
-    const matches360 = useMediaQuery('(min-width:0px)');
-    const projectSizeLabel = matches768 ? "m-text" : matches360 ? "s-text" : "m-text"
-    const experts = matches1440? 'heading-thirty' : matches1024 ? 'heading-thirty' : matches768 ? 'l-textReg' : 'm-text'
+    // const matches1440 = useMediaQuery('(min-width:1025px)');
+    // const matches1024 = useMediaQuery('(min-width:940px)');
+    // const matches768 = useMediaQuery('(min-width:420px)');
+    // const matches360 = useMediaQuery('(min-width:0px)');
+    const projectSizeLabel = '(min-width:420px)' ? "m-text" : '(min-width:0px)' ? "s-text" : "m-text"
+    const experts = '(min-width:1025px)' ? 'heading-thirty' : '(min-width:1025px)' ? 'heading-thirty' : '(min-width:420px)' ? 'l-textReg' : 'm-text'
 
-    let text
-    if (matches1440){
-        text = sizeLarge
-    } else if (matches768) {
-        text = sizeSmall
-    } else {
-        text = sizeXSmall
-    }
+    let text = sizeLarge
+    // if (matches1440){
+    //     text = sizeLarge
+    // } else if (matches768) {
+    //     text = sizeSmall
+    // } else {
+    //     text = sizeXSmall
+    // }
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 30"/>;
 
     const mainShowreel = showreels.find((showreel) => showreel.mainShowreel === true);
-    const dispatch = useDispatch();
-    // const {services, headerData, team} = props;
-    const { headerData, services, conacts, team } = useSelector((state) => ({
-            headerData: state.app.headerData,
-            services: state.app.services,
-            projects: state.app.projects,
-            team: state.app.team,
-      }));
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch(fetchData());
+    //   }, [dispatch]);
+    let sortedServices = [];
 
     useEffect(() => {
-        dispatch(fetchData());
-      }, [dispatch]);
+        if (services && Array.isArray(services)) {
+            sortedServices = [...services].sort((a, b) => a.position - b.position);
+        }
+    }, [services]);
 
-    services.sort((a, b) => a.position - b.position);
-    const sortedServices = [...services].sort((a, b) => a.position - b.position);
 
     const mainBannerRef = useRef(null);
     const videoModal = useRef(null);
@@ -293,25 +321,6 @@ const MainPage = (props) => {
                     </div>
                 </div>
             </section>
-
-            {/* {!!clients && <section className="main-clients">
-                <div className="main-clients__marquee">
-                    <Marquee
-                        direction="left"
-                    >
-                        {clients.map((client, i) => {
-                            return (
-                                <div className='main-clients__container' key={i}>
-                                    <RetryImage
-                                        src={client.image ? `/uploads/${client.image.filename}` : null}
-                                        alt={client.name} key={client.id}/>
-                                </div>
-
-                            )
-                        })}
-                    </Marquee>
-                </div>
-            </section>} */}
 
             {!!clients && (
             <section className="main-clients">
@@ -514,9 +523,5 @@ const MainPage = (props) => {
 };
 
 export default MainPage;
-// export default connect((state) => ({
-//     headerData: state.app.headerData, 
-//     services: state.app.services, 
-//     team: state.app.team,
-// }))(MainPage);
+
 

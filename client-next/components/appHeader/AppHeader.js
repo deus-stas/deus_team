@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link'; // Используем Link из Next.js для навигации
-import Image from 'next/image'; // Для оптимизации изображений
-import { useRouter } from 'next/navigation'; // Аналог useNavigate из React Router
+// import Image from 'next/image'; // Для оптимизации изображений
+// import { useRouter } from 'next/navigation'; // Аналог useNavigate из React Router
 import { useSelector } from 'react-redux'; // Подключение к Redux-хранилищу
 import RetryImage from '../../helpers/RetryImage';
 import { Icon } from '../icon/Icon';
 import { gotoAnchor } from '../anchors';
 import useMobile from '../useMobile';
-import { selectHeaderDataAndServices } from '../../components/selector';
+// import { selectHeaderDataAndServices } from '../../components/selector';
 import {setIsLoadingMainPageEvent} from "../../axios";
 
 import './appHeader.scss';
@@ -207,7 +207,7 @@ const closeMenu = (e) => {
 )
   
 
-  {console.log('Подставить даынные',!isLoading, headerData)}
+//   {console.log('Подставить даынные',!isLoading, headerData)}
 
   useEffect(() => {
     setIsLoadingMainPageEvent(true)

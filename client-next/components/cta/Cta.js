@@ -338,9 +338,9 @@ const Cta = (props) => {
                                         {values.formFiles && values.formFiles.length > 0 ? (
                                             <div className="form__file-f">
                                                 {values.formFiles.map((file, index) => (
-                                                    <div className="form__file-f__wrapp">
+                                                    <div className="form__file-f__wrapp" key={index}>
                                                             <Icon  icon="pdf" viewBox="0 0 24 24"/>
-                                                        <div className="fileItem m-text" key={index}>
+                                                        <div className="fileItem m-text" >
                                                             {file.name}
                                                         </div>
                                                         <div

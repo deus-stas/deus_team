@@ -15,14 +15,15 @@ import { Grid, Pagination } from 'swiper/modules';
 // import hh from "../../../img/hh_icon.png"
 import './agency.scss';
 // import TruncatedSentence from "./TruncatedSentence";
-import {useMediaQuery} from "@material-ui/core";
+// import {useMediaQuery} from "@material-ui/core";
 import Marquee from 'react-fast-marquee';
 import "./marquee.scss";
 import useMobile from "../../components/useMobile";
 import {Cursor} from "../../components/cursor/cursor";
 import Image from 'next/image';
-import {useDispatch, useSelector } from 'react-redux';
-import {fetchData } from "../../actions/appActions";
+// import {useDispatch, useSelector } from 'react-redux';
+// import {fetchData } from "../../actions/appActions";
+const apiUrl = "";
 
 const Agency = (props) => {
 
@@ -40,21 +41,33 @@ const Agency = (props) => {
     const [currentPerson, setCurrentPerson] = useState(0);
     const [reviews, setReviews] = useState([]);
     const {isTablet, isMobile} = useMobile()
+    const [team, setTeam] = useState([]);
 
 
-    const { headerData, services, conacts, team } = useSelector((state) => ({
-        headerData: state.app.headerData,
-        services: state.app.services,
-        projects: state.app.projects,
-        team: state.app.team,
-  }));
+//     const { headerData, services, conacts, team } = useSelector((state) => ({
+//         headerData: state.app.headerData,
+//         services: state.app.services,
+//         projects: state.app.projects,
+//         team: state.app.team,
+//   }));
 
-  const dispatch = useDispatch();
+//   const dispatch = useDispatch();
 
-  useEffect(() => {
-      dispatch(fetchData());
-  }, [dispatch]);
+//   useEffect(() => {
+//       dispatch(fetchData());
+//   }, [dispatch]);
 
+
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/api/team/`)
+            .then((response) => {
+                setTeam(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     useEffect(() => {
         axios.get(`/api/awards/`)
@@ -226,20 +239,20 @@ const Agency = (props) => {
     const size768 = 'Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения<br/> максимальной, эффективности для вашего бизнеса';
     const size360 = 'Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной, эффективности для вашего бизнеса';
 
-    const matches1440 = useMediaQuery('(min-width:1025px)');
-    const matches1024 = useMediaQuery('(min-width:940px)');
-    const matches768 = useMediaQuery('(min-width:420px)');
-    const matches360 = useMediaQuery('(min-width:0px)');
-    const principleText = matches1440 ? "s-text" : matches1024 ? "m-text" : "m-text"
+    // const matches1440 = useMediaQuery('(min-width:1025px)');
+    // const matches1024 = useMediaQuery('(min-width:940px)');
+    // const matches768 = useMediaQuery('(min-width:420px)');
+    // const matches360 = useMediaQuery('(min-width:0px)');
+    const principleText = '(min-width:1025px)' ? "s-text" : '(min-width:940px)' ? "m-text" : "m-text"
 
-    let text;
-    if (matches1440 || matches1024) {
-        text = sizeLarge;
-    } else if (matches768) {
-        text = size768;
-    } else if (matches360) {
-        text = size360;
-    }
+    let text = sizeLarge;
+    // if (matches1440 || matches1024) {
+    //     text = sizeLarge;
+    // } else if (matches768) {
+    //     text = size768;
+    // } else if (matches360) {
+    //     text = size360;
+    // }
 
     const [isMobileNew, setIsMobile] = useState(false);
 

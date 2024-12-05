@@ -1,17 +1,17 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import axios, {setIsLoadingMainPageEvent} from '../../../../axios'
+import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 
-import Breadcrumbs from '../../../breadcrubms/Breadcrumbs'
-import Cta from '../../../cta/Cta';
-import { Icon } from '../../../icon/Icon'
+import Breadcrumbs from '../../../components/breadcrubms/Breadcrumbs'
+import Cta from '../../../components/cta/Cta';
+import { Icon } from '../../../components/icon/Icon'
 import { Link } from 'react-router-dom';
 
 import './serviceDetail.scss'
-import HelmetComponent from "../../../helmetComponent";
-import RetryImage from "../../../../helpers/RetryImage";
-import {Cursor} from "../../../cursor/cursor";
+// import HelmetComponent from "../../../components/helmetComponent";
+import RetryImage from "../../../helpers/RetryImage";
+import {Cursor} from "../../../components/cursor/cursor";
 
 const onAcc = (e) => {
     let accItem = e.target.closest('.tab-parent');
@@ -190,7 +190,7 @@ const ServicesDetail = () => {
     return (
         <>
             <Cursor/>
-            <HelmetComponent pageKeywords={service.seoKeywords} pageTitle={service.seoTitle} pageDescription={service.seoDescription}/>
+            {/* <HelmetComponent pageKeywords={service.seoKeywords} pageTitle={service.seoTitle} pageDescription={service.seoDescription}/> */}
             {!isLoading &&
         <main className="service">
 
@@ -334,13 +334,13 @@ const ServicesDetail = () => {
                                 service.subProjects.map((project,i) => {
                                     const portfolioDelay= i < 7 ? (i * 0.1 + 0.1) : 0.1
                                     return (
-                                        <div>
+                                        <div key={`--1${i}`}>
                                             {!!project && !!project.nameInEng &&
                                                 <Link to={`/projects/${project.nameInEng}`}
                                                       className="projects__item wow fadeInUp"
                                                       data-wow-duration="0.5s"
                                                       data-wow-delay={`${portfolioDelay}s`}
-                                                      key={project.id} style={{background: project.color}}>
+                                                      key={`${project.id}`} style={{background: project.color}}>
                                                     <div className="projects__item-img-wrap">
                                                         {
                                                             project.mainVideoFile && project.mainVideoFile !== 'undefined' && project.mainVideoFile !== 'null'

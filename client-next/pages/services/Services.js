@@ -18,17 +18,20 @@ import elipse from "../../public/img/elipse.png"
 import {gotoAnchor} from "../../components/anchors";
 // import MarqueeComponent from "../../MarqueeComponent";
 import Link from 'next/link'; // Используем Link из Next.js для навигации
-import {useMediaQuery} from "@material-ui/core";
+// import {useMediaQuery} from "@material-ui/core";
 import {Cursor} from "../../components/cursor/cursor";
-import {fetchData } from "../../actions/appActions";
-import {connect, useDispatch, useSelector } from 'react-redux';
+// import {fetchData } from "../../actions/appActions";
+// import {connect, useDispatch, useSelector } from 'react-redux';
 
 const apiUrl = '';
 
 const Services = () => {
-
-    const dispatch = useDispatch();
+    
+    // const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
+    const [services, setservices] = useState([]);
+    const [team, setTeam] = useState([]);
+
 
     useEffect(() => {
         setIsLoadingMainPageEvent(true)
@@ -45,16 +48,38 @@ const Services = () => {
         };
     }, []);
 
-    const { headerData, services, contacts, team } = useSelector((state) => ({
-            headerData: state.app.headerData,
-            services: state.app.services,
-            projects: state.app.projects,
-            team: state.app.team,
-      }));
-
     useEffect(() => {
-        dispatch(fetchData());
-      }, [dispatch]);
+        axios
+            .get(`${apiUrl}/api/services/`)
+            .then((response) => {
+                setservices(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/api/team/`)
+            .then((response) => {
+                setTeam(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    // const { headerData, services, contacts, team } = useSelector((state) => ({
+    //         headerData: state.app.headerData,
+    //         services: state.app.services,
+    //         projects: state.app.projects,
+    //         team: state.app.team,
+    //   }));
+
+    // useEffect(() => {
+    //     dispatch(fetchData());
+    //   }, [dispatch]);
     
 
     useEffect(() => {
@@ -78,19 +103,19 @@ const Services = () => {
     const sizeXSmall = 'Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса'
 
 
-    const matches1440 = useMediaQuery('(min-width:1025px)');
-    const matches1024 = useMediaQuery('(min-width:940px)');
-    const matches768 = useMediaQuery('(min-width:420px)');
-    const matches360 = useMediaQuery('(min-width:0px)');
+    // const matches1440 = useMediaQuery('(min-width:1025px)');
+    // const matches1024 = useMediaQuery('(min-width:940px)');
+    // const matches768 = useMediaQuery('(min-width:420px)');
+    // const matches360 = useMediaQuery('(min-width:0px)');
 
-    let text
-    if (matches1440 || matches1024 ){
-        text = sizeLarge
-    } else if (matches768) {
-        text = sizeSmall
-    } else if (matches360){
-        text = sizeXSmall
-    }
+    let text = sizeLarge
+    // if (matches1440 || matches1024 ){
+    //     text = sizeLarge
+    // } else if (matches768) {
+    //     text = sizeSmall
+    // } else if (matches360){
+    //     text = sizeXSmall
+    // }
 
     // const {headerData, services, team, projects} = props;
 

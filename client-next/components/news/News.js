@@ -104,9 +104,9 @@ const News = () => {
                                     const shouldAutoPlay = item.mainControl;
 
                                     return (
-                                        <div className="flex-wrap">
+                                        <div className="flex-wrap" key={`${index}-dsf--${item.id}`}>
                                             <DelayedLink to={`/news/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
-                                                         key={item.id}>
+                                                         key={`${index}---${item.id}`}>
                                                 {isVideo && <video autoPlay={shouldAutoPlay}
                                                                    muted
                                                                    playsInline
