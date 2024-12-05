@@ -1,29 +1,23 @@
 'use client'; // Если вы используете Next.js с папкой `app`
 
-// import {useLocation, useSearchParams} from 'react-router-dom';
 import React from 'react'
-import {useEffect, useMemo, useRef, useState} from 'react';
+import {useEffect, useRef, useState, Suspense } from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../axios'
 import Link from 'next/link'; // Используем Link из Next.js для навигации
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import './projects.scss'
 import './../mainPage/mainPage.scss'
 import './../agency/agency.scss'
 import {Icon} from '../../components/icon/Icon'
 import {gotoAnchor} from "../../components/anchors";
-import {debounce, useMediaQuery} from "@material-ui/core";
-import {useMobile} from "../../components/useMobile";
 import {Cursor} from "../../components/cursor/cursor";
-import {connect, useDispatch, useSelector } from 'react-redux';
-import {fetchData } from "../../actions/appActions";
-import Image from 'next/image';
+
 
 
 const apiUrl = ''
 
 const Projects = () => {
     const MOBILE_SIZE = 768
-    const searchParams = useSearchParams(); // для работы с URL-параметрами
     const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState([]);
     const [limitProjects, setLimitProjects] = useState(projects);
@@ -36,28 +30,43 @@ const Projects = () => {
     const [menuTheme, setMenuTheme] = useState(true);
     const [menuType, setMenuType] = useState(false);
     const [select, setSelect] = useState(false);
-    
-    const [isMob, setIsMob] = useState(window.innerWidth < 700);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+    // const searchParams = useSearchParams(); // для работы с URL-параметрами
+    const getSearchParams = () => {
+        if (typeof window !== 'undefined') {
+          return new URLSearchParams(window.location.search);
+        }
+        return null;
+      };
+
+    // const [isMob, setIsMob] = useState(window.innerWidth < 700);
+    const [isMob, setIsMob] = useState(
+        typeof window !== 'undefined' ? window.innerWidth < 700 : false
+    );
+    // const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [windowWidth, setWindowWidth] = useState(0); // Начальное значение для SSR
     const [isMobile, setIsMobile] = useState(windowWidth <= MOBILE_SIZE)
 
-    const dispatch = useDispatch();
-
+    // const dispatch = useDispatch();
 
     useEffect(() => {
-        window.addEventListener("resize", onResizeEvent);
-        return () => window.removeEventListener("resize", onResizeEvent);
-    }, [])
-
+        if (typeof window !== "undefined") {
+            const onResizeEvent = () => {
+                setWindowWidth(window.innerWidth);
+            };
+            setWindowWidth(window.innerWidth);
+            window.addEventListener("resize", onResizeEvent);
+    
+            return () => {
+                window.removeEventListener("resize", onResizeEvent);
+            };
+        }
+    }, []);
+    
     useEffect(() => {
         setIsMobile(windowWidth <= MOBILE_SIZE)
     }, [windowWidth])
-    const onResizeEvent = () => {
-        debouncedResize();
-    };
 
-
-    const debouncedResize = debounce(() => setWindowWidth(window.innerWidth), 100);
 
     const THEME_KEY = 'theme'
     const TYPE_KEY = 'type'
@@ -73,8 +82,6 @@ const Projects = () => {
                 console.log(error);
             });
     }
-
-
 
     const loadThemes = (cb) => {
         axios.get(`${apiUrl}/api/themes/`)
@@ -94,19 +101,6 @@ const Projects = () => {
             });
     }
 
-
-    const updateOptionsTheme = (projectOptionsTheme) => {
-        setOptionsTheme(projectOptionsTheme);
-
-        const themeKey = searchParams.get(THEME_KEY);
-        if (themeKey) {
-            const theme = projectOptionsTheme.find(({ value }) => value === themeKey);
-            if (theme) {
-                setSelectedTheme(theme);
-            }
-        }
-    };
-
     useEffect(() => {
         setChecked(selectedTheme);
     }, [selectedTheme]);
@@ -116,7 +110,8 @@ const Projects = () => {
     }, [selectedType]);
 
     const updateOptionsType = (projectOptionsType) => {
-        const typeKey = searchParams.get(TYPE_KEY);
+        const searchParams = getSearchParams();
+        const typeKey = searchParams?.get(TYPE_KEY);
         if (typeKey) {
             setMenuType(true);
             setMenuTheme(false);
@@ -127,6 +122,27 @@ const Projects = () => {
             }
         }
     };
+
+    const updateOptionsTheme = (projectOptionsTheme) => {
+        setOptionsTheme(projectOptionsTheme);
+        const searchParams = getSearchParams();
+        const themeKey = searchParams?.get(THEME_KEY);
+        if (themeKey) {
+            const theme = projectOptionsTheme.find(({ value }) => value === themeKey);
+            if (theme) {
+                setSelectedTheme(theme);
+            }
+        }
+    };
+
+    useEffect(() => {
+        updateOptionsTheme(optionsTheme);
+    }, [optionsTheme])
+
+    useEffect(() => {
+        updateOptionsType(optionsType)
+    }, [optionsType])
+
     const loadTypes = (cb) => {
         axios.get(`${apiUrl}/api/types/`)
             .then((response) => {
@@ -149,27 +165,20 @@ const Projects = () => {
     }, []);
 
     useEffect(() => {
-        updateOptionsTheme(optionsTheme);
-    }, [searchParams])
-
-    useEffect(() => {
-        updateOptionsType(optionsType)
-    }, [searchParams, optionsType])
-
-
-    useEffect(() => {
-        setIsLoadingMainPageEvent(true)
-
-        const handleLoad = (e) => {
-            if (e.detail.isLoading !== isLoading) {
-                setIsLoading(e.detail.isLoading);
-            }
-        };
-
-        window.addEventListener('isLoadingMainPage', handleLoad);
-        return () => {
-            window.removeEventListener('isLoadingMainPage', handleLoad);
-        };
+        if (typeof window !== 'undefined') {
+            setIsLoadingMainPageEvent(true)
+    
+            const handleLoad = (e) => {
+                if (e.detail.isLoading !== isLoading) {
+                    setIsLoading(e.detail.isLoading);
+                }
+            };
+    
+            window.addEventListener('isLoadingMainPage', handleLoad);
+            return () => {
+                window.removeEventListener('isLoadingMainPage', handleLoad);
+            };
+        }
     }, []);
 
     const filteredProjects = (iProjects = projects) => (iProjects || []).filter(project => {
@@ -185,21 +194,6 @@ const Projects = () => {
         setLimitProjects(initialProjects);
     }, [projects, selectedTheme, selectedType]);
 
-    //todo optimize
-    // const memoFilteredProjects =  useMemo(() => {
-    //     const filterProject = filteredProjects(projects || [])
-    //     setLimitProjects(filterProject.slice(0, PAGE_SIZE))
-    //     return filterProject;
-    // }, [projects])
-
-    // const actionInSight = (entries) => {
-    //     const filteredProjectList = filteredProjects(projects || [])
-    //     const totalPages = filteredProjectList.length/PAGE_SIZE + 1
-    //     const currentPage = limitProjects.length / PAGE_SIZE
-    //     if (entries[0].isIntersecting && currentPage <= totalPages) {
-    //         loadNewProject();
-    //     }
-    // };
 
     const loadNewProject = () => {
         const filteredProjectList = filteredProjects(projects || []);
@@ -220,49 +214,28 @@ const Projects = () => {
     };
 
     useEffect(() => {
-        const handleResize = () => {
-            setIsMob(window.innerWidth < 700);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [window.innerWidth]);
+        if (typeof window !== 'undefined') {
+            const handleResize = () => {
+                setIsMob(window.innerWidth < 700);
+            };
+    
+            window.addEventListener('resize', handleResize);
+    
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
+        }
+    }, [windowWidth]);
 
     const sizeLarge = 'Мы гордимся каждым<br/> выполненным проектом';
     const size1024 = 'Мы гордимся каждым<br/> выполненным проектом';
     const size768 = 'Мы гордимся каждым<br/> выполненным<br/> проектом';
     const size360 = 'Мы гордимся каждым выполненным проектом';
 
-    const matches1440 = useMediaQuery('(min-width:1025px)');
-    const matches1024 = useMediaQuery('(min-width:940px)');
-    const matches768 = useMediaQuery('(min-width:420px)');
-    const matches360 = useMediaQuery('(min-width:0px)');
-    const projectSizeLabel = matches768 ? "m-text" : matches360 ? "s-text" : "m-text"
 
-    let text;
-    if (matches1440) {
-        text = sizeLarge;
-    } else if (matches1024) {
-        text = size1024;
-    } else if (matches768) {
-        text = size768;
-    } else if (matches360) {
-        text = size360;
-    }
+    const projectSizeLabel = '(min-width:1025px)' ? "s-text" : '(min-width:940px)' ? "m-text" : "m-text"
 
-    const { headerData, services, contacts, team } = useSelector((state) => ({
-        headerData: state.app.headerData,
-        services: state.app.services,
-        projects: state.app.projects,
-        team: state.app.team,
-    }));
-
-    useEffect(() => {
-        dispatch(fetchData());
-    }, [dispatch]);
+    let text = sizeLarge;
 
 
     const category = <>
@@ -354,6 +327,7 @@ const Projects = () => {
             </div>
         </div>
     </>
+
     const renderProject = (b) => <>{limitProjects ? limitProjects
             .filter((project, index, array) => !!b ? index % 2 === 0 : index % 2 !== 0)
             .map((project, index, array) => {
@@ -396,44 +370,46 @@ const Projects = () => {
     const even = renderProject(false)
 
     return (
-        <>
-            <Cursor/>
-            {!isLoading &&
-                <main className="projects">
-                    <section className="projects-start">
-                        <div className="container">
-                            <span className="projects-start__text">
-                              <p className="m-text">Проекты</p>
-                            <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: text}}/>
-                            </span>
-
-                        </div>
-                    </section>
-                    <section id="projectNav" className="projects-content">
-
-                        <div className="container">
-                            {!!isMobile && <>{category}</>}
-                            <div className="projects__wrap">
-                                <span className={"projects__wrap-span"}>
-                                   <div className="projects__wrap-column">{odd}</div>
-                                </span>
-                                <span className="translateY">
-                                    {!isMobile && <>{category}</>}
-                                    <div className="projects__wrap-column">{even}</div>
+        <>  
+            <Suspense fallback={<div>Loading...</div>}>
+                <Cursor/>
+                {!isLoading &&
+                    <main className="projects">
+                        <section className="projects-start">
+                            <div className="container">
+                                <span className="projects-start__text">
+                                <p className="m-text">Проекты</p>
+                                <h1 className="heading-primary" dangerouslySetInnerHTML={{__html: text}}/>
                                 </span>
 
                             </div>
-                            <div className="flex-sb margin-for-button">
-                                {!allProjectsLoaded && (
-                                    <div onClick={loadNewProject} className="m-text loadMore">Показать еще</div>
-                                )}
+                        </section>
+                        <section id="projectNav" className="projects-content">
+
+                            <div className="container">
+                                {!!isMobile && <>{category}</>}
+                                <div className="projects__wrap">
+                                    <span className={"projects__wrap-span"}>
+                                    <div className="projects__wrap-column">{odd}</div>
+                                    </span>
+                                    <span className="translateY">
+                                        {!isMobile && <>{category}</>}
+                                        <div className="projects__wrap-column">{even}</div>
+                                    </span>
+
+                                </div>
+                                <div className="flex-sb margin-for-button">
+                                    {!allProjectsLoaded && (
+                                        <div onClick={loadNewProject} className="m-text loadMore">Показать еще</div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
 
-                    </section>
+                        </section>
 
-                </main>
-            }
+                    </main>
+                }
+            </Suspense>
         </>
     )
 

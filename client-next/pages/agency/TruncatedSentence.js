@@ -8,15 +8,22 @@ const TruncatedSentence = ({ sentence }) => {
     };
 
     const truncateSentence = (sentence) => {
+        if (!sentence || typeof sentence !== 'string') {
+            return ''; // Возвращаем пустую строку, если sentence недоступен
+        }
+
         const words = sentence.split(' ');
         if (words.length <= 20) {
-            return sentence;
+            return sentence; // Если менее 20 слов, возвращаем полное предложение
         } else {
             const truncatedWords = words.slice(0, 20);
-            const truncatedSentence = truncatedWords.join(' ');
-            return truncatedSentence;
+            return truncatedWords.join(' '); // Трёхточие добавляется в компоненте ниже
         }
     };
+
+    if (!sentence || typeof sentence !== 'string') {
+        return <p>No sentence provided.</p>; // Обработка случая, если sentence недоступен
+    }
 
     return (
         <div>
@@ -25,7 +32,11 @@ const TruncatedSentence = ({ sentence }) => {
             ) : (
                 <p>
                     {truncateSentence(sentence)}
-                    {sentence.split(' ').length > 20 && <span onClick={toggleExpand}>...</span>}
+                    {sentence.split(' ').length > 20 && (
+                        <span onClick={toggleExpand} style={{ cursor: 'pointer', color: 'blue' }}>
+                            ... Show more
+                        </span>
+                    )}
                 </p>
             )}
         </div>

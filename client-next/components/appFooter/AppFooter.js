@@ -7,12 +7,12 @@ import './appFooter.scss';
 import './popup.scss';
 import './cta.scss';
 import {Icon} from '../icon/Icon';
-import {useMediaQuery} from "@material-ui/core";
+// import {useMediaQuery} from "@material-ui/core";
 import {gotoAnchor} from "../anchors";
 // import Popup from "reactjs-popup";
 import RetryImage from "../../helpers/RetryImage";
 import {useDispatch, useSelector } from 'react-redux';
-import {fetchData } from "../../actions/appActions";
+// import {fetchData } from "../../actions/appActions";
 import dynamic from 'next/dynamic';
 const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
 const apiUrl = ''
@@ -22,7 +22,7 @@ const AppFooter = (props) => {
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // const {services, headerData, team} = props;
 
     const { headerData, services, conacts, team } = useSelector((state) => ({
@@ -74,23 +74,23 @@ const AppFooter = (props) => {
     const adressL = 'г. Одинцово, ул. Молодежная,<br/> д.46, строение 1 офис 24, 25';
     const adressM = 'г. Одинцово, ул. Молодежная, д.46,<br/> строение 1 офис 24, 25';
 
-    const matches1440 = useMediaQuery('(min-width:1025px)');
-    const matches1024 = useMediaQuery('(min-width:940px)');
-    const matches768 = useMediaQuery('(min-width:420px)');
-    const matches360 = useMediaQuery('(min-width:0px)');
+    // const matches1440 = useMediaQuery('(min-width:1025px)');
+    // const matches1024 = useMediaQuery('(min-width:940px)');
+    // const matches768 = useMediaQuery('(min-width:420px)');
+    // const matches360 = useMediaQuery('(min-width:0px)');
 
-    let text;
-    if (matches1440) {
-        text = sizeLarge;
-    } else if (matches1024) {
-        text = size1024;
-    } else if (matches768) {
-        text = size768;
-    } else if (matches360) {
-        text = size360;
-    }
+    let text = sizeLarge;
+    // if (matches1440) {
+    //     text = sizeLarge;
+    // } else if (matches1024) {
+    //     text = size1024;
+    // } else if (matches768) {
+    //     text = size768;
+    // } else if (matches360) {
+    //     text = size360;
+    // }
 
-    const adress = matches768 ? adressM : adressL
+    const adress = '(min-width:420px)' ? adressM : adressL
 
     return (
         <section className="container">
@@ -223,7 +223,7 @@ const AppFooter = (props) => {
                                         требованиями Федерального закона от 27.07.2006. № 152-ФЗ «О персональных данных»
                                         (далее — Закон о персональных данных) и определяет порядок обработки
                                         персональных данных и меры по обеспечению безопасности персональных данных,
-                                        предпринимаемые ООО "ДЕУС" (далее — Оператор).<br/>
+                                        предпринимаемые ООО &quot;ДЕУС&ldquo; (далее — Оператор).<br/>
                                         1.1. Оператор ставит своей важнейшей целью и условием осуществления своей
                                         деятельности соблюдение прав и свобод человека и гражданина при обработке его
                                         персональных данных, в том числе защиты прав на неприкосновенность частной

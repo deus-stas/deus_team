@@ -1,60 +1,26 @@
 "use client";
+
 import React, { useEffect, useState } from "react"; // Добавлен импорт хуков React
-// import { Provider } from 'react-redux';
 import { store } from '../store';
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import setAuthToken  from "../utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "../actions/authActions";
-import jwtDecode from "jwt-decode";
-import Head from 'next/head';
+
 import {Provider} from "react-redux";
 
 import AppHeader from '../components/appHeader/AppHeader';
-import HeadComponent from '../components/Head/Head';
 import AppFooter from "../components/appFooter/AppFooter";
 import CustomCursor from "custom-cursor-react";
-// import ScrollToTop from "../helpers/ScrollToTop";
 import "custom-cursor-react/dist/index.css";
 
 import '../style/style.scss'
 
 export default function RootLayout({ children }) {
 
-  // const dispatch = useDispatch()
   const pathname = usePathname();
   const adminBasePath = "/admin/";
   const hiddenRoutes = [adminBasePath];
 
   const [isLoading, setIsLoading] = useState(true);
   const [seoInfo, setSeoInfo] = useState(null);
-
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("jwtToken");
-
-  //   if (token) {
-  //     setAuthToken(token);
-
-  //     try {
-  //       const decoded = jwtDecode(token);
-  //       store.dispatch(setCurrentUser(decoded));
-
-  //       const currentTime = Date.now() / 1000; // Переводим в секунды
-  //       if (decoded.exp < currentTime) {
-  //         store.dispatch(logoutUser());
-  //         router.push("/login"); // Используем Next.js router для навигации
-  //       }
-  //     } catch (error) {
-  //       console.error("Ошибка при обработке токена:", error);
-  //       store.dispatch(logoutUser());
-  //       router.push("/login");
-  //     }
-  //   }
-  // }, [router]); // Депенденси на `router` для стабильной навигации
-
 
   // Определяем, нужно ли скрывать хедер и футер
   const shouldHideHeaderFooter = hiddenRoutes.some((route) =>
@@ -85,8 +51,6 @@ export default function RootLayout({ children }) {
     }
     fetchSeoData();
   }, [pathname]);
-
-
 
   return (
     <html lang="ru">  
@@ -135,5 +99,7 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+
 
 

@@ -1,8 +1,16 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
+const fs = require('fs');
+const gracefulFs = require('graceful-fs');
+
+// Применяем graceful-fs
+gracefulFs.gracefulify(fs);
 
 const nextConfig = {
   reactStrictMode: false,
+  experimental: {
+    outputFileTracing: false,
+  },
   async rewrites() {
     return [
       {
@@ -11,8 +19,12 @@ const nextConfig = {
       },
     ];
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.resolve.alias['@uploads'] = path.join(__dirname, 'uploads');
+    if (!isServer) {
+      config.externals = config.externals || [];
+      config.externals.push('@mui/icons-material');
+    }
     return config;
   },
   images: {

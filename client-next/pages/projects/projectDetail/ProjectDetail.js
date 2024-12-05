@@ -11,15 +11,15 @@ import SiteAndServices from "./detailPropsRender/SiteAndServices";
 import VideoProduction from "./detailPropsRender/VideoProduction";
 import TechSupport from "./detailPropsRender/TechSupport";
 import SEO from "./detailPropsRender/SEO";
-import { Icon } from "../../../components/icon/Icon";
-import {debounce} from "@material-ui/core";
+// import { Icon } from "../../../components/icon/Icon";
+// import {debounce} from "@material-ui/core";
 import ProjectNext from "../projectNext/ProjectNext";
 import CorporateIdentity from "./detailPropsRender/CorporateIdentity";
 import {Cursor} from "../../../components/cursor/cursor";
-import {fetchData } from "../../../actions/appActions";
-import {connect, useDispatch, useSelector } from 'react-redux';
+// import {fetchData } from "../../../actions/appActions";
+// import {connect, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'next/navigation';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const apiUrl = ''
 
@@ -29,27 +29,16 @@ const ProjectDetail = () => {
     const [types, setTypes] = useState([]);
     const [theme, setTheme] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const dispatch = useDispatch();
-    const { headerData, services, contacts, team } = useSelector((state) => ({
-        headerData: state.app.headerData,
-        services: state.app.services,
-        projects: state.app.projects,
-        team: state.app.team,
-    }));
-
+    const [id, setId] = useState(null);
+    const params = useParams();
+    // Получение ID из параметров маршрута
     useEffect(() => {
-        dispatch(fetchData());
-    }, [dispatch]);
+        if (params?.id) {
+            setId(params.id);
+        }
+    }, []);
 
-    const { id } = useParams(); // Получаем 'gazprom-groznii'
-    // const router = useRouter();
-  
-    // if (!router.isReady) {
-    //     return <p>Loading...</p>; // Убедитесь, что маршрутизатор готов
-    // }
-    // const { id } = router.query; // Здесь вы получите id
-    // const id = 'gazprom-groznii'// Здесь вы получите id
+
     useEffect(() => {
         setTimeout(() => {
             window.scroll({
@@ -64,6 +53,8 @@ const ProjectDetail = () => {
     }, []);
 
     useEffect(() => {
+        if (!id) return;
+        
         axios.get(`${apiUrl}/api/projects/${id}`)
             .then((response) => {
                 let dataDetail = {...response.data};
@@ -159,15 +150,6 @@ const ProjectDetail = () => {
             })
     },[])
 
-    const fetchThemeLabel = async (detail) => {
-        try {
-            const response = await axios.get(`${apiUrl}/api/themes/`);
-            return response.data.find((theme) => theme.id === detail.projectTheme)?.name;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    };
 
     useEffect(() => {
         setIsLoadingMainPageEvent(true)
@@ -184,19 +166,33 @@ const ProjectDetail = () => {
         };
     }, []);
 
+    const fetchThemeLabel = async (detail) => {
+        try {
+            const response = await axios.get(`${apiUrl}/api/themes/`);
+            return response.data.find((theme) => theme.id === detail.projectTheme)?.name;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    };
+
     const typeRender = detail.projectType
     const findType = types.find((item)=> item._id === typeRender )
+
     const RenderFields = ({detail}) => {
-        if(!!findType) {
-            const fieldsMap = {
-                'seo': (<SEO  detail={detail} />),
-                'site-and-services': (<SiteAndServices  detail={detail} />),
-                'tech-support': (<TechSupport  detail={detail} />),
-                'video-production': (<VideoProduction  detail={detail}/>),
-                'corporate-identity': (<CorporateIdentity  detail={detail}/>),
-            };
-            return fieldsMap[findType?.key] || <SiteAndServices  detail={detail} />;
+        console.log(detail)
+        
+        if (!findType) {
+            return <SiteAndServices detail={detail} />;
         }
+        const fieldsMap = {
+            'seo': <SEO detail={detail} />,
+            'site-and-services': <SiteAndServices detail={detail} />,
+            'tech-support': <TechSupport detail={detail} />,
+            'video-production': <VideoProduction detail={detail} />,
+            'corporate-identity': <CorporateIdentity detail={detail} />,
+        };
+        return fieldsMap[findType?.key] || <SiteAndServices detail={detail} />;
 
     };
 
@@ -204,8 +200,6 @@ const ProjectDetail = () => {
     return (
         <>
             <Cursor/>
-            {/* <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords}
-                             pageDescription={detail.seoDescription}/> */}
             {!isLoading &&
 
                 <main id="toUp" className="project">
@@ -224,15 +218,7 @@ const ProjectDetail = () => {
                                     <div className="project-main__text">
 
                                         <div className="project-main__descr l-textReg" dangerouslySetInnerHTML={{__html: detail.about}}/>
-                                        {/*{*/}
-                                        {/*    detail.projectSite ? (*/}
-                                        {/*        <div className="project-main__link">*/}
-                                        {/*            <Link target="_blank"*/}
-                                        {/*                  to={detail.projectURL}>{detail.projectSite}</Link>*/}
-                                        {/*            <Icon icon="arr"/>*/}
-                                        {/*        </div>*/}
-                                        {/*    ) : null*/}
-                                        {/*}*/}
+                        
                                         <div className="project-main__info">
                                             <div className="project-main__info-wrap">
                                                 <p className="s-text">Клиент</p>
@@ -332,33 +318,3 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
     );
 };
 
-export const useMobile = () => {
-    const MOBILE_SIZE = 575;
-    const TABLET_SIZE = 768;
-    const LAPTOP_SIZE = 1024;
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [isMobile, setIsMobile] = useState(windowWidth <= MOBILE_SIZE);
-    const [isTablet, setIsTablet] = useState(windowWidth <= TABLET_SIZE);
-    const [isLaptop, setIsLaptop] = useState(windowWidth <= LAPTOP_SIZE);
-    const [isDesktop, setIsDesktop] = useState(windowWidth > LAPTOP_SIZE);
-
-    useEffect(() => {
-        window.addEventListener("resize", onResizeEvent);
-        return () => window.removeEventListener("resize", onResizeEvent);
-    }, []);
-
-    useEffect(() => {
-        setIsMobile(windowWidth <= MOBILE_SIZE);
-        setIsTablet(windowWidth <= TABLET_SIZE);
-        setIsLaptop(windowWidth > LAPTOP_SIZE);
-        setIsDesktop(windowWidth > LAPTOP_SIZE);
-    }, [windowWidth]);
-
-    const onResizeEvent = () => {
-        debouncedResize();
-    };
-
-    const debouncedResize = debounce(() => setWindowWidth(window.innerWidth), 100);
-
-    return { isMobile,isTablet, isLaptop, isDesktop };
-};

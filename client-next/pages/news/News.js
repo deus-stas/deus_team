@@ -10,8 +10,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import './news.scss';
 import {Icon} from "../../components/icon/Icon";
 import {Cursor} from "../../components/cursor/cursor";
-import {useDispatch, useSelector } from 'react-redux';
-import {fetchData } from "../../actions/appActions";
+// import {useDispatch, useSelector } from 'react-redux';
+// import {fetchData } from "../../actions/appActions";
 import Image from 'next/image';
 
 const News = () => {
@@ -26,19 +26,6 @@ const News = () => {
     const [selectedTag, setSelectedTag] = useState(tagInit);
     const [isLoading, setIsLoading] = useState(true);
     const [allNewsCount, setAllNewsCount] = useState(0);
-
-    const dispatch = useDispatch();
-    // const {services, headerData, team} = props;
-    const { headerData, services, contacts, team } = useSelector((state) => ({
-            headerData: state.app.headerData,
-            services: state.app.services,
-            projects: state.app.projects,
-            team: state.app.team,
-      }));
-
-    useEffect(() => {
-        dispatch(fetchData());
-      }, [dispatch]);
 
 
     useEffect(() => {
