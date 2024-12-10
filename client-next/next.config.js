@@ -7,6 +7,7 @@ const gracefulFs = require('graceful-fs');
 gracefulFs.gracefulify(fs);
 
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: false,
   experimental: {
     outputFileTracing: false,
@@ -28,7 +29,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['example.com', 'localhost'], // Разрешенные домены для изображений
+    domains: ['v3.deus.team', 'localhost'], // Разрешенные домены для изображений
   },
 
   env: {
