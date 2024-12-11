@@ -29,7 +29,18 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['v3.deus.team', 'localhost'], // Разрешенные домены для изображений
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'v3.deus.team',
+        pathname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '**',
+      },
+    ],
   },
 
   env: {
