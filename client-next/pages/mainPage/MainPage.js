@@ -65,7 +65,9 @@ const MainPage = (props) => {
     const [isVideoPaused, setIsVideoPaused] = useState(true);
     const [team, setTeam] = useState([]);
     const [services, setservices] = useState([]);
+
     
+
 
     const router = useRouter();
 

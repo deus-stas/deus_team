@@ -7,6 +7,7 @@ const gracefulFs = require('graceful-fs');
 gracefulFs.gracefulify(fs);
 
 const nextConfig = {
+  // output: 'export',
   reactStrictMode: false,
   experimental: {
     outputFileTracing: false,

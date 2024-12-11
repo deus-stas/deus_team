@@ -14,23 +14,26 @@ import RetryImage from "../../helpers/RetryImage";
 import {useDispatch, useSelector } from 'react-redux';
 // import {fetchData } from "../../actions/appActions";
 import dynamic from 'next/dynamic';
+import axios from "../../axios";
+
 const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
 const apiUrl = ''
 
 const AppFooter = (props) => {
     const [isLoading, setIsLoading] = useState(true);
+    const [headerData, setHeaderData] = useState(null);
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>
 
     // const dispatch = useDispatch();
     // const {services, headerData, team} = props;
 
-    const { headerData, services, conacts, team } = useSelector((state) => ({
-            headerData: state.app.headerData,
-            services: state.app.services,
-            projects: state.app.projects,
-            team: state.app.team,
-      }));
+    // const { headerData, services, conacts, team } = useSelector((state) => ({
+    //         headerData: state.app.headerData,
+    //         services: state.app.services,
+    //         projects: state.app.projects,
+    //         team: state.app.team,
+    //   }));
     // useEffect(() => {
     //     const handleLoad = (e) => {
     //         setIsLoading(e.detail.isLoading);
@@ -43,6 +46,20 @@ const AppFooter = (props) => {
     //         setIsLoading(true)
     //     };
     // }, []);
+
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/api/headerData/`)
+            .then((response) => {
+                setHeaderData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    useEffect(() => {
+        console.log(headerData);
+    }, [headerData]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -104,9 +121,9 @@ const AppFooter = (props) => {
                                          datahash="contactUs"
                                          onClick={(e) => gotoAnchor(e)}>
                                 <span className="footer-frame__discuss-flex">
-                                   {!!headerData?.headerPhoto &&
+                                   {headerData &&
                                        <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                   src={`${apiUrl}/uploads/${headerData.headerPhoto.filename}`}
+                                                   src={`${apiUrl}/uploads/${headerData?.headerPhoto?.filename}`}
                                                    alt="Обсудить проект" className="img"/>
                                    }
                                     <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}

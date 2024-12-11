@@ -21,6 +21,9 @@ import {Cursor} from "../../../components/cursor/cursor";
 import { useParams } from 'next/navigation';
 // import Image from 'next/image';
 
+import Head from 'next/head';
+
+
 const apiUrl = ''
 
 const ProjectDetail = () => {
@@ -200,6 +203,11 @@ const ProjectDetail = () => {
     return (
         <>
             <Cursor/>
+            <Head>
+                <title>{detail?.seoTitle || "Deus"}</title>
+                <meta name="description" content={detail?.description || "Deus"} />
+                <meta name="key" content={detail?.seoKeywords || "Deus"} />
+            </Head>
             {!isLoading &&
 
                 <main id="toUp" className="project">

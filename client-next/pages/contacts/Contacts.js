@@ -21,7 +21,9 @@
     const [success, setSuccess] = useState(false);
     const [team, setTeam] = useState(null);
 
-
+  //   setTimeout(()=> {
+  //     document.querySelector('#preloader').style.transform = 'translateY(120%)';
+  //  }, 1000)
     // const dispatch = useDispatch();
     // const { team } = useSelector((state) => ({
     //     team: state.app.team,

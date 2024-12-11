@@ -252,11 +252,17 @@ main {
     clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
     -webkit-transition: opacity .7s, transform .7s;
     transition: opacity .7s, transform .7s;
+    transform: translateY(120%);
+
 }
 
-#preloader .loaded {
-    transform: translateY(120%);
-}
+#preloader.transitioning {
+    transform: translateY(0);
+  }
+
+// #preloader .loaded {
+//     transform: translateY(120%);
+// }
 
 //#preloader {
 //    position: fixed;

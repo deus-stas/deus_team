@@ -31,6 +31,8 @@ const Projects = () => {
     const [menuType, setMenuType] = useState(false);
     const [select, setSelect] = useState(false);
 
+ 
+
     // const searchParams = useSearchParams(); // для работы с URL-параметрами
     const getSearchParams = () => {
         if (typeof window !== 'undefined') {
@@ -237,6 +239,11 @@ const Projects = () => {
 
     let text = sizeLarge;
 
+    const handleLinkClick = (e) => {
+        gotoAnchor(e, 'start', false);
+        setChecked(value);
+    } 
+
 
     const category = <>
         <div className="projects-category">
@@ -268,12 +275,11 @@ const Projects = () => {
                                     return (
 
                                         <Link 
-                                            onClick={(e) => gotoAnchor(e, 'start', false)}
+                                            onClick={(e) => handleLinkClick(e, project.value)}
                                             href={`/projects?theme=${project.value}`}
                                             key={`index-${index}`}
                                             >
-                                            <div className="main-projects__item-flex__inner" onClick={() => {
-                                                setChecked(project.value)}}>
+                                            <div className="main-projects__item-flex__inner" >
                                                 <span className={`main-projects__item-btn ${checked && checked.value === project.value  &&  'activeItem'}`}>
                                                     <span className={`${projectSizeLabel}`}>
                                                         <p className="hover custom-cursor-link"
