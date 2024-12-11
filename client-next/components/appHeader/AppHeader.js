@@ -11,6 +11,7 @@ import { gotoAnchor } from '../anchors';
 import useMobile from '../useMobile';
 // import { selectHeaderDataAndServices } from '../../components/selector';
 import {setIsLoadingMainPageEvent} from "../../axios";
+import axios from "../../axios";
 
 import './appHeader.scss';
 
@@ -22,12 +23,15 @@ const AppHeader = () => {
   const [menu, setMenu] = useState(false);
   const [prevScroll, setPrevScroll] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [headerData, setHeaderData] = useState(null);
+  const [services, setServices] = useState(null);
+  const [contacts, setContacts] = useState(null);
 
   const { isTablet, isDesktop, isMobile, isLaptop } = useMobile(); // Кастомный хук для определения устройства
-  const { headerData, services } = useSelector((state) => ({
-    headerData: state.app.headerData,
-    services: state.app.services,
-  }));
+//   const { headerData, services } = useSelector((state) => ({
+//     headerData: state.app.headerData,
+//     services: state.app.services,
+//   }));
 
 const handleHeaderColor = (header, headerMob, menu) => {
   [header, headerMob, menu].filter(Boolean).forEach((el) => {
@@ -37,6 +41,37 @@ const handleHeaderColor = (header, headerMob, menu) => {
       el.style.pointerEvents = "";
   });
 };
+
+useEffect(() => {
+    axios
+        .get(`${apiUrl}/api/headerData/`)
+        .then((response) => {
+            setHeaderData(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}, []);
+useEffect(() => {
+    axios
+        .get(`${apiUrl}/api/services/`)
+        .then((response) => {
+            setServices(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}, []);
+useEffect(() => {
+    axios
+        .get(`${apiUrl}/api/contacts/`)
+        .then((response) => {
+            setContacts(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}, []);
 
 useEffect(() => {
   let id;
@@ -184,7 +219,7 @@ const closeMenu = (e) => {
                         <span data-hover="Услуги">Услуги</span>
                     </Link>
                 </li>
-                <div className="xs-text services-count">{services.length}</div>
+                <div className="xs-text services-count">{services?.length}</div>
             </div>
 
             <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
@@ -229,7 +264,7 @@ const closeMenu = (e) => {
     <>
       
       {/* {!isLoading && headerData && */}
-      {true && true &&
+      {headerData && true &&
             <>
                 <header className={`header`}>
                     <div className="container">
