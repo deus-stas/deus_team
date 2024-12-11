@@ -6,7 +6,9 @@ import axios, {setIsLoadingMainPageEvent} from '../../../axios'
 import Breadcrumbs from '../../../components/breadcrubms/Breadcrumbs'
 import Cta from '../../../components/cta/Cta';
 import { Icon } from '../../../components/icon/Icon'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Link from 'next/link'; // Используем Link из Next.js для навигации
+
 
 import './serviceDetail.scss'
 // import HelmetComponent from "../../../components/helmetComponent";
@@ -336,7 +338,7 @@ const ServicesDetail = () => {
                                     return (
                                         <div key={`--1${i}`}>
                                             {!!project && !!project.nameInEng &&
-                                                <Link to={`/projects/${project.nameInEng}`}
+                                                <Link href={`/projects/${project.nameInEng}`}
                                                       className="projects__item wow fadeInUp"
                                                       data-wow-duration="0.5s"
                                                       data-wow-delay={`${portfolioDelay}s`}
@@ -371,7 +373,7 @@ const ServicesDetail = () => {
                                 }) :
                                 projects.map((project,i) => {
                                     return (
-                                        <Link to={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
+                                        <Link href={`/projects/${project.nameInEng}`} className="projects__item" key={project.id} style={{ background: project.color }}>
                                             <div className="projects__item-img-wrap">
                                                 {
                                                     project.mainVideo && project.mainVideo !== 'undefined' && project.mainVideo !== 'null'
@@ -514,7 +516,7 @@ const ServicesDetail = () => {
                                                             </div>
                                                         </div>
                                                         <div className="service-review__descr">{review.review} </div>
-                                                        <Link to={`/projects/${review.reviewProject.nameInEng}`} className="btn --white">Смотреть проект</Link>
+                                                        <Link href={`/projects/${review.reviewProject.nameInEng}`} className="btn --white">Смотреть проект</Link>
                                                     </div>
                                                     { review.reviewBg ?  <RetryImage src={`${apiUrl}/uploads/${review.reviewBg.filename}`} alt={review.name} className="service-review__bg" /> :
                                                     review.reviewProject.image ? <RetryImage src={`${apiUrl}/uploads/${review.reviewProject.image.filename}`} alt={review.name} className="service-review__bg" /> : null}

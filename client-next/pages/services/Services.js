@@ -3,16 +3,16 @@
 import React from 'react';
 import {useEffect, useRef, useState} from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../axios'
-import 'wowjs/css/libs/animate.css';
+// import 'wowjs/css/libs/animate.css';
 import {Icon} from '../../components/icon/Icon'
 import Image from 'next/image';
 import './services.scss'
 
 // import RetryImage from "../../helpers/RetryImage";
 // import {connect, useSelector} from "react-redux";
-import pentagon from "../../public/img/pentagon.png"
-import octagon from "../../public/img/octagon.png"
-import elipse from "../../public/img/elipse.png"
+// import pentagon from "../../public/img/pentagon.png"
+// import elipse from "../../public/img/elipse.png"
+// import octagon from "../../public/img/octagon.png"
 // import spiral from "../../public/img/spiral.png"
 // import includes from "validator/es/lib/util/includes";
 import {gotoAnchor} from "../../components/anchors";
@@ -210,7 +210,7 @@ const Services = () => {
                             <h2 className="heading-secondary">Принципы управления<br/> проектами</h2>
                             <div className="services-principle__wrap">
                                 <div className="services-principle__wrap-item">
-                                    <img src={pentagon} alt=""/>
+                                    <img src="/img/pentagon.png" alt=""/>
                                     <div>
                                         <p className="l-textMed">Прозрачность</p>
                                         <p className="s-text">
@@ -221,7 +221,7 @@ const Services = () => {
                                     </div>
                                 </div>
                                 <div className="services-principle__wrap-item">
-                                    <img src={octagon} alt=""/>
+                                    <img src="/img/octagon.png" alt=""/>
                                     <div>
                                         <p className="l-textMed">Индивидуальность</p>
                                         <p className="s-text">
@@ -230,7 +230,7 @@ const Services = () => {
                                         </div>
                                     </div>
                                     <div className="services-principle__wrap-item">
-                                        <img src={elipse} alt=""/>
+                                        <img src='/img/elipse.png' alt=""/>
                                         <div>
                                             <p className="l-textMed">Персональный подход</p>
                                             <p className="s-text">
