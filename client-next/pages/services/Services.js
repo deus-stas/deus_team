@@ -3,7 +3,7 @@
 import React from 'react';
 import {useEffect, useRef, useState} from 'react';
 import axios, {setIsLoadingMainPageEvent} from '../../axios'
-import 'wowjs/css/libs/animate.css';
+// import 'wowjs/css/libs/animate.css';
 import {Icon} from '../../components/icon/Icon'
 import Image from 'next/image';
 import './services.scss'
