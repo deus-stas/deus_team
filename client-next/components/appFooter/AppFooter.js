@@ -108,7 +108,20 @@ const AppFooter = (props) => {
     // }
 
     const adress = '(min-width:420px)' ? adressM : adressL
+    
+    const closeMenu = (e, path) => {
+        e.preventDefault();
+        const preloader = document.querySelector('#preloader');
+        preloader.classList.add('transitioning')
 
+        // Задержка перед переходом
+        // Задержка перед переходом
+        if(window) {
+            setTimeout(() => {
+                window.location.assign(`${path}`); // Переход через window.location.assign
+                }, 500); // Задержка в 500 миллисекунд
+        }
+    };
     return (
         <section className="container">
             <footer className="footer borderBlock whiteHeader ">
@@ -123,7 +136,7 @@ const AppFooter = (props) => {
                                 <span className="footer-frame__discuss-flex">
                                    {headerData &&
                                        <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                   src={`${apiUrl}/uploads/${headerData?.headerPhoto?.filename}`}
+                                                   src={`${apiUrl}/uploads/${headerData[0]?.headerPhoto?.filename}`}
                                                    alt="Обсудить проект" className="img"/>
                                    }
                                     <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
@@ -191,20 +204,20 @@ const AppFooter = (props) => {
 
                                         <ul className="footer__pages m-text">
                                             <li className="footer__pages-item hover-flip">
-                                                <Link href="/agency"> <span
+                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/agency"> <span
                                                     data-hover="Агентство">Агентство</span></Link>
                                             </li>
                                             <li className="footer__pages-item hover-flip ">
-                                                <Link href="/projects"><span
+                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/projects"><span
                                                     data-hover="Услуги">Услуги</span></Link>
                                             </li>
                                             <li className="footer__pages-item hover-flip">
-                                                <Link href="/services"><span
+                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/services"><span
                                                     data-hover="Проекты">Проекты</span></Link>
                                             </li>
 
                                             <li className="footer__pages-item hover-flip">
-                                                <Link href="/contacts"><span
+                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/contacts"><span
                                                     data-hover="Контакты">Контакты</span></Link>
                                             </li>
                                         </ul>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link'; // Используем Link из Next.js для навигации
 // import Image from 'next/image'; // Для оптимизации изображений
 // import { useRouter } from 'next/navigation'; // Аналог useNavigate из React Router
+// import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux'; // Подключение к Redux-хранилищу
 import RetryImage from '../../helpers/RetryImage';
 import { Icon } from '../icon/Icon';
@@ -172,7 +173,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-    console.log(headerData);
+    console.log('headerData',headerData);
 }, [headerData]);
 
 
@@ -203,24 +204,33 @@ useEffect(() => {
 }, [menu]);
 
 
-
-const closeMenu = (e) => {
-  if (!isDesktop) {
-      setMenu(!menu);
-  }
+const closeMenu = (e, path) => {
+    e.preventDefault();
+    const preloader = document.querySelector('#preloader');
+    preloader.classList.add('transitioning')
+    if (!isDesktop) {
+        setMenu(!menu);
+    }
+    // Задержка перед переходом
+    // Задержка перед переходом
+    if(window) {
+        setTimeout(() => {
+            window.location.assign(`${path}`); // Переход через window.location.assign
+            }, 500); // Задержка в 500 миллисекунд
+    }
 };
 
   const navLink = (
     <nav className={`header__nav m-text ${visible ? '' : 'hidden'}`}>
         <ul className={`header__nav-list ${isDesktop ? 'm-text' : isTablet && 'heading-secondary'}`}>
             <li className={`header__nav-item hover-flip ${isDesktop ? 'hover-flip' : ''}`}>
-                <Link onClick={closeMenu}  href="/agency">
+                <Link onClick={(e) => closeMenu(e, '/agency')}  href="/agency">
                     <span data-hover="Агентство">Агентство</span>
                 </Link>
             </li>
             <div style={{position: "relative"}}>
                 <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                    <Link onClick={closeMenu} href="/services">
+                    <Link onClick={(e) => closeMenu(e, '/services')} href="/services">
                         <span data-hover="Услуги">Услуги</span>
                     </Link>
                 </li>
@@ -228,17 +238,17 @@ const closeMenu = (e) => {
             </div>
 
             <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                <Link onClick={closeMenu} href="/projects">
+                <Link onClick={(e) => closeMenu(e, '/projects')} href="/projects">
                     <span data-hover="Проекты">Проекты</span>
                 </Link>
             </li>
             <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                <Link onClick={closeMenu} href="/news">
+                <Link onClick={(e) => closeMenu(e, '/news')} href="/news">
                     <span data-hover="Блог">Блог</span>
                 </Link>
             </li>
             <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                <Link onClick={closeMenu} href="/contacts">
+                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/contacts">
                     <span data-hover="Контакты">Контакты</span>
                 </Link>
             </li>
@@ -274,7 +284,7 @@ const closeMenu = (e) => {
                 <header className={`header`}>
                     <div className="container">
                         <div className="header__wrap">
-                            <Link href="/" className='header__logo'>
+                            <Link href="/" className='header__logo' onClick={(e) => closeMenu(e, '/')}>
                                 <Icon icon="logo" viewBox="0 0 67 30"/>
                             </Link>
                             {isDesktop && (<>{navLink}</>)}
@@ -290,7 +300,7 @@ const closeMenu = (e) => {
                                     // headerData && headerData.phone &&
                                     headerData &&
                                     (
-                                        <a className={`menu-contacts ${menu ? 'hidden' : ''}`} href={`tel:${headerData.phone}`}>
+                                        <a className={`menu-contacts ${menu ? 'hidden' : ''}`} href={`tel:${headerData?.phone ?? "+74951034351"}`}>
                                             <div >
                                                 <Icon icon="telephone" viewBox="0 0 18 18"/>
                                             </div>
@@ -306,9 +316,9 @@ const closeMenu = (e) => {
                                     >
                                         <span className="header__discuss-flex">
                                           {/* {headerData?.headerPhoto && */}
-                                          {headerData &&
+                                          {headerData && headerData[0].headerPhoto?.filename &&
                                               <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                          src={`${apiUrl}/uploads/${headerData.headerPhoto?.filename}`}
+                                                          src={`${apiUrl}/uploads/${headerData[0].headerPhoto?.filename}`}
                                                           alt="Обсудить проект" className="img"/>
                                           }
                                             <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
@@ -350,9 +360,9 @@ const closeMenu = (e) => {
                                                           gotoAnchor(e)
                                                       }}>
                                             <span className="header__discuss-flex">
-                                          {!!headerData?.headerPhoto &&
+                                          {headerData && headerData[0].headerPhoto?.filename &&
                                               <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
-                                                          src={`${apiUrl}/uploads/${headerData.headerPhoto?.filename}`}
+                                                          src={`${apiUrl}/uploads/${headerData[0].headerPhoto?.filename}`}
                                                           alt="Обсудить проект" className="img"/>
                                           }
                                                 <div datahash="contactUs" onClick={(e) => gotoAnchor(e)}
@@ -363,10 +373,10 @@ const closeMenu = (e) => {
                                         </Link>
 
                                         {
-                                            headerData && headerData.phone &&
+                                            headerData && headerData[0].phone &&
                                             (
                                                 <a className="menu-contacts menu-contacts__menuSize"
-                                                    href={`tel:${headerData.phone}`}>
+                                                    href={`tel:${headerData[0].phone}`}>
                                                     <div>
                                                         <Icon icon="telephone" viewBox="0 0 18 18"/>
                                                     </div>
@@ -387,9 +397,4 @@ const closeMenu = (e) => {
   );
 };
 
-  export default AppHeader;
-  
-  // export default connect((state) => ({
-  //   headerData: state.app.headerData,
-  //   services: state.app.services,
-  // }))(AppHeader);
+export default AppHeader;
