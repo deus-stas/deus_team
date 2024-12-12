@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react"; // Добавлен импорт хуков React
 import { store } from '../store';
 import { usePathname } from "next/navigation";
-import Head from 'next/head';
+// import Head from 'next/head';
 
 import {Provider} from "react-redux";
 
 import AppHeader from '../components/appHeader/AppHeader';
 import AppFooter from "../components/appFooter/AppFooter";
-import CustomCursor from "custom-cursor-react";
+// import CustomCursor from "custom-cursor-react";
 import "custom-cursor-react/dist/index.css";
 
 import '../style/style.scss'
@@ -47,18 +47,18 @@ export default function RootLayout({ children }) {
     setTransitioning(true);
     const timeout = setTimeout(() => {
       setTransitioning(false);
-    }, 2000); 
+    }, 1000); 
 
     return () => clearTimeout(timeout); 
   }, [pathname]);
 
   return (
     <html lang="ru">  
-     <Head>
+     <head>
         <title>{seoInfo?.seoTitle || "Deus"}</title>
         <meta name="description" content={seoInfo?.description || "Deus"} />
         <meta name="key" content={seoInfo?.seoKeywords || "Deus"} />
-      </Head>
+      </head>
       <body id='root'>
 
         <Provider store={store}>
@@ -69,7 +69,7 @@ export default function RootLayout({ children }) {
           ></div>
 
           {/* Кастомный курсор */}
-          <CustomCursor
+          {/* <CustomCursor
             targets={["a", "button"]}
             customClass="custom-cursor"
             dimensions={30}
@@ -78,7 +78,7 @@ export default function RootLayout({ children }) {
             strokeWidth={1}
             zIndex={9999}
             smoothness={{ movement: 0.1, scale: 0.1, opacity: 0.1 }}
-          />
+          /> */}
 
           {/* Хедер */}
           {!shouldHideHeaderFooter && <AppHeader />}
