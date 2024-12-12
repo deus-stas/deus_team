@@ -40,8 +40,43 @@ export default function RootLayout({ children }) {
         console.error("Ошибка загрузки SEO данных:", error);
       }
     }
-    fetchSeoData();
+
+    async function fetchSeoDataDynamick() {
+      try {
+        const response = await fetch(`/api${pathname}`);
+        const data = await response.json();
+        console.log('data', data);
+        setSeoInfo(data);
+      } catch (error) {
+        console.error("Ошибка загрузки SEO данных:", error);
+      }
+    }
+
+    const checkPath = pathname.split('/').filter(Boolean);
+    if(checkPath.length > 1) {
+      fetchSeoDataDynamick();
+    } else {
+      fetchSeoData();
+    }
+    console.log("pathname", pathname, checkPath);
   }, [pathname]);
+
+  // SEO-запрос(Динамический)
+  // useEffect(() => {
+  //   async function fetchSeoData() {
+  //     try {
+  //       const response = await fetch(`/api${pathname}`);
+  //       const data = await response.json();
+  //       console.log('data', data);
+  //       // const currentSeoInfo = data.find((item) => item.seoPages === pathname);
+  //       setSeoInfo(data);
+  //     } catch (error) {
+  //       console.error("Ошибка загрузки SEO данных:", error);
+  //     }
+  //   }
+  //   fetchSeoData();
+  //   console.log("pathname", pathname);
+  // }, [pathname]);
 
   useEffect(() => {
     setTransitioning(true);
