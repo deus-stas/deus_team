@@ -27,7 +27,8 @@ const News = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [allNewsCount, setAllNewsCount] = useState(0);
 
-
+ 
+     
     useEffect(() => {
         axios.get(`/api/newsTags`)
             .then((tagResponse) => {

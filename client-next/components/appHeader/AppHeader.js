@@ -172,6 +172,11 @@ useEffect(() => {
 
 
 useEffect(() => {
+    console.log(headerData);
+}, [headerData]);
+
+
+useEffect(() => {
   setIsLoadingMainPageEvent(true)
   const handleLoad = (e) => {
       if (e.detail.isLoading !== isLoading) {
@@ -282,7 +287,8 @@ const closeMenu = (e) => {
                                   }}>
                                 {isMobile ? null : <>
                                 {
-                                    headerData && headerData.phone &&
+                                    // headerData && headerData.phone &&
+                                    headerData &&
                                     (
                                         <a className={`menu-contacts ${menu ? 'hidden' : ''}`} href={`tel:${headerData.phone}`}>
                                             <div >
@@ -292,12 +298,15 @@ const closeMenu = (e) => {
                                     )
                                 }
 
-                                    <Link href="/contacts"
-                                                  className={`header__discuss ${menu ? 'hidden' : ''}`}
-                                                  datahash="contactUs"
-                                                  onClick={(e) => gotoAnchor(e)}>
+                                    <Link 
+                                        href="/contacts"
+                                        className={`header__discuss ${menu ? 'hidden' : ''}`}
+                                        datahash="contactUs"
+                                        onClick={(e) => gotoAnchor(e)}
+                                    >
                                         <span className="header__discuss-flex">
-                                          {!!headerData?.headerPhoto &&
+                                          {/* {headerData?.headerPhoto && */}
+                                          {headerData &&
                                               <RetryImage datahash="contactUs" onClick={(e) => gotoAnchor(e)}
                                                           src={`${apiUrl}/uploads/${headerData.headerPhoto?.filename}`}
                                                           alt="Обсудить проект" className="img"/>
