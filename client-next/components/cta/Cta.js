@@ -55,7 +55,29 @@ function Checkbox(props) {
 }
 
 const Cta = (props) => {
+    const [services, setServices] = useState([]);
+    const [contacts, setContacts] = useState([]);
 
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/api/services/`)
+            .then((response) => {
+                setServices(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    useEffect(() => {
+        axios
+            .get(`${apiUrl}/api/contacts/`)
+            .then((response) => {
+                setContacts(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const [worker, setWorker] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -87,7 +109,7 @@ const Cta = (props) => {
         contacts.map((item, index) => (
             item.pageName === props.formName ? setWorker(item) : null
         ))
-    }, [props]);
+    }, [contacts]);
 
     useEffect(() => {
         setIsLoadingMainPageEvent(true)
@@ -132,7 +154,7 @@ const Cta = (props) => {
             console.error(error);
         }
     };
-    const {services, contacts } = props;
+    // const {services, contacts } = props;
     return (
         <>
             {!isLoading &&
@@ -143,7 +165,7 @@ const Cta = (props) => {
                         <span className="sticky-h2">
                         <h2 className="heading-secondary">Брифы для заполнения</h2>
                         <div className="cta__wrap-wrapper">
-                            {props.services && props.services.filter((service, index) =>
+                            {true && services.filter((service, index) =>
                                 service.isInvisible).map((service, index) => {
                                 const disabled = !service.brief || service.brief.length === 0
                                 const children = <div className="item l-textReg"><p>{service.name}</p>
@@ -560,11 +582,4 @@ const Cta = (props) => {
 
 }
 
-export default connect(
-    (state) => (
-        {
-            services: state.app.services,
-            contacts: state.app.contacts
-        }
-    )
-)(Cta)
+export default Cta;

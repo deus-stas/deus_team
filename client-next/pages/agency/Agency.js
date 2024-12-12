@@ -42,21 +42,7 @@ const Agency = (props) => {
     const [reviews, setReviews] = useState([]);
     const {isTablet, isMobile} = useMobile()
     const [team, setTeam] = useState([]);
-
-
-//     const { headerData, services, conacts, team } = useSelector((state) => ({
-//         headerData: state.app.headerData,
-//         services: state.app.services,
-//         projects: state.app.projects,
-//         team: state.app.team,
-//   }));
-
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//       dispatch(fetchData());
-//   }, [dispatch]);
-
+ 
 
     useEffect(() => {
         axios
@@ -391,7 +377,7 @@ const Agency = (props) => {
                                 return (
                                     <div className={`main-clients__marquee-agency`} key={`row-${count}`}>
                                         <div className="marquee-container-agency">
-                                            <Marquee speed={40} loop={0} gradient={false} direction={count % 2 === 0 ? "right" : 'left'}>
+                                            <Marquee speed={40} loop={0} style={{overflow: 'hidden'}}  gradient={false} direction={count % 2 === 0 ? "right" : 'left'}>
                                                 {row.map((client, i) => (
                                                     <div className='agency-clients__img marquee-item' key={client.id || i}>
                                                         <div className='container-img'>

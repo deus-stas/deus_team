@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import Popup from 'reactjs-popup';
 import './showreel.scss';
-import { usePrevious } from "react-admin";
-import showPng from "./showreel.png";
+// import { usePrevious } from "react-admin";
+// import showPng from "./showreel.png";
 import rotate from "./rotate.svg";
-import playCursor from "../../public/img/videoPlayCursor.svg"
-import pauseCursor from "../../public/img/videoPauseCursor.svg";
-import Image from 'next/image';
+// import playCursor from "../../public/img/videoPlayCursor.svg"
+// import pauseCursor from "../../public/img/videoPauseCursor.svg";
+// import Image from 'next/image';
 
 
 const apiUrl = '';
@@ -40,7 +40,8 @@ const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
             style={{
                 left: `${position.x}px`,
                 top: `${position.y}px`,
-                backgroundImage: `url(${isPaused ? playCursor : pauseCursor})`,
+                backgroundImage: `url(${isPaused ? '/img/videoPlayCursor.svg' : '/img/videoPauseCursor.svg'})`,
+                // backgroundImage: `url(${isPaused ? playCursor : pauseCursor})`,
             }}
         />
     );
@@ -117,11 +118,11 @@ const Showreel = (props) => {
                                     <source src={data.video ? `${apiUrl}/uploads/${data.video.filename}` : null}
                                             type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
                                 </video>
-                                <img src={rotate} alt="rotate" className={`rotate ${isPaused ? 'pausing' : 'playing'}`}/>
+                                <img src='/rotate.svg' alt="rotate" className={`rotate ${isPaused ? 'pausing' : 'playing'}`}/>
                             </>
                         }
 
-                        <img src={playCursor} alt="showreel" />
+                        <img src='/img/videoPlayCursor.svg' alt="showreel" />
                     </div>
                 ) : (
                     <>
