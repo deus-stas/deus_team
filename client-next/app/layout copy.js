@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
     }
 
     const checkPath = pathname.split('/').filter(Boolean);
-    if(false) {
+    if(checkPath.length > 1) {
       fetchSeoDataDynamick();
     } else {
       fetchSeoData();
