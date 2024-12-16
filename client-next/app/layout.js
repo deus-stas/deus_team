@@ -14,6 +14,8 @@ import "custom-cursor-react/dist/index.css";
 
 import '../style/style.scss'
 
+
+
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const adminBasePath = "/admin/";
@@ -27,39 +29,41 @@ export default function RootLayout({ children }) {
     pathname.startsWith(route)
   );
 
+  
+
   // SEO-запрос
-  useEffect(() => {
-    async function fetchSeoData() {
-      try {
-        const response = await fetch("/api/seo");
-        const data = await response.json();
-        console.log(data);
-        const currentSeoInfo = data.find((item) => item.seoPages === pathname);
-        setSeoInfo(currentSeoInfo);
-      } catch (error) {
-        console.error("Ошибка загрузки SEO данных:", error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchSeoData() {
+  //     try {
+  //       const response = await fetch("/api/seo");
+  //       const data = await response.json();
+  //       console.log(data);
+  //       const currentSeoInfo = data.find((item) => item.seoPages === pathname);
+  //       setSeoInfo(currentSeoInfo);
+  //     } catch (error) {
+  //       console.error("Ошибка загрузки SEO данных:", error);
+  //     }
+  //   }
 
-    async function fetchSeoDataDynamick() {
-      try {
-        const response = await fetch(`/api${pathname}`);
-        const data = await response.json();
-        console.log('data', data);
-        setSeoInfo(data);
-      } catch (error) {
-        console.error("Ошибка загрузки SEO данных:", error);
-      }
-    }
+  //   async function fetchSeoDataDynamick() {
+  //     try {
+  //       const response = await fetch(`/api${pathname}`);
+  //       const data = await response.json();
+  //       console.log('data', data);
+  //       setSeoInfo(data);
+  //     } catch (error) {
+  //       console.error("Ошибка загрузки SEO данных:", error);
+  //     }
+  //   }
 
-    const checkPath = pathname.split('/').filter(Boolean);
-    if(false) {
-      fetchSeoDataDynamick();
-    } else {
-      fetchSeoData();
-    }
-    console.log("pathname", pathname, checkPath);
-  }, [pathname]);
+  //   const checkPath = pathname.split('/').filter(Boolean);
+  //   if(false) {
+  //     fetchSeoDataDynamick();
+  //   } else {
+  //     fetchSeoData();
+  //   }
+  //   console.log("pathname", pathname, checkPath);
+  // }, [pathname]);
 
   // SEO-запрос(Динамический)
   // useEffect(() => {
@@ -90,9 +94,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">  
      <head>
-        <title>{seoInfo?.seoTitle || "Deus"}</title>
+        {/* <title>{seoInfo?.seoTitle || "Deus"}</title>
         <meta name="description" content={seoInfo?.description || "Deus"} />
-        <meta name="key" content={seoInfo?.seoKeywords || "Deus"} />
+        <meta name="key" content={seoInfo?.seoKeywords || "Deus"} /> */}
       </head>
       <body id='root'>
         <Provider store={store}>
