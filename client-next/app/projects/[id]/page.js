@@ -2,21 +2,27 @@ import ProjectDetail from "../../../pages/projects/projectDetail/ProjectDetail";
 import { headers as getHeaders } from "next/headers";
 
 export async function generateMetadata() {
-  const headers = getHeaders();
-  const host = headers.get("host"); // Достаем host
-  const currentUrl = `http://${host}`;
- 
-  const res = await fetch(`${currentUrl}/api/seo`, { cache: 'no-store' });
-  const seoData = await res.json();
+  const headers = await getHeaders();
+  const referer = headers.get("referer"); 
+  if(referer) {
 
-  // Фильтруем данные и получаем нужный блок
-  const data = seoData.find((el) => el.name === "Главная");
-
-  return {
-    title: data.seoTitle || "Главная", // Заголовок
-    description: data.seoDescription || "Главная", // Мета-описание
-    keywords: data.seoKeywords || "Главная", // Ключевые слова
-  };
+    const [baseUrl, path] = referer.split("/projects");
+  
+    const res = await fetch(`${baseUrl}/api/projects${path}`, { cache: 'no-store' });
+    const seoData = await res.json();
+    console.log(seoData);
+    return {
+      title: seoData?.seoTitle || "Проект", // Заголовок
+      description: seoData?.seoDescription || "Проект", // Мета-описание
+      keywords: seoData?.seoKeywords || "Проект", // Ключевые слова
+    };
+  } else {
+    return {
+      title: "Проект", // Заголовок
+      description: "Проект", // Мета-описание
+      keywords:  "Проект", // Ключевые слова
+    };
+  }
 }
 
 export default function Home() {

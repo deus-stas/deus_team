@@ -1,7 +1,12 @@
 import Agency from "../../pages/agency/Agency";
+import { headers as getHeaders } from "next/headers";
 
 export async function generateMetadata() {
-  const res = await fetch(`http://localhost:3000/api/seo`, { cache: 'no-store' });
+  const headers = getHeaders();
+  const host = headers.get("host"); // Достаем host
+  const currentUrl = `http://${host}`;
+   
+  const res = await fetch(`${currentUrl}/api/seo`, { cache: 'no-store' });
   const seoData = await res.json();
 
   // Фильтруем данные и получаем нужный блок
