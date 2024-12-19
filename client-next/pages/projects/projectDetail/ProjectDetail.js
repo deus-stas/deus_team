@@ -266,6 +266,7 @@ const ProjectDetail = () => {
 export default ProjectDetail;
 
 export const BannerComponent = ({banner, detail, stackItem}) => {
+    
     const fileUrl = `${apiUrl}/uploads/${banner.filename}`;
     const isVideo = /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(banner.filename);
     const isImage = /\.(jpeg|jpg|gif|png)$/i.test(banner.filename);

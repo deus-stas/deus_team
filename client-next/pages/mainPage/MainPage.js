@@ -304,6 +304,7 @@ const MainPage = (props) => {
         if (services && Array.isArray(services)) {
             sortedServices = [...services].sort((a, b) => a.position - b.position);
         }
+        console.log('services',services);
     }, [services]);
 
 
@@ -379,7 +380,7 @@ const MainPage = (props) => {
                                     );
 
                                     const allServices = index === 1 &&
-                                        sortedServices
+                                        services
                                             .filter((service) => service.isInvisible)
                                             .map((service, serviceIndex) => (
                                                 <Link href={`/services/`} key={`service-${serviceIndex}`}>
