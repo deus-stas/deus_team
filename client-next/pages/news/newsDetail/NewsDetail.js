@@ -358,15 +358,28 @@ const BannerComponent = ({banner, detail}) => {
     const isVideo = banner.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(banner.image.filename) : false;
     return (
         <>
-            {!isVideo
-                ?
-                <img src={`${apiUrl}/uploads/${banner.filename}`} alt={detail.name} className="image"/>
-                :
-                <video className="image" autoPlay loop muted playsInline>
-                    <source src={`${apiUrl}/uploads/${banner.filename}`}
-                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-                </video>
-            }
+            {banner.filename ? (
+                !isVideo ? (
+                    <img
+                        src={`${apiUrl}/uploads/${banner.filename}`}
+                        alt={detail.name}
+                        className="image"
+                    />
+                ) : (
+                    <video
+                        className="image"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                    >
+                        <source
+                            src={`${apiUrl}/uploads/${banner.filename}`}
+                            type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"
+                        />
+                    </video>
+                )
+            ) : null}
         </>
     )
 }
