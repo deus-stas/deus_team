@@ -66,7 +66,17 @@ const MainPage = (props) => {
     const [team, setTeam] = useState([]);
     const [services, setservices] = useState([]);
 
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+        console.log('isHovered', isHovered)
+
+      };
     
+      const handleMouseLeave = () => {
+        setIsHovered(false);
+        console.log('isHovered', isHovered)
+
+      };
 
 
     const router = useRouter();
@@ -381,7 +391,7 @@ const MainPage = (props) => {
 
                                     const allServices = index === 1 &&
                                         services
-                                            .filter((service) => service.isInvisible)
+                                            .filter((service) => service.isInvisible)   
                                             .map((service, serviceIndex) => (
                                                 <Link href={`/services/`} key={`service-${serviceIndex}`}>
                                                     <div className="main-agency__item-link l-textReg">
@@ -426,7 +436,11 @@ const MainPage = (props) => {
                                         );
 
                                     return (
-                                        <div className="main-agency__item" key={`mainItem-${index}`}>
+                                        <div 
+                                            className="main-agency__item" 
+                                            key={`mainItem-${index}`} 
+                                            onMouseEnter={handleMouseEnter}
+                                            onMouseLeave={handleMouseLeave}>
                                                 {isVideo ? (
                                                     <video
                                                         className="main-agency__item-img"

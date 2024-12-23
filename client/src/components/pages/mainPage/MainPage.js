@@ -26,7 +26,7 @@ import {Box, useMediaQuery} from "@material-ui/core";
 import {maxLength} from "react-admin";
 import {useMobile} from "../projects/projectDetail/ProjectDetail";
 import {Marquee} from "@devnomic/marquee";
-import {Cursor} from "../../cursor/cursor";
+import {Cursor} from "../../../components/cursor/cursor";
 
 const apiUrl = "";
 
