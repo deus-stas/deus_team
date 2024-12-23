@@ -179,7 +179,7 @@ const ProjectDetail = () => {
     return (
         <>
             <Cursor/>
-            <Head pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords}
+            <HelmetComponent pageTitle={detail.seoTitle} pageKeywords={detail.seoKeywords}
                              pageDescription={detail.seoDescription}/>
             {!isLoading &&
 

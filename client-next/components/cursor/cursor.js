@@ -35,6 +35,9 @@ export const Cursor = () => {
         '.next__project_img',
     ];
 
+
+    
+
     useEffect(() => {
         const handleMoveMouse = (e) => {
             if (typeof window !== 'undefined') {

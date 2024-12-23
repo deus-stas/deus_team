@@ -25,7 +25,11 @@ const newsSchema = new Schema({
   aboutClient2: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   aboutClient3: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   aboutClient4: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
-  newsTags: [{ type: Schema.Types.ObjectId, ref: 'NewsTags' }]
+  newsTags: [{ type: Schema.Types.ObjectId, ref: 'NewsTags' }],
+  seoTitle: {type: String},
+  seoDescription: {type: String},
+  seoKeywords: {type: String},
+
 });
 
 newsSchema.set('toJSON', { virtuals: true });

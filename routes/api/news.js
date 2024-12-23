@@ -87,6 +87,9 @@ router.post('/news', upload.fields([
     aboutClient4,
     mainControl,
     detailControl,
+    seoTitle,
+    seoDescription,
+    seoKeywords,
   });
 
   await news.save();
@@ -137,7 +140,7 @@ router.put("/news/:id", upload.fields([
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, newsTags, urlName, mainControl, description, aboutClient, aboutClient2,  aboutClient3, aboutClient4,  detailControl, underAboutClient, workStepsItem, aboutImg, aboutImg2, body, body2, body3, body4, body5 } = req.body;
+  const { name, newsTags, urlName, mainControl, description, aboutClient, aboutClient2,  aboutClient3, aboutClient4,  detailControl, underAboutClient, workStepsItem, aboutImg, aboutImg2, body, body2, body3, body4, body5, seoTitle, seoDescription, seoKeywords } = req.body;
   const image = req.files.image ? req.files.image[0] : undefined;
   const mainNewsImage = req.files.mainNewsImage ? req.files.mainNewsImage[0] : undefined;
   const bannerSecond = req.files.bannerSecond ? req.files.bannerSecond[0] : undefined;
@@ -256,6 +259,9 @@ router.put("/news/:id", upload.fields([
   news.body4 = body4;
   news.body5 = body5;
   news.workStepsItem = workStepsItem;
+  news.seoTitle = seoTitle;
+  news.seoDescription = seoDescription;
+  news.seoKeywords = seoKeywords;
 
   // Сохраняем изменения
   await news.save();
