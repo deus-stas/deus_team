@@ -62,7 +62,7 @@ const NewsDetail = () => {
 
     useEffect(() => {
         if(id) {
-            axios.get(`${apiUrl}/api/news/url/${id}`)
+            axios.get(`${apiUrl}/api/url/${id}`)
                 .then((response) => {
     
                     const dataDetail = response.data;
@@ -70,6 +70,7 @@ const NewsDetail = () => {
                         .then((response) => {
                             dataDetail.newsTags = response.data.name;
                             setDetail(dataDetail);
+                            // setMetaTags(dataDetail);
                         })
                         .catch((error) => {
                             console.log(error);
@@ -149,6 +150,30 @@ const NewsDetail = () => {
     const isImage = detail.mainNewsImage ? /\.(jpeg|jpg|gif|png)$/i.test(detail.mainNewsImage?.filename) : false;
     const shouldAutoPlay = detail.detailControl;
 
+
+    const setMetaTags = (data) => {
+        // Заголовок страницы
+        document.title = data.seoTitle ?? "Новости";
+    
+        // Удаляем старые мета-теги, если нужно
+        const existingDescription = document.querySelector('meta[name="description"]');
+        if (existingDescription) existingDescription.remove();
+    
+        const existingKeywords = document.querySelector('meta[name="keywords"]');
+        if (existingKeywords) existingKeywords.remove();
+    
+        // Добавляем мета-тег для description
+        const metaDescription = document.createElement('meta');
+        metaDescription.name = "description";
+        metaDescription.content = data.seoDescription || "Описание отсутствует";
+        document.head.appendChild(metaDescription);
+    
+        // // Добавляем мета-тег для keywords
+        // const metaKeywords = document.createElement('meta');
+        // metaKeywords.name = "keywords";
+        // metaKeywords.content = data.newsTags || "теги отсутствуют";
+        // document.head.appendChild(metaKeywords);
+    };
 
     return (
         <>

@@ -493,7 +493,7 @@ const MainPage = (props) => {
                             </p>
                             <div className="main-projects__item-flex">
                                 {optionsTheme ? optionsTheme.map((project, index) => {
-                                    console.log(project);
+                                    // console.log(project);
                                     const filterProjects = allProjects.filter((item) => item.projectTheme === project.value && item.visibility);
                                     const totalSum = filterProjects.length < 10 ? "0" + filterProjects.length : filterProjects.length;
                                     if (totalSum < 1) return null;
