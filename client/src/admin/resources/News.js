@@ -307,6 +307,21 @@ export const NewsEdit = (props) => {
                 label="Заголовок"/>
             <RichTextInput className="customWidth" label="Текст" source="body5" fullWidth/>
 
+            <TextInput 
+                className="customWidth" 
+                source="seoTitle" 
+                label="title"/>
+
+            <TextInput 
+                className="customWidth" 
+                source="seoDescription" 
+                label="description"/>
+
+            <TextInput 
+                className="customWidth" 
+                source="seoKeywords" 
+                label="keywords"/>
+
         </SimpleForm>
     </Edit>
 );
