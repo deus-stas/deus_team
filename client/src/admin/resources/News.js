@@ -196,16 +196,6 @@ export const NewsCreate = (props) => (
                 source="aboutClient4"
                 label="Заголовок"/>
             <RichTextInput className="customWidth" label="Текст" source="body5" fullWidth/>
-
-            <TextInput 
-                className="customWidth" 
-                source="seoTitle" 
-                label="Title"/>
-                
-            <TextInput 
-                className="customWidth" 
-                source="seoDescription" 
-                label="Description"/>
         </SimpleForm>
     </Create>
 );
@@ -215,7 +205,6 @@ export const NewsEdit = (props) => {
     <Edit {...props}>
         <SimpleForm>
             <TextInput className="customWidth" source="name" label="Заголовок" validate={[required()]}/>
-
             <TextInput
                 className="customWidth"
                 source="description"
@@ -327,6 +316,11 @@ export const NewsEdit = (props) => {
                 className="customWidth" 
                 source="seoDescription" 
                 label="description"/>
+
+            <TextInput 
+                className="customWidth" 
+                source="seoKeywords" 
+                label="keywords"/>
 
         </SimpleForm>
     </Edit>

@@ -100,8 +100,8 @@ router.post('/news', upload.fields([
 
 router.get('/news/:id', async (req, res) => {
   const { id } = req.params;
+  console.log('id', id);
   let news;
-
 
   news = await News.findById(id);
 
@@ -112,17 +112,23 @@ router.get('/news/:id', async (req, res) => {
   res.json(news);
 });
 
-router.get('/news/url/:url', async (req, res) => {
-  const { url } = req.params;
-  let news;
+router.get('/url/:id', async (req, res) => {
+  const { id } = req.params;
+  console.log('url:', id);
 
-  news = await News.findOne({ urlName: url });
+  try {
+    // Ищем документ по полю `urlName`
+    const news = await News.findOne({ urlName: id });
 
-  if (!news) {
-    return res.status(404).json({ error: 'News not found' });
+    if (!news) {
+      return res.status(404).json({ error: 'News not found' });
+    }
+
+    res.json(news);
+  } catch (error) {
+    console.error('Error fetching news:', error.message);
+    res.status(500).json({ error: 'Internal server error' });
   }
-
-  res.json(news);
 });
 
 router.put("/news/:id", upload.fields([

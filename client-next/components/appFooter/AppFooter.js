@@ -13,10 +13,11 @@ import {gotoAnchor} from "../anchors";
 import RetryImage from "../../helpers/RetryImage";
 import {useDispatch, useSelector } from 'react-redux';
 // import {fetchData } from "../../actions/appActions";
-import dynamic from 'next/dynamic';
 import axios from "../../axios";
 
+import dynamic from 'next/dynamic';
 const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
+
 const apiUrl = ''
 
 const AppFooter = (props) => {
@@ -25,6 +26,7 @@ const AppFooter = (props) => {
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>
 
+    
     // const dispatch = useDispatch();
     // const {services, headerData, team} = props;
 

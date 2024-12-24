@@ -21,6 +21,10 @@ import "./marquee.scss";
 import useMobile from "../../components/useMobile";
 import {Cursor} from "../../components/cursor/cursor";
 import Image from 'next/image';
+// import { Marquee as MarqueeTeam} from "@devnomic/marquee";
+
+// import dynamic from 'next/dynamic';
+// const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
 // import {useDispatch, useSelector } from 'react-redux';
 // import {fetchData } from "../../actions/appActions";
 const apiUrl = "";
@@ -448,7 +452,7 @@ const Agency = (props) => {
                             <div 
                                 className="agency-team__wrap-imgWrap" 
                                 style={{ maxWidth: '860px', width: '100%', height: "539px", flexDirection: 'column',}}>
-                                {team && splitArrayIntoChunks(team,  4).map((row, count) => {
+                                {team && splitArrayIntoChunks(team,  5).map((row, count) => {
                                     return (
                                             <Marquee 
                                                 key={`row-pepol-${count}`}
@@ -456,7 +460,7 @@ const Agency = (props) => {
                                                 loop={0}
                                                 gradient={false}
                                                 direction={count % 2 === 0 ? "right" : 'left'}
-                                                // direction={count % 2 === 0 ? "up" : 'down'}
+                                                // direction={count % 2 === 0 ? "up" : 'down    '}
                                                 style={{margin: '0 25px'}}      
 
                                                 >
@@ -483,6 +487,8 @@ const Agency = (props) => {
                                     //     </div>
                                     )
                                 })}
+
+                   
                             </div>
 
                         </div>
