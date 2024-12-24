@@ -98,7 +98,6 @@ const Showreel = (props) => {
         }
         mobileVersion();
     }, []);
-    console.log('sddcsfsdds', data);
     return (
         <div className="showreel">
             {
