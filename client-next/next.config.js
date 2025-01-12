@@ -36,8 +36,8 @@ const nextConfig = {
         pathname: '**',
       },
       {
-        protocol: 'http',
-        hostname: 'localhost',
+        protocol: 'https',
+        hostname: 'v3.deus.team',
         pathname: '**',
       },
     ],
