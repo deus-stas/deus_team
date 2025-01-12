@@ -1,35 +1,34 @@
 import ProjectDetail from "../../../pages/projects/projectDetail/ProjectDetail";
-import { headers as getHeaders } from "next/headers";
+import { headers } from "next/headers";
 
-export async function generateMetadata() {
-  const headers = await getHeaders();
-  const referer = headers.get("referer"); 
-  if(referer) {
 
-    const [baseUrl, path] = referer.split("/projects");
+// Функция для настройки метаданных страницы
+export async function generateMetadata({ params }) {
+  const { id } = params;
+
+  // Получаем текущий базовый URL из заголовков
+  const headersList = headers();
+  const protocol = headersList.get("x-forwarded-proto") || "http";
+  const host = headersList.get("host");
+  const baseUrl = `${protocol}://${host}`;
   
-    const res = await fetch(`${baseUrl}/api/projects${path}`, { cache: 'no-store' });
-    const seoData = await res.json();
-    console.log(seoData);
-    return {
+  // Пример запроса на сервер для получения данных о проекте
+  const response = await fetch(`${baseUrl}/api/projects/${id}`, {
+    cache: "no-store", // Можно использовать "force-cache" для кэширования
+  });
+
+  const seoData = await response.json();
+
+  return {
       title: seoData?.seoTitle || "Проект", // Заголовок
       description: seoData?.seoDescription || "Проект", // Мета-описание
       keywords: seoData?.seoKeywords || "Проект", // Ключевые слова
-    };
-  } else {
-    return {
-      title: "Проект", // Заголовок
-      description: "Проект", // Мета-описание
-      keywords:  "Проект", // Ключевые слова
-    };
-  }
+  };
 }
 
-export default function Home() {
-  
+
+export default function Home({ params }) {
     return (
-      <main>
         <ProjectDetail/>
-      </main>
     );
   }

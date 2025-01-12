@@ -1215,3 +1215,13 @@
     margin-bottom: 20px;
   }
 }
+.cursor-circle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1); /* Прозрачный черный цвет */
+  pointer-events: none; /* Чтобы круг не блокировал клики */
+  transform: translate(-50%, -50%); /* Центрирование круга относительно курсора */
+  transition: transform 0.1s ease-out; /* Плавная анимация */
+}
