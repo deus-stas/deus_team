@@ -27,6 +27,11 @@ import Image from 'next/image';
 // const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
 // import {useDispatch, useSelector } from 'react-redux';
 // import {fetchData } from "../../actions/appActions";
+
+
+// import InfinitePhotoScroll from './InfinitePhotoScroll';
+// import RetryImage from '../../helpers/RetryImage';
+
 const apiUrl = "";
 
 const Agency = (props) => {
@@ -448,48 +453,85 @@ const Agency = (props) => {
                                     Поэтому особое внимание уделяем формированию команды.</p>
                                 <p className="descr m-text">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в
                                     единую систему для получения максимальной эффективности для вашего бизнеса</p>
+                            </div>  
+                            {/* <InfinitePhotoScroll photos={team} /> */}
+
+                            <div className="main-clients__marquee">
+                                {team && splitArrayIntoChunks(team,  5).map((row, count) => {
+                                    return(
+                                        <div className={count % 2 === 0 ? "marquee-container" : 'marquee-container-reverse'}  key={`key-${count}`}>
+                                            {row.map((client, i) => (
+                                                <div className="main-clients__container" key={client.id || i}>
+                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                </div>
+                                            ))}
+                                            {row.map((client, i) => (
+                                                <div className="main-clients__container" key={client.id || i}>
+                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                </div>
+                                            ))}
+                                            {row.map((client, i) => (
+                                                <div className="main-clients__container" key={client.id || i}>
+                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                </div>
+                                            ))}
+                                            {row.map((client, i) => (
+                                                <div className="main-clients__container" key={client.id || i}>
+                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                </div>
+                                            ))}
+                                            {row.map((client, i) => (
+                                                <div className="main-clients__container" key={client.id || i}>
+                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                })}
+
                             </div>
-                            <div 
+
+                            {/* <div 
                                 className="agency-team__wrap-imgWrap" 
-                                style={{ maxWidth: '860px', width: '100%', height: "539px", flexDirection: 'column',}}>
+                                style={{ maxWidth: '860px', width: '100%', height: "539px"}}>
                                 {team && splitArrayIntoChunks(team,  5).map((row, count) => {
                                     return (
-                                            <Marquee 
-                                                key={`row-pepol-${count}`}
-                                                speed={40}
-                                                loop={0}
-                                                gradient={false}
-                                                direction={count % 2 === 0 ? "right" : 'left'}
-                                                // direction={count % 2 === 0 ? "up" : 'down    '}
-                                                style={{margin: '0 25px'}}      
+                                        <Marquee 
+                                            key={`row-pepol-${count}`}
+                                            speed={40}
+                                            loop={0}
+                                            gradient={false}
+                                            // direction={count % 2 === 0 ? "right" : 'left'}
+                                            direction={count % 2 === 0 ? "up" : 'down'}
+                                            style={{margin: '0 25px'}}      
 
-                                                >
-                                                {row.map((item, i) => (
-                                                    <img
-                                                        key={`img-${i}-${count}`}
-                                                        className="image"
-                                                        style={{margin: '0 25px'}}      
-                                                        src={`/uploads/${item.mainImg?.filename}`}
-                                                        alt={''}
-                                                        />
-                                                ))}
-                                            </Marquee>
-                              
+                                            >
+                                            {team.map((item, i) => (
+                                                <img
+                                                    key={`img-${i}-${count}`}
+                                                    className="image"
+                                                    style={{margin: '0 25px'}}      
+                                                    src={`/uploads/${item.mainImg?.filename}`}
+                                                    alt={''}
+                                                    />
+                                            ))}
+                                        </Marquee>
 
-                                    //     <div 
-                                    //         className={`main-clients__marquee-agency`}
-                                    //         key={`row-pepol-${count}`}
-                                    //         style={{ width: '124px' }}
-                                    //     >
-                                    //         <div className="marquee-container-agency">
+
+                                        // <div 
+                                        //     className={`main-clients__marquee-agency`}
+                                        //     key={`row-pepol-${count}`}
+                                        //     style={{ width: '124px' }}
+                                        // >
+                                        //     <div className="marquee-container-agency">
                                                 
-                                    //         </div>
-                                    //     </div>
+                                        //     </div>
+                                        // </div>
                                     )
                                 })}
 
                    
-                            </div>
+                            </div> */}
 
                         </div>
                     </section>

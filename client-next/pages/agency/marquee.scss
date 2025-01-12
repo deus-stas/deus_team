@@ -4,3 +4,16 @@
   text-align: center;
   margin: 0 10px;
 }
+.main-clients__marquee {
+  transform: rotate(90deg);
+  display: block;
+}
+.team-img {
+  transform: rotate(-90deg);
+  height: 15rem;
+  width: 10rem;
+  border-radius: 21rem;
+  display: block;
+}
+
+
