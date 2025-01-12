@@ -25,10 +25,10 @@
 }
 
 .main-agency__item:hover {
-    cursor: none; /* Скрываем стандартный курсор */
+    cursor: none; 
 }
 .main-agency__item-header,
 .main-agency__item-service a {
-    cursor: none; /* Скрываем стандартный курсор */
+    cursor: none; 
 
 }

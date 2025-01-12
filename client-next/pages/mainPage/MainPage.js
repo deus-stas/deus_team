@@ -18,7 +18,7 @@ import "swiper/css";
 import "swiper/css/grid";
 import "./mainPage.scss";
 import Image from 'next/image';
-import CursorCircle from './CursorCircle.js';
+// import CursorCircle from './CursorCircle.js';
 
 
 // import deus from "../../../img/deus-circle.png";
@@ -33,7 +33,7 @@ import {goProjects, gotoAnchor} from "../../components/anchors";
 // import {maxLength} from "react-admin";
 import useMobile from "../../components/useMobile";
 // import {Marquee} from "@devnomic/marquee";
-// import {Cursor} from "../../components/cursor/cursor";
+import {Cursor} from "../../components/cursor/cursor";
 // import {useDispatch, useSelector } from 'react-redux';
 // import {fetchData } from "../../actions/appActions";
 
@@ -70,12 +70,12 @@ const MainPage = (props) => {
 
     const handleMouseEnter = () => {
         setIsHovered(true);
-        document.querySelector('.cursor-circle').classList.add('visible')
+        // document.querySelector('.cursor-circle').classList.add('visible')
       };
     
       const handleMouseLeave = () => {
         setIsHovered(false);
-        document.querySelector('.cursor-circle').classList.remove('visible')
+        // document.querySelector('.cursor-circle').classList.remove('visible')
 
       };
 
@@ -324,8 +324,8 @@ const MainPage = (props) => {
 
     return (<>
         {!isLoading && (<div className="main">
-            {/* <Cursor/> */}
-            <CursorCircle/>
+            <Cursor/>
+            {/* <CursorCircle/> */}
             <section className="main-banner" ref={mainBannerRef}>
                 <div className="container">
                     <div className="main-banner__wrap">

@@ -397,6 +397,16 @@ const Agency = (props) => {
             
                                                     </div>
                                                 ))}
+                                                {row.map((client, i) => (
+                                                    <div className='agency-clients__img marquee-item' key={client.id || i}>
+                                                        <div className='container-img'>
+                                                            <img
+                                                                src={client.image ? `/uploads/${client.image.filename}` : null}
+                                                                alt={client.name} key={client.id}/>
+                                                        </div>
+            
+                                                    </div>
+                                                ))}
                                             </Marquee>
                                         </div>
                       
@@ -458,31 +468,32 @@ const Agency = (props) => {
 
                             <div className="main-clients__marquee">
                                 {team && splitArrayIntoChunks(team,  5).map((row, count) => {
+                                    console.log(team);
                                     return(
                                         <div className={count % 2 === 0 ? "marquee-container" : 'marquee-container-reverse'}  key={`key-${count}`}>
                                             {row.map((client, i) => (
                                                 <div className="main-clients__container" key={client.id || i}>
-                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                    <img className={`team-img`} src={client.mainImg ? `/uploads/${client.mainImg?.filename}`: null} alt={client.name} />
                                                 </div>
                                             ))}
                                             {row.map((client, i) => (
                                                 <div className="main-clients__container" key={client.id || i}>
-                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                    <img className={`team-img`} src={client.mainImg ? `/uploads/${client.mainImg.filename}` : null} alt={client.name} />
                                                 </div>
                                             ))}
                                             {row.map((client, i) => (
                                                 <div className="main-clients__container" key={client.id || i}>
-                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                    <img className={`team-img`} src={client.mainImg ? `/uploads/${client.mainImg.filename}` : null} alt={client.name} />
                                                 </div>
                                             ))}
                                             {row.map((client, i) => (
                                                 <div className="main-clients__container" key={client.id || i}>
-                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                    <img className={`team-img`} src={client.mainImg ? `/uploads/${client.mainImg.filename}` : null} alt={client.name} />
                                                 </div>
                                             ))}
                                             {row.map((client, i) => (
                                                 <div className="main-clients__container" key={client.id || i}>
-                                                    <img className={`team-img`} src={client.image ? `/uploads/${client.image.filename}` : null} alt={client.name} />
+                                                    <img className={`team-img`} src={client.mainImg ? `/uploads/${client.mainImg.filename}` : null} alt={client.name} />
                                                 </div>
                                             ))}
                                         </div>

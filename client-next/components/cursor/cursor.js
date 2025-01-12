@@ -8,7 +8,6 @@ export const Cursor = () => {
     const arrowRef = useRef(null);
     const bubbleRef = useRef(null);
     const circleRef = useRef(null);
-    const testRef = useRef(null);
 
     const [windowWidth, setWindowWidth] = useState(
         typeof window !== 'undefined' ? window.innerWidth : 0
@@ -35,7 +34,6 @@ export const Cursor = () => {
         '.video-target',
         '.main-projects__img',
         '.next__project_img',
-        '.main-agency__item',
     ];
 
     const handleResize = () => {
@@ -97,12 +95,15 @@ export const Cursor = () => {
                 bubbleRef.current.style.width = '120px';
                 bubbleRef.current.style.height = '120px';
                 e.target.classList.add('cursor__none');
+                document.querySelector('.arrow-element').style.transform = 'rotate(90deg)';
             } else {
                 bubbleRef.current.style.opacity = '0.6';
                 bubbleRef.current.style.mixBlendMode = 'normal';
                 bubbleRef.current.style.width = '30px';
                 bubbleRef.current.style.height = '30px';
                 e.target.classList.remove('cursor__none');
+                document.querySelector('.arrow-element').style.transform = 'rotate(0deg)';
+
             }
         };
 
