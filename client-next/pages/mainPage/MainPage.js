@@ -18,6 +18,8 @@ import "swiper/css";
 import "swiper/css/grid";
 import "./mainPage.scss";
 import Image from 'next/image';
+import CursorCircle from './CursorCircle.js';
+
 
 // import deus from "../../../img/deus-circle.png";
 // import {connect} from "react-redux";
@@ -31,7 +33,7 @@ import {goProjects, gotoAnchor} from "../../components/anchors";
 // import {maxLength} from "react-admin";
 import useMobile from "../../components/useMobile";
 // import {Marquee} from "@devnomic/marquee";
-import {Cursor} from "../../components/cursor/cursor";
+// import {Cursor} from "../../components/cursor/cursor";
 // import {useDispatch, useSelector } from 'react-redux';
 // import {fetchData } from "../../actions/appActions";
 
@@ -68,13 +70,12 @@ const MainPage = (props) => {
 
     const handleMouseEnter = () => {
         setIsHovered(true);
-        console.log('isHovered', isHovered)
-
+        document.querySelector('.cursor-circle').classList.add('visible')
       };
     
       const handleMouseLeave = () => {
         setIsHovered(false);
-        console.log('isHovered', isHovered)
+        document.querySelector('.cursor-circle').classList.remove('visible')
 
       };
 
@@ -323,7 +324,8 @@ const MainPage = (props) => {
 
     return (<>
         {!isLoading && (<div className="main">
-            <Cursor/>
+            {/* <Cursor/> */}
+            <CursorCircle/>
             <section className="main-banner" ref={mainBannerRef}>
                 <div className="container">
                     <div className="main-banner__wrap">
@@ -493,7 +495,6 @@ const MainPage = (props) => {
                             </p>
                             <div className="main-projects__item-flex">
                                 {optionsTheme ? optionsTheme.map((project, index) => {
-                                    // console.log(project);
                                     const filterProjects = allProjects.filter((item) => item.projectTheme === project.value && item.visibility);
                                     const totalSum = filterProjects.length < 10 ? "0" + filterProjects.length : filterProjects.length;
                                     if (totalSum < 1) return null;
