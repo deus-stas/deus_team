@@ -88,14 +88,15 @@ app.use('/api', headerData);
 app.use('/api', diplomasRoutes);
 app.use('/api', contactsRoutes);
 
+let PORT = 4554
+if (process.env.NODE_ENV === 'production') {
+    app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
-// if (process.env.NODE_ENV === 'production') {
-//     app.use('/', express.static(path.join(__dirname, 'client', 'build')))
-
-//     app.get('*', (req, res) => {
-//         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-//     })
-// }
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+    PORT = 3002
+}
 
 // mongoose.connect(config.get('mongoURI'), {
 //     useNewUrlParser: true,
@@ -104,7 +105,7 @@ app.use('/api', contactsRoutes);
 // .then(() => console.log("MongoDB successfully connected"))
 // .catch(err => console.log(err));
 
-const PORT = config.get('port') || 4554
+
 
 // app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`));
 
