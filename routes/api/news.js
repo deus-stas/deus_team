@@ -114,11 +114,12 @@ router.get('/news/:id', async (req, res) => {
 
 router.get('/url/:id', async (req, res) => {
   const { id } = req.params;
-  console.log('url:', id);
+  console.log('url:', id, req, res);
 
   try {
     // Ищем документ по полю `urlName`
     const news = await News.findOne({ urlName: id });
+    console.log('news:', news);
 
     if (!news) {
       return res.status(404).json({ error: 'News not found' });

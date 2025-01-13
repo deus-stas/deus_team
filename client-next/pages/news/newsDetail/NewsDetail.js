@@ -23,7 +23,7 @@ import {Cursor} from "../../../components/cursor/cursor";
 import { useParams } from 'next/navigation';
 // import {fetchData } from "../../../actions/appActions";
 // import {useDispatch, useSelector } from 'react-redux';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const apiUrl = ''
 
@@ -62,6 +62,7 @@ const NewsDetail = () => {
 
     useEffect(() => {
         if(id) {
+            console.log("apiUrl", apiUrl);
             axios.get(`${apiUrl}/api/url/${id}`)
                 .then((response) => {
     
