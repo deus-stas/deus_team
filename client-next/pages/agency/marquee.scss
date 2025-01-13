@@ -8,12 +8,23 @@
   transform: rotate(90deg);
   display: block;
 }
+
 .team-img {
   transform: rotate(-90deg);
   height: 15rem;
   width: 10rem;
   border-radius: 21rem;
   display: block;
+  object-fit: cover;
 }
 
-
+.agency-team__wrap .main-clients__container {
+  flex: 0 0 auto;
+  width: 15rem;
+  overflow: hidden;
+  text-align: center;
+  margin-left: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

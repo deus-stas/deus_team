@@ -8,6 +8,11 @@
 .arrow-element {
   z-index: 1002;
   pointer-events: none;
+  transition: transform 0.5s ease-in-out; 
+}
+
+.arrow-element:hover {
+  transform: rotate(0deg);
 }
 
 .cursor__block {
