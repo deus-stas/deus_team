@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import './CursorCircle.css'; // Подключаем CSS файл для стилизации
-
+// import './CursorCircle.css';
 const CursorCircle = () => {
     const [isHovered, setIsHovered] = useState(false);
     const cursorCircleRef = useRef(null);
