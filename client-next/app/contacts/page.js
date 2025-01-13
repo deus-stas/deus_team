@@ -1,22 +1,50 @@
 import Contacts from "../../pages/contacts/Contacts";
-import { headers as getHeaders } from "next/headers";
+import { headers } from "next/headers";
 
 export async function generateMetadata() {
-  const headers = getHeaders();
-  const host = headers.get("host"); // Достаем host
-  const currentUrl = `http://${host}`;
-   
-  const res = await fetch(`${currentUrl}/api/seo`, { cache: 'no-store' });
-  const seoData = await res.json();
+  
+  const headersList = headers();
+  const protocol = headersList.get("x-forwarded-proto") || "http";
+  const host = headersList.get("host");
 
-  // Фильтруем данные и получаем нужный блок
-  const data = seoData.find((el) => el.name === "Контакты");
+  if (!host) {
+    console.error("Host header is missing");
+    return {
+      title: "Error",
+      description: "Invalid host configuration",
+    };
+  }
 
-  return {
-    title: data.seoTitle || "Контакты", // Заголовок
-    description: data.seoDescription || "Контакты", // Мета-описание
-    keywords: data.seoKeywords || "Контакты", // Ключевые слова
-  };
+  const baseUrl = `${protocol}://${host}`;
+
+  try {
+    const response = await fetch(`${baseUrl}/api/seo`, {
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch SEO data: ${response.status} ${response.statusText}`);
+      return {
+        title: "Error",
+        description: "Failed to fetch SEO data",
+      };
+    }
+
+    const seoData = await response.json();
+    const data = seoData.find((el) => el.name === "Контакты");
+
+    return {
+      title: data?.seoTitle || "Контакты",
+      description: data?.seoDescription || "Контакты",
+      keywords: data?.seoKeywords || "Контакты",
+    };
+  } catch (error) {
+    console.error("Error fetching SEO data:", error);
+    return {
+      title: "Error",
+      description: "An error occurred while fetching SEO data",
+    };
+  }
 }
 
 export default function Home() {
