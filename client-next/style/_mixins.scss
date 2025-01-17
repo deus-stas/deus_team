@@ -54,7 +54,7 @@
   //MEDIA QUERY MANAGER
   @mixin respond($breakpoint) {
     @if $breakpoint==xxxl {
-      @media screen and (max-width: 1949.9px) {
+      @media screen and (min-width: 768px) {
         @content;
       }
     }
