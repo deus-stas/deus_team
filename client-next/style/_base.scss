@@ -681,7 +681,7 @@ main {
     overflow: hidden; /* Скрываем содержимое за пределами контейнера */
     position: relative;
     display: flex;
-    
+
     .marquee-container {
         display: flex;
       gap: 20px; /* Расстояние между элементами */
@@ -694,13 +694,13 @@ main {
       animation: marquee-reverse 60s linear infinite; /* Анимация */
       will-change: transform; /* Оптимизация анимации */
     }
-  
+
     .main-clients__container {
       flex: 0 0 auto; /* Предотвращаем сжатие */
     }
-  
 
-  
+
+
     @keyframes marquee {
       from {
         transform: translateX(0%); /* Начинаем с начального положения */
@@ -709,7 +709,7 @@ main {
         transform: translateX(-100%); /* Двигаемся влево на ширину содержимого */
       }
     }
-  
+
     @keyframes marquee-reverse {
       from {
         transform: translateX(-100%); /* Начинаем за пределами экрана слева */
@@ -718,5 +718,5 @@ main {
         transform: translateX(0%); /* Двигаемся к правому краю */
       }
     }
-  
+
   }
