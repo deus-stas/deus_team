@@ -307,7 +307,8 @@ const Projects = () => {
                                     if (totalSum < 1) return null;
                                     return (
                                         <Link 
-                                            onClick={(e) => gotoAnchor(e, 'start', false)} 
+                                            // onClick={(e) => gotoAnchor(e, 'start', false)} 
+                                            onClick={(e) => handleLinkClick(e, project.value)} 
                                             href={`/projects?type=${project.value}`} 
                                             key={`key-vlue-${index}`}
                                             >
