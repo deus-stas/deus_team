@@ -26,7 +26,7 @@ const AppFooter = (props) => {
 
     const double = <Icon icon="arrowGo" viewBox="0 0 30 31"/>
 
-    
+
     // const dispatch = useDispatch();
     // const {services, headerData, team} = props;
 
@@ -110,7 +110,7 @@ const AppFooter = (props) => {
     // }
 
     const adress = '(min-width:420px)' ? adressM : adressL
-    
+
     const closeMenu = (e, path) => {
         e.preventDefault();
         const preloader = document.querySelector('#preloader');
@@ -125,7 +125,7 @@ const AppFooter = (props) => {
         }
     };
     return (
-        <section className="container">
+        <section className="container container-footer">
             <footer className="footer borderBlock whiteHeader ">
                 <div className="footer-frame">
                     <div

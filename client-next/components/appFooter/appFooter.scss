@@ -1,6 +1,12 @@
 @import '../../style/_mixins.scss';
 
+.container-footer{
+    max-width: 1800px!important;
+}
+
+
 .footer {
+    max-width: 1800px;
     margin: 7rem 0 4rem;
     background: #121212;
     color: #FFFFFF;
