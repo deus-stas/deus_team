@@ -104,15 +104,17 @@ const WorkingSlider = () => {
                 </p>
                 <Swiper
                     className="swiper_wrapper_mainp main-working__wrapperSlide"
-                    spaceBetween={20}
+                    spaceBetween={0}
+                    slidesOffsetBefore={20}
                     slidesPerView={slidesPerView}
-                    loop={true}
+                    loop={false}
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                     breakpoints={{
+                        0: { slidesPerView: 1 },
                         576: { slidesPerView: 2 },
                         1345: { slidesPerView: 3 },
-                        0: { slidesPerView: 1.2 },
+                        2000: { slidesPerView: 3 },
                       }}
                 >
                     {working.map((item, index) => (
@@ -146,6 +148,8 @@ const WorkingSlider = () => {
                             </div>
                         </SwiperSlide>
                         ))}
+                    <div className="swiper_wrapper_mainp__blur-left"></div>
+
                 </Swiper>
                 <div className="slide-arrow mobile">
                     <div
@@ -174,6 +178,7 @@ const WorkingSlider = () => {
                     </div>
                 </div>
             </div>
+            <div className="swiper_wrapper_mainp__blur-right"></div>
         </div>
     </section>
   );
