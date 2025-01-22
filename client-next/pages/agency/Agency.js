@@ -51,7 +51,7 @@ const Agency = (props) => {
     const [reviews, setReviews] = useState([]);
     const {isTablet, isMobile} = useMobile()
     const [team, setTeam] = useState([]);
- 
+
 
     useEffect(() => {
         axios
@@ -200,7 +200,7 @@ const Agency = (props) => {
         const chunkSize = Math.floor(array.length / numChunks); // Определяем размер каждой части
         const totalItems = chunkSize * numChunks; // Определяем общее количество элементов, которое нужно использовать
         const trimmedArray = array.slice(0, totalItems); // Обрезаем массив до нужного размера
-      
+
         const chunks = Array.from({ length: numChunks }, (_, i) =>
           trimmedArray.slice(i * chunkSize, (i + 1) * chunkSize)
         );
@@ -256,15 +256,15 @@ const Agency = (props) => {
         const checkIfMobile = () => {
           setIsMobile(window.innerWidth <= 768);
         };
-    
+
         checkIfMobile(); // При монтировании компонента проверим размер экрана
         window.addEventListener('resize', checkIfMobile);  // Добавляем слушатель события resize
-    
+
         return () => {
           window.removeEventListener('resize', checkIfMobile); // Очищаем слушатель при размонтировании
         };
       }, []); // Этот useEffect будет вызван только один раз после первого рендера на клиенте
-    
+
 
     return (
         <>
@@ -377,11 +377,12 @@ const Agency = (props) => {
                                 <div className="agency-clients__pag hidden-desktop">
                                 </div>
                             </div>
-                        
+
                         {!isMobileNew?
-    
+
                         <section className="main-clients">
-                            
+                            <div className="main-clients__blur-left"></div>
+
                             {clients && splitArrayIntoChunks(clients,  3).map((row, count) => {
                                 return (
                                     <div className={`main-clients__marquee-agency`} key={`row-${count}`}>
@@ -394,7 +395,7 @@ const Agency = (props) => {
                                                                 src={client.image ? `/uploads/${client.image.filename}` : null}
                                                                 alt={client.name} key={client.id}/>
                                                         </div>
-            
+
                                                     </div>
                                                 ))}
                                                 {row.map((client, i) => (
@@ -404,16 +405,18 @@ const Agency = (props) => {
                                                                 src={client.image ? `/uploads/${client.image.filename}` : null}
                                                                 alt={client.name} key={client.id}/>
                                                         </div>
-            
+
                                                     </div>
                                                 ))}
                                             </Marquee>
                                         </div>
-                      
-        
+
+
                                     </div>
                                 )
                             })}
+
+                            <div className="main-clients__blur-left"></div>
                         </section>
 
                             :
@@ -451,7 +454,7 @@ const Agency = (props) => {
                             </Swiper>
                             </div>
                         }
-                        
+
                     </section> : null
                 }
 
@@ -463,7 +466,7 @@ const Agency = (props) => {
                                     Поэтому особое внимание уделяем формированию команды.</p>
                                 <p className="descr m-text">Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в
                                     единую систему для получения максимальной эффективности для вашего бизнеса</p>
-                            </div>  
+                            </div>
                             {/* <InfinitePhotoScroll photos={team} /> */}
 
                             <div className="main-clients__marquee">
@@ -502,26 +505,26 @@ const Agency = (props) => {
 
                             </div>
 
-                            {/* <div 
-                                className="agency-team__wrap-imgWrap" 
+                            {/* <div
+                                className="agency-team__wrap-imgWrap"
                                 style={{ maxWidth: '860px', width: '100%', height: "539px"}}>
                                 {team && splitArrayIntoChunks(team,  5).map((row, count) => {
                                     return (
-                                        <Marquee 
+                                        <Marquee
                                             key={`row-pepol-${count}`}
                                             speed={40}
                                             loop={0}
                                             gradient={false}
                                             // direction={count % 2 === 0 ? "right" : 'left'}
                                             direction={count % 2 === 0 ? "up" : 'down'}
-                                            style={{margin: '0 25px'}}      
+                                            style={{margin: '0 25px'}}
 
                                             >
                                             {team.map((item, i) => (
                                                 <img
                                                     key={`img-${i}-${count}`}
                                                     className="image"
-                                                    style={{margin: '0 25px'}}      
+                                                    style={{margin: '0 25px'}}
                                                     src={`/uploads/${item.mainImg?.filename}`}
                                                     alt={''}
                                                     />
@@ -529,19 +532,19 @@ const Agency = (props) => {
                                         </Marquee>
 
 
-                                        // <div 
+                                        // <div
                                         //     className={`main-clients__marquee-agency`}
                                         //     key={`row-pepol-${count}`}
                                         //     style={{ width: '124px' }}
                                         // >
                                         //     <div className="marquee-container-agency">
-                                                
+
                                         //     </div>
                                         // </div>
                                     )
                                 })}
 
-                   
+
                             </div> */}
 
                         </div>
