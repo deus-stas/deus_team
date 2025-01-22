@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const PhoneInput = () => {
+const PhoneInput = ({ setFieldValue, value }) => {
   const [phone, setPhone] = useState('+7 (___) ___-__-__');
 
   const handleInput = (e) => {
@@ -26,6 +26,9 @@ const PhoneInput = () => {
     const formattedValue = formatPhone(value);
     setPhone(formattedValue);
 
+    // Передаем значение в Formik
+    setFieldValue('phone', formattedValue);
+
     // Восстанавливаем позицию курсора
     window.requestAnimationFrame(() => {
       input.selectionStart = cursorPosition;
@@ -48,7 +51,9 @@ const PhoneInput = () => {
 
       const value = phone.replace(/\D/g, '').slice(1); // Оставляем только редактируемые цифры
       const newValue = value.slice(0, -1); // Удаляем последнюю цифру
-      setPhone(formatPhone(newValue));
+      const formattedValue = formatPhone(newValue);
+      setPhone(formattedValue);
+      setFieldValue('phone', formattedValue); // Обновляем значение в Formik
     }
 
     const allowedKeys = ['Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
@@ -63,7 +68,7 @@ const PhoneInput = () => {
   return (
     <input
       type="text"
-      value={phone}
+      value={value}
       onInput={handleInput}
       onKeyDown={handleKeyDown}
       placeholder="Ваш номер"
