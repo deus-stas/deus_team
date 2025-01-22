@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const PhoneInput = ({ setFieldValue }) => {
+const PhoneInput = ({ setFieldValue, value }) => {
   const [phone, setPhone] = useState('+7 (___) ___-__-__');
 
   const handleInput = (e) => {
@@ -68,7 +68,7 @@ const PhoneInput = ({ setFieldValue }) => {
   return (
     <input
       type="text"
-      value={phone}
+      value={value}
       onInput={handleInput}
       onKeyDown={handleKeyDown}
       placeholder="Ваш номер"
