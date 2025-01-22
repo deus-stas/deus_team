@@ -149,6 +149,7 @@ const WorkingSlider = () => {
                         </SwiperSlide>
                         ))}
                     <div className="swiper_wrapper_mainp__blur-left"></div>
+                    <div className="swiper_wrapper_mainp__blur-right"></div>
 
                 </Swiper>
                 <div className="slide-arrow mobile">
@@ -178,7 +179,7 @@ const WorkingSlider = () => {
                     </div>
                 </div>
             </div>
-            <div className="swiper_wrapper_mainp__blur-right"></div>
+
         </div>
     </section>
   );
