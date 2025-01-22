@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"efc8564e5a474e71bd052332d1702bdf","collectionName":"raitings","type":"collection"}
