@@ -92,6 +92,7 @@ const Cta = (props) => {
         const formattedValue = `+7 (${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 8)}-${value.slice(8, 10)}`;
         setPhone(formattedValue);
     };
+
     const handleKeyDown = (e) => {
         const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'];
         if (allowedKeys.includes(e.key)) return;
@@ -165,7 +166,7 @@ const Cta = (props) => {
                         <span className="sticky-h2">
                         <h2 className="heading-secondary">Брифы для заполнения</h2>
                         <div className="cta__wrap-wrapper">
-                            {true && services.filter((service, index) =>
+                            {services && services.filter((service, index) =>
                                 service.isInvisible).map((service, index) => {
                                 const disabled = !service.brief || service.brief.length === 0
                                 const children = <div className="item l-textReg"><p>{service.name}</p>
@@ -220,7 +221,9 @@ const Cta = (props) => {
                                 if (!values.company || values.company.length < 2) {
                                     errors.company = 'Обязательное поле';
                                 }
-                                if (!values.phone || values.phone.indexOf("_") !== -1) {
+                                // if (!values.phone || values.phone.indexOf("_") !== -1) {
+                                if (!values.phone) {
+                                    console.log(values.phone)
                                     errors.phone = 'Обязательное поле';
                                 }
                                 if (!values.email || !(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email))) {
@@ -304,7 +307,7 @@ const Cta = (props) => {
                                         <div className="form__wrap m-text">
                                             <div className={`form__group ${errors.phone && touched.phone ? 'error' : ''}`}>
                                                 {values.phone && <label htmlFor="phone" className="form__label xs-text">Номер телефона</label>}
-                                                    <PhoneInput type="text" name="phone" className="form__input m-text" onInput={handleInput}  onKeyDown={handleKeyDown} onChange={handleChange} value={phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />
+                                                    <PhoneInput type="text" name="phone" className="form__input m-text" onInput={handleInput}  onKeyDown={handleKeyDown} onChange={handleChange} value={values.phone} setFieldValue={setFieldValue} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />                                                    
                                                 {/* <InputMask type="text" name="phone" className="form__input m-text" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" /> */}
                                                 {/* <InputMask
                                                     mask="+7 (999) 999-99-99"
