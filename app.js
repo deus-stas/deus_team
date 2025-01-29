@@ -98,6 +98,22 @@ if (process.env.NODE_ENV === 'production') {
     PORT = 3002
 }
 
+app.post('/api/logs', (req, res) => {
+    const logs = req.body.logs;
+    const logFilePath = path.join(__dirname, 'logs.txt'); // Путь к файлу логов
+    const timestamp = new Date().toISOString();
+    const logMessage = `[${timestamp}] ${logs}\n`;
+
+    // Запись в файл
+    fs.appendFile(logFilePath, logMessage, (err) => {
+        if (err) {
+            console.error('Ошибка при записи в файл:', err);
+            return res.status(500).send('Ошибка при записи логов');
+        }
+        res.status(200).send('Логи успешно записаны');
+    });
+});
+
 // mongoose.connect(config.get('mongoURI'), {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
