@@ -41,7 +41,7 @@ import {Cursor} from "../../components/cursor/cursor";
 // const Marquee = dynamic(() =>
 //     import("@devnomic/marquee").then((mod) => mod.Marquee) // Убедитесь, что `Marquee` — экспортируемый компонент
 // );
-const apiUrl = "";
+const apiUrl = "http://v3.deus.team";
 
 const MainPage = (props) => {
     const [isActive, setIsActive] = useState([]);

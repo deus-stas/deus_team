@@ -14,7 +14,8 @@ import "custom-cursor-react/dist/index.css";
 
 import '../style/style.scss'
 
-
+import YandexMetrikaScript from '../public/custom/yandex_head'; // Импортируем компонент скрипта
+import YandexMetrikaNoscript from '../public/custom/yandex_body'; // Импортируем компонент noscript
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -97,8 +98,10 @@ export default function RootLayout({ children }) {
         {/* <title>{seoInfo?.seoTitle || "Deus"}</title>
         <meta name="description" content={seoInfo?.description || "Deus"} />
         <meta name="key" content={seoInfo?.seoKeywords || "Deus"} /> */}
+        <YandexMetrikaScript />
       </head>
       <body id='root'>
+        <YandexMetrikaNoscript />
         <Provider store={store}>
 
           {/* Прелоадер */}

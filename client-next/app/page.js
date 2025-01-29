@@ -15,6 +15,7 @@ export async function generateMetadata() {
     };
   }
 
+  // const baseUrl = `${protocol}://${host}`;
   const baseUrl = `${protocol}://${host}`;
 
   try {
