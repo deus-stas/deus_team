@@ -33,6 +33,8 @@ const users = require("./routes/api/users");
 const headerData = require("./routes/api/headerData");
 const diplomasRoutes = require("./routes/api/diplomas");
 const contactsRoutes = require("./routes/api/contacts");
+const fs = require('fs');
+
 
 const app = express();
 
@@ -88,6 +90,21 @@ app.use('/api', headerData);
 app.use('/api', diplomasRoutes);
 app.use('/api', contactsRoutes);
 
+app.post('/api/logs', (req, res) => {
+    const logs = req.body.logs;
+    const logFilePath = path.join(__dirname, 'logs.txt'); // Путь к файлу логов
+    const timestamp = new Date().toISOString();
+    const logMessage = `[${timestamp}] ${logs}\n`;
+
+    // Запись в файл
+    fs.appendFile(logFilePath, logMessage, (err) => {
+        if (err) {
+            console.error('Ошибка при записи в файл:', err);
+            return res.status(500).send('Ошибка при записи логов');
+        }
+        res.status(200).send('Логи успешно записаны');
+    });
+});
 
 // if (process.env.NODE_ENV === 'production') {
 //     app.use('/', express.static(path.join(__dirname, 'client', 'build')))

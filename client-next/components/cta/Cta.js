@@ -156,6 +156,17 @@ const Cta = (props) => {
         }
     };
     // const {services, contacts } = props;
+
+    const sendLogsToServer = (logs) => {
+        axios.post(`${apiUrl}/api/logs/`, { logs })
+            .then((response) => {
+                console.log("Логи успешно отправлены на сервер");
+            })
+            .catch((error) => {
+                console.error("Ошибка при отправке логов:", error);
+            });
+    };
+
     return (
         <>
             {!isLoading &&
@@ -256,6 +267,7 @@ const Cta = (props) => {
                                     }
                                     axios.post(`${apiUrl}/api/form/`, formData)
                                         .then((response) => {
+                                            sendLogsToServer(values)
                                         })
                                         .catch((error) => {
                                             console.log(error);
