@@ -22,7 +22,7 @@ router.post('/mail', (req, res) => {
     // настройки электронного письма
     const mailOptions = {
         from: 'DEUS заявка<sales@de-us.ru>',
-        to: 's.muhin@de-us.ru',
+        to: 'hello@de-us.ru',
         subject: 'Заполнена форма с сайта Deus',
         text: `Заполнена форма с сайта Deus\nФорма: ${formName}\nИмя: ${name}\nТелефон: ${phone}\nПочта: ${email}\nКомпания: ${company}\nБюджет: ${budget}\nТекст: ${about}\nПортфолио: ${link}
         `,
@@ -38,7 +38,6 @@ router.post('/mail', (req, res) => {
             res.status(200).send('Email sent successfully');
         }
     });
-    console.log (resmes);
 });
 
 
