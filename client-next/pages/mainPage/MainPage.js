@@ -72,7 +72,7 @@ const MainPage = (props) => {
         setIsHovered(true);
         // document.querySelector('.cursor-circle').classList.add('visible')
       };
-    
+
       const handleMouseLeave = () => {
         setIsHovered(false);
         // document.querySelector('.cursor-circle').classList.remove('visible')
@@ -82,7 +82,7 @@ const MainPage = (props) => {
 
     const router = useRouter();
 
-    
+
     // const { services, team } = useSelector((state) => ({
     //     services: state.app.services,
     //     team: state.app.team,
@@ -97,7 +97,7 @@ const MainPage = (props) => {
                 console.log(error);
             });
     }, []);
-    
+
     useEffect(() => {
         axios
             .get(`${apiUrl}/api/team/`)
@@ -108,7 +108,7 @@ const MainPage = (props) => {
                 console.log(error);
             });
     }, []);
-    
+
     const handleVideoClick = () => {
         if (isVideoPaused) {
             setIsFullScreen(!isFullScreen);
@@ -339,6 +339,13 @@ const MainPage = (props) => {
 
             {!!clients && (
             <section className="main-clients">
+                {/*<div className="main-clients__blur-left">*/}
+                {/*    <div style={{ "--index": 0 }}></div>*/}
+                {/*    <div style={{ "--index": 1 }}></div>*/}
+                {/*    <div style={{ "--index": 2 }}></div>*/}
+                {/*    <div style={{ "--index": 3 }}></div>*/}
+                {/*    <div style={{ "--index": 4 }}></div>*/}
+                {/*</div>*/}
                 <div className="main-clients__marquee">
                     <div className="marquee-container">
                         {clients.map((client, i) => (
@@ -361,6 +368,13 @@ const MainPage = (props) => {
                         ))}
                     </div>
                 </div>
+                {/*<div className="main-clients__blur-right">*/}
+                {/*    <div style={{ "--index": 0 }}></div>*/}
+                {/*    <div style={{ "--index": 1 }}></div>*/}
+                {/*    <div style={{ "--index": 2 }}></div>*/}
+                {/*    <div style={{ "--index": 3 }}></div>*/}
+                {/*    <div style={{ "--index": 4 }}></div>*/}
+                {/*</div>*/}
             </section>
             )}
 
@@ -393,7 +407,7 @@ const MainPage = (props) => {
 
                                     const allServices = index === 1 &&
                                         services
-                                            .filter((service) => service.isInvisible)   
+                                            .filter((service) => service.isInvisible)
                                             .map((service, serviceIndex) => (
                                                 <Link href={`/services/`} key={`service-${serviceIndex}`}>
                                                     <div className="main-agency__item-link l-textReg">
@@ -438,9 +452,9 @@ const MainPage = (props) => {
                                         );
 
                                     return (
-                                        <div 
-                                            className="main-agency__item" 
-                                            key={`mainItem-${index}`} 
+                                        <div
+                                            className="main-agency__item"
+                                            key={`mainItem-${index}`}
                                             onMouseEnter={handleMouseEnter}
                                             onMouseLeave={handleMouseLeave}>
                                                 {isVideo ? (
@@ -498,7 +512,7 @@ const MainPage = (props) => {
                                     const filterProjects = allProjects.filter((item) => item.projectTheme === project.value && item.visibility);
                                     const totalSum = filterProjects.length < 10 ? "0" + filterProjects.length : filterProjects.length;
                                     if (totalSum < 1) return null;
-                                    return (<Link 
+                                    return (<Link
                                                 href={`/projects?theme=${project.value}`}
                                                 key={`project-${project.value || index}`} // Уникальный ключ
                                                 onClick={(e) => gotoAnchor(e)}>

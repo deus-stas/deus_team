@@ -637,7 +637,7 @@
       &__descr1 {
         display: flex;
         flex-direction: row;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         gap: 0;
         color: #ffffff;
         position: absolute;
@@ -1052,6 +1052,80 @@
   }
 
 }
+
+.main-clients{
+  background: #eeeeee;
+}
+
+//.main-clients__blur-left {
+//  position: absolute;
+//  top: -1rem;
+//  left: -2rem;
+//  height: 100%;
+//  width: 15rem;
+//  z-index: 20;
+//  transform: rotate(180deg);
+//}
+//
+//.main-clients__blur-left div {
+//  position: absolute;
+//  top: 0;
+//  right: 0;
+//  bottom: 0;
+//  left: 0;
+//  z-index: var(--index);
+//
+//  /* Инвертируем градиент для эффекта справа налево */
+//  -webkit-mask: linear-gradient(90deg,
+//          transparent calc((5 - var(--index)) * 100 / 5 * 1%), /* Считаем от 5, а не от 0, чтобы начать справа */
+//          #000 calc((5 - var(--index) + 1) * 100 / 5 * 1%),
+//          #000 calc((5 - var(--index) + 2) * 100 / 5 * 1%),
+//          transparent calc((5 - var(--index) + 3) * 100 / 5 * 1%)
+//  );
+//  mask: linear-gradient(90deg,
+//          transparent calc((5 - var(--index)) * 100 / 5 * 1%),
+//          #000 calc((5 - var(--index) + 1) * 100 / 5 * 1%),
+//          #000 calc((5 - var(--index) + 2) * 100 / 5 * 1%),
+//          transparent calc((5 - var(--index) + 3) * 100 / 5 * 1%)
+//  );
+//
+//  /* Применяем блюр с пропорцией для усиления справа налево */
+//  -webkit-backdrop-filter: blur(calc((5 - var(--index)) * 2px)); /* Уменьшаем эффект по мере приближения к левому краю */
+//  backdrop-filter: blur(calc((5 - var(--index)) * 2px));
+//}
+//
+//.main-clients__blur-right{
+//  position: absolute;
+//  top: -1rem;
+//  right: -2rem;
+//  height: 100%;
+//  width: 15rem;
+//  z-index: 20;
+//}
+//
+//.main-clients__blur-right > div{
+//  position: absolute;
+//  top: 0;
+//  right: 0;
+//  bottom: 0;
+//  left: 0;
+//  z-index: var(--index);
+//  -webkit-mask: linear-gradient(90deg,
+//          transparent calc(var(--index) * 100 / 5 * 1%),
+//          #000 calc((var(--index) + 1) * 100 / 5 * 1%),
+//          #000 calc((var(--index) + 2) * 100 / 5 * 1%),
+//          transparent calc((var(--index) + 3) * 100 / 5 * 1%)
+//  );
+//  mask: linear-gradient(90deg,
+//          transparent calc(var(--index) * 100 / 5 * 1%),
+//          #000 calc((var(--index) + 1) * 100 / 5 * 1%),
+//          #000 calc((var(--index) + 2) * 100 / 5 * 1%),
+//          transparent calc((var(--index) + 3) * 100 / 5 * 1%)
+//  );
+//  -webkit-backdrop-filter: blur(calc(var(--index) * 2px));
+//  backdrop-filter: blur(calc(var(--index) * 2px));
+//}
+
 
 .rollCircleMain {
   position: absolute;
