@@ -52,7 +52,7 @@
         height: 100%;
         position: relative;
         cursor: none;
-        
+
 
         // &.pausing {
         //     cursor: url('../../img/videoPlayCursor.svg'), default !important;
@@ -112,7 +112,7 @@
     width: 200px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
   }
-  
+
   .popup-overlay {
     background: rgba(0, 0, 0, 0.5);
   }
@@ -137,7 +137,7 @@
 }
 @media (max-width: 768px) {
     .rotate {
-        display: block;
+        display: none;
         position: absolute;
         z-index: 99;
         left: 50%;
@@ -148,7 +148,7 @@
             display: none;
         }
         &.pausing {
-            display: block;
+            display: none;
         }
-    }   
+    }
 }

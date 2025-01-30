@@ -381,7 +381,6 @@ const Agency = (props) => {
                         {!isMobileNew?
 
                         <section className="main-clients">
-                            <div className="main-clients__blur-left"></div>
 
                             {clients && splitArrayIntoChunks(clients,  3).map((row, count) => {
                                 return (
@@ -416,7 +415,6 @@ const Agency = (props) => {
                                 )
                             })}
 
-                            <div className="main-clients__blur-left"></div>
                         </section>
 
                             :
