@@ -32,12 +32,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'v3.deus.team',
+        hostname: 'deus.team',
         pathname: '**',
       },
       {
         protocol: 'https',
-        hostname: 'v3.deus.team',
+        hostname: 'deus.team',
         pathname: '**',
       },
     ],
