@@ -41,7 +41,8 @@ import {Cursor} from "../../components/cursor/cursor";
 // const Marquee = dynamic(() =>
 //     import("@devnomic/marquee").then((mod) => mod.Marquee) // Убедитесь, что `Marquee` — экспортируемый компонент
 // );
-const apiUrl = "http://v3.deus.team";
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+
 
 const MainPage = (props) => {
     const [isActive, setIsActive] = useState([]);
@@ -182,7 +183,7 @@ const MainPage = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/clients/`)
+        axios.get(`${apiUrl}/api/clients/`)
             .then((response) => {
                 setClients(response.data);
                 setTotal(response.data.length)

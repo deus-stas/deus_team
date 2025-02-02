@@ -10,8 +10,9 @@ export async function generateMetadata({ params }) {
   const headersList = headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
-  const baseUrl = `${protocol}://${host}`;
-  
+  // const baseUrl = `${protocol}://${host}`;
+  const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+
   // Пример запроса на сервер для получения данных о проекте
   const response = await fetch(`${baseUrl}/api/projects/${id}`, {
     cache: "no-store", // Можно использовать "force-cache" для кэширования

@@ -15,7 +15,7 @@ const News = () => {
     let tagInit = params.get('newsTags') ? params.get('newsTags') : 'Все';
 
     const [news, setNews] = useState([]);
-    const apiUrl = ''
+    const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
     const [allTags, setAllTags] = useState(new Set());
     const [selectedTag, setSelectedTag] = useState(tagInit);
@@ -25,7 +25,7 @@ const News = () => {
 
 
     useEffect(() => {
-        axios.get(`/api/newsTags`)
+        axios.get(`${apiUrl}/api/newsTags`)
             .then((tagResponse) => {
                 const tags = tagResponse.data.reduce((obj, tag) => {
                     obj[tag._id] = tag.name;
@@ -34,7 +34,7 @@ const News = () => {
                 console.log('tags', tags)
 
                 // Получить все новости
-                axios.get(`/api/news`)
+                axios.get(`${apiUrl}/api/news`)
                     .then((response) => {
                         const news = response.data.map((newsItem) => {
                             newsItem.newsTags = tags[newsItem.newsTags];
@@ -105,7 +105,7 @@ const News = () => {
 
                                     return (
                                         <div className="flex-wrap" key={`${index}-dsf--${item.id}`}>
-                                            <DelayedLink to={`/news/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
+                                            <DelayedLink to={`${apiUrl}/news/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
                                                          key={`${index}---${item.id}`}>
                                                 {isVideo && <video autoPlay={shouldAutoPlay}
                                                                    muted

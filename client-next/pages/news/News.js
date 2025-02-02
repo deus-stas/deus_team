@@ -20,7 +20,7 @@ const News = () => {
     let tagInit = params.get('newsTags') ? params.get('newsTags') : 'Все';
 
     const [news, setNews] = useState([]);
-    const apiUrl = ''
+    const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
     const [allTags, setAllTags] = useState(new Set());
     const [selectedTag, setSelectedTag] = useState(tagInit);
@@ -30,7 +30,7 @@ const News = () => {
  
      
     useEffect(() => {
-        axios.get(`/api/newsTags`)
+        axios.get(`${apiUrl}/api/newsTags`)
             .then((tagResponse) => {
                 const tags = tagResponse.data.reduce((obj, tag) => {
                     obj[tag._id] = tag.name;
@@ -39,7 +39,7 @@ const News = () => {
                 console.log('tags', tags)
 
                 // Получить все новости
-                axios.get(`/api/news`)
+                axios.get(`${apiUrl}/api/news`)
                     .then((response) => {
                         const news = response.data.map((newsItem) => {
                             newsItem.newsTags = tags[newsItem.newsTags];

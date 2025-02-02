@@ -5,6 +5,10 @@ const ThemesSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    href: {
+        type: String,
+        required: true
     }
 });
 

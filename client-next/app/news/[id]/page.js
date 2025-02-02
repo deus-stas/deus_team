@@ -24,7 +24,9 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const baseUrl = `${protocol}://${host}`;
+  // const baseUrl = `${protocol}://${host}`;
+  const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+
 
   try {
     const response = await fetch(`${baseUrl}/api/url/${id}`, {

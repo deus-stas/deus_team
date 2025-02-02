@@ -13,7 +13,8 @@
   // import {useDispatch, useSelector } from 'react-redux';
   import Image from 'next/image';
 
-  const apiUrl = "";
+  const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+
 
   const Contacts = (props) => {
     const router = useRouter();

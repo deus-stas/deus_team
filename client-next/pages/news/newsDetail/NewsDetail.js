@@ -25,7 +25,7 @@ import { useParams } from 'next/navigation';
 // import {useDispatch, useSelector } from 'react-redux';
 // import Image from 'next/image';
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const NewsDetail = () => {
 

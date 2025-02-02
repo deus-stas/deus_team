@@ -23,7 +23,7 @@ import {Cursor} from "../../components/cursor/cursor";
 // import {fetchData } from "../../actions/appActions";
 // import {connect, useDispatch, useSelector } from 'react-redux';
 
-const apiUrl = '';
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
 
 const Services = () => {
     

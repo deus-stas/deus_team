@@ -9,7 +9,7 @@ import rotate from "./rotate.svg";
 // import Image from 'next/image';
 
 
-const apiUrl = '';
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
 
 const CustomCursor = ({ isPaused, isVisible, initialPosition }) => {
     const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });

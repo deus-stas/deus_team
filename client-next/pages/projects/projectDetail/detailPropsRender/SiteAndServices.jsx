@@ -9,7 +9,7 @@ import Image from 'next/image';
 import  useMobile from "../../../../components/useMobile";
 
 const SiteAndServices = ({detail}) => {
-    const apiUrl = '';
+    const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
     const [slidesPerView, setSlidesPerView] = useState(1.99);
     const [swiperRef, setSwiperRef] = useState(null);
     const [isHovered, setIsHovered] = useState(false);

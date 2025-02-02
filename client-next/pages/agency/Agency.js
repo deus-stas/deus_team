@@ -32,7 +32,8 @@ import Image from 'next/image';
 // import InfinitePhotoScroll from './InfinitePhotoScroll';
 // import RetryImage from '../../helpers/RetryImage';
 
-const apiUrl = "";
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+
 
 const Agency = (props) => {
 
@@ -65,7 +66,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/awards/`)
+        axios.get(`${apiUrl}/api/awards/`)
             .then((response) => {
                 setAwards(response.data);
             })
@@ -75,7 +76,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/diplomas/`)
+        axios.get(`${apiUrl}/api/diplomas/`)
             .then((response) => {
                 setDiplomas(response.data);
             })
@@ -85,7 +86,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/raitings/`)
+        axios.get(`${apiUrl}/api/raitings/`)
             .then((response) => {
                 setRaitings(response.data);
             })
@@ -95,7 +96,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/clients/`)
+        axios.get(`${apiUrl}/api/clients/`)
             .then((response) => {
                 setClients(response.data);
                 setTotal(response.data.length)
@@ -106,7 +107,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/vacancies/`)
+        axios.get(`${apiUrl}/api/vacancies/`)
             .then((response) => {
                 setVacancies(response.data);
             })
@@ -116,7 +117,7 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/showreels/`)
+        axios.get(`${apiUrl}/api/showreels/`)
             .then((response) => {
                 setShowreels(response.data);
             })
@@ -126,15 +127,15 @@ const Agency = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/reviews/`)
+        axios.get(`${apiUrl}/api/reviews/`)
             .then((response) => {
                 const reviews = response.data;
                 const projectIds = reviews.map((review) => review.reviewProject);
                 const serviceIds = reviews.map((review) => review.reviewService);
 
                 Promise.all([
-                    axios.get(`/api/projects/?ids=${projectIds.join(',')}`),
-                    axios.get(`/api/services/?ids=${serviceIds.join(',')}`)
+                    axios.get(`${apiUrl}/api/projects/?ids=${projectIds.join(',')}`),
+                    axios.get(`${apiUrl}/api/services/?ids=${serviceIds.join(',')}`)
                 ])
                     .then((results) => {
                         const projects = results[0].data;
