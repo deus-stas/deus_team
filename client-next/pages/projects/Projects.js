@@ -15,8 +15,7 @@ import {Cursor} from "../../components/cursor/cursor";
 import { usePathname } from 'next/navigation';
 
 
-// const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
-const apiUrl =`http://localhost:3001`
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const Projects = () => {
     const MOBILE_SIZE = 768

@@ -3,6 +3,6 @@ node_modules
 /client/src1
 /uploads
 package-lock.json*
-*.env
+# *.env
 /.vscode
 /client-next/.next

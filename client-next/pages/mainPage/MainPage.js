@@ -371,6 +371,7 @@ const MainPage = (props) => {
                         <div className="main-agency__wrap whiteHeader">
                             {mainPage
                                 ? mainPage.map((item, index) => {
+                                    console.log('item', item);
                                     const fileUrl = item.mainVideoFile ? `${apiUrl}/uploads/${item.mainVideoFile.filename}` : null;
                                     const isVideo = item.mainVideoFile ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.mainVideoFile.filename) : false;
 
@@ -466,6 +467,7 @@ const MainPage = (props) => {
                                                 </div>
                                                 {descr}
                                                 {!!arrow && !isMobile && !!isDesktop && (
+                                                <Link href={`${item.pageURL}`} rel="noreferrer">
                                                     <div className="main-agency__item-arrow">
                                                         <div className="hover-flip-circle">
                                                             <span>
@@ -474,9 +476,8 @@ const MainPage = (props) => {
                                                             </span>
                                                         </div>
                                                     </div>
+                                                </Link>
                                                 )}
-                                            {/* <Link href={`${item.pageURL}`} target="_blank" rel="noreferrer">
-                                            </Link> */}
                                         </div>
                                     );
                                 })
