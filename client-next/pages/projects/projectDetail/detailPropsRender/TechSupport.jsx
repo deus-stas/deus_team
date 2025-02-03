@@ -6,7 +6,7 @@ import Image from 'next/image';
 import useMobile from "../../../../components/useMobile";
 
 const TechSupport = ({detail}) => {
-    const apiUrl = '';
+    const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
     const [stack, setStack] = useState([])
     const { isMobile } = useMobile();
 

@@ -3,7 +3,7 @@ import {BannerComponent} from "../ProjectDetail";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 const VideoProduction = ({detail}) => {
-    const apiUrl = '';
+    const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
     const [slidesPerView, setSlidesPerView] = useState(1.5);
 
     useEffect(() => {

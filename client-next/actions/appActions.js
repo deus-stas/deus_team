@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = '';
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
 
 export const setHeaderData = (headerData) => ({
     type: 'SET_HEADER_DATA',

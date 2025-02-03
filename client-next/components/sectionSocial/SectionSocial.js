@@ -7,7 +7,7 @@ import TrailOn from "../animation/trailOn";
 import ScrollUp from "../animation/scrollUp";
 import Image from 'next/image';
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const SectionSocial = () => {
 

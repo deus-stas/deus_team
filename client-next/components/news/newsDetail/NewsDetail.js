@@ -15,7 +15,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {Cursor} from "../../cursor/cursor";
 import Image from 'next/image';
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const NewsDetail = () => {
 

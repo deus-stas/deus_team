@@ -16,7 +16,7 @@ import axios from "../../axios";
 
 import './appHeader.scss';
 
-const apiUrl = ''; // Укажите URL вашего API
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
 
 const AppHeader = () => {
   // Состояния для управления поведением компонента

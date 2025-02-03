@@ -14,8 +14,9 @@ export async function generateMetadata() {
       description: "Invalid host configuration",
     };
   }
-
-  const baseUrl = `${protocol}://${host}`;
+  
+  const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+  // const baseUrl = `${protocol}://${host}`;
 
   try {
     const response = await fetch(`${baseUrl}/api/seo`, {

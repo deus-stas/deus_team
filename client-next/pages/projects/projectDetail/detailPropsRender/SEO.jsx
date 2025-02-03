@@ -6,7 +6,7 @@ import  useMobile from "../../../../components/useMobile";
 const Seo = ({detail}) => {
     
     const { isMobile } = useMobile();
-    const apiUrl = ''
+    const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
     return (
         <>
