@@ -38,63 +38,127 @@ router.get('/news', async (req, res) => {
   res.json(news);
 });
 
+// router.post('/news', upload.fields([
+//   { name: 'image' },
+//   { name: 'mainNewsImage' },
+//   { name: 'photoSlider' }])
+//     , async (req, res) => {
+//   const { name, newsTags, bannerSecond, bannerThird, mainControl, description, aboutImg, aboutImg2, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, aboutClient4, body, workStepsItem, body2, body3, body4 , body5, seoTitle, seoDescription, seoKeywords } = req.body;
+
+//   function generateUrl(name) {
+//     const transliteratedName = transliterate(name);
+//     const rmPercent = transliteratedName.replace(/%/g, '');
+//     return rmPercent.split(' ').join('-');
+//   }
+
+//   const urlName = generateUrl(name);
+
+//  let photoSlider;
+
+//  if (req.files.photoSlider) {
+//    photoSlider = req.files.photoSlider;
+//  }
+
+//  const image = req.files.image[0];
+//  const mainNewsImage = req.files.mainNewsImage[0];
+
+//   const news = new News({
+//     name,
+//     image,
+//     mainNewsImage,
+//     underAboutClient,
+//     bannerSecond,
+//     bannerThird,
+//     description,
+//     body,
+//     body2,
+//     body3,
+//     body4,
+//     body5,
+//     photoSlider,
+//     aboutImg,
+//     aboutImg2,
+//     workStepsItem,
+//     urlName,
+//     newsTags,
+//     aboutClient,
+//     aboutClient2,
+//     aboutClient3,
+//     aboutClient4,
+//     mainControl,
+//     detailControl,
+//     seoTitle,
+//     seoDescription,
+//     seoKeywords,
+//   });
+
+//   await news.save();
+
+//   res.json(news);
+// });
+
+
 router.post('/news', upload.fields([
   { name: 'image' },
   { name: 'mainNewsImage' },
-  { name: 'photoSlider' }])
-    , async (req, res) => {
-  const { name, newsTags, bannerSecond, bannerThird, mainControl, description, aboutImg, aboutImg2, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, aboutClient4, body, workStepsItem, body2, body3, body4 , body5 } = req.body;
+  { name: 'photoSlider' }
+]), async (req, res) => {
+  try {
+    const { name, newsTags, bannerSecond, bannerThird, mainControl, description, aboutImg, aboutImg2, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, aboutClient4, body, workStepsItem, body2, body3, body4, body5, seoTitle, seoDescription, seoKeywords } = req.body;
 
-  function generateUrl(name) {
-    const transliteratedName = transliterate(name);
-    const rmPercent = transliteratedName.replace(/%/g, '');
-    return rmPercent.split(' ').join('-');
+    function generateUrl(name) {
+      const transliteratedName = transliterate(name);
+      const rmPercent = transliteratedName.replace(/%/g, '');
+      return rmPercent.split(' ').join('-');
+    }
+
+    const urlName = generateUrl(name);
+
+    let photoSlider = req.files.photoSlider || [];
+
+    const image = req.files.image ? req.files.image[0] : null;
+    const mainNewsImage = req.files.mainNewsImage ? req.files.mainNewsImage[0] : null;
+
+    // Validate newsTags
+    const validNewsTags = Array.isArray(newsTags) ? newsTags.filter(tag => mongoose.Types.ObjectId.isValid(tag)) : [];
+
+    const news = new News({
+      name,
+      image,
+      mainNewsImage,
+      underAboutClient,
+      bannerSecond,
+      bannerThird,
+      description,
+      body,
+      body2,
+      body3,
+      body4,
+      body5,
+      photoSlider,
+      aboutImg,
+      aboutImg2,
+      workStepsItem,
+      urlName,
+      newsTags: validNewsTags,
+      aboutClient,
+      aboutClient2,
+      aboutClient3,
+      aboutClient4,
+      mainControl,
+      detailControl,
+      seoTitle,
+      seoDescription,
+      seoKeywords,
+    });
+
+    await news.save();
+
+    res.json(news);
+  } catch (error) {
+    console.error('Error creating news:', error.message);
+    res.status(500).json({ error: 'Internal server error' });
   }
-
-  const urlName = generateUrl(name);
-
- let photoSlider;
-
- if (req.files.photoSlider) {
-   photoSlider = req.files.photoSlider;
- }
-
- const image = req.files.image[0];
- const mainNewsImage = req.files.mainNewsImage[0];
-
-  const news = new News({
-    name,
-    image,
-    mainNewsImage,
-    underAboutClient,
-    bannerSecond,
-    bannerThird,
-    description,
-    body,
-    body2,
-    body3,
-    body4,
-    body5,
-    photoSlider,
-    aboutImg,
-    aboutImg2,
-    workStepsItem,
-    urlName,
-    newsTags,
-    aboutClient,
-    aboutClient2,
-    aboutClient3,
-    aboutClient4,
-    mainControl,
-    detailControl,
-    seoTitle,
-    seoDescription,
-    seoKeywords,
-  });
-
-  await news.save();
-
-  res.json(news);
 });
 
 

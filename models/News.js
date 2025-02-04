@@ -26,9 +26,9 @@ const newsSchema = new Schema({
   aboutClient3: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   aboutClient4: {type: String, default: '' ,set: v => (v === null || v=== 'null' || v === 'undefined' || v === undefined) ? '' : v },
   newsTags: [{ type: Schema.Types.ObjectId, ref: 'NewsTags' }],
-  seoTitle: {type: String},
-  seoDescription: {type: String},
-  seoKeywords: {type: String},
+  seoTitle: {type: String, default: ''},
+  seoDescription: {type: String, default: ''},
+  seoKeywords: {type: [String], default: []},
 
 });
 

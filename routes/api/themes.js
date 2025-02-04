@@ -22,8 +22,7 @@ router.get('/themes', async (req, res) => {
 
 router.post('/themes', async (req, res) => {
     console.log(req.body.name);
-    const { name } = req.body;
-    const { href } = req.body;
+    const { name, href } = req.body;
     const themes = new Themes({
         name,
         href
@@ -47,9 +46,24 @@ router.get('/themes/:id', async (req, res) => {
 });
 
 router.put("/themes/:id", async (req, res) => {
-    const { id } = req.params;
-    const post = await Themes.findByIdAndUpdate(id, req.body);
-    res.json(post);
+    try {
+        const { id } = req.params;
+        const { name, href } = req.body;
+
+        if (!name || !href) {
+            return res.status(400).json({ error: "Name and href are required" });
+        }
+
+        const updatedTheme = await Themes.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+
+        if (!updatedTheme) {
+            return res.status(404).json({ error: "Theme not found" });
+        }
+
+        res.json(updatedTheme);
+    } catch (error) {
+        res.status(500).json({ error: "Update failed" });
+    }
 });
 
 router.delete("/themes/:id", async (req, res) => {
