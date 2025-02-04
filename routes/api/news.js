@@ -104,7 +104,7 @@ router.post('/news', upload.fields([
   { name: 'photoSlider' }
 ]), async (req, res) => {
   try {
-    const { name, newsTags, bannerSecond, bannerThird, mainControl, description, aboutImg, aboutImg2, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, aboutClient4, body, workStepsItem, body2, body3, body4, body5, seoTitle, seoDescription, seoKeywords } = req.body;
+    const { name, newsTags, bannerSecond, bannerThird, mainControl, description, aboutImg, aboutImg2, detailControl, underAboutClient, aboutClient, aboutClient2, aboutClient3, aboutClient4, body, workStepsItem, body2, body3, body4, body5, seoTitle, seoDescription, seoKeywords, visibility } = req.body;
 
     function generateUrl(name) {
       const transliteratedName = transliterate(name);
@@ -150,6 +150,7 @@ router.post('/news', upload.fields([
       seoTitle,
       seoDescription,
       seoKeywords,
+      visibility
     });
 
     await news.save();
@@ -211,7 +212,7 @@ router.put("/news/:id", upload.fields([
     return res.status(404).json({ error: 'News not found' });
   }
 
-  const { name, newsTags, urlName, mainControl, description, aboutClient, aboutClient2,  aboutClient3, aboutClient4,  detailControl, underAboutClient, workStepsItem, aboutImg, aboutImg2, body, body2, body3, body4, body5, seoTitle, seoDescription, seoKeywords } = req.body;
+  const { name, newsTags, urlName, mainControl, description, aboutClient, aboutClient2,  aboutClient3, aboutClient4,  detailControl, underAboutClient, workStepsItem, aboutImg, aboutImg2, body, body2, body3, body4, body5, seoTitle, seoDescription, seoKeywords, visibility } = req.body;
   const image = req.files.image ? req.files.image[0] : undefined;
   const mainNewsImage = req.files.mainNewsImage ? req.files.mainNewsImage[0] : undefined;
   const bannerSecond = req.files.bannerSecond ? req.files.bannerSecond[0] : undefined;
@@ -333,6 +334,7 @@ router.put("/news/:id", upload.fields([
   news.seoTitle = seoTitle;
   news.seoDescription = seoDescription;
   news.seoKeywords = seoKeywords;
+  news.visibility = visibility;
 
   // Сохраняем изменения
   await news.save();

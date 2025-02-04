@@ -116,6 +116,9 @@ export const NewsCreate = (props) => (
                 <BooleanInput
                     source="detailControl"
                     label="Деталка Превью/Видео"/>
+                <BooleanInput
+                    source="visibility"
+                    label="Скрыть/Показать новости"/>
             </p>
 
 
@@ -226,6 +229,9 @@ export const NewsEdit = (props) => {
                 <BooleanInput
                     source="detailControl"
                     label="Деталка Превью/Видео"/>
+                <BooleanInput
+                    source="visibility"
+                    label="Скрыть/Показать новости"/>
             </p>
 
 

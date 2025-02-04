@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const defaultBoolean = { type: Boolean, default: true, set: v => (v === null || v === 'null' || v === 'undefined' || v === undefined) ? true : v };
 
 const newsSchema = new Schema({
   name: { type: String, required: true },
@@ -29,7 +30,7 @@ const newsSchema = new Schema({
   seoTitle: {type: String, default: ''},
   seoDescription: {type: String, default: ''},
   seoKeywords: {type: [String], default: []},
-
+  visibility: defaultBoolean,
 });
 
 newsSchema.set('toJSON', { virtuals: true });

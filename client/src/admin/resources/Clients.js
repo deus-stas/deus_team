@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Datagrid, TextField, EditButton } from 'react-admin';
-import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, required, FunctionField, BooleanInput } from 'react-admin';
 
 const apiUrl = ''
 
@@ -47,6 +47,9 @@ export const ClientsCreate = (props) => (
                         source="src" 
                         title="title" />
             </ImageInput>
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать"/>
         </SimpleForm>
     </Create>
 );
@@ -69,6 +72,9 @@ export const ClientsEdit = (props) => (
                     source="image" 
                     title="title" />
             </ImageInput>
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать"/>
         </SimpleForm>
     </Edit>
 );

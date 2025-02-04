@@ -359,3 +359,10 @@
     }
 
 }
+
+.MuiToolbar-root.MuiToolbar-gutters.RaToolbar-desktopToolbar {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 365px);
+    z-index: 10;
+}

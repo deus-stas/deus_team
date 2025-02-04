@@ -22,9 +22,9 @@ router.get('/vacancies', async (req, res) => {
 
 router.post('/vacancies', async (req, res) => {
     console.log(req.body.name);
-    const { name, type, place, link } = req.body;
+    const { name, type, place, link, visibility } = req.body;
     const vacancies = new Vacancies({
-        name, type, place, link
+        name, type, place, link, visibility
     });
 
     await vacancies.save();
@@ -46,8 +46,22 @@ router.get('/vacancies/:id', async (req, res) => {
 
 router.put("/vacancies/:id", async (req, res) => {
     const { id } = req.params;
-    const post = await Vacancies.findByIdAndUpdate(id, req.body);
-    res.json(post);
+    const { name, type, place, link, visibility } = req.body;
+
+    const vacancies = await Vacancies.findById(id);
+    if (!vacancies) {
+        return res.status(404).json({ error: 'Vacancies not found' });
+    }
+
+    vacancies.name = name;
+    vacancies.type = type;
+    vacancies.place = place;
+    vacancies.link = link;
+    vacancies.visibility = visibility;
+
+    await vacancies.save();
+
+    res.json(vacancies);
 });
 
 router.delete("/vacancies/:id", async (req, res) => {

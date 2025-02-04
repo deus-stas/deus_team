@@ -53,7 +53,9 @@ export const AwardsCreate = (props) => (
                     source="src" 
                     title="title" />
             </ImageInput>
-
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать"/>
         </SimpleForm>
     </Create>
 );
@@ -83,7 +85,9 @@ export const AwardsEdit = (props) => (
                     source="image" 
                     title="title" />
             </ImageInput>
-
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать"/>
         </SimpleForm>
     </Edit>
 );
