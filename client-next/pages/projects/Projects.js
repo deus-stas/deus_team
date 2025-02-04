@@ -12,9 +12,10 @@ import {Icon} from '../../components/icon/Icon'
 import {gotoAnchor} from "../../components/anchors";
 import {Cursor} from "../../components/cursor/cursor";
 
+import { usePathname } from 'next/navigation';
 
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const Projects = () => {
     const MOBILE_SIZE = 768
@@ -30,8 +31,8 @@ const Projects = () => {
     const [menuTheme, setMenuTheme] = useState(true);
     const [menuType, setMenuType] = useState(false);
     const [select, setSelect] = useState(false);
-
- 
+    const pathname = usePathname();
+    
 
     // const searchParams = useSearchParams(); // для работы с URL-параметрами
     const getSearchParams = () => {
@@ -53,6 +54,10 @@ const Projects = () => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
+
+
+
+
             const onResizeEvent = () => {
                 setWindowWidth(window.innerWidth);
             };
@@ -90,9 +95,10 @@ const Projects = () => {
             .then((response) => {
                 let projectOptionsTheme = [];
                 response.data.forEach((item, i) => {
-                    const {id, name} = item;
-                    projectOptionsTheme[i] = {value: id, label: name}
+                    const {id, name, href} = item;
+                    projectOptionsTheme[i] = {value: id, label: name, href:href}
                 })
+                console.log(projectOptionsTheme);
                 updateOptionsTheme(projectOptionsTheme)
                 if (!!cb) {
                     cb()
@@ -118,7 +124,7 @@ const Projects = () => {
             setMenuType(true);
             setMenuTheme(false);
 
-            const type = projectOptionsType.find(({ value }) => value === typeKey);
+            const type = projectOptionsType.find(({ href }) => href === typeKey);
             if (type) {
                 setSelectedType(type);
             }
@@ -129,8 +135,11 @@ const Projects = () => {
         setOptionsTheme(projectOptionsTheme);
         const searchParams = getSearchParams();
         const themeKey = searchParams?.get(THEME_KEY);
+        console.log('themeKey', themeKey);
+        console.log('projectOptionsTheme', projectOptionsTheme);
         if (themeKey) {
-            const theme = projectOptionsTheme.find(({ value }) => value === themeKey);
+            // const theme = projectOptionsTheme.find(({ value }) => value === themeKey);
+            const theme = projectOptionsTheme.find(({ href }) => href === themeKey);
             if (theme) {
                 setSelectedTheme(theme);
             }
@@ -150,8 +159,8 @@ const Projects = () => {
             .then((response) => {
                 let projectOptionsType = [];
                 response.data.forEach((item, i) => {
-                    const {id, name} = item;
-                    projectOptionsType[i] = {value: id, label: name}
+                    const {id, name, key} = item;
+                    projectOptionsType[i] = {value: id, label: name, href:key}
                 })
                 setOptionsType(projectOptionsType)
                 if (!!cb) {
@@ -240,6 +249,7 @@ const Projects = () => {
     let text = sizeLarge;
 
     const handleLinkClick = (e) => {
+
         gotoAnchor(e, 'start', false);
         setChecked(value);
     } 
@@ -276,7 +286,7 @@ const Projects = () => {
 
                                         <Link 
                                             onClick={(e) => handleLinkClick(e, project.value)}
-                                            href={`/projects?theme=${project.value}`}
+                                            href={`/projects?theme=${project.href}`}
                                             key={`index-${index}`}
                                             >
                                             <div className="main-projects__item-flex__inner" >
@@ -305,11 +315,12 @@ const Projects = () => {
                                     const filterProjects = projects.filter(item => item.projectType === project.value && item.visibility);
                                     const totalSum = filterProjects.length.toString().padStart(2, '0');
                                     if (totalSum < 1) return null;
+                                    console.log(project)
                                     return (
                                         <Link 
                                             // onClick={(e) => gotoAnchor(e, 'start', false)} 
                                             onClick={(e) => handleLinkClick(e, project.value)} 
-                                            href={`/projects?type=${project.value}`} 
+                                            href={`/projects?type=${project.href}`} 
                                             key={`key-vlue-${index}`}
                                             >
                                             <div className="main-projects__item-flex__inner">

@@ -41,7 +41,8 @@ import {Cursor} from "../../components/cursor/cursor";
 // const Marquee = dynamic(() =>
 //     import("@devnomic/marquee").then((mod) => mod.Marquee) // Убедитесь, что `Marquee` — экспортируемый компонент
 // );
-const apiUrl = "http://v3.deus.team";
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+
 
 const MainPage = (props) => {
     const [isActive, setIsActive] = useState([]);
@@ -182,7 +183,7 @@ const MainPage = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`/api/clients/`)
+        axios.get(`${apiUrl}/api/clients/`)
             .then((response) => {
                 setClients(response.data);
                 setTotal(response.data.length)
@@ -384,6 +385,7 @@ const MainPage = (props) => {
                         <div className="main-agency__wrap whiteHeader">
                             {mainPage
                                 ? mainPage.map((item, index) => {
+                                    console.log('item', item);
                                     const fileUrl = item.mainVideoFile ? `${apiUrl}/uploads/${item.mainVideoFile.filename}` : null;
                                     const isVideo = item.mainVideoFile ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.mainVideoFile.filename) : false;
 
@@ -479,6 +481,7 @@ const MainPage = (props) => {
                                                 </div>
                                                 {descr}
                                                 {!!arrow && !isMobile && !!isDesktop && (
+                                                <Link href={`${item.pageURL}`} rel="noreferrer">
                                                     <div className="main-agency__item-arrow">
                                                         <div className="hover-flip-circle">
                                                             <span>
@@ -487,9 +490,8 @@ const MainPage = (props) => {
                                                             </span>
                                                         </div>
                                                     </div>
+                                                </Link>
                                                 )}
-                                            {/* <Link href={`${item.pageURL}`} target="_blank" rel="noreferrer">
-                                            </Link> */}
                                         </div>
                                     );
                                 })

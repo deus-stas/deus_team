@@ -24,7 +24,7 @@ const onAcc = (e) => {
     }
 }
 
-const apiUrl = '';
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
 
 const ServicesDetail = () => {
 

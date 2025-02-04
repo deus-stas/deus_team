@@ -24,7 +24,7 @@ import { useParams } from 'next/navigation';
 
 
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const ProjectDetail = () => {
 

@@ -14,7 +14,7 @@ import {VideoComponent} from "../Projects";
 // import {Cursor} from "../../../cursor/cursor";
 import Image from 'next/image';
 
-const apiUrl = '';
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
 
 const ProjectNext = ({ props, detail }) => {
     // const { id, category } = useParams();

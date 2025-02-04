@@ -23,8 +23,10 @@ router.get('/themes', async (req, res) => {
 router.post('/themes', async (req, res) => {
     console.log(req.body.name);
     const { name } = req.body;
+    const { href } = req.body;
     const themes = new Themes({
-        name
+        name,
+        href
     });
 
     await themes.save();
