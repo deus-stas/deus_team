@@ -12,6 +12,7 @@ import 'swiper/css';
 import Image from 'next/image';
 import useResponsiveSlides from "./useResponsiveSlides";
 
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
 
 const WorkingSlider = () => {
   const [working, setWorking] = useState([]);
@@ -50,7 +51,7 @@ const WorkingSlider = () => {
 
   useEffect(() => {
     axios
-      .get("/api/working/")
+      .get(`${apiUrl}/api/working/`)
       .then((response) => {
         setWorking(response.data);
       })

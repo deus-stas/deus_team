@@ -39,7 +39,6 @@ const addCustomId = async (req, res, next) => {
     }
 };
 
-
 const upload = multer({storage: storage});
 
 router.get('/projects', async (req, res) => {
@@ -484,6 +483,7 @@ router.get('/projects/:id', async (req, res) => {
     }
     res.json(projects);
 });
+
 router.get('/projects/:id', async (req, res) => {
     const {id} = req.params;
     const projects = await Projects.findById(id);

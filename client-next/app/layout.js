@@ -3,13 +3,11 @@
 import React, { useEffect, useState } from "react"; // Добавлен импорт хуков React
 import { store } from '../store';
 import { usePathname } from "next/navigation";
-// import Head from 'next/head';
 
 import {Provider} from "react-redux";
 
 import AppHeader from '../components/appHeader/AppHeader';
 import AppFooter from "../components/appFooter/AppFooter";
-// import CustomCursor from "custom-cursor-react";
 import "custom-cursor-react/dist/index.css";
 
 import '../style/style.scss'
@@ -30,58 +28,6 @@ export default function RootLayout({ children }) {
     pathname.startsWith(route)
   );
 
-  
-
-  // SEO-запрос
-  // useEffect(() => {
-  //   async function fetchSeoData() {
-  //     try {
-  //       const response = await fetch("/api/seo");
-  //       const data = await response.json();
-  //       console.log(data);
-  //       const currentSeoInfo = data.find((item) => item.seoPages === pathname);
-  //       setSeoInfo(currentSeoInfo);
-  //     } catch (error) {
-  //       console.error("Ошибка загрузки SEO данных:", error);
-  //     }
-  //   }
-
-  //   async function fetchSeoDataDynamick() {
-  //     try {
-  //       const response = await fetch(`/api${pathname}`);
-  //       const data = await response.json();
-  //       console.log('data', data);
-  //       setSeoInfo(data);
-  //     } catch (error) {
-  //       console.error("Ошибка загрузки SEO данных:", error);
-  //     }
-  //   }
-
-  //   const checkPath = pathname.split('/').filter(Boolean);
-  //   if(false) {
-  //     fetchSeoDataDynamick();
-  //   } else {
-  //     fetchSeoData();
-  //   }
-  //   console.log("pathname", pathname, checkPath);
-  // }, [pathname]);
-
-  // SEO-запрос(Динамический)
-  // useEffect(() => {
-  //   async function fetchSeoData() {
-  //     try {
-  //       const response = await fetch(`/api${pathname}`);
-  //       const data = await response.json();
-  //       console.log('data', data);
-  //       // const currentSeoInfo = data.find((item) => item.seoPages === pathname);
-  //       setSeoInfo(data);
-  //     } catch (error) {
-  //       console.error("Ошибка загрузки SEO данных:", error);
-  //     }
-  //   }
-  //   fetchSeoData();
-  //   console.log("pathname", pathname);
-  // }, [pathname]);
 
   useEffect(() => {
     setTransitioning(true);
@@ -95,9 +41,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">  
      <head>
-        {/* <title>{seoInfo?.seoTitle || "Deus"}</title>
-        <meta name="description" content={seoInfo?.description || "Deus"} />
-        <meta name="key" content={seoInfo?.seoKeywords || "Deus"} /> */}
         <YandexMetrikaScript />
       </head>
       <body id='root'>
@@ -109,18 +52,6 @@ export default function RootLayout({ children }) {
             id="preloader"
             className={`preloader ${transitioning ? 'transitioning' : ''}`}
           ></div>
-
-          {/* Кастомный курсор */}
-          {/* <CustomCursor
-            targets={["a", "button"]}
-            customClass="custom-cursor"
-            dimensions={30}
-            fill="#000"
-            strokeColor="#FFF"
-            strokeWidth={1}
-            zIndex={9999}
-            smoothness={{ movement: 0.1, scale: 0.1, opacity: 0.1 }}
-          /> */}
 
           {/* Хедер */}
           {!shouldHideHeaderFooter && <AppHeader />}
@@ -140,34 +71,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-
-// // Функция для получения SEO данных на сервере
-// export async function getServerSideProps({ query }) {
-//   const pathname = query.path || ''; // Это пример, подставьте нужное вам значение
-//   const adminBasePath = "/admin/";
-//   const hiddenRoutes = [adminBasePath];
-  
-//   // Функция для получения SEO данных
-//   async function fetchSeoData() {
-//     try {
-//       const response = await fetch(`http://your-api-url/api/seo`);
-//       const data = await response.json();
-//       return data.find(item => item.seoPages === pathname);
-//     } catch (error) {
-//       console.error("Ошибка загрузки SEO данных:", error);
-//       return null;
-//     }
-//   }
-
-//   // Получаем SEO данные
-//   const seoInfo = await fetchSeoData();
-
-//   // Параметры для рендера
-//   return {
-//     props: {
-//       seoInfo: seoInfo || null
-//     }
-//   };
-// }
-

@@ -18,7 +18,7 @@ import axios from "../../axios";
 import dynamic from 'next/dynamic';
 const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const AppFooter = (props) => {
     const [isLoading, setIsLoading] = useState(true);

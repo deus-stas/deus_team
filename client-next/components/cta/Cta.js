@@ -20,7 +20,7 @@ import PhoneInput from "./PhoneInput";
 // import arrorGo from '../../img/icon/arrow-go.svg'
 // import DelayedLink from "../appHeader/DelayedLink";
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 // const InputMask = dynamic(() => import('react-input-mask'), { ssr: false });
 

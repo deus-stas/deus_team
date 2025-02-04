@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import './sectionProducts.scss'
 
-const apiUrl = ''
+const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`
 
 const SectionProducts = () => {
 
