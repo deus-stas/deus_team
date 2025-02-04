@@ -249,7 +249,7 @@ const Projects = () => {
     let text = sizeLarge;
 
     const handleLinkClick = (e) => {
-
+        // e.preventDefault();
         gotoAnchor(e, 'start', false);
         setChecked(value);
     } 
@@ -286,6 +286,7 @@ const Projects = () => {
 
                                         <Link 
                                             onClick={(e) => handleLinkClick(e, project.value)}
+                                            // href={`/projects/${project.href}`}
                                             href={`/projects?theme=${project.href}`}
                                             key={`index-${index}`}
                                             >
@@ -320,6 +321,7 @@ const Projects = () => {
                                         <Link 
                                             // onClick={(e) => gotoAnchor(e, 'start', false)} 
                                             onClick={(e) => handleLinkClick(e, project.value)} 
+                                            // href={`/projects/${project.href}`} 
                                             href={`/projects?type=${project.href}`} 
                                             key={`key-vlue-${index}`}
                                             >
