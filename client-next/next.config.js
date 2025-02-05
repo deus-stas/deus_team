@@ -12,6 +12,9 @@ const nextConfig = {
   experimental: {
     outputFileTracing: false,
   },
+  images: { 
+    domains: ['deus.team'],
+  },
   async rewrites() {
     return [
       {
