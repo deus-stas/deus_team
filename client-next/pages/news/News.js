@@ -118,7 +118,7 @@ const News = () => {
                                                                    playsInline
                                                                    src={fileUrl}
                                                                    loop/>}
-                                                {isImage && <img src={fileUrl} alt={item.name}/>}
+                                                {isImage && <Image  width="300" height='200' src={fileUrl} alt={item.name}/>}
                                             </Link>
                                             <span>
                                                 <p className="news-main__text s-text">{item.newsTags}</p>
