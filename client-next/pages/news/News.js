@@ -86,6 +86,10 @@ const News = () => {
 
     const filteredNews = selectedTag === 'Все' ? news : news.filter((newsItem) => newsItem.newsTags === selectedTag);
 
+    const addLoading = () => {
+        document.querySelector('#preloader').classList.add('transitioning');
+    }
+
     return (
         <>
             <Cursor/>
@@ -111,14 +115,14 @@ const News = () => {
 
                                     return (
                                         <div className="flex-wrap" key={index}>
-                                            <Link href={`/news/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
+                                            <Link href={`/news/${item.urlName}`} onClick={addLoading} className={`news-main__item news-main__${index + 1}`}
                                                          key={item.id}>
                                                 {isVideo && <video autoPlay={shouldAutoPlay}
                                                                    muted
                                                                    playsInline
                                                                    src={fileUrl}
                                                                    loop/>}
-                                                {isImage && <Image  width="300" height='200' src={fileUrl} alt={item.name}/>}
+                                                {isImage && <img  width="300" height='200' src={fileUrl} alt={item.name}/>}
                                             </Link>
                                             <span>
                                                 <p className="news-main__text s-text">{item.newsTags}</p>
