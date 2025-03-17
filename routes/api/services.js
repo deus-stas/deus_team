@@ -153,7 +153,7 @@ router.post('/services', addPosition, upload.single('brief'), async (req, res) =
         return a[char] || char;
     }).join("");
     var rmPercent = editedName.replace("%", '');
-    var editedWithLine = rmPercent.split(' ').join('-');
+    var editedWithLine = rmPercent.toLowerCase().split(' ').join('-');
 
     const path = editedWithLine
 

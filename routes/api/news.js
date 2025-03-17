@@ -109,7 +109,7 @@ router.post('/news', upload.fields([
     function generateUrl(name) {
       const transliteratedName = transliterate(name);
       const rmPercent = transliteratedName.replace(/%/g, '');
-      return rmPercent.split(' ').join('-');
+      return rmPercent.toLowerCase().split(' ').join('-');
     }
 
     const urlName = generateUrl(name);
