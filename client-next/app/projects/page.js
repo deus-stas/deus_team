@@ -1,58 +1,46 @@
-import Projects from "../../pages/projects/Projects";
-import { headers } from "next/headers";
+import { Suspense } from 'react';
+import ProjectsClient from '../../pages/projects/Projects.client';  
 
-
-export async function generateMetadata() {
-  
-  const headersList = headers();
-  const protocol = headersList.get("x-forwarded-proto") || "http";
-  const host = headersList.get("host");
-
-  if (!host) {
-    console.error("Host header is missing");
-    return {
-      title: "Error",
-      description: "Invalid host configuration",
-    };
-  }
-
-  // const baseUrl = `${protocol}://${host}`;
-  const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
-
-  try {
-    const response = await fetch(`${baseUrl}/api/seo`, {
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      console.error(`Failed to fetch SEO data: ${response.status} ${response.statusText}`);
-      return {
-        title: "Error",
-        description: "Failed to fetch SEO data",
-      };
-    }
-
-    const seoData = await response.json();
-    const data = seoData.find((el) => el.name === "Проекты");
-
-    return {
-      title: data?.seoTitle || "Проекты",
-      description: data?.seoDescription || "Проекты",
-      keywords: data?.seoKeywords || "Проекты",
-    };
-  } catch (error) {
-    console.error("Error fetching SEO data:", error);
-    return {
-      title: "Error",
-      description: "An error occurred while fetching SEO data",
-    };
-  }
+async function getProjects() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/projects/`);
+  return res.json();
 }
 
-export default function Home() {
-    return (
-      <main>
-        <Projects/>
-      </main>
-    );
-  }
+async function getThemes() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/themes/`);
+  const data = await res.json();
+  return data.map((item, i) => ({
+    value: item.id,
+    label: item.name,
+    href: item.href
+  }));
+}
+
+async function getTypes() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/types/`);
+  const data = await res.json();
+  return data.map((item, i) => ({
+    value: item.id,
+    label: item.name,
+    href: item.key
+  }));
+}
+
+export default async function ProjectsPage({ searchParams }) {
+  const [projects, themes, types] = await Promise.all([
+    getProjects(),
+    getThemes(),
+    getTypes()
+  ]);
+
+  return (
+    <Suspense fallback={<div>Загрузка...</div>}>
+      <ProjectsClient 
+        initialProjects={projects}
+        initialThemes={themes}
+        initialTypes={types}
+        searchParams={searchParams}
+      />
+    </Suspense>
+  );
+} 
