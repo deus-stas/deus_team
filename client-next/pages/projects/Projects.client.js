@@ -63,10 +63,16 @@ export default function ProjectsClient({ initialProjects, initialThemes, initial
         }
     }, [searchParams, optionsTheme, optionsType]);
 
-    const filteredProjects = () => projects.filter(project => {
-        return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
-            (selectedType ? project.projectType === selectedType.value : true) && project.visibility;
-    });
+    const filteredProjects = () => {
+        if (!Array.isArray(projects)) return [];
+        
+        return projects.filter(project => {
+            if (!project) return false;
+            return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
+                (selectedType ? project.projectType === selectedType.value : true) && 
+                project.visibility;
+        });
+    };
 
     useEffect(() => {
         const filteredProjectList = filteredProjects();
@@ -151,7 +157,7 @@ export default function ProjectsClient({ initialProjects, initialThemes, initial
                 <div className="main-projects__item-flex">
                     {menuTheme ? (
                         <>
-                            {optionsTheme.map((project, index) => {
+                            {optionsTheme && optionsTheme.map((project, index) => {
                                 const filterProjects = projects.filter(item => 
                                     item.projectTheme === project.value && item.visibility
                                 );
@@ -182,7 +188,7 @@ export default function ProjectsClient({ initialProjects, initialThemes, initial
                         </>
                     ) : (
                         <>
-                            {optionsType.map((project, index) => {
+                            {optionsType && optionsType.map((project, index) => {
                                 const filterProjects = projects.filter(item => 
                                     item.projectType === project.value && item.visibility
                                 );
