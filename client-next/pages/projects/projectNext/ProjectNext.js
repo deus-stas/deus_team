@@ -10,7 +10,7 @@ import './projectNext.scss';
 import  useMobile from "../../../components/useMobile";
 
 // import {Icon} from "../../../icon/Icon";
-import {VideoComponent} from "../Projects";
+import {VideoComponent} from "../Projects.client";
 // import {Cursor} from "../../../cursor/cursor";
 import Image from 'next/image';
 

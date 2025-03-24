@@ -1,58 +1,76 @@
-import Projects from "../../pages/projects/Projects";
-import { headers } from "next/headers";
+import ClientWrapper from './ClientWrapper';
 
-
-export async function generateMetadata() {
-  
-  const headersList = headers();
-  const protocol = headersList.get("x-forwarded-proto") || "http";
-  const host = headersList.get("host");
-
-  if (!host) {
-    console.error("Host header is missing");
-    return {
-      title: "Error",
-      description: "Invalid host configuration",
-    };
-  }
-
-  // const baseUrl = `${protocol}://${host}`;
-  const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
-
+async function getProjects() {
   try {
-    const response = await fetch(`${baseUrl}/api/seo`, {
-      cache: "no-store",
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/projects/`, { 
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
     });
-
-    if (!response.ok) {
-      console.error(`Failed to fetch SEO data: ${response.status} ${response.statusText}`);
-      return {
-        title: "Error",
-        description: "Failed to fetch SEO data",
-      };
-    }
-
-    const seoData = await response.json();
-    const data = seoData.find((el) => el.name === "Проекты");
-
-    return {
-      title: data?.seoTitle || "Проекты",
-      description: data?.seoDescription || "Проекты",
-      keywords: data?.seoKeywords || "Проекты",
-    };
+    if (!res.ok) throw new Error('Failed to fetch projects');
+    return res.json();
   } catch (error) {
-    console.error("Error fetching SEO data:", error);
-    return {
-      title: "Error",
-      description: "An error occurred while fetching SEO data",
-    };
+    console.error('Error fetching projects:', error);
+    return [];
   }
 }
 
-export default function Home() {
-    return (
-      <main>
-        <Projects/>
-      </main>
-    );
+async function getThemes() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/themes/`, { 
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    });
+    if (!res.ok) throw new Error('Failed to fetch themes');
+    const data = await res.json();
+    return data.map((item) => ({
+      value: item.id,
+      label: item.name,
+      href: item.href
+    }));
+  } catch (error) {
+    console.error('Error fetching themes:', error);
+    return [];
   }
+}
+
+async function getTypes() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/types/`, { 
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    });
+    if (!res.ok) throw new Error('Failed to fetch types');
+    const data = await res.json();
+    return data.map((item) => ({
+      value: item.id,
+      label: item.name,
+      href: item.key
+    }));
+  } catch (error) {
+    console.error('Error fetching types:', error);
+    return [];
+  }
+}
+
+export default async function ProjectsPage({ searchParams }) {
+  const [projects, themes, types] = await Promise.all([
+    getProjects(),
+    getThemes(),
+    getTypes()
+  ]);
+
+  return (
+    <ClientWrapper 
+      initialProjects={projects}
+      initialThemes={themes}
+      initialTypes={types}
+      searchParams={searchParams}
+    />
+  );
+} 
