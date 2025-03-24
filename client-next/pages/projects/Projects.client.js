@@ -267,7 +267,7 @@ export default function ProjectsClient({ initialProjects, initialThemes, initial
     );
 }
 
-const VideoComponent = React.forwardRef(({ project, videoSize }, ref) => {
+export const VideoComponent = React.forwardRef(({ project, videoSize }, ref) => {
     const videoRef = useRef();
 
     useEffect(() => {
