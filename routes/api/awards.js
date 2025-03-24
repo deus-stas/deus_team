@@ -38,16 +38,16 @@ router.get('/awards', async (req, res) => {
 });
 
 router.post('/awards', upload.single('image'), async (req, res) => {
-  const { name, blogUrl} = req.body;
+  const { name, blogUrl, visibility } = req.body;
   console.log(req.file);
 
-  const image = req.file
+  const image = req.file;
 
   const awards = new Awards({
     name,
     blogUrl,
     image,
-
+    visibility
   });
 
   await awards.save();
@@ -76,14 +76,15 @@ router.put("/awards/:id", upload.single('image'), async (req, res) => {
     return res.status(404).json({ error: 'Awards not found' });
   }
 
-  const { name, blogUrl } = req.body;
+  const { name, blogUrl, visibility } = req.body;
   const image = req.file;
 
-  uploadFile(image,'image',  awards, req, 'image')
+  uploadFile(image, 'image', awards, req, 'image');
 
   // Обновляем остальные поля документа
   awards.name = name;
   awards.blogUrl = blogUrl;
+  awards.visibility = visibility;
 
   // Сохраняем изменения
   await awards.save();

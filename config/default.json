@@ -1,5 +1,6 @@
 {
-    "mongoURI": "mongodb://DeusTeam:a7H3SN@127.0.0.1:27017/deusDB?authSource=admin",
+    // "mongoURI": "mongodb://DeusTeam:a7H3SN@127.0.0.1:27017/deusDB?authSource=admin",
+    "mongoURI": "mongodb://127.0.0.1:27017",
     "port": 4554,
     "baseUrl": "http://localhost:4554"
 }

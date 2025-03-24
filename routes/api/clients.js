@@ -38,7 +38,7 @@ router.get('/clients', async (req, res) => {
 });
 
 router.post('/clients', upload.single('image'), async (req, res) => {
-    const { name } = req.body;
+    const { name, visibility } = req.body;
     console.log(req.file);
 
     const image = req.file;
@@ -46,6 +46,7 @@ router.post('/clients', upload.single('image'), async (req, res) => {
     const clients = new Clients({
         name,
         image,
+        visibility
     });
 
     await clients.save();
@@ -74,14 +75,14 @@ router.put("/clients/:id", upload.single('image'), async (req, res) => {
         return res.status(404).json({ error: 'clients not found' });
     }
 
-    const { name } = req.body;
+    const { name, visibility } = req.body;
     const image = req.file ? req.file : undefined;
 
-
-    uploadFile(image,'image',clients,req,'image')
+    uploadFile(image, 'image', clients, req, 'image');
 
     // Обновляем остальные поля документа
     clients.name = name;
+    clients.visibility = visibility;
 
     // Сохраняем изменения
     await clients.save();
