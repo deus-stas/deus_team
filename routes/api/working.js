@@ -47,6 +47,7 @@ router.post('/working', upload.single('file'), async (req, res) => {
         name,
         descr,
         file,
+        visibility
     });
 
     await working.save();
@@ -75,8 +76,7 @@ router.put("/working/:id", upload.single('file'), async (req, res) => {
         return res.status(404).json({error: 'Working not found'});
     }
 
-
-    const {name, descr} = req.body;
+    const {name, descr, visibility} = req.body;
     const file = req.file;
 
     uploadFile(file,'file',working, req,'file')
@@ -84,6 +84,7 @@ router.put("/working/:id", upload.single('file'), async (req, res) => {
     // Обновляем остальные поля документа
     working.name = name;
     working.descr = descr;
+    working.visibility = visibility;
 
     // Сохраняем изменения
     await working.save();

@@ -1442,7 +1442,7 @@ export const DefaultFields = () => {
 
                 <BooleanInput
                     source="visibility"
-                    label="Скрыть/Показать проекта проекта"/>
+                    label="Скрыть/Показать проекта"/>
                 <p>Обложка проекта</p>
                 <span className="baseFlexWrap">
                     <FileInput

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { List, Datagrid, TextField, Edit, Create, TextInput, SimpleForm, required } from 'react-admin';
+import { List, Datagrid, TextField, Edit, Create, TextInput, SimpleForm, required, BooleanInput } from 'react-admin';
 
 export const VacanciesCreate = (props) => (
     <Create {...props}>
@@ -8,6 +8,9 @@ export const VacanciesCreate = (props) => (
             <TextInput className="customWidth" source="type" label="Оформление" />
             <TextInput className="customWidth" source="place" label="Место работы" />
             <TextInput className="customWidth" source="link" label="Ссылка на вакансию" />
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать"/>
         </SimpleForm>
     </Create>
 )
@@ -19,6 +22,9 @@ export const VacanciesEdit = (props) => (
             <TextInput className="customWidth" source="type" label="Оформление" />
             <TextInput className="customWidth" source="place" label="Место работы" />
             <TextInput className="customWidth" source="link" label="Ссылка на вакансию" />
+            <BooleanInput
+                source="visibility"
+                label="Скрыть/Показать"/>
         </SimpleForm>
     </Edit>
 );

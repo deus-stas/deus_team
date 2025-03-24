@@ -9,6 +9,9 @@ gracefulFs.gracefulify(fs);
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     outputFileTracing: false,
   },

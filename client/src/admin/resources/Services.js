@@ -12,9 +12,11 @@ const FilenameField = props => {
             {...props}
             render={record => {
                 if (record.filename) {
-                    return <iframe src={`${apiUrl}/uploads/${record.filename}`} sandbox="allow-same-origin allow-scripts"/>;
+                    return <a href={`${apiUrl}/uploads/${record.filename}`} target="_blank">{record.originalname}</a>;
+                    // return <iframe src={`${apiUrl}/uploads/${record.filename}`} sandbox="allow-same-origin allow-scripts"/>;
                 } else {
-                    return <iframe src={`${record.src}`} sandbox="allow-same-origin allow-scripts" />;
+                    return `${record.src}`
+                    // return <iframe src={`${record.src}`} sandbox="allow-same-origin allow-scripts" />;
                 }
             }}
         />
