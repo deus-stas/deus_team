@@ -410,7 +410,7 @@ const Projects = () => {
                                 {!!isMobile && <>{category}</>}
                                 <div className="projects__wrap">
                                     <span className={"projects__wrap-span"}>
-                                    <div className="projects__wrap-column">{odd}</div>
+                                        <div className="projects__wrap-column">{odd}</div>
                                     </span>
                                     <span className="translateY">
                                         {!isMobile && <>{category}</>}
