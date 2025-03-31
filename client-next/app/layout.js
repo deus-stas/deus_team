@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
           </main>
 
           {/* Футер */}
-          {/* {!shouldHideHeaderFooter && <AppFooter />} */}
+          {!shouldHideHeaderFooter && <AppFooter />}
         </Provider>
       </body>
     </html>

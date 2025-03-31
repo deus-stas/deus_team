@@ -1,3 +1,4 @@
+import Link from "next/link";
 import News from "../../pages/news/News";
 import { headers } from "next/headers";
 
@@ -48,9 +49,79 @@ export async function generateMetadata() {
   }
 }
 
-export default function Home() {
+const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
+
+async function getNewsTags() {
+  const response = await fetch(`${apiUrl}/api/newsTags`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+}
+
+async function getNews() {
+  const response = await fetch(`${apiUrl}/api/news`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+}
+
+export default async function Home() {
+    const [news, newsTags] = await Promise.all([
+      getNews(),
+      getNewsTags(),
+    ]);
+    const allNewsCount = news.length
+    const filteredNews = news;
+    const formatNumber = (num) => {
+      return num.toString().padStart(2, '0');
+    };
     return (
         <>
+          <main className="news" style={{display: 'none'}}>
+              <div className="container">
+                  <section className="news-start">
+                    <span className="news-start__text">
+                      <p className="breadcrumb">Блог</p>
+                      <h1 className="heading-primary">Делимся полезной<br/> информацией</h1>
+                    </span>
+
+                  </section>
+                  <section className="news-main">
+                      <div className="news-main__wrap">
+                          {filteredNews.map((item, index) => {
+                              return (
+                                  <div className="flex-wrap" key={`key-index-${index}`}>
+                                      <Link href={`/news/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
+                                          key={`key-link-${item.id}`}>
+                                      </Link>
+                                      <span>
+                                          <p className="news-main__text s-text">{item.newsTags}</p>
+                                          <p className="news-main__descr m-text">{item.name}</p>
+                                      </span>
+
+                                  </div>
+
+                              )
+                          })}
+                          <div className="flex-wrap filter">
+                              <div className="news-main__filters borderBlock padding">
+                                  <div
+                                      className={`news-main__filters-btn m-text`}
+                                  >
+                                      <span className="news-main__filters-btn__flexWrap">
+                                          <p className="name">Все</p>
+                                          <p className="num xs-text">{formatNumber(allNewsCount)}</p>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </section>
+              </div>
+          </main>
           <News/>
         </>
     );
