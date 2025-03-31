@@ -18,6 +18,7 @@
         "jwt-decode": "^3.1.2",
         "next": "^15.0.3",
         "next-redux-wrapper": "^8.1.0",
+        "next-sitemap": "^4.2.3",
         "ra-data-simple-rest": "^4.9.1",
         "ra-input-rich-text": "^5.4.1",
         "react": "^18.3.1",
@@ -43,6 +44,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build --no-lint",
+        "postbuild": "next-sitemap",
         "start": "next start",
         "lint": "next lint"
     },
