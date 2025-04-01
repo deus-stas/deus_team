@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://deus.team
-
-# Sitemaps
-Sitemap: https://deus.team/sitemap.xml
