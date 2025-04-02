@@ -44,7 +44,6 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build --no-lint",
-        "postbuild": "next-sitemap",
         "start": "next start",
         "lint": "next lint"
     },
