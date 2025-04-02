@@ -2,6 +2,8 @@
 
 import React from 'react'
 import {useEffect, useRef, useState, Suspense } from 'react';
+import { useRouter } from 'next/navigation';
+
 import axios, {setIsLoadingMainPageEvent} from '../../axios'
 import Link from 'next/link'; // Используем Link из Next.js для навигации
 // import { useSearchParams } from 'next/navigation';
@@ -33,6 +35,7 @@ const Projects = () => {
     const [select, setSelect] = useState(false);
     const pathname = usePathname();
     
+    const router = useRouter();
 
     // const searchParams = useSearchParams(); // для работы с URL-параметрами
     const getSearchParams = () => {
@@ -118,8 +121,8 @@ const Projects = () => {
     }, [selectedType]);
 
     const updateOptionsType = (projectOptionsType) => {
-        const searchParams = getSearchParams();
-        const typeKey = searchParams?.get(TYPE_KEY);
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        const typeKey = pathSegments[pathSegments.length - 1];
         if (typeKey) {
             setMenuType(true);
             setMenuTheme(false);
@@ -133,10 +136,8 @@ const Projects = () => {
 
     const updateOptionsTheme = (projectOptionsTheme) => {
         setOptionsTheme(projectOptionsTheme);
-        const searchParams = getSearchParams();
-        const themeKey = searchParams?.get(THEME_KEY);
-        console.log('themeKey', themeKey);
-        console.log('projectOptionsTheme', projectOptionsTheme);
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        const themeKey = pathSegments[pathSegments.length - 1];
         if (themeKey) {
             // const theme = projectOptionsTheme.find(({ value }) => value === themeKey);
             const theme = projectOptionsTheme.find(({ href }) => href === themeKey);
@@ -287,11 +288,11 @@ const Projects = () => {
                                         <Link 
                                             onClick={(e) => handleLinkClick(e, project.value)}
                                             // href={`/projects/${project.href}`}
-                                            href={`/projects?theme=${project.href}`}
+                                            href={`/projects/theme/${project.href}`}
                                             key={`index-${index}`}
                                             >
                                             <div className="main-projects__item-flex__inner" >
-                                                <span className={`main-projects__item-btn ${checked && checked.value === project.value  &&  'activeItem'}`}>
+                                                <span className={`main-projects__item-btn ${checked && checked.href === project.href  &&  'activeItem'}`}>
                                                     <span className={`${projectSizeLabel}`}>
                                                         <p className="hover custom-cursor-link"
                                                            datahash="projectNav">
@@ -299,7 +300,7 @@ const Projects = () => {
                                                         </p>
                                                     </span>
                                                     <div
-                                                        className={`main-agency__item-header__num xs-text ${checked && checked.value === project.value  && 'activeNum'}`}>
+                                                        className={`main-agency__item-header__num xs-text ${checked && checked.href === project.href  && 'activeNum'}`}>
                                                         {totalSum}
                                                     </div>
                                                 </span>
@@ -322,17 +323,17 @@ const Projects = () => {
                                             // onClick={(e) => gotoAnchor(e, 'start', false)} 
                                             onClick={(e) => handleLinkClick(e, project.value)} 
                                             // href={`/projects/${project.href}`} 
-                                            href={`/projects?type=${project.href}`} 
+                                            href={`/projects/type/${project.href}`} 
                                             key={`key-vlue-${index}`}
                                             >
                                             <div className="main-projects__item-flex__inner">
-                                                <span className={`main-projects__item-btn ${checkedType && checkedType.value === project.value && 'activeItem'}`}>
+                                                <span className={`main-projects__item-btn ${checkedType && checkedType.href === project.href && 'activeItem'}`}>
                                                     <span className={`${projectSizeLabel}`}>
                                                         <p className="hover custom-cursor-link" datahash="projectNav">
                                                             {project.label}
                                                         </p>
                                                     </span>
-                                                    <div className={`main-agency__item-header__num xs-text ${checkedType && checkedType.value === project.value && 'activeNum'}`}>
+                                                    <div className={`main-agency__item-header__num xs-text ${checkedType && checkedType.href === project.href && 'activeNum'}`}>
                                                         {totalSum}
                                                     </div>
                                                 </span>

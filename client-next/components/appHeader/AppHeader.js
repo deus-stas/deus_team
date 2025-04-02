@@ -243,7 +243,7 @@ const closeMenu = (e, path) => {
                 </Link>
             </li>
             <li className={`header__nav-item ${isDesktop ? 'hover-flip' : ''}`}>
-                <Link onClick={(e) => closeMenu(e, '/news')} href="/news">
+                <Link onClick={(e) => closeMenu(e, '/blog')} href="/blog">
                     <span data-hover="Блог">Блог</span>
                 </Link>
             </li>
