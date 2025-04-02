@@ -516,9 +516,9 @@ const MainPage = (props) => {
                                     console.log(project);
                                     if (totalSum < 1) return null;
                                     return (<Link
-                                                href={`/projects?theme=${project.href}`}
+                                                href={`/projects/theme/${project.href}`}
                                                 key={`project-${project.value || index}`} // Уникальный ключ
-                                                onClick={(e) => gotoAnchor(e)}>
+                                                onClick={(e) => gotoAnchor(e)}> 
                                                     <div className="main-projects__item-flex__inner" >
                                                         <span className="main-projects__item-btn">
                                                         <div className={`${projectSizeLabel}`}>
