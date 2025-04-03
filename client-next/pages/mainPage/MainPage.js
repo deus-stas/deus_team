@@ -233,8 +233,8 @@ const MainPage = (props) => {
             .then((response) => {
                 let projectOptionsTheme = [];
                 response.data.forEach((item, i) => {
-                    const {id, name} = item;
-                    projectOptionsTheme[i] = {value: id, label: name};
+                    const {id, name, href} = item;
+                    projectOptionsTheme[i] = {value: id, label: name, href: href};
                 });
                 setOptionsTheme(projectOptionsTheme);
             })
@@ -513,25 +513,26 @@ const MainPage = (props) => {
                                 {optionsTheme ? optionsTheme.map((project, index) => {
                                     const filterProjects = allProjects.filter((item) => item.projectTheme === project.value && item.visibility);
                                     const totalSum = filterProjects.length < 10 ? "0" + filterProjects.length : filterProjects.length;
+                                    console.log(project);
                                     if (totalSum < 1) return null;
                                     return (<Link
-                                                href={`/projects?theme=${project.value}`}
+                                                href={`/projects/theme/${project.href}`}
                                                 key={`project-${project.value || index}`} // Уникальный ключ
-                                                onClick={(e) => gotoAnchor(e)}>
-                                        <div className="main-projects__item-flex__inner" >
-                                            <span className="main-projects__item-btn">
-                                              <div className={`${projectSizeLabel}`}>
-                                                <p className="hover custom-cursor-link"
-                                                   datahash="projectNav">
-                                                    {project.label}
-                                                </p>
-                                              </div>
-                                              <div className="main-agency__item-header__num xs-text">
-                                                {totalSum}
-                                              </div>
-                                            </span>
-                                        </div>
-                                    </Link>);
+                                                onClick={(e) => gotoAnchor(e)}> 
+                                                    <div className="main-projects__item-flex__inner" >
+                                                        <span className="main-projects__item-btn">
+                                                        <div className={`${projectSizeLabel}`}>
+                                                            <p className="hover custom-cursor-link"
+                                                            datahash="projectNav">
+                                                                {project.label}
+                                                            </p>
+                                                        </div>
+                                                        <div className="main-agency__item-header__num xs-text">
+                                                            {totalSum}
+                                                        </div>
+                                                        </span>
+                                                    </div>
+                                            </Link>);
                                 }) : null}
                             </div>
                         </div>

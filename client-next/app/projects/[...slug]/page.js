@@ -1,4 +1,4 @@
-import Projects from "../../pages/projects/Projects";
+import Projects from "../../../pages/projects/Projects";  
 import { headers } from "next/headers";
 import Link from "next/link";
 import { Suspense } from 'react';
@@ -102,8 +102,6 @@ export default async function Home({ someParam }) {
   let limitProjects = projects;
   let selectedTheme = themes[0]
   let selectedType = types[0]
-  let optionsTheme = themes
-  let optionsType = types
 
   const filteredProjects = (iProjects = projects) => (iProjects || []).filter(project => {
       return (selectedTheme ? project.projectTheme === selectedTheme.value : true) &&
@@ -116,78 +114,7 @@ export default async function Home({ someParam }) {
   const initialProjects = filteredProjectList.slice(0, PAGE_SIZE);
   limitProjects = initialProjects;
 
-  const category = <>
-    <div className="projects-category">
-        <div className="projects-start__filters m-text">
-            <span style={{position:'relative'}} className="flex-sb">
-                <div className="switcher"/>
-                <div className="item" >
-                    <p>По отраслям</p>
-                </div>
-                <div className="item">
-                    <p>По услугам</p>
-                </div>
-            </span>
-        </div>
-        <div className={`projects-menu tapped`}>
-            <div className="main-projects__item-flex">
-                  {optionsTheme ? optionsTheme.map((project, index) => {
-                      const filterProjects = projects.filter(item => item.projectTheme === project.value && item.visibility);
-                      const totalSum = filterProjects.length.toString().padStart(2, '0');
-                      if (totalSum < 1) return null;
-                      return (
-
-                          <Link 
-                              href={`/projects/theme/${project.href}`}
-                              key={`index-${index}`}
-                              >
-                              <div className="main-projects__item-flex__inner" >
-                                  <span className={`main-projects__item-btn`}>
-                                      <span>
-                                          <p className="hover custom-cursor-link"
-                                              datahash="projectNav">
-                                              {project.label}
-                                          </p>
-                                      </span>
-                                      <div
-                                          className={`main-agency__item-header__num xs-text`}>
-                                          {totalSum}
-                                      </div>
-                                  </span>
-                              </div>
-                          </Link>
-                      );
-                  }) : null}
-    
-                  {optionsType ? optionsType.map((project, index) => {
-                      const filterProjects = projects.filter(item => item.projectType === project.value && item.visibility);
-                      const totalSum = filterProjects.length.toString().padStart(2, '0');
-                      if (totalSum < 1) return null;
-                      console.log(project)
-                      return (
-                          <Link 
-                              href={`/projects/type/${project.href}`} 
-                              key={`key-vlue-${index}`}
-                              >
-                              <div className="main-projects__item-flex__inner">
-                                  <span className={`main-projects__item-btn`}>
-                                      <span >
-                                          <p className="hover custom-cursor-link" datahash="projectNav">
-                                              {project.label}
-                                          </p>
-                                      </span>
-                                      <div className={`main-agency__item-header__num xs-text`}>
-                                          {totalSum}
-                                      </div>
-                                  </span>
-                              </div>
-                          </Link>
-                      );
-                  }) : null}
-            </div>
-        </div>
-    </div>
-</>
+ 
 
 
 const renderProject = (b) => <>{limitProjects ? limitProjects
@@ -250,7 +177,7 @@ const even = renderProject(false)
           <section id="projectNav" className="projects-content">
 
               <div className="container">
-                  {category}
+                  {/* {<>{category}</>} */}
                   <div className="projects__wrap">
                       <span className={"projects__wrap-span"}>
                           <div className="projects__wrap-column">{odd}</div>
