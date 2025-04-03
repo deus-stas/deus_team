@@ -111,7 +111,7 @@ const News = () => {
 
                                     return (
                                         <div className="flex-wrap" key={index}>
-                                            <Link href={`/news/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
+                                            <Link href={`/blog/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
                                                          key={item.id}>
                                                 {isVideo && <video autoPlay={shouldAutoPlay}
                                                                    muted
