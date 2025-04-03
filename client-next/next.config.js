@@ -71,6 +71,12 @@ const nextConfig = {
         hostname: 'deus.team',
         pathname: '**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '4554',
+        pathname: '/uploads/**',
+      },
     ],
   },
 

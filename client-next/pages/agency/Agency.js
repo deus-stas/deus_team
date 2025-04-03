@@ -317,7 +317,7 @@ const Agency = (props) => {
                                 };
 
                                 return (
-                                    <Link href={`/news/${award.blogUrl}`} className="agency-about__wrapp-btn"
+                                    <div className="agency-about__wrapp-btn"
                                                     key={award.id}>
                                         <img src={award.image ? `/uploads/${award.image.filename}` : null}
                                                 alt={award.name}/>
@@ -326,7 +326,7 @@ const Agency = (props) => {
                                                 <p className="name m-text">{award.name}</p>
                                         </span>
 
-                                    </Link>
+                                    </div>
                                 );
                             })}
                         </div>}

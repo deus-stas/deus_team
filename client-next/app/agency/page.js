@@ -125,7 +125,7 @@ export default async function Home() {
                           {awards.map(award => {
 
                               return (
-                                  <Link href={`/news/${award.blogUrl}`} className="agency-about__wrapp-btn"
+                                  <Link href={`/blog/${award.blogUrl}`} className="agency-about__wrapp-btn"
                                                   key={award.id}>
                                       <img src={award.image ? `/uploads/${award.image.filename}` : null}
                                               alt={award.name}/>
