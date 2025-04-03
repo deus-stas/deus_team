@@ -9,7 +9,7 @@ export default async function sitemap() {
   }))
 
   const blogUrls = blogs.map(blog => ({
-    url: `https://deus.team/news/${blog.urlName}`,
+    url: `https://deus.team/blog/${blog.urlName}`,
     lastModified: new Date(),
   }))
 
@@ -36,7 +36,7 @@ export default async function sitemap() {
       lastModified: new Date(),
     },
     {
-      url: 'https://deus.team/news',
+      url: 'https://deus.team/blog',
       lastModified: new Date(),
     },
     {
