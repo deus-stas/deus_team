@@ -261,7 +261,7 @@ export default async function Home() {
                                     const totalSum = filterProjects.length < 10 ? "0" + filterProjects.length : filterProjects.length;
                                     if (totalSum < 1) return null;
                                     return (<Link
-                                                href={`/projects?theme=${project.value}`}
+                                                href={`/projects/theme/${project.value}`}
                                                 key={`project-${project.value || index}`}>
                                         <div className="main-projects__item-flex__inner" >
                                             <span className="main-projects__item-btn">

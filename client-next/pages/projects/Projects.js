@@ -162,7 +162,7 @@ const Projects = () => {
                 response.data.forEach((item, i) => {
                     const {id, name, key} = item;
                     projectOptionsType[i] = {value: id, label: name, href:key}
-                })
+                })   
                 setOptionsType(projectOptionsType)
                 if (!!cb) {
                     cb()
