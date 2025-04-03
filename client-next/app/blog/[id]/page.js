@@ -210,7 +210,7 @@ export default async function NewsPage({ params }) {
                                         <div className={`flex-wrap `}
                                             key={item.id}
                                                >
-                                            <Link href={`/news/${item.urlName}`}
+                                            <Link href={`/blog/${item.urlName}`}
                                                           className="news__item  slider">
                                                     {isVideo && (
                                                         <video

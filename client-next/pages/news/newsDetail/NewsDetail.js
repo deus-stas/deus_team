@@ -324,7 +324,7 @@ const NewsDetail = () => {
                                                         key={item.id}
                                                          style={{transform: `translateX(-${currentSlide * 100}%)`, transition: 'transform 0.3s ease-out'}}
                                                     >
-                                                        <Link href={`/news/${item.urlName}`}
+                                                        <Link href={`/blog/${item.urlName}`}
                                                                      className="news__item  slider">
                                                                 {isVideo && (
                                                                     <video

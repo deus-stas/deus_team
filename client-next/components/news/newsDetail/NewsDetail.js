@@ -273,7 +273,7 @@ const NewsDetail = () => {
                                                         key={item.id}
                                                          style={{transform: `translateX(-${currentSlide * 100}%)`, transition: 'transform 0.3s ease-out'}}
                                                     >
-                                                        <DelayedLink to={`/news/${item.urlName}`}
+                                                        <DelayedLink to={`/blog/${item.urlName}`}
                                                                      className="news__item  slider">
                                                                 {isVideo && (
                                                                     <video
