@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 import {Provider} from "react-redux";
 
-import AppHeader from '../components/appHeader/AppHeader';
+import AppHeaderNext from "../components/appHeaderNext/AppHeaderNext";
 import AppFooter from "../components/appFooter/AppFooter";
 import "custom-cursor-react/dist/index.css";
 
@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
           ></div>
 
           {/* Хедер */}
-          {!shouldHideHeaderFooter && <AppHeader />}
+          {!shouldHideHeaderFooter && <AppHeaderNext />}
 
           {/* Основное содержимое */}
           <main>
