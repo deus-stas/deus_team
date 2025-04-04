@@ -179,12 +179,20 @@ const Services = () => {
                                                     <h2 href={`/services/${service.path}`}
                                                          className="heading-secondary"
                                                          key={service.id}>
-                                                        <Link href={`/projects/type/${service.path.toLowerCase()}`}
-                                                                     disabled={!service.types || service.types.length === 0}
-                                                                     datahash="projectNav"
-                                                                     onClick={(e) => gotoAnchor(e)}>
-                                                            <div className="services-s__name">{service.name}</div>
-                                                        </Link>
+                                                        {service.path !== 'null' ? 
+                                                            <Link href={`/projects/type/${service.path.toLowerCase()}`}
+                                                                        disabled={!service.path || service.path === 0 }
+                                                                        datahash="projectNav"
+                                                                        onClick={(e) => gotoAnchor(e)}>
+                                                                <div className="services-s__name">{service.name}</div>
+                                                            </Link>
+                                                        :
+                                                            <div
+                                                                datahash="projectNav"
+                                                                >
+                                                                <div className="services-s__name">{service.name}</div>
+                                                            </div>
+                                                        }
                                                     </h2>
                                                     <div className="describe__wrapp ">
                                                         <p className="s-text">

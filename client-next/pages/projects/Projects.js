@@ -57,10 +57,6 @@ const Projects = () => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-
-
-
-
             const onResizeEvent = () => {
                 setWindowWidth(window.innerWidth);
             };
@@ -76,6 +72,7 @@ const Projects = () => {
     useEffect(() => {
         setIsMobile(windowWidth <= MOBILE_SIZE)
     }, [windowWidth])
+
 
 
     const THEME_KEY = 'theme'
@@ -149,10 +146,34 @@ const Projects = () => {
 
     useEffect(() => {
         updateOptionsTheme(optionsTheme);
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        if(pathSegments.length === 3) {
+            const typeKey = pathSegments[pathSegments.length - 2];
+            console.log('test', typeKey);
+            if(typeKey === 'theme') {
+                setMenuTheme(true);
+                setMenuType(false);
+            } else {     
+                setMenuTheme(false);
+                setMenuType(true);
+            }
+        }
     }, [optionsTheme])
 
     useEffect(() => {
         updateOptionsType(optionsType)
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        if(pathSegments.length === 3) {
+            const typeKey = pathSegments[pathSegments.length - 2];
+            console.log('test', typeKey);
+            if(typeKey === 'theme') {
+                setMenuTheme(true);
+                setMenuType(false);
+            } else {     
+                setMenuTheme(false);
+                setMenuType(true);
+            }
+        }
     }, [optionsType])
 
     const loadTypes = (cb) => {
