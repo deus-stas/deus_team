@@ -118,7 +118,18 @@ const Services = () => {
     // }
 
     // const {headerData, services, team, projects} = props;
-
+    // const checkService = () => {
+    //     switch(key) {
+    //         case '66d1bb8ca3db9fa6832bea54': 
+    //             return 'tech-support';
+    //         case '66d1bb21a3db9fa6832be9d3': 
+    //             return 'site-and-services';
+    //         case '66d1bb8ca3db9fa6832bea54': 
+    //             return 'tech-support';
+    //         case '66d1bb8ca3db9fa6832bea54': 
+    //             return 'tech-support';
+    //     }
+    // }
     return (
         <>
             <Cursor/>
@@ -161,13 +172,14 @@ const Services = () => {
                             <div className="services-list__wrapp borderBlock padding">
                                 {
                                     !!services && services.filter((service) => service.isInvisible).map((service, index) => {
+                                        console.log('service',service);
                                         return (
                                             <div className="services-list__wrapp-item" key={`$services-list-${index}`}>
                                                 <div className="describe">
                                                     <h2 href={`/services/${service.path}`}
                                                          className="heading-secondary"
                                                          key={service.id}>
-                                                        <Link href={`/projects?type=${service.types}`}
+                                                        <Link href={`/projects/type/${service.path.toLowerCase()}`}
                                                                      disabled={!service.types || service.types.length === 0}
                                                                      datahash="projectNav"
                                                                      onClick={(e) => gotoAnchor(e)}>

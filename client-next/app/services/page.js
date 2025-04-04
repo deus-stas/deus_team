@@ -117,7 +117,7 @@ export default async function Home() {
                                               <h2 href={`/services/${service.path}`}
                                                     className="heading-secondary"
                                                     key={service.id}>
-                                                  <Link href={`/projects?type=${service.types}`}
+                                                  <Link href={`/projects/type.${service.path.toLowerCase()}`}
                                                                 datahash="projectNav"
                                                                 >
                                                       <div className="services-s__name">{service.name}</div>
