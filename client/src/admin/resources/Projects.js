@@ -884,7 +884,9 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="taskDo"
             placeholder="Мы разработали..."
-            label="Описание блока Шрифт и детали"/>
+            label="Описание блока Шрифт и детали"
+            multiline rows={5}
+        />
 
         <p>Список баннеров</p>
         <BooleanInput
@@ -917,7 +919,9 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="approach"
             placeholder="Мы разработали..."
-            label="Описание блока Паттерн"/>
+            label="Описание блока Паттерн"
+            multiline rows={5}
+        />
         <p>Список баннеров</p>
         <BooleanInput
             source="control4"
@@ -1438,6 +1442,7 @@ export const DefaultFields = () => {
                     className="customWidth"
                     source="descrProject"
                     label="Описание проекта"
+                    multiline rows={5}
                 />
 
                 <BooleanInput
@@ -1481,7 +1486,9 @@ export const DefaultFields = () => {
                     <TextInput
                         className="customWidth"
                         source="about"
-                        label="Описание о клиенте"/>
+                        label="Описание о клиенте"
+                        multiline rows={5}
+                    />
                   <TextInput
                       className="customWidth"
                       source="projectSite"

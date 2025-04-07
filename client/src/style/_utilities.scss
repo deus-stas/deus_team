@@ -31,8 +31,14 @@
 }
 .customWidth {
     width: 450px !important;
-    margin: 40px 0 !important;
+    margin: 10px 0 20px 0 !important;
     word-wrap: break-word;
+}
+video.customWidth {
+    width: 200px !important;
+}
+img.customWidth {
+    width: 200px !important;
 }
 .customWidth #body {
     width: 600px !important;
@@ -49,11 +55,14 @@
 .editForm label span, .editForm .RaLabeled-label span, .editForm .RaArrayInput-label span {
     font-size: 20px !important;
 }
+
 .fileInput .RaFileInput-dropZone {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 40px;
+    width: 40px;
+    height: 40px;
 }
 .editForm .RaSimpleFormIterator-buttons .MuiSvgIcon-root {
     font-size: 4rem !important;
@@ -102,4 +111,15 @@
 
 .fileInput{
     width: 20rem !important;
+}
+.RaSimpleFormIterator-line {
+    background-color: #EEEEEE;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 25%;
+}
+
+.RaSimpleFormIterator-list {
+    display: flex;
+    flex-wrap: wrap;
 }
