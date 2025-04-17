@@ -210,11 +210,11 @@ const AppFooter = (props) => {
                                                     data-hover="Агентство">Агентство</span></Link>
                                             </li>
                                             <li className="footer__pages-item hover-flip ">
-                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/projects"><span
+                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/services"><span
                                                     data-hover="Услуги">Услуги</span></Link>
                                             </li>
                                             <li className="footer__pages-item hover-flip">
-                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/services"><span
+                                                <Link onClick={(e) => closeMenu(e, '/contacts')} href="/projects"><span
                                                     data-hover="Проекты">Проекты</span></Link>
                                             </li>
 
