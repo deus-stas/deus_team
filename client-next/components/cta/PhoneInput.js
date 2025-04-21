@@ -116,7 +116,7 @@ const PhoneInput = ({ setFieldValue, value }) => {
       onFocus={handleFocus}
       placeholder="Ваш номер"
       className="form__input m-text"
-      style={{ caretColor: 'transparent' }} // Скрываем курсор
+      style={{ caretColor: 'auto' }} // Скрываем курсор
     />
   );
 };
