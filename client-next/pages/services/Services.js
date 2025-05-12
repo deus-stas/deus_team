@@ -97,8 +97,8 @@ const Services = () => {
       }, [isLoading]);
 
 
-
-    const sizeLarge = 'Объединяем аналитику, маркетинг, дизайн, разработку<br/> и интеграции в единую систему для получения<br/> максимальной эффективности для вашего бизнеса'
+    const sizeLarge = 'DEUS — это не шаблонные решения, а подход, который <br/> строится под ваш конкретный запрос. Мы не просто <br/> выполняем задачи, а работаем с проектом <br/> от начала до конца: изучаем ваши цели, <br/> предлагаем решения, внедряем их и помогаем <br/> поддерживать результат. Наша задача — сделать так, <br/> чтобы все работало именно для вас, <br/> без лишней сложности и абстрактных обещаний.'
+    // const sizeLarge = 'Объединяем аналитику, маркетинг, дизайн, разработку<br/> и интеграции в единую систему для получения<br/> максимальной эффективности для вашего бизнеса'
     const sizeSmall = 'Объединяем аналитику, маркетинг, дизайн,<br/> разработку и интеграции в единую систему<br/> для получения максимальной эффективности<br/> для вашего бизнеса'
     const sizeXSmall = 'Объединяем аналитику, маркетинг, дизайн, разработку и интеграции в единую систему для получения максимальной эффективности для вашего бизнеса'
 
@@ -140,13 +140,13 @@ const Services = () => {
                         <section className="services-s">
                          <span className="services-s__text">
                                 <p className="breadcrumb">Услуги</p>
-                                <h1 className="heading-primary">Отвечаем за качество <br/> своих услуг</h1>
+                                <h1 className="heading-primary">Наши решения для <br/> вашего бизнеса</h1>
                          </span>
                         </section>
                         <section className="services-about borderBlock padding">
                             <div className="services-about__wrap">
                                 <span className="info">
-                                   <h2 className="heading-secondary">Почему стоит заказать<br/> разработку сайта в DEUS?</h2>
+                                   <h2 className="heading-secondary">Почему стоит работать с нами?</h2>
                                 <div className="descr s-text" dangerouslySetInnerHTML={{__html: text}}/>
                                 </span>
                                 <div className="services-about__adv">
@@ -177,14 +177,16 @@ const Services = () => {
                                             <div className="services-list__wrapp-item" key={`$services-list-${index}`}>
                                                 <div className="describe">
                                                     <h2 href={`/services/${service.path}`}
-                                                         className="heading-secondary"
+                                                         className="heading-secondary hover-flip"
                                                          key={service.id}>
                                                         {service.path !== 'null' ? 
                                                             <Link href={`/projects/type/${service.path.toLowerCase()}`}
                                                                         disabled={!service.path || service.path === 0 }
                                                                         datahash="projectNav"
                                                                         onClick={(e) => gotoAnchor(e)}>
-                                                                <div className="services-s__name">{service.name}</div>
+                                                                <div className="services-s__name">
+                                                                    <span data-hover={service.name}>{service.name}</span>
+                                                                </div>
                                                             </Link>
                                                         :
                                                             <div
