@@ -108,7 +108,7 @@ export default async function Home({ params }) {
 
   return (
     <>
-      <main id="toUp" className="project">
+      {/* <main id="toUp" className="project">
         <div className="container">
           <section className="project-main">
             <span className="project-maint__text">
@@ -151,7 +151,7 @@ export default async function Home({ params }) {
             </div>
           )}
         </div>
-      </main>
+      </main> */}
       <ProjectDetail initialData={projectData} />
     </>
   );

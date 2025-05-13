@@ -177,7 +177,7 @@ const Services = () => {
                                             <div className="services-list__wrapp-item" key={`$services-list-${index}`}>
                                                 <div className="describe">
                                                     <h2 href={`/services/${service.path}`}
-                                                         className="heading-secondary hover-flip"
+                                                         className="heading-secondary hover-flip service-title"
                                                          key={service.id}>
                                                         {service.path !== 'null' ? 
                                                             <Link href={`/projects/type/${service.path.toLowerCase()}`}

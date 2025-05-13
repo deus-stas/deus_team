@@ -16,6 +16,10 @@
   border-radius: 21rem;
   display: block;
   object-fit: cover;
+  @media (max-width: 768px) {
+    height: 7rem;
+    width: 5rem;
+  }
 }
 
 .agency-team__wrap .main-clients__container {
@@ -27,4 +31,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 9rem;
+    margin-left: 15px;
+  }
 }
