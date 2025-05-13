@@ -38,7 +38,7 @@ router.get('/working', async (req, res) => {
 });
 
 router.post('/working', upload.single('file'), async (req, res) => {
-    const {name, descr} = req.body;
+    const {name, descr, visibility} = req.body;
     console.log(req.file);
 
     const file = req.file;
