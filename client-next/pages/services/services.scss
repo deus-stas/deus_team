@@ -545,3 +545,13 @@
 
 }
 
+.service-title {
+    a {
+        transition: color .4s, opacity 0.3s ease-in;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+}
+

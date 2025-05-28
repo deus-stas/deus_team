@@ -654,11 +654,12 @@
         @include respond(sm) {
           top: 9rem;
           flex-wrap: wrap;
+          flex-direction: column;
           font-size: 1.4rem;
         }
 
         @include respond(xs) {
-          top: 13.197rem;
+          top: 9rem;
           padding: 0 2rem 3rem;
         }
 
@@ -1325,4 +1326,9 @@
   pointer-events: none; /* Чтобы круг не блокировал клики */
   transform: translate(-50%, -50%); /* Центрирование круга относительно курсора */
   transition: transform 0.1s ease-out; /* Плавная анимация */
+}
+
+.workers-list {
+  display: flex;
+  height: max-content;
 }

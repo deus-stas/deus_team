@@ -392,7 +392,7 @@ const MainPage = (props) => {
                                     const arrow = index !== 1;
 
                                     const workers = index === 0 && (
-                                        <div key={`workers-${index}`}>
+                                        <div className="workers-list" key={`workers-${index}`}>
                                             {team
                                                 .filter((teamMember) => teamMember.mainControl)
                                                 .slice(0, 3)

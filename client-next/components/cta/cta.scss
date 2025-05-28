@@ -203,3 +203,18 @@
     top: 15rem;
 }
 
+.form__label {
+    top: 4px !important;
+}
+
+.form__error {
+    top: 0;
+    right: 10px;
+    font-size: 15px;
+
+    @media (max-width: 1140px) {
+        top: 0;
+        right: 10px;
+        font-size: 11px;
+    }
+}

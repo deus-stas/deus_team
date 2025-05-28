@@ -321,16 +321,7 @@ const Cta = (props) => {
                                         <div className="form__wrap m-text">
                                             <div className={`form__group ${errors.phone && touched.phone ? 'error' : ''}`}>
                                                 {values.phone && <label htmlFor="phone" className="form__label xs-text">Номер телефона</label>}
-                                                    <PhoneInput type="text" name="phone" className="form__input m-text" onInput={handleInput}  onKeyDown={handleKeyDown} onChange={handleChange} value={values.phone} setFieldValue={setFieldValue} placeholder="Номер телефона" mask="+7 (999) 999-99-99" />                                                    
-                                                {/* <InputMask type="text" name="phone" className="form__input m-text" onChange={handleChange} value={values.phone} placeholder="Номер телефона" mask="+7 (999) 999-99-99" /> */}
-                                                {/* <InputMask
-                                                    mask="+7 (999) 999-99-99"
-                                                    value={values.phone}
-                                                    onChange={handleChange}
-                                                    alwaysShowMask={false} // Убедитесь, что props корректные
-                                                >
-                                                    {() => <input type="text" placeholder="Ваш телефон" name="phone" className="form__input m-text" />}
-                                                </InputMask> */}
+                                                    <PhoneInput type="text" name="phone" className="form__input m-text" onInput={handleInput}  onKeyDown={handleKeyDown} onChange={handleChange} value={values.phone} setFieldValue={setFieldValue} placeholder="Номер телефона" mask="+7 (999) 999-99-99" /> 
                                                 <div className="form__error">{errors.phone && touched.phone && errors.phone}</div>
                                             </div>
                                             <div className={`form__group ${errors.email && touched.email ? 'error' : ''}`}>

@@ -665,6 +665,7 @@ main {
     }
     @include respond(xs) {
         padding: 2rem;
+        padding-bottom: 2rem !important;
     }
 }
 
@@ -719,4 +720,10 @@ main {
       }
     }
 
+  }
+
+  .info {
+    @include respond(xs) {
+        margin-top: 2rem;
+    }
   }
