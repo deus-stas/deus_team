@@ -1,4 +1,4 @@
-import Projects from "../../../pages/projects/Projects";  
+import Projects from "../../../pages/projects/Projects";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { Suspense } from 'react';
@@ -41,7 +41,6 @@ async function getTypes() {
 
 
 export async function generateMetadata() {
-  
   const headersList = headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
@@ -95,7 +94,7 @@ export default async function Home({ someParam }) {
     getThemes(),
     getTypes()
   ]);
-  
+
   const searchParams = someParam;
   // console.log(someParam);
 
@@ -109,12 +108,12 @@ export default async function Home({ someParam }) {
         })
 
   const PAGE_SIZE = 10
-  
+
   const filteredProjectList = filteredProjects(projects || []);
   const initialProjects = filteredProjectList.slice(0, PAGE_SIZE);
   limitProjects = initialProjects;
 
- 
+
 
 
 const renderProject = (b) => <>{limitProjects ? limitProjects
@@ -132,7 +131,7 @@ const renderProject = (b) => <>{limitProjects ? limitProjects
                     key={project.id}
                 >
                     <div className="projects__item-img-wrap">
-                    
+
                     </div>
                 </Link>
                 <span className="projects-decription m-text">
@@ -198,7 +197,7 @@ const even = renderProject(false)
           </section>
 
         </div>
-          
+
       </>
     );
   }

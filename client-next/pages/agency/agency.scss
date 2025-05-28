@@ -823,6 +823,248 @@
             }
         }
     }
+
+    &-group{
+        margin: 7rem 0;
+
+        .heading-secondary{
+            max-width: 57rem;
+        }
+
+        &__wrap{
+            margin-top: 2rem;
+        }
+
+        &__list{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        &__item{
+
+            &.group-item{
+                display: flex;
+                align-items: center;
+                gap: 20rem;
+                font-size: 1.6rem;
+                line-height: 150%;
+                letter-spacing: -0.03em;
+                padding: 5.4rem 5rem;
+                border-radius: 3rem;
+                color: #FFFFFF;
+                position: relative;
+
+                @include respond(lg){
+                    gap: 8.5rem;
+                }
+
+                @include respond(sm) {
+                    gap: 3.3rem;
+                }
+
+                @include respond(xs){
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    gap: 1.2rem;
+                    padding: 3rem 3rem;
+                    height: 15rem;
+                }
+
+                &.-one{
+                    background-color: #161616;
+
+                    .group-item__arrow{
+                        position: absolute;
+                        top: 10%;
+                        right: 15%;
+
+                        @include respond(lg){
+                            display: none;
+                        }
+                    }
+                }
+
+                &.-two{
+
+                    background-color: #8FAEC9;
+                    position: relative;
+
+                    background-image: url("/img/agency/bg-2-1.svg"), url("/img/agency/bg-2-2.svg");
+                    background-repeat: no-repeat;
+                    background-position: left 13rem bottom , right 0 ;
+
+                    //@include respond(xl){
+                    //    background-position: right bottom;
+                    //}
+                    //
+                    //@include respond(xlg){
+                    //    background-position: right -15rem bottom;
+                    //}
+                    //
+                    //@include respond(lg){
+                    //    background-position: right -35% bottom;
+                    //}
+                    //
+                    //@include respond(md) {
+                    //    background-position: right -44rem bottom;
+                    //}
+                    //
+                    //@include respond(sm) {
+                    //    background-position: right -46rem bottom;
+                    //}
+                    //
+                    //@include respond(xs){
+                    //    background-position: right -120rem bottom;
+                    //}
+
+                    .group-item__arrow{
+                        position: absolute;
+                        bottom: 0;
+                        right: 35%;
+
+                        @include respond(lg){
+                            display: none;
+                        }
+                    }
+
+                    .group-item__text{
+                        position: relative;
+                    }
+
+                    .group-item__soon{
+                        position: absolute;
+                        top: -3rem;
+                        left: -3rem;
+                        transform: rotate(-15deg);
+                        text-transform: uppercase;
+                        font-size: 1.2rem;
+                        line-height: 140%;
+                        letter-spacing: -0.03em;
+                        padding: .6rem 1rem;
+                        border-radius: 6.9rem;
+                        background-color: #C6AF87;
+
+                        @include respond(sm) {
+                            left: inherit;
+                        }
+
+                        @include respond(xs){
+                            display: none;
+                        }
+
+                        &.-block{
+                            display: none;
+                            right: 2rem;
+                            transform: rotate(0deg);
+                            top: 2rem;
+
+                            @include respond(xs){
+                                display: block;
+                            }
+                        }
+
+                    }
+                }
+
+                &.-three{
+                    background-color: #ADD7E4;
+                    color: #1C90B6;
+
+                    background-image: url("/img/agency/bg-3.svg");
+                    background-repeat: no-repeat;
+                    background-position: right 7% bottom;
+
+                    @include respond(xl){
+                        background-position: right bottom;
+                    }
+
+                    @include respond(xlg){
+                        background-position: right -15rem bottom;
+                    }
+
+                    @include respond(lg){
+                        background-position: right -35% bottom;
+                    }
+
+                    @include respond(md) {
+                        background-position: right -44rem bottom;
+                    }
+
+                    @include respond(sm) {
+                        background-position: right -46rem bottom;
+                    }
+
+                    @include respond(xs){
+                        background-position: right -120rem bottom;
+                    }
+
+                    .group-item__arrow{
+                        position: absolute;
+                        bottom: 10%;
+                        right: 10%;
+
+                        @include respond(lg){
+                            display: none;
+                        }
+                    }
+                }
+
+                &.-four{
+                    background-color: #5E3AAA;
+                    position: relative;
+
+                    .group-item__arrow{
+                        position: absolute;
+                        bottom: 10%;
+                        right: 25%;
+
+                        @include respond(lg){
+                            display: none;
+                        }
+                    }
+
+                    .group-item__text{
+                        position: relative;
+                    }
+
+                    .group-item__soon{
+                        position: absolute;
+                        top: -3rem;
+                        left: -3rem;
+                        transform: rotate(-15deg);
+                        text-transform: uppercase;
+                        font-size: 1.2rem;
+                        line-height: 140%;
+                        letter-spacing: -0.03em;
+                        padding: .6rem 1rem;
+                        border-radius: 6.9rem;
+                        background-color: #E79925;
+
+                        @include respond(sm) {
+                            left: inherit;
+                        }
+
+                        @include respond(xs){
+                            display: none;
+                        }
+
+                        &.-block{
+                            display: none;
+                            right: 2rem;
+                            transform: rotate(0deg);
+                            top: 2rem;
+
+                            @include respond(xs){
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .flex-sb {

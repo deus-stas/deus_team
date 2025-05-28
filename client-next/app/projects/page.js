@@ -41,7 +41,6 @@ async function getTypes() {
 
 
 export async function generateMetadata() {
-  
   const headersList = headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
@@ -95,7 +94,7 @@ export default async function Home({ someParam }) {
     getThemes(),
     getTypes()
   ]);
-  
+
   const searchParams = someParam;
   // console.log(someParam);
 
@@ -111,7 +110,7 @@ export default async function Home({ someParam }) {
         })
 
   const PAGE_SIZE = 10
-  
+
   const filteredProjectList = filteredProjects(projects || []);
   const initialProjects = filteredProjectList.slice(0, PAGE_SIZE);
   limitProjects = initialProjects;
@@ -137,7 +136,7 @@ export default async function Home({ someParam }) {
                       if (totalSum < 1) return null;
                       return (
 
-                          <Link 
+                          <Link
                               href={`/projects/theme/${project.href}`}
                               key={`index-${index}`}
                               >
@@ -158,15 +157,15 @@ export default async function Home({ someParam }) {
                           </Link>
                       );
                   }) : null}
-    
+
                   {optionsType ? optionsType.map((project, index) => {
                       const filterProjects = projects.filter(item => item.projectType === project.value && item.visibility);
                       const totalSum = filterProjects.length.toString().padStart(2, '0');
                       if (totalSum < 1) return null;
                       console.log(project)
                       return (
-                          <Link 
-                              href={`/projects/type/${project.href}`} 
+                          <Link
+                              href={`/projects/type/${project.href}`}
                               key={`key-vlue-${index}`}
                               >
                               <div className="main-projects__item-flex__inner">
@@ -205,7 +204,7 @@ const renderProject = (b) => <>{limitProjects ? limitProjects
                     key={project.id}
                 >
                     <div className="projects__item-img-wrap">
-                    
+
                     </div>
                 </Link>
                 <span className="projects-decription m-text">
@@ -271,7 +270,7 @@ const even = renderProject(false)
           </section>
 
         </div>
-          
+
       </>
     );
   }
