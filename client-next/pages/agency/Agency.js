@@ -550,6 +550,42 @@ const Agency = (props) => {
                     </section>
                 )}
 
+                <section className="agency-group">
+                    <h2 className="heading-secondary">DEUS — группа компаний, объединённых общими принципами, миссией и подходами</h2>
+                    <div className="agency-group__wrap">
+                        <div className="agency-group__list">
+                            <div className="agency-group__item group-item -one">
+                                <img className="group-item__logo" src="img/agency/redtape.svg"/>
+                                <div className="group-item__text">Создание видео для брендов</div>
+                                <img className="group-item__arrow" src="/img/group/icon-1.svg"/>
+                            </div>
+                            <div className="agency-group__item group-item -two">
+                                <img className="group-item__logo" src="img/agency/sellbox.svg"/>
+                                <div className="group-item__text">
+                                    CRM система для учёта объектов недвижимости
+                                    <span className="group-item__soon">Скоро</span>
+                                </div>
+                                <span className="group-item__soon -block">Скоро</span>
+                                <img className="group-item__arrow" src="/img/group/icon-2.svg"/>
+                            </div>
+                            <div className="agency-group__item group-item -three">
+                                <img className="group-item__logo" src="img/agency/adspotter.svg"/>
+                                <div className="group-item__text">Рекламные показы на различных цифровых экранах</div>
+                                <img className="group-item__arrow" src="/img/group/icon-3.svg"/>
+                            </div>
+                            <div className="agency-group__item group-item -four">
+                                <img className="group-item__logo" src="img/agency/deus-2.svg"/>
+                                <div className="group-item__text">
+                                    Корпоративные подарки для вашей компании
+                                    <span className="group-item__soon">Скоро</span>
+                                </div>
+                                <span className="group-item__soon -block">Скоро</span>
+                                <img className="group-item__arrow" src="/img/group/icon-4.svg"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {vacancies && (
                     <section id="agency" className="agency-vacancy">
                         <div className="agency-vacancy__wrap">
