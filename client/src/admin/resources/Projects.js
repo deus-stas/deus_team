@@ -330,7 +330,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo"
                 placeholder="Мы разработали..."
@@ -365,7 +365,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="stageName"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="approach"
                 placeholder="Мы разработали..."
@@ -660,7 +660,7 @@ export const SEORender = () => {
                 className="customWidth"
                 source="task"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo"
                 placeholder="Мы разработали..."
@@ -915,7 +915,7 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="stageName"
             label="Заголовок слева"/>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="approach"
             placeholder="Мы разработали..."
@@ -982,7 +982,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo"
                 placeholder="Мы разработали..."
@@ -1017,7 +1017,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="stageName"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="approach"
                 placeholder="Мы разработали..."

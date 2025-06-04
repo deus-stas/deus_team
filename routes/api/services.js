@@ -56,15 +56,19 @@ router.get('/services', async (req, res) => {
     res.json(services);
 });
 
-router.post('/services', addPosition, upload.single('brief'), async (req, res) => {
+router.post('/services', upload.fields([{name: 'serviceBanner'}, {name: 'brief'}]), addPosition, async (req, res) => {
     console.log(req.body);
 
-    const brief = req.file;
+    const brief = req.files.brief ? req.files.brief[0] : undefined;
     const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' ? JSON.parse(req.body.benefits) : [];
     const work = !!req.body.work && req.body.work !== 'undefined' ? JSON.parse(req.body.work) : [];
-    const tariffs = req.body.tariffs && req.body.tariffs!== 'undefined' ? JSON.parse(req.body.tariffs) : [];
-     const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' ? JSON.parse(req.body.subProjects) : [];
-
+    const tariffs = req.body.tariffs && req.body.tariffs !== 'undefined' ? JSON.parse(req.body.tariffs) : [];
+    const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' ? JSON.parse(req.body.subProjects) : [];
+    const whyChooseUsOptions = req.body.whyChooseUsOptions && req.body.whyChooseUsOptions !== 'undefined' ? JSON.parse(req.body.whyChooseUsOptions) : [];
+    const serviceIncludesOptions = req.body.serviceIncludesOptions && req.body.serviceIncludesOptions !== 'undefined' ? JSON.parse(req.body.serviceIncludesOptions) : [];
+    const faqOptions = req.body.faqOptions && req.body.faqOptions !== 'undefined' ? JSON.parse(req.body.faqOptions) : [];
+    const asproTemplatesOptions = req.body.asproTemplatesOptions && req.body.asproTemplatesOptions !== 'undefined' ? JSON.parse(req.body.asproTemplatesOptions) : [];
+    
     const {
         name,
         types,
@@ -77,7 +81,12 @@ router.post('/services', addPosition, upload.single('brief'), async (req, res) =
         seoTitle,
         seoDescription,
         seoKeywords,
-        isInvisible
+        isInvisible,
+        serviceIncludesTitle,
+        serviceIncludesDescription,
+        faqTitle,
+        asproTemplatesTitle,
+        asproTemplatesDescription,
     } = req.body;
 
     var a = {
@@ -157,13 +166,23 @@ router.post('/services', addPosition, upload.single('brief'), async (req, res) =
 
     const path = editedWithLine
 
+    const serviceBanner = req.files.serviceBanner ? req.files.serviceBanner[0] : undefined;
+
     const services = new Services({
         name,
         types,
         brief,
+        description,
         descrTotal,
         descr,
         benefitsTitle,
+        whyChooseUsTitle,
+        whyChooseUsOptions,
+        serviceIncludesTitle,
+        serviceIncludesDescription,
+        serviceIncludesOptions,
+        faqTitle,
+        faqOptions,
         benefits,
         servicesServices,
         work,
@@ -175,7 +194,11 @@ router.post('/services', addPosition, upload.single('brief'), async (req, res) =
         seoTitle,
         seoDescription,
         seoKeywords,
-        isInvisible
+        isInvisible,
+        asproTemplatesTitle,
+        asproTemplatesDescription,
+        asproTemplatesOptions,
+        serviceBanner,
     });
 
     await services.save();
@@ -205,7 +228,7 @@ router.get('/services/:id', async (req, res) => {
     }
 });
 
-router.put("/services/:id", upload.single('brief'), async (req, res) => {
+router.put("/services/:id", upload.fields([{name: 'serviceBanner'}, {name: 'brief'}]), async (req, res) => {
     try {
         const {id} = req.params;
 
@@ -213,16 +236,23 @@ router.put("/services/:id", upload.single('brief'), async (req, res) => {
             position,
             name,
             types,
+            description,
             descrTotal,
             descr,
             benefitsTitle,
+            whyChooseUsTitle,
+            serviceIncludesTitle,
+            serviceIncludesDescription,
             servicesServices,
             blockTitle,
             path,
             seoTitle,
             seoDescription,
             seoKeywords,
-            isInvisible
+            isInvisible,
+            faqTitle,
+            asproTemplatesTitle,
+            asproTemplatesDescription,
         } = req.body;
         const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' && typeof req.body.benefits === 'string'
             ? JSON.parse(req.body.benefits)
@@ -232,7 +262,10 @@ router.put("/services/:id", upload.single('brief'), async (req, res) => {
             : [];
 
         const tariffs = req.body.tariffs && req.body.tariffs!== 'undefined' ? JSON.parse(req.body.tariffs) : [];
-
+        const whyChooseUsOptions = req.body.whyChooseUsOptions && req.body.whyChooseUsOptions!== 'undefined' ? JSON.parse(req.body.whyChooseUsOptions) : [];
+        const serviceIncludesOptions = req.body.serviceIncludesOptions && req.body.serviceIncludesOptions!== 'undefined' ? JSON.parse(req.body.serviceIncludesOptions) : [];
+        const faqOptions = req.body.faqOptions && req.body.faqOptions !== 'undefined' ? JSON.parse(req.body.faqOptions) : [];
+        const asproTemplatesOptions = req.body.asproTemplatesOptions && req.body.asproTemplatesOptions!== 'undefined' ? JSON.parse(req.body.asproTemplatesOptions) : [];
 
         const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' && typeof req.body.subProjects === 'string'
             ? JSON.parse(req.body.subProjects)
@@ -244,7 +277,7 @@ router.put("/services/:id", upload.single('brief'), async (req, res) => {
             return res.status(404).json({error: 'Service not found'});
         }
 
-        const brief = req.file ? req.file : undefined;
+        const brief = req.files.brief ? req.files.brief[0] : undefined;
         uploadFile(brief, 'brief', service, req, 'brief')
 
         const oldServicesServices = service.servicesServices;
@@ -259,13 +292,51 @@ router.put("/services/:id", upload.single('brief'), async (req, res) => {
         // var rmPercent = editedName.replace("%",'');
         // var editedWithLine = rmPercent.split(' ').join('-');
         // service.path = editedWithLine
+        const serviceBanner = req.files.serviceBanner ? req.files.serviceBanner[0] : undefined;
+
+        if (serviceBanner) {
+            if (service.serviceBanner) {
+                const path = `uploads/${service.serviceBanner.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+            }
+            service.serviceBanner = serviceBanner;
+        } else {
+            if (service.serviceBanner && service.serviceBanner.path && req.body.serviceBanner !== 'true') {
+                const path = `uploads/${service.serviceBanner.filename}`
+                if (fs.existsSync(path)) {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                    });
+                }
+
+                service.serviceBanner = null;
+            }
+        }
 
         // Update the fields of the service
         service.position = position;
         service.name = name;
+        service.types = types;
+        service.description = description;
         service.descrTotal = descrTotal;
         service.descr = descr;
         service.benefitsTitle = benefitsTitle;
+        service.whyChooseUsTitle = whyChooseUsTitle;
+        service.whyChooseUsOptions = whyChooseUsOptions;
+        service.serviceIncludesTitle = serviceIncludesTitle;
+        service.serviceIncludesDescription = serviceIncludesDescription;
+        service.serviceIncludesOptions = serviceIncludesOptions;
+        service.faqTitle = faqTitle;
+        service.faqOptions = faqOptions;
         service.benefits = benefits;
         service.servicesServices = servicesServices;
         service.work = work;
@@ -277,8 +348,9 @@ router.put("/services/:id", upload.single('brief'), async (req, res) => {
         service.seoTitle = seoTitle;
         service.seoDescription = seoDescription;
         service.seoKeywords = seoKeywords;
-        service.types = types;
-
+        service.asproTemplatesTitle = asproTemplatesTitle,
+        service.asproTemplatesDescription = asproTemplatesDescription,
+        service.asproTemplatesOptions = asproTemplatesOptions;
         await service.save();
 
         if (position !== oldPosition) {
