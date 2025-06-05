@@ -35,6 +35,7 @@ export async function generateMetadata() {
 
     const seoData = await response.json();
     const data = seoData.find((el) => el.name === "Услуги");
+    
 
     return {
       title: data?.seoTitle || "Услуги",
