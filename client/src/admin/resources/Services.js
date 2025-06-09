@@ -132,56 +132,88 @@ export const ServicesCreate = (props) => (
                 </SimpleFormIterator>
             </ArrayInput>
 
-            <TextInput className="customWidth" source="faqTitle" label="Заголовок секции FAQ" fullWidth />
-            
-            <ArrayInput source="faqOptions" label="Вопросы и ответы">
-                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput className="customWidth" source="title" label="Вопрос" />
-                    <RichTextInput className="customWidth" source="description" label="Ответ" />
-                </SimpleFormIterator>
-            </ArrayInput>
+            {/* FAQ Section */}
+            <div className="admin-section">
+                <div className="admin-section-title">Часто задаваемые вопросы</div>
+                <div className="admin-form-grid-full">
+                    <TextInput className="customWidth" source="faqTitle" label="Заголовок секции FAQ" fullWidth />
+                </div>
+                <ArrayInput source="faqOptions" label="Вопросы и ответы">
+                    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
+                        <div className="admin-form-grid">
+                            <TextInput className="customWidth" source="question" label="Вопрос" />
+                            <RichTextInput className="customWidth" source="answer" label="Ответ" fullWidth />
+                        </div>
+                    </SimpleFormIterator>
+                </ArrayInput>
+            </div>
 
-            <TextInput className="customWidth" source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
+            {/* Benefits Section */}
+            <div className="admin-section">
+                <div className="admin-section-title">Преимущества</div>
+                <div className="admin-form-grid-full">
+                    <TextInput className="customWidth" source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
+                </div>
+                <ArrayInput source="benefits" label="Преимущества">
+                    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
+                        <div className="admin-form-grid-3">
+                            <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
+                            <TextInput className="customWidth" source="benefitsDescr" label="Описание" />
+                            <ReferenceArrayInput source="benefitsPersons" reference="persons">
+                                <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
+                            </ReferenceArrayInput>
+                        </div>
+                    </SimpleFormIterator>
+                </ArrayInput>
+            </div>
 
-            <ArrayInput
-                source="benefits"
-                label="Преимущества"
-            >
-                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
-                    <TextInput className="customWidth" source="benefitsDescr" label="Описание" />
-                    <ReferenceArrayInput source="benefitsPersons" reference="persons">
-                        <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
+            {/* Related Services Section */}
+            <div className="admin-section">
+                <div className="admin-section-title">Связанные услуги</div>
+                <div className="admin-form-grid">
+                    <TextInput className="customWidth" source="blockTitle" label="Заголовок для блока" />
+                    <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
+                        <SelectArrayInput className="customWidth" optionText="name" label="Услуги" />
                     </ReferenceArrayInput>
-                </SimpleFormIterator>
-            </ArrayInput>
-            <TextInput className="customWidth" source="blockTitle" label="Заголовок для блока" />
-            <ReferenceArrayInput perPage={100} source="servicesServices" reference="subServices" allowEmpty={true}>
-                <SelectArrayInput className="customWidth" optionText="name" label="Услуги" />
-            </ReferenceArrayInput>
-            <ArrayInput
-                source="work"
-                label="Как проходит работа"
-            >
-                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput className="customWidth" source="workName" label="Название" />
-                    <TextInput className="customWidth" source="workDescr" label="Описание" />
-                </SimpleFormIterator>
-            </ArrayInput>
+                </div>
+            </div>
 
-            <ArrayInput
-                source="tariffs"
-                label="Тарифы"
-            >
-                <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                    <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
-                    <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
-                    <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
-                </SimpleFormIterator>
-            </ArrayInput>
-            <TextInput className="customWidth" source="seoTitle" label="TITLE" />
-            <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
-            <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
+            {/* Work Process Section */}
+            <div className="admin-section">
+                <div className="admin-section-title">Как проходит работа</div>
+                <ArrayInput source="work" label="Этапы работы">
+                    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
+                        <div className="admin-form-grid">
+                            <TextInput className="customWidth" source="workName" label="Название" />
+                            <TextInput className="customWidth" source="workDescr" label="Описание" />
+                        </div>
+                    </SimpleFormIterator>
+                </ArrayInput>
+            </div>
+
+            {/* Tariffs Section */}
+            <div className="admin-section">
+                <div className="admin-section-title">Тарифы</div>
+                <ArrayInput source="tariffs" label="Тарифы">
+                    <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
+                        <div className="admin-form-grid-3">
+                            <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
+                            <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
+                            <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
+                        </div>
+                    </SimpleFormIterator>
+                </ArrayInput>
+            </div>
+
+            {/* SEO Section */}
+            <div className="admin-section seo-section">
+                <div className="admin-section-title">SEO настройки</div>
+                <div className="admin-form-grid-3">
+                    <TextInput className="customWidth" source="seoTitle" label="TITLE" />
+                    <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
+                    <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
+                </div>
+            </div>
         </SimpleForm>
     </Create>
 );

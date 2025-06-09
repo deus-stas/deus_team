@@ -30,7 +30,7 @@
     display: block !important;
 }
 .customWidth {
-    width: 450px !important;
+    // width: 450px !important;
     margin: 10px 0 20px 0 !important;
     word-wrap: break-word;
 }
@@ -109,17 +109,370 @@ img.customWidth {
 }
 
 
-.fileInput{
-    width: 20rem !important;
+/* ========================================
+   ADMIN PANEL IMPROVEMENTS
+   ======================================== */
+
+/* Form Section Organization */
+.admin-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 3px solid transparent;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: 
+        0 8px 25px rgba(0,0,0,0.08),
+        0 3px 10px rgba(0,0,0,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    background-clip: padding-box;
 }
+
+.admin-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    border-radius: 16px;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    z-index: -1;
+    opacity: 0.6;
+    transition: all 0.4s ease;
+}
+
+.admin-section:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.12),
+        0 8px 20px rgba(25, 118, 210, 0.15),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.admin-section:hover::before {
+    opacity: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
+    animation: borderGlow 2s ease-in-out infinite alternate;
+}
+
+.admin-section:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 15px 35px rgba(25, 118, 210, 0.2),
+        0 5px 15px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.admin-section:focus-within::before {
+    opacity: 0.8;
+    background: linear-gradient(135deg, #1976d2 0%, #42a5f5 50%, #64b5f6 100%);
+}
+
+@keyframes borderGlow {
+    0% {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
+    }
+    100% {
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 20%, #f5576c 40%, #f093fb 60%, #764ba2 80%, #667eea 100%);
+    }
+}
+
+.admin-section h3 {
+    margin: 0 0 20px 0 !important;
+    padding: 0 0 16px 0;
+    border-bottom: 2px solid #f0f0f0;
+    font-size: 18px !important;
+    font-weight: 600;
+    color: #333;
+}
+
+.admin-section-title {
+    background: linear-gradient(90deg, #1976d2, #1565c0);
+    color: white !important;
+    padding: 12px 20px !important;
+    margin: 0 0 24px 0 !important;
+    border-radius: 6px;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Form Grid Layout */
+.admin-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.admin-form-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.admin-form-grid-full {
+    grid-column: 1 / -1;
+}
+
+/* Input Field Improvements */
+.customWidth {
+    width: 100% !important;
+    // max-width: 450px;
+    margin: 8px 0 16px 0 !important;
+}
+
+.admin-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.admin-input-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.admin-input-row .customWidth {
+    flex: 1;
+    margin: 0 !important;
+}
+
+/* Rich Text Editor Improvements */
+.ra-rich-text-input {
+    width: 100% !important;
+}
+
+.ra-rich-text-input .ql-toolbar {
+    border: 1px solid #ddd !important;
+    border-radius: 4px 4px 0 0 !important;
+    background: #fafafa !important;
+    padding: 8px !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    align-items: center !important;
+}
+
+/* Custom scrollbar for toolbar */
+.ra-rich-text-input .ql-toolbar::-webkit-scrollbar {
+    height: 6px;
+}
+
+.ra-rich-text-input .ql-toolbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.ra-rich-text-input .ql-toolbar::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.ra-rich-text-input .ql-toolbar::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.ra-rich-text-input .ql-toolbar .ql-formats {
+    margin-right: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+.ra-rich-text-input .ql-toolbar button {
+    width: 32px !important;
+    height: 32px !important;
+    margin: 2px !important;
+    border-radius: 3px !important;
+    flex-shrink: 0 !important;
+}
+
+.ra-rich-text-input .ql-toolbar button:hover {
+    background: #e0e0e0 !important;
+}
+
+.ra-rich-text-input .ql-toolbar select {
+    flex-shrink: 0 !important;
+}
+
+.ra-rich-text-input .ql-container {
+    border: 1px solid #ddd !important;
+    border-top: none !important;
+    border-radius: 0 0 4px 4px !important;
+    min-height: 120px !important;
+}
+
+/* Make sure full width works properly */
+.customWidth.ra-rich-text-input {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+/* File Input Improvements */
+.fileInput {
+    width: 100% !important;
+    max-width: 300px !important;
+}
+
+.fileInput .RaFileInput-dropZone {
+    border: 2px dashed #ccc !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    text-align: center !important;
+    background: #fafafa !important;
+    transition: all 0.3s ease !important;
+    min-height: 120px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.fileInput .RaFileInput-dropZone:hover {
+    border-color: #1976d2 !important;
+    background: #f0f8ff !important;
+}
+
+.fileInput .RaFileInput-dropZone p {
+    margin: 8px 0 0 0 !important;
+    font-size: 14px !important;
+    color: #666 !important;
+}
+
+/* Image Preview Styling */
+.fileInput img {
+    max-width: 200px !important;
+    max-height: 150px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Array Input Improvements */
 .RaSimpleFormIterator-line {
-    background-color: #EEEEEE;
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 100%;
+    background: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+    margin-bottom: 16px !important;
+    position: relative !important;
+}
+
+.RaSimpleFormIterator-line:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
 }
 
 .RaSimpleFormIterator-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 16px;
 }
+
+.RaSimpleFormIterator-buttons {
+    display: flex !important;
+    gap: 8px !important;
+    justify-content: flex-end !important;
+    margin-top: 12px !important;
+}
+
+.RaSimpleFormIterator-buttons button {
+    min-width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+}
+
+/* Boolean Input Styling */
+.RaBooleanInput-label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 14px !important;
+}
+
+/* Reference Input Improvements */
+.RaReferenceInput-label,
+.RaReferenceArrayInput-label {
+    font-weight: 500 !important;
+    color: #333 !important;
+    margin-bottom: 8px !important;
+}
+
+/* Button Styling */
+.admin-button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-form-grid,
+    .admin-form-grid-3 {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .admin-input-row {
+        flex-direction: column !important;
+    }
+    
+    .baseFlexWrap {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+}
+
+/* SEO Section Specific */
+.seo-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.seo-section h3 {
+    color: white !important;
+    border-bottom-color: rgba(255,255,255,0.3) !important;
+}
+
+/* Validation Error Styling */
+.RaFormInput-errorMessage {
+    color: #d32f2f !important;
+    font-size: 12px !important;
+    margin-top: 4px !important;
+}
+
+/* Loading States */
+.RaFileInput-loading {
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
+
+/* Success States */
+.admin-success-indicator {
+    color: #4caf50 !important;
+    font-size: 12px !important;
+    margin-top: 4px !important;
+}
+
+/* Focus States */
+.MuiTextField-root:focus-within {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15) !important;
+}
+
+/* ========================================
+   END ADMIN PANEL IMPROVEMENTS
+   ======================================== */
