@@ -8,6 +8,62 @@ import CorporateIdentity from "../../components/pages/projects/projectDetail/det
 
 const apiUrl = ''
 
+// Admin Tabs Component for navigation
+const AdminTabs = ({ tabs, activeTab, setActiveTab }) => {
+    const scrollToSection = (sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start',
+                inline: 'nearest'
+            });
+        }
+        setActiveTab(sectionId);
+    };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveTab(entry.target.id);
+                    }
+                });
+            },
+            { 
+                threshold: 0.3,
+                rootMargin: '-80px 0px -50% 0px'
+            }
+        );
+
+        tabs.forEach(tab => {
+            const element = document.getElementById(tab.id);
+            if (element) observer.observe(element);
+        });
+
+        return () => observer.disconnect();
+    }, [tabs, setActiveTab]);
+
+    return (
+        <div className="admin-tabs-container">
+            <div className="admin-tabs">
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.id}
+                        className={`admin-tab ${activeTab === tab.id ? 'active' : ''}`}
+                        onClick={() => scrollToSection(tab.id)}
+                        type="button"
+                    >
+                        {tab.label}
+                        {tab.count && <span className="admin-tab-count">{tab.count}</span>}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 /**
  * Компонент VideoOrImageField - это многоразовый компонент React, который отображает либо видео, либо изображение на основе предоставленного объекта файла.
  * @returns {JSX.Element} - Элемент React, который отображает либо видео, либо изображение.
@@ -216,11 +272,13 @@ export const ProjectsEdit = (props) => {
 export const SaitAndServiceRender = () => {
     return(<>
         <p>Блок цели и задачи</p>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDescr"
             placeholder="Клиент обратился к нам..."
-            label="Описание блока цели и задачи"/>
+            label="Описание блока цели и задачи"
+            fullWidth
+        />
         <RichTextInput
             className="customWidth"
             label="Задача"
@@ -399,11 +457,11 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task2"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo2"
                 placeholder="Мы разработали..."
-                label="Описание блока "/>
+                label="Описание блока Паттерн"/>
         </div>
 
         <p>Четвертый баннер/ список</p>
@@ -434,11 +492,11 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task3"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo3"
                 placeholder="Мы разработали..."
-                label="Описание блока "/>
+                label="Описание блока"/>
         </div>
 
         <p>Пятый баннер/ список</p>
@@ -469,7 +527,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task4"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo4"
                 placeholder="Мы разработали..."
@@ -504,7 +562,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task5"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo5"
                 placeholder="Мы разработали..."
@@ -539,7 +597,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task6"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo6"
                 placeholder="Мы разработали..."
@@ -606,7 +664,7 @@ export const SaitAndServiceRender = () => {
 export const SEORender = () => {
     return (<>
             <p>Блок цели и задачи</p>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDescr"
                 placeholder="Клиент обратился к нам..."
@@ -813,7 +871,7 @@ export const VideoRender = () => {
 export const CorporateIdentityRender = () => {
     return(<>
         <p>Блок цели и задачи</p>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDescr"
             placeholder="Клиент обратился к нам..."
@@ -848,7 +906,7 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="heading"
             label="Заголовок слева"/>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="workIntroText"
             placeholder="Мы разработали..."
@@ -880,13 +938,14 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="task"
             label="Заголовок слева"/>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDo"
             placeholder="Мы разработали..."
             label="Описание блока Шрифт и детали"
             multiline rows={5}
         />
+        
 
         <p>Список баннеров</p>
         <BooleanInput
@@ -1051,7 +1110,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task2"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo2"
                 placeholder="Мы разработали..."
@@ -1086,7 +1145,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task3"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo3"
                 placeholder="Мы разработали..."
@@ -1121,7 +1180,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task4"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo4"
                 placeholder="Мы разработали..."
@@ -1156,7 +1215,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task5"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo5"
                 placeholder="Мы разработали..."
@@ -1191,7 +1250,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task6"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo6"
                 placeholder="Мы разработали..."
@@ -1226,7 +1285,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task7"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo7"
                 placeholder="Мы разработали..."
@@ -1262,7 +1321,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task8"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo8"
                 placeholder="Мы разработали..."
@@ -1336,7 +1395,7 @@ export const TechSupportRender = () => {
             className="customWidth"
             source="heading"
             label="Заголовок слева"/>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDescr"
             placeholder="Клиент обратился к нам..."
@@ -1409,120 +1468,151 @@ export const TechSupportRender = () => {
  */
 export const DefaultFields = () => {
     const projectType = useWatch({name: 'projectType'});
+    const [activeTab, setActiveTab] = useState('basic-info');
+
+    const projectTabs = [
+        { id: 'basic-info', label: 'Основная информация' },
+        { id: 'media', label: 'Медиа' },
+        { id: 'client-info', label: 'Информация о клиенте' },
+        { id: 'seo', label: 'SEO' }
+    ];
 
     return (<>
-            {projectType && <div className="baseFlexColumn">
-                <p>Настройка SEO</p>
-                <span className="baseFlexWrap">
-                    <TextInput className="customWidth" source="seoTitle" label="title"/>
-                    <TextInput className="customWidth" source="seoDescription" label="description"/>
-                    <TextInput className="customWidth" source="seoKeywords" label="keywords"/>
-                </span>
-                <span className="baseFlexWrap">
-                    <TextInput
-                        className="customWidth"
-                        source="name"
-                        label="Название проекта"
-                        validate={[required()]}
-                    />
-                    <TextInput
-                        className="customWidth"
-                        source="date"
-                        label="Дата"
-                        placeholder="2024"
-                    />
-                    <TextInput
-                        className="customWidth"
-                        source="nameInEng"
-                        disabled={true}
-                        placeholder="генерируется автоматически"
-                        label="URL проекта" fullWidth/>
-                </span>
-                <TextInput
-                    className="customWidth"
-                    source="descrProject"
-                    label="Описание проекта"
-                    multiline rows={5}
-                />
+        {projectType && (
+            <div className="projects-admin-container">
+                <AdminTabs tabs={projectTabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+                
+                <div className="admin-form-content">
+                    {/* Basic Information Section */}
+                    <div id="basic-info" className="admin-section">
+                        <h3 className="admin-section-title">Основная информация</h3>
+                        <div className="admin-section-content">
+                            <span className="baseFlexWrap">
+                                <TextInput
+                                    className="customWidth"
+                                    source="name"
+                                    label="Название проекта"
+                                    validate={[required()]}
+                                />
+                                <TextInput
+                                    className="customWidth"
+                                    source="date"
+                                    label="Дата"
+                                    placeholder="2024"
+                                />
+                                <TextInput
+                                    className="customWidth"
+                                    source="nameInEng"
+                                    disabled={true}
+                                    placeholder="генерируется автоматически"
+                                    label="URL проекта" fullWidth/>
+                            </span>
+                            <RichTextInput
+                                className="customWidth"
+                                source="descrProject"
+                                label="Описание проекта"
+                            />
+                            <BooleanInput
+                                source="visibility"
+                                label="Скрыть/Показать проекта"/>
+                            <TextInput
+                                className="customWidth"
+                                source="projectURL"
+                                placeholder="https://mysite.ru/"
+                                label="Ссылка для перехода на сайт"/>
+                        </div>
+                    </div>
 
-                <BooleanInput
-                    source="visibility"
-                    label="Скрыть/Показать проекта"/>
-                <p>Обложка проекта</p>
-                <span className="baseFlexWrap">
-                    <FileInput
-                        className="fileInput"
-                        placeholder="+"
-                        source="image"
-                        label="Большая"
-                        validate={[required()]}
-                    >
-                    <FilenameField source="src" title="title"/>
-                </FileInput>
-                <FileInput
-                    className="fileInput"
-                    placeholder="+"
-                    source="imageMob"
-                    label="Маленькая"
-                >
-                    <FilenameField source="src" title="title"/>
-                </FileInput>
-                </span>
-                <TextInput
-                    className="customWidth"
-                    source="projectURL"
-                    placeholder="https://mysite.ru/"
-                    label="Ссылка для перехода на сайт"/>
-                <p>Заполнение карты клиента</p>
-                <ReferenceArrayInput
-                    source="projectTheme"
-                    reference="themes">
-                    <SelectInput
-                        className="customWidth"
-                        optionText="name"
-                        label="Отрасль"/>
-                </ReferenceArrayInput>
-                <span className="baseFlexWrap">
-                    <TextInput
-                        className="customWidth"
-                        source="about"
-                        label="Описание о клиенте"
-                        multiline rows={5}
-                    />
-                  <TextInput
-                      className="customWidth"
-                      source="projectSite"
-                      label="Клиент"/>
+                    {/* Media Section */}
+                    <div id="media" className="admin-section">
+                        <h3 className="admin-section-title">Медиа файлы</h3>
+                        <div className="admin-section-content">
+                            <p>Обложка проекта</p>
+                            <span className="baseFlexWrap">
+                                <FileInput
+                                    className="fileInput"
+                                    placeholder="+"
+                                    source="image"
+                                    label="Большая"
+                                    validate={[required()]}
+                                >
+                                <FilenameField source="src" title="title"/>
+                            </FileInput>
+                            <FileInput
+                                className="fileInput"
+                                placeholder="+"
+                                source="imageMob"
+                                label="Маленькая"
+                            >
+                                <FilenameField source="src" title="title"/>
+                            </FileInput>
+                            </span>
+                            <p>Главный баннер/список</p>
+                            <ArrayInput
+                                label={""}
+                                source={"bannerThirds"}
+                            >
+                                <SimpleFormIterator>
+                                    <FileInput
+                                        source="imageI"
+                                        className="fileInput"
+                                        placeholder="+"
+                                        label="Баннер">
+                                        <FilenameField
+                                            source="src"
+                                            title="title"/>
+                                    </FileInput>
+                                    <FunctionFieldForArrayItem/>
+                                </SimpleFormIterator>
+                            </ArrayInput>
+                        </div>
+                    </div>
 
-                <TextInput
-                    className="customWidth"
-                    source="duration"
-                    placeholder="2,5 месяца"
-                    label="Продолжительность"/>
-                </span>
-                <p>Главный баннер/список</p>
-                <ArrayInput
-                    label={""}
-                    source={"bannerThirds"}
-                >
-                    <SimpleFormIterator>
-                        <FileInput
-                            source="imageI"
-                            className="fileInput"
-                            placeholder="+"
-                            label="Баннер">
-                            <FilenameField
-                                source="src"
-                                title="title"/>
-                        </FileInput>
-                        <FunctionFieldForArrayItem/>
-                    </SimpleFormIterator>
-                </ArrayInput>
+                    {/* Client Information Section */}
+                    <div id="client-info" className="admin-section">
+                        <h3 className="admin-section-title">Информация о клиенте</h3>
+                        <div className="admin-section-content">
+                            <ReferenceArrayInput
+                                source="projectTheme"
+                                reference="themes">
+                                <SelectInput
+                                    className="customWidth"
+                                    optionText="name"
+                                    label="Отрасль"/>
+                            </ReferenceArrayInput>
+                            <span className="baseFlexWrap">
+                                <RichTextInput
+                                    className="customWidth"
+                                    source="about"
+                                    label="Описание о клиенте"
+                                />
+                              <TextInput
+                                  className="customWidth"
+                                  source="projectSite"
+                                  label="Клиент"/>
 
+                            <TextInput
+                                className="customWidth"
+                                source="duration"
+                                placeholder="2,5 месяца"
+                                label="Продолжительность"/>
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* SEO Section */}
+                    <div id="seo" className="admin-section">
+                        <h3 className="admin-section-title">SEO настройки</h3>
+                        <div className="admin-section-content">
+                            <span className="baseFlexWrap">
+                                <TextInput className="customWidth" source="seoTitle" label="title"/>
+                                <TextInput className="customWidth" source="seoDescription" label="description"/>
+                                <TextInput className="customWidth" source="seoKeywords" label="keywords"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            }
-
-        </>
-    )
+        )}
+    </>)
 }

@@ -57,12 +57,31 @@ img.customWidth {
 }
 
 .fileInput .RaFileInput-dropZone {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 24px !important;
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+    border-radius: 8px !important;
+    border: 2px solid #ddd !important;
+    background: #f8f9fa !important;
+    color: #6c757d !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+}
+
+.fileInput .RaFileInput-dropZone:hover {
+    border-color: #1976d2 !important;
+    background: #e3f2fd !important;
+    color: #1976d2 !important;
+    // transform: scale(1.05) !important;
 }
 .editForm .RaSimpleFormIterator-buttons .MuiSvgIcon-root {
     font-size: 4rem !important;
@@ -146,17 +165,17 @@ img.customWidth {
 }
 
 .admin-section:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 
-        0 20px 40px rgba(0,0,0,0.12),
-        0 8px 20px rgba(25, 118, 210, 0.15),
-        inset 0 1px 0 rgba(255,255,255,0.9);
+    // transform: translateY(-3px) scale(1.02);
+    // box-shadow: 
+    //     0 20px 40px rgba(0,0,0,0.12),
+    //     0 8px 20px rgba(25, 118, 210, 0.15),
+    //     inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .admin-section:hover::before {
     opacity: 1;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
-    animation: borderGlow 2s ease-in-out infinite alternate;
+    // background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
+    // animation: borderGlow 2s ease-in-out infinite alternate;
 }
 
 .admin-section:focus-within {
@@ -312,7 +331,9 @@ img.customWidth {
     border: 1px solid #ddd !important;
     border-top: none !important;
     border-radius: 0 0 4px 4px !important;
-    min-height: 120px !important;
+    min-height: 96px !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
 }
 
 /* Make sure full width works properly */
@@ -327,29 +348,45 @@ img.customWidth {
     max-width: 300px !important;
 }
 
+/* Square Plus Icon Style for File Inputs with "+" placeholder */
 .fileInput .RaFileInput-dropZone {
-    border: 2px dashed #ccc !important;
+    border: 2px solid #ddd !important;
     border-radius: 8px !important;
-    padding: 20px !important;
-    text-align: center !important;
-    background: #fafafa !important;
+    background: #f8f9fa !important;
     transition: all 0.3s ease !important;
-    min-height: 120px !important;
     display: flex !important;
-    flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: #6c757d !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    
+    /* Perfect Square Dimensions */
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    
+    /* Remove default padding for square look */
+    padding: 0 !important;
+    text-align: center !important;
 }
 
 .fileInput .RaFileInput-dropZone:hover {
     border-color: #1976d2 !important;
-    background: #f0f8ff !important;
+    background: #e3f2fd !important;
+    color: #1976d2 !important;
+    // transform: scale(1.05) !important;
+    // box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2) !important;
 }
 
+/* Hide any text paragraphs inside the square plus icon */
 .fileInput .RaFileInput-dropZone p {
-    margin: 8px 0 0 0 !important;
-    font-size: 14px !important;
-    color: #666 !important;
+    display: none !important;
 }
 
 /* Image Preview Styling */
@@ -472,6 +509,128 @@ img.customWidth {
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15) !important;
 }
+
+.RaRichTextInput-editorContent div {
+    min-height: 140px !important;
+}
+
+/* ========================================
+   ADMIN TABS NAVIGATION
+   ======================================== */
+
+.admin-tabs-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 16px 20px 0 20px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f5f5f5;
+}
+
+.admin-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+
+.admin-tabs::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+
+.admin-tabs::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+}
+
+.admin-tab {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #dee2e6;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: -2px;
+}
+
+.admin-tab:hover {
+    // background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    color: #212529;
+    // transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.admin-tab.active {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    border-color: #1976d2;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+.admin-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ffffff;
+}
+
+.admin-tab-count {
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 11px;
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+.admin-tab.active .admin-tab-count {
+    background: rgba(255,255,255,0.3);
+}
+
+.admin-tab:not(.active) .admin-tab-count {
+    background: #6c757d;
+    color: white;
+}
+
+/* Responsive tabs */
+@media (max-width: 768px) {
+    .admin-tabs {
+        padding: 12px 16px 0 16px;
+        gap: 8px;
+    }
+    
+    .admin-tab {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
+
+/* Smooth scroll behavior for sections */
+.admin-section {
+    scroll-margin-top: 80px;
+}
+
+/* ========================================
+   END ADMIN TABS NAVIGATION
+   ======================================== */
 
 /* ========================================
    END ADMIN PANEL IMPROVEMENTS
