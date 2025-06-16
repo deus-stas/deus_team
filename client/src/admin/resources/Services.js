@@ -158,7 +158,7 @@ export const ServicesCreate = (props) => (
                     <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                         <div className="admin-form-grid-3">
                             <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
-                            <TextInput className="customWidth" source="benefitsDescr" label="Описание" />
+                            <RichTextInput className="customWidth" source="benefitsDescr" label="Описание" fullWidth />
                             <ReferenceArrayInput source="benefitsPersons" reference="persons">
                                 <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
                             </ReferenceArrayInput>
@@ -185,7 +185,7 @@ export const ServicesCreate = (props) => (
                     <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                         <div className="admin-form-grid">
                             <TextInput className="customWidth" source="workName" label="Название" />
-                            <TextInput className="customWidth" source="workDescr" label="Описание" />
+                            <RichTextInput className="customWidth" source="workDescr" label="Описание" fullWidth />
                         </div>
                     </SimpleFormIterator>
                 </ArrayInput>
@@ -301,7 +301,7 @@ export const ServicesEdit = (props) => (
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
-                    <TextInput className="customWidth" source="benefitsDescr" label="Описание" />
+                    <RichTextInput className="customWidth" source="benefitsDescr" label="Описание" fullWidth />
                     <ReferenceArrayInput source="benefitsPersons" reference="persons">
                         <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
                     </ReferenceArrayInput>
@@ -317,7 +317,7 @@ export const ServicesEdit = (props) => (
             >
                 <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
                     <TextInput className="customWidth" source="workName" label="Название" />
-                    <TextInput className="customWidth" source="workDescr" label="Описание" />
+                    <RichTextInput className="customWidth" source="workDescr" label="Описание" fullWidth />
                 </SimpleFormIterator>
             </ArrayInput>
 

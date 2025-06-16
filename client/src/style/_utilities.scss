@@ -57,12 +57,31 @@ img.customWidth {
 }
 
 .fileInput .RaFileInput-dropZone {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 24px !important;
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+    border-radius: 8px !important;
+    border: 2px solid #ddd !important;
+    background: #f8f9fa !important;
+    color: #6c757d !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+}
+
+.fileInput .RaFileInput-dropZone:hover {
+    border-color: #1976d2 !important;
+    background: #e3f2fd !important;
+    color: #1976d2 !important;
+    transform: scale(1.05) !important;
 }
 .editForm .RaSimpleFormIterator-buttons .MuiSvgIcon-root {
     font-size: 4rem !important;
@@ -312,7 +331,9 @@ img.customWidth {
     border: 1px solid #ddd !important;
     border-top: none !important;
     border-radius: 0 0 4px 4px !important;
-    min-height: 120px !important;
+    min-height: 96px !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
 }
 
 /* Make sure full width works properly */
@@ -327,29 +348,45 @@ img.customWidth {
     max-width: 300px !important;
 }
 
+/* Square Plus Icon Style for File Inputs with "+" placeholder */
 .fileInput .RaFileInput-dropZone {
-    border: 2px dashed #ccc !important;
+    border: 2px solid #ddd !important;
     border-radius: 8px !important;
-    padding: 20px !important;
-    text-align: center !important;
-    background: #fafafa !important;
+    background: #f8f9fa !important;
     transition: all 0.3s ease !important;
-    min-height: 120px !important;
     display: flex !important;
-    flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: #6c757d !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    
+    /* Perfect Square Dimensions */
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    
+    /* Remove default padding for square look */
+    padding: 0 !important;
+    text-align: center !important;
 }
 
 .fileInput .RaFileInput-dropZone:hover {
     border-color: #1976d2 !important;
-    background: #f0f8ff !important;
+    background: #e3f2fd !important;
+    color: #1976d2 !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2) !important;
 }
 
+/* Hide any text paragraphs inside the square plus icon */
 .fileInput .RaFileInput-dropZone p {
-    margin: 8px 0 0 0 !important;
-    font-size: 14px !important;
-    color: #666 !important;
+    display: none !important;
 }
 
 /* Image Preview Styling */
@@ -473,6 +510,9 @@ img.customWidth {
     box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15) !important;
 }
 
+.RaRichTextInput-editorContent div {
+    min-height: 140px !important;
+}
 /* ========================================
    END ADMIN PANEL IMPROVEMENTS
    ======================================== */
