@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {List, Datagrid, TextField, EditButton, SimpleShowLayout, AutocompleteArrayInput} from 'react-admin';
 import { Create, SimpleForm, TextInput, Edit, ImageInput, ImageField, SearchInput, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, FileField, ArrayInput, SimpleFormIterator } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
-import { HTMLField } from '../components/HTMLField';
 import {useWatch} from "react-hook-form";
 import axios from "../../axios";
 import CorporateIdentity from "../../components/pages/projects/projectDetail/detailPropsRender/CorporateIdentity";
@@ -571,79 +570,7 @@ export const SaitAndServiceRender = () => {
             </SimpleFormIterator>
         </ArrayInput>
 
-        <p>9 Блок Этапы работ</p>
-        <div className="baseFlexWrap">
-            <TextInput
-                className="customWidth"
-                source="task7"
-                label="Заголовок слева"/>
-            <RichTextInput
-                className="customWidth"
-                source="taskDo7"
-                placeholder="Мы разработали..."
-                label="Описание блока "/>
-        </div>
-
-        <p>Девятый баннер/ список</p>
-        <BooleanInput
-            source="control9"
-            label="по 1 в ряд/по 2 в ряд"/>
-        <ArrayInput
-            label={""}
-            source={"bannerTwelfth"}
-        >
-            <SimpleFormIterator>
-                <FileInput
-                    source="imageI"
-                    className="fileInput"
-                    placeholder="+"
-                    label="Баннер">
-                    <FilenameField
-                        source="src"
-                        title="title"/>
-                </FileInput>
-                <FunctionFieldForArrayItem/>
-            </SimpleFormIterator>
-        </ArrayInput>
-
-
-        <p>10 Блок Этапы работ</p>
-        <div className="baseFlexWrap">
-            <TextInput
-                className="customWidth"
-                source="task8"
-                label="Заголовок слева"/>
-            <RichTextInput
-                className="customWidth"
-                source="taskDo8"
-                placeholder="Мы разработали..."
-                label="Описание блока "/>
-        </div>
-
-        <p>Десятый баннер/ список</p>
-        <BooleanInput
-            source="control10"
-            label="по 1 в ряд/по 2 в ряд"/>
-        <ArrayInput
-            label={""}
-            source={"bannerThirteenth"}
-        >
-            <SimpleFormIterator>
-                <FileInput
-                    source="imageI"
-                    className="fileInput"
-                    placeholder="+"
-                    label="Баннер">
-                    <FilenameField
-                        source="src"
-                        title="title"/>
-                </FileInput>
-                <FunctionFieldForArrayItem/>
-            </SimpleFormIterator>
-        </ArrayInput>
-        
-
-        <p>Блок результаты</p>
+        <p>Блок результаты spec</p>
         <TextInput
             className="customWidth"
             source="awardsURL"
@@ -675,8 +602,6 @@ export const SaitAndServiceRender = () => {
             className="customWidth"
             source="result"
             label="результат"/>
-        
-
     </>)
 }
 
@@ -1133,7 +1058,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="taskDo2"
                 placeholder="Мы разработали..."
-                label="Описание блока Паттерн"/>
+                label="Описание блока "/>
         </div>
 
         <p>Четвертый баннер/ список</p>
