@@ -216,11 +216,13 @@ export const ProjectsEdit = (props) => {
 export const SaitAndServiceRender = () => {
     return(<>
         <p>Блок цели и задачи</p>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDescr"
             placeholder="Клиент обратился к нам..."
-            label="Описание блока цели и задачи"/>
+            label="Описание блока цели и задачи"
+            fullWidth
+        />
         <RichTextInput
             className="customWidth"
             label="Задача"
@@ -399,11 +401,11 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task2"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo2"
                 placeholder="Мы разработали..."
-                label="Описание блока "/>
+                label="Описание блока Паттерн"/>
         </div>
 
         <p>Четвертый баннер/ список</p>
@@ -434,11 +436,11 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task3"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo3"
                 placeholder="Мы разработали..."
-                label="Описание блока "/>
+                label="Описание блока"/>
         </div>
 
         <p>Пятый баннер/ список</p>
@@ -469,7 +471,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task4"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo4"
                 placeholder="Мы разработали..."
@@ -504,7 +506,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task5"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo5"
                 placeholder="Мы разработали..."
@@ -539,7 +541,7 @@ export const SaitAndServiceRender = () => {
                 className="customWidth"
                 source="task6"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo6"
                 placeholder="Мы разработали..."
@@ -606,7 +608,7 @@ export const SaitAndServiceRender = () => {
 export const SEORender = () => {
     return (<>
             <p>Блок цели и задачи</p>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDescr"
                 placeholder="Клиент обратился к нам..."
@@ -813,7 +815,7 @@ export const VideoRender = () => {
 export const CorporateIdentityRender = () => {
     return(<>
         <p>Блок цели и задачи</p>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDescr"
             placeholder="Клиент обратился к нам..."
@@ -848,7 +850,7 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="heading"
             label="Заголовок слева"/>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="workIntroText"
             placeholder="Мы разработали..."
@@ -880,13 +882,14 @@ export const CorporateIdentityRender = () => {
             className="customWidth"
             source="task"
             label="Заголовок слева"/>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDo"
             placeholder="Мы разработали..."
             label="Описание блока Шрифт и детали"
             multiline rows={5}
         />
+        
 
         <p>Список баннеров</p>
         <BooleanInput
@@ -1051,7 +1054,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task2"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo2"
                 placeholder="Мы разработали..."
@@ -1086,7 +1089,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task3"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo3"
                 placeholder="Мы разработали..."
@@ -1121,7 +1124,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task4"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo4"
                 placeholder="Мы разработали..."
@@ -1156,7 +1159,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task5"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo5"
                 placeholder="Мы разработали..."
@@ -1191,7 +1194,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task6"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo6"
                 placeholder="Мы разработали..."
@@ -1226,7 +1229,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task7"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo7"
                 placeholder="Мы разработали..."
@@ -1262,7 +1265,7 @@ export const CorporateIdentityRender = () => {
                 className="customWidth"
                 source="task8"
                 label="Заголовок слева"/>
-            <TextInput
+            <RichTextInput
                 className="customWidth"
                 source="taskDo8"
                 placeholder="Мы разработали..."
@@ -1336,7 +1339,7 @@ export const TechSupportRender = () => {
             className="customWidth"
             source="heading"
             label="Заголовок слева"/>
-        <TextInput
+        <RichTextInput
             className="customWidth"
             source="taskDescr"
             placeholder="Клиент обратился к нам..."
@@ -1438,11 +1441,10 @@ export const DefaultFields = () => {
                         placeholder="генерируется автоматически"
                         label="URL проекта" fullWidth/>
                 </span>
-                <TextInput
+                <RichTextInput
                     className="customWidth"
                     source="descrProject"
                     label="Описание проекта"
-                    multiline rows={5}
                 />
 
                 <BooleanInput
@@ -1483,11 +1485,10 @@ export const DefaultFields = () => {
                         label="Отрасль"/>
                 </ReferenceArrayInput>
                 <span className="baseFlexWrap">
-                    <TextInput
+                    <RichTextInput
                         className="customWidth"
                         source="about"
                         label="Описание о клиенте"
-                        multiline rows={5}
                     />
                   <TextInput
                       className="customWidth"
