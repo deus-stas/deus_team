@@ -1,4 +1,18 @@
 @import '../../../style/mixins';
+.service{
+    padding-top: 13.4rem;
+
+    @include respond(lg){
+        padding-top: 13.4rem;
+    }
+    @include respond(sm){
+        padding-top: 11.4rem;
+    }
+
+    .main-working{
+        margin-bottom: 7rem;
+    }
+}
 
 .services {
     &-s {
@@ -561,7 +575,6 @@
         position: relative;
         background-color: #050505;
         color: white;
-        margin-bottom: 7rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         background-image: url("/img/form/form-bg.png");
@@ -668,6 +681,11 @@
                 line-height: 130%;
                 letter-spacing: -0.03em;
                 transition: all 0.3s ease-in-out;
+            }
+
+            &__content{
+                display: flex;
+                flex-direction: column;
             }
         }
 
@@ -1122,6 +1140,7 @@
             .faq-wrap{
                 display: grid;
                 grid-template-columns: repeat(2,1fr);
+                gap: 1rem;
 
                 @include respond(sm) {
                     grid-template-columns: 100%;
@@ -1175,6 +1194,7 @@
                     padding: 1rem 2rem;
                     border-radius: 9.4rem;
                     color: #FFFFFF;
+                    cursor: pointer;
 
                     &.-tg{
                         background-color: #3F99F2;
@@ -1327,6 +1347,8 @@
 }
 
 .article{
+    margin-bottom: 7rem;
+
     &__header{
         display: flex;
         justify-content: space-between;
@@ -1350,7 +1372,8 @@
         column-gap: 4rem;
     }
 
-    &__picture{
+    img{
+        width: 100%;
         border-radius: 2rem;
         margin-bottom: 2rem;
         object-fit: cover;
@@ -1384,4 +1407,3 @@
         }
     }
 }
-    
