@@ -588,7 +588,7 @@ const ServicesDetail = (data) => {
                                 <input type="text" name="name" placeholder="Ваше имя" required/>
                                 <input type="tel" name="phone" placeholder="Номер телефона" required pattern="[\d\+\-\(\) ]+"/>
 
-                                <button className="services-form__btn --accent" type="submit">Отправить заявку</button>
+                                <Link href={`/contact`} className="services-form__btn --accent" type="submit">Отправить заявку</Link>
                             </form>
                         </section>
 
