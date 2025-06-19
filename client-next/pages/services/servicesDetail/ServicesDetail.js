@@ -21,7 +21,7 @@ const ServicesDetail = (data) => {
     const [service, setService] = useState(null);
     const [total, setTotal] = useState(null);
     const [detail, setDetail] = useState([]);
-    
+
 
     useEffect(() => {
         axios
@@ -76,7 +76,7 @@ const ServicesDetail = (data) => {
     const [selectedTag, setSelectedTag] = useState('Все');
     const [allNewsCount, setAllNewsCount] = useState(0);
     const [news, setNews] = useState([]);
-    
+
     useEffect(() => {
         axios.get(`${apiUrl}/api/newsTags`)
             .then((tagResponse) => {
@@ -114,8 +114,8 @@ const ServicesDetail = (data) => {
         <>
             {/* <Cursor/> */}
             {!isLoading &&
-                <main className="service">
-                        {service && 
+                <main className="service container">
+                        {service &&
                             <section className="services-detail-start">
                                 <div className="services-about__wrap">
                                     <h1 className="heading-primary">{service.name}</h1>
@@ -126,14 +126,14 @@ const ServicesDetail = (data) => {
                                 </div>
                             </section>
                         }
-                        {service && service.serviceBanner &&        
+                        {service && service.serviceBanner &&
                             <section className="services-detail-banner">
                                 <img className="services-detail-banner__img" src={`${apiUrl}/${service.serviceBanner.path}`}/>
                             </section>
-                            
+
                         }
 
-                        {service &&             
+                        {service &&
                             <section className="services-detail-aspro">
                                 <div className="services-detail-aspro__wrap">
                                     <div className="services-detail-aspro__title">
@@ -151,21 +151,21 @@ const ServicesDetail = (data) => {
                                                         <p className={principleText} dangerouslySetInnerHTML={{ __html: item.description}} />
                                                     </span>
                                                 </div>
-                        
+
                                         ))}
                                     </div>
                                 </div>
 
                             </section>
                         }
-                        {service &&                         
+                        {service &&
                             <section className="services-detail-type">
                                 <div className="services-detail-type__wrap">
                                     <div className="services-detail-type__title">
                                         <h2 className="heading-secondary">
                                            {service.serviceIncludesTitle}
                                         </h2>
-                                        <p className="services-detail-aspro__subtitle"  dangerouslySetInnerHTML={{ __html: service.serviceIncludesDescription }} /> 
+                                        <p className="services-detail-aspro__subtitle"  dangerouslySetInnerHTML={{ __html: service.serviceIncludesDescription }} />
                                         {/* <p>Прозрачность — наш принцип. Каждый<br/> компонент услуги продуман до мелочей, чтобы<br/> вы чувствовали уверенность на каждом шагу.</p> */}
                                         <Link href={`/contacts`} className="services-form__btn --accent" >Расчитать стоимость</Link>
                                     </div>
@@ -188,7 +188,7 @@ const ServicesDetail = (data) => {
                             </section>
                         }
 
-                        {service && 
+                        {service &&
                             <section className="services-detail-price">
                                 <div className="services-detail-price__wrapp borderBlock padding">
                                     <div className="services-detail-price__wrapp-item">
@@ -258,7 +258,7 @@ const ServicesDetail = (data) => {
 
                         </section>
 
-                        {service && 
+                        {service &&
                             <section className="services-detail-faq">
                                 <div className="services-detail-faq__wrap faq-wrap">
                                     <div className="faq-wrap__info">
@@ -333,8 +333,8 @@ const ServicesDetail = (data) => {
                                 </div>
                             </section>
                         }
-                        {service && 
-    
+                        {service &&
+
                             <section className="services-detail-why-us">
                                 <div className="services-detail-why-us__wrap why-us padding borderBlock">
                                     <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: service.whyChooseUsTitle}} />
@@ -405,11 +405,11 @@ const ServicesDetail = (data) => {
                                         <div className="agency-clients__pag hidden-desktop">
                                         </div>
                                     </div>
-        
+
                                 {!isMobileNew?
-        
+
                                 <section className="main-clients">
-        
+
                                     {clients && splitArrayIntoChunks(clients,  3).map((row, count) => {
                                         return (
                                             <div className={`main-clients__marquee-agency`} key={`row-${count}`}>
@@ -422,7 +422,7 @@ const ServicesDetail = (data) => {
                                                                         src={client.image ? `/uploads/${client.image.filename}` : null}
                                                                         alt={client.name} key={client.id}/>
                                                                 </div>
-        
+
                                                             </div>
                                                         ))}
                                                         {row.map((client, i) => (
@@ -432,19 +432,19 @@ const ServicesDetail = (data) => {
                                                                         src={client.image ? `/uploads/${client.image.filename}` : null}
                                                                         alt={client.name} key={client.id}/>
                                                                 </div>
-        
+
                                                             </div>
                                                         ))}
                                                     </Marquee>
                                                 </div>
-        
-        
+
+
                                             </div>
                                         )
                                     })}
-        
+
                                 </section>
-        
+
                                     :
                                     <div className="agency-swiper">
                                     <Swiper
@@ -452,7 +452,7 @@ const ServicesDetail = (data) => {
                                         grid={{
                                             rows: 3,
                                         }}
-        
+
                                         spaceBetween={10}
                                         modules={[Grid, Pagination]}
                                         pagination={{
@@ -480,7 +480,7 @@ const ServicesDetail = (data) => {
                                     </Swiper>
                                     </div>
                                 }
-        
+
                             </section> : null
                         }
 
@@ -534,7 +534,7 @@ const ServicesDetail = (data) => {
                                             const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
                                             const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
                                             const shouldAutoPlay = item.mainControl;
-        
+
                                             return (
                                                 <div className="article__item" key={index}>
                                                     <Link href={`/blog/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
@@ -550,9 +550,9 @@ const ServicesDetail = (data) => {
                                                         <p className="article__subtitle s-text">{item.newsTags}</p>
                                                         <p className="article__title m-text">{item.name}</p>
                                                     </span>
-        
+
                                                 </div>
-        
+
                                             )
                                         }
                                     })}
