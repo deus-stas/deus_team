@@ -231,7 +231,7 @@ img.customWidth {
 
 .admin-form-grid-3 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 100% 1fr 1fr;
     gap: 20px;
     align-items: start;
 }
@@ -475,7 +475,7 @@ img.customWidth {
 
 /* SEO Section Specific */
 .seo-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    width: 100% !important;
     color: white !important;
 }
 

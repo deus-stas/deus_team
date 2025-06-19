@@ -243,14 +243,10 @@ export const ServicesCreate = (props) => {
                         <SimpleFormIterator 
                             inline 
                             getItemLabel={index => `#${index + 1}`}
-                            addLabel="Добавить преимущество"
-                            removeLabel="Удалить"
-                        >
-                            <div className="admin-form-grid-3">
-                                <TextInput className="customWidth" source="number" label="Номер" />
-                                <TextInput className="customWidth" source="title" label="Заголовок" />
-                                <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />       
-                            </div>
+                        >   
+                            <TextInput className="customWidth" source="number" label="Номер" />
+                            <TextInput className="customWidth" source="title" label="Заголовок" />
+                            <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -269,13 +265,9 @@ export const ServicesCreate = (props) => {
                         <SimpleFormIterator 
                             inline 
                             getItemLabel={index => `Элемент #${index + 1}`}
-                            addLabel="Добавить элемент"
-                            removeLabel="Удалить"
                         >
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="title" label="Заголовок" />
-                                <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="title" label="Заголовок" />
+                            <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -294,13 +286,9 @@ export const ServicesCreate = (props) => {
                         <SimpleFormIterator 
                             inline 
                             getItemLabel={index => `Шаблон #${index + 1}`}
-                            addLabel="Добавить шаблон"
-                            removeLabel="Удалить"
                         >
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="title" label="Заголовок" />
-                                <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="title" label="Заголовок" />
+                            <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -318,13 +306,9 @@ export const ServicesCreate = (props) => {
                         <SimpleFormIterator 
                             inline 
                             getItemLabel={index => `Вопрос #${index + 1}`}
-                            addLabel="Добавить вопрос"
-                            removeLabel="Удалить"
                         >
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="title" label="Вопрос" />
-                                <RichTextInput className="customWidth" source="description" label="Ответ" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="title" label="Вопрос" />
+                            <RichTextInput className="customWidth" source="description" label="Ответ" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -337,13 +321,11 @@ export const ServicesCreate = (props) => {
                     </div>
                     <ArrayInput source="benefits" label="Преимущества">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid-3">
-                                <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
-                                <RichTextInput className="customWidth" source="benefitsDescr" label="Описание" fullWidth />
-                                <ReferenceArrayInput source="benefitsPersons" reference="persons">
-                                    <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
-                                </ReferenceArrayInput>
-                            </div>
+                            <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
+                            <RichTextInput className="customWidth" source="benefitsDescr" label="Описание" fullWidth />
+                            <ReferenceArrayInput source="benefitsPersons" reference="persons">
+                                <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
+                            </ReferenceArrayInput>
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -364,10 +346,8 @@ export const ServicesCreate = (props) => {
                     <div className="admin-section-title">Как проходит работа</div>
                     <ArrayInput source="work" label="Этапы работы">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="workName" label="Название" />
-                                <RichTextInput className="customWidth" source="workDescr" label="Описание" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="workName" label="Название" />
+                            <RichTextInput className="customWidth" source="workDescr" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -377,11 +357,9 @@ export const ServicesCreate = (props) => {
                     <div className="admin-section-title">Тарифы</div>
                     <ArrayInput source="tariffs" label="Тарифы">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid-3">
-                                <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
-                                <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
-                                <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
-                            </div>
+                            <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
+                            <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
+                            <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -389,7 +367,7 @@ export const ServicesCreate = (props) => {
                 {/* SEO Section */}
                 <div id="seo-section" className="admin-section seo-section">
                     <div className="admin-section-title">SEO настройки</div>
-                    <div className="admin-form-grid-3">
+                    <div>
                         <TextInput className="customWidth" source="seoTitle" label="TITLE" />
                         <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
                         <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
@@ -499,11 +477,9 @@ export const ServicesEdit = (props) => {
                     </div>
                     <ArrayInput source="whyChooseUsOptions" label="Преимущества выбора">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid-3">
-                                <TextInput className="customWidth" source="number" label="Номер" />
-                                <TextInput className="customWidth" source="title" label="Заголовок" />
-                                <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="number" label="Номер" />
+                            <TextInput className="customWidth" source="title" label="Заголовок" />
+                            <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -517,10 +493,8 @@ export const ServicesEdit = (props) => {
                     </div>
                     <ArrayInput source="serviceIncludesOptions" label="Элементы услуги">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="title" label="Заголовок" />
-                                <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="title" label="Заголовок" />
+                            <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -534,10 +508,8 @@ export const ServicesEdit = (props) => {
                     </div>
                     <ArrayInput source="asproTemplatesOptions" label="Шаблоны Aspro">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="title" label="Заголовок" />
-                                <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="title" label="Заголовок" />
+                            <RichTextInput className="customWidth" source="description" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -550,10 +522,8 @@ export const ServicesEdit = (props) => {
                     </div>
                     <ArrayInput source="faqOptions" label="Вопросы и ответы">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="title" label="Вопрос" />
-                                <RichTextInput className="customWidth" source="description" label="Ответ" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="title" label="Вопрос" />
+                            <RichTextInput className="customWidth" source="description" label="Ответ" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -566,13 +536,11 @@ export const ServicesEdit = (props) => {
                     </div>
                     <ArrayInput source="benefits" label="Преимущества">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid-3">
-                                <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
-                                <RichTextInput className="customWidth" source="benefitsDescr" label="Описание" fullWidth />
-                                <ReferenceArrayInput source="benefitsPersons" reference="persons">
-                                    <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
-                                </ReferenceArrayInput>
-                            </div>
+                            <TextInput className="customWidth" source="benefitsName" label="Название преимущества" />
+                            <RichTextInput className="customWidth" source="benefitsDescr" label="Описание" fullWidth />
+                            <ReferenceArrayInput source="benefitsPersons" reference="persons">
+                                <SelectInput className="customWidth" optionText="name" label="Сотрудник" />
+                            </ReferenceArrayInput>
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -593,10 +561,8 @@ export const ServicesEdit = (props) => {
                     <div className="admin-section-title">Как проходит работа</div>
                     <ArrayInput source="work" label="Как проходит работа">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid">
-                                <TextInput className="customWidth" source="workName" label="Название" />
-                                <RichTextInput className="customWidth" source="workDescr" label="Описание" fullWidth />
-                            </div>
+                            <TextInput className="customWidth" source="workName" label="Название" />
+                            <RichTextInput className="customWidth" source="workDescr" label="Описание" fullWidth />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -606,11 +572,9 @@ export const ServicesEdit = (props) => {
                     <div className="admin-section-title">Тарифы</div>
                     <ArrayInput source="tariffs" label="Тарифы">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
-                            <div className="admin-form-grid-3">
-                                <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
-                                <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
-                                <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
-                            </div>
+                            <TextInput className="customWidth" source="tariffsCategory" label="Категория тарифа" />
+                            <TextInput className="customWidth" source="tariffDeadline" label="Срок работы" />
+                            <TextInput className="customWidth" source="tariffPrice" label="Стоимость" />
                         </SimpleFormIterator>
                     </ArrayInput>
                 </div>
@@ -618,7 +582,7 @@ export const ServicesEdit = (props) => {
                 {/* SEO Section */}
                 <div id="seo-section" className="admin-section seo-section">
                     <div className="admin-section-title">SEO настройки</div>
-                    <div className="admin-form-grid-3">
+                    <div>
                         <TextInput className="customWidth" source="seoTitle" label="TITLE" />
                         <TextInput className="customWidth" source="seoDescription" label="DESCRIPTION" />
                         <TextInput className="customWidth" source="seoKeywords" label="KEYWORDS" />
