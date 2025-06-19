@@ -142,6 +142,7 @@ const MainPage = (props) => {
             prevSlide();
         }
     };
+    
 
     useEffect(() => {
         axios

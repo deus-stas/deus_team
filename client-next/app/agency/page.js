@@ -96,7 +96,7 @@ export default async function Home() {
 
     return (
         <>
-          <main style={{display: 'none'}} className="agency">
+          <main style={{display: 'none'}} className="agency destroy">
               <div className="container">
                 <section className="agency-start">
                   <span className="agency-start__text">

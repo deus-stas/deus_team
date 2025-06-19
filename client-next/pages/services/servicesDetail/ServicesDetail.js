@@ -10,7 +10,7 @@ import Marquee from 'react-fast-marquee';
 import WorkingSlider from '../../mainPage/WorkingSlider';
 import Link from 'next/link';
 import ProjectNext from '../../projects/projectNext/ProjectNext';
-
+import ServicesForm from './ServicesForm';
 
 
 const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
@@ -120,7 +120,7 @@ const ServicesDetail = (data) => {
                                 <div className="services-about__wrap">
                                     <h1 className="heading-primary">{service.name}</h1>
                                     <div className="services-detail-start__content">
-                                        <p  className="services-detail-start__text" dangerouslySetInnerHTML={{ __html: service.description }}/>
+                                        <p  className="services-detail-start__text" dangerouslySetInnerHTML={{ __html: service.description || "" }}/>
                                         <Link href={`/contacts`} className="services-detail-start__btn" >Расчитать стоимость</Link>
                                     </div>
                                 </div>
@@ -562,7 +562,7 @@ const ServicesDetail = (data) => {
 
 
 
-                        <section className="services-form borderBlock padding whiteHeader">
+                        {/* <section className="services-form borderBlock padding whiteHeader">
                             <h2 className="heading-secondary">Вам интересно, но нужно больше конкретики?</h2>
                             <form className="services-form__form">
 
@@ -588,10 +588,11 @@ const ServicesDetail = (data) => {
                                 <input type="text" name="name" placeholder="Ваше имя" required/>
                                 <input type="tel" name="phone" placeholder="Номер телефона" required pattern="[\d\+\-\(\) ]+"/>
 
-                                <Link href={`/contact`} className="services-form__btn --accent" type="submit">Отправить заявку</Link>
+                                <Button className="services-form__btn --accent" type="submit" onSubmit={}>Отправить заявку</Button>
                             </form>
-                        </section>
-
+                        </section> */}
+                        
+                        <ServicesForm />
                 </main>
             }
         </>

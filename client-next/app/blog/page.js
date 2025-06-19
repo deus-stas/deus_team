@@ -79,7 +79,7 @@ export default async function Home() {
     };
     return (
         <>
-          <main className="news" style={{display: 'none'}}>
+          <main className="news destroy" style={{display: 'none'}}>
               <div className="container">
                   <section className="news-start">
                     <span className="news-start__text">

@@ -95,7 +95,7 @@ export default async function NewsPage({ params }) {
 
   return (
     <>
-      <main className="news-detail" style={{display: 'none'}}>
+      <main className="news-detail destroy" style={{display: 'none'}}>
         <div className="container">
             <section className="news-detail__main">
                 <div className="news-detail__main-content">

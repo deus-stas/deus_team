@@ -21,7 +21,9 @@
     const [isLoading, setIsLoading] = useState(true);
     const [success, setSuccess] = useState(false);
     const [team, setTeam] = useState(null);
+    
 
+;
   //   setTimeout(()=> {
   //     document.querySelector('#preloader').style.transform = 'translateY(120%)';
   //  }, 1000)

@@ -123,7 +123,7 @@ export default async function Home({ params }) {
 
   return (
     <> 
-      <main className="service"  style={{display: 'none'}}>
+      <main className="service destroy"  style={{display: 'none'}}>
               {services && 
                   <section className="services-detail-start">
                       <div className="services-about__wrap">
@@ -146,8 +146,8 @@ export default async function Home({ params }) {
                   <section className="services-detail-aspro">
                       <div className="services-detail-aspro__wrap">
                           <div className="services-detail-aspro__title">
-                              <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: services.asproTemplatesTitle }} />
-                              <p className="services-detail-aspro__subtitle" dangerouslySetInnerHTML={{ __html: services.asproTemplatesDescription }} />
+                              <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: services.asproTemplatesTitle || "" }} />
+                              <p className="services-detail-aspro__subtitle" dangerouslySetInnerHTML={{ __html: services.asproTemplatesDescription || "" }} />
                           </div>
                           <div className="services-detail-aspro__wrapp">
                               {services.asproTemplatesOptions &&
@@ -156,8 +156,8 @@ export default async function Home({ params }) {
                                       <div className="services-detail-aspro__wrap-item" key={`services-detail-aspro__wrap-item-${index}`}>
                                           <p className="num">0{++index}</p>
                                           <span className="flex-wrap">
-                                              <p className="text l-textMed" dangerouslySetInnerHTML={{ __html: item.title}} />
-                                              <p dangerouslySetInnerHTML={{ __html: item.description}} />
+                                              <p className="text l-textMed" dangerouslySetInnerHTML={{ __html: item.title || ""}} />
+                                              <p dangerouslySetInnerHTML={{ __html: item.description || ""}} />
                                           </span>
                                       </div>
               
@@ -175,7 +175,7 @@ export default async function Home({ params }) {
                               <h2 className="heading-secondary">
                                   {services.serviceIncludesTitle}
                               </h2>
-                              <p className="services-detail-aspro__subtitle"  dangerouslySetInnerHTML={{ __html: services.serviceIncludesDescription }} /> 
+                              <p className="services-detail-aspro__subtitle"  dangerouslySetInnerHTML={{ __html: services.serviceIncludesDescription || "" }} /> 
                               <Link href={`/contacts`} className="services-form__btn --accent" >Расчитать стоимость</Link>
                           </div>
                           <div className="services-detail-type__info">
@@ -183,9 +183,9 @@ export default async function Home({ params }) {
                                       Array.isArray(services.serviceIncludesOptions) &&
                                       services.serviceIncludesOptions.map((item, index) => (
                                           <div className="services-detail-type__item type-item" key={`services-detail-type__item-${index}`}>
-                                              <div className="type-item__title" dangerouslySetInnerHTML={{ __html: item.title}} />
+                                              <div className="type-item__title" dangerouslySetInnerHTML={{ __html: item.title || ""}} />
                                               <div className="type-item__bottom">
-                                                  <div className="type-item__subtitle" dangerouslySetInnerHTML={{ __html: item.description}} />
+                                                  <div className="type-item__subtitle" dangerouslySetInnerHTML={{ __html: item.description || ""}} />
                                               </div>
                                           </div>
                                   ))}
@@ -256,7 +256,7 @@ export default async function Home({ params }) {
                   <section className="services-detail-faq">
                       <div className="services-detail-faq__wrap faq-wrap">
                           <div className="faq-wrap__info">
-                              <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: services.faqTitle}} />
+                              <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: services.faqTitle || ""}} />
                               <div className="faq-wrap__subtitle">Если вы не нашли ответ на ваш вопрос напишите нашему руководителю и он на них ответит</div>
                               <div className="faq-wrap__person">
                                   <img className="faq-wrap__person-img" src="img/faq/1.png"/>
@@ -294,13 +294,13 @@ export default async function Home({ params }) {
                                       services.faqOptions.map((item, index) => (
                                           <div className="faq-wrap__item"  key={`faq-wrap__item-${index}`}>
                                               <div className="faq-wrap__top">
-                                                  <div className="faq-wrap__title" dangerouslySetInnerHTML={{ __html: item.title}} />
+                                                  <div className="faq-wrap__title" dangerouslySetInnerHTML={{ __html: item.title || ""}} />
                                                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                       <circle cx="20" cy="20" r="20" fill="#EEEEEE"/>
                                                       <path d="M15 20.25H25" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
                                                   </svg>
                                               </div>
-                                              <div className="faq-wrap__content" dangerouslySetInnerHTML={{ __html: item.description}} />
+                                              <div className="faq-wrap__content" dangerouslySetInnerHTML={{ __html: item.description || ""}} />
                                           </div>
                                   ))}
                           </div>
@@ -311,7 +311,7 @@ export default async function Home({ params }) {
 
                   <section className="services-detail-why-us">
                       <div className="services-detail-why-us__wrap why-us padding borderBlock">
-                          <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: services.whyChooseUsTitle}} />
+                          <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: services.whyChooseUsTitle || ""}} />
                           <div className="why-us__body">
                               {services.whyChooseUsOptions &&
                                   Array.isArray(services.whyChooseUsOptions) &&
@@ -322,8 +322,8 @@ export default async function Home({ params }) {
                                               <img className="why-us__number-bg" src="img/why-us/1.svg"/>
                                           </div>
                                           <div className="why-us__info">
-                                              <div className="why-us__title" dangerouslySetInnerHTML={{ __html: item.title}} />
-                                              <div className="why-us__subtitle" dangerouslySetInnerHTML={{ __html: item.description}} />
+                                              <div className="why-us__title" dangerouslySetInnerHTML={{ __html: item.title || ""}} />
+                                              <div className="why-us__subtitle" dangerouslySetInnerHTML={{ __html: item.description || ""}} />
                                           </div>
                                       </div>
                               ))}
