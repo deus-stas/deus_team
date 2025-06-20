@@ -118,7 +118,7 @@ export default async function Home() {
     
     return (
       <>
-        <div style={{display: 'none'}}>
+        <div className="destroy" style={{display: 'none'}}>
           <section className="main-banner">
                 <div className="container">
                     <div className="main-banner__wrap">

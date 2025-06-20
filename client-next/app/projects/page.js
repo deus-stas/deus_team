@@ -237,7 +237,7 @@ const even = renderProject(false)
     return (
       <>
         <Projects/>
-        <div className="projects" style={{display: 'none'}}>
+        <div className="projects destroy" style={{display: 'none'}}>
           <section className="projects-start">
               <div className="container">
                   <span className="projects-start__text">

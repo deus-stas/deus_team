@@ -78,7 +78,7 @@ export default async function Home() {
 
     return (
         <>
-          <main className="services" style={{display: 'none'}}>
+          <main className="services destroy" style={{display: 'none'}}>
               <div className="container">
                   <section className="services-s">
                     <span className="services-s__text">

@@ -615,8 +615,18 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-
-        &__btn{
+        &__btn-wrap {
+            margin-bottom: 2rem;
+            input {
+                display: none;
+                &:checked + .services-form__btn {
+                    background-color: #E0FD60;
+                    border-color: #E0FD60;
+                    color: #050505;
+                }
+            }
+        }
+        &__btn {
             padding: 1rem 2rem;
             color: #FFFFFF;
             background-color: #050505;
@@ -626,6 +636,8 @@
             line-height: 130%;
             letter-spacing: -0.03em;
             transition: all .3s ease-in-out;
+            cursor: pointer;
+    
 
             &:hover{
                 background-color: #E0FD60;

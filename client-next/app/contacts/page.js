@@ -71,7 +71,7 @@ export default async function Home() {
   ]);
     return (
       <>
-        <main className="contacts" style={{display: 'none'}}>
+        <main className="contacts destroy" style={{display: 'none'}}>
           <div className="container">
             <section className="contacts-main">
               <span className="agency-maint__text">
