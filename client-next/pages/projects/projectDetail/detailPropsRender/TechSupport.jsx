@@ -39,6 +39,14 @@ const TechSupport = ({detail}) => {
                                 )}
                                 <div className="project-target__item m-text">
                                     <div dangerouslySetInnerHTML={{__html: detail?.tasksItem}}/>
+                                    <ul  className="project-target__item m-text">
+                                        <li>
+                                            Мощность системы рассчитана на работу по новым автомобилям, а также автомобилям с пробегом.
+                                        </li>
+                                        <li>
+                                            В рамках технической поддержки обеспечивается стабильная работа функционала, стабильная доставка актуального стока на классифайды, что поддерживает всегда актуальные данные о наличии и стоимости автомобилей у партнеров.
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
 
@@ -47,7 +55,7 @@ const TechSupport = ({detail}) => {
 
             {detail?.workIntroText && detail?.workIntroText !== 'undefined' && detail?.workIntroText !== '' ?
 
-                <section style={{backgroundColor: "black"}} className="project-stack padding borderBlock">
+                <section className="project-stack padding borderBlock">
                     <div className="project-stack__wrap">
                         <span>
                            <h2 className="heading-secondary">Стек технологий</h2>
