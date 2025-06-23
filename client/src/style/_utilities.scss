@@ -518,14 +518,19 @@ img.customWidth {
    ADMIN TABS NAVIGATION
    ======================================== */
 
+.MuiCardContent-root {
+    margin-top: 100px;
+}
 .admin-tabs-container {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     background: #ffffff;
     border-bottom: 2px solid #e0e0e0;
     margin-bottom: 24px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 48px 0 8px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: calc(100% - 270px);
 }
 
 .admin-tabs {

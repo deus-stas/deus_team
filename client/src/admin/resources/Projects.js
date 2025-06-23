@@ -11,39 +11,11 @@ const apiUrl = ''
 // Admin Tabs Component for navigation
 const AdminTabs = ({ tabs, activeTab, setActiveTab }) => {
     const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start',
-                inline: 'nearest'
-            });
-        }
+        // Just set active tab - no scrolling needed anymore
         setActiveTab(sectionId);
     };
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveTab(entry.target.id);
-                    }
-                });
-            },
-            { 
-                threshold: 0.3,
-                rootMargin: '-80px 0px -50% 0px'
-            }
-        );
-
-        tabs.forEach(tab => {
-            const element = document.getElementById(tab.id);
-            if (element) observer.observe(element);
-        });
-
-        return () => observer.disconnect();
-    }, [tabs, setActiveTab]);
+    // No need for intersection observer anymore since we'll be showing/hiding sections
 
     return (
         <div className="admin-tabs-container">
@@ -1484,7 +1456,7 @@ export const DefaultFields = () => {
                 
                 <div className="admin-form-content">
                     {/* Basic Information Section */}
-                    <div id="basic-info" className="admin-section">
+                    <div id="basic-info" className="admin-section" style={{display: activeTab === 'basic-info' ? 'block' : 'none'}}>
                         <h3 className="admin-section-title">Основная информация</h3>
                         <div className="admin-section-content">
                             <span className="baseFlexWrap">
@@ -1524,7 +1496,7 @@ export const DefaultFields = () => {
                     </div>
 
                     {/* Media Section */}
-                    <div id="media" className="admin-section">
+                    <div id="media" className="admin-section" style={{display: activeTab === 'media' ? 'block' : 'none'}}>
                         <h3 className="admin-section-title">Медиа файлы</h3>
                         <div className="admin-section-content">
                             <p>Обложка проекта</p>
@@ -1569,7 +1541,7 @@ export const DefaultFields = () => {
                     </div>
 
                     {/* Client Information Section */}
-                    <div id="client-info" className="admin-section">
+                    <div id="client-info" className="admin-section" style={{display: activeTab === 'client-info' ? 'block' : 'none'}}>
                         <h3 className="admin-section-title">Информация о клиенте</h3>
                         <div className="admin-section-content">
                             <ReferenceArrayInput
@@ -1601,7 +1573,7 @@ export const DefaultFields = () => {
                     </div>
 
                     {/* SEO Section */}
-                    <div id="seo" className="admin-section">
+                    <div id="seo" className="admin-section" style={{display: activeTab === 'seo' ? 'block' : 'none'}}>
                         <h3 className="admin-section-title">SEO настройки</h3>
                         <div className="admin-section-content">
                             <span className="baseFlexWrap">

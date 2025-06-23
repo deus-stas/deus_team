@@ -1,65 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {List, Datagrid, TextField, EditButton, ReferenceInput} from 'react-admin';
 // import './Services.css';
-import { Create, SimpleForm, TextInput, Edit, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, ArrayInput, SimpleFormIterator, SelectArrayInput, FormDataConsumer } from 'react-admin';
+import { Create, SimpleForm, TextInput, Edit, required, ReferenceArrayInput, SelectInput, FunctionField, BooleanInput, FileInput, ArrayInput, SimpleFormIterator, SelectArrayInput } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
 
 const apiUrl = ''
 
-// Isolated Array Component to prevent form state sharing
-const IsolatedArrayInput = ({ children, ...props }) => {
-    const [localKey, setLocalKey] = useState(Math.random());
-    
-    useEffect(() => {
-        // Force re-render when source changes to break state sharing
-        setLocalKey(Math.random());
-    }, [props.source]);
-    
-    return (
-        <div key={localKey}>
-            <ArrayInput {...props}>
-                {children}
-            </ArrayInput>
-        </div>
-    );
-};
-
 // Admin Tabs Component for navigation
 const AdminTabs = ({ tabs, activeTab, setActiveTab }) => {
     const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start',
-                inline: 'nearest'
-            });
-        }
+        // Just set active tab - no scrolling needed anymore
         setActiveTab(sectionId);
     };
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveTab(entry.target.id);
-                    }
-                });
-            },
-            { 
-                threshold: 0.3,
-                rootMargin: '-80px 0px -50% 0px'
-            }
-        );
-
-        tabs.forEach(tab => {
-            const element = document.getElementById(tab.id);
-            if (element) observer.observe(element);
-        });
-
-        return () => observer.disconnect();
-    }, [tabs, setActiveTab]);
+    // No need for intersection observer anymore since we'll be showing/hiding sections
 
     return (
         <div className="admin-tabs-container">
@@ -168,7 +122,7 @@ export const ServicesCreate = (props) => {
                 />
 
                 {/* Basic Information Section */}
-                <div id="basic-info" className="admin-section">
+                <div id="basic-info" className="admin-section" style={{display: activeTab === 'basic-info' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Основная информация</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
@@ -188,7 +142,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Media Section */}
-                <div id="media-section" className="admin-section">
+                <div id="media-section" className="admin-section" style={{display: activeTab === 'media-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Медиа файлы</div>
                     <div className="admin-form-grid">
                         <div>
@@ -215,7 +169,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Content Section */}
-                <div id="content-section" className="admin-section">
+                <div id="content-section" className="admin-section" style={{display: activeTab === 'content-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Контент страницы</div>
                     <div className="admin-form-grid-full">
                         <RichTextInput className="customWidth" source="descrTotal" label="Описание для разводящей страницы" fullWidth />
@@ -231,7 +185,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Why Choose Us Section */}
-                <div id="why-choose-us" className="admin-section">
+                <div id="why-choose-us" className="admin-section" style={{display: activeTab === 'why-choose-us' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Почему выбирают нас</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="whyChooseUsTitle" label="Заголовок секции 'Почему выбирают'" fullWidth />
@@ -252,7 +206,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Service Includes Section */}
-                <div id="service-includes" className="admin-section">
+                <div id="service-includes" className="admin-section" style={{display: activeTab === 'service-includes' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Что входит в услугу</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="serviceIncludesTitle" label="Заголовок секции 'Что входит в услугу'" fullWidth />
@@ -273,7 +227,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Aspro Templates Section */}
-                <div id="aspro-templates" className="admin-section">
+                <div id="aspro-templates" className="admin-section" style={{display: activeTab === 'aspro-templates' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Шаблоны Aspro</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="asproTemplatesTitle" label="Заголовок секции 'Шаблоны Aspro'" fullWidth />
@@ -294,7 +248,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* FAQ Section */}
-                <div id="faq-section" className="admin-section">
+                <div id="faq-section" className="admin-section" style={{display: activeTab === 'faq-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Часто задаваемые вопросы</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="faqTitle" label="Заголовок секции FAQ" fullWidth />
@@ -314,7 +268,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Benefits Section */}
-                <div id="benefits-section" className="admin-section">
+                <div id="benefits-section" className="admin-section" style={{display: activeTab === 'benefits-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Преимущества</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
@@ -331,7 +285,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Related Services Section */}
-                <div id="related-services" className="admin-section">
+                <div id="related-services" className="admin-section" style={{display: activeTab === 'related-services' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Связанные услуги</div>
                     <div className="admin-form-grid">
                         <TextInput className="customWidth" source="blockTitle" label="Заголовок для блока" />
@@ -342,7 +296,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Work Process Section */}
-                <div id="work-process" className="admin-section">
+                <div id="work-process" className="admin-section" style={{display: activeTab === 'work-process' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Как проходит работа</div>
                     <ArrayInput source="work" label="Этапы работы">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
@@ -353,7 +307,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* Tariffs Section */}
-                <div id="tariffs-section" className="admin-section">
+                <div id="tariffs-section" className="admin-section" style={{display: activeTab === 'tariffs-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Тарифы</div>
                     <ArrayInput source="tariffs" label="Тарифы">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
@@ -365,7 +319,7 @@ export const ServicesCreate = (props) => {
                 </div>
 
                 {/* SEO Section */}
-                <div id="seo-section" className="admin-section seo-section">
+                <div id="seo-section" className="admin-section seo-section" style={{display: activeTab === 'seo-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">SEO настройки</div>
                     <div>
                         <TextInput className="customWidth" source="seoTitle" label="TITLE" />
@@ -406,7 +360,7 @@ export const ServicesEdit = (props) => {
                 />
 
                 {/* Basic Information Section */}
-                <div id="basic-info" className="admin-section">
+                <div id="basic-info" className="admin-section" style={{display: activeTab === 'basic-info' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Основная информация</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="name" label="Заголовок" fullWidth validate={[required()]} />
@@ -427,7 +381,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Media Section */}
-                <div id="media-section" className="admin-section">
+                <div id="media-section" className="admin-section" style={{display: activeTab === 'media-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Медиа файлы</div>
                     <div className="admin-form-grid">
                         <div>
@@ -454,7 +408,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Content Section */}
-                <div id="content-section" className="admin-section">
+                <div id="content-section" className="admin-section" style={{display: activeTab === 'content-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Контент страницы</div>
                     <div className="admin-form-grid-full">
                         <RichTextInput className="customWidth rich-text-input" source="descrTotal" label="Описание для разводящей" fullWidth />
@@ -470,7 +424,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Why Choose Us Section */}
-                <div id="why-choose-us" className="admin-section">
+                <div id="why-choose-us" className="admin-section" style={{display: activeTab === 'why-choose-us' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Почему выбирают нас</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="whyChooseUsTitle" label="Заголовок секции 'Почему выбирают'" fullWidth />
@@ -485,7 +439,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Service Includes Section */}
-                <div id="service-includes" className="admin-section">
+                <div id="service-includes" className="admin-section" style={{display: activeTab === 'service-includes' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Что входит в услугу</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="serviceIncludesTitle" label="Заголовок секции 'Что входит в услугу'" fullWidth />
@@ -500,7 +454,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Aspro Templates Section */}
-                <div id="aspro-templates" className="admin-section">
+                <div id="aspro-templates" className="admin-section" style={{display: activeTab === 'aspro-templates' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Шаблоны Aspro</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="asproTemplatesTitle" label="Заголовок секции 'Шаблоны Aspro'" fullWidth />
@@ -515,7 +469,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* FAQ Section */}
-                <div id="faq-section" className="admin-section">
+                <div id="faq-section" className="admin-section" style={{display: activeTab === 'faq-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">FAQ</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="faqTitle" label="Заголовок секции FAQ" fullWidth />
@@ -529,7 +483,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Benefits Section */}
-                <div id="benefits-section" className="admin-section">
+                <div id="benefits-section" className="admin-section" style={{display: activeTab === 'benefits-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Преимущества</div>
                     <div className="admin-form-grid-full">
                         <TextInput className="customWidth" source="benefitsTitle" label="Заголовок для преимуществ" fullWidth />
@@ -546,7 +500,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Related Services Section */}
-                <div id="related-services" className="admin-section">
+                <div id="related-services" className="admin-section" style={{display: activeTab === 'related-services' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Связанные услуги</div>
                     <div className="admin-form-grid">
                         <TextInput className="customWidth" source="blockTitle" label="Заголовок для блока" />
@@ -557,7 +511,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Work Process Section */}
-                <div id="work-process" className="admin-section">
+                <div id="work-process" className="admin-section" style={{display: activeTab === 'work-process' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Как проходит работа</div>
                     <ArrayInput source="work" label="Как проходит работа">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
@@ -568,7 +522,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* Tariffs Section */}
-                <div id="tariffs-section" className="admin-section">
+                <div id="tariffs-section" className="admin-section" style={{display: activeTab === 'tariffs-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">Тарифы</div>
                     <ArrayInput source="tariffs" label="Тарифы">
                         <SimpleFormIterator inline getItemLabel={index => `#${index + 1}`}>
@@ -580,7 +534,7 @@ export const ServicesEdit = (props) => {
                 </div>
 
                 {/* SEO Section */}
-                <div id="seo-section" className="admin-section seo-section">
+                <div id="seo-section" className="admin-section seo-section" style={{display: activeTab === 'seo-section' ? 'block' : 'none'}}>
                     <div className="admin-section-title">SEO настройки</div>
                     <div>
                         <TextInput className="customWidth" source="seoTitle" label="TITLE" />
