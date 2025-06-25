@@ -214,7 +214,7 @@ const ProjectDetail = () => {
                                 <h1 className="heading-primary"
                                     dangerouslySetInnerHTML={{__html: detail.descrProject}}></h1>
                             </span>
-
+                            <div className="project-wrap_text_video_block">
                             {detail.about !== 'undefined' ?
                                 <div className="project-main__wrap borderBlock padding">
                                     <div className="project-main__subtitle heading-secondary">О клиенте</div>
@@ -239,18 +239,19 @@ const ProjectDetail = () => {
                                     </div>
 
                                 </div> : null}
-
-                        </section>
-                        {detail.bannerThirds ?
-                            <div className="banner-list">
-                                {detail.bannerThirds.filter(val => !!val).map((banner, index) =>
-                                    <div className="project-banner borderBlock" key={`project-banner-${index}`}>
-                                        <BannerComponent banner={banner} detail={detail}/>
-                                    </div>
-                                )}
+                            {detail.bannerThirds ?
+                                <div className="banner-list">
+                                    {detail.bannerThirds.filter(val => !!val).map((banner, index) =>
+                                        <div className="project-banner borderBlock" key={`project-banner-${index}`}>
+                                            <BannerComponent banner={banner} detail={detail}/>
+                                        </div>
+                                    )}
+                                </div>
+                                : null
+                            }
                             </div>
-                            : null
-                        }
+                        </section>
+
 
                         <RenderFields detail={detail}/>
                         <ProjectNext detail={detail}/>
