@@ -3,16 +3,16 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { Suspense } from 'react';
 
-export const getServerSideProps = async (context) => {
-  const { query } = context;
-  const someParam = query.someParam || '';
+// export const getServerSideProps = async (context) => {
+//   const { query } = context;
+//   const someParam = query.someParam || '';
 
-  return {
-    props: {
-      someParam,
-    },
-  };
-};
+//   return {
+//     props: {
+//       someParam,
+//     },
+//   };
+// };
 
 async function getProjects() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/projects/`);
