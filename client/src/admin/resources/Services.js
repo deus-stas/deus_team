@@ -129,7 +129,7 @@ export const ServicesCreate = (props) => {
                     </div>
                     <div className="admin-form-grid">
                         <ReferenceArrayInput source="types" reference="types" label="Тип проекта" validate={[required()]}>
-                            <SelectInput className="customWidth" optionText="name" />
+                            <SelectInput className="customWidth" optionText="name" label="Тип проекта" validate={[required()]}/>
                         </ReferenceArrayInput>
                         <TextInput className="customWidth" source="position" label="Позиция"/>
                     </div>

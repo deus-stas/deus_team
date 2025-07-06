@@ -39,6 +39,29 @@ const addPosition = async (req, res, next) => {
     }
 };
 
+const safeJsonParse = (jsonString, defaultValue = []) => {
+  if (!jsonString || jsonString === 'undefined' || jsonString === 'null') {
+    return defaultValue;
+  }
+  
+  // Handle the case where the input is already an object or array
+  if (typeof jsonString === 'object') {
+    return jsonString;
+  }
+  
+  // Skip parsing if the string is "[object Object]"
+  if (jsonString === "[object Object]") {
+    return defaultValue;
+  }
+  
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    console.error(`JSON parse error: ${error.message} for value: ${jsonString}`);
+    return defaultValue;
+  }
+};
+
 router.get('/services', async (req, res) => {
     const limit = parseInt(req.query._limit);
     const skip = parseInt(req.query._start);
@@ -59,19 +82,28 @@ router.get('/services', async (req, res) => {
 router.post('/services', upload.fields([{name: 'serviceBanner'}, {name: 'brief'}]), addPosition, async (req, res) => {
     console.log(req.body);
 
-    const brief = req.files.brief ? req.files.brief[0] : undefined;
-    const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' ? JSON.parse(req.body.benefits) : [];
-    const work = !!req.body.work && req.body.work !== 'undefined' ? JSON.parse(req.body.work) : [];
-    const tariffs = req.body.tariffs && req.body.tariffs !== 'undefined' ? JSON.parse(req.body.tariffs) : [];
-    const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' ? JSON.parse(req.body.subProjects) : [];
-    const whyChooseUsOptions = req.body.whyChooseUsOptions && req.body.whyChooseUsOptions !== 'undefined' ? JSON.parse(req.body.whyChooseUsOptions) : [];
-    const serviceIncludesOptions = req.body.serviceIncludesOptions && req.body.serviceIncludesOptions !== 'undefined' ? JSON.parse(req.body.serviceIncludesOptions) : [];
-    const faqOptions = req.body.faqOptions && req.body.faqOptions !== 'undefined' ? JSON.parse(req.body.faqOptions) : [];
-    const asproTemplatesOptions = req.body.asproTemplatesOptions && req.body.asproTemplatesOptions !== 'undefined' ? JSON.parse(req.body.asproTemplatesOptions) : [];
+    const brief = req.files && req.files.brief ? req.files.brief[0] : undefined;
+    // const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' ? JSON.parse(req.body.benefits) : [];
+    // const work = !!req.body.work && req.body.work !== 'undefined' ? JSON.parse(req.body.work) : [];
+    // const tariffs = req.body.tariffs && req.body.tariffs !== 'undefined' ? JSON.parse(req.body.tariffs) : [];
+    const benefits = safeJsonParse(req.body.benefits);
+    const work = safeJsonParse(req.body.work);
+    const tariffs = safeJsonParse(req.body.tariffs);
+    const subProjects = safeJsonParse(req.body.subProjects);
+    const whyChooseUsOptions = safeJsonParse(req.body.whyChooseUsOptions);
+    const serviceIncludesOptions = safeJsonParse(req.body.serviceIncludesOptions);
+    const faqOptions = safeJsonParse(req.body.faqOptions);
+    const asproTemplatesOptions = safeJsonParse(req.body.asproTemplatesOptions);
+    // const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' ? JSON.parse(req.body.subProjects) : [];
+    // const whyChooseUsOptions = req.body.whyChooseUsOptions && req.body.whyChooseUsOptions !== 'undefined' ? JSON.parse(req.body.whyChooseUsOptions) : [];
+    // const serviceIncludesOptions = req.body.serviceIncludesOptions && req.body.serviceIncludesOptions !== 'undefined' ? JSON.parse(req.body.serviceIncludesOptions) : [];
+    // const faqOptions = req.body.faqOptions && req.body.faqOptions !== 'undefined' ? JSON.parse(req.body.faqOptions) : [];
+    // const asproTemplatesOptions = req.body.asproTemplatesOptions && req.body.asproTemplatesOptions !== 'undefined' ? JSON.parse(req.body.asproTemplatesOptions) : [];
     
     const {
         name,
         types,
+        description,
         descrTotal,
         descr,
         benefitsTitle,
@@ -87,6 +119,7 @@ router.post('/services', upload.fields([{name: 'serviceBanner'}, {name: 'brief'}
         faqTitle,
         asproTemplatesTitle,
         asproTemplatesDescription,
+        whyChooseUsTitle,
     } = req.body;
 
     var a = {
@@ -166,7 +199,7 @@ router.post('/services', upload.fields([{name: 'serviceBanner'}, {name: 'brief'}
 
     const path = editedWithLine
 
-    const serviceBanner = req.files.serviceBanner ? req.files.serviceBanner[0] : undefined;
+    const serviceBanner = req.files && req.files.serviceBanner ? req.files.serviceBanner[0] : undefined;
 
     const services = new Services({
         name,
@@ -254,22 +287,29 @@ router.put("/services/:id", upload.fields([{name: 'serviceBanner'}, {name: 'brie
             asproTemplatesTitle,
             asproTemplatesDescription,
         } = req.body;
-        const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' && typeof req.body.benefits === 'string'
-            ? JSON.parse(req.body.benefits)
-            : [];
-        const work = !!req.body.work && req.body.work !== 'undefined' && typeof req.body.work === 'string'
-            ? JSON.parse(req.body.work)
-            : [];
+        // const benefits = !!req.body.benefits && req.body.benefits !== 'undefined' && typeof req.body.benefits === 'string'
+        //     ? JSON.parse(req.body.benefits)
+        //     : [];
+        // const work = !!req.body.work && req.body.work !== 'undefined' && typeof req.body.work === 'string'
+        //     ? JSON.parse(req.body.work)
+        //     : [];
 
-        const tariffs = req.body.tariffs && req.body.tariffs!== 'undefined' ? JSON.parse(req.body.tariffs) : [];
-        const whyChooseUsOptions = req.body.whyChooseUsOptions && req.body.whyChooseUsOptions!== 'undefined' ? JSON.parse(req.body.whyChooseUsOptions) : [];
-        const serviceIncludesOptions = req.body.serviceIncludesOptions && req.body.serviceIncludesOptions!== 'undefined' ? JSON.parse(req.body.serviceIncludesOptions) : [];
-        const faqOptions = req.body.faqOptions && req.body.faqOptions !== 'undefined' ? JSON.parse(req.body.faqOptions) : [];
-        const asproTemplatesOptions = req.body.asproTemplatesOptions && req.body.asproTemplatesOptions!== 'undefined' ? JSON.parse(req.body.asproTemplatesOptions) : [];
-
-        const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' && typeof req.body.subProjects === 'string'
-            ? JSON.parse(req.body.subProjects)
-            : [];
+        const benefits = safeJsonParse(req.body.benefits);
+        const work = safeJsonParse(req.body.work);
+        const tariffs = safeJsonParse(req.body.tariffs);
+        const subProjects = safeJsonParse(req.body.subProjects);
+        const whyChooseUsOptions = safeJsonParse(req.body.whyChooseUsOptions);
+        const serviceIncludesOptions = safeJsonParse(req.body.serviceIncludesOptions);
+        const faqOptions = safeJsonParse(req.body.faqOptions);
+        const asproTemplatesOptions = safeJsonParse(req.body.asproTemplatesOptions);
+        // const tariffs = req.body.tariffs && req.body.tariffs!== 'undefined' ? JSON.parse(req.body.tariffs) : [];
+        // const whyChooseUsOptions = req.body.whyChooseUsOptions && req.body.whyChooseUsOptions!== 'undefined' ? JSON.parse(req.body.whyChooseUsOptions) : [];
+        // const serviceIncludesOptions = req.body.serviceIncludesOptions && req.body.serviceIncludesOptions!== 'undefined' ? JSON.parse(req.body.serviceIncludesOptions) : [];
+        // const faqOptions = req.body.faqOptions && req.body.faqOptions !== 'undefined' ? JSON.parse(req.body.faqOptions) : [];
+        // const asproTemplatesOptions = req.body.asproTemplatesOptions && req.body.asproTemplatesOptions!== 'undefined' ? JSON.parse(req.body.asproTemplatesOptions) : [];
+        // const subProjects = !!req.body.subProjects && req.body.subProjects !== 'undefined' && typeof req.body.subProjects === 'string'
+        //     ? JSON.parse(req.body.subProjects)
+        //     : [];
 
         const service = await Services.findById(id);
 
@@ -277,7 +317,7 @@ router.put("/services/:id", upload.fields([{name: 'serviceBanner'}, {name: 'brie
             return res.status(404).json({error: 'Service not found'});
         }
 
-        const brief = req.files.brief ? req.files.brief[0] : undefined;
+        const brief = req.files && req.files.brief ? req.files.brief[0] : undefined;
         uploadFile(brief, 'brief', service, req, 'brief')
 
         const oldServicesServices = service.servicesServices;
@@ -292,7 +332,7 @@ router.put("/services/:id", upload.fields([{name: 'serviceBanner'}, {name: 'brie
         // var rmPercent = editedName.replace("%",'');
         // var editedWithLine = rmPercent.split(' ').join('-');
         // service.path = editedWithLine
-        const serviceBanner = req.files.serviceBanner ? req.files.serviceBanner[0] : undefined;
+        const serviceBanner = req.files && req.files.serviceBanner ? req.files.serviceBanner[0] : undefined;
 
         if (serviceBanner) {
             if (service.serviceBanner) {
