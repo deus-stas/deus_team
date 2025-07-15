@@ -79,9 +79,9 @@
 
         &__wrap {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             background-color: white;
-            margin-top: 4rem;
+            //margin-top: 4rem;
 
             @include respond(xs) {
                 grid-template-columns: 1fr;
@@ -90,7 +90,7 @@
         }
 
         &__subtitle {
-
+            margin-bottom:1rem
         }
 
         &__descr {
@@ -851,6 +851,15 @@
 
         p {
             display: none;
+        }
+    }
+    &-wrap{
+        &_text_video_block{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: auto;
+            gap: 4rem;
+            margin-top: 6rem;
         }
     }
 }

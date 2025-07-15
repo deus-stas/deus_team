@@ -42,10 +42,10 @@ const ProjectNext = ({ props, detail }) => {
                 setAllProjects(projects);
 
                 const relatedProjectsByType = projects.filter((project) => project.projectType === detail?.projectType);
-                if (relatedProjectsByType.length >= 2) {
-                    setRelatedProjects(relatedProjectsByType.slice(0, 2));
+                if (relatedProjectsByType.length >= 3) {
+                    setRelatedProjects(relatedProjectsByType.slice(0, 3));
                 } else {
-                    setRelatedProjects(projects.slice(0, 2));
+                    setRelatedProjects(projects.slice(0, 3));
                 }
             })
             .catch((error) => {
@@ -69,7 +69,7 @@ const ProjectNext = ({ props, detail }) => {
     return (
         <>
         <section className="project-next">
-            <h1 className="heading-primary">Ещё проекты</h1>
+            <h3 className="heading-primary">Ещё проекты</h3>
             <div className="project-next__wrap">
                 {relatedProjects.map((project, index) => {
                     const imgSize = isMobile ? `${apiUrl}/uploads/${project.imageMob?.filename}` : `${apiUrl}/uploads/${project.image.filename}`;

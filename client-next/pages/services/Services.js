@@ -207,9 +207,8 @@ const Services = () => {
                                                         }
                                                     </h2>
                                                     <div className="describe__wrapp ">
-                                                        <p className="s-text">
-                                                            {service.descr}
-                                                        </p>
+                                                        <p className="s-text" dangerouslySetInnerHTML={{ __html: service.descr}} /> 
+                                                     
                                                     </div>
                                                 </div>
                                                 <div className="describe__content">

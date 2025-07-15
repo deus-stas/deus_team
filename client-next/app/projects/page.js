@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 // export const getServerSideProps = async (context) => {
 //   const { query } = context;
 //   const someParam = query.someParam || '';
-//
+
 //   return {
 //     props: {
 //       someParam,

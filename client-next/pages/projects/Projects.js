@@ -219,7 +219,7 @@ const Projects = () => {
             (selectedType ? project.projectType === selectedType.value : true) && project.visibility;
     })
 
-    const PAGE_SIZE = 10
+    const PAGE_SIZE = 12
 
     useEffect(() => {
         const filteredProjectList = filteredProjects(projects || []);
@@ -407,9 +407,45 @@ const Projects = () => {
             )
         })
         : null}</>
+    const allRenderProject = () => <>{limitProjects ? limitProjects
+            .map((project, index, array) => {
+                const numProject = index < 12 ? "0" + (index + 1) : (index + 1);
+                const isLastItem = index + 1 === array.length;
+                const imgSize = isMob ? `${apiUrl}/uploads/${project.imageMob?.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
+                const isVideo = project.imageMob && project.imageMob?.filename.endsWith('.mp4') || project.image && project.image.filename.endsWith('.mp4');
+
+                return (
+                    <div key={project.id} style={{ display: "flex", flexDirection: "column", gap: '2rem' }}>
+                        <Link
+                            href={`/projects/${project.nameInEng}`}
+                            className={`projects__item projects__item__${index + 1}`}
+                            key={project.id}
+                        >
+                            <div className="projects__item-img-wrap">
+                                {isVideo ?
+                                    <VideoComponent ref={(ref) => addVideoRef(ref)} project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} /> :
+                                    <img  src={imgSize} alt={project.name} className="main-projects__img" />
+                                }
+                            </div>
+                        </Link>
+                        <span className="projects-decription m-text">
+                        <p style={{ color: "rgba(117, 118, 119, 1)" }}>{project.date} • {project.name}</p>
+                    <Link
+                        href={`/projects/${project.nameInEng}`}
+                        className="heading-secondary"
+                    >
+                        {project.descrProject}
+                    </Link>
+                </span>
+                    </div>
+
+                )
+            })
+        : null}</>
 
     const odd = renderProject(true)
     const even = renderProject(false)
+    const all = allRenderProject()
 
     return (
         <>  
@@ -430,15 +466,13 @@ const Projects = () => {
 
                             <div className="container">
                                 {!!isMobile && <>{category}</>}
+                                <span className="translateY">
+                                        {!isMobile && <>{category}</>}
+                                    </span>
                                 <div className="projects__wrap">
                                     <span className={"projects__wrap-span"}>
-                                        <div className="projects__wrap-column">{odd}</div>
+                                        <div className="projects__wrap-column">{all}</div>
                                     </span>
-                                    <span className="translateY">
-                                        {!isMobile && <>{category}</>}
-                                        <div className="projects__wrap-column">{even}</div>
-                                    </span>
-
                                 </div>
                                 <div className="flex-sb margin-for-button">
                                     {!allProjectsLoaded && (
