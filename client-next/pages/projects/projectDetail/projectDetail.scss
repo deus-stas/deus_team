@@ -503,6 +503,8 @@
                 }
             }
         }
+
+
     }
 
     &-videoProduction {
@@ -521,7 +523,7 @@
     }
 
     &-stack{
-        background-color: #050505;
+        background-color: #898A8E;
         color: white;
         margin: 4rem 0;
         @include respond(lg){
@@ -645,7 +647,7 @@
     }
 
     &-results {
-        background-color: #050505;
+        background-color: #084650;
         color: white;
         margin: 4rem 0;
         @include respond(lg){
