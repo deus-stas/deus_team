@@ -637,7 +637,7 @@
             letter-spacing: -0.03em;
             transition: all .3s ease-in-out;
             cursor: pointer;
-    
+
 
             &:hover{
                 background-color: #E0FD60;
@@ -926,6 +926,10 @@
                     border: .1rem solid #FFFFFF;
 
                     .type-item__title{
+                        color: #FFFFFF;
+                    }
+
+                    .type-item__subtitle{
                         color: #FFFFFF;
                     }
                 }
