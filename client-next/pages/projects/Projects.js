@@ -398,8 +398,8 @@ const Projects = () => {
                     <Link
                         href={`/projects/${project.nameInEng}`}
                         className="heading-secondary"
+                        dangerouslySetInnerHTML={{ __html: project.descrProject }}
                     >
-                        {project.descrProject}
                     </Link>
                 </span>
                     </div>
@@ -433,8 +433,8 @@ const Projects = () => {
                     <Link
                         href={`/projects/${project.nameInEng}`}
                         className="heading-secondary"
+                        dangerouslySetInnerHTML={{ __html: project.descrProject }}
                     >
-                        {project.descrProject}
                     </Link>
                 </span>
                     </div>
