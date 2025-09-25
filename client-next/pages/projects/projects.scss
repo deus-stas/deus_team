@@ -144,6 +144,12 @@
             @include respond(lg){
                gap: 3rem;
             }
+            @include respond(md){
+                grid-template-columns: 1fr 1fr;
+            }
+            @include respond(sm){
+                grid-template-columns: 100%;
+            }
         }
 
 

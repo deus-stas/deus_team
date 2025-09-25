@@ -34,7 +34,7 @@ const Projects = () => {
     const [menuType, setMenuType] = useState(false);
     const [select, setSelect] = useState(false);
     const pathname = usePathname();
-    
+
     const router = useRouter();
 
     // const searchParams = useSearchParams(); // для работы с URL-параметрами
@@ -62,13 +62,13 @@ const Projects = () => {
             };
             setWindowWidth(window.innerWidth);
             window.addEventListener("resize", onResizeEvent);
-    
+
             return () => {
                 window.removeEventListener("resize", onResizeEvent);
             };
         }
     }, []);
-    
+
     useEffect(() => {
         setIsMobile(windowWidth <= MOBILE_SIZE)
     }, [windowWidth])
@@ -153,7 +153,7 @@ const Projects = () => {
             if(typeKey === 'theme') {
                 setMenuTheme(true);
                 setMenuType(false);
-            } else {     
+            } else {
                 setMenuTheme(false);
                 setMenuType(true);
             }
@@ -169,7 +169,7 @@ const Projects = () => {
             if(typeKey === 'theme') {
                 setMenuTheme(true);
                 setMenuType(false);
-            } else {     
+            } else {
                 setMenuTheme(false);
                 setMenuType(true);
             }
@@ -183,7 +183,7 @@ const Projects = () => {
                 response.data.forEach((item, i) => {
                     const {id, name, key} = item;
                     projectOptionsType[i] = {value: id, label: name, href:key}
-                })   
+                })
                 setOptionsType(projectOptionsType)
                 if (!!cb) {
                     cb()
@@ -200,13 +200,13 @@ const Projects = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setIsLoadingMainPageEvent(true)
-    
+
             const handleLoad = (e) => {
                 if (e.detail.isLoading !== isLoading) {
                     setIsLoading(e.detail.isLoading);
                 }
             };
-    
+
             window.addEventListener('isLoadingMainPage', handleLoad);
             return () => {
                 window.removeEventListener('isLoadingMainPage', handleLoad);
@@ -251,9 +251,9 @@ const Projects = () => {
             const handleResize = () => {
                 setIsMob(window.innerWidth < 700);
             };
-    
+
             window.addEventListener('resize', handleResize);
-    
+
             return () => {
                 window.removeEventListener('resize', handleResize);
             };
@@ -274,7 +274,7 @@ const Projects = () => {
         // e.preventDefault();
         gotoAnchor(e, 'start', false);
         setChecked(value);
-    } 
+    }
 
 
     const category = <>
@@ -306,7 +306,7 @@ const Projects = () => {
                                     if (totalSum < 1) return null;
                                     return (
 
-                                        <Link 
+                                        <Link
                                             onClick={(e) => handleLinkClick(e, project.value)}
                                             // href={`/projects/${project.href}`}
                                             href={`/projects/theme/${project.href}`}
@@ -340,11 +340,11 @@ const Projects = () => {
                                     if (totalSum < 1) return null;
                                     console.log(project)
                                     return (
-                                        <Link 
-                                            // onClick={(e) => gotoAnchor(e, 'start', false)} 
-                                            onClick={(e) => handleLinkClick(e, project.value)} 
-                                            // href={`/projects/${project.href}`} 
-                                            href={`/projects/type/${project.href}`} 
+                                        <Link
+                                            // onClick={(e) => gotoAnchor(e, 'start', false)}
+                                            onClick={(e) => handleLinkClick(e, project.value)}
+                                            // href={`/projects/${project.href}`}
+                                            href={`/projects/type/${project.href}`}
                                             key={`key-vlue-${index}`}
                                             >
                                             <div className="main-projects__item-flex__inner">
@@ -448,7 +448,7 @@ const Projects = () => {
     const all = allRenderProject()
 
     return (
-        <>  
+        <>
             <Suspense fallback={<div>Loading...</div>}>
                 <Cursor/>
                 {!isLoading &&
@@ -474,7 +474,7 @@ const Projects = () => {
                                         <div className="projects__wrap-column">{all}</div>
                                     </span>
                                 </div>
-                                <div className="flex-sb margin-for-button">
+                                <div className="flex-sb">
                                     {!allProjectsLoaded && (
                                         <div onClick={loadNewProject} className="m-text loadMore">Показать еще</div>
                                     )}
