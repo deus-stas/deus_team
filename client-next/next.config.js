@@ -59,6 +59,15 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/news',
+        destination: '/blog',
+        permanent: true, // 301 редирект
+      }
+    ];
+  },
   images: {
     remotePatterns: [
       {
