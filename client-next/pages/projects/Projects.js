@@ -423,7 +423,7 @@ const Projects = () => {
                         >
                             <div className="projects__item-img-wrap">
                                 {isVideo ?
-                                    <VideoComponent ref={(ref) => addVideoRef(ref)} project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} /> :
+                                    <VideoComponent ref={(ref) => addVideoRef(ref)} project={project} isMob={isMob} videoSize={imgSize} apiUrl={apiUrl} posterUrl={''} /> :
                                     <img  src={imgSize} alt={project.name} className="main-projects__img" />
                                 }
                             </div>
@@ -491,7 +491,7 @@ const Projects = () => {
 
 }
 
-export const VideoComponent = ({project, apiUrl, videoSize}) => {
+export const VideoComponent = ({project, apiUrl, videoSize,posterUrl=''}) => {
     const videoRef = useRef();
 
     useEffect(() => {
@@ -524,7 +524,7 @@ export const VideoComponent = ({project, apiUrl, videoSize}) => {
     }, [videoSize]);
 
     return (
-        <video key={'videoSize_' + videoSize} ref={videoRef} muted loop playsInline>
+        <video key={'videoSize_' + videoSize} ref={videoRef} muted loop playsInline poster={posterUrl}>
             <source
                 src={videoSize}
                 type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"
