@@ -41,7 +41,7 @@ async function getTypes() {
 
 
 export async function generateMetadata() {
-  const headersList = headers();
+  const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
 
@@ -76,6 +76,16 @@ export async function generateMetadata() {
       title: data?.seoTitle || "Проекты",
       description: data?.seoDescription || "Проекты",
       keywords: data?.seoKeywords || "Проекты",
+        openGraph: {
+            title: data?.seoTitle || "Проекты",
+            description: data?.seoDescription || "Проекты",
+            type: 'website',
+            images:['/img/agency/deus.svg']
+        },
+        twitter: {},
+        alternates: {
+            canonical: baseUrl+"/projects",
+        },
     };
   } catch (error) {
     console.error("Error fetching SEO data:", error);

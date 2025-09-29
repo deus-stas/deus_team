@@ -68,13 +68,24 @@ async function getNewsData() {
 
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
+    const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
+  const { id } = await params;
   const serviceData = await getServices(id);
 
-  return {
+    return {
     title: serviceData?.seoTitle || "Cервис",
     description: serviceData?.seoDescription || "Cервис",
     keywords: serviceData?.seoKeywords || "Cервис",
+      openGraph: {
+          title: serviceData?.seoTitle || "Cервис",
+          description: serviceData?.seoDescription || "Cервис",
+          type: 'website',
+          images:[baseUrl+'/'+serviceData.serviceBanner.path]
+      },
+      twitter: {},
+      alternates: {
+          canonical: baseUrl+"/services/"+serviceData.path,
+      },
   };
 }
 

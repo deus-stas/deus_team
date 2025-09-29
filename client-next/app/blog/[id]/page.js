@@ -67,7 +67,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const headersList = headers();
+  const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
 
@@ -81,11 +81,21 @@ export async function generateMetadata({ params }) {
 
   // const baseUrl = `${protocol}://${host}`;
   const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`; // Укажите URL вашего API
-
+    console.log (detail);
   return {
     title: detail?.seoTitle || "Новости",
     description: detail?.seoDescription || "Новости",
     keywords: detail?.seoKeywords || "Новости",
+      openGraph: {
+          title: detail?.seoTitle || "Новости",
+          description: detail?.seoDescription || "Новости",
+          type: 'website',
+          images:[baseUrl+'/'+detail.image.path]
+      },
+      twitter: {},
+      alternates: {
+          canonical: baseUrl+"/blog"+detail.urlName,
+      },
   };
 }
 

@@ -2,17 +2,17 @@ import Projects from "../../../pages/projects/Projects";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { Suspense } from 'react';
-
-export const getServerSideProps = async (context) => {
-  const { query } = context;
-  const someParam = query.someParam || '';
-
-  return {
-    props: {
-      someParam,
-    },
-  };
-};
+//
+// export const getServerSideProps = async (context) => {
+//   const { query } = context;
+//   const someParam = query.someParam || '';
+//
+//   return {
+//     props: {
+//       someParam,
+//     },
+//   };
+// };
 
 async function getProjects() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/api/projects/`);
@@ -41,7 +41,7 @@ async function getTypes() {
 
 
 export async function generateMetadata() {
-  const headersList = headers();
+  const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
 
@@ -76,6 +76,16 @@ export async function generateMetadata() {
       title: data?.seoTitle || "Проекты",
       description: data?.seoDescription || "Проекты",
       keywords: data?.seoKeywords || "Проекты",
+        openGraph: {
+            title: data?.seoTitle || "Проекты",
+            description: data?.seoDescription || "Проекты",
+            type: 'website',
+            images:[baseUrl+'/img/agency/deus.svg']
+        },
+        twitter: {},
+        alternates: {
+            canonical: baseUrl+"/projects",
+        },
     };
   } catch (error) {
     console.error("Error fetching SEO data:", error);

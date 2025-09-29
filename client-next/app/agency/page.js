@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 
 export async function generateMetadata() {
   
-  const headersList = headers();
+  const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
 
@@ -39,6 +39,16 @@ export async function generateMetadata() {
       title: data?.seoTitle || "Агентство",
       description: data?.seoDescription || "Агентство",
       keywords: data?.seoKeywords || "Агентство",
+        openGraph: {
+            title: data?.seoTitle || "Агентство",
+            description: data?.seoDescription || "Агентство",
+            type: 'website',
+            images:[baseUrl+'/img/agency/deus.svg']
+        },
+        twitter: {},
+        alternates: {
+            canonical: baseUrl+"/agency",
+        },
     };
   } catch (error) {
     console.error("Error fetching SEO data:", error);

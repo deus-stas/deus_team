@@ -6,7 +6,7 @@ const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT
 
 export async function generateMetadata() {
   
-  const headersList = headers();
+  const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
 
@@ -41,6 +41,16 @@ export async function generateMetadata() {
       title: data?.seoTitle || "Контакты",
       description: data?.seoDescription || "Контакты",
       keywords: data?.seoKeywords || "Контакты",
+      openGraph: {
+        title: data?.seoTitle || "Контакты",
+        description: data?.seoDescription || "Контакты",
+        type: 'website',
+        images:[baseUrl+'/img/agency/deus.svg']
+      },
+      twitter: {},
+      alternates: {
+        canonical: baseUrl+"/contacts",
+      },
     };
   } catch (error) {
     console.error("Error fetching SEO data:", error);
@@ -80,13 +90,14 @@ export default async function Home() {
               </span>
             </section>
             <section className="contacts-info">
-              <div className="contacts-info__wrap">
-                <div className="contacts-info__wrap-adress">
+              <div className="contacts-info__wrap"  itemscope itemtype="http://schema.org/Organization">
+                <div className="contacts-info__wrap-adress" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  <div style={{display: 'none'}} itemprop="name">Deus Team</div>
                   <Link
                     href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
                     target="_blank"
                   >
-                    <h2 className="heading-secondary cursorTarget">
+                    <h2 className="heading-secondary cursorTarget" itemprop="streetAddress">
                       г. Одинцово, ул. Молодежная, д.46,<br /> строение 1 офис 24, 25
                     </h2>
                   </Link>

@@ -92,18 +92,29 @@ async function getProjectData(id) {
 }
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const projectData = await getProjectData(id);
-
+  const baseUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
+  console.log(projectData);
   return {
     title: projectData?.seoTitle || "Проект",
     description: projectData?.seoDescription || "Проект",
     keywords: projectData?.seoKeywords || "Проект",
+    openGraph: {
+      title: projectData?.seoTitle || "Проект",
+      description: projectData?.seoDescription || "Проект",
+      type: 'website',
+      images:[baseUrl+'/'+projectData.image.path]
+    },
+    twitter: {},
+    alternates: {
+      canonical:baseUrl+"/projects/"+projectData.nameInEng,
+    },
   };
 }
 
 export default async function Home({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const projectData = await getProjectData(id);
 
   return (
