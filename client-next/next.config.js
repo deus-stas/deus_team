@@ -12,8 +12,16 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  transpilePackages: [
+    'react-hotkeys-hook',
+    'ra-ui-materialui',
+    'react-admin',
+    '@mui/material',
+    '@emotion/react'
+  ],
   experimental: {
     outputFileTracing: false,
+    esmExternals: 'loose'
   },
   images: { 
     domains: ['deus.team'],
@@ -31,7 +39,12 @@ const nextConfig = {
     if (!isServer) {
       config.externals = config.externals || [];
       config.externals.push('@mui/icons-material');
+      config.externals.push('react-hotkeys-hook');
     }
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Принудительно используем CommonJS версию если доступна
+    };
     return config;
   },
   async headers() {
@@ -72,12 +85,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'deus.team',
+        hostname: 'dev.deus.team',
         pathname: '**',
       },
       {
         protocol: 'https',
-        hostname: 'deus.team',
+        hostname: 'dev.deus.team',
         pathname: '**',
       },
       {
