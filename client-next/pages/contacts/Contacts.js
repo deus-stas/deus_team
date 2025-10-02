@@ -23,7 +23,7 @@
     const [team, setTeam] = useState(null);
     
 
-;
+
   //   setTimeout(()=> {
   //     document.querySelector('#preloader').style.transform = 'translateY(120%)';
   //  }, 1000)
@@ -120,31 +120,31 @@
                 </span>
               </section>
               <section className="contacts-info">
-                <div className="contacts-info__wrap" itemscope itemtype="http://schema.org/Organization">
-                    <div className="contacts-info__wrap-adress" itemProp="address" itemscope
-                         itemtype="http://schema.org/PostalAddress">
+                <div className="contacts-info__wrap" itemScope itemType="http://schema.org/Organization">
+                    <div className="contacts-info__wrap-adress" itemProp="address" itemScope
+                         itemType="http://schema.org/PostalAddress">
                         <div style={{display: 'none'}} itemProp="name">Deus Team</div>
                         <Link
                             href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
                             target="_blank"
                         >
-                            <h2 className="heading-secondary cursorTarget" itemprop="streetAddress">
+                            <h2 className="heading-secondary cursorTarget" itemProp="streetAddress">
                                 г. Одинцово, ул. Молодежная, д.46,<br/> строение 1 офис 24, 25
                             </h2>
                         </Link>
                         <Link href="tel:+74951034351">
                             <h2 className="heading-secondary hover-flip" style={{display: 'inline-flex'}}>
-                        <span data-hover="+7 (495) 103—4351" itemprop="telephone">
+                        <span data-hover="+7 (495) 103—4351" itemProp="telephone">
                           +7 (495) 103—4351
                         </span>
-                            </h2>
-                        </Link>
-                    </div>
-                    <div className="contacts-info__wrap-invate">
+                      </h2>
+                    </Link>
+                  </div>
+                  <div className="contacts-info__wrap-invate">
                     <span>
                       <h2 className="m-text hover-flip">
                         <Link href="mailto:hello@de-us.ru">
-                          <span data-hover="hello@de-us.ru" itemprop="email">hello@de-us.ru</span>
+                          <span data-hover="hello@de-us.ru" itemProp="email">hello@de-us.ru</span>
                         </Link>
                       </h2>
                       <p className="s-text pb-32">Стать клиентом или партнером</p>
