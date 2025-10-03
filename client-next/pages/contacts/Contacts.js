@@ -121,20 +121,20 @@
               </section>
               <section className="contacts-info">
                 <div className="contacts-info__wrap" itemScope itemType="http://schema.org/Organization">
-                    <div className="contacts-info__wrap-adress" itemProp="address" itemScope
-                         itemType="http://schema.org/PostalAddress">
-                        <div style={{display: 'none'}} itemProp="name">Deus Team</div>
-                        <Link
-                            href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
-                            target="_blank"
-                        >
-                            <h2 className="heading-secondary cursorTarget" itemProp="streetAddress">
-                                г. Одинцово, ул. Молодежная, д.46,<br/> строение 1 офис 24, 25
-                            </h2>
-                        </Link>
-                        <Link href="tel:+74951034351">
-                            <h2 className="heading-secondary hover-flip" style={{display: 'inline-flex'}}>
-                        <span data-hover="+7 (495) 103—4351" itemProp="telephone">
+                  <div style={{display: 'none'}} itemProp="name" itemScope>Deus Team</div>
+                  <div className="contacts-info__wrap-adress" itemProp="address" itemScope
+                       itemType="http://schema.org/PostalAddress">
+                    <Link
+                        href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
+                        target="_blank"
+                    >
+                      <h2 className="heading-secondary cursorTarget" itemProp="streetAddress" itemScope>
+                        г. Одинцово, ул. Молодежная, д.46,<br/> строение 1 офис 31
+                      </h2>
+                    </Link>
+                    <Link href="tel:+74951034351">
+                      <h2 className="heading-secondary hover-flip" style={{display: 'inline-flex'}}>
+                        <span data-hover="+7 (495) 103—4351" itemProp="telephone" itemScope>
                           +7 (495) 103—4351
                         </span>
                       </h2>
@@ -161,7 +161,7 @@
                 </div>
               </section>
               <section id="contactUs">
-                <Cta formName={"contacts"} />
+              <Cta formName={"contacts"} />
               </section>
 
               <section className="contacts-general">
