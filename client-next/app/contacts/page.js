@@ -91,7 +91,7 @@ export default async function Home() {
               </span>
             </section>
             <section className="contacts-info">
-              <div className="contacts-info__wrap" itemScope itemtype="http://schema.org/Organization">
+              <div className="contacts-info__wrap" itemScope itemType="http://schema.org/Organization">
                 <div style={{display: 'none'}} itemProp="name" itemScope>Deus Team</div>
                 <div className="contacts-info__wrap-adress" itemProp="address" itemScope
                      itemtype="http://schema.org/PostalAddress">
@@ -99,7 +99,7 @@ export default async function Home() {
                       href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
                       target="_blank"
                   >
-                    <h2 className="heading-secondary cursorTarget" itemprop="streetAddress">
+                    <h2 className="heading-secondary cursorTarget" itemProp="streetAddress">
                       г. Одинцово, ул. Молодежная, д.46,<br/> строение 1 офис 31
                     </h2>
                   </Link>
