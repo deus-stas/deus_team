@@ -191,9 +191,9 @@ const ServicesDetail = (data) => {
                                                     </div>
                                             ))}
                                     </div>
-                                    <div className="services-detail-type__bg">
-                                        <img className="services-detail-type__img" src="img/services-detail/bg-1.svg"/>
-                                    </div>
+                                    {/*<div className="services-detail-type__bg">*/}
+                                    {/*    <img className="services-detail-type__img" src="img/services-detail/bg-1.svg"/>*/}
+                                    {/*</div>*/}
                                 </div>
                             </section>
                         }
