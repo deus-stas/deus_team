@@ -117,7 +117,13 @@ function splitArrayIntoChunks(array, numChunks) {
   );
   return chunks;
 }
-
+async function getTeam() {
+    const response = await fetch(`${apiUrl}/api/team/`);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+}
 export default async function Home({ params }) {
   const { id } = params;
   
@@ -130,7 +136,10 @@ export default async function Home({ params }) {
   ]);
 
   const filteredNews = news;
+    const [team ] = await Promise.all([
+        getTeam(),
 
+    ]);
   console.log(services);
 
   return (
@@ -270,13 +279,27 @@ export default async function Home({ params }) {
                           <div className="faq-wrap__info">
                               <h2 className="heading-secondary" dangerouslySetInnerHTML={{ __html: services.faqTitle || ""}} />
                               <div className="faq-wrap__subtitle">Если вы не нашли ответ на ваш вопрос напишите нашему руководителю и он на них ответит</div>
-                              <div className="faq-wrap__person">
-                                  <img className="faq-wrap__person-img" src="img/faq/1.png"/>
-                                  <div className="faq-wrap__person-info">
-                                      <div className="faq-wrap__person-name">Брижань Вячеслав</div>
-                                      <div className="faq-wrap__person-work">Генеральный директор</div>
-                                  </div>
-                              </div>
+
+                                  {Array.isArray(team) &&
+                                      team
+                                          .filter((team) => team.name === "Вячеслав Брижань")
+                                          .map((team, index) => (
+                                              <div className="faq-wrap__person" key={`worker-kk-${index}`}>
+                                                  <img
+                                                      className="faq-wrap__person-img"
+                                                      src={
+                                                          team.mainImg
+                                                              ? `${apiUrl}/uploads/${team.image.filename}`
+                                                              : null
+                                                      }
+                                                      alt=""
+                                                  />
+                                                      <div className="faq-wrap__person-info">
+                                                        <p className="faq-wrap__person-name">{team.name}</p>
+                                                        <p className="aq-wrap__person-work">{team.post}</p>
+                                                      </div>
+                                              </div>
+                                          ))}
                               <div className="faq-wrap__btns">
                                   <a className="faq-wrap__btn -tg">
                                       <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
