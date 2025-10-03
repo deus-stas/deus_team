@@ -91,15 +91,23 @@ export default async function Home() {
               </span>
             </section>
             <section className="contacts-info">
-              <div className="contacts-info__wrap"  itemscope itemtype="http://schema.org/Organization">
-                <div className="contacts-info__wrap-adress" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                  <div style={{display: 'none'}} itemprop="name" itemscope >Deus Team</div>
+              <div className="contacts-info__wrap" itemScope itemtype="http://schema.org/Organization">
+                <div style={{display: 'none'}} itemProp="name" itemScope>Deus Team</div>
+                <div className="contacts-info__wrap-adress" itemProp="address" itemScope
+                     itemtype="http://schema.org/PostalAddress">
                   <Link
-                    href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
-                    target="_blank"
+                      href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
+                      target="_blank"
                   >
                     <h2 className="heading-secondary cursorTarget" itemprop="streetAddress">
-                      г. Одинцово, ул. Молодежная, д.46,<br /> строение 1 офис 24, 25
+                      г. Одинцово, ул. Молодежная, д.46,<br/> строение 1 офис 31
+                    </h2>
+                  </Link>
+                  <Link href="tel:+74951034351">
+                    <h2 className="heading-secondary hover-flip" style={{display: 'inline-flex'}}>
+                        <span data-hover="+7 (495) 103—4351" itemProp="telephone" itemScope>
+                          +7 (495) 103—4351
+                        </span>
                     </h2>
                   </Link>
                 </div>
@@ -107,8 +115,8 @@ export default async function Home() {
                   <span>
                     <h2 className="m-text hover-flip">
                       <Link href="mailto:hello@de-us.ru">
-                        <span data-hover="hello@de-us.ru">hello@de-us.ru</span>
-                      </Link>
+                          <span data-hover="hello@de-us.ru" itemProp="email">hello@de-us.ru</span>
+                        </Link>
                     </h2>
                     <p className="s-text pb-32">Стать клиентом или партнером</p>
                   </span>
