@@ -104,7 +104,7 @@ export async function generateMetadata({ params }) {
       title: projectData?.seoTitle || "Проект",
       description: projectData?.seoDescription || "Проект",
       type: 'website',
-      images:[baseUrl+'/'+projectData.image.path],
+      images:[baseUrl+'/'+projectData.image?.path || baseUrl+'/deus.png'],
       url: baseUrl+"/projects/"+projectData.nameInEng
     },
     twitter: {},
