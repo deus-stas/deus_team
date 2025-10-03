@@ -80,7 +80,8 @@ export async function generateMetadata({ params }) {
           title: serviceData?.seoTitle || "Cервис",
           description: serviceData?.seoDescription || "Cервис",
           type: 'website',
-          images:[baseUrl+'/'+serviceData.serviceBanner.path]
+          images:[baseUrl+'/'+serviceData.serviceBanner.path],
+          url:baseUrl+"/services/"+serviceData.path
       },
       twitter: {},
       alternates: {

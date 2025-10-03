@@ -80,7 +80,8 @@ export async function generateMetadata() {
             title: data?.seoTitle || "Проекты",
             description: data?.seoDescription || "Проекты",
             type: 'website',
-            images:[baseUrl+'/deus.png']
+            images:[baseUrl+'/deus.png'],
+            url: baseUrl+"/projects"
         },
         twitter: {},
         alternates: {

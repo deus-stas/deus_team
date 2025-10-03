@@ -43,7 +43,8 @@ export async function generateMetadata() {
             title: data?.seoTitle || "Главная",
             description: data?.seoDescription || "Главная",
             type: 'website',
-            images:[baseUrl+'/deus.png']
+            images:[baseUrl+'/deus.png'],
+            url:baseUrl+"/",
         },
         twitter: {},
         alternates: {

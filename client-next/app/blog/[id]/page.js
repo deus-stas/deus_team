@@ -90,7 +90,8 @@ export async function generateMetadata({ params }) {
           title: detail?.seoTitle || "Новости",
           description: detail?.seoDescription || "Новости",
           type: 'website',
-          images:[baseUrl+'/'+detail.image.path]
+          images:[baseUrl+'/'+detail.image.path],
+          url: baseUrl+"/blog"+detail.urlName
       },
       twitter: {},
       alternates: {
