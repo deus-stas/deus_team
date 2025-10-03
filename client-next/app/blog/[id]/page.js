@@ -95,7 +95,7 @@ export async function generateMetadata({ params }) {
       },
       twitter: {},
       alternates: {
-          canonical: baseUrl+"/blog"+detail.urlName,
+          canonical: baseUrl+"/blog/"+detail.urlName,
       },
   };
 }
