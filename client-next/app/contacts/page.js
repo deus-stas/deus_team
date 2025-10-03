@@ -93,7 +93,7 @@ export default async function Home() {
             <section className="contacts-info">
               <div className="contacts-info__wrap"  itemscope itemtype="http://schema.org/Organization">
                 <div className="contacts-info__wrap-adress" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                  <div style={{display: 'none'}} itemprop="name">Deus Team</div>
+                  <div style={{display: 'none'}} itemprop="name" itemscope >Deus Team</div>
                   <Link
                     href="https://yandex.ru/maps/?rtext=~55.677636,37.272125"
                     target="_blank"
