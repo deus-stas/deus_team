@@ -1,6 +1,7 @@
 import Link from "next/link";
 import NewsDetail from "../../../pages/news/newsDetail/NewsDetail";
 import { headers } from "next/headers";
+import React from "react";
 
 const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
 
@@ -103,10 +104,14 @@ export async function generateMetadata({ params }) {
 export default async function NewsPage({ params }) {
   const { id } = params;
   const { detail, news } = await getNewsData(id);
+    const fileUrl = detail.mainNewsImage ? `${apiUrl}/uploads/${detail.mainNewsImage?.filename}` : null;
+    const isVideo = detail.mainNewsImage ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(detail.mainNewsImage?.filename) : false;
+    const isImage = detail.mainNewsImage ? /\.(jpeg|jpg|gif|png)$/i.test(detail.mainNewsImage?.filename) : false;
+    const shouldAutoPlay = detail.detailControl;
 
   return (
     <>
-      <main className="news-detail destroy" style={{display: 'none'}}>
+      <main className="news-detail">
         <div className="container">
             <section className="news-detail__main">
                 <div className="news-detail__main-content">
@@ -122,8 +127,13 @@ export default async function NewsPage({ params }) {
                         rel="noopener noreferrer">
                         Читайте нас в Telegram 
                     </a>
-
                 </div>
+                {isVideo && <video autoPlay={shouldAutoPlay} muted playsInline
+                                   src={fileUrl}
+                                   className="news-detail__main-img"
+                                   loop/>}
+                {isImage && <img src={fileUrl} alt={detail.name}
+                                 className="news-detail__main-img"/>}
             </section>
 
             <section className="news-detail__article">
@@ -255,7 +265,6 @@ export default async function NewsPage({ params }) {
             </section>
         </div>
       </main>
-      <NewsDetail initialData={{ detail, news }} />
     </>
   );
 }
