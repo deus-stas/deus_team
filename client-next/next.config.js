@@ -78,6 +78,11 @@ const nextConfig = {
         source: '/news',
         destination: '/blog',
         permanent: true, // 301 редирект
+      },
+      {
+        source: '/news/:slug*',
+        destination: '/blog/:slug*',
+        permanent: true, // 301 редирект
       }
     ];
   },
