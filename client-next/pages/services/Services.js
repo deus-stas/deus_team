@@ -213,31 +213,31 @@ const Services = () => {
                                                 </div>
                                                 <div className="describe__content">
                                                     <div className="describe__wrapp-benefits">
-                                                    {!!service.tariffs && service.tariffs.map((tariffs, index) => {
-                                                        const num = (index + 1).toString().padStart(2, '0');
-                                                        return (
-                                                            <div className="describe__wrapp-benefits__item"  key={`$describe__wrapp-benefits-key-${index}`}>
-                                                                <p className="num m-text">{num}</p>
-                                                                <div className="tariffs">
-                                                                    <span className="tariffs__span">
+                                                        {!!service.tariffs && service.tariffs.map((tariffs, index) => {
+                                                            const num = (index + 1).toString().padStart(2, '0');
+                                                            return (
+                                                                <div className="describe__wrapp-benefits__item"  key={`$describe__wrapp-benefits-key-${index}`}>
+                                                                    <p className="num m-text">{num}</p>
+                                                                    <div className="tariffs">
+                                                                        <span className="tariffs__span">
 
-                                                                        <p className="m-text">{tariffs.tariffsCategory}</p>
-                                                                    </span>
-                                                                    <p className="price s-text">
-                                                                        {tariffs.tariffPrice} &nbsp;/&nbsp; {tariffs.tariffDeadline}
-                                                                    </p>
+                                                                            <p className="m-text">{tariffs.tariffsCategory}</p>
+                                                                        </span>
+                                                                        <p className="price s-text">
+                                                                            {tariffs.tariffPrice} &nbsp;/&nbsp; {tariffs.tariffDeadline}
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
-                                                        )
-                                                    })}
-                                                </div>
-                                                    <div className="describe__wrapp-content-trigger">
-                                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="20" cy="20" r="20" fill="#E0FD60"/>
-                                                            <path d="M20 15.25V25.25M15 20.25H25" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
-                                                        </svg>
+                                                            )
+                                                        })}
                                                     </div>
+                                                    {/*<div className="describe__wrapp-content-trigger">*/}
+                                                    {/*    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+                                                    {/*        <circle cx="20" cy="20" r="20" fill="#E0FD60"/>*/}
+                                                    {/*        <path d="M20 15.25V25.25M15 20.25H25" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>*/}
+                                                    {/*    </svg>*/}
+                                                    {/*</div>*/}
                                                 </div>
                                             </div>
                                         )
