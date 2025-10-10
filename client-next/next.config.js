@@ -90,12 +90,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'dev.deus.team',
+        hostname: 'deus.team',
         pathname: '**',
       },
       {
         protocol: 'https',
-        hostname: 'dev.deus.team',
+        hostname: 'deus.team',
         pathname: '**',
       },
       {
