@@ -37,7 +37,7 @@
         }
 
         @include respond(sm){
-            padding: 12.4rem 0 2rem;
+            padding: 12.4rem 0 0rem;
         }
 
         &__text{
@@ -860,6 +860,12 @@
             grid-auto-rows: auto;
             gap: 4rem;
             margin-top: 6rem;
+
+            @include respond(sm){
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 2rem;
+            }
         }
     }
 }
