@@ -8,5 +8,5 @@ package-lock.json*
 /client-next/.next
 client-next/app/.DS_Store
 client-next/public/.DS_Store
-client-next/public/img/.DS_Storeя
+client-next/public/img/.DS_Store
 client-next/.DS_Store
