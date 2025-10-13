@@ -592,6 +592,8 @@
 
         @include respond(xs){
             background-size: 35.3rem;
+            display: flex;
+            flex-direction: column;
         }
 
         .heading-secondary{
@@ -679,6 +681,13 @@
                 font-size: 1.6rem;
                 line-height: 150%;
                 letter-spacing: -0.03em;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                overflow-x: auto;
+
+                pre{
+                    white-space: pre-wrap;
+                }
             }
 
             &__btn{
