@@ -11,7 +11,10 @@ import WorkingSlider from '../../mainPage/WorkingSlider';
 import Link from 'next/link';
 import ProjectNext from '../../projects/projectNext/ProjectNext';
 import ServicesForm from './ServicesForm';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from "swiper";
+import "swiper/css";
+import "swiper/css/grid";
 
 const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
 async function getTeam() {
@@ -191,6 +194,38 @@ const ServicesDetail = (data) => {
                                                     </div>
                                             ))}
                                     </div>
+                                    {/* Мобильная версия со слайдером */}
+                                    <div className="services-detail-type__info-mob">
+                                      {service.serviceIncludesOptions &&
+                                        Array.isArray(service.serviceIncludesOptions) && (
+                                          <Swiper
+                                            slidesPerView={1}
+                                            spaceBetween={10}
+                                            pagination={{
+                                              clickable: true,
+                                            }}
+                                            className="services-detail-type__slider"
+                                          >
+                                            {service.serviceIncludesOptions.map((item, index) => (
+                                              <SwiperSlide key={`services-detail-type-slide-${index}`}>
+                                                <div className="services-detail-type__item-mob type-item">
+                                                  <div 
+                                                    className="type-item__title" 
+                                                    dangerouslySetInnerHTML={{ __html: item.title}} 
+                                                  />
+                                                  <div className="type-item__bottom">
+                                                    <div 
+                                                      className="type-item__subtitle" 
+                                                      dangerouslySetInnerHTML={{ __html: item.description}} 
+                                                    />
+                                                  </div>
+                                                </div>
+                                              </SwiperSlide>
+                                            ))}
+                                          </Swiper>
+                                        )}
+                                    </div>
+
                                     {/*<div className="services-detail-type__bg">*/}
                                     {/*    <img className="services-detail-type__img" src="img/services-detail/bg-1.svg"/>*/}
                                     {/*</div>*/}
@@ -523,34 +558,6 @@ const ServicesDetail = (data) => {
                             </div>
                             <div className="article__body">
                                 <div className="article__list">
-                                    {/* <div className="article__item">
-                                        <div className="article__picture">
-                                            <img className="article__img" src="img/article/article1.png"/>
-                                        </div>
-                                        <div className="article__subtitle">Советы эксперта</div>
-                                        <div className="article__title">Внутренний проект менеджер: необходимые знания, навыки, качества и как искать идеального ПМа</div>
-                                    </div>
-                                    <div className="article__item">
-                                        <div className="article__picture">
-                                            <img className="article__img" src="img/article/article2.png"/>
-                                        </div>
-                                        <div className="article__subtitle">SEO</div>
-                                        <div className="article__title">Как выбрать разработчика сайта</div>
-                                    </div>
-                                    <div className="article__item">
-                                        <div className="article__picture">
-                                            <img className="article__img" src="img/article/article3.png"/>
-                                        </div>
-                                        <div className="article__subtitle">Инсайты</div>
-                                        <div className="article__title">Честный ритейл: какие магазины интересны налоговой и как не нарушить права клиентов</div>
-                                    </div>
-                                    <div className="article__item">
-                                        <div className="article__picture">
-                                            <img className="article__img" src="img/article/article4.png"/>
-                                        </div>
-                                        <div className="article__subtitle">Приколы</div>
-                                        <div className="article__title">Как развивать E-commerce-направление в 2023 году</div>
-                                    </div> */}
                                     {filteredNews.map((item, index) => {
                                         if(index < 4) {
                                             const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
@@ -580,6 +587,51 @@ const ServicesDetail = (data) => {
                                         }
                                     })}
                                 </div>
+                                  <div className="article__list--mobile">
+                                    <Swiper
+                                      slidesPerView={1}
+                                      spaceBetween={20}
+                                      pagination={{
+                                        clickable: true,
+                                        el: '.article-swiper-pagination',
+                                        type: 'bullets'
+                                      }}
+                                      navigation={{
+                                        nextEl: '.article-swiper-button-next',
+                                        prevEl: '.article-swiper-button-prev',
+                                      }}
+                                      loop={true}
+                                      className="article-swiper"
+                                    >
+                                      {filteredNews.map((item, index) => {
+                                        if(index < 4) {
+                                          const fileUrl = item.image ? `${apiUrl}/uploads/${item.image.filename}` : null;
+                                          const isVideo = item.image ? /\.(avi|mkv|asf|mp4|flv|mov)$/i.test(item.image.filename) : false;
+                                          const isImage = item.image ? /\.(jpeg|jpg|gif|png)$/i.test(item.image.filename) : false;
+                                          const shouldAutoPlay = item.mainControl;
+
+                                          return (
+                                            <SwiperSlide key={index}>
+                                              <div className="article__item">
+                                                <Link href={`/blog/${item.urlName}`} className={`news-main__item news-main__${index + 1}`}>
+                                                  {isVideo && <video autoPlay={shouldAutoPlay}
+                                                                    muted
+                                                                    playsInline
+                                                                    src={fileUrl}
+                                                                    loop/>}
+                                                  {isImage && <img width="300" height='200' src={fileUrl} alt={item.name}/>}
+                                                </Link>
+                                                <span>
+                                                  <p className="article__subtitle s-text">{item.newsTags}</p>
+                                                  <p className="article__title m-text">{item.name}</p>
+                                                </span>
+                                              </div>
+                                            </SwiperSlide>
+                                          )
+                                        }
+                                      })}
+                                    </Swiper>
+                                  </div>
                             </div>
                         </section>
 
