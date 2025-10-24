@@ -16,7 +16,10 @@
 }
 
 .privacy-header {
-  background: #e0fd60;
+  background: #e0fd6069;
+  border: 1px solid #e0fd60;
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
   color: #050505;
   padding: 2rem 3rem;
   text-align: center;
