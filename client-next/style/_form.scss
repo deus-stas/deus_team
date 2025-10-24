@@ -302,6 +302,18 @@
                 color: #050505;
 
             }
+            &_sogl{
+                a{
+                    text-decoration: underline;
+                }
+            }
+        }
+        &-label{
+            &_sogl{
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
         }
     }
 
