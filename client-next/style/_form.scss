@@ -277,7 +277,9 @@
         input {
             display: none;
         }
-
+        &.soglasie input{
+            display:block;
+        }
         input:checked~&-c {
             background: #E0FD60;
             color: #050505;
