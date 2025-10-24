@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import './cookies.scss';
-
+import Cookies from 'js-cookie';
 export default function CookieConsent({
                                           message = "Мы используем файлы cookie для улучшения работы сайта.",
                                           policyLink = "/privacy-policy",
@@ -13,7 +13,7 @@ export default function CookieConsent({
 
     useEffect(() => {
         // Проверяем, не давал ли пользователь уже согласие
-        const consentGiven = localStorage.getItem('cookieConsent');
+        const consentGiven = Cookies.get('cookieConsent');
 
         if (!consentGiven) {
             // Показываем баннер с задержкой для лучшего UX
@@ -26,7 +26,7 @@ export default function CookieConsent({
     }, []);
 
     const handleAccept = () => {
-        localStorage.setItem('cookieConsent', 'accepted');
+        Cookies.set('cookieConsent', 'accepted',{expires:7});
         setIsVisible(false);
         if (onAccept) onAccept();
 
