@@ -14,7 +14,7 @@ import '../style/style.scss'
 
 import YandexMetrikaScript from '../public/custom/yandex_head'; // Импортируем компонент скрипта
 import YandexMetrikaNoscript from '../public/custom/yandex_body'; // Импортируем компонент noscript
-
+import Cookies from '../components/cookie/cookies';
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const adminBasePath = "/admin/";
@@ -67,6 +67,7 @@ export default function RootLayout({ children }) {
           {/* Футер */}
           {!shouldHideHeaderFooter && <AppFooter />}
         </Provider>
+      <Cookies/>
       </body>
     </html>
   );
