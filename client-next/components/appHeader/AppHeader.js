@@ -267,7 +267,22 @@ const closeMenu = (e, path) => {
        
         }
     };
-
+      const goLink = (e) => {
+          if(e.target.classList.contains('cursor__none')){
+            const link = e.target.closest('a');
+            e.preventDefault();
+            e.stopPropagation();
+              const preloader = document.querySelector('#preloader');
+              preloader.classList.add('transitioning')
+              // Задержка перед переходом
+              if(window) {
+                  setTimeout(() => {
+                      window.location.assign(link.href); // Переход через window.location.assign
+                  }, 500); // Задержка в 500 миллисекунд
+              }
+          }
+      };
+    window.addEventListener('click',goLink)
     window.addEventListener('isLoadingMainPage', handleLoad);
     return () => {
         window.removeEventListener('isLoadingMainPage', handleLoad);
