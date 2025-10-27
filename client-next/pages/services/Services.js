@@ -136,7 +136,17 @@ const Services = () => {
     //             return 'tech-support';
     //     }
     // }
-
+    const goLink = (e,path) => {
+        e.preventDefault();
+        const preloader = document.querySelector('#preloader');
+        preloader.classList.add('transitioning')
+        // Задержка перед переходом
+        if(window) {
+            setTimeout(() => {
+                window.location.assign(`${path}`); // Переход через window.location.assign
+            }, 500); // Задержка в 500 миллисекунд
+        }
+    };
     return (
         <>
             <Cursor/>
@@ -181,7 +191,6 @@ const Services = () => {
                             <div className="services-list__wrapp borderBlock padding">
                                 {
                                     !!services && services.filter((service) => service.isInvisible).map((service, index) => {
-                                        console.log('service',service);
                                         return (
                                             <div className="services-list__wrapp-item" key={`$services-list-${index}`}>
                                                 <div className="describe">
@@ -193,7 +202,7 @@ const Services = () => {
                                                             <Link href={`/services/${service.path}`}
                                                                         disabled={!service.path || service.path === 0 }
                                                                         datahash="projectNav"
-                                                                        onClick={(e) => gotoAnchor(e)}>
+                                                                        onClick={(e) => goLink(e,`/services/${service.path}`)}>
                                                                 <div className="services-s__name">
                                                                     <span data-hover={service.name}>{service.name}</span>
                                                                 </div>
