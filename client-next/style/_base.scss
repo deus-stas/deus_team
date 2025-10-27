@@ -182,7 +182,10 @@ body {
     min-height: 100vh;
     animation: fadeIn 0.3s ease 0.3s forwards;
 }
-
+/* Временный черный фон на 1 секунду */
+.temp-black-bg {
+    background-color: #000 !important;
+}
 main {
     animation: fadeIn 0.3s ease 0.3s forwards;
 }
