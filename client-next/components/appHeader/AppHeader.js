@@ -268,7 +268,7 @@ const closeMenu = (e, path) => {
         }
     };
       const goLink = (e) => {
-          if(e.target.classList.contains('cursor__none')){
+          if(e.target.classList.contains('cursor__none') || e.target.closest('a').classList.contains('project-next')){
             const link = e.target.closest('a');
             e.preventDefault();
             e.stopPropagation();
