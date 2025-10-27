@@ -1,21 +1,20 @@
 @font-face {
     font-family: "Graphik LC Web Regular";
-    src: url("https://db.onlinewebfonts.com/t/575fc498ad34ad0f411e618dad9ed36a.eot");
-    src: url("https://db.onlinewebfonts.com/t/575fc498ad34ad0f411e618dad9ed36a.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/575fc498ad34ad0f411e618dad9ed36a.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/575fc498ad34ad0f411e618dad9ed36a.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/575fc498ad34ad0f411e618dad9ed36a.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/575fc498ad34ad0f411e618dad9ed36a.svg#Graphik LC Web Regular")format("svg");
+    src: local('Graphik LCG Regular'), local('Graphik-LCG-Regular'),
+    url('../fonts/GraphikLCG-Regular.woff2') format('woff2'),
+    url('../fonts/GraphikLCG-Regular.woff') format('woff'),
+    url('../fonts/GraphikLCG-Regular.ttf') format('truetype');
     font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
     font-family: "Graphik LC Web Medium";
-    src: url("https://db.onlinewebfonts.com/t/e81d1bf7827206c7d1273046adace7f2.eot");
-    src: url("https://db.onlinewebfonts.com/t/e81d1bf7827206c7d1273046adace7f2.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/e81d1bf7827206c7d1273046adace7f2.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/e81d1bf7827206c7d1273046adace7f2.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/e81d1bf7827206c7d1273046adace7f2.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/e81d1bf7827206c7d1273046adace7f2.svg#Graphik LC Web Medium")format("svg");
+    src: url('../fonts/graphiklcweb-medium.eot'); /* IE 9 Compatibility Mode */
+    src: url('../fonts/graphiklcweb-medium.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
+    url('../fonts/graphiklcweb-medium.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/graphiklcweb-medium.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
+    url('../fonts/graphiklcweb-medium.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/graphiklcweb-medium.svg#graphiklcweb-medium') format('svg'); /* Chrome < 4, Legacy iOS */
     font-weight: 500;
 }
