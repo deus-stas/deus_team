@@ -85,7 +85,17 @@ const News = () => {
     };
 
     const filteredNews = selectedTag === 'Все' ? news : news.filter((newsItem) => newsItem.newsTags === selectedTag);
-
+    const goLink = (e,path) => {
+        e.preventDefault();
+        const preloader = document.querySelector('#preloader');
+        preloader.classList.add('transitioning')
+        // Задержка перед переходом
+        if(window) {
+            setTimeout(() => {
+                window.location.assign(`${path}`); // Переход через window.location.assign
+            }, 500); // Задержка в 500 миллисекунд
+        }
+    };
     return (
         <>
             <Cursor/>
@@ -111,7 +121,7 @@ const News = () => {
 
                                     return (
                                         <div className="flex-wrap" key={index}>
-                                            <Link href={`/blog/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
+                                            <Link onClick={(e) => goLink(e, `/blog/${item.urlName}`)} href={`/blog/${item.urlName}`}  className={`news-main__item news-main__${index + 1}`}
                                                          key={item.id}>
                                                 {isVideo && <video autoPlay={shouldAutoPlay}
                                                                    muted
