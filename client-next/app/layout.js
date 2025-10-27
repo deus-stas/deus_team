@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
      <head>
         <YandexMetrikaScript />
       </head>
-      <body id='root'>
+      <body id='root' className={`${transitioning ? 'temp-black-bg' : ''}`}>
         <YandexMetrikaNoscript />
         <Provider store={store}>
 
