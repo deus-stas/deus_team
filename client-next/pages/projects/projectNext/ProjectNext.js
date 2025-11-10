@@ -89,7 +89,7 @@ const ProjectNext = ({ props, detail }) => {
                                 }
                                 <span className="projects-decription m-text">
                                       <p style={{color: "rgba(117, 118, 119, 1)"}}>{project.date} • {project.name}</p>
-                                      <p className="heading-secondary">{project.descrProject}</p>
+                                      <p className="heading-secondary" dangerouslySetInnerHTML={{ __html: project.descrProject }}></p>
                                 </span>
                             </div>
                         </Link>
