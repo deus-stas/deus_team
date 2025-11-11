@@ -679,6 +679,15 @@ main {
     @include respond(sm){
         padding-bottom: 1rem;
     }
+    .bull{
+        margin:auto 1rem;
+        &::before{
+            content: "•";
+        }
+    }
+    .last{
+        color:#333
+    }
 }
 
 .main-clients__marquee {
