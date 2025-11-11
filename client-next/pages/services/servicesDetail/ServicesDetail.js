@@ -130,7 +130,7 @@ const ServicesDetail = (data) => {
             {!isLoading &&
                 <main className="service container">
                     {service &&
-
+                        //todo крошки переписать на компонент
                         <section className="services-detail-start">
                             <div className="breadcrumb">
                                 <a href="/"><span data-hover="Главная">Главная</span></a>
