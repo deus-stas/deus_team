@@ -1534,9 +1534,15 @@
 }
 /* Состояние плюса - первая линия вертикальная */
 .plus .first-line {
-    transform: rotate(90deg);
+    transform: rotate(0deg);
 }
 /* Состояние минуса - обе линии горизонтальные */
 .minus .first-line {
-    transform: rotate(0deg);
+    transform: rotate(90deg);
+}
+.minus .circle{
+    fill: #EEEEEE;
+}
+.plus .circle{
+    fill: #E0FD60; /* Зеленый фон вместо серого */
 }
