@@ -828,7 +828,8 @@
 
             &__wrap {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                //grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: minmax(26rem, 94rem) minmax(64rem, 69rem);
                 padding: 4rem;
                 border-radius: 5rem;
                 background-color: #084650;
@@ -836,11 +837,12 @@
 
                 background-image: url("../../../public/img/services/services-bg.png");
                 background-repeat: no-repeat;
-                background-position: left bottom;
+                background-position: left 1.5rem bottom -10.5rem;
                 background-size: contain;
 
-                @media(max-width: 1100px) {
-                  grid-template-columns: repeat(1, 1fr);
+                @media(max-width: 1120px) {
+                    grid-template-columns: minmax(26rem, 94rem);
+                    grid-template-rows: repeat(2, 1fr);
                 }
 
                 @media(max-width: 768px) {
@@ -911,14 +913,33 @@
 
             &__title{
                 margin-bottom: 26px;
+                @media(max-width: 1120px) {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    div:nth-child(2){
+                        justify-self: end;
+                        margin-top:1rem;
+                    }
+                }
 
                 .heading-secondary{
                     color: #FFFFFF;
                 }
 
                 .services-detail-aspro__subtitle{
-                    color: #FFFFFF;
+                    color: #ffffffa1;
                     margin-bottom: 20px;
+                    margin-right: 1rem;
+                    overflow-wrap: break-word;
+                    white-space: normal;
+                    word-break: auto-phrase;
+                    hyphens: auto;
+                    max-width:35rem;
+                    text-align: justify;
+                    code{
+                        white-space: normal;
+                        word-break: auto-phrase;
+                    }
                 }
             }
 
@@ -930,12 +951,12 @@
                 @include respond(lg) {
                     gap: 1.6rem;
                 }
-                @media(max-width: 768px) {
+                @media(max-width: 1120px) {
                   display: none;
                 }
                 &-mob {
                   display: none;
-                  @media(max-width: 768px) {
+                  @media(max-width: 1120px) {
                     display: block;
                   }
                 }
@@ -975,7 +996,7 @@
                 padding: 2.4rem;
                 background-color: #FFFFFF;
                 border-radius: 2rem;
-                height: 18.9rem;
+                height: 22.9rem;
 
                 @include respond(lg) {
                     border-radius: 1.6rem;
@@ -1064,7 +1085,8 @@
 
                         &__wrapp{
                             color: rgb(117, 118, 119);
-
+                            margin-right: 2rem;
+                            max-width:45rem;
                             &-benefits{
                                 &__item{
                                     display: grid;
