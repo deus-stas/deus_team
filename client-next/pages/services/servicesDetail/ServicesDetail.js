@@ -36,7 +36,6 @@ const ServicesDetail = (data) => {
     const [total, setTotal] = useState(null);
     const [detail, setDetail] = useState([]);
 
-
     useEffect(() => {
         axios
             .get(`${apiUrl}/api/working/`)
@@ -123,7 +122,14 @@ const ServicesDetail = (data) => {
 
     const filteredNews = selectedTag === 'Все' ? news : news.filter((newsItem) => newsItem.newsTags === selectedTag);
 
-
+    const handleClick = (event) => {
+        const clickedElement = event.currentTarget;
+        console.log (clickedElement.closest ('.faq-wrap__top').nextElementSibling);
+        clickedElement.closest ('.faq-wrap__top').nextElementSibling.classList.toggle('hidden');
+        clickedElement.closest ('.faq-wrap__top').nextElementSibling.classList.toggle('visible');
+        clickedElement.classList.toggle('plus');
+        clickedElement.classList.toggle('minus');
+    };
     return (
         <>
             {/* <Cursor/> */}
@@ -416,14 +422,25 @@ const ServicesDetail = (data) => {
                                                 <div className="faq-wrap__top">
                                                     <div className="faq-wrap__title"
                                                          dangerouslySetInnerHTML={{__html: item.title}}/>
-                                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                                         xmlns="http://www.w3.org/2000/svg">
-                                                        <circle cx="20" cy="20" r="20" fill="#EEEEEE"/>
-                                                        <path d="M15 20.25H25" stroke="black" strokeLinecap="round"
-                                                              strokeLinejoin="round"/>
+                                                    <svg
+                                                        className={`toggle-button plus`}
+                                                        onClick={handleClick}
+                                                        width="40"
+                                                        height="40"
+                                                        viewBox="0 0 40 40"
+                                                        fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        style={{cursor: 'pointer'}}
+                                                    >
+                                                        <circle className="circle" cx="20" cy="20" r="20"
+                                                                fill="#22c55e"></circle>
+                                                        <line className="first-line" x1="20" y1="15" x2="20"
+                                                              y2="25"/>
+                                                        <line className="second-line" x1="15" y1="20" x2="25"
+                                                              y2="20"/>
                                                     </svg>
                                                 </div>
-                                                <div className="faq-wrap__content"
+                                                <div className="faq-wrap__content hidden"
                                                      dangerouslySetInnerHTML={{__html: item.description}}/>
                                             </div>
                                         ))}
