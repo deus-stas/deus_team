@@ -1501,5 +1501,42 @@
         }
     }
 }
+.toggle-button {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.toggle-button:hover {
+    transform: scale(1.05);
+}
 
+.toggle-button:active {
+    transform: scale(0.95);
+}
 
+.circle {
+    transition: fill 0.3s ease;
+}
+
+/* Первая линия (будет превращаться в вертикальную) */
+.first-line {
+    stroke: black;
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+/* Вторая линия (остается горизонтальной) */
+.second-line {
+    stroke: black;
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: all 0.3s ease;
+}
+/* Состояние плюса - первая линия вертикальная */
+.plus .first-line {
+    transform: rotate(90deg);
+}
+/* Состояние минуса - обе линии горизонтальные */
+.minus .first-line {
+    transform: rotate(0deg);
+}
