@@ -152,6 +152,16 @@ const Services = () => {
             }, 500); // Задержка в 500 миллисекунд
         }
     };
+    const handleClick = (event) => {
+        const clickedElement = event.currentTarget;
+        clickedElement.closest ('.describe__content').previousElementSibling.querySelector('.describe__wrapp').classList.toggle('hidden')
+        clickedElement.closest ('.describe__content').previousElementSibling.querySelector('.describe__wrapp').classList.toggle('visible')
+
+        clickedElement.closest ('.describe__wrapp-content-trigger').previousElementSibling.classList.toggle('hidden');
+        clickedElement.closest ('.describe__wrapp-content-trigger').previousElementSibling.classList.toggle('visible');
+        clickedElement.classList.toggle('plus');
+        clickedElement.classList.toggle('minus');
+    };
     return (
         <>
             <Cursor/>
@@ -220,13 +230,13 @@ const Services = () => {
                                                             </div>
                                                         }
                                                     </h2>
-                                                    <div className="describe__wrapp ">
+                                                    <div className="describe__wrapp hidden">
                                                         <p className="s-text" dangerouslySetInnerHTML={{ __html: service.descr}} /> 
                                                      
                                                     </div>
                                                 </div>
                                                 <div className="describe__content">
-                                                    <div className="describe__wrapp-benefits">
+                                                    <div className="describe__wrapp-benefits hidden">
                                                         {!!service.tariffs && service.tariffs.map((tariffs, index) => {
                                                             const num = (index + 1).toString().padStart(2, '0');
                                                             return (
@@ -246,12 +256,25 @@ const Services = () => {
                                                             )
                                                         })}
                                                     </div>
-                                                    {/*<div className="describe__wrapp-content-trigger">*/}
-                                                    {/*    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                                                    {/*        <circle cx="20" cy="20" r="20" fill="#E0FD60"/>*/}
-                                                    {/*        <path d="M20 15.25V25.25M15 20.25H25" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>*/}
-                                                    {/*    </svg>*/}
-                                                    {/*</div>*/}
+                                                    <div className="describe__wrapp-content-trigger">
+                                                        <svg
+                                                            className={`toggle-button plus`}
+                                                            onClick={handleClick}
+                                                            width="40"
+                                                            height="40"
+                                                            viewBox="0 0 40 40"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            style={{cursor: 'pointer'}}
+                                                        >
+                                                            <circle className="circle" cx="20" cy="20" r="20"
+                                                                    fill="#22c55e"></circle>
+                                                            <line className="first-line" x1="20" y1="15" x2="20"
+                                                                  y2="25"/>
+                                                            <line className="second-line" x1="15" y1="20" x2="25"
+                                                                  y2="20"/>
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                             </div>
                                         )
@@ -259,7 +282,7 @@ const Services = () => {
                             </div>
                         </section>
 
-                        
+
                         <section className="services-principle borderBlock padding whiteHeader">
                             <h2 className="heading-secondary">Принципы управления<br/> проектами</h2>
                             <div className="services-principle__wrap">
