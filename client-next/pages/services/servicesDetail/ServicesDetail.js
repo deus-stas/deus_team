@@ -124,7 +124,6 @@ const ServicesDetail = (data) => {
 
     const handleClick = (event) => {
         const clickedElement = event.currentTarget;
-        console.log (clickedElement.closest ('.faq-wrap__top').nextElementSibling);
         clickedElement.closest ('.faq-wrap__top').nextElementSibling.classList.toggle('hidden');
         clickedElement.closest ('.faq-wrap__top').nextElementSibling.classList.toggle('visible');
         clickedElement.classList.toggle('plus');
