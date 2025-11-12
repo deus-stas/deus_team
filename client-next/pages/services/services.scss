@@ -220,7 +220,7 @@
         &__wrapp {
             display: flex;
             flex-direction: column;
-            gap: 4rem;
+            gap: 3rem;
             background: #050505;
             @include respond(xs){
                 gap: 2rem;
@@ -230,15 +230,15 @@
                 border-bottom: 1px solid #757677;
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                padding-bottom: 4rem;
+                padding-bottom: 2rem;
                 @include respond(sm){
-                    padding-bottom: 3rem;
+                    padding-bottom: 2rem;
                 }
                 @include respond(xs){
                     display: flex;
                     flex-direction: column;
                     gap: 2rem;
-                    padding-bottom: 2rem;
+                    padding-bottom: 1rem;
                 }
 
             .describe {
@@ -259,10 +259,32 @@
                     @include respond(xs){
                         max-width: 100%;
                     }
+                    &.hidden{
+                        opacity: 0;
+                        pointer-events: none;
+                        transform: scale(0);
+                        height: 0;
+                        min-height: 0;
+                        padding: 0;
+                        margin: 0;
+                        border: none;
+                        transition:
+                                opacity 0.3s ease-in-out;
+                    }
+                    &.visible{
+                        opacity: 1;
+                        transform:translateY(0);
+                        transition:
+                                opacity 0.7s ease-in-out;
+                    }
                     &-benefits {
                         display: flex;
                         flex-direction: column;
-
+                        height:35rem;
+                        max-height:100%;
+                        transition:
+                                height 0.2s ease-in-out,
+                                display 0.2s ease-in-out;
                         &__item{
                             display: grid;
                             grid-template-columns: auto 1fr;
@@ -345,6 +367,25 @@
 
                                 }
                             }
+                        }
+                        &.hidden{
+                            opacity: 0;
+                            pointer-events: none;
+                            transform: scale(0);
+                            height: 1px;
+                            min-height: 0;
+                            padding: 0;
+                            margin: 0;
+                            border: none;
+                            transition:
+                                    opacity 0.3s ease-in-out,
+                                    height 0.5s ease-in-out;
+                        }
+                        &.visible{
+                            opacity: 1;
+                            transform: scale(1);
+                            transition:
+                                    opacity 0.5s ease-in-out;
                         }
                     }
                 }
@@ -1383,3 +1424,48 @@
     }
 }
 
+.toggle-button {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.toggle-button:hover {
+    transform: scale(1.05);
+}
+
+.toggle-button:active {
+    transform: scale(0.95);
+}
+
+.circle {
+    transition: fill 0.3s ease;
+}
+
+/* Первая линия (будет превращаться в вертикальную) */
+.first-line {
+    stroke: black;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+/* Вторая линия (остается горизонтальной) */
+.second-line {
+    stroke: black;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    transition: all 0.3s ease;
+}
+/* Состояние плюса - первая линия вертикальная */
+.plus .first-line {
+    transform: rotate(0deg);
+}
+/* Состояние минуса - обе линии горизонтальные */
+.minus .first-line {
+    transform: rotate(90deg);
+}
+.minus .circle{
+    fill: #EEEEEE;
+}
+.plus .circle{
+    fill: #E0FD60; /* Зеленый фон вместо серого */
+}
