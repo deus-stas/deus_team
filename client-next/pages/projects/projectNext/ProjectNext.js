@@ -36,7 +36,6 @@ const ProjectNext = ({ props, detail }) => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
                 const projects = response.data.filter((project) => {
-                    console.log (detail.includes (project._id));
                     if(Array.isArray(detail) && detail.includes(project._id)){
                         return project
                     }else if(id){
