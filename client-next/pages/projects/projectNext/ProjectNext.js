@@ -40,9 +40,11 @@ const ProjectNext = ({ props, detail }) => {
                         return project
                     }else if(id){
                         return project.nameInEng !== id
+                    }else if(typeof (detail) === 'object' && detail.projectType && detail.projectTheme == project.projectTheme && detail.nameInEng != project.nameInEng){
+                        return project
                     }
                 });
-                projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                projects.sort((a, b) => new Date(b.date) - new Date(a.date));
                 setAllProjects(projects);
 
                 const relatedProjectsByType = projects.filter((project) => project.projectType === detail?.projectType);
