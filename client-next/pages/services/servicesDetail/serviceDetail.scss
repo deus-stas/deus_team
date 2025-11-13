@@ -1512,6 +1512,12 @@
         letter-spacing: -0.03em;
         color: #050505;
     }
+    &-service{
+        &__detail{
+            margin-top:7rem;
+            margin-bottom:0;
+        }
+    }
 }
 
 .service-title {
