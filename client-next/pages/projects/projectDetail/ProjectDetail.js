@@ -57,7 +57,6 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         if (!id) return;
-        
         axios.get(`${apiUrl}/api/projects/${id}`)
             .then((response) => {
                 let dataDetail = {...response.data};
@@ -183,8 +182,6 @@ const ProjectDetail = () => {
     const findType = types.find((item)=> item._id === typeRender )
 
     const RenderFields = ({detail}) => {
-        console.log(detail)
-        
         if (!findType) {
             return <SiteAndServices detail={detail} />;
         }
@@ -286,8 +283,6 @@ export const BannerComponent = ({banner, detail, stackItem}) => {
 
  export const ProjectResults = ({ result, awardsURL, awardsTitle, awardsImage, isMobile}) => {
     if (!result) return null;
-
-    console.log('awardsImage',awardsImage)
     return (
         <section className="project-results padding borderBlock">
             <div className="project-results__wrap">
