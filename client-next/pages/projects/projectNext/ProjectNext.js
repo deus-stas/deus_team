@@ -21,7 +21,7 @@ const ProjectNext = ({ props, detail }) => {
     const [relatedProjects, setRelatedProjects] = useState([]);
     const [allProjects, setAllProjects] = useState([]);
     const [id, setId] = useState(null);
-
+    const [loading, setLoading] = useState(false);
     const isMobile = useMobile()
 
     const params = useParams();
@@ -31,13 +31,18 @@ const ProjectNext = ({ props, detail }) => {
             setId(params.id);
         }
     }, []);
-
-
     useEffect(() => {
+        setLoading(true);
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
-                const projects = response.data.filter((project) => project.nameInEng !== id);
-
+                const projects = response.data.filter((project) => {
+                    console.log (detail.includes (project._id));
+                    if(Array.isArray(detail) && detail.includes(project._id)){
+                        return project
+                    }else if(id){
+                        return project.nameInEng !== id
+                    }
+                });
                 projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setAllProjects(projects);
 
@@ -50,8 +55,11 @@ const ProjectNext = ({ props, detail }) => {
             })
             .catch((error) => {
                 console.log(error);
-            });
-    }, [id, detail?.type]);
+            })
+            .finally(() => {
+            setLoading(false);
+        });
+    }, [detail,id, detail?.type]);
 
     const videoRefs = useRef([]);
 
