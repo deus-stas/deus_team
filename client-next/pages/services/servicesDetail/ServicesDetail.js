@@ -18,23 +18,43 @@ import "swiper/css";
 import "swiper/css/grid";
 
 const apiUrl =`${process.env.NEXT_PUBLIC_BACKEND_PROTOCOL}://${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}`;
-async function getTeam() {
-    const response = await fetch(`${apiUrl}/api/team/`);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json();
-}
-const [team ] = await Promise.all([
-    getTeam(),
-
-]);
 const ServicesDetail = (data) => {
 
     const [working, setWorking] = useState([]);
     const [service, setService] = useState(null);
     const [total, setTotal] = useState(null);
     const [detail, setDetail] = useState([]);
+    const [subProjects, setSubProjects] = useState([]); // ← Инициализируем пустым массивом
+    const [team, setTeam] = useState([]); // ← Добавляем состояние для team
+
+    // 1. Загружаем данные service при получении props
+    useEffect(() => {
+        if (data.data) {
+            setService(data.data);
+            // Сразу устанавливаем subProjects из полученных данных
+            if (data.data?.subProjects) {
+                setSubProjects(data.data.subProjects);
+            }
+        }
+    }, [data.data]); // ← Зависимость от data.data
+
+    // 2. Загружаем team внутри useEffect
+    useEffect(() => {
+        const getTeam = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/api/team/`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const teamData = await response.json();
+                setTeam(teamData);
+            } catch (error) {
+                console.error('Error fetching team:', error);
+            }
+        };
+
+        getTeam();
+    }, []);
 
     useEffect(() => {
         axios
@@ -52,7 +72,6 @@ const ServicesDetail = (data) => {
 
     useEffect(()=> {
         setService(data.data);
-        console.log("дыные: ", service);
     }, [service])
 
     const [clients, setClients] = useState([]);
@@ -106,7 +125,6 @@ const ServicesDetail = (data) => {
                             newsItem.newsTags = tags[newsItem.newsTags];
                             return newsItem;
                         });
-                        console.log('news', news)
                         setNews(news);
                         setAllNewsCount(news.length);
                         setAllTags(new Set(news.flatMap((news) => news.newsTags)));
@@ -140,7 +158,7 @@ const ServicesDetail = (data) => {
                             <div className="breadcrumb">
                                 <a href="/"><span data-hover="Главная">Главная</span></a>
                                 <span className="bull"></span>
-                                <a href="/services" ><span data-hover="Услуги">Услуги</span></a>
+                                <a href="/services"><span data-hover="Услуги">Услуги</span></a>
                                 <span className="bull"></span>
                                 <span className="last">{service.name}</span>
                             </div>
@@ -206,8 +224,8 @@ const ServicesDetail = (data) => {
                                         {/* <p>Прозрачность — наш принцип. Каждый<br/> компонент услуги продуман до мелочей, чтобы<br/> вы чувствовали уверенность на каждом шагу.</p> */}
                                     </div>
                                     <div>
-                                    <Link href={`/contacts`} className="services-form__btn --accent">Расчитать
-                                        стоимость</Link>
+                                        <Link href={`/contacts`} className="services-form__btn --accent">Расчитать
+                                            стоимость</Link>
                                     </div>
                                 </div>
                                 <div className="services-detail-type__info">
@@ -348,7 +366,7 @@ const ServicesDetail = (data) => {
                                         </div>
                                     </div> */}
                             </div>
-                            <ProjectNext detail={detail}/>
+                            <ProjectNext detail={subProjects}/>
                         </div>
 
                     </section>
@@ -490,46 +508,6 @@ const ServicesDetail = (data) => {
                                                 </div>
                                             </div>
                                         ))}
-                                    {/* <div className="why-us__item">
-                                            <div className="why-us__number">
-                                                <div className="why-us__number-value">01</div>
-                                                <img className="why-us__number-bg" src="img/why-us/1.svg"/>
-                                            </div>
-                                            <div className="why-us__info">
-                                                <div className="why-us__title">Гарантия соблюдения сроков</div>
-                                                <div className="why-us__subtitle">Мы гарантируем четкое следование утвержденным срокам, чтобы проект был завершен точно в срок. Каждый этап работ планируется детально, а процесс контролируется на всех стадиях — это позволяет избежать задержек и обеспечить прозрачность выполнения задач.</div>
-                                            </div>
-                                        </div>
-                                        <div className="why-us__item">
-                                            <div className="why-us__number">
-                                                <div className="why-us__number-value">02</div>
-                                                <img className="why-us__number-bg" src="img/why-us/1.svg"/>
-                                            </div>
-                                            <div className="why-us__info">
-                                                <div className="why-us__title">Экспертный подход</div>
-                                                <div className="why-us__subtitle">Над вашим проектом работают сертифицированные специалисты 1С-Битрикс с глубоким опытом в разработке. Мы фокусируемся на качестве, инновационных решениях и полном соответствии требованиям клиента, чтобы результат превзошел ожидания.</div>
-                                            </div>
-                                        </div>
-                                        <div className="why-us__item">
-                                            <div className="why-us__number">
-                                                <div className="why-us__number-value">03</div>
-                                                <img className="why-us__number-bg" src="img/why-us/1.svg"/>
-                                            </div>
-                                            <div className="why-us__info">
-                                                <div className="why-us__title">Прозрачность коммуникации</div>
-                                                <div className="why-us__subtitle">Вы всегда в курсе прогресса: мы предоставляем регулярные отчеты, фиксируем этапы и оперативно отвечаем на вопросы. Наши клиенты получают полный доступ к информации о проекте — от технических нюансов до стратегических решений.</div>
-                                            </div>
-                                        </div>
-                                        <div className="why-us__item">
-                                            <div className="why-us__number">
-                                                <div className="why-us__number-value">04</div>
-                                                <img className="why-us__number-bg" src="img/why-us/1.svg"/>
-                                            </div>
-                                            <div className="why-us__info">
-                                                <div className="why-us__title">Безопасность обновлений и сопровождение</div>
-                                                <div className="why-us__subtitle">Мы сохраняем архитектуру вашего сайта и системы в соответствии с требованиями 1С-Битрикс. Это позволяет беспрепятственно получать технические обновления, обеспечивать стабильность работы и пользоваться официальной поддержкой платформы даже после завершения проекта.</div>
-                                            </div>
-                                        </div> */}
                                 </div>
                             </div>
                         </section>
@@ -630,8 +608,9 @@ const ServicesDetail = (data) => {
                         <WorkingSlider/>
                     }
 
+                    <ServicesForm/>
 
-                    <section className="services-article article">
+                    <section className="services-article article article-service__detail">
                         <div className="article__header">
                             <h2 className="heading-secondary">Полезные статьи</h2>
                             <Link href={`/blog`} className="article__link">Все статьи</Link>
@@ -719,39 +698,6 @@ const ServicesDetail = (data) => {
                             </div>
                         </div>
                     </section>
-
-
-                    {/* <section className="services-form borderBlock padding whiteHeader">
-                            <h2 className="heading-secondary">Вам интересно, но нужно больше конкретики?</h2>
-                            <form className="services-form__form">
-
-                                <div className="services-form__title">Выберите услугу</div>
-
-                                <div className="services-form__btns">
-                                    <button type="button" className="services-form__btn" data-service="Услуга 1">Дизайн
-                                    </button>
-                                    <button type="button" className="services-form__btn" data-service="Услуга 2">Сайты и сервисы
-                                    </button>
-                                    <button type="button" className="services-form__btn" data-service="Услуга 3">SEO
-                                    </button>
-                                    <button type="button" className="services-form__btn" data-service="Услуга 1">Видеопродакшн
-                                    </button>
-                                    <button type="button" className="services-form__btn" data-service="Услуга 2">Контент-маркетинг
-                                    </button>
-                                    <button type="button" className="services-form__btn" data-service="Услуга 3">Техническая поддержка
-                                    </button>
-                                </div>
-
-                                <input type="hidden" name="service" id="service-input" required/>
-
-                                <input type="text" name="name" placeholder="Ваше имя" required/>
-                                <input type="tel" name="phone" placeholder="Номер телефона" required pattern="[\d\+\-\(\) ]+"/>
-
-                                <Button className="services-form__btn --accent" type="submit" onSubmit={}>Отправить заявку</Button>
-                            </form>
-                        </section> */}
-
-                    <ServicesForm/>
                 </main>
             }
         </>
