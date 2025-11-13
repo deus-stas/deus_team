@@ -80,6 +80,7 @@ const Projects = () => {
     const loadProject = (cb) => {
         axios.get(`${apiUrl}/api/projects/`)
             .then((response) => {
+                response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
                 setProjects(response.data);
                 if (!!cb) {
                     cb()
@@ -338,7 +339,6 @@ const Projects = () => {
                                     const filterProjects = projects.filter(item => item.projectType === project.value && item.visibility);
                                     const totalSum = filterProjects.length.toString().padStart(2, '0');
                                     if (totalSum < 1) return null;
-                                    console.log(project)
                                     return (
                                         <Link
                                             // onClick={(e) => gotoAnchor(e, 'start', false)}
@@ -373,7 +373,6 @@ const Projects = () => {
     const renderProject = (b) => <>{limitProjects ? limitProjects
             .filter((project, index, array) => !!b ? index % 2 === 0 : index % 2 !== 0)
             .map((project, index, array) => {
-                console.log();
                 const numProject = index < 9 ? "0" + (index + 1) : (index + 1);
                 const isLastItem = index + 1 === array.length;
                 const imgSize = isMob ? `${apiUrl}/uploads/${project.imageMob?.filename}` : `${apiUrl}/uploads/${project.image.filename}`;
