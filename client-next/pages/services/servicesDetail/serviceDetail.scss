@@ -913,15 +913,15 @@
 
             &__title{
                 margin-bottom: 26px;
-                @media(max-width: 1120px) {
+                @include respond(md) {
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr 1fr;
+                    grid-template-columns: none;
                     div:nth-child(2){
-                        justify-self: end;
+                        justify-self: start;
                         margin-top:1rem;
                     }
                 }
-
                 .heading-secondary{
                     color: #FFFFFF;
                 }
