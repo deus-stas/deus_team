@@ -231,14 +231,33 @@
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 padding-bottom: 2rem;
-                @include respond(sm){
+                @include respond(lg){
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
                     padding-bottom: 2rem;
+                    position:relative;
+                }
+                @include respond(md){
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+                    padding-bottom: 2rem;
+                    position:relative;
+                }
+                @include respond(sm){
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+                    padding-bottom: 2rem;
+                    position:relative;
                 }
                 @include respond(xs){
                     display: flex;
                     flex-direction: column;
                     gap: 2rem;
                     padding-bottom: 1rem;
+                    position:relative;
                 }
 
             .describe {
@@ -253,11 +272,37 @@
                 &__wrapp {
                     max-width: 70%;
                     width: 100%;
+                    @include respond(lg){
+                        max-width: 100%;
+                        &-content-trigger{
+                            position:absolute;
+                            top:0;
+                            right:0;
+                        }
+                    }
+                    @include respond(md){
+                        max-width: 100%;
+                        &-content-trigger{
+                            position:absolute;
+                            top:0;
+                            right:0;
+                        }
+                    }
                     @include respond(sm){
                         max-width: 80%;
+                        &-content-trigger{
+                            position:absolute;
+                            top:0;
+                            right:0;
+                        }
                     }
                     @include respond(xs){
                         max-width: 100%;
+                        &-content-trigger{
+                            position:absolute;
+                            top:0;
+                            right:0;
+                        }
                     }
                     &.hidden{
                         opacity: 0;
